@@ -5,14 +5,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchMyOrders } from "../../../../store/redux/myOrders/actions/MyOrderAction";
 import LoadingSkelleton from "../../../master/skelleton/LoadingSkelleton";
 import ProfileSideBar from "../myprofile/profileSideBar";
+import { getOrderDataList } from "../payment/_redux/Action/OrderAction";
 
 const MyOrder = ({ router }, props) => {
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.myOrder.loading);
   const myOrders = useSelector((state) => state.myOrder.myOrders);
+  const orderListData = useSelector((state) => state.MyOrderReducer.orderListData);
+
+  console.log('orderListData :>> ', orderListData);
 
   useEffect(() => {
     dispatch(fetchMyOrders());
+    dispatch(getOrderDataList());
   }, []);
 
   return (
@@ -41,219 +46,65 @@ const MyOrder = ({ router }, props) => {
                   height={200}
                 />
               )}
-
-              {myOrders.map.length > 0 && (
-                <>
-                  {myOrders.map((myOrder, index) => (
-                    <div className="mt-4">
-                      <div className="innerwishlist productorderdetailsbox">
-                        <div className="orderboxDetails">
-                          <div className="ordercode">
-                            <h2>#ORDERNO012345</h2>
-                          </div>
-                          <div className="ordercode one">
-                            <h2>View Details</h2>
-                          </div>
+              {
+                orderListData.length > 0 && orderListData.map((item, index) => (
+                  <div className="mt-4">
+                    <div className="innerwishlist productorderdetailsbox">
+                      <div className="orderboxDetails">
+                        <div className="ordercode">
+                          <h2>{item.orderCode}</h2>
                         </div>
-                        <div className="clear-fix"></div>
-
-
-                        <div className="singleorderproduct">
-                          <img src="/images/default/chair.png" />
+                        <div className="ordercode one">
+                          <h2>View Details</h2>
                         </div>
-                        <div className="wishsingleproductText orderproducttext">
-                          <h1>Product title with link</h1>
-                          <h4>৳ 500</h4>
-
-                          <h5>Order On:</h5>
-                        </div>
-                        <div className="orderquantity">
-                          <h2>Qty</h2>
-                          <h3>1</h3>
-                        </div>
-                        <div className="orderquantity">
-                          <h2>Payment Type</h2>
-                          <h3 className="cod-text">COD</h3>
-                        </div>
-                        <div className="clear-fix"></div>
-                        <div className="orderstatus ">
-                          <div className="singlestatus">
-                            <h2 className="order-status">
-                              Order status:<span> Payment Pending</span>
-                            </h2>
-                          </div>
-                          <div className="singlestatus two">
-                            <h2>Total Amount: ৳ 500 </h2>
-                          </div>
-                        </div>
-                        <div className="clear-fix"></div>
                       </div>
+
+                      {/* {
+                        item.product.length > 0 && item.product.map((product, index) => ( */}
+                          <>
+                            <div className="clear-fix"></div>
+
+                            <div className="singleorderproduct">
+                              <img src="/images/default/chair.png" />
+                            </div>
+                            <div className="wishsingleproductText orderproducttext">
+                              <h1>Product title with link</h1>
+                              <h4>৳ 500</h4>
+
+                              <h5>Order On:</h5>
+                            </div>
+                            <div className="orderquantity">
+                              <h2>Qty</h2>
+                              <h3>1</h3>
+                            </div>
+                            <div className="orderquantity">
+                              <h2>Payment Type</h2>
+                              <h3 className="cod-text">COD</h3>
+                            </div>
+                            <div className="clear-fix"></div>
+
+                          </>
+                        ))
+                      }
+
+                      <div className="orderstatus ">
+                        <div className="singlestatus">
+                          <h2 className="order-status">
+                            Order status:<span> {item.status}</span>
+                          </h2>
+                        </div>
+                        <div className="singlestatus two">
+                          <h2>Total Amount: ৳ 500 </h2>
+                        </div>
+                      </div>
+                      <div className="clear-fix"></div>
                     </div>
-                  ))}
-                </>
-              )}
+                  </div>
+                ))
+              }
+
               {/*  */}
-              <div className="mt-2">
-                <div className="innerwishlist productorderdetailsbox">
-                  <div className="orderboxDetails">
-                    <div className="ordercode">
-                      <h2>#ORDERNO012345</h2>
-                    </div>
-                    <div className="ordercode one">
-                      <h2>View Details</h2>
-                    </div>
-                  </div>
-                  <div className="singleorderproduct">
-                    <img src="/images/default/chair.png" />
-                  </div>
-                  <div className="wishsingleproductText orderproducttext">
-                    <h1>Product title with link</h1>
-                    <h4>৳ 500</h4>
 
-                    <h5>Order On:</h5>
-                  </div>
-                  <div className="orderquantity">
-                    <h2>Qty</h2>
-                    <h3>1</h3>
-                  </div>
-                  <div className="orderquantity">
-                    <h2>Payment Type</h2>
-                    <h3>COD</h3>
-                  </div>
-
-                  <div className="orderstatus">
-                    <div className="singlestatus">
-                      <h2>
-                        {/* Order status:<span> Payment Pending</span> */}
-                      </h2>
-                    </div>
-                    <div className="singlestatus two processing">
-                      <h2>Total Amount: ৳ 500 </h2>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="">
-                <div className="innerwishlist productorderdetailsbox">
-                  <div className="orderboxDetails">
-                    <div className="ordercode">
-                      <h2>#ORDERNO012345</h2>
-                    </div>
-                    <div className="ordercode one">
-                      <h2>View Details</h2>
-                    </div>
-                  </div>
-                  <div className="singleorderproduct">
-                    <img src="/images/default/chair.png" />
-                  </div>
-                  <div className="wishsingleproductText orderproducttext">
-                    <h1>Product title with link</h1>
-                    <h4>৳ 500</h4>
-
-                    <h5>Order On:</h5>
-                  </div>
-                  <div className="orderquantity">
-                    <h2>Qty</h2>
-                    <h3>1</h3>
-                  </div>
-                  <div className="orderquantity">
-                    <h2>Payment Type</h2>
-                    <h3>COD</h3>
-                  </div>
-
-                  <div className="orderstatus">
-                    <div className="singlestatus ">
-                      <h2>
-                        Order status:<span> Your order on processing</span>
-                      </h2>
-                    </div>
-                    <div className="singlestatus two">
-                      <h2>Total Amount: ৳ 500 </h2>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {/*  */}
-              <div className="mt-2">
-                <div className="innerwishlist productorderdetailsbox">
-                  <div className="orderboxDetails">
-                    <div className="ordercode">
-                      <h2>#ORDERNO012345</h2>
-                    </div>
-                    <div className="ordercode one">
-                      <h2>View Details</h2>
-                    </div>
-                  </div>
-                  <div className="singleorderproduct">
-                    <img src="/images/default/chair.png" />
-                  </div>
-                  <div className="wishsingleproductText orderproducttext">
-                    <h1>Product title with link</h1>
-                    <h4>৳ 500</h4>
-
-                    <h5>Order On:</h5>
-                  </div>
-                  <div className="orderquantity">
-                    <h2>Qty</h2>
-                    <h3>1</h3>
-                  </div>
-                  <div className="orderquantity">
-                    <h2>Payment Type</h2>
-                    <h3>COD</h3>
-                  </div>
-
-                  <div className="orderstatus">
-                    <div className="singlestatus shipping">
-                      <h2>
-                        Order status:<span> Your order ready for shipping</span>
-                      </h2>
-                    </div>
-                    <div className="singlestatus two">
-                      <h2>Total Amount: ৳ 500 </h2>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="mt-2">
-                <div className="innerwishlist productorderdetailsbox">
-                  <div className="orderboxDetails">
-                    <div className="ordercode">
-                      <h2>#ORDERNO012345</h2>
-                    </div>
-                    <div className="ordercode one">
-                      <h2>View Details</h2>
-                    </div>
-                  </div>
-                  <div className="singleorderproduct">
-                    <img src="/images/default/chair.png" />
-                  </div>
-                  <div className="wishsingleproductText orderproducttext">
-                    <h1>Product title with link</h1>
-                    <h4>৳ 500</h4>
-
-                    <h5>Order On:</h5>
-                  </div>
-                  <div className="orderquantity">
-                    <h2>Qty</h2>
-                    <h3>1</h3>
-                  </div>
-                  <div className="orderquantity">
-                    <h2>Payment Type</h2>
-                    <h3>COD</h3>
-                  </div>
-
-                  <div className="orderstatus">
-                    <div className="singlestatus delivered">
-                      <h2>
-                        Order status:<span> Delivered</span>
-                      </h2>
-                    </div>
-                    <div className="singlestatus two">
-                      <h2>Total Amount: ৳ 500 </h2>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>

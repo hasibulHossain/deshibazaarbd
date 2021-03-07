@@ -3155,3 +3155,12 @@ p.single-product-text {
 .productPrice {
     padding-left: 7px;
 }
+.custome-btn{
+    background-color: #F58509!important;
+    color: #ffffff!important;
+    font-weight: bold;
+}
+.custome-ref-input {
+    width: 100px!important;
+    margin-left: 10px;
+}

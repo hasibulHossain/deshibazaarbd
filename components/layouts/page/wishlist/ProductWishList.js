@@ -15,6 +15,7 @@ const ProductWishList = ({ router }, props) => {
     dispatch(fetchProductWishes());
   }, []);
 
+  console.log('productWishes :>> ', productWishes);
   return (
     <>
       <div className="wishbanner pb">
@@ -45,13 +46,13 @@ const ProductWishList = ({ router }, props) => {
               {productWishes.map.length > 0 && (
                 <>
                   {productWishes.map((productWish, index) => (
-                    <div className="mt-4">
+                    <div className="mt-4" key={index}>
                       <div className="innerwishlist">
                         <div className="wishsingleproduct">
                           <img src="/images/default/chair.png" />
                         </div>
                         <div className="wishsingleproductText">
-                          <h1>Product title with link</h1>
+                          <h1>{productWish.name && productWish.name}</h1>
                           <h4>৳ 500</h4>
 
                           <h5>Seller: Seller shop name</h5>
@@ -81,38 +82,8 @@ const ProductWishList = ({ router }, props) => {
                   </div>
                 </div>
               </div>
-              <div className="mt-2">
-                <div className="innerwishlist">
-                  <div className="wishsingleproduct">
-                    <img src="/images/default/chair.png" />
-                  </div>
-                  <div className="wishsingleproductText">
-                    <h1>Product title with link</h1>
-                    <h4>৳ 500</h4>
-
-                    <h5>Seller: Seller shop name</h5>
-                  </div>
-                  <div className="wishsingleproductIcon red">
-                    <FavoriteIcon />
-                  </div>
-                </div>
-              </div>
-              <div className="mt-2">
-                <div className="innerwishlist">
-                  <div className="wishsingleproduct">
-                    <img src="/images/default/chair.png" />
-                  </div>
-                  <div className="wishsingleproductText">
-                    <h1>Product title with link</h1>
-                    <h4>৳ 500</h4>
-
-                    <h5>Seller: Seller shop name</h5>
-                  </div>
-                  <div className="wishsingleproductIcon">
-                    <FavoriteIcon />
-                  </div>
-                </div>
-              </div>
+          
+            
             </div>
           </div>
         </div>
