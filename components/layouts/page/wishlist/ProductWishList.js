@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchProductWishes } from "../../../../store/redux/productWishes/actions/ProductWishAction";
 import LoadingSkelleton from "../../../master/skelleton/LoadingSkelleton";
 import ProfileSideBar from "../myprofile/profileSideBar";
+import { getWishList } from "./_redux/Action/WishlistAction";
 
 const ProductWishList = ({ router }, props) => {
   const dispatch = useDispatch();
@@ -12,7 +13,7 @@ const ProductWishList = ({ router }, props) => {
   const productWishes = useSelector((state) => state.productWish.productWishes);
 
   useEffect(() => {
-    dispatch(fetchProductWishes());
+    dispatch(getWishList());
   }, []);
 
   console.log('productWishes :>> ', productWishes);

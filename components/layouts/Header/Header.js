@@ -228,7 +228,7 @@ const Header = () => {
                             </> :
                             //  <p>{userData.first_name}</p>
                             <DropdownButton className="user-profile" id="dropdown-item-button" title={userData && userData.first_name}>
-                              <Link className="dropdown-item" href="/myprofile">
+                              <Link className="dropdown-item" href="/profile">
                                 <Dropdown.Item as="button">
                                   <i className="fas fa-user mr-2"></i> Profile
                               </Dropdown.Item>

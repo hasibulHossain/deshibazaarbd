@@ -21,6 +21,7 @@ import wishListReducer from "../components/WishList/_redux/Reducer/wishListReduc
 import UserDataReducer from "../components/getUserData/Reducer/UserDataReducer";
 import UserReducer from "./reducers/user/UserReducer";
 import MyOrderReducer from "../components/layouts/page/payment/_redux/Action/Reducer/OrderReducer";
+// import WishlistReducer from "../components/layouts/page/wishlist/_redux/Reducer/WishlistReducer";
 
 export default combineReducers({
   product: ProductReducer,

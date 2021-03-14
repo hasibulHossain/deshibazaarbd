@@ -24,7 +24,7 @@ const Login = () => {
   }
   const router = useRouter()
   if (isLogging === true) {
-    router.push('/myprofile')
+    router.push('/profile')
     dispatch(emptyDispatch())
   }
   return (
