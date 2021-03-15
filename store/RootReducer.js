@@ -20,7 +20,8 @@ import AudiencePoll from "./reducers/AudiencePoll/AudiencePoll";
 import wishListReducer from "../components/WishList/_redux/Reducer/wishListReducer";
 import UserDataReducer from "../components/getUserData/Reducer/UserDataReducer";
 import UserReducer from "./reducers/user/UserReducer";
-import MyOrderReducer from "../components/layouts/page/payment/_redux/Action/Reducer/OrderReducer";
+import MyOrderReducer from "./redux/myOrders/reducers/MyOrderReducer";
+import PaymentReducer from "../components/layouts/page/payment/_redux/Reducer/PaymentReducer";
 // import WishlistReducer from "../components/layouts/page/wishlist/_redux/Reducer/WishlistReducer";
 
 export default combineReducers({
@@ -45,4 +46,5 @@ export default combineReducers({
   UserDataReducer: UserDataReducer,
   UserReducer: UserReducer,
   MyOrderReducer: MyOrderReducer,
+  PaymentReducer: PaymentReducer,
 });

@@ -1,1 +1,1 @@
-export const GET_ORDER_LIST_DATA = "GET_ORDER_LIST_DATA";
+export const GET_PAYMENT_LIST = "GET_PAYMENT_LIST";

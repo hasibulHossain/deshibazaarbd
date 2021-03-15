@@ -11,9 +11,6 @@ const ProfileSideBar = () => {
                     <a href="/account-setting">Account Setting</a>
                 </li>
                 <li>
-                    <a href="/cart">My Card</a>
-                </li>
-                <li>
                     <a href="wishlist">My Wish list</a>
                 </li>
                 <li>

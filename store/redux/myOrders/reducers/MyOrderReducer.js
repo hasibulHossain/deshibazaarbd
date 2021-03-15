@@ -4,6 +4,7 @@ const initialState = {
   myOrders: [],
   loading: false,
   error: null,
+  orderListData: [],
 };
 
 const MyOrderReducer = (state = initialState, action) => {
@@ -20,6 +21,12 @@ const MyOrderReducer = (state = initialState, action) => {
         myOrders: action.payload.data,
         loading: false,
       };
+
+    case Types.GET_ORDER_LIST_DATA:
+      return {
+        ...state,
+        orderListData: action.payload.orderList,
+      }
 
     default:
       return {
