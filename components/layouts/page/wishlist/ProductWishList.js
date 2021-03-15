@@ -5,18 +5,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchProductWishes } from "../../../../store/redux/productWishes/actions/ProductWishAction";
 import LoadingSkelleton from "../../../master/skelleton/LoadingSkelleton";
 import ProfileSideBar from "../myprofile/profileSideBar";
-import { getWishList } from "./_redux/Action/WishlistAction";
+import { getWishListData } from "../../../WishList/_redux/Action/wishListAction";
 
 const ProductWishList = ({ router }, props) => {
   const dispatch = useDispatch();
-  const loading = useSelector((state) => state.productWish.loading);
+  const isLoading = useSelector((state) => state.wishListReducer.isLoading);
   const productWishes = useSelector((state) => state.productWish.productWishes);
+  const wishList = useSelector((state) => state.wishListReducer.wishList);
 
   useEffect(() => {
-    dispatch(getWishList());
+    dispatch(getWishListData());
   }, []);
 
-  console.log('productWishes :>> ', productWishes);
   return (
     <>
       <div className="wishbanner pb">
@@ -31,11 +31,11 @@ const ProductWishList = ({ router }, props) => {
                 <h1>My Wishlist</h1>
               </div>
 
-              {!loading && productWishes.map.length === 0 && (
+              {!isLoading && wishList.map.length === 0 && (
                 <div>No Wish Found !!</div>
               )}
 
-              {loading && (
+              {isLoading && (
                 <LoadingSkelleton
                   alignment="vertical"
                   count={1}
@@ -44,18 +44,17 @@ const ProductWishList = ({ router }, props) => {
                 />
               )}
 
-              {productWishes.map.length > 0 && (
+              {wishList.map.length > 0 && (
                 <>
-                  {productWishes.map((productWish, index) => (
+                  {wishList.map((item, index) => (
                     <div className="mt-4" key={index}>
                       <div className="innerwishlist">
                         <div className="wishsingleproduct">
                           <img src="/images/default/chair.png" />
                         </div>
                         <div className="wishsingleproductText">
-                          <h1>{productWish.name && productWish.name}</h1>
-                          <h4>৳ 500</h4>
-
+                          <h1>{item.item && item.item.name}</h1>
+                          <h4>{item.item && item.item.final_selling_price !== null ? `৳ ${item.item.final_selling_price}` : ''}</h4>
                           <h5>Seller: Seller shop name</h5>
                         </div>
                         <div className="wishsingleproductIcon">
@@ -67,7 +66,7 @@ const ProductWishList = ({ router }, props) => {
                 </>
               )}
 
-              <div className="mt-2">
+              {/* <div className="mt-2">
                 <div className="innerwishlist">
                   <div className="wishsingleproduct">
                     <img src="/images/default/chair.png" />
@@ -82,9 +81,9 @@ const ProductWishList = ({ router }, props) => {
                     <FavoriteIcon />
                   </div>
                 </div>
-              </div>
-          
-            
+              </div> */}
+
+
             </div>
           </div>
         </div>
