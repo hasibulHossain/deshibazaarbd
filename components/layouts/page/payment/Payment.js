@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import ProfileSideBar from "../myprofile/profileSideBar";
 import { getPaymentList } from "./_redux/Action/PaymentAction";
 import LoadingSkelleton from "../../../master/skelleton/LoadingSkelleton";
+import { Button, Modal } from "react-bootstrap";
+import PaymentDetails from "./PaymentDetails";
 const Payment = ({ router }, props) => {
   const dispatch = useDispatch()
   useEffect(() => {
@@ -13,6 +15,12 @@ const Payment = ({ router }, props) => {
   const userData = useSelector((state) => state.UserDataReducer.userData);
   const paymentList = useSelector((state) => state.PaymentReducer.paymentList);
   const isLoading = useSelector((state) => state.PaymentReducer.isLoading);
+
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = (item) => {
+    setShow(true)
+  };
 
   return (
     <>
@@ -82,7 +90,7 @@ const Payment = ({ router }, props) => {
                             </div>
 
                             <div className="border-left myProfilePriceBtn">
-                              <button className="btn btn-outline-danger">
+                              <button className="btn btn-outline-danger" onClick={() => handleShow(item)}>
                                 View details
                             </button>
                             </div>
@@ -99,6 +107,16 @@ const Payment = ({ router }, props) => {
           </div>
         </div>
       </div>
+
+      <Modal
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        show={show}
+        onHide={handleClose}
+      >
+        <PaymentDetails handleClose={handleClose} />
+      </Modal>
     </>
   );
 };
