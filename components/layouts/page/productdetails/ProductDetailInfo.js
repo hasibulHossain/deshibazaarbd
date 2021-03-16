@@ -19,9 +19,19 @@ import {
   updateCartQtyAction,
 } from "../../../../store/actions/orders/CartAction";
 
+import {
+  Magnifier,
+  GlassMagnifier,
+  SideBySideMagnifier,
+  PictureInPictureMagnifier,
+  MOUSE_ACTIVATION,
+  TOUCH_ACTIVATION
+} from "react-image-magnifiers";
+
 const ProductDetailInfo = (props) => {
   const { product } = props;
-  // console.log('product :>> ', product);
+  console.log('product :>> ', product);
+
   //product quantity set
   const [quantity, setQuantity] = useState(1);
   const [idAdded, setIsAdded] = useState(false);
@@ -85,6 +95,10 @@ const ProductDetailInfo = (props) => {
   const addToCart = (cartProduct, id) => {
     dispatch(addToCartAction(cartProduct, id));
   };
+  const [previewImg, setPreviewImg] = useState(`${process.env.NEXT_PUBLIC_URL}images/products/${product.featured_image}`)
+  const handleChangePreviewImg = (image) => {
+    setPreviewImg(image.image_url);
+  }
   return (
     <>
       {product != null && (
@@ -117,22 +131,42 @@ const ProductDetailInfo = (props) => {
             </div>
             <div className="row single-product-box">
               <div className="col-lg-4">
-                <div className="singlechair">
+                <div className="singlechair p-5">
                   {/* <img src="/images/default/singlechair.png" /> */}
                   <ReactImageFallback
-                    src={`${process.env.NEXT_PUBLIC_URL}images/products/${product.featured_image}`}
+                    // src={`${process.env.NEXT_PUBLIC_URL}images/products/${product.featured_image}`}
+                    src={previewImg}
                     fallbackImage="/images/default/fallback-image.png"
                     initialImage="/images/default/fallback-image.png"
                     alt={product.name}
                     className=""
                   />
+
+
+                  {/* <GlassMagnifier
+                    imageSrc={previewImg}
+                    imageAlt="Example"
+                    largeImageSrc={previewImg} // Optional
+                  />
+
+                  <Magnifier
+                    imageSrc={previewImg}
+                    imageAlt="Example"
+                    largeImageSrc={previewImg}
+                    // Optional
+                    mouseActivation={MOUSE_ACTIVATION.DOUBLE_CLICK} // Optional
+                    touchActivation={TOUCH_ACTIVATION.DOUBLE_TAP} // Optional
+                  /> */}
+
+
+                  <div className="d-flex m-2">
+                    {
+                      product.images && product.images.length > 0 && product.images.map((item, index) => (
+                        <img onClick={() => handleChangePreviewImg(item)} src={item.image_url} className="img-thumbnail multiple_preview_images" alt="Multi image preview" />
+                      ))
+                    }
+                  </div>
                 </div>
-                {/* <div className="elegentsinglechair">
-                                    <img src="/images/default/chair.png" />
-                                </div>
-                                <div className="elegentsinglechair two">
-                                    <img src="/images/default/chair2.png" />
-                                </div> */}
               </div>
 
               <div className="col-lg-4">
@@ -162,7 +196,7 @@ const ProductDetailInfo = (props) => {
                     <span>
                       Brand:
                       {typeof product.brand != "undefined" &&
-                      product.brand != null
+                        product.brand != null
                         ? product.brand.name
                         : ""}
                     </span>

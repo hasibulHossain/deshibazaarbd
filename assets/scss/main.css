@@ -3164,3 +3164,7 @@ p.single-product-text {
     width: 100px!important;
     margin-left: 10px;
 }
+.multiple_preview_images{
+    width: 70px!important;
+    cursor: pointer;
+}
