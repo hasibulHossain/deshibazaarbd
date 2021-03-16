@@ -9,6 +9,7 @@ import ElegentChairRating from "../../components/layouts/page/productdetails/Ele
 import { fetchProductBySlug, fetchProducts } from "../../store/redux/products/actions/ProductAction"
 import LoadingSkelleton from "./../../components/master/skelleton/LoadingSkelleton";
 import Head from 'next/head'
+import ProductReview from "../../components/layouts/page/productdetails/ProductReview"
 
 export default function ProductBySlug({ product }) {
     const router = useRouter();
@@ -25,6 +26,7 @@ export default function ProductBySlug({ product }) {
                 <>
                     <ProductDetailInfo product={product} />
                     <ProductDetailsDescrition />
+                    <ProductReview />
                     <ElegentChairRating />
                     <HomeFeaturList />
                 </>

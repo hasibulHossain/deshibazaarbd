@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { withRouter } from "next/router";
 import MobileMenu from "./MobileMenu";
+
 import {
   // Dropdown,
   Navbar,
@@ -161,7 +162,7 @@ const Header = () => {
 
   const handleLogout = () => {
     dispatch(handleLogoutUser())
-    
+
   }
 
   return (
@@ -191,19 +192,19 @@ const Header = () => {
                                     {category.name}
                                   </MenuItem>
                                 ) : (
-                                    <SubMenu
-                                      title={category.name}
-                                      key={category.short_code}
-                                    >
-                                      {category.childs.length > 0
-                                        ? category.childs.map((subCategory) => (
-                                          <MenuItem key={subCategory.short_code}>
-                                            {subCategory.name}
-                                          </MenuItem>
-                                        ))
-                                        : ""}
-                                    </SubMenu>
-                                  )
+                                  <SubMenu
+                                    title={category.name}
+                                    key={category.short_code}
+                                  >
+                                    {category.childs.length > 0
+                                      ? category.childs.map((subCategory) => (
+                                        <MenuItem key={subCategory.short_code}>
+                                          {subCategory.name}
+                                        </MenuItem>
+                                      ))
+                                      : ""}
+                                  </SubMenu>
+                                )
                               )}
                           </Menu>
                         </div>
@@ -252,6 +253,9 @@ const Header = () => {
                       <div>
                         {printCartMenu()}
                       </div>
+                      {/* <div>
+                        <Toggle checkedChildren={"EN"} unCheckedChildren={"BN"} />
+                      </div> */}
                     </div>
                   </div>
                 </Navbar.Collapse>

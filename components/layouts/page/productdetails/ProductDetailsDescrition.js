@@ -12,7 +12,7 @@ const ProductDetailsDescrition = ({ router }, props) => {
                 <div className="row">
                   <div className="col-12">
                     <div className="productdescriptiontext">
-                      <h1>Description</h1>
+                      <h1>Description </h1>
                       <p>
                         Curabitur arcu erat, accumsan id imperdiet et, porttitor
                         at sem. Vivamus suscipit tortor eget felis porttitor

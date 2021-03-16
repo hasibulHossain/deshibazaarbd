@@ -32,6 +32,8 @@ const ProductDetailInfo = (props) => {
   const cartState = useSelector((state) => state.cart);
   const carts = useSelector((state) => state.cart.carts);
   const findCurrentCart = carts.find((id) => id.productID === product.id);
+
+  console.log(`carts`, carts)
   useEffect(() => {
     dispatch(getCartsAction());
   }, []);
