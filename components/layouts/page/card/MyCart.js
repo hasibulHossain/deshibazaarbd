@@ -16,6 +16,7 @@ import { Remove } from "@material-ui/icons";
 import Link from "next/link";
 import { FaTrash } from "react-icons/fa";
 import { Button } from "@material-ui/core";
+import ReactImageFallback from "react-image-fallback";
 
 const MyCart = ({ router }, props) => {
   const dispatch = useDispatch();
@@ -49,7 +50,7 @@ const MyCart = ({ router }, props) => {
 
   return (
     <>
-      <div className="wishbanner pb">
+      <div className="wishbanner pb-5">
         <div className="container">
           <div className="row">
             <div className="col-lg-8">
@@ -76,7 +77,7 @@ const MyCart = ({ router }, props) => {
                     <div className="singleorderproduct">
                       <img
                         className="img-fluid w-75 m-2"
-                        src={item.productImage}
+                        src={item.productImage ? item.productImage : "../../../../public/images/default/fallback-image.png"}
                       />
                     </div>
                     <div className="wishsingleproductText mycarttext">

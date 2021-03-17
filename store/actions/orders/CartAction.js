@@ -15,7 +15,7 @@ export const addToCartAction = (cartProduct, id) => async (dispatch) => {
   const previousCart = getCartData().carts;
   let carts = [...previousCart];
   if (carts.find((data) => data.productID === id)) {
-    alert("This product already added in your carts!");
+    // alert("This product already added in your carts!");
   } else {
     carts.push(cartProduct);
     localStorage.setItem("carts", JSON.stringify(carts));

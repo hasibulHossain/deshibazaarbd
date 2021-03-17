@@ -19,14 +19,9 @@ import {
   updateCartQtyAction,
 } from "../../../../store/actions/orders/CartAction";
 
-import {
-  Magnifier,
-  GlassMagnifier,
-  SideBySideMagnifier,
-  PictureInPictureMagnifier,
-  MOUSE_ACTIVATION,
-  TOUCH_ACTIVATION
-} from "react-image-magnifiers";
+import ReactImageZoom from 'react-image-zoom';
+import { useRouter } from "next/router";
+
 
 const ProductDetailInfo = (props) => {
   const { product } = props;
@@ -35,6 +30,7 @@ const ProductDetailInfo = (props) => {
   //product quantity set
   const [quantity, setQuantity] = useState(1);
   const [idAdded, setIsAdded] = useState(false);
+  const router = useRouter()
 
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.cart.loading);
@@ -43,7 +39,6 @@ const ProductDetailInfo = (props) => {
   const carts = useSelector((state) => state.cart.carts);
   const findCurrentCart = carts.find((id) => id.productID === product.id);
 
-  console.log(`carts`, carts)
   useEffect(() => {
     dispatch(getCartsAction());
   }, []);
@@ -78,6 +73,7 @@ const ProductDetailInfo = (props) => {
       (item) => item.productID === id && setQuantity((item.quantity += 1))
     );
     dispatch(updateCartQtyAction(id, (quantity += 1)));
+    dispatch(addToCartAction(cartProduct, id));
   };
   //decrease quantity
   const decrementQunatity = (id, quantity) => {
@@ -98,6 +94,13 @@ const ProductDetailInfo = (props) => {
   const [previewImg, setPreviewImg] = useState(`${process.env.NEXT_PUBLIC_URL}images/products/${product.featured_image}`)
   const handleChangePreviewImg = (image) => {
     setPreviewImg(image.image_url);
+  }
+  const zoomImage = { zoomWidth: 500, img: previewImg }
+  // const zoomImage = {width: 400, height: 250, zoomWidth: 500, img: previewImg}
+
+  const handleBuyProduct = (cartProduct, id) => {
+    dispatch(addToCartAction(cartProduct, id));
+    router.push('/placeorder')
   }
   return (
     <>
@@ -132,34 +135,22 @@ const ProductDetailInfo = (props) => {
             <div className="row single-product-box">
               <div className="col-lg-4">
                 <div className="singlechair p-5">
-                  {/* <img src="/images/default/singlechair.png" /> */}
-                  <ReactImageFallback
+                  {/* <ReactImageFallback
                     // src={`${process.env.NEXT_PUBLIC_URL}images/products/${product.featured_image}`}
                     src={previewImg}
                     fallbackImage="/images/default/fallback-image.png"
                     initialImage="/images/default/fallback-image.png"
                     alt={product.name}
                     className=""
-                  />
-
-
-                  {/* <GlassMagnifier
-                    imageSrc={previewImg}
-                    imageAlt="Example"
-                    largeImageSrc={previewImg} // Optional
-                  />
-
-                  <Magnifier
-                    imageSrc={previewImg}
-                    imageAlt="Example"
-                    largeImageSrc={previewImg}
-                    // Optional
-                    mouseActivation={MOUSE_ACTIVATION.DOUBLE_CLICK} // Optional
-                    touchActivation={TOUCH_ACTIVATION.DOUBLE_TAP} // Optional
                   /> */}
 
+                  <ReactImageZoom
+                    className="zoom-image mt-3"
+                    {...zoomImage}
+                  />
 
-                  <div className="d-flex m-2">
+
+                  <div className="d-flex m-1">
                     {
                       product.images && product.images.length > 0 && product.images.map((item, index) => (
                         <img onClick={() => handleChangePreviewImg(item)} src={item.image_url} className="img-thumbnail multiple_preview_images" alt="Multi image preview" />
@@ -255,7 +246,10 @@ const ProductDetailInfo = (props) => {
 
                   <div className="chaircolor">
                     {/* <h2 className="mt-4">Color:</h2> */}
-                    <p className="mb-4">
+
+                    {/**Available color */}
+
+                    {/* <p className="mb-4">
                       Color:
                       <span className="colorType border rounded text-dark">
                         Red
@@ -266,18 +260,15 @@ const ProductDetailInfo = (props) => {
                       <span className="colorType border rounded text-dark">
                         Yellow
                       </span>
-                    </p>
-                    <h2 className="">
+                    </p> */}
+
+
+                    {/* <h2 className="">
                       Quantity :
                       <button
                         className="btn btn-light quantity-btn decrement bg-light border rounded-circle text-dark ml-3"
                         onClick={(id, quantity) =>
-                          decrementQunatity(
-                            cartProduct.productID,
-                            cartProduct.quantity
-                          )
-                        }
-                      >
+                          decrementQunatity(cartProduct.productID, cartProduct.quantity)} >
                         {" "}
                         <Remove />
                       </button>
@@ -286,18 +277,37 @@ const ProductDetailInfo = (props) => {
                           ? findCurrentCart.quantity
                           : quantity}
                       </span>
-                      <button
-                        className="btn btn-light quantity-btn  increment bg-light border rounded-circle text-dark ml-2"
-                        onClick={(id, quantity) =>
-                          increaseQuantity(
-                            cartProduct.productID,
-                            cartProduct.quantity
-                          )
-                        }
-                      >
+                      <button className="btn btn-light quantity-btn  increment bg-light border rounded-circle text-dark ml-2" onClick={(id, quantity) =>
+                        increaseQuantity(cartProduct.productID, cartProduct.quantity)} >
                         <AddIcon />
                       </button>
+                    </h2> */}
+
+                    <h2>
+                      Quantity:
+                        <div className="cart-quantity-area">
+                        <button
+                          className="btn btn-light quantity-btn decrement bg-light text-dark"
+                          onClick={(id, quantity) => decrementQunatity(cartProduct.productID, cartProduct.quantity)} >
+
+                          {" "}
+                          <Remove />
+                        </button>
+                        <span className="colorType rounded text-dark">
+                          {/* {findCurrentCart && findCurrentCart.quantity
+                            ? findCurrentCart.quantity
+                            : quantity} */}
+                          {quantity}
+                        </span>
+                        <button
+                          className="btn btn-light quantity-btn  increment bg-light text-dark ml-2"
+                          onClick={(id, quantity) => increaseQuantity(cartProduct.productID, cartProduct.quantity)} >
+                          <AddIcon />
+                        </button>
+                      </div>
                     </h2>
+
+
                   </div>
                   <div className="stock cart two">
                     <button onClick={() => addToCart(cartProduct, product.id)}>
@@ -305,7 +315,7 @@ const ProductDetailInfo = (props) => {
                     </button>
                   </div>
                   <div className="stock cart">
-                    <button>Buy Now</button>
+                    <button onClick={() => handleBuyProduct(cartProduct, product.id)}>Buy Now</button>
                   </div>
                 </div>
               </div>
