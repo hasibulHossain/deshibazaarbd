@@ -1,52 +1,31 @@
 import React from 'react';
-import ReactStars from "react-rating-stars-component";
+import { Tab, Tabs } from 'react-bootstrap';
+import ProfileSideBar from '../myprofile/profileSideBar';
+import ProductListForReview from './ProductListForReview';
+import ProductReviewCreate from './ProductReviewCreate';
+import ProductReviewHistory from './ProductReviewHistory';
 
 const ProductReview = () => {
-
-    const [ratingValue, setRatingValue] = React.useState(3);
-    const secondExample = {
-        size: 25,
-        count: 5,
-        color: "black",
-        activeColor: "gold",
-        value: ratingValue,
-        a11y: true,
-        isHalf: true,
-        emptyIcon: <i className="far fa-star" />,
-        halfIcon: <i className="fa fa-star-half-alt" />,
-        filledIcon: <i className="fa fa-star" />,
-        onChange: (newValue) => {
-            setRatingValue(newValue)
-        }
-    };
-
     return (
-        <div className="ratingbanner pb">
-            <div className="container">
-                <div className="elegentratingsection">
-                    <div className="row">
-                        <div className="col-xl-10 col-lg-10 col-md-10 col-12">
-                            <div className="elegentratingreview">
-                                <h1>Product Review</h1>
-                            </div>
+        <div class="container">
+            <div className="row">
+                <div className="col-md-3">
+                    <ProfileSideBar />
+                </div>
+                <div className="col-md-9">
+                    <div className="card card-middle">
+                        <div className="sidebar-card-title">
+                            <Tabs defaultActiveKey="waitingForReview" id="uncontrolled-tab-example">
+                                <Tab eventKey="waitingForReview" title="To Be Reviewed">
+                                    {/* <ProductReviewCreate /> */}
+                                    <ProductListForReview />
+                                </Tab>
+                                <Tab eventKey="history" title="Review History">
+                                    <ProductReviewHistory />
+                                </Tab>
+                            </Tabs>
                         </div>
                     </div>
-                    <div className="row">
-                        <div className="col-xl-6 col-lg-6 col-md-6 col-6">
-                            <div className="elegentratingreview one">
-                                <div className="review two">
-                                    <ReactStars {...secondExample} />
-                                </div>
-                                <p>{ratingValue}/5</p>
-                            </div>
-                        </div>
-                        <div className="col-xl-6 col-lg-6 col-md-6 col-6">
-                            <div className="elegentratingreview two">
-
-                            </div>
-                        </div>
-                    </div>
-
 
                 </div>
             </div>

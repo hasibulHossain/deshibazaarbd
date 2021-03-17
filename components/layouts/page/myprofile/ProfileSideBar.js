@@ -36,7 +36,7 @@ const ProfileSideBar = () => {
                     <Link href="/audience-pool">Audience Pool</Link>
                 </li>
                 <li>
-                    <Link href="">My Reviews</Link>
+                    <Link href="productr-review">My Reviews</Link>
                 </li>
                 <li>
                     <Link href="/refferal-program">Refferal Programme</Link>
