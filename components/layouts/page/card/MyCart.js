@@ -8,7 +8,9 @@ import LoadingSkelleton from "../../../master/skelleton/LoadingSkelleton";
 import {
   deleteCartItemAction,
   getCartsAction,
+  handleChangeCouponInput,
   updateCartQtyAction,
+  handleApplyCouponCode,
 } from "../../../../store/actions/orders/CartAction";
 import NumericInput from "react-numeric-input";
 import AddIcon from "@material-ui/icons/Add";
@@ -17,6 +19,7 @@ import Link from "next/link";
 import { FaTrash } from "react-icons/fa";
 import { Button } from "@material-ui/core";
 import ReactImageFallback from "react-image-fallback";
+import { useForm } from "react-hook-form";
 
 const MyCart = ({ router }, props) => {
   const dispatch = useDispatch();
@@ -24,6 +27,9 @@ const MyCart = ({ router }, props) => {
   const carts = useSelector((state) => state.cart.carts);
   const totalQuantity = useSelector((state) => state.cart.totalQuantity);
   const totalPrice = useSelector((state) => state.cart.totalPrice);
+  const coupon = useSelector((state) => state.cart.coupon);
+  const couponLoading = useSelector((state) => state.cart.couponLoading);
+  const couponData = useSelector((state) => state.cart.couponData);
   const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
@@ -47,6 +53,18 @@ const MyCart = ({ router }, props) => {
   const deleteCartProduct = (id) => {
     dispatch(deleteCartItemAction(id))
   }
+
+  //=================coupon code apply==========================
+  const { register, handleSubmit, watch, errors } = useForm();
+
+  const handleChangeCouponCode = (name, value) => {
+    dispatch(handleChangeCouponInput(name, value))
+  }
+  console.log(`couponData in main page`, couponData)
+
+  const onSubmit = () => {
+    dispatch(handleApplyCouponCode(coupon, carts))
+  };
 
   return (
     <>
@@ -93,7 +111,7 @@ const MyCart = ({ router }, props) => {
                         </h4>
                         {
                           item.offerPrice !== null && (
-                            <h4 className="ml-5">Offer Price ৳{item.offerPrice}</h4>
+                            <h4 className="ml-5 text-dark">{item.offerPrice}</h4>
                           )}
 
                       </div>
@@ -146,20 +164,65 @@ const MyCart = ({ router }, props) => {
               <div className="promocodesection mt-4">
                 <div className="promotionsummery one">
                   <div className="orderProductDetails cartline">
-                    <div className="orderProduct">
-                      <p>Price (0 items)</p>
-                      <p>Number of Items</p>
-                      <p>Total Price</p>
-                    </div>
-                    <div className="orderProductText">
-                      <p>৳ {totalPrice}</p>
-                      <p> {totalQuantity}</p>
-                      <p>৳ {totalPrice}</p>
+                    <div className="placeOrder">
+                      <div className="d-flex justify-content-between">
+                        <p>Price (0 items)</p>
+                        <p>৳ {totalPrice}</p>
+                      </div>
+                      <div className="d-flex justify-content-between">
+                        <p>Number of Items</p>
+                        <p> {totalQuantity}</p>
+                      </div>
+                      <div className="d-flex justify-content-between">
+                        <p>Shipping Fee </p>
+                        <p> ৳ 0 </p>
+                      </div>
+                      <div className="d-flex justify-content-between">
+                        <p>Discount</p>
+                        <p> ৳ {couponData && couponData.discount_amount ? couponData.discount_amount :  0 } </p>
+                      </div>
+                      <form onSubmit={handleSubmit(onSubmit)}>
+                        <div className="d-flex justify-content-between">
+                          <input
+                            className="form-control mr-1"
+                            name="code"
+                            autoComplete="off"
+                            placeholder="Your Coupon Code"
+                            value={coupon.code && coupon.code}
+                            onChange={(e) => handleChangeCouponCode("code", e.target.value)}
+                            ref={register({ required: true })} /> <br />
+                          {
+                            !couponLoading && (
+                              <button className="btn btn-primary" type="submit"> APPLY </button>
+                            )
+                          }
+
+                          {couponLoading && (
+                            <button disabled={true} className="btn btn-primary d-flex">
+                              <span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span> APPLY
+                            </button>
+                          )}
+                        </div>
+                        <p> {errors.code && <span className="text-danger font-weight-bold mt-2">Please insert your coupon code if you have.</span>}</p>
+                        {
+                          couponData && !couponData.errors && couponData.message && (
+                            <p className="text-success">{couponData.message}</p>
+                          )
+                        }
+                        {
+                          couponData && couponData.errors && (
+                            <p className="text-danger">{couponData.errors.message}</p>
+                          )
+                        }
+                      </form> <hr />
+                      <div className="d-flex justify-content-between">
+                        <p>Total Price</p>
+                        <p>৳ {couponData && couponData.discount_amount ? (totalPrice - couponData.discount_amount) : totalPrice}</p>
+                      </div>
                     </div>
                   </div>
-
                   <div className="mycartplace" disabled={true}>
-                    <Link href="placeorder"><button disabled={carts.length === 0 ? true : false}>PLACE ORDER</button></Link>
+                    <Link href="placeorder"><button className="btn" disabled={carts.length === 0 ? true : false}>PLACE ORDER</button></Link>
                   </div>
                 </div>
               </div>

@@ -75,3 +75,6 @@ export const GET_BRANDS_LIST_DATA = "GET_BRANDS_LIST_DATA";
 export const CHANGE_USER_INPUT_DATA = "CHANGE_USER_INPUT_DATA";
 export const UPDATED_USER_DATA = "UPDATED_USER_DATA";
 export const GET_USER_UPDATED_DATA = "GET_USER_UPDATED_DATA";
+//*********************Coupon data in add to cart page*********************************** */
+export const CHANGE_COUPON_INPUT_DATA = "CHANGE_COUPON_INPUT_DATA";
+export const APPLY_COUPON_CODE = "APPLY_COUPON_CODE";

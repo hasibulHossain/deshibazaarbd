@@ -2,7 +2,6 @@ import React from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import ProfileSideBar from '../myprofile/profileSideBar';
 import ProductListForReview from './ProductListForReview';
-import ProductReviewCreate from './ProductReviewCreate';
 import ProductReviewHistory from './ProductReviewHistory';
 
 const ProductReview = () => {
@@ -17,7 +16,6 @@ const ProductReview = () => {
                         <div className="sidebar-card-title">
                             <Tabs defaultActiveKey="waitingForReview" id="uncontrolled-tab-example">
                                 <Tab eventKey="waitingForReview" title="To Be Reviewed">
-                                    {/* <ProductReviewCreate /> */}
                                     <ProductListForReview />
                                 </Tab>
                                 <Tab eventKey="history" title="Review History">

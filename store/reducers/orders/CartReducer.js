@@ -21,6 +21,17 @@ const initialState = {
   totalQuantity: 0,
   totalPrice: 0,
   shippingCost: 0,
+  coupon: {
+    code: "",
+    carts: [
+      {
+        productID: "",
+        quantity: ""
+      }
+    ]
+  },
+  couponLoading: false,
+  couponData: {}
 };
 
 const CartReducer = (state = initialState, action) => {
@@ -86,6 +97,15 @@ const CartReducer = (state = initialState, action) => {
         loading_add: false,
         errors: null,
       };
+    case Types.APPLY_COUPON_CODE:
+      console.log(`action.payload for coupon`, action.payload)
+      return {
+        ...state,
+        couponLoading: action.payload.couponLoading,
+        couponData: action.payload.couponData,
+        coupon: initialState.coupon,
+      
+      };
 
     // case Types.UPDATE_CARTS_DATA:
     //   return {
@@ -103,6 +123,13 @@ const CartReducer = (state = initialState, action) => {
     //     errors: null,
     //     delete_message: "Cart Item has been deleted !",
     //   };
+    case Types.CHANGE_COUPON_INPUT_DATA:
+      const coupon = { ...state.coupon };
+      coupon[action.payload.name] = action.payload.value;
+      return {
+        ...state,
+        coupon,
+      };
 
     default:
       return {

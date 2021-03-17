@@ -3,7 +3,7 @@ import ReactStars from "react-rating-stars-component";
 import ProfileSideBar from '../myprofile/profileSideBar';
 
 const ProductReviewCreate = () => {
-
+   
     const [ratingValue, setRatingValue] = React.useState(3);
     const secondExample = {
         size: 25,

@@ -1607,7 +1607,7 @@ button.productBtn.product.cartorder {
     margin-top: 85px;
     padding-top: 47px;
     background: white;
-    height: 289px;
+    /* height: 289px; */
     border-radius: 4px;
     padding-left: 14px;
     padding-right: 15px;
@@ -1621,7 +1621,7 @@ button.productBtn.product.cartorder {
 .orderProductText {
     width: 50%;
     float: right;
-    padding-left: 120px;
+    /* padding-left: 120px; */
     text-align: right;
     padding-top: 5px;
 }
@@ -1641,7 +1641,7 @@ button.productBtn.product.cartorder {
 .orderProductDetails p {
     font-size: 15px;
     color: #000000;
-    padding-bottom: 13px;
+    padding-bottom: 5px;
 }
 
 .orderProduct.one p {
@@ -1695,7 +1695,7 @@ button.productBtn.product.cartorder {
 }
 
 .orderProductDetails {
-    position: relative;
+    /* position: relative; */
 }
 
 .homebanner.pb {
@@ -2060,9 +2060,9 @@ button.productBtn.product.cartorder {
     background: #f58509;
     border: none;
     border-radius: 5px;
-    line-height: 40px;
-    margin-left: 10px;
-    width: 300px;
+    line-height: 30px;
+    /* margin-left: 10px; */
+    width: 100%;
 }
 
 .promotionsummery.one {

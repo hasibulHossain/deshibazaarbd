@@ -1,6 +1,7 @@
 import { useState } from "react";
 import * as Types from "../../Types";
-
+import Axios from "axios"
+import { showToast } from "../../../components/master/Helper/ToastHelper";
 // export const addToCartAction = (product, quantity = 1) => async (dispatch) => {
 //   dispatch({ type: Types.POST_CARTS_LOADING, payload: true });
 //   addToCartData(product, quantity);
@@ -68,7 +69,7 @@ export const deleteCartItemAction = (product_id) => async (dispatch) => {
     data.carts = JSON.parse(cartStorageData);
     data.products = data.carts.products;
 
-    let findProducts = data.carts.filter((item) => item.productID !== product_id); 
+    let findProducts = data.carts.filter((item) => item.productID !== product_id);
 
     localStorage.setItem("carts", JSON.stringify(findProducts));
   }
@@ -145,3 +146,48 @@ function getCartData() {
   }
   return data;
 }
+
+//  ===================================handle coupon action==================================
+export const handleChangeCouponInput = (name, value) => (dispatch) => {
+  const couponData = {
+    name: name,
+    value: value
+  }
+  dispatch({ type: Types.CHANGE_COUPON_INPUT_DATA, payload: couponData });
+}
+
+export const handleApplyCouponCode = (coupon, carts) => (dispatch => {
+  let responseData = {
+    status: false,
+    message: "",
+    errorMessage: "",
+    couponData: {},
+    couponLoading: true,
+    returnData: ""
+  };
+  dispatch({ type: Types.APPLY_COUPON_CODE, payload: responseData });
+
+  const newCoupon = {
+    code: coupon.code,
+    carts: carts
+  }
+  console.log(`newCoupon`, newCoupon)
+  Axios.post(`${process.env.NEXT_PUBLIC_API_URL}coupons/check-by/code`, newCoupon)
+    .then((res) => {
+      if (res.data.status) {
+        let data = res.data;
+        responseData.message = data.message;
+        responseData.status = data.status;
+        responseData.couponData = data.data;
+        responseData.couponLoading = false;
+        dispatch({ type: Types.APPLY_COUPON_CODE, payload: responseData });
+      }
+    })
+    .catch((err) => {
+      const { response } = err;
+      const { request, ...errorObject } = response;
+      responseData.couponLoading = false;
+      responseData.couponData = response.data,
+      dispatch({ type: Types.APPLY_COUPON_CODE, payload: responseData });
+    });
+})

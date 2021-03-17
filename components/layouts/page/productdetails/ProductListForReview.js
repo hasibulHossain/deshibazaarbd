@@ -14,11 +14,9 @@ const ProductListForReview = () => {
     const itemList = useSelector((state) => state.ReviewReducer.itemList);
 
     useEffect(() => {
-        dispatch(getWishListData());
         dispatch(getItemListByUser());
     }, []);
 
-    console.log(`itemList`, itemList)
     return (
         <>
             {isLoading && (
@@ -42,16 +40,19 @@ const ProductListForReview = () => {
                                     </div>
                                     <div className="wishsingleproductText">
                                         <h1>{item.item_name && item.item_name}</h1>
-                                        <h4>{item.selling_price && `৳ ${item.selling_price}`}</h4>
+                                        <h4>৳ {item.selling_price && `${item.selling_price}`}</h4>
                                         <h6>Tax Amount : {item.tax_amount && `৳ ${item.tax_amount}`}</h6>
                                         <h5>Seller: {item.business_name && item.business_name}</h5>
                                     </div>
 
                                     <div className="wishsingleproductIcon">
                                         <FavoriteIcon />
-                                        <Link href="/product-review-create">
+                                        <Link href={`/product-review-create`}>
                                             <button className="btn btn-warning float-right mt-5">REVIEW</button>
                                         </Link>
+                                        {/* <Link href={`/product-review-create/${item.item_id}`}>
+                                            <button className="btn btn-warning float-right mt-5">REVIEW</button>
+                                        </Link> */}
                                     </div>
                                 </div>
                             </div>
