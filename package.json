@@ -53,6 +53,7 @@
         "react-numeric-input": "^2.2.3",
         "react-owl-carousel": "^2.3.1",
         "react-rater": "^5.1.1",
+        "react-rating-stars-component": "^2.2.0",
         "react-redux": "^7.2.2",
         "react-responsive-multi-level-menu": "^2.2.5",
         "react-slick": "^0.27.13",

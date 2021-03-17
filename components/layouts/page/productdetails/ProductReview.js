@@ -1,8 +1,24 @@
 import React from 'react';
+import ReactStars from "react-rating-stars-component";
 
 const ProductReview = () => {
 
-    const [hoverValue, setHoverValue] = React.useState(3);
+    const [ratingValue, setRatingValue] = React.useState(3);
+    const secondExample = {
+        size: 25,
+        count: 5,
+        color: "black",
+        activeColor: "gold",
+        value: ratingValue,
+        a11y: true,
+        isHalf: true,
+        emptyIcon: <i className="far fa-star" />,
+        halfIcon: <i className="fa fa-star-half-alt" />,
+        filledIcon: <i className="fa fa-star" />,
+        onChange: (newValue) => {
+            setRatingValue(newValue)
+        }
+    };
 
     return (
         <div className="ratingbanner pb">
@@ -16,15 +32,15 @@ const ProductReview = () => {
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-xl-3 col-lg-3 col-md-3 col-6">
+                        <div className="col-xl-6 col-lg-6 col-md-6 col-6">
                             <div className="elegentratingreview one">
-                                <p>4.5/5</p>
                                 <div className="review two">
-                                    {/* <Rate defaultValue={3} onChangeActive={setHoverValue} allowHalf /> */}
+                                    <ReactStars {...secondExample} />
                                 </div>
+                                <p>{ratingValue}/5</p>
                             </div>
                         </div>
-                        <div className="col-xl-3 col-lg-3 col-md-3 col-6">
+                        <div className="col-xl-6 col-lg-6 col-md-6 col-6">
                             <div className="elegentratingreview two">
 
                             </div>

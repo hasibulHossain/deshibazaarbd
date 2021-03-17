@@ -1,44 +1,45 @@
 import React from 'react';
+import Link from "next/link";
 
 const ProfileSideBar = () => {
     return (
         <div className="sidebar card">
             <ul>
                 <li>
-                    <a href="/profile">My Profile</a>
+                    <Link href="/profile">My Profile</Link>
                 </li>
                 <li>
-                    <a href="/account-setting">Account Setting</a>
+                    <Link href="/account-setting">Account Setting</Link>
                 </li>
                 <li>
-                    <a href="wishlist">My Wish list</a>
+                    <Link href="wishlist">My Wish list</Link>
                 </li>
                 <li>
-                    <a href="/order">My Orders</a>
+                    <Link href="/order">My Orders</Link>
                 </li>
                 <li>
-                    <a href="/payment">Payment</a>
+                    <Link href="/payment">Payment</Link>
                 </li>
                 <li>
-                    <a href="/wallet">My Wallet</a>
+                    <Link href="/wallet">My Wallet</Link>
                 </li>
                 <li>
-                    <a href="/gift-card">My Gift card</a>
+                    <Link href="/gift-card">My Gift card</Link>
                 </li>
                 <li>
-                    <a href="/voucher">My Vouchar</a>
+                    <Link href="/voucher">My Vouchar</Link>
                 </li>
                 <li>
-                    <a href="/notification">Notifications</a>
+                    <Link href="/notification">Notifications</Link>
                 </li>
                 <li>
-                    <a href="/audience-pool">Audience Pool</a>
+                    <Link href="/audience-pool">Audience Pool</Link>
                 </li>
                 <li>
-                    <a href="">My Reviews</a>
+                    <Link href="">My Reviews</Link>
                 </li>
                 <li>
-                    <a href="/refferal-program">Refferal Programme</a>
+                    <Link href="/refferal-program">Refferal Programme</Link>
                 </li>
             </ul>
         </div>
