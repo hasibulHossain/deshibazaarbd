@@ -29,7 +29,7 @@ export const getReviewListByUser = () => (dispatch) => {
         reviewList: []
     }
     dispatch({ type: Types.GET_REVIEW_LIST_BY_USER, payload: responseList });
-    Axios.get(`${process.env.NEXT_PUBLIC_API_URL}item-review/get-by-item?item_id=0&user_id=1&status=1`)
+    Axios.get(`${process.env.NEXT_PUBLIC_API_URL}item-review/get-by-item?item_id=0&user_id=1`)
         .then((res) => {
             if (res.data.status) {
                 responseList.status = res.data.status;

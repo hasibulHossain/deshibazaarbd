@@ -9,13 +9,11 @@ import ReactStars from "react-rating-stars-component";
 const ProductReviewHistory = () => {
     const dispatch = useDispatch();
     const productWishes = useSelector((state) => state.productWish.productWishes);
-    const wishList = useSelector((state) => state.wishListReducer.wishList);
     const isLoading = useSelector((state) => state.ReviewReducer.isLoading);
     const reviewList = useSelector((state) => state.ReviewReducer.reviewList);
 
     console.log(`reviewList`, reviewList)
     useEffect(() => {
-        dispatch(getWishListData());
         dispatch(getReviewListByUser());
     }, []);
     return (
@@ -34,14 +32,14 @@ const ProductReviewHistory = () => {
                 reviewList.length > 0 && (
                     <>
                         {reviewList.map((item, index) => (
-                            <div className="mt-2 p-2" key={index}>
-                                <div className="innerwishlist">
-                                    <div className="wishsingleproduct">
+                            <div className="card m-1 p-2">
+                                <div className="row">
+                                    <div className="col-3">
                                         <img src="/images/default/chair.png" />
                                     </div>
-                                    <div className="wishsingleproductText">
-                                        <h1>{item.item_name && item.item_name}</h1>
-                                        <h5>By: {item.rating_by}</h5>
+                                    <div className="col-7">
+                                        <h5>{item.item_name && item.item_name}</h5>
+                                        <h6>By: {item.rating_by}</h6>
                                         <ReactStars
                                             count={5}
                                             size={24}
@@ -49,13 +47,19 @@ const ProductReviewHistory = () => {
                                             edit={false}
                                             activeColor="#ffd700"
                                         />,
-                                        <h3 className="float-right">
+                                        {
+                                            item.comment && (
+                                                <>
+                                                    <p> <span className="font-weight-bold">Description : </span> {item.comment}</p>
+                                                </>
+                                            )
+                                        }
+                                    </div>
+                                    <div className="col-2">
+                                        <h3 className="float-right mt-5">
                                             {item.rating_value}/5
                                         </h3>
                                     </div>
-                                    {/* <div className="wishsingleproductIcon">
-                                        <FavoriteIcon />
-                                    </div> */}
                                 </div>
                             </div>
                         ))}
