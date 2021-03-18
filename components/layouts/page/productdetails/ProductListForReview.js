@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getWishListData } from '../../../WishList/_redux/Action/wishListAction';
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import LoadingSkelleton from '../../../master/skelleton/LoadingSkelleton';
 import Link from 'next/link';
 import { getItemListByUser } from './_redux/Action/ReviewAction';
+import { Button, Modal } from 'react-bootstrap';
+import ProductReviewCreate from './ProductReviewCreate';
 
 const ProductListForReview = () => {
     const dispatch = useDispatch();
@@ -16,6 +18,15 @@ const ProductListForReview = () => {
     useEffect(() => {
         dispatch(getItemListByUser());
     }, []);
+    const [show, setShow] = useState(false);
+    const [ReviewItem, setReviewItem] = useState(null);
+    const handleClose = () => {
+        setShow(false)
+    };
+    const handleShow = (item) => {
+        setShow(true)
+        setReviewItem(item)
+    };
 
     return (
         <>
@@ -47,12 +58,7 @@ const ProductListForReview = () => {
 
                                     <div className="wishsingleproductIcon">
                                         <FavoriteIcon />
-                                        <Link href={`/product-review-create`}>
-                                            <button className="btn btn-warning float-right mt-5">REVIEW</button>
-                                        </Link>
-                                        {/* <Link href={`/product-review-create/${item.item_id}`}>
-                                            <button className="btn btn-warning float-right mt-5">REVIEW</button>
-                                        </Link> */}
+                                        <button onClick={() => handleShow(item)} className="btn btn-warning float-right mt-5">REVIEW</button>
                                     </div>
                                 </div>
                             </div>
@@ -60,6 +66,16 @@ const ProductListForReview = () => {
                     </>
                 )
             }
+
+            <Modal
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+                show={show}
+                onHide={handleClose}
+            >
+                <ProductReviewCreate ReviewItem={ReviewItem} />
+            </Modal>
         </>
     );
 };

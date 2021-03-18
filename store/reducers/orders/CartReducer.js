@@ -103,7 +103,7 @@ const CartReducer = (state = initialState, action) => {
         ...state,
         couponLoading: action.payload.couponLoading,
         couponData: action.payload.couponData,
-        coupon: initialState.coupon,
+        // coupon: initialState.coupon,
       
       };
 
@@ -146,7 +146,7 @@ const calculateTotalQtyAndPrices = (carts) => {
   }
   for (let i = 0; i < carts.length; i++) {
     response.totalQuantity += carts[i].quantity;
-    response.totalPrice += (carts[i].offerPrice !== null && carts[i].price !== "" ? carts[i].quantity * carts[i].offerPrice : carts[i].quantity * carts[i].price);
+    response.totalPrice += (carts[i].offerPrice !== null && carts[i].offerPrice !== 0 && carts[i].price !== "" ? carts[i].quantity * carts[i].offerPrice : carts[i].quantity * carts[i].price);
     response.shippingCost = (response.totalPrice / 100) * 5;
   }
   return response;

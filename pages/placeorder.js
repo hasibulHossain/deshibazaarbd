@@ -4,9 +4,11 @@ import CancelIcon from "@material-ui/icons/Cancel";
 import MainLayout from "../components/layouts/Layout";
 import { Checkbox } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
-import { getCartsAction } from "../store/actions/orders/CartAction";
+import { getCartsAction, handleApplyCouponCode, handleChangeCouponInput } from "../store/actions/orders/CartAction";
 import { getOrderInfo, orderInputChange, storeSells } from "../store/actions/orders/OrderAction";
 import { toast } from "react-toastify";
+import { useForm } from "react-hook-form";
+import { Table } from "react-bootstrap";
 
 const placeorder = ({ router }, props) => {
   const dispatch = useDispatch()
@@ -29,6 +31,22 @@ const placeorder = ({ router }, props) => {
   const placeOrderSubmit = (e) => {
     dispatch(storeSells(orderInputData, carts, totalQuantity, shippingCost, totalPrice))
   }
+
+  const { register, handleSubmit, watch, errors } = useForm();
+  const coupon = useSelector((state) => state.cart.coupon);
+  const couponLoading = useSelector((state) => state.cart.couponLoading);
+  const couponData = useSelector((state) => state.cart.couponData);
+
+  const handleChangeCouponCode = (name, value) => {
+    dispatch(handleChangeCouponInput(name, value))
+  }
+  console.log(`couponData in main page`, couponData)
+
+  const onSubmit = () => {
+    dispatch(handleApplyCouponCode(coupon, carts))
+  };
+  const withoutDiscount = totalPrice + shippingCost;
+  console.log(`withoutDiscount`, withoutDiscount)
   return (
     <>
       <MainLayout>
@@ -98,16 +116,49 @@ const placeorder = ({ router }, props) => {
                         <div className="shippmentDetailsHeader mt-3 mb-3">
                           <h1>Shipment Details</h1>
                         </div>
-                        <div className="shippmentDetailsTitle">
+
+
+                        {/* <div className="shippmentDetailsTitle">
                           <h3 className="d-inline item">Items</h3>
                           <h3 className="d-inline qty">Qty</h3>
                           <h3 className="d-inline unitPrice">Unite price</h3>
                           <h3 className="d-inline">Subtotal</h3>
-                        </div>
+                        </div> */}
                       </div>
                       <div className="clearfix"></div>
-                      <div className="item-quantity">
 
+
+
+                      <Table>
+                        <thead className="custome-background">
+                          <tr>
+                            <th> Product </th>
+                            <th> Product Name</th>
+                            <th>Qty</th>
+                            <th>Unite price</th>
+                            <th>Subtotal</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {carts.map((item, index) => (
+                            <tr className="bg-white">
+                              <td>
+                                <img className="img-fluid w-75 p-2" src={item.productImage} alt="product image" />
+                              </td>
+                              <td>
+                                <h4>{item.productName}</h4>
+                                <h6 className="text-danger">Seller: Seller shop name</h6>
+                              </td>
+                              <td>{item.quantity}</td>
+                              <td> ৳ {item.offerPrice !== null && item.offerPrice !== 0 && item.price !== "" ? item.offerPrice : item.price}</td>
+                              <td>৳ {item.offerPrice !== null && item.offerPrice !== 0 && item.price !== "" ? item.quantity * item.offerPrice : item.quantity * item.price}</td>
+                            </tr>
+                          )
+                          )}
+                        </tbody>
+                      </Table>
+
+                      {/* <div className="item-quantity">
                         {carts.map((item, index) => (
                           <div className="innerwishlist bg-white">
                             <div className="wishsingleproduct shippingImg">
@@ -121,16 +172,15 @@ const placeorder = ({ router }, props) => {
                               <p>{item.quantity}</p>
                             </div>
                             <div className="wishsingleproductIcon">
-                              <p>৳ {item.offerPrice !== null && item.price !== "" ? item.offerPrice : item.price}</p>
+                              <p>৳ {item.offerPrice !== null && item.offerPrice !== 0 && item.price !== "" ? item.offerPrice : item.price}</p>
                             </div>
                             <div className="wishsingleproductIcon">
-                              {/* item.quantity * item.offerPrice */}
-                              <p>৳ {item.offerPrice !== null && item.price !== "" ? item.quantity * item.offerPrice : item.quantity * item.price}</p>
+                              <p>৳ {item.offerPrice !== null && item.offerPrice !== 0 && item.price !== "" ? item.quantity * item.offerPrice : item.quantity * item.price}</p>
                             </div>
                           </div>
                         ))
                         }
-                      </div>
+                      </div> */}
                     </>
                   )
                 }
@@ -146,7 +196,9 @@ const placeorder = ({ router }, props) => {
                   <h1>Price Detail</h1>
                 </div>
                 <div className="placeOrderSummery bg-white p-3">
-                  <div className="float-left">
+
+
+                  {/* <div className="float-left">
                     <p>Price </p>
                     <p>Number of Items</p>
                     <p>Shipping cost</p>
@@ -161,6 +213,73 @@ const placeorder = ({ router }, props) => {
                     <p className="float-left">Total Price</p>
                     <p className="float-right">৳ {totalPrice + shippingCost}</p>
                   </div>
+                  */}
+                  <div className="placeOrder">
+                    <div className="d-flex justify-content-between">
+                      <p>Price (0 items)</p>
+                      <p>৳ {totalPrice}</p>
+                    </div>
+                    <div className="d-flex justify-content-between">
+                      <p>Number of Items</p>
+                      <p> {totalQuantity}</p>
+                    </div>
+                    <div className="d-flex justify-content-between">
+                      <p>Shipping cost </p>
+                      <p> ৳ {shippingCost} </p>
+                    </div>
+                    <div className="d-flex justify-content-between">
+                      <p>Discount</p>
+                      <p> ৳ {couponData && couponData.discount_amount ? couponData.discount_amount : 0} </p>
+                    </div>
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                      <div className="d-flex justify-content-between">
+                        <input
+                          className="form-control mr-1"
+                          name="code"
+                          autoComplete="off"
+                          placeholder="Your Coupon Code"
+                          value={coupon.code && coupon.code}
+                          onChange={(e) => handleChangeCouponCode("code", e.target.value)}
+                          ref={register({ required: true })} /> <br />
+                        {
+                          !couponLoading && (
+                            <button className="btn btn-primary" type="submit"> APPLY </button>
+                          )
+                        }
+
+                        {couponLoading && (
+                          <button disabled={true} className="btn btn-primary d-flex">
+                            <span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span> APPLY
+                          </button>
+                        )}
+                      </div>
+                      <p> {errors.code ?
+                        <span className="text-danger font-weight-bold mt-2">Please insert your coupon code if you have. </span> :
+                        (couponData && !couponData.errors && couponData.message ? (
+                          <p className="text-success font-weight-bold mt-2">{couponData.message}</p>
+                        ) : couponData && couponData.errors && (
+                          <p className="text-danger font-weight-bold mt-2">{couponData.errors.message}</p>
+                        )
+                        )
+                      }</p>
+                      {/* {
+                          couponData && !couponData.errors && couponData.message && (
+                            <p className="text-success">{couponData.message}</p>
+                          )
+                        } */}
+                      {/* {
+                          couponData && couponData.errors && (
+                            <p className="text-danger">{couponData.errors.message}</p>
+                          )
+                        } */}
+                    </form> <hr />
+                    <div className="d-flex justify-content-between">
+                      <p>Total Price</p>
+                      <p>৳ {couponData && couponData.discount_amount ? (withoutDiscount - couponData.discount_amount) : withoutDiscount}</p>
+                    </div>
+                  </div>
+
+
                   <div className="clearfix"></div>
                   <div className="proceedBtn">
                     {

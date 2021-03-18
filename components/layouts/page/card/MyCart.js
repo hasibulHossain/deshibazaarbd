@@ -60,7 +60,6 @@ const MyCart = ({ router }, props) => {
   const handleChangeCouponCode = (name, value) => {
     dispatch(handleChangeCouponInput(name, value))
   }
-  console.log(`couponData in main page`, couponData)
 
   const onSubmit = () => {
     dispatch(handleApplyCouponCode(coupon, carts))
@@ -104,13 +103,13 @@ const MyCart = ({ router }, props) => {
                       <div className="row">
                         <h4 >
                           {
-                            item.offerPrice !== null ? (
+                            item.offerPrice !== null && item.offerPrice !== 0 ? (
                               <del> {item.price} </del>) :
                               <>৳ {item.price}</>
                           }
                         </h4>
                         {
-                          item.offerPrice !== null && (
+                          item.offerPrice !== null && item.offerPrice !== 0 && (
                             <h4 className="ml-5 text-dark">{item.offerPrice}</h4>
                           )}
 
@@ -173,59 +172,10 @@ const MyCart = ({ router }, props) => {
                         <p>Number of Items</p>
                         <p> {totalQuantity}</p>
                       </div>
-                      <div className="d-flex justify-content-between">
-                        <p>Shipping Fee </p>
-                        <p> ৳ 0 </p>
-                      </div>
-                      <div className="d-flex justify-content-between">
-                        <p>Discount</p>
-                        <p> ৳ {couponData && couponData.discount_amount ? couponData.discount_amount : 0} </p>
-                      </div>
-                      <form onSubmit={handleSubmit(onSubmit)}>
-                        <div className="d-flex justify-content-between">
-                          <input
-                            className="form-control mr-1"
-                            name="code"
-                            autoComplete="off"
-                            placeholder="Your Coupon Code"
-                            value={coupon.code && coupon.code}
-                            onChange={(e) => handleChangeCouponCode("code", e.target.value)}
-                            ref={register({ required: true })} /> <br />
-                          {
-                            !couponLoading && (
-                              <button className="btn btn-primary" type="submit"> APPLY </button>
-                            )
-                          }
-
-                          {couponLoading && (
-                            <button disabled={true} className="btn btn-primary d-flex">
-                              <span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span> APPLY
-                            </button>
-                          )}
-                        </div>
-                        <p> {errors.code ?
-                          <span className="text-danger font-weight-bold mt-2">Please insert your coupon code if you have. </span> :
-                          (couponData && !couponData.errors && couponData.message ? (
-                            <p className="text-success font-weight-bold mt-2">{couponData.message}</p>
-                          ) : couponData && couponData.errors && (
-                            <p className="text-danger font-weight-bold mt-2">{couponData.errors.message}</p>
-                          )
-                          )
-                        }</p>
-                        {/* {
-                          couponData && !couponData.errors && couponData.message && (
-                            <p className="text-success">{couponData.message}</p>
-                          )
-                        } */}
-                        {/* {
-                          couponData && couponData.errors && (
-                            <p className="text-danger">{couponData.errors.message}</p>
-                          )
-                        } */}
-                      </form> <hr />
+                      <hr />
                       <div className="d-flex justify-content-between">
                         <p>Total Price</p>
-                        <p>৳ {couponData && couponData.discount_amount ? (totalPrice - couponData.discount_amount) : totalPrice}</p>
+                        <p>৳ {totalPrice}</p>
                       </div>
                     </div>
                   </div>
