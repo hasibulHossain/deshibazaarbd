@@ -126,9 +126,6 @@ const placeorder = ({ router }, props) => {
                         </div> */}
                       </div>
                       <div className="clearfix"></div>
-
-
-
                       <Table>
                         <thead className="custome-background">
                           <tr>
@@ -143,11 +140,11 @@ const placeorder = ({ router }, props) => {
                           {carts.map((item, index) => (
                             <tr className="bg-white">
                               <td>
-                                <img className="img-fluid w-75 p-2" src={item.productImage} alt="product image" />
+                                <img className="placeOrder-img p-2" src={item.productImage} alt="product image" />
                               </td>
                               <td>
-                                <h4>{item.productName}</h4>
-                                <h6 className="text-danger">Seller: Seller shop name</h6>
+                                <h5>{item.productName}</h5>
+                                <h6 className="text-danger">Seller: {item.business.businessName}</h6>
                               </td>
                               <td>{item.quantity}</td>
                               <td> ৳ {item.offerPrice !== null && item.offerPrice !== 0 && item.price !== "" ? item.offerPrice : item.price}</td>

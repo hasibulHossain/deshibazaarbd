@@ -99,7 +99,7 @@ const MyCart = ({ router }, props) => {
                     </div>
                     <div className="wishsingleproductText mycarttext">
                       <h1>{item.productName}</h1>
-                      <h2>Seller: Shop no</h2>
+                      <h2>Seller: {item.business.businessName}</h2>
                       <div className="row">
                         <h4 >
                           {
