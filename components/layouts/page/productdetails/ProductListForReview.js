@@ -11,8 +11,6 @@ import ProductReviewCreate from './ProductReviewCreate';
 const ProductListForReview = () => {
     const dispatch = useDispatch();
     const isLoading = useSelector((state) => state.ReviewReducer.isLoading);
-    const productWishes = useSelector((state) => state.productWish.productWishes);
-    const wishList = useSelector((state) => state.wishListReducer.wishList);
     const itemList = useSelector((state) => state.ReviewReducer.itemList);
 
     useEffect(() => {

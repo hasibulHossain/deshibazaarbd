@@ -1,9 +1,9 @@
 import React from 'react';
-import { Modal } from 'react-bootstrap';
+import { Form, Modal } from 'react-bootstrap';
 import ReactStars from "react-rating-stars-component";
 import ProfileSideBar from '../myprofile/profileSideBar';
 
-const ProductReviewCreate = ({ReviewItem}) => {
+const ProductReviewCreate = ({ ReviewItem }) => {
 
     const [ratingValue, setRatingValue] = React.useState(3);
     const secondExample = {
@@ -13,7 +13,7 @@ const ProductReviewCreate = ({ReviewItem}) => {
         activeColor: "gold",
         value: ratingValue,
         a11y: true,
-        isHalf: true,
+        // isHalf: true,
         emptyIcon: <i className="far fa-star" />,
         halfIcon: <i className="fa fa-star-half-alt" />,
         filledIcon: <i className="fa fa-star" />,
@@ -48,9 +48,23 @@ const ProductReviewCreate = ({ReviewItem}) => {
                                     </div>
                                     <ReactStars {...secondExample} />
                                     <label>Review detail</label>
-                                    <textarea className="form-control" placeholder="Please share your feedback about the product: 
-                                               was the product as described? What is the quality like?" />
+                                    <textarea
+                                        className="form-control"
+                                        placeholder="Please share your feedback about the product: was the product as described? What is the quality like?" />
+                                    <br />
 
+                                    <div className="mb-3">
+                                        <Form.File id="formcheck-api-custom" custom>
+                                            <Form.File.Input isValid />
+                                            <Form.File.Label data-browse="UPLOAD">
+                                                Choose Your Review Image
+                                             </Form.File.Label>
+                                        </Form.File>
+                                    </div>
+                                    {/* <div class="input-group">
+                                        <label class="input-group-text" for="inputGroupFile01">Upload</label>
+                                        <input type="file" class="form-control" id="inputGroupFile01" />
+                                    </div> */}
                                 </div>
                             </div>
                         </div>
