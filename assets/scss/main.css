@@ -3192,6 +3192,8 @@ p.single-product-text {
 .js-image-zoom__zoomed-image {
     z-index: 999 !important;
     margin-left: 15px;
+    background-color: #fff;
+    border: 1px solid #cdcdcd;
 }
 .innerItemList {
     width: 100%;
