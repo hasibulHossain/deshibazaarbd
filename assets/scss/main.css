@@ -3221,3 +3221,13 @@ p.single-product-text {
 .placeOrder-img{
     width: 200px!important;
 }
+.payment-method{
+    background-color: #dedede;
+    text-align: center;
+    padding: 20px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.payment-method img{
+    width: 60px;
+}

@@ -192,23 +192,6 @@ const placeorder = ({ router }, props) => {
                 </div>
                 <div className="placeOrderSummery bg-white p-3">
 
-
-                  {/* <div className="float-left">
-                    <p>Price </p>
-                    <p>Number of Items</p>
-                    <p>Shipping cost</p>
-                  </div>
-                  <div className="float-right">
-                    <p>৳ {totalPrice}</p>
-                    <p className="ml-4">{totalQuantity}</p>
-                    <p>৳ {shippingCost}</p>
-                  </div>
-                  <div className="clearfix"></div>
-                  <div className="border-top pt-1">
-                    <p className="float-left">Total Price</p>
-                    <p className="float-right">৳ {totalPrice + shippingCost}</p>
-                  </div>
-                  */}
                   <div className="placeOrder">
                     <div className="d-flex justify-content-between">
                       <p>Price (0 items)</p>
@@ -300,6 +283,7 @@ const placeorder = ({ router }, props) => {
                   </div>
                 </div>
               </div>
+
             </div>
           </div>
         </div>
