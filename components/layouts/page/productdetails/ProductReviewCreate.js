@@ -1,11 +1,14 @@
 import React from 'react';
 import { Form, Modal } from 'react-bootstrap';
+import { useForm } from 'react-hook-form';
 import ReactStars from "react-rating-stars-component";
-import ProfileSideBar from '../myprofile/profileSideBar';
+import { useDispatch, useSelector } from 'react-redux';
+import { handleChangeReviewItemInput, storeReviewData } from './_redux/Action/ReviewAction';
 
 const ProductReviewCreate = ({ ReviewItem }) => {
 
-    const [ratingValue, setRatingValue] = React.useState(3);
+    const dispatch = useDispatch()
+    const [ratingValue, setRatingValue] = React.useState(1);
     const secondExample = {
         size: 25,
         count: 5,
@@ -21,7 +24,25 @@ const ProductReviewCreate = ({ ReviewItem }) => {
             setRatingValue(newValue)
         }
     };
-    console.log(`ReviewItem`, ReviewItem)
+
+    const { register, handleSubmit, watch, errors } = useForm();
+    const reviewSubmitting = useSelector((state) => state.ReviewReducer.reviewSubmitting);
+    const reviewInput = useSelector((state) => state.ReviewReducer.reviewInput);
+
+    const reviewStoreInput = {
+        item_id: ReviewItem.item_id,
+        rating_value: ratingValue,
+        comment: reviewInput.comment,
+        images: reviewInput.images
+    }
+    const handleChangeCouponCode = (name, value) => {
+        dispatch(handleChangeReviewItemInput(name, value))
+    }
+
+    const onSubmit = () => {
+        dispatch(storeReviewData(reviewStoreInput))
+    };
+
     return (
         <>
             <Modal.Header closeButton>
@@ -31,7 +52,10 @@ const ProductReviewCreate = ({ ReviewItem }) => {
             </Modal.Header>
             <Modal.Body>
                 <div className="card audienceContainer p-2">
-                    <form>
+                    <form
+                        onSubmit={handleSubmit(onSubmit)}
+                        autoComplete="off"
+                    >
                         <div className="pool-container m-1">
                             <h6>Delivered on 24 Feb 2021</h6>
                             <p>Rate and review purchased product:</p>
@@ -50,12 +74,22 @@ const ProductReviewCreate = ({ ReviewItem }) => {
                                     <label>Review detail</label>
                                     <textarea
                                         className="form-control"
-                                        placeholder="Please share your feedback about the product: was the product as described? What is the quality like?" />
+                                        placeholder="Please share your feedback about the product: was the product as described? What is the quality like?"
+                                        name="comment"
+                                        onChange={(e) => handleChangeCouponCode("comment", e.target.value)}
+                                        ref={register({ required: true })}
+                                    />
+                                    {errors.comment &&
+                                        <span className="text-danger font-weight-bold mt-2">Your Comments can't be blank! </span>
+                                    }
                                     <br />
 
                                     <div className="mb-3">
                                         <Form.File id="formcheck-api-custom" custom>
-                                            <Form.File.Input isValid />
+                                            <Form.File.Input
+                                                name="images"
+                                                onChange={(e) => handleChangeCouponCode("images", e)}
+                                                isValid />
                                             <Form.File.Label data-browse="UPLOAD">
                                                 Choose Your Review Image
                                              </Form.File.Label>
@@ -68,7 +102,17 @@ const ProductReviewCreate = ({ ReviewItem }) => {
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" className="btn btn-outline-primary float-right mt-3">SUBMIT</button>
+                        {
+                            !reviewSubmitting && (
+                                <button type="submit" className="btn btn-outline-primary float-right mt-3">Submit</button>
+                            )
+                        }
+
+                        {reviewSubmitting && (
+                            <button disabled={true} className="btn btn-primary d-flex float-right">
+                                <span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span> Submitting...
+                            </button>
+                        )}
                     </form>
                 </div>
                 {/* <Button onClick={handleClose}>Close</Button> */}

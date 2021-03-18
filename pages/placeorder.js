@@ -40,13 +40,11 @@ const placeorder = ({ router }, props) => {
   const handleChangeCouponCode = (name, value) => {
     dispatch(handleChangeCouponInput(name, value))
   }
-  console.log(`couponData in main page`, couponData)
 
   const onSubmit = () => {
     dispatch(handleApplyCouponCode(coupon, carts))
   };
   const withoutDiscount = totalPrice + shippingCost;
-  console.log(`withoutDiscount`, withoutDiscount)
   return (
     <>
       <MainLayout>
