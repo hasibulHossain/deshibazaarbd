@@ -56,7 +56,7 @@ const SpliteCardForm = () => {
     };
 
     return (
-        <div className="card p-3 mb-5 mt-2">
+        <div className="card p-3 mb-5 mt-2 splitCardForm">
             <form onSubmit={handleSubmit}>
                 <label>
                     Card number

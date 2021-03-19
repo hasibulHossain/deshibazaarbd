@@ -64,6 +64,7 @@ export const storeSells = (orderInputData, carts, totalQuantity, shippingCost, t
     Axios.post(`${process.env.NEXT_PUBLIC_API_URL}sales`, orderPlaceData)
         .then((res) => {
             if (res.data.status) {
+                console.log(`res`, res)
                 response.status = res.data.status;
                 response.orderData = res.data.data;
                 response.isLoading = false;
