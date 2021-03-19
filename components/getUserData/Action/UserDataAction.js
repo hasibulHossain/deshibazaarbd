@@ -1,6 +1,7 @@
 import * as Types from "../Types/Types";
 
 export const getUserDataAction = () => async (dispatch) => {
+  
   const data = getUserData();
   dispatch({ type: Types.GET_USER_STORAGE_DATA, payload: data });
 };

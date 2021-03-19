@@ -9,9 +9,13 @@ import { getOrderInfo, orderInputChange, storeSells } from "../store/actions/ord
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import { Table } from "react-bootstrap";
+import { useRouter } from "next/router";
+import { getUserDataAction } from "../components/getUserData/Action/UserDataAction";
+// import { getUserDataAction } from "../../getUserData/Action/UserDataAction";
 
-const placeorder = ({ router }, props) => {
+const placeorder = (props) => {
   const dispatch = useDispatch()
+  const router = useRouter();
   const loading = useSelector((state) => state.cart.loading);
   const carts = useSelector((state) => state.cart.carts);
   const totalQuantity = useSelector((state) => state.cart.totalQuantity);
@@ -23,13 +27,18 @@ const placeorder = ({ router }, props) => {
 
   useEffect(() => {
     dispatch(getCartsAction());
-  }, []);
+    dispatch(getUserDataAction());
 
+  }, []);
+  const userData = useSelector((state) => state.UserDataReducer.userData)
+
+  console.log(`userData`, userData)
   const handleInputChage = (name, value, e) => {
     dispatch(orderInputChange(name, value))
   }
   const placeOrderSubmit = (e) => {
-    dispatch(storeSells(orderInputData, carts, totalQuantity, shippingCost, totalPrice))
+    dispatch(storeSells(orderInputData, carts, totalQuantity, shippingCost, totalPrice));
+    router.push('/checkout-payment')
   }
 
   const { register, handleSubmit, watch, errors } = useForm();
@@ -45,6 +54,15 @@ const placeorder = ({ router }, props) => {
     dispatch(handleApplyCouponCode(coupon, carts))
   };
   const withoutDiscount = totalPrice + shippingCost;
+
+  useEffect(() => {
+    if (userData !== null) {
+      router.push('/placeorder')
+    } else if (userData === null) {
+      router.push('/login')
+    }
+  }, []);
+
   return (
     <>
       <MainLayout>

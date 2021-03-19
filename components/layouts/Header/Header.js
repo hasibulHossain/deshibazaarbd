@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
-import { withRouter } from "next/router";
+import { useRouter, withRouter } from "next/router";
 import MobileMenu from "./MobileMenu";
 
 import {
@@ -158,11 +158,16 @@ const Header = () => {
       </>
     )
   }
+  const router = useRouter()
   const userData = useSelector((state) => state.UserDataReducer.userData)
 
   const handleLogout = () => {
-    dispatch(handleLogoutUser())
+    dispatch(handleLogoutUser());
+    router.push('/login')
+    // if (userData === null) {
+    //   router.push('/login')
 
+    // }
   }
 
   return (
