@@ -3194,7 +3194,10 @@ p.single-product-text {
     margin-left: 15px;
     background-color: #fff;
     border: 1px solid #cdcdcd;
+    top: -20% !important;
+    height: 500px !important;
 }
+
 .innerItemList {
     width: 100%;
     height: 200px;
@@ -3203,31 +3206,55 @@ p.single-product-text {
     background: white;
 }
 
-.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link{
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link {
     border: none;
-    font-size: 17px!important;
+    font-size: 17px !important;
 }
-.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link:hover{
+
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link:hover {
     border: none;
 }
-.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
+
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active {
     border: none;
-    border-bottom: 2px solid #00c4ee!important;
-    color: #00c4ee!important;
+    border-bottom: 2px solid #00c4ee !important;
+    color: #00c4ee !important;
 }
-.custome-background{
+
+.custome-background {
     background-color: #ebebeb;
 }
-.placeOrder-img{
-    width: 200px!important;
+
+.placeOrder-img {
+    width: 200px !important;
 }
-.payment-method{
-    background-color: #dedede;
+
+.checkoutPayment {
+    background-color: #f8f9fa;
+}
+
+.payment-method {
+    background-color: #f5f6f9;
     text-align: center;
     padding: 20px;
+    margin-right: 10px!important;
     border-radius: 6px;
     cursor: pointer;
+    min-width: 160px
 }
-.payment-method img{
+
+.payment-method img {
     width: 60px;
+}
+.bkash p {
+    font-size: 16px;
+    margin-bottom: 4px;
+}
+.custome-pay-btn{
+    background-color: #f57224!important;
+    color: #fff!important;
+    width: 100%;
 }

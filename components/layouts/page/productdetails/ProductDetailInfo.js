@@ -145,7 +145,7 @@ const ProductDetailInfo = (props) => {
                   /> */}
 
                   <ReactImageZoom
-                    className="zoom-image mt-3"
+                    className="zoom-image mt-3 card"
                     {...zoomImage}
                   />
 
