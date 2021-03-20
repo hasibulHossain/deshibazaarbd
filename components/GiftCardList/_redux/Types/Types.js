@@ -1,0 +1,1 @@
+export const GET_GIFT_CARD_LIST = "GET_GIFT_CARD_LIST"

@@ -24,6 +24,7 @@ import MyOrderReducer from "./redux/myOrders/reducers/MyOrderReducer";
 import PaymentReducer from "../components/layouts/page/payment/_redux/Reducer/PaymentReducer";
 import ReviewReducer from "../components/layouts/page/productdetails/_redux/ReviewReducer/ReviewReducer";
 import CheckoutPaymentReducer from "../components/layouts/page/CheckoutPayment/_redux/Reducer/CheckoutPayment";
+import GiftCardListReducer from "../components/GiftCardList/_redux/Reducer/GiftCardListReducer";
 // import WishlistReducer from "../components/layouts/page/wishlist/_redux/Reducer/WishlistReducer";
 
 export default combineReducers({
@@ -51,4 +52,5 @@ export default combineReducers({
   PaymentReducer: PaymentReducer,
   ReviewReducer: ReviewReducer,
   CheckoutPaymentReducer: CheckoutPaymentReducer,
+  GiftCardListReducer: GiftCardListReducer,
 });

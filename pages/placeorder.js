@@ -30,7 +30,6 @@ const placeorder = (props) => {
     dispatch(getUserDataAction());
 
   }, []);
-  const userData = useSelector((state) => state.UserDataReducer.userData)
 
   console.log(`userData`, userData)
   const handleInputChage = (name, value, e) => {
@@ -43,6 +42,7 @@ const placeorder = (props) => {
 
   const { register, handleSubmit, watch, errors } = useForm();
   const coupon = useSelector((state) => state.cart.coupon);
+  const userData = useSelector((state) => state.UserDataReducer.userData)
   const couponLoading = useSelector((state) => state.cart.couponLoading);
   const couponData = useSelector((state) => state.cart.couponData);
 

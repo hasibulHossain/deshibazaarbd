@@ -20,9 +20,12 @@ import { FaTrash } from "react-icons/fa";
 import { Button } from "@material-ui/core";
 import ReactImageFallback from "react-image-fallback";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/router";
+import { getUserDataAction } from "../../../getUserData/Action/UserDataAction";
 
-const MyCart = ({ router }, props) => {
+const MyCart = (props) => {
   const dispatch = useDispatch();
+  const router = useRouter()
   const loading = useSelector((state) => state.cart.loading);
   const carts = useSelector((state) => state.cart.carts);
   const totalQuantity = useSelector((state) => state.cart.totalQuantity);
@@ -34,6 +37,8 @@ const MyCart = ({ router }, props) => {
 
   useEffect(() => {
     dispatch(getCartsAction());
+    dispatch(getUserDataAction());
+
   }, []);
 
   // increase quantity 
@@ -54,17 +59,14 @@ const MyCart = ({ router }, props) => {
     dispatch(deleteCartItemAction(id))
   }
 
-  //=================coupon code apply==========================
-  const { register, handleSubmit, watch, errors } = useForm();
-
-  const handleChangeCouponCode = (name, value) => {
-    dispatch(handleChangeCouponInput(name, value))
+  const userData = useSelector((state) => state.UserDataReducer.userData)
+  const placeOrder = () => {
+    if (userData !== null) {
+      router.push('/placeorder')
+    } else if (userData === null) {
+      router.push('/login')
+    }
   }
-
-  const onSubmit = () => {
-    dispatch(handleApplyCouponCode(coupon, carts))
-  };
-
   return (
     <>
       <div className="wishbanner pb-5">
@@ -180,7 +182,7 @@ const MyCart = ({ router }, props) => {
                     </div>
                   </div>
                   <div className="mycartplace" disabled={true}>
-                    <Link href="placeorder"><button className="btn" disabled={carts.length === 0 ? true : false}>PLACE ORDER</button></Link>
+                    <button onClick={() => placeOrder()}><button className="btn" disabled={carts.length === 0 ? true : false}>PLACE ORDER</button></button>
                   </div>
                 </div>
               </div>

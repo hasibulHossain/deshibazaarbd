@@ -21,6 +21,7 @@ import {
 
 import ReactImageZoom from 'react-image-zoom';
 import { useRouter } from "next/router";
+import { getUserDataAction } from "../../../getUserData/Action/UserDataAction";
 
 
 const ProductDetailInfo = (props) => {
@@ -41,6 +42,7 @@ const ProductDetailInfo = (props) => {
 
   useEffect(() => {
     dispatch(getCartsAction());
+    dispatch(getUserDataAction());
   }, []);
 
   // // manage product price with current quantity
@@ -97,10 +99,15 @@ const ProductDetailInfo = (props) => {
   }
   const zoomImage = { zoomWidth: 500, img: previewImg }
   // const zoomImage = {width: 400, height: 250, zoomWidth: 500, img: previewImg}
+  const userData = useSelector((state) => state.UserDataReducer.userData)
 
   const handleBuyProduct = (cartProduct, id) => {
     dispatch(addToCartAction(cartProduct, id));
-    router.push('/placeorder')
+    if (userData !== null) {
+      router.push('/placeorder')
+    } else if (userData === null) {
+      router.push('/login')
+    }
   }
   return (
     <>
