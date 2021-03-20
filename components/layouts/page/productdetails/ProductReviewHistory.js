@@ -12,9 +12,11 @@ const ProductReviewHistory = () => {
     const isLoading = useSelector((state) => state.ReviewReducer.isLoading);
     const reviewList = useSelector((state) => state.ReviewReducer.reviewList);
 
-    console.log(`reviewList`, reviewList)
+    const itemID = 0;
+    const userID = 1;
+
     useEffect(() => {
-        dispatch(getReviewListByUser());
+        dispatch(getReviewListByUser(itemID, userID));
     }, []);
     return (
         <>

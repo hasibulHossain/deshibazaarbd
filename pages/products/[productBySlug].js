@@ -6,10 +6,8 @@ import HomeFeaturList from "../../components/layouts/page/home/HomeFeaturList"
 import ProductDetailInfo from "../../components/layouts/page/productdetails/ProductDetailInfo"
 import ProductDetailsDescrition from "../../components/layouts/page/productdetails/ProductDetailsDescrition"
 import ElegentChairRating from "../../components/layouts/page/productdetails/ElegentChairRating"
-import { fetchProductBySlug, fetchProducts } from "../../store/redux/products/actions/ProductAction"
 import LoadingSkelleton from "./../../components/master/skelleton/LoadingSkelleton";
 import Head from 'next/head'
-import ProductReview from "../../components/layouts/page/productdetails/ProductReview"
 
 export default function ProductBySlug({ product }) {
     const router = useRouter();
@@ -25,9 +23,8 @@ export default function ProductBySlug({ product }) {
             <MainLayout>
                 <>
                     <ProductDetailInfo product={product} />
-                    <ProductDetailsDescrition />
-                    <ProductReview />
-                    <ElegentChairRating />
+                    <ProductDetailsDescrition product={product} />
+                    <ElegentChairRating product={product} />
                     <HomeFeaturList />
                 </>
                 {

@@ -4,7 +4,7 @@ import CancelIcon from "@material-ui/icons/Cancel";
 import MainLayout from "../components/layouts/Layout";
 import { Checkbox } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
-import { getCartsAction, handleApplyCouponCode, handleChangeCouponInput } from "../store/actions/orders/CartAction";
+import { getCartsAction, handleApplyCouponCode, handleChangeCouponInput, handleShippingCost } from "../store/actions/orders/CartAction";
 import { getOrderInfo, orderInputChange, storeSells } from "../store/actions/orders/OrderAction";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
@@ -28,10 +28,9 @@ const placeorder = (props) => {
   useEffect(() => {
     dispatch(getCartsAction());
     dispatch(getUserDataAction());
-
+    dispatch(handleShippingCost(carts))
   }, []);
 
-  console.log(`userData`, userData)
   const handleInputChage = (name, value, e) => {
     dispatch(orderInputChange(name, value))
   }

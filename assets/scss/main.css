@@ -1240,7 +1240,16 @@ h4.pt-2 {
 
 .chairreviewcomment.one {
     float: left;
-    width: 20%;
+    height: 80px;
+    width: 10%;
+    border: 1px solid #cdcdcd;
+    text-align: center;
+    padding: 15px;
+    border-radius: 50%;
+}
+.chairreviewcomment.one i {
+    font-size: 40px;
+   
 }
 
 .chairreviewcomment.two {
@@ -1256,7 +1265,7 @@ h4.pt-2 {
 .chairreviewcomment.two p {
     color: #646464;
     font-size: 14px;
-    padding: 4px 0px 7px 18px;
+    padding: 4px 0px 1px 0px;
     margin-bottom: 0px;
 }
 
@@ -1264,8 +1273,9 @@ h4.pt-2 {
     content: none;
 }
 
-.row.ratingborder {
+ratingborder {
     padding-bottom: 20px;
+    border-bottom: 1px solid #696969;
 }
 
 .review.two {

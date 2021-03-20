@@ -78,3 +78,4 @@ export const GET_USER_UPDATED_DATA = "GET_USER_UPDATED_DATA";
 //*********************Coupon data in add to cart page*********************************** */
 export const CHANGE_COUPON_INPUT_DATA = "CHANGE_COUPON_INPUT_DATA";
 export const APPLY_COUPON_CODE = "APPLY_COUPON_CODE";
+export const APPLY_SHIPPING_COST = "APPLY_SHIPPING_COST";

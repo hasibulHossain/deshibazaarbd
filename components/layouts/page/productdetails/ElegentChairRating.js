@@ -1,9 +1,19 @@
-import React, { Component } from "react";
-
+import React, { Component, useEffect } from "react";
+import ReactStars from "react-rating-stars-component";
 import Rater from "react-rater";
 import { MdThumbUp } from "react-icons/md";
+import { getReviewListByUser } from "./_redux/Action/ReviewAction";
+import { useDispatch, useSelector } from "react-redux";
 
-const ElegentChairRating = ({ router }, props) => {
+const ElegentChairRating = ({ product }) => {
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getReviewListByUser(product.id, 0, 1));
+  }, []);
+
+  const reviewList = useSelector((state) => state.ReviewReducer.reviewList);
+  console.log(`reviewList in description section`, reviewList)
   return (
     <>
       <div className="ratingbanner pb">
@@ -50,7 +60,7 @@ const ElegentChairRating = ({ router }, props) => {
             <div className="row">
               <div className="col-12">
                 <div className="chairreview">
-                <div className="chair-border"></div>
+                  <div className="chair-border"></div>
                   <div className="chairreview one">
                     <h1>Product Reviews</h1>
                   </div>
@@ -59,72 +69,33 @@ const ElegentChairRating = ({ router }, props) => {
                   </div>
                 </div>
               </div>
-            </div>
-            {/* <div className="row product-review">
-              <div className="chairreview comment">
-                <div className="chairreviewcomment one">
-                  <img src="/images/default/departemntteamimg.png" />
-                </div>
 
-                <div className="chairreviewcomment two">
-                  <h1>by Faruk U.</h1>
-                  <div className="review comment">
-                    <Rater total={5} rating={2} />
-                    <br></br>
-                  </div>
-                  <p>02</p>
-                 <MdThumbUp/>
-                 <input type="text" placeholder="write your review" className="review-input"></input>
-                </div>
-              </div>
-            </div> */}
-            <div className="row">
-              <div className="chairreview comment borderless">
-                <div className="chairreviewcomment one">
-                  <img src="/images/default/departemntteamimg.png" />
-                </div>
 
-                <div className="chairreviewcomment two">
-                  <h1>by Faruk U.</h1>
-                  <div className="review comment">
-                    <Rater total={5} rating={2} />
-                    <br></br>
-                  </div>
-                  <p>
-                    {" "}
-                    <MdThumbUp /> 02
-                  </p>
-                  <input
-                    type="text"
-                    placeholder="write your review"
-                    className="review-input"
-                  ></input>
-                </div>
-              </div>
-            </div>
-            <div className="row ratingborder">
-              <div className="chairreview comment borderless">
-                <div className="chairreviewcomment one">
-                  <img src="/images/default/departemntteamimg.png" />
-                </div>
+              {
+                reviewList.length > 0 && reviewList.map((item, index) => (
+                  <>
+                    <div className="col-12 ratingborder">
+                      <div className="chairreview comment borderless">
+                        <div className="chairreviewcomment one">
+                          <i class="fas fa-user"></i>
+                        </div>
 
-                <div className="chairreviewcomment two">
-                  <h1>by Faruk U.</h1>
-                  <div className="review comment">
-                    <Rater total={5} rating={2} />
-                    <br></br>
-                  </div>
-                  <p>
-                    {" "}
-                    <MdThumbUp /> 02
-                  </p>
-                  <input
-                    type="text"
-                    placeholder="write your review"
-                    className="review-input"
-                  ></input>
-                </div>
-              </div>
+                        <div className="chairreviewcomment two">
+                          <h1>by {item.rating_by}</h1>
+                          <ReactStars
+                            count={5}
+                            size={20}
+                            value={item.rating_value}
+                            edit={false}
+                            activeColor="#ffab00"
+                          />
+                          <p> <span className="font-weight-bold">Customer Review : </span> {item.comment ? item.comment : "----"}</p>
+                        </div>
+                      </div> 
+                    </div> 
+                  </>
+                ))
+              }
             </div>
           </div>
         </div>
