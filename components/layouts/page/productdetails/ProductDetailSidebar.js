@@ -11,10 +11,10 @@ const ProductDetailSidebar = ({ product }) => {
                 <h2>Delivery Options</h2>
                 <div className="chairDeliveryoption three"></div>
                 <div className="chairDeliveryoption productDetailsFloating">
-                    <p>
+                    {/* <p>
                         <PinDropIcon />
                         Dhaka,Dhaka - South,Wari
-                    </p>
+                    </p> */}
                     <br></br>
                     <img src="/images/default/homedelivery.png" alt="" />
                     <p>Home Delivery</p>
@@ -62,18 +62,23 @@ const ProductDetailSidebar = ({ product }) => {
                 <div className="mt-2 bg-light soldText">
                     <h6>Sold by</h6>
                     <div className="soldAgency">
-                        <h2 className="float-left">Akij plastic</h2>
-                        <p className="float-right text-right font-weight-bold">
+                        <h2 className="float-left">
+                            {
+                                typeof product.business !== 'undefined' ?
+                                    product.business.name : ''
+                            }
+                        </h2>
+                        {/* <p className="float-right text-right font-weight-bold">
                             <a href="">
                                 <ChatIcon />
                                 Chat Now
                             </a>
-                        </p>
+                        </p> */}
                     </div>
                 </div>
                 <div className="clearfix"></div>
                 <div className="elegentrating">
-                    <div className="elegentsinglerating">
+                    {/* <div className="elegentsinglerating">
                         <h6>88%</h6>
                         <p>Positive Seller Ratings</p>
                     </div>
@@ -84,7 +89,7 @@ const ProductDetailSidebar = ({ product }) => {
                     <div className="elegentsinglerating">
                         <h6>43%</h6>
                         <p>Chat Response Rate</p>
-                    </div>
+                    </div> */}
                     <div className="clearfix"></div>
                     <div className="goStore text-center font-weight-bold">
                         <Link href="/"> GO TO STORE</Link>
