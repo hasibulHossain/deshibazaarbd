@@ -1,52 +1,28 @@
 import React, { useState } from "react";
 import { InputBase, Paper, IconButton } from "@material-ui/core";
+import { useSelector, useDispatch } from 'react-redux';
+import SearchLoadingSkelleton from './SearchLoadingSkelleton';
+import { searchProductAction } from "./redux/SearchAction";
+import { useRouter } from 'next/router'
 
 const SearchInput = (props) => {
+  const dispatch = useDispatch();
+  const router = useRouter();
+
   const [search, setSearch] = useState("");
-  const suggestions = [
-    {
-      search_id: "saluar-kameez",
-      search_name: "Saluar Kameez",
-      search_image_url: null,
-      is_item: true,
-      search_price: 499,
-      is_category: false,
-      is_tag: false,
-    },
-    {
-      slug: "cotton-shirts-for-gents",
-      search_name: "Cotton Shirts for Gents",
-      search_image_url: null,
-      search_price: 0,
-      is_item: false,
-      is_category: false,
-      is_tag: true,
-    },
-    {
-      slug: "gents-t-shairt",
-      search_name: "T-Shirt for Gents",
-      search_image_url:
-        "https://images.othoba.com/images/thumbs/0312595_mens-half-sleeve-t-shirt.jpeg",
-      is_item: false,
-      is_category: false,
-      search_price: 0,
-      is_tag: true,
-    },
-    {
-      slug: "rolex-watch",
-      search_name: "Watch - Rolex",
-      search_image_url:
-        "https://images.othoba.com/images/thumbs/0321841_huawei-watch-fit-black.jpeg",
-      is_item: false,
-      is_category: true,
-      search_price: 0,
-      is_tag: false,
-    },
-  ];
+  const suggestions = useSelector((state) => state.search.products);
+  const loading = useSelector((state) => state.search.loading);
 
   const searchProduct = (e) => {
     setSearch(e.target.value);
+    dispatch(searchProductAction(e.target.value))
   };
+
+  const searchClick = (searchData) => {
+    if (searchData.is_item) {
+      router.push(`/products/${searchData.slug}`);
+    }
+  }
 
   return (
     <>
@@ -54,7 +30,7 @@ const SearchInput = (props) => {
         <div className="float-left search-text">
           <InputBase
             placeholder="Search Products"
-            onInput={(e) => searchProduct(e)}
+            onChange={(e) => searchProduct(e)}
           />
         </div>
         <div className="float-right search-icon">
@@ -64,10 +40,24 @@ const SearchInput = (props) => {
         </div>
         <div className="clearfix"></div>
       </Paper>
+
+      <SearchLoadingSkelleton loading={loading} />
+
+      {
+        search.length > 0 && suggestions.length === 0 && !loading && (
+          <div className="search-suggestion-area">
+            <p className="text-danger text-center">
+              Sorry, No Product found by - {search} <br />
+              Please try with another keyword !
+            </p>
+          </div>
+        )
+      }
+
       {search.length > 0 && suggestions.length > 0 && (
         <div className="search-suggestion-area">
           {suggestions.map((searchItem, searchIndex) => (
-            <div className="search-suggestion-item" key={searchIndex}>
+            <div className="search-suggestion-item" key={searchIndex} onClick={() => searchClick(searchItem, searchIndex)}>
               {searchItem.search_image_url !== null ? (
                 <div className="float-left">
                   <img src={searchItem.search_image_url} alt="" width={50} />
@@ -83,9 +73,14 @@ const SearchInput = (props) => {
               )}
 
               <div className="float-left">
-                <h5 className="search-title">{searchItem.search_name}</h5>
-                {searchItem.search_price != 0 && (
-                  <p>Tk. {searchItem.search_price}</p>
+                <h5 className="search-title">
+                  {
+                    searchItem.is_category ? 'Category - ' : ''
+                  }
+                  {searchItem.search_name}
+                </h5>
+                {searchItem.search_price > 0 && (
+                  <p className="search-price">৳ {searchItem.search_price}</p>
                 )}
               </div>
 

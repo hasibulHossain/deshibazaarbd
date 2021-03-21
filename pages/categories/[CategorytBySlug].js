@@ -1,7 +1,11 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { useRouter } from 'next/router'
+import { useDispatch, useSelector } from "react-redux"
 import MainLayout from "../../components/layouts/Layout"
+import HomeFeaturList from "../../components/layouts/page/home/HomeFeaturList"
 import ProductDetailInfo from "../../components/layouts/page/productdetails/ProductDetailInfo"
+import ProductDetailsDescrition from "../../components/layouts/page/productdetails/ProductDetailsDescrition"
+import ProductRatings from "../../components/layouts/page/productdetails/ProductRatings"
 import LoadingSkelleton from "./../../components/master/skelleton/LoadingSkelleton";
 import Head from 'next/head'
 

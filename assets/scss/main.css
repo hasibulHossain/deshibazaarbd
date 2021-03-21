@@ -2354,14 +2354,20 @@ p.text-secondary.mb-0 {
 }
 
 .search-suggestion-area {
-  height: 300px;
+  height: auto;
+  min-height: 100px;
+  max-height: 300px;
   z-index: 10;
   position: absolute;
   background: #eee;
-  width: 92.5%;
+  width: 93%;
   border-radius: 0px 0px 25px 25px;
   color: #111;
   overflow-y: auto;
+}
+
+.search-suggestion-item img {
+  width: 50px;
 }
 
 .search-suggestion-item {
@@ -2374,6 +2380,14 @@ p.text-secondary.mb-0 {
 .search-suggestion-item .search-title {
   font-size: 15px;
   margin-top: 10px;
+  margin-left: 20px;
+  width: 300px;
+}
+
+.search-suggestion-item .search-price {
+  font-size: 15px;
+  margin-top: 10px;
+  margin-left: 20px;
 }
 
 /* single product */
