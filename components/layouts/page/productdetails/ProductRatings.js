@@ -1,22 +1,22 @@
 import React, { Component, useEffect } from "react";
 import ReactStars from "react-rating-stars-component";
 import Rater from "react-rater";
-import { MdThumbUp } from "react-icons/md";
 import { getReviewListByUser } from "./_redux/Action/ReviewAction";
 import { useDispatch, useSelector } from "react-redux";
 
-const ElegentChairRating = ({ product }) => {
+const ProductRatings = ({ product }) => {
 
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getReviewListByUser(product.id, 0, 1));
   }, []);
 
   const reviewList = useSelector((state) => state.ReviewReducer.reviewList);
-  console.log(`reviewList in description section`, reviewList)
+
   return (
     <>
-      <div className="ratingbanner pb">
+      <div className="ratingbanner pb-3">
         <div className="container">
           <div className="elegentratingsection">
             <div className="row">
@@ -29,16 +29,16 @@ const ElegentChairRating = ({ product }) => {
             <div className="row">
               <div className="col-xl-3 col-lg-3 col-md-3 col-6">
                 <div className="elegentratingreview one">
-                  <p>4.5/5</p>
+                  <p>{product.average_rating}/5</p>
                   <div className="review two">
-                    <Rater total={5} rating={2} />
+                    <Rater total={5} rating={product.average_rating} interactive={false} />
                   </div>
                 </div>
               </div>
               <div className="col-xl-3 col-lg-3 col-md-3 col-6">
                 <div className="elegentratingreview two">
-                  <span>58 Ratings</span>
-                  <div className="review">
+                  <span>{product.total_rating} Ratings</span>
+                  {/* <div className="review">
                     <Rater total={5} rating={2} />
                     <span>56</span>
                     <br></br>
@@ -53,7 +53,7 @@ const ElegentChairRating = ({ product }) => {
                     <br></br>
                     <Rater total={5} rating={2} />
                     <span>0</span>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
@@ -104,4 +104,4 @@ const ElegentChairRating = ({ product }) => {
   );
 };
 
-export default ElegentChairRating;
+export default ProductRatings;

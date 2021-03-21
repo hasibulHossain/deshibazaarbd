@@ -2,11 +2,6 @@ import React from "react";
 import { FaCartPlus } from "react-icons/fa";
 import Rater from "react-rater";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import ShareIcon from "@material-ui/icons/Share";
-import Link from "next/link";
-import PinDropIcon from "@material-ui/icons/PinDrop";
-import ChatIcon from "@material-ui/icons/Chat";
 import ReactImageFallback from "react-image-fallback";
 import AddIcon from "@material-ui/icons/Add";
 import { Remove } from "@material-ui/icons";
@@ -22,6 +17,11 @@ import {
 import ReactImageZoom from 'react-image-zoom';
 import { useRouter } from "next/router";
 import { getUserDataAction } from "../../../getUserData/Action/UserDataAction";
+import WishList from "../../../WishList/WishList";
+import ProductDetailSidebar from "./ProductDetailSidebar";
+import ProductDetailsDescrition from "./ProductDetailsDescrition";
+import ProductRatings from "./ProductRatings";
+import HomeFeaturList from "../home/HomeFeaturList";
 
 
 const ProductDetailInfo = (props) => {
@@ -77,6 +77,7 @@ const ProductDetailInfo = (props) => {
     dispatch(updateCartQtyAction(id, (quantity += 1)));
     dispatch(addToCartAction(cartProduct, id));
   };
+
   //decrease quantity
   const decrementQunatity = (id, quantity) => {
     carts.find(
@@ -93,7 +94,9 @@ const ProductDetailInfo = (props) => {
   const addToCart = (cartProduct, id) => {
     dispatch(addToCartAction(cartProduct, id));
   };
-  const [previewImg, setPreviewImg] = useState(`${process.env.NEXT_PUBLIC_URL}images/products/${product.featured_image}`)
+
+  const featured_image = `${process.env.NEXT_PUBLIC_URL}images/products/${product.featured_image}`;
+  const [previewImg, setPreviewImg] = useState(featured_image);
   const handleChangePreviewImg = (image) => {
     setPreviewImg(image.image_url);
   }
@@ -109,6 +112,7 @@ const ProductDetailInfo = (props) => {
       router.push('/login')
     }
   }
+
   return (
     <>
       {product != null && (
@@ -117,32 +121,42 @@ const ProductDetailInfo = (props) => {
             <div className="row">
               <div className="col-12">
                 <div className="elegentchairmenu">
-                  {/* <ul>
-                                <li> Akij Plastics</li>
-                                <li>Chair </li>
-                                <li> Chair Elegant Chair wave rose wood</li>
-                                </ul> */}
                   <Breadcrumb>
-                    <Breadcrumb.Item href="/">
-                      {" "}
-                      {typeof product.category != "undefined"
-                        ? product.category.name
-                        : ""}
-                    </Breadcrumb.Item>
-                    <Breadcrumb.Item href="/">
-                      {typeof product.sub_category != "undefined"
-                        ? product.sub_category.name
-                        : ""}
-                    </Breadcrumb.Item>
+                    {
+                      typeof product.category != "undefined" && product.category != null &&
+                      <Breadcrumb.Item href={`/products?category=${product.category.slug}`}>
+                        {product.category.name}
+                      </Breadcrumb.Item>
+                    }
+
+                    {
+                      typeof product.sub_category != "undefined" && product.sub_category != null &&
+                      <Breadcrumb.Item href={`/products?category=${product.sub_category.slug}`}>
+                        {product.sub_category.name}
+                      </Breadcrumb.Item>
+                    }
+
+                    {
+                      typeof product.sub_category2 != "undefined" && product.sub_category2 != null &&
+                      <Breadcrumb.Item href={`/products?category=${product.sub_category2.slug}`}>
+                        {product.sub_category2.name}
+                      </Breadcrumb.Item>
+                    }
+
+
                     <Breadcrumb.Item active>{product.name}</Breadcrumb.Item>
                   </Breadcrumb>
                 </div>
               </div>
             </div>
+
             <div className="row single-product-box">
-              <div className="col-lg-4">
-                <div className="singlechair p-5">
-                  {/* <ReactImageFallback
+              <div className="col-lg-8">
+                <div className="row">
+
+                  <div className="col-lg-5">
+                    <div className="singlechair p-5">
+                      {/* <ReactImageFallback
                     // src={`${process.env.NEXT_PUBLIC_URL}images/products/${product.featured_image}`}
                     src={previewImg}
                     fallbackImage="/images/default/fallback-image.png"
@@ -151,96 +165,82 @@ const ProductDetailInfo = (props) => {
                     className=""
                   /> */}
 
-                  <ReactImageZoom
-                    className="zoom-image mt-3 card"
-                    {...zoomImage}
-                  />
+                      <ReactImageZoom
+                        className="zoom-image mt-3 card"
+                        {...zoomImage}
+                      />
 
-
-                  <div className="d-flex m-1">
-                    {
-                      product.images && product.images.length > 0 && product.images.map((item, index) => (
-                        <img onClick={() => handleChangePreviewImg(item)} src={item.image_url} className="img-thumbnail multiple_preview_images" alt="Multi image preview" />
-                      ))
-                    }
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-lg-4">
-                <div className="chairdetails">
-                  <h1>{product.name}</h1>
-                  <div className="review">
-                    <Rater total={5} rating={2} /> <span> 58 Ratings </span>
-                    <span className="float-right">
-                      <Link href="/">
-                        <a>
-                          <ShareIcon />
-                          Share
-                        </a>
-                      </Link>
-                      <Link href="/">
-                        <a>
-                          <span className="favoriteicon-border">
-                            {" "}
-                            <FavoriteIcon />
-                          </span>
-                        </a>
-                      </Link>
-                    </span>
+                      <div className="d-flex m-1 border-top pt-4">
+                        <img onClick={() => handleChangePreviewImg({ image_url: featured_image })} src={featured_image} className="img-thumbnail multiple_preview_images" alt="" />
+                        {
+                          product.images && product.images.length > 0 && product.images.map((item, index) => (
+                            <img onClick={() => handleChangePreviewImg(item)} src={item.image_url} className="img-thumbnail multiple_preview_images" alt="" />
+                          ))
+                        }
+                      </div>
+                    </div>
                   </div>
 
-                  <div className="stock">
-                    <span>
-                      Brand:
-                      {typeof product.brand != "undefined" &&
-                        product.brand != null
-                        ? product.brand.name
-                        : ""}
-                    </span>
-                  </div>
-                  <div className="Chairinstock">
-                    <span>In Stock</span>
-                  </div>
-                  <div className="Chairinstock icon">
-                    <Link href="/">
-                      <a>
-                        <FaCartPlus />
-                      </a>
-                    </Link>
-                  </div>
+                  <div className="col-lg-7">
+                    <div className="chairdetails">
+                      <h1>{product.name}</h1>
 
-                  <div className="chairdetailstext">
-                    {product.is_offer_enable != true && (
-                      <h2 className="text-warning">
-                        ৳{" "}
-                        {product.price
-                          ? product.price
-                          : product.default_selling_price}{" "}
-                      </h2>
-                    )}
+                      <div className="review">
+                        <Rater total={5} rating={product.average_rating} /> <span> {product.total_rating} Ratings </span>
 
-                    {product.is_offer_enable != false && (
-                      <>
-                        <h2 className="text-warning">
-                          ৳{" "}
-                          {product.price
-                            ? product.price
-                            : product.offer_selling_price}{" "}
-                        </h2>
-                        {/* <p>
-                                            <del>৳ {product.default_selling_price}</del>
-                                        </p> */}
-                        <h4 className="text-danger">
-                          ৳ {product.default_selling_price}
-                        </h4>
-                      </>
-                    )}
+                        <span className="float-right">
+                          <WishList product={product} />
+                        </span>
+                      </div>
 
-                    {/* <h4 className="text-danger">৳ 1200</h4>
+                      <div>
+                        {
+                          typeof product.brand != "undefined" && product.brand != null &&
+                          <>
+                            Brand: {product.brand.name}
+                          </>
+                        }
+                      </div>
+
+                      <div>
+                        {
+                          product.current_stock > 0 && product.enable_stock ?
+                            <div className="stock-area in-stock">
+                              <span>In Stock - {product.current_stock} </span>
+                            </div>
+                            :
+                            <div className="stock-area out-stock">
+                              <span>Out of Stock</span>
+                            </div>
+                        }
+                      </div>
+
+                      <div className="chairdetailstext">
+                        {product.is_offer_enable === false && (
+                          <h2 className="text-warning">
+                            ৳{" "}
+                            {product.default_selling_price}{" "}
+                          </h2>
+                        )}
+
+                        {product.is_offer_enable === true && (
+                          <>
+                            <h2 className="text-warning">
+                              ৳{" "}
+                              {product.offer_selling_price
+                                ? product.offer_selling_price
+                                : product.default_selling_price}{" "}
+                            </h2>
+                            <h4 className="text-danger">
+                              ৳ {product.default_selling_price}
+                            </h4>
+                          </>
+                        )}
+
+                        {/* <h4 className="text-danger">৳ 1200</h4>
                                         <span className="text-dark">-38%</span> */}
-                  </div>
-                  {/* <div className="Promotion">
+                      </div>
+                      {/* <div className="Promotion">
                                         <h6 className="float-left">Promotions</h6>
                                         <h6 className="float-right">Spend ৳ 2000 get ৳ 200 off
                                         <DropdownButton  title="Dropdown button">
@@ -251,12 +251,12 @@ const ProductDetailInfo = (props) => {
                                             </h6>
                                         </div> */}
 
-                  <div className="chaircolor">
-                    {/* <h2 className="mt-4">Color:</h2> */}
+                      <div className="chaircolor">
+                        {/* <h2 className="mt-4">Color:</h2> */}
 
-                    {/**Available color */}
+                        {/**Available color */}
 
-                    {/* <p className="mb-4">
+                        {/* <p className="mb-4">
                       Color:
                       <span className="colorType border rounded text-dark">
                         Red
@@ -270,7 +270,7 @@ const ProductDetailInfo = (props) => {
                     </p> */}
 
 
-                    {/* <h2 className="">
+                        {/* <h2 className="">
                       Quantity :
                       <button
                         className="btn btn-light quantity-btn decrement bg-light border rounded-circle text-dark ml-3"
@@ -290,138 +290,51 @@ const ProductDetailInfo = (props) => {
                       </button>
                     </h2> */}
 
-                    <h2>
-                      Quantity:
-                        <div className="cart-quantity-area">
-                        <button
-                          className="btn btn-light quantity-btn decrement bg-light text-dark"
-                          onClick={(id, quantity) => decrementQunatity(cartProduct.productID, cartProduct.quantity)} >
+                        <h2>
+                          Quantity:
+                          <div className="cart-quantity-area">
+                            <button
+                              className="btn btn-light quantity-btn decrement bg-light text-dark"
+                              onClick={(id, quantity) => decrementQunatity(cartProduct.productID, cartProduct.quantity)} >
 
-                          {" "}
-                          <Remove />
-                        </button>
-                        <span className="colorType rounded text-dark">
-                          {/* {findCurrentCart && findCurrentCart.quantity
+                              {" "}
+                              <Remove />
+                            </button>
+                            <span className="colorType rounded text-dark">
+                              {/* {findCurrentCart && findCurrentCart.quantity
                             ? findCurrentCart.quantity
                             : quantity} */}
-                          {quantity}
-                        </span>
-                        <button
-                          className="btn btn-light quantity-btn  increment bg-light text-dark ml-2"
-                          onClick={(id, quantity) => increaseQuantity(cartProduct.productID, cartProduct.quantity)} >
-                          <AddIcon />
+                              {quantity}
+                            </span>
+                            <button
+                              className="btn btn-light quantity-btn  increment bg-light text-dark ml-2"
+                              onClick={(id, quantity) => increaseQuantity(cartProduct.productID, cartProduct.quantity)} >
+                              <AddIcon />
+                            </button>
+                          </div>
+                        </h2>
+
+
+                      </div>
+                      <div className="stock cart two">
+                        <button onClick={() => addToCart(cartProduct, product.id)}>
+                          Add to cart
                         </button>
                       </div>
-                    </h2>
-
-
-                  </div>
-                  <div className="stock cart two">
-                    <button onClick={() => addToCart(cartProduct, product.id)}>
-                      Add to cart
-                    </button>
-                  </div>
-                  <div className="stock cart">
-                    <button onClick={() => handleBuyProduct(cartProduct, product.id)}>Buy Now</button>
+                      <div className="stock cart">
+                        <button onClick={() => handleBuyProduct(cartProduct, product.id)}>Buy Now</button>
+                      </div>
+                    </div>
+                    <div className="clearfix"></div>
                   </div>
                 </div>
+                <ProductDetailsDescrition product={product} />
+                <ProductRatings product={product} />
+                <HomeFeaturList product={product} />
               </div>
 
               <div className="col-lg-4 deliverysection">
-                <div className="chairDeliverydetails bg-light p-3">
-                  <h2>Delivery Options</h2>
-                  <div className="chairDeliveryoption three"></div>
-                  <div className="chairDeliveryoption productDetailsFloating">
-                    <p>
-                      <PinDropIcon />
-                      Dhaka,Dhaka - South,Wari
-                    </p>
-                    <br></br>
-                    <img src="/images/default/homedelivery.png" alt="" />
-                    <p>Home Delivery</p>
-                    <br></br>
-                    <p className="mt-n3 deliveryDays pl-4">3-5 days</p>
-                    <br></br>
-                    <img src="/images/default/cashdelivery.png" alt="" />{" "}
-                    <p>Cash on Delivery Available</p>
-                  </div>
-                  {/* <div className="chairDeliveryoption two">
-                                    <p>Edit</p>
-                                    <p>৳ 245</p>
-                                    </div>
-                                    <div className="elegentchairestore">
-                                    <h3>Store by</h3>
-                                    <div className="elegentstoreImg">
-                                        <img src="/images/default/store1.png" />
-                                    </div>
-                                    <div className="elegentstoreImg two">
-                                        <h5>Akij Plastics Ltd</h5>
-                                        <p>Flagship Store</p>
-                                        <Rater total={5} rating={2} />
-                                    </div>
-                                    <div className="elegentstoreImg three">
-                                        <img src="/images/default/playstore.png" />
-                                    </div>
-                                    </div> */}
-                  <div className="clearfix"></div>
-                  <div className="border-bottom"></div>
-                  <div className="clearfix"></div>
-                  <div className="chairDeliveryoption productDetailsFloating returnWarranty mt-2">
-                    <h6>Return & Warranty</h6>
-                    <img src="/images/default/7days.png" alt="" />
-                    <p>7 Days Returns</p>
-                    <p className="mt-n3 deliveryDays pl-4">
-                      Change of mind is not applicable
-                    </p>
-                    <br></br>
-                    <img src="/images/default/nowarranty.png" alt="" />
-                    <p>Warranty not available</p>
-                    <br></br>
-                  </div>
-                  <div className="clearfix"></div>
-                  <div className="clearfix"></div>
-                  <div className="mt-2 bg-light soldText">
-                    <h6>Sold by</h6>
-                    <div className="soldAgency">
-                      <h2 className="float-left">Akij plastic</h2>
-                      <p className="float-right text-right font-weight-bold">
-                        <a href="">
-                          <ChatIcon />
-                          Chat Now
-                        </a>
-                      </p>
-                    </div>
-                  </div>
-                  <div className="clearfix"></div>
-                  <div className="elegentrating">
-                    <div className="elegentsinglerating">
-                      <h6>88%</h6>
-                      <p>Positive Seller Ratings</p>
-                    </div>
-                    <div className="elegentsinglerating two">
-                      <h6>41%</h6>
-                      <p>Ship on Time</p>
-                    </div>
-                    <div className="elegentsinglerating">
-                      <h6>43%</h6>
-                      <p>Chat Response Rate</p>
-                    </div>
-                    <div className="clearfix"></div>
-                    <div className="goStore text-center font-weight-bold">
-                      <Link href="/"> GO TO STORE</Link>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="clearfix"></div>
-                <div className="elegentpayment mt-2">
-                  <div className="elegentpaymenttext">
-                    <p>Payment:</p>
-                  </div>
-                  <div className="elegentpaymenttext one">
-                    <img src="/images/default/payment-gateway.png" />
-                  </div>
-                </div>
+                <ProductDetailSidebar product={product} />
               </div>
             </div>
           </div>

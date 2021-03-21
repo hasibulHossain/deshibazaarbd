@@ -61,9 +61,7 @@ const ProductMiniCard = (props) => {
             <Link href="">
               <a>
                 <div className="float-right product-cart">
-
                   <img src="/images/default/cart.png" className=" p-2" alt="" />
-
                 </div>
               </a>
             </Link>
@@ -71,13 +69,8 @@ const ProductMiniCard = (props) => {
             <div className="ratepoint ">
               <RatingDisplay total={5} rating={product.average_rating} />
             </div>
-
           </div>
-
-
         </div>
-
-
       )}
 
     </>

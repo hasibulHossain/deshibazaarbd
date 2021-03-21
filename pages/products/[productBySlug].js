@@ -5,7 +5,7 @@ import MainLayout from "../../components/layouts/Layout"
 import HomeFeaturList from "../../components/layouts/page/home/HomeFeaturList"
 import ProductDetailInfo from "../../components/layouts/page/productdetails/ProductDetailInfo"
 import ProductDetailsDescrition from "../../components/layouts/page/productdetails/ProductDetailsDescrition"
-import ElegentChairRating from "../../components/layouts/page/productdetails/ElegentChairRating"
+import ProductRatings from "../../components/layouts/page/productdetails/ProductRatings"
 import LoadingSkelleton from "./../../components/master/skelleton/LoadingSkelleton";
 import Head from 'next/head'
 
@@ -23,9 +23,6 @@ export default function ProductBySlug({ product }) {
             <MainLayout>
                 <>
                     <ProductDetailInfo product={product} />
-                    <ProductDetailsDescrition product={product} />
-                    <ElegentChairRating product={product} />
-                    <HomeFeaturList />
                 </>
                 {
                     loading &&

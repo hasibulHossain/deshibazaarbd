@@ -28,6 +28,7 @@
         "dotenv": "^8.2.0",
         "dotenv-webpack": "^5.1.0",
         "font-awesome": "^4.7.0",
+        "html-react-parser": "^1.2.4",
         "jquery": "^3.5.1",
         "jwt-decode": "^2.2.0",
         "moment": "^2.29.1",

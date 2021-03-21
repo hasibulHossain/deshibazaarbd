@@ -1,46 +1,27 @@
-import React, { Component } from "react";
-import SuggestionProduct from "./SuggestionProduct";
+import React from "react";
+import Parser from 'html-react-parser';
 
 const ProductDetailsDescrition = ({ product }) => {
   console.log(`product`, product)
   return (
     <>
-      <div className="homebanner pb">
+      <div className="homebanner pb-3">
         <div className="container ">
           <div className="row">
-            <div className="col-lg-9">
+            <div className="col-lg-12">
               <div className="productdescriptiondetails">
                 <div className="row">
                   <div className="col-12">
                     <div className="productdescriptiontext">
-                      <h1>Description </h1>
-                      <p>
-                        {product.description && product.description}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="col-12">
-                    <div className="row">
                       {
-                        product.images && product.images.length > 0 && (
-                          product.images.map((item, index) => (
-                            <div className="col-md-4 p-2">
-                              {/* <div className="productdescription"> */}
-                              <img className="img-fluid" key={index} src={item.image_url} />
-                              {/* </div> */}
-                            </div>
-                          ))
-                        )
+                        typeof product.description != 'undefined' && product.description !== null ?
+                          Parser(product.description) : '...'
                       }
                     </div>
                   </div>
+                  
                 </div>
-
-
               </div>
-            </div>
-            <div className="col-lg-3">
-              <SuggestionProduct />
             </div>
           </div>
         </div>

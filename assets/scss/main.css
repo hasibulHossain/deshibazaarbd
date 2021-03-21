@@ -637,7 +637,7 @@ h4.pt-2 {
 }
 
 .react-rater {
-  width: 80px;
+  width: auto;
   float: left;
 }
 
@@ -663,6 +663,10 @@ h4.pt-2 {
 
 .singleProduct.singleproductborder {
   margin-bottom: 30px;
+}
+.deliverysection {
+  padding-left: 0 !important;
+  margin-left: 0 !important;
 }
 
 /*** Shop by brand ***/
@@ -853,21 +857,29 @@ h4.pt-2 {
   width: 38%;
 }
 
-.Chairinstock {
+.stock-area {
   float: left;
   width: 28%;
 }
 
-.Chairinstock span {
-  background: #dbffc9;
+.stock-area span {
   padding: 6px 25px;
   border-radius: 20px;
-  color: #59cf1f;
   font-weight: 500;
   font-size: 12px;
 }
 
-.Chairinstock.icon {
+.stock-area.in-stock span {
+  background-color: #dbffc9;
+  color: #59cf1f;
+}
+
+.stock-area.out-stock span {
+  background-color: #fffab8;
+  color: red;
+}
+
+.stock-area.icon {
   float: left;
   width: 32%;
 }
@@ -1101,7 +1113,6 @@ h4.pt-2 {
   background: #f8f8f8;
   padding-left: 29px;
   padding-top: 21px;
-  /* width: 77%; */
 }
 
 .productdescription {
@@ -1140,7 +1151,6 @@ h4.pt-2 {
   border: 2px solid #e2e2e2;
   padding-left: 30px;
   padding-top: 15px;
-  width: 77%;
 }
 
 .elegentratingreview h1 {
@@ -3039,7 +3049,9 @@ span.favoriteicon-border::before {
 .product-review {
   position: absolute;
   top: 9px;
-  right: 19px;
+  right: 24px;
+  font-size: 20px;
+  color: #ccc;
 }
 
 .singleProduct {
@@ -3238,5 +3250,5 @@ p.single-product-text {
   color: #ccc !important;
 }
 .react-rater-star.is-active-half:before {
-    color: #f5ab41!important;
+  color: #f5ab41 !important;
 }
