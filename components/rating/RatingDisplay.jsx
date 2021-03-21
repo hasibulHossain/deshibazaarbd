@@ -7,7 +7,10 @@ const RatingDisplay = ({ total = 5, rating, showRatingText = true }) => {
     return (
         <>
             <Rater total={total} rating={rating} interactive={false} />{" "}
-            <span> ({showRatingText ? rating : ''}) </span>
+            {
+                showRatingText &&
+                <span> ({showRatingText ? rating : ''}) </span>
+            }
         </>
     );
 }

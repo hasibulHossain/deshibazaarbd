@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCoffee, faSearch, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import RatingDisplay from '../../../rating/RatingDisplay';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,11 +18,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ProductList = () => {
-  const dispatch = useDispatch();
-  const loading = useSelector((state) => state.product.loading);
-  const products = useSelector((state) => state.product.products);
+  const dispatch      = useDispatch();
+  const loading       = useSelector((state) => state.product.loading);
+  const products      = useSelector((state) => state.product.products);
   const filterProduct = useSelector((state) => state.product.filterProduct);
-  const { category, brand, min_price, max_price } = filterProduct;
+
+  const { category, brand, min_price, max_price, rating } = filterProduct;
   const classes = useStyles();
 
   useEffect(() => {
@@ -63,6 +65,14 @@ const ProductList = () => {
                 max_price != null &&
                 <Button className="filterClass ml-2">
                   Max Price: {(max_price !== null ? max_price : '')}
+                  <span className="ml-2 cursor-pointer"><FontAwesomeIcon icon={faTimesCircle} /></span>
+                </Button>
+              }
+
+              {
+                rating != null &&
+                <Button className="filterClass ml-2">
+                  Rating: {(rating !== null ? <RatingDisplay total={5} rating={rating} showRatingText={false} /> : '')}
                   <span className="ml-2 cursor-pointer"><FontAwesomeIcon icon={faTimesCircle} /></span>
                 </Button>
               }

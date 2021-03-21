@@ -1,20 +1,20 @@
-import React, { Component, useEffect } from "react";
-import { FaArrowRight } from "react-icons/fa";
-import Rater from "react-rater";
-import Link from "next/link";
+import React, { useEffect } from "react";
 import { useRouter } from 'next/router'
-
 
 import { Form } from "react-bootstrap";
 import ProductList from "./ProductList";
 import { GetCategoryList, getBrandList, handleChangeCategoryFilter } from "../../../../store/redux/products/actions/ProductAction";
 import { useDispatch, useSelector } from "react-redux";
+import Rater from "react-rater";
+
 const MultipleProducts = (props) => {
   const dispatch = useDispatch()
   const router = useRouter()
   const category = useSelector((state) => state.product.category);
   const brands = useSelector((state) => state.product.brands);
   const filterProduct = useSelector((state) => state.product.filterProduct);
+  const ratingsArray = [5, 4, 3, 2, 1];
+
   useEffect(() => {
     dispatch(GetCategoryList())
     dispatch(getBrandList())
@@ -23,26 +23,30 @@ const MultipleProducts = (props) => {
   const handleChangeProductFilter = (name, value, e) => {
     dispatch(handleChangeCategoryFilter(name, value));
     console.log('filterProduct', filterProduct);
-    
+
     let push_data = "?"
     const { category, brand, min_price, max_price } = filterProduct;
-    
-    if(name === 'category' && value !== null){
-      push_data +=  `category=${value.id}`;
+
+    if (name === 'category' && value !== null) {
+      push_data += `category=${value.id}`;
     }
-    
-    if(name === 'brand' && value !== null){
-      push_data +=  `brand=${value.id}`;
+
+    if (name === 'brand' && value !== null) {
+      push_data += `brand=${value.id}`;
     }
-    
-    if(name === 'min_price'){
-      push_data +=  `min_price=${value}`;
+
+    if (name === 'min_price') {
+      push_data += `min_price=${value}`;
     }
-     
-    if(name === 'max_price'){
-      push_data +=  `max_price=${value}`;
+
+    if (name === 'max_price') {
+      push_data += `max_price=${value}`;
     }
-    
+
+    if (name === 'rating') {
+      push_data += `rating=${value}`;
+    }
+
     router.push({
       pathname: '/products',
       search: push_data
@@ -143,18 +147,24 @@ const MultipleProducts = (props) => {
 
                 </div> */}
 
-                {/* <div className="sidebar-section">
+                <div className="sidebar-section">
                   <h6>Rating</h6>
-
-
-                  <Rater total={5} rating={2} /><br></br>
-
-                  <Rater total={5} rating={2} /><br></br>
-                  <Rater total={5} rating={2} /><br></br>
-                  <div className="ratingiew">
-                    <Link href="/">View More</Link>
+                  <div>
+                    <span key={-1} onClick={() => handleChangeProductFilter('rating', null)} >
+                      All
+                    </span>
                   </div>
-                </div> */}
+                  {
+                    ratingsArray.map(rating => (
+                      <>
+                        <span key={rating} onClick={() => handleChangeProductFilter('rating', rating)} >
+                          <Rater total={5} rating={rating} interactive={false} />
+                        </span>
+                        <br />
+                      </>
+                    ))
+                  }
+                </div>
               </div>
             </div>
             <div className="col-lg-10">

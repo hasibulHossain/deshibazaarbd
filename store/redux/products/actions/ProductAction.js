@@ -12,7 +12,7 @@ export const fetchProducts = () => async (dispatch) => {
   let URL = `${process.env.NEXT_PUBLIC_API_URL}get-items?search=`;
   
   const filterProduct = store.getState().product.filterProduct;
-  const { category, brand, min_price, max_price } = filterProduct;
+  const { category, brand, min_price, max_price, rating } = filterProduct;
   
   if(category !== null){
     URL +=  `&category=${category.id}`
@@ -26,6 +26,9 @@ export const fetchProducts = () => async (dispatch) => {
   }
   if(max_price !== null){
     URL +=  `&max_price=${max_price}`
+  }
+  if(rating !== null){
+    URL +=  `&rating=${rating}`
   }
   await axios.get(URL).then((res) => {
     payload = res.data;

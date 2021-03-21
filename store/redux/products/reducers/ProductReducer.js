@@ -9,6 +9,7 @@ const initialState = {
     brand: null,
     min_price: null,
     max_price: null,
+    rating: null,
   },
   category: [],
   brands: [],
