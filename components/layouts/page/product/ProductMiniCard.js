@@ -1,10 +1,10 @@
 
 import React from "react";
-import Rater from "react-rater";
 import Link from "next/link";
 import LazyLoad from 'react-lazyload';
 import ReactImageFallback from "react-image-fallback";
 import WishList from "../../../WishList/WishList";
+import RatingDisplay from "../../../rating/RatingDisplay";
 
 const ProductMiniCard = (props) => {
   const { product } = props;
@@ -69,8 +69,7 @@ const ProductMiniCard = (props) => {
             </Link>
 
             <div className="ratepoint ">
-              <Rater total={5} rating={parseFloat(product.average_rating)} />{" "}
-              <span> ({parseFloat(product.average_rating).toFixed(1)}) </span>
+              <RatingDisplay total={5} rating={product.average_rating} />
             </div>
 
           </div>
