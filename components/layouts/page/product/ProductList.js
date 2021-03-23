@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ProductList = () => {
+const ProductList = (props) => {
   const dispatch      = useDispatch();
   const loading       = useSelector((state) => state.product.loading);
   const products      = useSelector((state) => state.product.products);

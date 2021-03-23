@@ -58,6 +58,8 @@ const MultipleProducts = (props) => {
         <div className="container-fluid">
           <div className="row">
             <div className="col-lg-2">
+              
+              {/* Sidebar */}
               <div className="filterSideBar ml-3">
                 <div className="sidebar-section">
                   <h6>Category</h6>
@@ -166,6 +168,7 @@ const MultipleProducts = (props) => {
                   }
                 </div>
               </div>
+
             </div>
             <div className="col-lg-10">
               <ProductList />

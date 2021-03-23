@@ -24,13 +24,14 @@ import Menu, { SubMenu, Item as MenuItem, Divider } from "rc-menu";
 import "rc-menu/assets/index.css";
 import { getCartsAction } from "../../../store/actions/orders/CartAction";
 import { getCategoriesList } from "./_redux/MenuAction/MenuAction";
-
 import Menubar from "react-responsive-multi-level-menu";
 import SearchInput from "../../search-input/SearchInput";
 import { getUserDataAction, handleLogoutUser } from "../../getUserData/Action/UserDataAction";
 
 function handleSelect(info) {
   console.log("selected ", info);
+  const router = useRouter();
+  router.push('/categories/'+info);
 }
 
 function handleDeselect(info) {

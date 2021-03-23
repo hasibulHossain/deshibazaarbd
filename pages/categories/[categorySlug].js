@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from "react-redux"
 import MainLayout from "../../components/layouts/Layout"
-import HomeFeaturList from "../../components/layouts/page/home/HomeFeaturList"
-import ProductDetailInfo from "../../components/layouts/page/productdetails/ProductDetailInfo"
-import ProductDetailsDescrition from "../../components/layouts/page/productdetails/ProductDetailsDescrition"
-import ProductRatings from "../../components/layouts/page/productdetails/ProductRatings"
 import LoadingSkelleton from "./../../components/master/skelleton/LoadingSkelleton";
-import Head from 'next/head'
+import Head from 'next/head';
+import MultipleProducts from "../../components/layouts/page/product/MultipleProducts";
 
-export default function ProductBySlug({ product }) {
+export default function CategoryBySlug({ category }) {
     const router = useRouter();
     const loading = false;
 
@@ -17,13 +14,11 @@ export default function ProductBySlug({ product }) {
         <>
             <Head>
                 <title>
-                    {product.name} || Ecommerce
+                    {category.name} Category || Ecommerce
                 </title>
             </Head>
             <MainLayout>
-                <>
-                    <ProductDetailInfo product={product} />
-                </>
+                
                 {
                     loading &&
                     <div className="mb-5">
@@ -38,6 +33,13 @@ export default function ProductBySlug({ product }) {
                     </div>
                 }
 
+                <div className="container-fluid mt-2">
+                    <div className="contaienr">
+                        <h4>Category - {category.name}</h4>
+                    </div>
+                    <MultipleProducts category={category} />
+                </div>
+
             </MainLayout>
         </>
     );
@@ -45,14 +47,14 @@ export default function ProductBySlug({ product }) {
 
 export const getServerSideProps = async (context) => {
     const categorySlug = context.params.categorySlug;
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}get-item-detail/${categorySlug}`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}categories/${categorySlug}`);
     const dataJSON = await res.json();
     const data = dataJSON.data;
 
     return {
         props: {
-            category: null,
-            products: data 
+            category: data,
+            products: [] 
         }
     }
 }
