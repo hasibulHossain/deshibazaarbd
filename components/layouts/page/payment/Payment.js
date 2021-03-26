@@ -1,7 +1,7 @@
 import React, { Component, useState, useEffect } from "react";
 import { getUserDataAction } from "../../../getUserData/Action/UserDataAction";
 import { useDispatch, useSelector } from "react-redux";
-import ProfileSideBar from "../myprofile/profileSideBar";
+import ProfileSideBar from "../myprofile/ProfileSideBar";
 import { getPaymentList } from "./_redux/Action/PaymentAction";
 import LoadingSkelleton from "../../../master/skelleton/LoadingSkelleton";
 import { Button, Modal } from "react-bootstrap";

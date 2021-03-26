@@ -3,7 +3,7 @@ import { Media } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchWallets } from "../../../../store/redux/wallets/actions/WalletAction";
 import LoadingSkelleton from "../../../master/skelleton/LoadingSkelleton";
-import ProfileSideBar from "../myprofile/profileSideBar";
+import ProfileSideBar from "../myprofile/ProfileSideBar";
 
 const RefferalProgram = ({ router }, props) => {
   const dispatch = useDispatch();

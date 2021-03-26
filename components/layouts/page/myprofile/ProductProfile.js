@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import { Card, Media } from "react-bootstrap";
 import { getUserDataAction } from "../../../getUserData/Action/UserDataAction";
 import { useDispatch, useSelector } from "react-redux";
-import ProfileSideBar from "./profileSideBar";
+import ProfileSideBar from "./ProfileSideBar";
 import { fetchWallets } from "../../../../store/redux/wallets/actions/WalletAction";
 const ProductProfile = ({ router }, props) => {
   const dispatch = useDispatch()

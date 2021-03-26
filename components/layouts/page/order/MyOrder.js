@@ -4,7 +4,7 @@ import Rater from "react-rater";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMyOrders, getOrderDataList } from "../../../../store/redux/myOrders/actions/MyOrderAction";
 import LoadingSkelleton from "../../../master/skelleton/LoadingSkelleton";
-import ProfileSideBar from "../myprofile/profileSideBar";
+import ProfileSideBar from "../myprofile/ProfileSideBar";
 
 const MyOrder = ({ router }, props) => {
   const dispatch = useDispatch();

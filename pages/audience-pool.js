@@ -5,7 +5,7 @@ import PageHeding from '../components/pages/sidbarLayout/PageHeding';
 import { FaThumbsUp } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAudienceData } from '../store/actions/AudiencePoll/AudiencePoll';
-import ProfileSideBar from '../components/layouts/page/myprofile/profileSideBar';
+import ProfileSideBar from '../components/layouts/page/myprofile/ProfileSideBar';
 
 export default function giftcard(props) {
   const dispatch = useDispatch();

@@ -4,7 +4,7 @@ import Rater from "react-rater";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProductWishes } from "../../../../store/redux/productWishes/actions/ProductWishAction";
 import LoadingSkelleton from "../../../master/skelleton/LoadingSkelleton";
-import ProfileSideBar from "../myprofile/profileSideBar";
+import ProfileSideBar from "../myprofile/ProfileSideBar";
 import { getWishListData } from "../../../WishList/_redux/Action/wishListAction";
 
 const ProductWishList = ({ router }, props) => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import MainLayout from '../components/layouts/Layout';
-import ProfileSideBar from '../components/layouts/page/myprofile/profileSideBar';
+import ProfileSideBar from '../components/layouts/page/myprofile/ProfileSideBar';
 
 export default function giftcard(props) {
   return (

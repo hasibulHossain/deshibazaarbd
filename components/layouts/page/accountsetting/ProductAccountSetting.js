@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { changeUserUpdateInput, handleSetDataIntoInputField, updatedUserData } from "../../../../store/actions/user/UserAction";
 import { getUserDataAction } from "../../../getUserData/Action/UserDataAction";
-import ProfileSideBar from "../myprofile/profileSideBar";
+import ProfileSideBar from "../myprofile/ProfileSideBar";
 const ProductAccountSetting = ({ router }, props) => {
   const { register, handleSubmit, errors, setValue, watch } = useForm();
   const dispatch = useDispatch()
