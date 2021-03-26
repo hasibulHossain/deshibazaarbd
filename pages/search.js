@@ -1,8 +1,6 @@
 import React from "react";
 import MainLayout from "../components/layouts/Layout";
-import Sidebar from "../components/layouts/Sidebar/sidebar";
-import { Card, Media } from "react-bootstrap";
-import PageHeding from "../components/pages/sidbarLayout/PageHeding";
+import Sidebar from "../components/layouts/Sidebar/Sidebar";
 import Rater from "react-rater";
 
 export default function giftcard(props) {

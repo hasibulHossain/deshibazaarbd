@@ -1,6 +1,6 @@
 import React from 'react';
 import MainLayout from '../components/layouts/Layout';
-import Sidebar from '../components/layouts/Sidebar/sidebar';
+import Sidebar from '../components/layouts/Sidebar/Sidebar';
 import { Card } from 'react-bootstrap';
 import PageHeding from '../components/pages/sidbarLayout/PageHeding';
 
