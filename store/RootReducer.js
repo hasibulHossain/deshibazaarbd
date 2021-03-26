@@ -15,7 +15,6 @@ import OrderReducer from "./reducers/orders/OrderReducer";
 import AuthReducer from "./reducers/auth/AuthReducer";
 import VendorRegisterReducer from "./reducers/auth/VendorRegisterReducer";
 import MenuReducer from "../components/layouts/Header/_redux/MenuReducer/MenuReducer";
-import HomeCarouselReducer from "../pages/api/_redux/reducer/reducer";
 import AudiencePoll from "./reducers/AudiencePoll/AudiencePoll";
 import wishListReducer from "../components/WishList/_redux/Reducer/wishListReducer";
 import UserDataReducer from "../components/getUserData/Reducer/UserDataReducer";
@@ -26,6 +25,7 @@ import ReviewReducer from "../components/layouts/page/productdetails/_redux/Revi
 import CheckoutPaymentReducer from "../components/layouts/page/CheckoutPayment/_redux/Reducer/CheckoutPayment";
 import GiftCardListReducer from "../components/GiftCardList/_redux/Reducer/GiftCardListReducer";
 import SearchReducer from "../components/search-input/redux/SearchReducer";
+import SliderReducer from "./reducers/sliders/SliderReducer";
 // import WishlistReducer from "../components/layouts/page/wishlist/_redux/Reducer/WishlistReducer";
 
 export default combineReducers({
@@ -45,7 +45,7 @@ export default combineReducers({
   registerReducer: RegisterReducer,
   VendorRegisterReducer: VendorRegisterReducer,
   MenuReducer: MenuReducer,
-  HomeCarouselReducer: HomeCarouselReducer,
+  slider: SliderReducer,
   AudiencePoll: AudiencePoll,
   wishListReducer: wishListReducer,
   UserDataReducer: UserDataReducer,
