@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import MainLayout from '../Layout';
-import Sidebar from './sidebar';
+import Sidebar from './Sidebar';
 
-const MasterSidebarLayout = ({ router }, props) => {
-  console.log('props', props.children);
+const MasterSidebarLayout = (props) => {
   return (
     <>
       <MainLayout>
