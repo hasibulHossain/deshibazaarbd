@@ -49,10 +49,10 @@ export default function CategoryBySlug({ category }) {
 
                                         <div className="m-2 ml-3">
                                             <h6>{category.name && category.name}</h6>
-                                            <p>80% Positive Seller Ratings</p>
+                                            {/* <p>80% Positive Seller Ratings</p> */}
                                             {
                                                 category.is_main_shop !== 0 && (
-                                                    <p className="shopName"><span className="maccaf">Maccaf Mall</span> <span className="business">{category.name && category.name}</span></p>
+                                                    <p className="shopName"><span className="maccaf">Maccaf</span> <span className="business">{category.name && category.name}</span></p>
                                                 )
                                             }
                                         </div>

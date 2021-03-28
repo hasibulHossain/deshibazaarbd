@@ -526,6 +526,7 @@ button.viewButton {
   font-size: 14px;
   color: #2989ff;
   outline: none !important;
+  cursor: pointer;
 }
 
 button.viewButton svg {
@@ -3293,7 +3294,7 @@ p.single-product-text {
   border: 1px solid rgb(0, 126, 158);
   color: #fff;
   padding: 1px 15px;
-  clip-path: polygon(50% 0%, 100% 0, 91% 100%, 0 100%, 0 0);
+  clip-path: polygon(50% 0%, 100% 0, 89% 100%, 0 100%, 0 0);
 }
 
 .shopName .business {

@@ -52,12 +52,12 @@ const HomeCategoryWiseProduct = (props) => {
                 <div className="col-lg-4">
                   <div className="flashtitle">
                     <h2>{category.name}</h2>
-                    <p>{category.short_description}</p>
+                    <p>{category.short_description}33</p>
                   </div>
                 </div>
                 <div className="col-lg-4"></div>
                 <div className="col-lg-4">
-                    <Link href="products">
+                    <Link href={`categories/${category.short_code}`}>
                       <button className="viewButton">
                         View all 
                         <FaArrowRight />

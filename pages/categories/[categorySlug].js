@@ -8,7 +8,6 @@ import MultipleProducts from "../../components/layouts/page/product/MultipleProd
 import ChildCategory from "../../components/ChildCategory/ChildCategory";
 
 export default function CategoryBySlug({ category }) {
-    console.log(`category`, category)
     const router = useRouter();
     const loading = false;
   
@@ -38,7 +37,7 @@ export default function CategoryBySlug({ category }) {
                 <div className="container-fluid mt-2">
                     <div className="container-fluid">
                         <div className="row m-2">
-                            <ChildCategory category={category} />
+                            <ChildCa3tegory category={category} />
                         </div>
                         <div className="row m-1">
                             <div className="col-md-2">
