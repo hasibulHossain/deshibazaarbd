@@ -3266,3 +3266,6 @@ p.single-product-text {
 .react-rater-star.is-active-half:before {
   color: #f5ab41 !important;
 }
+.child-category{
+  cursor: pointer;
+}

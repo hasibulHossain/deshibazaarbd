@@ -5,11 +5,32 @@ import MainLayout from "../../components/layouts/Layout"
 import LoadingSkelleton from "./../../components/master/skelleton/LoadingSkelleton";
 import Head from 'next/head';
 import MultipleProducts from "../../components/layouts/page/product/MultipleProducts";
+import ChildCategory from "../../components/ChildCategory/ChildCategory";
 
 export default function CategoryBySlug({ category }) {
+    console.log(`category`, category)
     const router = useRouter();
     const loading = false;
-
+    const childCategoryData = [
+        {
+            title: "Samsung",
+        },
+        {
+            title: "Sony",
+        },
+        {
+            title: "iPhone",
+        },
+        {
+            title: "Smart Winer",
+        },
+        {
+            title: "Apple",
+        },
+        {
+            title: "Nokia",
+        },
+    ]
     return (
         <>
             <Head>
@@ -18,7 +39,7 @@ export default function CategoryBySlug({ category }) {
                 </title>
             </Head>
             <MainLayout>
-                
+
                 {
                     loading &&
                     <div className="mb-5">
@@ -34,7 +55,10 @@ export default function CategoryBySlug({ category }) {
                 }
 
                 <div className="container-fluid mt-2">
-                    <div className="contaienr">
+                    <div className="container-fluid">
+                        <div className="row shadow-sm mb-2 bg-body rounded">
+                            <ChildCategory childCategoryData={childCategoryData} />
+                        </div>
                         <h4>Category - {category.name}</h4>
                     </div>
                     <MultipleProducts category={category} />
@@ -54,7 +78,7 @@ export const getServerSideProps = async (context) => {
     return {
         props: {
             category: data,
-            products: [] 
+            products: []
         }
     }
 }
