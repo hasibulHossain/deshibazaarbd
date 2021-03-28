@@ -2,7 +2,7 @@ import React from "react"
 import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from "react-redux"
 import MainLayout from "../../components/layouts/Layout"
-import LoadingSkelleton from "./../../components/master/skelleton/LoadingSkelleton";
+import LoadingSkelleton from "../../components/master/skelleton/LoadingSkelleton";
 import Head from 'next/head';
 import MultipleProducts from "../../components/layouts/page/product/MultipleProducts";
 import ChildCategory from "../../components/ChildCategory/ChildCategory";
@@ -10,12 +10,12 @@ import ChildCategory from "../../components/ChildCategory/ChildCategory";
 export default function CategoryBySlug({ category }) {
     const router = useRouter();
     const loading = false;
-  
+  console.log(`category in brand section`, category )
     return (
         <>
             <Head>
                 <title>
-                    {category.name} Category || Ecommerce
+                    {category.name} Brand || Ecommerce
                 </title>
             </Head>
             <MainLayout>
@@ -36,13 +36,11 @@ export default function CategoryBySlug({ category }) {
 
                 <div className="container-fluid mt-2">
                     <div className="container-fluid">
-                        <div className="row m-2">
-                            <ChildCategory category={category} />
-                        </div>
+                        
                         <div className="row m-1">
                             <div className="col-md-2">
-                                <p>Related Category</p>
-                                <h6>Mobile</h6>
+                                <p>Related Brand</p>
+                                <h6>Apple</h6>
                                 <hr />
                             </div>
                             <div className="col-md-4">
@@ -61,9 +59,9 @@ export default function CategoryBySlug({ category }) {
 }
 
 export const getServerSideProps = async (context) => {
-    const categorySlug = context.params.categorySlug;
-    console.log(`categorySlug`, categorySlug)
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}categories/${categorySlug}`);
+    const brand = context.params.brand;
+    console.log(`brand`, brand)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}brands/${brand}`);
     const dataJSON = await res.json();
     const data = dataJSON.data;
 
