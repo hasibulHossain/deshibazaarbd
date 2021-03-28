@@ -22,7 +22,6 @@ const MultipleProducts = (props) => {
 
   const handleChangeProductFilter = (name, value, e) => {
     dispatch(handleChangeCategoryFilter(name, value));
-    console.log('filterProduct', filterProduct);
 
     let push_data = "?"
     const { category, brand, min_price, max_price } = filterProduct;

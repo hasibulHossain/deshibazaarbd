@@ -18,9 +18,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ProductList = (props) => {
-  const dispatch      = useDispatch();
-  const loading       = useSelector((state) => state.product.loading);
-  const products      = useSelector((state) => state.product.products);
+  const dispatch = useDispatch();
+  const loading = useSelector((state) => state.product.loading);
+  const products = useSelector((state) => state.product.products);
   const filterProduct = useSelector((state) => state.product.filterProduct);
 
   const { category, brand, min_price, max_price, rating } = filterProduct;
@@ -45,6 +45,7 @@ const ProductList = (props) => {
                   <span className="ml-2 cursor-pointer"><FontAwesomeIcon icon={faTimesCircle} /></span>
                 </Button>
               }
+
               {
                 brand != null &&
                 <Button className="filterClass ml-2">
@@ -77,6 +78,13 @@ const ProductList = (props) => {
                 </Button>
               }
 
+              {
+                (category != null || brand !== null || min_price != null || max_price != null || rating != null) &&
+                <Button className="filterClass ml-2">
+                  Clear All
+                  <span className="ml-2 cursor-pointer"><FontAwesomeIcon icon={faTimesCircle} /></span>
+                </Button>
+              }
             </p>
           </div>
         )
@@ -107,7 +115,7 @@ const ProductList = (props) => {
             </div>
           ))}
       </div>
-    
+
     </>
   );
 }
