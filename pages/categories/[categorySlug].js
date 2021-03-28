@@ -63,6 +63,7 @@ export default function CategoryBySlug({ category }) {
 
 export const getServerSideProps = async (context) => {
     const categorySlug = context.params.categorySlug;
+    console.log(`categorySlug`, categorySlug)
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}categories/${categorySlug}`);
     const dataJSON = await res.json();
     const data = dataJSON.data;
