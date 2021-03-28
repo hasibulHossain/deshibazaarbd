@@ -56,10 +56,21 @@ export default function CategoryBySlug({ category }) {
 
                 <div className="container-fluid mt-2">
                     <div className="container-fluid">
-                        <div className="row shadow-sm mb-2 bg-body rounded">
+                        <div className="row shadow-sm m-2 bg-body rounded">
                             <ChildCategory childCategoryData={childCategoryData} />
                         </div>
-                        <h4>Category - {category.name}</h4>
+                        <div className="row m-1">
+                            <div className="col-md-2">
+                                <p>Related Category</p>
+                                <h6>Mobile</h6>
+                                <hr />
+                            </div>
+                            <div className="col-md-4">
+                                <h4 className="mt-3"> {category && category.name && category.name}</h4>
+                                <small>{`261`} items found in {category && category.name && category.name}</small>
+                            </div>
+                        </div>
+
                     </div>
                     <MultipleProducts category={category} />
                 </div>
