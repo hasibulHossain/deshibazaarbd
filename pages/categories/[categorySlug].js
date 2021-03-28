@@ -11,26 +11,7 @@ export default function CategoryBySlug({ category }) {
     console.log(`category`, category)
     const router = useRouter();
     const loading = false;
-    const childCategoryData = [
-        {
-            title: "Samsung",
-        },
-        {
-            title: "Sony",
-        },
-        {
-            title: "iPhone",
-        },
-        {
-            title: "Smart Winer",
-        },
-        {
-            title: "Apple",
-        },
-        {
-            title: "Nokia",
-        },
-    ]
+  
     return (
         <>
             <Head>
@@ -56,8 +37,8 @@ export default function CategoryBySlug({ category }) {
 
                 <div className="container-fluid mt-2">
                     <div className="container-fluid">
-                        <div className="row shadow-sm m-2 bg-body rounded">
-                            <ChildCategory childCategoryData={childCategoryData} />
+                        <div className="row m-2">
+                            <ChildCategory category={category} />
                         </div>
                         <div className="row m-1">
                             <div className="col-md-2">

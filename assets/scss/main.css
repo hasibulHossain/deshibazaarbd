@@ -3269,3 +3269,8 @@ p.single-product-text {
 .child-category{
   cursor: pointer;
 }
+.child-cateogry-card img{
+  height: 80px;
+  width: 80px;
+  margin-left: 25%;
+}
