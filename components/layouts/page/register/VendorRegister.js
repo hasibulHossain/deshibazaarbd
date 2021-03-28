@@ -38,7 +38,7 @@ const VendorRegister = ({ router }, props) => {
           <div className="row">
             <div className="col-lg-6 offset-lg-3">
               <div className="Loginform">
-                <h1>Vendor Registration</h1>
+                <h1>Seller Registration</h1>
                 <Form autoComplete="off" autoave="off">
                   {
                     stepNo === 1 &&
@@ -133,7 +133,7 @@ const VendorRegister = ({ router }, props) => {
                     </div>
                     <div className="signinlink">
                       {" "}
-                      <Link href="/">
+                      <Link href="/seller-login">
                         <a>
                           <h4>Sign in</h4>
                         </a>

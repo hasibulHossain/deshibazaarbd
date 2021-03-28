@@ -23,7 +23,7 @@ const VendorLogin = ({ router }, props) => {
           <div className="row">
             <div className="col-lg-5 offset-lg-3">
               <div className="Loginform">
-                <h1>Vendor Login</h1>
+                <h1>Seller Login</h1>
                 <Form autoComplete="off">
                   <Form.Group controlId="formBasicEmail">
                     <Form.Label>Email or phone number</Form.Label>
@@ -61,7 +61,7 @@ const VendorLogin = ({ router }, props) => {
                   </Link>
                   <h6>New to Maccaf</h6>
 
-                  <Link href="/vendorRegister">
+                  <Link href="/seller-register">
                     <a>
                       {" "}
                       <button className="createbtn" type="submit">

@@ -115,6 +115,15 @@ const Login = () => {
                       </button>
                     </a>
                   </Link>
+                  <span>-----OR-----</span>
+                  <Link href="/seller-register">
+                    <a>
+                      {" "}
+                      <button className="createbtn" type="submit">
+                        Create an account as a seller
+                      </button>
+                    </a>
+                  </Link>
                 </form>
               </div>
             </div>
