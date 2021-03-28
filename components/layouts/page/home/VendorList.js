@@ -15,6 +15,7 @@ const VendorList = (props) => {
     dispatch(fetchVendors());
   }, []);
 
+  console.log(`vendors`, vendors)
   return (
     <>
       <div className="HomeBrand ">
@@ -26,11 +27,11 @@ const VendorList = (props) => {
               </div>
             </div>
             <div className="viewTopRight">
-            <Link href="products">
-              <button className="viewButton brandbutton">
-                View all
+              <Link href="products">
+                <button className="viewButton brandbutton">
+                  View all
                 <FaArrowRight />
-              </button>
+                </button>
               </Link>
             </div>
           </div>
@@ -52,22 +53,24 @@ const VendorList = (props) => {
             {vendors.map.length > 0 && (
               <>
                 {vendors.map((vendor, index) => (
-                  <div className="StoreImg" key={index}>
-                  <ReactImageFallback
-                    src={`${process.env.NEXT_PUBLIC_URL}images/vendors/${vendor.logo}`}
-                    fallbackImage="/images/default/fallback-image.png"
-                    initialImage="/images/default/fallback-image.png"
-                    alt={vendor.name}
-                    className="" />
+                  <Link href={`/shop/${vendor.slug}`}>
+                    <div className="StoreImg" key={index}>
+                      <ReactImageFallback
+                        src={`${process.env.NEXT_PUBLIC_URL}images/vendors/${vendor.logo}`}
+                        fallbackImage="/images/default/fallback-image.png"
+                        initialImage="/images/default/fallback-image.png"
+                        alt={vendor.name}
+                        className="" />
 
-                    {/* <img
+                      {/* <img
                       src={`${process.env.NEXT_PUBLIC_URL}images/vendors/${vendor.logo}`}
                       alt=""
                     /> */}
-                    <p className="text-center font-weight-bold">
-                      {vendor.name}
-                    </p>
-                  </div>
+                      <p className="text-center font-weight-bold">
+                        {vendor.name}
+                      </p>
+                    </div>
+                  </Link>
                 ))}
               </>
             )}

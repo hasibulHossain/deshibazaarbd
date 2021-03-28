@@ -5,7 +5,6 @@ import MainLayout from "../../components/layouts/Layout"
 import LoadingSkelleton from "../../components/master/skelleton/LoadingSkelleton";
 import Head from 'next/head';
 import MultipleProducts from "../../components/layouts/page/product/MultipleProducts";
-import ChildCategory from "../../components/ChildCategory/ChildCategory";
 import { Tab, Tabs } from "react-bootstrap";
 import ShopProfile from "../../components/ShopProfile/ShopProfile";
 
@@ -43,11 +42,19 @@ export default function CategoryBySlug({ category }) {
                             <div className="row p-2">
                                 <div className="col-md-6">
                                     <div className="d-flex bg-white p-2">
-                                        <img style={{ height: "50px" }} src="https://d3re0f381bckq9.cloudfront.net/31604257_images-9_604x507.jpg" alt="business logo" className="img-thumbnail" />
-                                        <div className="m-2">
-                                            <h6>Watch World</h6>
+                                        {
+                                            category.logo_url !== null ? <img style={{ height: "50px" }} src={category.logo_url} alt="business logo" className="img-thumbnail" />
+                                                : <i style={{ fontSize: "50px", height: "60px" }} class="fas fa-store img-thumbnail"></i>
+                                        }
+
+                                        <div className="m-2 ml-3">
+                                            <h6>{category.name && category.name}</h6>
                                             <p>80% Positive Seller Ratings</p>
-                                            <p className="shopName"><span className="maccaf">Maccaf Mall</span> <span className="business">Akash Shop</span></p>
+                                            {
+                                                category.is_main_shop !== 0 && (
+                                                    <p className="shopName"><span className="maccaf">Maccaf Mall</span> <span className="business">{category.name && category.name}</span></p>
+                                                )
+                                            }
                                         </div>
                                         <div className="shop-follower">
                                             <i class="fa fa-plus mr-2"></i>
@@ -73,7 +80,6 @@ export default function CategoryBySlug({ category }) {
                             </div>
                         </div>
                     </div>
-                    {/* <MultipleProducts category={category} /> */}
                 </div>
 
             </MainLayout>
@@ -82,9 +88,8 @@ export default function CategoryBySlug({ category }) {
 }
 
 export const getServerSideProps = async (context) => {
-    const categorySlug = context.params.categorySlug;
-    console.log(`categorySlug`, categorySlug)
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}categories/${categorySlug}`);
+    const shopSlug = context.params.shopSlug;
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}business/${shopSlug}`);
     const dataJSON = await res.json();
     const data = dataJSON.data;
 
