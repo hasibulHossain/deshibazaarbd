@@ -3345,10 +3345,11 @@ p.single-product-text {
   width: 15px !important;
   height: 15px !important;
   border-radius: 50% !important;
-  background-color: #05a7cc!important;
+  background-color: #05a7cc !important;
 }
-.carousel-indicators .active{
-  background-color: #ffff!important;
+
+.carousel-indicators .active {
+  background-color: #ffff !important;
 }
 
 .sliderBtn {
@@ -3356,4 +3357,11 @@ p.single-product-text {
   color: #fff !important;
   border-radius: 25px !important;
   padding: 10px 20px !important;
+}
+.sales .businessName {
+  cursor: pointer;
+  color: #199cbd;
+}
+.LinkToBrandPage{
+  cursor: pointer;
 }

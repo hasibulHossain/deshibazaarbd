@@ -31,15 +31,15 @@ const MainMenu = ({ router }, props) => {
                 {/* <Nav.Item>
                   <Nav.Link eventKey="/products">Brands</Nav.Link>
                 </Nav.Item> */}
-                <Nav.Item>
+                {/* <Nav.Item>
                   <Nav.Link eventKey="/search">Sitemap</Nav.Link>
-                </Nav.Item>
+                </Nav.Item> */}
                 <Nav.Item>
                   <Nav.Link eventKey="/giftcard">Gift card</Nav.Link>
                 </Nav.Item>
-                <Nav.Item>
+                {/* <Nav.Item>
                   <Nav.Link eventKey="/">Feedback</Nav.Link>
-                </Nav.Item>
+                </Nav.Item> */}
                 <Nav.Item>
                   <Nav.Link eventKey="/">First Purchase Offer</Nav.Link>
                 </Nav.Item>

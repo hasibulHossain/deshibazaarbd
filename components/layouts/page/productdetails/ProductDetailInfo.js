@@ -22,11 +22,12 @@ import ProductDetailSidebar from "./ProductDetailSidebar";
 import ProductDetailsDescrition from "./ProductDetailsDescrition";
 import ProductRatings from "./ProductRatings";
 import HomeFeaturList from "../home/HomeFeaturList";
+import Link from "next/link";
 
 
 const ProductDetailInfo = (props) => {
   const { product } = props;
-  console.log('product :>> ', product);
+  console.log('product in details page :>> ', product);
 
   //product quantity set
   const [quantity, setQuantity] = useState(1);
@@ -124,23 +125,29 @@ const ProductDetailInfo = (props) => {
                   <Breadcrumb>
                     {
                       typeof product.category != "undefined" && product.category != null &&
-                      <Breadcrumb.Item href={`/products?category=${product.category.slug}`}>
-                        {product.category.name}
-                      </Breadcrumb.Item>
+                      <Link href={`/categories/${product.category.slug}`}>
+                        <Breadcrumb.Item href={`/products?category=${product.category.slug}`}>
+                          {product.category.name}
+                        </Breadcrumb.Item>
+                      </Link>
                     }
 
                     {
                       typeof product.sub_category != "undefined" && product.sub_category != null &&
-                      <Breadcrumb.Item href={`/products?category=${product.sub_category.slug}`}>
-                        {product.sub_category.name}
-                      </Breadcrumb.Item>
+                      <Link href={`/categories/${product.sub_category.slug}`}>
+                        <Breadcrumb.Item href={`/products?category=${product.sub_category.slug}`}>
+                          {product.sub_category.name}
+                        </Breadcrumb.Item>
+                      </Link>
                     }
 
                     {
                       typeof product.sub_category2 != "undefined" && product.sub_category2 != null &&
-                      <Breadcrumb.Item href={`/products?category=${product.sub_category2.slug}`}>
-                        {product.sub_category2.name}
-                      </Breadcrumb.Item>
+                      <Link href={`/categories/${product.sub_category2.slug}`}>
+                        <Breadcrumb.Item href={`/products?category=${product.sub_category2.slug}`}>
+                          {product.sub_category2.name}
+                        </Breadcrumb.Item>
+                      </Link>
                     }
 
 
@@ -196,9 +203,13 @@ const ProductDetailInfo = (props) => {
                       <div>
                         {
                           typeof product.brand != "undefined" && product.brand != null &&
-                          <>
-                            Brand: {product.brand.name}
-                          </>
+
+                          <Link href={`/brand/${product.brand.slug}`} className="LinkToBrandPage">
+                            <span>
+                              Brand Name: {product.brand.name}
+                            </span>
+                          </Link>
+
                         }
                       </div>
 

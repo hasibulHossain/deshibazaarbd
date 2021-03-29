@@ -61,13 +61,15 @@ const ProductDetailSidebar = ({ product }) => {
                 <div className="clearfix"></div>
                 <div className="mt-2 bg-light soldText">
                     <h6>Sold by</h6>
-                    <div className="soldAgency">
-                        <h2 className="float-left">
-                            {
-                                typeof product.business !== 'undefined' ?
-                                    product.business.name : ''
-                            }
-                        </h2>
+                    <div className="soldAgency sales">
+                        <Link href={`/shop/${product.business.slug}`}>
+                            <h2 className="float-left businessName">
+                                {
+                                    typeof product.business !== 'undefined' ?
+                                        product.business.name : ''
+                                }
+                            </h2>
+                        </Link>
                         {/* <p className="float-right text-right font-weight-bold">
                             <a href="">
                                 <ChatIcon />
