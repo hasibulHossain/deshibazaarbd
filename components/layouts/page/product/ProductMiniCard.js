@@ -1,14 +1,36 @@
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import LazyLoad from 'react-lazyload';
 import ReactImageFallback from "react-image-fallback";
 import WishList from "../../../WishList/WishList";
 import RatingDisplay from "../../../rating/RatingDisplay";
+import { useDispatch } from "react-redux";
+import { addToCartAction } from "../../../../store/actions/orders/CartAction";
 
 const ProductMiniCard = (props) => {
   const { product } = props;
+  const dispatch = useDispatch();
 
+  const [quantity, setQuantity] = useState(1);
+
+  const cartProduct = {
+    productID: product.id,
+    productName: product.name,
+    quantity: quantity,
+    price: product.default_selling_price,
+    offerPrice: product.offer_selling_price,
+    productImage: `${process.env.NEXT_PUBLIC_URL}images/products/${product.featured_image}`,
+    business: {
+      businessID: product.business_id,
+      businessName: "product.business.name",
+      businessLogo: `${process.env.NEXT_PUBLIC_URL}images/vendors/${product.featured_image}`,
+    },
+  };
+
+  const addToCart = (cartProduct, id) => {
+    dispatch(addToCartAction(cartProduct, id));
+  };
   return (
     <>
       {typeof product != "undefined" && (
@@ -58,14 +80,12 @@ const ProductMiniCard = (props) => {
                 </>
               )}
             </div>
-            <Link href="">
+           
               <a>
-                <div className="float-right product-cart">
+                <div className="float-right product-cart" onClick={() => addToCart(cartProduct, product.id)}>
                   <img src="/images/default/cart.png" className=" p-2" alt="" />
                 </div>
               </a>
-            </Link>
-
             <div className="ratepoint ">
               <RatingDisplay total={5} rating={product.average_rating} />
             </div>

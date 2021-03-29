@@ -3002,6 +3002,7 @@ button.offer-zone-btn {
   background: #f0f0f0;
   border-radius: 50%;
   border: 1px solid gray;
+  cursor: pointer;
 }
 
 .productImg {
