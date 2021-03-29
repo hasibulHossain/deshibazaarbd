@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
 import { Carousel } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
+import LoadingSkelleton from '../components/master/skelleton/LoadingSkelleton';
 import { fetchSliders } from '../store/actions/sliders/SliderAction';
 
 const TopHomeCarousel = () => {
     const dispatch = useDispatch()
-    const sliders = useSelector((state) => state.slider.sliders)
+    const sliders = useSelector((state) => state.slider.sliderList)
+    const isLoading = useSelector((state) => state.slider.isLoading)
 
     useEffect(() => {
         dispatch(fetchSliders())
@@ -16,6 +18,17 @@ const TopHomeCarousel = () => {
             {
                 sliders && (
                     <Carousel>
+                        {isLoading && (
+                            <div className="p-3">
+                                <LoadingSkelleton
+                                    alignment="vertical"
+                                    count={1}
+                                    // width={800}
+                                    height={400}
+                                    className="d-block w-100"
+                                />
+                            </div>
+                        )}
                         {
                             sliders.length > 0 && sliders.map((item, index) => (
                                 <Carousel.Item interval={1000} key={index}>
