@@ -2,14 +2,14 @@ import * as Types from "../../../Types";
 import axios from "axios";
 import store from "../../../Store";
 
-export const fetchProducts = () => async (dispatch) => {
+export const fetchProducts = (page = 1) => async (dispatch) => {
   let payload = {
     data: [],
     loading: false,
     total: 0,
   };
   dispatch({ type: Types.GET_PRODUCTS_LOADING, payload: payload });
-  let URL = `${process.env.NEXT_PUBLIC_API_URL}get-items?search=`;
+  let URL = `${process.env.NEXT_PUBLIC_API_URL}get-items?page=${page}&search=`;
   
   const filterProduct = store.getState().product.filterProduct;
   const { category, brand, min_price, max_price, rating } = filterProduct;
@@ -32,6 +32,7 @@ export const fetchProducts = () => async (dispatch) => {
   }
   await axios.get(URL).then((res) => {
     payload = res.data;
+    payload.paginated = res.data.data;
     payload.data = res.data.data.data;
     dispatch({ type: Types.GET_PRODUCTS, payload: payload });
   });

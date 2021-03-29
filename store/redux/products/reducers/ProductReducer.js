@@ -2,6 +2,7 @@ import * as Types from "../../../Types";
 
 const initialState = {
   products: [],
+  productsPaginated: null,
   loading: false,
   error: null,
   filterProduct: {
@@ -23,8 +24,10 @@ const ProductReducer = (state = initialState, action) => {
         loading: action.payload,
       };
     case Types.GET_PRODUCTS:
+      console.log(`action.payload`, action.payload);
       return {
         ...state,
+        productsPaginated: action.payload.paginated,
         products: (action.payload.data !== null && typeof action.payload.data !== 'undefined') ? action.payload.data : [],
         loading: false,
       };

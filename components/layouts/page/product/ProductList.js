@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts, GetCategoryList } from '../../../../store/redux/products/actions/ProductAction';
 import LoadingSkelleton from '../../../master/skelleton/LoadingSkelleton';
@@ -8,6 +8,7 @@ import { faCoffee, faSearch, faTimesCircle } from '@fortawesome/free-solid-svg-i
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import RatingDisplay from '../../../rating/RatingDisplay';
+import EcomPaginator from './../../../../components/pagination/EcomPaginator';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,15 +22,25 @@ const ProductList = (props) => {
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.product.loading);
   const products = useSelector((state) => state.product.products);
+  const productsPaginated = useSelector((state) => state.product.productsPaginated);
   const filterProduct = useSelector((state) => state.product.filterProduct);
+  const [page, setPage] = useState(1);
 
   const { category, brand, min_price, max_price, rating } = filterProduct;
   const classes = useStyles();
 
   useEffect(() => {
-    dispatch(fetchProducts());
+    dispatch(fetchProducts(page));
     dispatch(GetCategoryList())
   }, []);
+
+  const handlePageChange = (page) => {
+    const updatePageNo = parseInt(page.selected) + 1;
+    setPage(updatePageNo);
+    dispatch(fetchProducts(updatePageNo));
+  }
+
+  console.log(`productsPaginated`, productsPaginated);
 
   return (
     <>
@@ -114,6 +125,16 @@ const ProductList = (props) => {
               <ProductMiniCard product={product} />
             </div>
           ))}
+      </div>
+
+      <div className="ecom-pagination">
+        {
+          products.length > 0 &&
+          <EcomPaginator
+            pageCount={productsPaginated ? productsPaginated.last_page : 0}
+            handlePageClick={handlePageChange}
+          />
+        }
       </div>
 
     </>
