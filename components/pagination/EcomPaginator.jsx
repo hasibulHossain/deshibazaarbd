@@ -5,8 +5,8 @@ const EcomPaginator = ({ pageCount, handlePageClick }) => {
 
     return (
         <ReactPaginate
-          previousLabel={'Prev'}
-          nextLabel={'Next'}
+          previousLabel={'<<'}
+          nextLabel={'>>'}
           breakLabel={'...'}
           breakClassName={'break-me'}
           pageCount={pageCount}

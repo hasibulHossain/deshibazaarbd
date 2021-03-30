@@ -9,6 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import RatingDisplay from '../../../rating/RatingDisplay';
 import EcomPaginator from './../../../../components/pagination/EcomPaginator';
+import { windowScrollPosition } from '../../../utils/WindowHelper';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,12 +36,11 @@ const ProductList = (props) => {
   }, []);
 
   const handlePageChange = (page) => {
+    windowScrollPosition(0, 50);
     const updatePageNo = parseInt(page.selected) + 1;
     setPage(updatePageNo);
     dispatch(fetchProducts(updatePageNo));
   }
-
-  console.log(`productsPaginated`, productsPaginated);
 
   return (
     <>

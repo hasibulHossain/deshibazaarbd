@@ -12,6 +12,7 @@ const initialState = {
     max_price: null,
     rating: null,
   },
+  pushDataString: '',
   category: [],
   brands: [],
 };
@@ -48,6 +49,7 @@ const ProductReducer = (state = initialState, action) => {
       return {
         ...state,
         filterProduct,
+        pushDataString: getPushDataFromFilterProduct(filterProduct)
       }
     default:
       return {
@@ -57,4 +59,39 @@ const ProductReducer = (state = initialState, action) => {
   }
 };
 
+function getPushDataFromFilterProduct(filterProduct) {
+  let pushDataString = '';
+
+  Object.keys(filterProduct).map((item, index) => {
+    if (filterProduct[item] !== null) {
+      const singleItem = filterProduct[item];
+
+      if (item === 'category') {
+        pushDataString += '&category=' + singleItem.short_code;
+      }
+
+      if (item === 'brand') {
+        pushDataString += '&brand=' + singleItem.slug;
+      }
+
+      if (item === 'min_price') {
+        pushDataString += '&min_price=' + singleItem;
+      }
+
+      if (item === 'max_price') {
+        pushDataString += '&max_price=' + singleItem;
+      }
+
+      if (item === 'rating') {
+        pushDataString += '&rating=' + singleItem;
+      }
+
+    }
+  });
+  return pushDataString;
+}
+
+function setFilterProductFromPushData() {
+
+}
 export default ProductReducer;
