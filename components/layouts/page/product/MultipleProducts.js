@@ -28,11 +28,20 @@ const MultipleProducts = (props) => {
   };
 
   useEffect(() => {
+    let routerPath = '';
+
+    if (router.pathname === '/products') {
+      routerPath = router.pathname;
+    } else if (router.pathname = '/categories/[categorySlug]') {
+      const { categorySlug } = router.query;
+      routerPath = '/categories/' + categorySlug;
+    }
+
     router.push({
-      pathname: '/products',
+      pathname: routerPath,
       search: pushDataString
     })
-  }, [filterProduct]);
+  }, [filterProduct, pushDataString]);
 
   return (
     <>
@@ -40,7 +49,7 @@ const MultipleProducts = (props) => {
         <div className="container-fluid">
           <div className="row">
             <div className="col-lg-2">
-              
+
               {/* Sidebar */}
               <div className="filterSideBar ml-3">
                 <div className="sidebar-section">

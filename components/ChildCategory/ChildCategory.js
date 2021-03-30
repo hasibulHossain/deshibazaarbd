@@ -6,7 +6,7 @@ const ChildCategory = ({ category }) => {
         <>
             {
                 category && category.childs && category.childs.length > 0 && category.childs.map((item, index) => (
-                    <Link href={`/categories/${item.short_code}`}>
+                    <Link href={`/categories/${item.short_code}`} key={index}>
                         <div className="col-md-2 p-1 text-center border child-category shadow-sm">
                             <div className="child-cateogry-card text-center">
                                 {
