@@ -1,6 +1,5 @@
 import React from "react"
 import { useRouter } from 'next/router'
-import { useDispatch, useSelector } from "react-redux"
 import MainLayout from "../../components/layouts/Layout"
 import LoadingSkelleton from "../../components/master/skelleton/LoadingSkelleton";
 import Head from 'next/head';
@@ -8,11 +7,8 @@ import MultipleProducts from "../../components/layouts/page/product/MultipleProd
 import { Tab, Tabs } from "react-bootstrap";
 import ShopProfile from "../../components/ShopProfile/ShopProfile";
 
-export default function CategoryBySlug({ category }) {
-    console.log(`category`, category)
-    const router = useRouter();
+export default function ShopBySlug({ shop }) {
     const loading = false;
-
     return (
         <>
             <Head>
@@ -43,16 +39,16 @@ export default function CategoryBySlug({ category }) {
                                 <div className="col-md-6">
                                     <div className="d-flex bg-white p-2">
                                         {
-                                            category.logo_url !== null ? <img style={{ height: "50px" }} src={category.logo_url} alt="business logo" className="img-thumbnail" />
+                                            shop.logo_url !== null ? <img style={{ height: "50px" }} src={shop.logo_url} alt="business logo" className="img-thumbnail" />
                                                 : <i style={{ fontSize: "50px", height: "60px" }} class="fas fa-store img-thumbnail"></i>
                                         }
 
                                         <div className="m-2 ml-3">
-                                            <h6>{category.name && category.name}</h6>
+                                            <h6>{shop.name && shop.name}</h6>
                                             {/* <p>80% Positive Seller Ratings</p> */}
                                             {
-                                                category.is_main_shop !== 0 && (
-                                                    <p className="shopName"><span className="maccaf">Maccaf</span> <span className="business">{category.name && category.name}</span></p>
+                                                shop.is_main_shop !== 0 && (
+                                                    <p className="shopName"><span className="maccaf">Maccaf</span> <span className="business">{shop.name && shop.name}</span></p>
                                                 )
                                             }
                                         </div>
@@ -70,8 +66,8 @@ export default function CategoryBySlug({ category }) {
                                     {/* <Tab eventKey="home" title="Home Page">
                                         <h2>Home Page</h2>
                                     </Tab> */}
-                                    <Tab eventKey="products" title="All Products">
-                                        <MultipleProducts category={category} />
+                                    <Tab eventKey="products" title={`All Products (${shop.count_products})`}>
+                                        <MultipleProducts shop={shop} />
                                     </Tab>
                                     <Tab eventKey="profile" title="Profile">
                                         <ShopProfile />
@@ -89,13 +85,13 @@ export default function CategoryBySlug({ category }) {
 
 export const getServerSideProps = async (context) => {
     const shopSlug = context.params.shopSlug;
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}business/${shopSlug}`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}business/${shopSlug}?count_products=1`);
     const dataJSON = await res.json();
     const data = dataJSON.data;
 
     return {
         props: {
-            category: data,
+            shop: data,
             products: []
         }
     }

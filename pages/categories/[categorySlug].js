@@ -47,7 +47,7 @@ export default function CategoryBySlug({ category }) {
                             </div>
                             <div className="col-md-4">
                                 <h4 className="mt-3"> {category && category.name && category.name}</h4>
-                                <small>{`261`} items found in {category && category.name && category.name}</small>
+                                <small>{category.count_products} item{ category.count_products > 1 ? 's' : ''} found in {category && category.name && category.name} Category</small>
                             </div>
                         </div>
 
@@ -63,7 +63,7 @@ export default function CategoryBySlug({ category }) {
 export const getServerSideProps = async (context) => {
     const categorySlug = context.params.categorySlug;
     console.log(`categorySlug`, categorySlug)
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}categories/${categorySlug}`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}categories/${categorySlug}?count_products=1`);
     const dataJSON = await res.json();
     const data = dataJSON.data;
 
