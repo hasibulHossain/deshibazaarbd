@@ -29,10 +29,11 @@ const ProductList = (props) => {
   const [page, setPage] = useState(1);
 
   const { category, brand, min_price, max_price, rating } = filterProduct;
+  const { cat = null, br = null, sh = null } = props;
   const classes = useStyles();
 
   useEffect(() => {
-    dispatch(fetchProducts(page));
+    dispatch(fetchProducts(page, cat, br, sh));
     dispatch(GetCategoryList())
   }, []);
 

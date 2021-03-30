@@ -25,7 +25,6 @@ const ProductReducer = (state = initialState, action) => {
         loading: action.payload,
       };
     case Types.GET_PRODUCTS:
-      console.log(`action.payload`, action.payload);
       return {
         ...state,
         productsPaginated: action.payload.paginated,

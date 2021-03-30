@@ -17,6 +17,8 @@ const MultipleProducts = (props) => {
   const pushDataString = useSelector((state) => state.product.pushDataString);
   const ratingsArray = [5, 4, 3, 2, 1];
 
+  const { cat } = props;
+
   useEffect(() => {
     dispatch(GetCategoryList())
     dispatch(getBrandList())
@@ -168,7 +170,7 @@ const MultipleProducts = (props) => {
 
             </div>
             <div className="col-lg-10">
-              <ProductList />
+              <ProductList cat={cat} />
             </div>
           </div>
         </div>

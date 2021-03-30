@@ -42,7 +42,7 @@ export default function CategoryBySlug({ category }) {
                         <div className="row m-1">
                             <div className="col-md-2">
                                 <p>Related Category</p>
-                                <h6>Mobile</h6>
+                                {/* <h6>Mobile</h6> */}
                                 <hr />
                             </div>
                             <div className="col-md-4">
@@ -52,7 +52,7 @@ export default function CategoryBySlug({ category }) {
                         </div>
 
                     </div>
-                    <MultipleProducts category={category} />
+                    <MultipleProducts cat={category} />
                 </div>
 
             </MainLayout>

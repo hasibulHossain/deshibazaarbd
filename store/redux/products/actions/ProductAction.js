@@ -2,7 +2,7 @@ import * as Types from "../../../Types";
 import axios from "axios";
 import store from "../../../Store";
 
-export const fetchProducts = (page = 1) => async (dispatch) => {
+export const fetchProducts = (page = 1, cat = null, br = null, sh = null ) => async (dispatch) => {
   let payload = {
     data: [],
     loading: false,
@@ -14,8 +14,13 @@ export const fetchProducts = (page = 1) => async (dispatch) => {
   const filterProduct = store.getState().product.filterProduct;
   const { category, brand, min_price, max_price, rating } = filterProduct;
   
-  if(category !== null){
-    URL +=  `&category=${category.id}`
+  console.log(`cat`, cat);
+  if(category !== null || cat !== null ){
+    if( cat !== null ){
+      URL +=  `&category=${cat.id}`
+    }else {
+      URL +=  `&category=${category.id}`
+    }
   }
   
   if(brand !== null){
