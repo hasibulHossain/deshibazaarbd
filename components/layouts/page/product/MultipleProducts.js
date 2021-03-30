@@ -32,9 +32,15 @@ const MultipleProducts = (props) => {
 
     if (router.pathname === '/products') {
       routerPath = router.pathname;
-    } else if (router.pathname = '/categories/[categorySlug]') {
+    } else if (router.pathname === '/categories/[categorySlug]') {
       const { categorySlug } = router.query;
       routerPath = '/categories/' + categorySlug;
+    } else if(router.pathname === '/brand/[brand]') {
+      const { brand } = router.query;
+      routerPath = '/brand/' + brand;
+    } else if(router.pathname === '/shop/[shopSlug]') {
+      const { shopSlug } = router.query;
+      routerPath = '/shop/' + shopSlug;
     }
 
     router.push({
