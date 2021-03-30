@@ -19,7 +19,7 @@ const Bkash = () => {
             <p className="mt-3 mb-3">
                 ***Please note that one bkash account can only be saved in one Daraz account.***
             </p>
-            <button className="btn custome-pay-btn">
+            <button className="btn custom-pay-btn">
                 PAY NOW
             </button>
         </div>

@@ -3248,6 +3248,12 @@ p.single-product-text {
   min-width: 160px;
 }
 
+.payment-method.active {
+  background: #e9f8ed;
+  border: 1px dotted #ccc;
+  margin-bottom: 10px;
+}
+
 .payment-method img {
   width: 60px;
 }
@@ -3257,7 +3263,7 @@ p.single-product-text {
   margin-bottom: 4px;
 }
 
-.custome-pay-btn {
+.custom-pay-btn {
   background-color: #f57224 !important;
   color: #fff !important;
   width: 100%;
@@ -3385,12 +3391,26 @@ p.single-product-text {
 }
 
 .ecom-pagination .pagination a {
-  padding: 10px!important;
+  padding: 10px !important;
   background: #50c5ee;
-  color: #fff!important;
+  color: #fff !important;
 }
 
 .ecom-pagination li.active a {
-  background: #34add8!important;
+  background: #34add8 !important;
 }
 /** Pagination **/
+
+/** Page title **/
+.page-title {
+  padding-top: 20px;
+  font-size: 25px;
+  font-weight: normal;
+}
+.page-description {
+  color: gray;
+  font-weight: 200;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+/** Page title **/

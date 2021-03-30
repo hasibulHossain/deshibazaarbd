@@ -2,9 +2,8 @@ import React, { useMemo } from "react";
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import SpliteCardForm from "./SpliteCardForm";
-// Make sure to call `loadStripe` outside of a component’s render to avoid
-// recreating the `Stripe` object on every render.
-const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
+
+const stripePromise = loadStripe(`pk_test_BE2H4ZqSHaRIyY6EWQNfX152`); // Stripe Public Key
 
 const MasterCard = () => {
     return (

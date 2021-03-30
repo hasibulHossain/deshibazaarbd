@@ -1,6 +1,7 @@
 import React from 'react';
 import MainLayout from '../components/layouts/Layout';
 import ProfileSideBar from '../components/layouts/page/myprofile/ProfileSideBar';
+import PageTitle from '../components/page-title/PageTitle';
 
 export default function giftcard(props) {
   return (
@@ -14,7 +15,7 @@ export default function giftcard(props) {
             <div className="col-md-9">
               <div className="card card-middle">
                 <div className="sidebar-card-title">
-                  <h2>MY gift card</h2>
+                  <PageTitle title='My Card Items' description='All of the purchased and non-purchased gift cards' />
                 </div>
               </div>
               <div className="card p-3">

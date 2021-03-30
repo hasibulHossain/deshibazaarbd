@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import PageTitle from '../page-title/PageTitle';
 import LoadingSkelleton from '../master/skelleton/LoadingSkelleton';
 import { getWishListData } from './_redux/Action/GiftCardListAction';
 
@@ -11,10 +12,11 @@ const GiftCardList = () => {
 
     const giftCardList = useSelector((state) => state.GiftCardListReducer.giftCardList)
     const isLoading = useSelector((state) => state.GiftCardListReducer.isLoading)
-    console.log(`giftCardList`, giftCardList)
+
     return (
         <div className="container">
-            <h3 className="card-title m-5"> GIFT CARD </h3>
+            <PageTitle title='Gift Cards' description='Gift Card Items..' />
+
             <div className="row mt-3 justify-content-center">
                 {isLoading && (
                     <div className="p-3">
@@ -35,9 +37,9 @@ const GiftCardList = () => {
                                     <h6 className="title mt-2"> {item.title} </h6>
                                     <p className="price"> Card Price : ৳ {item.price_value_for} </p>
                                     <p className="price"> Change Value : ৳ {item.change_price_value} </p>
-                                    <button className="btn custome-pay-btn" disabled={true}>
+                                    <button className="btn custom-pay-btn" disabled={true}>
                                         PURCHASE
-                                     </button>
+                                    </button>
                                 </div>
                             </div>
                         ))

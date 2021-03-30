@@ -8,25 +8,27 @@ import MasterCard from './PayMethod/MasterCard/MasterCard';
 import CashOnDelivery from './PayMethod/CashOnDelivery/CashOnDelivery';
 import Rocket from './PayMethod/Rocket/Rocket';
 import { getPaymentMethodList } from './_redux/Action/CheckoutPayment';
+import PageTitle from '../../../page-title/PageTitle';
 
 const CheckoutPayment = () => {
+
   const dispatch = useDispatch()
   const paymentMethod = useSelector((state) => state.CheckoutPaymentReducer.paymentMethod);
   const isLoading = useSelector((state) => state.CheckoutPaymentReducer.isLoading);
 
-  console.log(`paymentMethod`, paymentMethod)
-  const [payMethod, setPayMethod] = useState(null);
+  const [payMethod, setPayMethod] = useState('bkash');
+
   useEffect(() => {
     dispatch(getPaymentMethodList())
   }, []);
+
   return (
     <div>
       <div className="checkoutPayment">
         <div className="container">
-          <h2>Payment</h2>
+          <PageTitle title='Payment' description='Select Payment Method' />
           <div className="row">
             <div className="col-md-8">
-              <h4>Select Payment Method </h4>
               {isLoading && (
                 <div className="p-3">
                   <LoadingSkelleton
@@ -39,42 +41,20 @@ const CheckoutPayment = () => {
               )}
               <Nav defaultActiveKey={''}>
                 {paymentMethod.length > 0 && (
-                  paymentMethod.map((item, index) => (
-                    <Nav.Item className={`payment-method`} onClick={() => setPayMethod(item.code)}>
+                  paymentMethod.map((item) => (
+                    <Nav.Item className={`payment-method ${payMethod === item.code ? 'active' : ''}`} onClick={() => setPayMethod(item.code)} key={item.id}>
                       <h6 className="text-center">{item.name}</h6>
                       <img className="img-fluid text-center" src={item.image_url} alt={item.name} />
                     </Nav.Item>
                   ))
                 )}
               </Nav>
-              {
-                payMethod !== null && (
-                  payMethod === "card" && (
-                    <MasterCard />
-                  )
-                )
-              }
-              {
-                payMethod !== null && (
-                  payMethod === "bkash" && (
-                    <Bkash />
-                  )
-                )
-              }
-              {
-                payMethod !== null && (
-                  payMethod === "rocket" && (
-                    <Rocket />
-                  )
-                )
-              }
-              {
-                payMethod !== null && (
-                  payMethod === "cash_in" && (
-                    <CashOnDelivery />
-                  )
-                )
-              }
+
+              {payMethod === "bkash" && <Bkash />}
+              {payMethod === "rocket" && <Rocket />}
+              {payMethod === "card" && <MasterCard />}
+              {payMethod === "cash_in" && <CashOnDelivery />}
+
             </div>
             <div className="col-md-4">
               <div className="card m-2">
