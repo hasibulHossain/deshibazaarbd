@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts, GetCategoryList } from '../../../../store/redux/products/actions/ProductAction';
 import LoadingSkelleton from '../../../master/skelleton/LoadingSkelleton';
 import ProductMiniCard from './ProductMiniCard';
+import ProductLoadingSkelleton from './ProductLoadingSkelleton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCoffee, faSearch, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 import { makeStyles } from '@material-ui/core/styles';
@@ -41,6 +42,8 @@ const ProductList = (props) => {
     setPage(updatePageNo);
     dispatch(fetchProducts(updatePageNo));
   }
+
+  const isLoad = true;
 
   return (
     <>
@@ -102,12 +105,9 @@ const ProductList = (props) => {
       }
 
       {loading && (
-        <LoadingSkelleton
-          alignment="vertical"
-          count={5}
-          width={220}
-          height={250}
-        />
+        <>
+          <ProductLoadingSkelleton />
+        </>
       )}
 
       <div className="row">
@@ -119,7 +119,7 @@ const ProductList = (props) => {
             <h5 style={{ fontSize: "70px", marginTop: "10px" }}><FontAwesomeIcon icon={faSearch} /></h5>
           </div>
         )}
-        {products.length > 0 &&
+        { !loading && products.length > 0 &&
           products.map((product, index) => (
             <div className="col-xl-2 col-lg-3 col-6" key={index}>
               <ProductMiniCard product={product} />
@@ -127,7 +127,7 @@ const ProductList = (props) => {
           ))}
       </div>
 
-      <div className="ecom-pagination">
+      <div className="ecom-pagination mt-3">
         {
           products.length > 0 &&
           <EcomPaginator
