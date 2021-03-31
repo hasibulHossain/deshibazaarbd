@@ -3,6 +3,7 @@ import CheckoutPayment from "../components/layouts/page/CheckoutPayment/Checkout
 import ProfileLayout from "../components/layouts/ProfileLayout";
 
 export default function Home(props) {
+
   return (
     <>
       <ProfileLayout>

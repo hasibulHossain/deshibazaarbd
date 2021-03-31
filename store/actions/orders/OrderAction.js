@@ -3,6 +3,8 @@ import moment from "moment";
 import Axios from "axios";
 import { showToast } from "../../../components/master/Helper/ToastHelper";
 import { getCartsAction } from "./CartAction";
+import { encrypt } from "../../../components/utils/EncryptHelper";
+
 export const orderInputChange = (name, value) => (dispatch) => {
     const formData = {
         name: name,
@@ -10,6 +12,7 @@ export const orderInputChange = (name, value) => (dispatch) => {
     }
     dispatch({ type: Types.ORDER_INPUT_CHANGE, payload: formData });
 }
+
 export const getOrderInfo = (orderInputData, carts, totalQuantity, shippingCost, totalPrice) => (dispatch) => {
 }
 
@@ -17,6 +20,7 @@ export const storeSells = (orderInputData, carts, totalQuantity, shippingCost, t
     const getUserData = JSON.parse(localStorage.getItem('loginData'))
     const { userData } = getUserData;
     let sale_lines = [];
+
     carts.forEach((item) => {
         const singleItem = {
             item_id: item.productID,
@@ -60,7 +64,9 @@ export const storeSells = (orderInputData, carts, totalQuantity, shippingCost, t
         isLoading: true,
         orderData: {}
     }
-    dispatch({ type: Types.ORDER_SUBMIT, payload: response })
+    
+    dispatch({ type: Types.ORDER_SUBMIT, payload: response });
+
     Axios.post(`${process.env.NEXT_PUBLIC_API_URL}sales`, orderPlaceData)
         .then((res) => {
             if (res.data.status) {
@@ -68,9 +74,11 @@ export const storeSells = (orderInputData, carts, totalQuantity, shippingCost, t
                 response.status = res.data.status;
                 response.orderData = res.data.data;
                 response.isLoading = false;
-                localStorage.removeItem("carts");
-                dispatch(getCartsAction());
-                showToast('success', res.data.message);
+                // localStorage.removeItem("carts");
+                // dispatch(getCartsAction());
+                localStorage.setItem('tr_no', res.data.data.id);
+                localStorage.setItem('tr', encrypt(res.data.data.id));
+                showToast('success', 'Order Placed Successfully, Please confirm your payment.');
                 dispatch({ type: Types.ORDER_SUBMIT, payload: response });
             }
         }).catch((err) => {

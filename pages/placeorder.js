@@ -244,7 +244,7 @@ const placeorder = (props) => {
 
                         {couponLoading && (
                           <button disabled={true} className="btn btn-primary d-flex">
-                            <span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span> APPLY
+                            <span className="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span> APPLY
                           </button>
                         )}
                       </div>
@@ -292,7 +292,7 @@ const placeorder = (props) => {
                         <button
                           className="btn btn-warning text-white pb-2"
                           disabled={true}>
-                          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing...
+                          <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing...
                         </button>
                       )
                     }

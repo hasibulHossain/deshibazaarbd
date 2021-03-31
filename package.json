@@ -67,6 +67,7 @@
         "redux-devtools-extension": "^2.13.8",
         "redux-thunk": "^2.3.0",
         "sass": "^1.29.0",
+        "simple-encrypter": "0.0.2",
         "slick-carousel": "^1.8.1"
     },
     "devDependencies": {
