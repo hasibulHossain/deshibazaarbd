@@ -5,14 +5,14 @@ import PageTitle from "../../../page-title/PageTitle";
 import FirstPurchaseProductList from "./FirstPurchaseProductList";
 import { getOfferProducts } from './_redux/actions/FirstPurchaseProductAction';
 
-const FirstPurchaseProduct = (props) => {
+const DealsAndOffer = (props) => {
   const dispatch = useDispatch()
   const router = useRouter()
   const { cat } = props;
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    dispatch(getOfferProducts("first_purchase_offer"));
+    dispatch(getOfferProducts("normal_offer"));
   }, []);
 
   const handlePageChange = (page) => {
@@ -26,7 +26,7 @@ const FirstPurchaseProduct = (props) => {
       <div className="HomeProduct">
         <div className="container-fluid">
           <div className="ml-4">
-            <PageTitle title="First Purchase Offer" description="First time registered user's offers..." />
+            <PageTitle title="Deals and offer" description="Latest offer for everyone..." />
           </div>
           <div className="row m-2">
             <div className="col-lg-12">
@@ -38,5 +38,4 @@ const FirstPurchaseProduct = (props) => {
     </>
   );
 };
-
-export default FirstPurchaseProduct;
+export default DealsAndOffer;
