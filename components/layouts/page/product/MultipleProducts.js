@@ -7,7 +7,6 @@ import { GetCategoryList, getBrandList, handleChangeCategoryFilter } from "../..
 import { useDispatch, useSelector } from "react-redux";
 import Rater from "react-rater";
 import { windowScrollPosition } from "../../../utils/WindowHelper";
-import PageTitle from "../../../page-title/PageTitle";
 
 const MultipleProducts = (props) => {
   const dispatch = useDispatch()
@@ -38,10 +37,10 @@ const MultipleProducts = (props) => {
     } else if (router.pathname === '/categories/[categorySlug]') {
       const { categorySlug } = router.query;
       routerPath = '/categories/' + categorySlug;
-    } else if (router.pathname === '/brand/[brand]') {
+    } else if(router.pathname === '/brand/[brand]') {
       const { brand } = router.query;
       routerPath = '/brand/' + brand;
-    } else if (router.pathname === '/shop/[shopSlug]') {
+    } else if(router.pathname === '/shop/[shopSlug]') {
       const { shopSlug } = router.query;
       routerPath = '/shop/' + shopSlug;
     }
@@ -54,13 +53,123 @@ const MultipleProducts = (props) => {
 
   return (
     <>
-      <div className="HomeProduct">
+      <div className="HomeProduct bp">
         <div className="container-fluid">
-          <div className="ml-4">
-            <PageTitle title="First Purchase Offer" />
-          </div>
-          <div className="row m-2">
-            <div className="col-lg-12">
+          <div className="row">
+            <div className="col-lg-2">
+
+              {/* Sidebar */}
+              <div className="filterSideBar ml-3">
+                <div className="sidebar-section">
+                  <h6>Category</h6>
+                  {
+                    category && category.length > 0 && category.map((item, index) => (
+                      <Form.Group controlId="formBasicCheckbox" key={index}>
+                        <Form.Check
+                          checked={(filterProduct.category !== null) ? (filterProduct.category.id === item.id) ? true : false : false}
+                          type="checkbox" label={item.name}
+                          name={item.name}
+                          onChange={(e) => {
+                            if (filterProduct.category !== null) {
+                              if (filterProduct.category.id === item.id) {
+                                handleChangeProductFilter("category", null, e)
+                              } else {
+                                handleChangeProductFilter("category", item, e)
+                              }
+                            } else {
+                              handleChangeProductFilter("category", item, e)
+                            }
+                          }}
+                        />
+                      </Form.Group>
+
+                    ))
+                  }
+                </div>
+
+                <div className="sidebar-section">
+                  <h6>Brand</h6>
+                  {
+                    brands && brands.length > 0 && brands.map((item, index) => (
+                      <Form.Group controlId="formBasicCheckbox" key={index}>
+                        <Form.Check type="checkbox" label={item.name}
+                          name={item.name}
+                          checked={(filterProduct.brand !== null) ? (filterProduct.brand.id === item.id) ? true : false : false}
+                          onChange={(e) => {
+                            if (filterProduct.brand !== null) {
+                              if (filterProduct.brand.id === item.id) {
+                                handleChangeProductFilter("brand", null, e)
+                              } else {
+                                handleChangeProductFilter("brand", item, e)
+                              }
+                            } else {
+                              handleChangeProductFilter("brand", item, e)
+                            }
+                          }}
+                        />
+                      </Form.Group>
+
+                    ))
+                  }
+                </div>
+
+                <div className="sidebar-section">
+                  <h6>Price</h6>
+                  <div className="row">
+                    <div className="col-6 m-0">
+                      <input type="number" min={0} className="form-control sidebar-section-input" placeholder="Min"
+                        onChange={(e) => handleChangeProductFilter('min_price', e.target.value)}
+                      />
+                    </div>
+                    <div className="col-6 m-0">
+                      <input type="number" min={filterProduct.min_price} className="form-control sidebar-section-input" placeholder="Max"
+                        onChange={(e) => handleChangeProductFilter('max_price', e.target.value)}
+                      />
+                    </div>
+                  </div>
+                  {/* <Link href="/">View More</Link> */}
+
+                </div>
+
+                {/* <div className="sidebar-section">
+                  <h6>Type</h6>
+                  <Form>
+                    <Form.Group controlId="formBasicCheckbox">
+                      <Form.Check type="checkbox" label="Richman" />
+                    </Form.Group>
+                    <Form.Group controlId="formBasicCheckbox">
+                      <Form.Check type="checkbox" label="Lubnan" />
+                    </Form.Group>
+                    <Form.Group controlId="formBasicCheckbox">
+                      <Form.Check type="checkbox" label="Cats eye" />
+                    </Form.Group>
+                  </Form>
+                  <Link href="/">View More</Link>
+
+                </div> */}
+
+                <div className="sidebar-section">
+                  <h6>Rating</h6>
+                  <div>
+                    <span key={-1} onClick={() => handleChangeProductFilter('rating', null)} className="pointer">
+                      All
+                    </span>
+                  </div>
+                  {
+                    ratingsArray.map((rating, index) => (
+                      <span key={index}>
+                        <span key={rating} onClick={() => handleChangeProductFilter('rating', rating)} >
+                          <Rater total={5} rating={rating} interactive={false} />
+                        </span>
+                        <br />
+                      </span>
+                    ))
+                  }
+                </div>
+              </div>
+
+            </div>
+            <div className="col-lg-10">
               <ProductList cat={cat} />
             </div>
           </div>

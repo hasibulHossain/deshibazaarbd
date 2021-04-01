@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProducts, GetCategoryList } from '../../../../store/redux/products/actions/ProductAction';
-import LoadingSkelleton from '../../../master/skelleton/LoadingSkelleton';
 import ProductLoadingSkelleton from './ProductLoadingSkelleton';
 import { makeStyles } from '@material-ui/core/styles';
 import EcomPaginator from '../../../pagination/EcomPaginator';
 import { windowScrollPosition } from '../../../utils/WindowHelper';
 import FirstPurchaseProductMiniCard from './FirstPurchaseProductMiniCard';
+import { getOfferProducts } from './_redux/actions/FirstPurchaseProductAction';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,29 +17,21 @@ const useStyles = makeStyles((theme) => ({
 
 const FirstPurchaseProductList = (props) => {
   const dispatch = useDispatch();
-  const loading = useSelector((state) => state.product.loading);
-  const products = useSelector((state) => state.product.products);
+  const loading = useSelector((state) => state.offerProduct.loading);
+  const products = useSelector((state) => state.offerProduct.products);
   const productsPaginated = useSelector((state) => state.product.productsPaginated);
-  const filterProduct = useSelector((state) => state.product.filterProduct);
   const [page, setPage] = useState(1);
 
-  const { category, brand, min_price, max_price, rating } = filterProduct;
-  const { cat = null, br = null, sh = null } = props;
-  const classes = useStyles();
-
   useEffect(() => {
-    dispatch(fetchProducts(page, cat, br, sh));
-    dispatch(GetCategoryList())
+    dispatch(getOfferProducts("first_purchase_offer"));
   }, []);
 
   const handlePageChange = (page) => {
     windowScrollPosition(0, 50);
     const updatePageNo = parseInt(page.selected) + 1;
     setPage(updatePageNo);
-    dispatch(fetchProducts(updatePageNo));
+    dispatch(getOfferProducts(updatePageNo));
   }
-
-  const isLoad = true;
 
   return (
     <>

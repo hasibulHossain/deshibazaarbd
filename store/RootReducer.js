@@ -26,6 +26,7 @@ import CheckoutPaymentReducer from "../components/layouts/page/CheckoutPayment/_
 import GiftCardListReducer from "../components/GiftCardList/_redux/Reducer/GiftCardListReducer";
 import SearchReducer from "../components/search-input/redux/SearchReducer";
 import SliderReducer from "./reducers/sliders/SliderReducer";
+import FirstPurchaseProductReducer from "../components/layouts/page/firstPurchaseOffer/_redux/reducers/FirstPurchaseProductReducer";
 // import WishlistReducer from "../components/layouts/page/wishlist/_redux/Reducer/WishlistReducer";
 
 export default combineReducers({
@@ -55,4 +56,5 @@ export default combineReducers({
   ReviewReducer: ReviewReducer,
   CheckoutPaymentReducer: CheckoutPaymentReducer,
   GiftCardListReducer: GiftCardListReducer,
+  offerProduct: FirstPurchaseProductReducer,
 });

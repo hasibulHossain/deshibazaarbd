@@ -4,7 +4,6 @@ import Link from "next/link";
 import LazyLoad from 'react-lazyload';
 import ReactImageFallback from "react-image-fallback";
 import WishList from "../../../WishList/WishList";
-import RatingDisplay from "../../../rating/RatingDisplay";
 import { useDispatch } from "react-redux";
 import { addToCartAction } from "../../../../store/actions/orders/CartAction";
 
@@ -40,7 +39,7 @@ const FirstPurchaseProductMiniCard = (props) => {
             <div className="productImg">
               <LazyLoad height={200} once>
                 <ReactImageFallback
-                  src={`${process.env.NEXT_PUBLIC_URL}images/products/${product.featured_image}`}
+                  src={`${process.env.NEXT_PUBLIC_URL}images/products/${product.item_featured_image}`}
                   fallbackImage="/images/default/fallback-image.png"
                   initialImage="/images/default/fallback-image.png"
                   alt={product.name}
@@ -56,39 +55,28 @@ const FirstPurchaseProductMiniCard = (props) => {
             </a>
           </Link>
           <div className="productDetails ">
-            <Link href={`/products/${product.sku}`}>
+            <Link href={`/products/${product.item_sku}`}>
               <a>
                 <div className="productTitle">
-                  <h3>{product.name}</h3>
-                  <p>{product.category ? product.category.name : ''}</p>
+                  <h3>{product.item_name}</h3>
                 </div>
               </a>
             </Link>
 
 
-            <div className="productPrice pt-2 float-left">
-              {product.is_offer_enable != true && (
-                <h4>৳ {product.default_selling_price}</h4>
-              )}
+            <div className="productPrice pt-2 d-flex">
+              <h5>৳ {product.offer_price}</h5>
+              <h5>
+                <del>৳ {product.current_price}</del>
+              </h5>
+            </div>
 
-              {product.is_offer_enable != false && (
-                <>
-                  <h4>৳ {product.offer_selling_price}</h4>
-                  <p>
-                    <del>৳ {product.default_selling_price}</del>
-                  </p>
-                </>
-              )}
-            </div>
-           
-              <a>
-                <div className="float-right product-cart" onClick={() => addToCart(cartProduct, product.id)}>
-                  <img src="/images/default/cart.png" className=" p-2" alt="" />
-                </div>
-              </a>
-            <div className="ratepoint ">
-              <RatingDisplay total={5} rating={product.average_rating} />
-            </div>
+            <a>
+              <div className="float-right product-cart" onClick={() => addToCart(cartProduct, product.id)}>
+                <img src="/images/default/cart.png" className=" p-2" alt="" />
+              </div>
+            </a>
+          
           </div>
         </div>
       )}

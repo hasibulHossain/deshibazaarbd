@@ -48,6 +48,63 @@ const ProductList = (props) => {
 
   return (
     <>
+      {
+        (category !== null || brand !== null || min_price !== null || max_price !== null) && (
+          <div className={classes.root}>
+            <p>
+              Filtered By:
+              {
+                category != null &&
+                <Button className="filterClass ml-2">
+                  Category: {(category !== null ? category.name : '')}
+                  <span className="ml-2 cursor-pointer"><FontAwesomeIcon icon={faTimesCircle} /></span>
+                </Button>
+              }
+
+              {
+                brand != null &&
+                <Button className="filterClass ml-2">
+                  Brand: {(brand !== null ? brand.name : '')}
+                  <span className="ml-2 cursor-pointer"><FontAwesomeIcon icon={faTimesCircle} /></span>
+                </Button>
+              }
+
+              {
+                min_price != null &&
+                <Button className="filterClass ml-2">
+                  Min Price: {(min_price !== null ? min_price : '')}
+                  <span className="ml-2 cursor-pointer"><FontAwesomeIcon icon={faTimesCircle} /></span>
+                </Button>
+              }
+
+              {
+                max_price != null &&
+                <Button className="filterClass ml-2">
+                  Max Price: {(max_price !== null ? max_price : '')}
+                  <span className="ml-2 cursor-pointer"><FontAwesomeIcon icon={faTimesCircle} /></span>
+                </Button>
+              }
+
+              {
+                rating != null &&
+                <Button className="filterClass ml-2">
+                  Rating: {(rating !== null ? <RatingDisplay total={5} rating={rating} showRatingText={false} /> : '')}
+                  <span className="ml-2 cursor-pointer"><FontAwesomeIcon icon={faTimesCircle} /></span>
+                </Button>
+              }
+
+              {
+                (category != null || brand !== null || min_price != null || max_price != null || rating != null) &&
+                <Button className="filterClass ml-2">
+                  Clear All
+                  <span className="ml-2 cursor-pointer"><FontAwesomeIcon icon={faTimesCircle} /></span>
+                </Button>
+              }
+            </p>
+          </div>
+        )
+      }
+
       {loading && (
         <>
           <ProductLoadingSkelleton />
@@ -55,6 +112,14 @@ const ProductList = (props) => {
       )}
 
       <div className="row">
+        {!loading && products.length === 0 && (
+
+          <div className="col-md-10 text-center">
+            <h1>Search Product Not Found</h1>
+            <h6>We're sorry. We cannot find any matches for your search term.</h6>
+            <h5 style={{ fontSize: "70px", marginTop: "10px" }}><FontAwesomeIcon icon={faSearch} /></h5>
+          </div>
+        )}
         { !loading && products.length > 0 &&
           products.map((product, index) => (
             <div className="col-xl-2 col-lg-3 col-6" key={index}>
