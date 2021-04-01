@@ -1962,24 +1962,29 @@ button.productBtn.product.cartorder {
 
 .orderstatus {
   border-bottom: 1px solid #f3f3f3;
-  margin-top: 102px;
+  /* margin-top: 102px; */
 }
 
 .orderstatus {
-  height: 40px;
+  /* height: 40px; */
+  padding: 10px;
 }
-
+.orderDetailsBorder{
+  border-bottom: 1px solid #f3f3f3;
+}
 .singlestatus {
   float: left;
-  width: 50%;
-  padding: 0px;
+  width: 100%;
+  padding: 5px 20px;
   margin: 0px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .singlestatus h2 {
   padding-top: 15px;
   font-weight: 400;
-  margin-left: -128px;
+  /* margin-left: -128px; */
   font-size: 15px;
 }
 

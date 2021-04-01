@@ -48,8 +48,8 @@ const MyOrder = ({ router }, props) => {
               {
                 orderListData.length > 0 && orderListData.map((item, index) => (
                   <div className="mt-4">
-                    <div className="innerwishlist productorderdetailsbox">
-                      <div className="orderboxDetails">
+                    <div className="card bg-white">
+                      <div className="card-title orderboxDetails">
                         <div className="ordercode">
                           <h2>{item.orderCode}</h2>
                         </div>
@@ -58,45 +58,36 @@ const MyOrder = ({ router }, props) => {
                         </div>
                       </div>
 
-                      {/* {
-                        item.product.length > 0 && item.product.map((product, index) => ( */}
+                      {
+                        item.product.length > 0 && item.product.map((product, index) => (
                           <>
-                            <div className="clear-fix"></div>
-
-                            <div className="singleorderproduct">
-                              <img src="/images/default/chair.png" />
+                            <div className="row orderDetailsBorder p-2">
+                              <div className="col-3">
+                                <div className="">
+                                  <img src={product.image} />
+                                </div>
+                              </div>
+                              <div className="col-5">
+                                <h3>{product.title}</h3>
+                                <div className="d-flex">
+                                  <h6 className="mr-3 text-danger"><del>৳ {product.price}</del></h6>
+                                  <h6>৳ {product.offerPrice}</h6>
+                                </div>
+                              </div>
+                              <div className="col-4">
+                                <h5>Order Date</h5>
+                                <h6>{product.orderData}</h6>
+                              </div>
                             </div>
-                            <div className="wishsingleproductText orderproducttext">
-                              <h1>Product title with link</h1>
-                              <h4>৳ 500</h4>
-
-                              <h5>Order On:</h5>
-                            </div>
-                            <div className="orderquantity">
-                              <h2>Qty</h2>
-                              <h3>1</h3>
-                            </div>
-                            <div className="orderquantity">
-                              <h2>Payment Type</h2>
-                              <h3 className="cod-text">COD</h3>
-                            </div>
-                            <div className="clear-fix"></div>
-
                           </>
                         ))
                       }
-
-                      <div className="orderstatus ">
-                        <div className="singlestatus">
-                          <h2 className="order-status">
-                            Order status:<span> {item.status}</span>
-                          </h2>
-                        </div>
-                        <div className="singlestatus two">
-                          <h2>Total Amount: ৳ 500 </h2>
-                        </div>
+                      <div className="singlestatus">
+                        <h2 className="order-status">
+                          Order status:<span> {item.status}</span>
+                        </h2>
+                        <h2>Total Amount: <span className="font-weight-bold text-dark ml-1">৳ {item.product.reduce(( accumulator, currentValue ) => accumulator + currentValue.offerPrice, 0)}</span> </h2>
                       </div>
-                      <div className="clear-fix"></div>
                     </div>
                   </div>
                 ))
