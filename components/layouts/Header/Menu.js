@@ -41,7 +41,7 @@ const MainMenu = ({ router }, props) => {
                   <Nav.Link eventKey="/">Feedback</Nav.Link>
                 </Nav.Item> */}
                 <Nav.Item>
-                  <Nav.Link eventKey="/">First Purchase Offer</Nav.Link>
+                  <Nav.Link eventKey="/first-purchase-offer">First Purchase Offer</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
                   <Nav.Link eventKey="/AudiencePool">Audience Poll</Nav.Link>

@@ -1,15 +1,12 @@
 import React, { useEffect } from "react";
 import { useRouter } from 'next/router'
-
-import { Form } from "react-bootstrap";
-import ProductList from "./ProductList";
 import { GetCategoryList, getBrandList, handleChangeCategoryFilter } from "../../../../store/redux/products/actions/ProductAction";
 import { useDispatch, useSelector } from "react-redux";
-import Rater from "react-rater";
 import { windowScrollPosition } from "../../../utils/WindowHelper";
 import PageTitle from "../../../page-title/PageTitle";
+import FirstPurchaseProductList from "./FirstPurchaseProductList";
 
-const MultipleProducts = (props) => {
+const FirstPurchaseProduct = (props) => {
   const dispatch = useDispatch()
   const router = useRouter()
   const category = useSelector((state) => state.product.category);
@@ -61,7 +58,7 @@ const MultipleProducts = (props) => {
           </div>
           <div className="row m-2">
             <div className="col-lg-12">
-              <ProductList cat={cat} />
+              <FirstPurchaseProductList cat={cat} />
             </div>
           </div>
         </div>
@@ -70,4 +67,4 @@ const MultipleProducts = (props) => {
   );
 };
 
-export default MultipleProducts;
+export default FirstPurchaseProduct;

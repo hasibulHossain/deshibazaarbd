@@ -2,15 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts, GetCategoryList } from '../../../../store/redux/products/actions/ProductAction';
 import LoadingSkelleton from '../../../master/skelleton/LoadingSkelleton';
-import ProductMiniCard from './ProductMiniCard';
 import ProductLoadingSkelleton from './ProductLoadingSkelleton';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCoffee, faSearch, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import RatingDisplay from '../../../rating/RatingDisplay';
-import EcomPaginator from './../../../../components/pagination/EcomPaginator';
+import EcomPaginator from '../../../pagination/EcomPaginator';
 import { windowScrollPosition } from '../../../utils/WindowHelper';
+import FirstPurchaseProductMiniCard from './FirstPurchaseProductMiniCard';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ProductList = (props) => {
+const FirstPurchaseProductList = (props) => {
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.product.loading);
   const products = useSelector((state) => state.product.products);
@@ -58,7 +54,7 @@ const ProductList = (props) => {
         { !loading && products.length > 0 &&
           products.map((product, index) => (
             <div className="col-xl-2 col-lg-3 col-6" key={index}>
-              <ProductMiniCard product={product} />
+              <FirstPurchaseProductMiniCard product={product} />
             </div>
           ))}
       </div>
@@ -77,4 +73,4 @@ const ProductList = (props) => {
   );
 }
 
-export default ProductList;
+export default FirstPurchaseProductList;
