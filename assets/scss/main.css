@@ -3419,3 +3419,7 @@ p.single-product-text {
   margin-bottom: 20px;
 }
 /** Page title **/
+.returnButton{
+  padding: 1px 10px!important;
+  margin-top: 20px;
+}

@@ -54,7 +54,10 @@ const MyOrder = ({ router }, props) => {
                           <h2>{item.orderCode}</h2>
                         </div>
                         <div className="ordercode one">
-                          <h2>View Details</h2>
+                          <h2>
+                            {/* View Details */}
+                            Invoice No-{index + 1}
+                          </h2>
                         </div>
                       </div>
 
@@ -77,6 +80,7 @@ const MyOrder = ({ router }, props) => {
                               <div className="col-4">
                                 <h5>Order Date</h5>
                                 <h6>{product.orderData}</h6>
+                                <button className="btn btn-outline-warning returnButton">Return / Refund</button>
                               </div>
                             </div>
                           </>
@@ -86,7 +90,7 @@ const MyOrder = ({ router }, props) => {
                         <h2 className="order-status">
                           Order status:<span> {item.status}</span>
                         </h2>
-                        <h2>Total Amount: <span className="font-weight-bold text-dark ml-1">৳ {item.product.reduce(( accumulator, currentValue ) => accumulator + currentValue.offerPrice, 0)}</span> </h2>
+                        <h2>Total Amount: <span className="font-weight-bold text-dark ml-1">৳ {item.product.reduce((accumulator, currentValue) => accumulator + currentValue.offerPrice, 0)}</span> </h2>
                       </div>
                     </div>
                   </div>
