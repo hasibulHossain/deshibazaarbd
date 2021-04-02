@@ -146,7 +146,7 @@ const MyCart = (props) => {
                         </div>
                       </div>
                       <div className="col-2">
-                        <div className="pointer custom-quantity m-3" onClick={(id) => deleteCartProduct(item.productID)}>
+                        <div className="pointer custom-quantity mt-3 mr-2" onClick={(id) => deleteCartProduct(item.productID)}>
                           <FaTrash />
                         </div>
                       </div>
