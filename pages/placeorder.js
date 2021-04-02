@@ -21,6 +21,7 @@ const placeorder = (props) => {
   const totalQuantity = useSelector((state) => state.cart.totalQuantity);
   const totalPrice = useSelector((state) => state.cart.totalPrice);
   const shippingCost = useSelector((state) => state.cart.shippingCost);
+  const shippingCostLoading = useSelector((state) => state.cart.shippingCostLoading);
   const orderInputData = useSelector((state) => state.OrderReducer.orderInputData);
   const placeOrder = useSelector((state) => state.OrderReducer.placeOrder);
   const isLoading = useSelector((state) => state.OrderReducer.isLoading);
@@ -169,30 +170,6 @@ const placeorder = (props) => {
                           )}
                         </tbody>
                       </Table>
-
-                      {/* <div className="item-quantity">
-                        {carts.map((item, index) => (
-                          <div className="innerwishlist bg-white">
-                            <div className="wishsingleproduct shippingImg">
-                              <img className="img-fluid w-75 p-3" src={item.productImage} alt="product image" />
-                            </div>
-                            <div className="shippmentBoxText pt-3">
-                              <h1>{item.productName}</h1>
-                              <h5 className="text-danger">Seller: Seller shop name</h5>
-                            </div>
-                            <div className="wishsingleproductIcon">
-                              <p>{item.quantity}</p>
-                            </div>
-                            <div className="wishsingleproductIcon">
-                              <p>৳ {item.offerPrice !== null && item.offerPrice !== 0 && item.price !== "" ? item.offerPrice : item.price}</p>
-                            </div>
-                            <div className="wishsingleproductIcon">
-                              <p>৳ {item.offerPrice !== null && item.offerPrice !== 0 && item.price !== "" ? item.quantity * item.offerPrice : item.quantity * item.price}</p>
-                            </div>
-                          </div>
-                        ))
-                        }
-                      </div> */}
                     </>
                   )
                 }
@@ -221,6 +198,13 @@ const placeorder = (props) => {
                     <div className="d-flex justify-content-between">
                       <p>Shipping cost </p>
                       <p> ৳ {shippingCost} </p>
+                      {
+                        shippingCostLoading && (
+                          <p>
+                            <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                          </p>
+                        )
+                      }
                     </div>
                     <div className="d-flex justify-content-between">
                       <p>Discount</p>

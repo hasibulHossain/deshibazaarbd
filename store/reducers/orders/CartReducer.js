@@ -21,6 +21,7 @@ const initialState = {
   totalQuantity: 0,
   totalPrice: 0,
   shippingCost: 0,
+  shippingCostLoading: false,
   coupon: {
     code: "",
     carts: [
@@ -83,10 +84,18 @@ const CartReducer = (state = initialState, action) => {
         carts: action.payload.carts,
         totalQuantity: calculateTotalQtyAndPrices(action.payload.carts).totalQuantity,
         totalPrice: calculateTotalQtyAndPrices(action.payload.carts).totalPrice,
-        shippingCost: calculateTotalQtyAndPrices(action.payload.carts).shippingCost,
+        // shippingCost: calculateTotalQtyAndPrices(action.payload.carts).shippingCost,
         products: action.payload.products,
         loading: false,
         errors: null,
+      };
+    case Types.APPLY_SHIPPING_COST:
+      console.log(`action.payload`, action.payload.shipping)
+      return {
+        ...state,
+        shippingCost: action.payload.shipping,
+        shippingCostLoading: action.payload.shippingCostLoading
+      
       };
 
     case Types.POST_CARTS_DATA:
@@ -98,7 +107,6 @@ const CartReducer = (state = initialState, action) => {
         errors: null,
       };
     case Types.APPLY_COUPON_CODE:
-      console.log(`action.payload for coupon`, action.payload)
       return {
         ...state,
         couponLoading: action.payload.couponLoading,
@@ -147,7 +155,7 @@ const calculateTotalQtyAndPrices = (carts) => {
   for (let i = 0; i < carts.length; i++) {
     response.totalQuantity += carts[i].quantity;
     response.totalPrice += (carts[i].offerPrice !== null && carts[i].offerPrice !== 0 && carts[i].price !== "" ? carts[i].quantity * carts[i].offerPrice : carts[i].quantity * carts[i].price);
-    response.shippingCost = (response.totalPrice / 100) * 5;
+    // response.shippingCost = (response.totalPrice / 100) * 5;
   }
   return response;
 }

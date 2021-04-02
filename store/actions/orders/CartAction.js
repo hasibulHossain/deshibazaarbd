@@ -198,7 +198,7 @@ export const handleShippingCost = (carts) => (dispatch => {
     status: false,
     message: "",
     errorMessage: "",
-    shipping: {},
+    shipping: 0,
     shippingCostLoading: true,
     returnData: ""
   };
@@ -210,6 +210,7 @@ export const handleShippingCost = (carts) => (dispatch => {
   Axios.post(`${process.env.NEXT_PUBLIC_API_URL}sales/shipping-cost/by-cart`, shippingCost)
     .then((res) => {
       if (res.data.status) {
+        console.log(`res`, res)
         let data = res.data;
         responseData.message = data.message;
         responseData.status = data.status;
