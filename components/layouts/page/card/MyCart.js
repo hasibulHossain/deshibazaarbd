@@ -90,62 +90,66 @@ const MyCart = (props) => {
                 />
               )}
 
-              {carts.map((item) => (
-                <div className="mt-2 p-3">
-                  <div className="innerwishlist productorderdetailsbox cartlistsection">
-                    <div className="singleorderproduct">
-                      <img
-                        className="img-fluid w-75 m-2"
-                        src={item.productImage ? item.productImage : "../../../../public/images/default/fallback-image.png"}
-                      />
-                    </div>
-                    <div className="wishsingleproductText mycarttext">
-                      <h5>{item.productName}</h5>
-                      <h2>Seller: {item.business.businessName}</h2>
-                      <div className="row">
-                        <h4 >
-                          {
-                            item.offerPrice !== null && item.offerPrice !== 0 ? (
-                              <del> {item.price} </del>) :
-                              <>৳ {item.price}</>
-                          }
-                        </h4>
-                        {
-                          item.offerPrice !== null && item.offerPrice !== 0 && (
-                            <h4 className="ml-5 text-dark">{item.offerPrice}</h4>
-                          )}
-
+              {carts.map((item, index) => (
+                <div className="mt-2">
+                  <div className="card" key={index + 1}>
+                    <div className="row">
+                      <div className="col-3">
+                        <img
+                          className="img-fluid m-2"
+                          src={item.productImage ? item.productImage : "../../../../public/images/default/fallback-image.png"}
+                        />
                       </div>
-                      <h2>
-                        Quantity:
-                        <div className="cart-quantity-area">
-                          <button
-                            className="btn btn-light quantity-btn decrement bg-light text-dark"
-                            onClick={(id, quantity) =>
-                              decrementQunatity(item.productID, item.quantity)
-                            }
-                          >
-                            {" "}
-                            <Remove />
-                          </button>
-                          <span className="colorType rounded text-dark">
-                            {item.quantity}
-                          </span>
-                          <button
-                            className="btn btn-light quantity-btn  increment bg-light text-dark ml-2"
-                            onClick={(id, quantity) =>
-                              increaseQuantity(item.productID, item.quantity)
-                            }
-                          >
-                            <AddIcon />
-                          </button>
-                        </div>
-                      </h2>
-                    </div>
-                
+                      <div className="col-7">
+                        <div className="m-2 cart-item">
+                          <h5>{item.productName}</h5>
+                          <h6>Seller: {item.business.businessName}</h6>
+                          <div className="row">
+                            <h5 className="ml-2">
+                              {
+                                item.offerPrice !== null && item.offerPrice !== 0 ? (
+                                  <del className="text-danger"> {item.price} </del>) :
+                                  <>৳ {item.price}</>
+                              }
+                            </h5>
+                            {
+                              item.offerPrice !== null && item.offerPrice !== 0 && (
+                                <h4 className="ml-5 text-dark">{item.offerPrice}</h4>
+                              )}
 
-                    <div className="orderquantity mycarttext pointer" onClick={(id) => deleteCartProduct(item.productID)}>
-                      <FaTrash />
+                          </div>
+                          <h5>
+                             <div className="cart-quantity-area">
+                              <button
+                                className={ item.quantity > 1 ? `btn btn-light quantity-btn bg-light text-dark` : `btn btn-light quantity-btn decrement bg-light text-dark`}
+                                onClick={(id, quantity) =>
+                                  decrementQunatity(item.productID, item.quantity)
+                                }
+                                disabled={item.quantity > 1 ? false : true}
+                              >
+                                {" "}
+                                <Remove />
+                              </button>
+                              <span className="colorType rounded text-dark">
+                                {item.quantity}
+                              </span>
+                              <button
+                                className="btn btn-light quantity-btn  increment bg-light text-dark ml-2"
+                                onClick={(id, quantity) =>
+                                  increaseQuantity(item.productID, item.quantity)
+                                }
+                              >
+                                <AddIcon />
+                              </button>
+                            </div>
+                          </h5>
+                        </div>
+                      </div>
+                      <div className="col-2">
+                        <div className="pointer custom-quantity m-3" onClick={(id) => deleteCartProduct(item.productID)}>
+                          <FaTrash />
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>

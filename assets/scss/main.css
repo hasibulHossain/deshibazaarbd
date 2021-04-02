@@ -2605,13 +2605,30 @@ button:not(:disabled) {
   width: 40px;
   /* box-shadow: 10px 10px 35px 28px #8080800f; */
 }
+.decrement{
+  cursor: not-allowed!important;
+}
 
 .cart-quantity-area {
   display: inline-block;
   background: #f4f4f4;
-  margin-left: 10px;
 }
-
+.cart-item h5{
+  font-size: 16px!important;
+}
+.cart-item h6{
+  font-size: 14px!important;
+  color: #c5c5c5;
+}
+.custom-quantity{
+  transition: 0.6s;
+  text-align: center;
+  padding: 5px;
+}
+.custom-quantity:hover{
+  background-color: #f7f7f8;
+  border-radius: 5px;
+}
 .sideBox.form-group {
   margin-bottom: 0rem;
 }
