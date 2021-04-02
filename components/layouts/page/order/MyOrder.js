@@ -5,14 +5,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchMyOrders, getOrderDataList } from "../../../../store/redux/myOrders/actions/MyOrderAction";
 import LoadingSkelleton from "../../../master/skelleton/LoadingSkelleton";
 import ProfileSideBar from "../myprofile/ProfileSideBar";
+import { Modal } from "react-bootstrap";
+import SimpleModal from "../../../master/Modal/SimpleModal";
+import ReturnProducts from "./ReturnProducts";
 
 const MyOrder = ({ router }, props) => {
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.myOrder.loading);
   const myOrders = useSelector((state) => state.myOrder.myOrders);
   const orderListData = useSelector((state) => state.MyOrderReducer.orderListData);
+  const [orderID, setOrderID] = useState(null);
+  const [returnProduct, setReturnProduct] = useState(null);
+  const [show, setShow] = useState(false);
 
-  console.log('orderListData :>> ', orderListData);
+  const handleClose = () => setShow(false);
+  const handleShow = (item, product) => {
+    setShow(true);
+    setOrderID(item.orderCode);
+    setReturnProduct(product)
+  };
 
   useEffect(() => {
     dispatch(fetchMyOrders());
@@ -80,7 +91,7 @@ const MyOrder = ({ router }, props) => {
                               <div className="col-4">
                                 <h5>Order Date</h5>
                                 <h6>{product.orderData}</h6>
-                                <button className="btn btn-outline-warning returnButton">Return / Refund</button>
+                                <button className="btn btn-outline-warning returnButton" onClick={() => handleShow(item, product)}>Return / Refund</button>
                               </div>
                             </div>
                           </>
@@ -102,6 +113,18 @@ const MyOrder = ({ router }, props) => {
             </div>
           </div>
         </div>
+        <SimpleModal
+          show={show}
+          size="lg"
+          modalTitle="Return Product"
+          id={orderID}
+          handleClose={handleClose}
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+        >
+          <ReturnProducts product={returnProduct} />
+
+        </SimpleModal>
       </div>
     </>
   );

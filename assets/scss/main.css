@@ -250,8 +250,7 @@ span.ant-input-search.searcbarStyle.ant-input-affix-wrapper input {
 }
 
 button.ant-btn.playStoreBtn {
-  background: transparent linear-gradient(270deg, #c028ec 0%, #ff5f03 100%) 0%
-    0% no-repeat padding-box;
+  background: transparent linear-gradient(270deg, #c028ec 0%, #ff5f03 100%) 0% 0% no-repeat padding-box;
   border-radius: 50px;
   height: 35px;
   width: 120px;
@@ -1735,16 +1734,16 @@ button.productBtn.product.cartorder {
   padding: 20px 0px;
 }
 
-.dropdown-menu-large > li > ul {
+.dropdown-menu-large>li>ul {
   padding: 0;
   margin: 0;
 }
 
-.dropdown-menu-large > li > ul > li {
+.dropdown-menu-large>li>ul>li {
   list-style: none;
 }
 
-.dropdown-menu-large > li > ul > li > a {
+.dropdown-menu-large>li>ul>li>a {
   display: block;
   padding: 3px 20px;
   clear: both;
@@ -1754,21 +1753,21 @@ button.productBtn.product.cartorder {
   white-space: normal;
 }
 
-.dropdown-menu-large > li ul > li > a:hover,
-.dropdown-menu-large > li ul > li > a:focus {
+.dropdown-menu-large>li ul>li>a:hover,
+.dropdown-menu-large>li ul>li>a:focus {
   text-decoration: none;
   color: #262626;
   background-color: #f5f5f5;
 }
 
-.dropdown-menu-large .disabled > a,
-.dropdown-menu-large .disabled > a:hover,
-.dropdown-menu-large .disabled > a:focus {
+.dropdown-menu-large .disabled>a,
+.dropdown-menu-large .disabled>a:hover,
+.dropdown-menu-large .disabled>a:focus {
   color: #999999;
 }
 
-.dropdown-menu-large .disabled > a:hover,
-.dropdown-menu-large .disabled > a:focus {
+.dropdown-menu-large .disabled>a:hover,
+.dropdown-menu-large .disabled>a:focus {
   text-decoration: none;
   background-color: transparent;
   background-image: none;
@@ -1786,11 +1785,11 @@ button.productBtn.product.cartorder {
   margin-right: 0;
 }
 
-.dropdown-menu-large > li {
+.dropdown-menu-large>li {
   margin-bottom: 30px;
 }
 
-.dropdown-menu-large > li:last-child {
+.dropdown-menu-large>li:last-child {
   margin-bottom: 0;
 }
 
@@ -1969,9 +1968,11 @@ button.productBtn.product.cartorder {
   /* height: 40px; */
   padding: 10px;
 }
-.orderDetailsBorder{
+
+.orderDetailsBorder {
   border-bottom: 1px solid #f3f3f3;
 }
+
 .singlestatus {
   float: left;
   width: 100%;
@@ -2183,11 +2184,11 @@ button.createbtn {
 
 /* elegentchairbreadcrum */
 
-.breadcrumb-item + .breadcrumb-item::before {
+.breadcrumb-item+.breadcrumb-item::before {
   content: "";
 }
 
-.breadcrumb-item + .breadcrumb-item::before {
+.breadcrumb-item+.breadcrumb-item::before {
   display: inline-block;
   padding-right: 0.5rem;
   color: #6c757d;
@@ -2503,8 +2504,7 @@ button.btn.btn-light.galleryAdd {
 }
 
 .galleryDescription button.btn.btn-warning.text-white,
-.galleryDescription
-  button.btn.btn-primary.bg-white.border-primary.text-primary {
+.galleryDescription button.btn.btn-primary.bg-white.border-primary.text-primary {
   padding: 0px 33px;
   line-height: 29px;
   margin: 0px auto;
@@ -2540,8 +2540,7 @@ button.btn.btn-light.increment.bg-light.border.rounded-circle.text-dark.ml-5 {
   width: 30px !important;
 }
 
-element.style {
-}
+element.style {}
 
 .btn:not(:disabled):not(.disabled) {
   cursor: pointer;
@@ -3376,10 +3375,12 @@ p.single-product-text {
   border-radius: 25px !important;
   padding: 10px 20px !important;
 }
+
 .sales .businessName {
   cursor: pointer;
   color: #199cbd;
 }
+
 .LinkToBrandPage {
   cursor: pointer;
 }
@@ -3404,6 +3405,7 @@ p.single-product-text {
 .ecom-pagination li.active a {
   background: #34add8 !important;
 }
+
 /** Pagination **/
 
 /** Page title **/
@@ -3412,14 +3414,45 @@ p.single-product-text {
   font-size: 25px;
   font-weight: normal;
 }
+
 .page-description {
   color: gray;
   font-weight: 200;
   font-size: 16px;
   margin-bottom: 20px;
 }
+
 /** Page title **/
-.returnButton{
-  padding: 1px 10px!important;
+.returnButton {
+  padding: 1px 10px !important;
   margin-top: 20px;
+}
+
+.btn-modal-close {
+  position: absolute;
+  right: -15px;
+  padding-right: 20px;
+  cursor: pointer;
+  top: -15px;
+  background: #ffffffed;
+  border-radius: 20px;
+  width: 36px;
+  height: 36px;
+  padding: 12px;
+  box-shadow: 1px 2px 30px grey;
+}
+
+.btn-modal-close i {
+  position: relative;
+  top: -6px;
+}
+
+.modal-header .close {
+  display: none;
+}
+
+.returnProducts {
+  border-bottom: 1px solid #f3f3f3;
+  margin-right: 0px !important;
+  margin-left: 0px !important;
 }

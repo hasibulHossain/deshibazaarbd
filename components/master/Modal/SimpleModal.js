@@ -1,8 +1,9 @@
 import React from 'react';
 import { Badge, Button } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
-import './css/model.css'
+// import './css/model.css'
 const SimpleModal = (props) => {
+
     const { show, handleClose, handleShow, size, modalTitle, status, id } = props;
     return (
         <Modal
@@ -15,7 +16,7 @@ const SimpleModal = (props) => {
                 <Modal.Title>
                     {modalTitle}
                     {
-                        id && <Badge className="ml-2" variant="success"> {id} </Badge>
+                        id && <Badge className="ml-2" variant="info"> {id} </Badge>
                     }
                     <div className="row custom-modal">
                         <div className="col-6">
