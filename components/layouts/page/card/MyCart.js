@@ -100,7 +100,7 @@ const MyCart = (props) => {
                       />
                     </div>
                     <div className="wishsingleproductText mycarttext">
-                      <h1>{item.productName}</h1>
+                      <h5>{item.productName}</h5>
                       <h2>Seller: {item.business.businessName}</h2>
                       <div className="row">
                         <h4 >
@@ -142,15 +142,10 @@ const MyCart = (props) => {
                         </div>
                       </h2>
                     </div>
-                    {/* <div className="mycartquantity">
-                        <NumericInput mobile className="form-control" />
-                      </div> */}
+                
 
-                    <div style={{ cursor: 'pointer' }} className="orderquantity mycarttext cursor-pointer" onClick={(id) => deleteCartProduct(item.productID)}>
+                    <div className="orderquantity mycarttext pointer" onClick={(id) => deleteCartProduct(item.productID)}>
                       <FaTrash />
-                    </div>
-                    <div className="mycartquantity one cursor-pointer">
-                      <FavoriteIcon />
                     </div>
                   </div>
                 </div>

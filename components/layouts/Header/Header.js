@@ -31,7 +31,7 @@ import { getUserDataAction, handleLogoutUser } from "../../getUserData/Action/Us
 function handleSelect(info) {
   console.log("selected ", info);
   const router = useRouter();
-  router.push('/categories/'+info);
+  router.push('/categories/' + info);
 }
 
 function handleDeselect(info) {
@@ -149,13 +149,15 @@ const Header = () => {
     return (
       <>
         <Link href="/cart">
-          <FaCartArrowDown className="header-carticon pointer" />
+          <div className="pointer">
+            <FaCartArrowDown className="header-carticon" />
+            <span className="badge counter">
+              <span className="count">
+                {carts ? carts.length : 0}
+              </span>
+            </span>
+          </div>
         </Link>
-        <span className="badge counter">
-          <span className="count">
-            {carts ? carts.length : 0}
-          </span>
-        </span>
       </>
     )
   }
