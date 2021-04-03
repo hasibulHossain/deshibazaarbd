@@ -1,4 +1,4 @@
-const { encryptString, decryptString } = require( 'simple-encrypter' );
+const { encryptString, decryptString } = require('simple-encrypter');
 
 /**
  * encrypt String
@@ -8,6 +8,7 @@ const { encryptString, decryptString } = require( 'simple-encrypter' );
  * @return string encrypted string
  */
 export function encrypt(normalString) {
+    normalString        = String(normalString);
     let encryptedString = '';
 
     if (typeof normalString !== 'undefined' && normalString.length > 0) {
