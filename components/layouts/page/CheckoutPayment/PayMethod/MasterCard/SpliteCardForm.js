@@ -33,7 +33,7 @@ const useOptions = () => {
     return options;
 };
 
-const SpliteCardForm = () => {
+const SpliteCardForm = ({ transaction }) => {
     const stripe = useStripe();
     const elements = useElements();
     const options = useOptions();
@@ -78,19 +78,24 @@ const SpliteCardForm = () => {
         const paymentData = { token: token.id };
 
         const data = {
-            order_id: 2,
+            order_id: transaction.id,
             payload: paymentData.token
         }
 
         Axios.post(`${process.env.NEXT_PUBLIC_API_URL}payments`, data)
             .then(res => {
                 if (res.data.status) {
+                    localStorage.removeItem('carts');
+                    localStorage.removeItem('tr');
                     showToast('success', res.data.message);
+
+                    setTimeout(() => {
+                        window.location.href = '/';
+                      }, 1000);
                 } else {
                     showToast('error', res.data.message);
                 }
-                console.log(`res after payment`, res);
-            })
+            });
     }
 
     return (

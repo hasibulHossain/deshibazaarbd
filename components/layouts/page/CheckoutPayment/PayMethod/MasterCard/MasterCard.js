@@ -5,10 +5,15 @@ import SpliteCardForm from "./SpliteCardForm";
 
 const stripePromise = loadStripe(`pk_test_BE2H4ZqSHaRIyY6EWQNfX152`); // Stripe Public Key
 
-const MasterCard = () => {
+const MasterCard = ({ transaction }) => {
+    
+    if(transaction === null || transaction === -1){
+        return "Sorry, No transaction found."
+    }
+
     return (
         <Elements stripe={stripePromise}>
-            <SpliteCardForm />
+            <SpliteCardForm transaction={transaction} />
         </Elements>
     );
 };

@@ -1,12 +1,9 @@
-import React, { useEffect, useState } from "react";
-import NumericInput from "react-numeric-input";
-import CancelIcon from "@material-ui/icons/Cancel";
+import React, { useEffect } from "react";
 import MainLayout from "../components/layouts/Layout";
-import { Checkbox } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { getCartsAction, handleApplyCouponCode, handleChangeCouponInput, handleShippingCost } from "../store/actions/orders/CartAction";
-import { getOrderInfo, orderInputChange, storeSells } from "../store/actions/orders/OrderAction";
-import { toast } from "react-toastify";
+import { orderInputChange, storeSells } from "../store/actions/orders/OrderAction";
+import ShippingAddressForm from '../components/shipping-address/ShippingAddressForm';
 import { useForm } from "react-hook-form";
 import { Table } from "react-bootstrap";
 import { useRouter } from "next/router";
@@ -35,6 +32,7 @@ const placeorder = (props) => {
   const handleInputChage = (name, value, e) => {
     dispatch(orderInputChange(name, value))
   }
+
   const placeOrderSubmit = (e) => {
     dispatch(storeSells(orderInputData, carts, totalQuantity, shippingCost, totalPrice));
     router.push('/checkout-payment')
@@ -53,14 +51,15 @@ const placeorder = (props) => {
   const onSubmit = () => {
     dispatch(handleApplyCouponCode(coupon, carts))
   };
+
   const withoutDiscount = totalPrice + shippingCost;
 
   useEffect(() => {
-    if (userData !== null) {
-      router.push('/placeorder')
-    } else if (userData === null) {
-      router.push('/login')
-    }
+    // if (userData !== null) {
+    //   router.push('/placeorder')
+    // } else if (userData === null) {
+    //   router.push('/login')
+    // }
   }, []);
 
   return (
@@ -73,6 +72,7 @@ const placeorder = (props) => {
                 <div className="card mt-5">
                   <div className="card-body">
                     <h5 className="card-title">Shipping Address</h5>
+                    <ShippingAddressForm />
                     <form onSubmit={(e) => placeOrderSubmit(e)} autoComplete="off">
                       <div className="row">
                         <div className="col">
@@ -130,37 +130,29 @@ const placeorder = (props) => {
                     <>
                       <div className="shippmentDetails">
                         <div className="shippmentDetailsHeader mt-3 mb-3">
-                          <h1>Shipment Details</h1>
+                          <h1>Order Details</h1>
                         </div>
-
-
-                        {/* <div className="shippmentDetailsTitle">
-                          <h3 className="d-inline item">Items</h3>
-                          <h3 className="d-inline qty">Qty</h3>
-                          <h3 className="d-inline unitPrice">Unite price</h3>
-                          <h3 className="d-inline">Subtotal</h3>
-                        </div> */}
                       </div>
                       <div className="clearfix"></div>
                       <Table>
                         <thead className="custome-background">
                           <tr>
-                            <th> Product </th>
-                            <th> Product Name</th>
+                            <th>Product </th>
+                            <th>Product Name</th>
                             <th>Qty</th>
-                            <th>Unite price</th>
+                            <th>Unit price</th>
                             <th>Subtotal</th>
                           </tr>
                         </thead>
                         <tbody>
                           {carts.map((item, index) => (
-                            <tr className="bg-white">
+                            <tr className="bg-white" key={index}>
                               <td>
                                 <img className="placeOrder-img p-2" src={item.productImage} alt="product image" />
                               </td>
                               <td>
                                 <h5>{item.productName}</h5>
-                                <h6 className="text-danger">Seller: {item.business.businessName}</h6>
+                                <h6 className="text-danger">Seller: {item.seller_name}</h6>
                               </td>
                               <td>{item.quantity}</td>
                               <td> ৳ {item.offerPrice !== null && item.offerPrice !== 0 && item.price !== "" ? item.offerPrice : item.price}</td>

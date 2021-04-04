@@ -2,8 +2,7 @@ import * as Types from "../../Types";
 import moment from "moment";
 import Axios from "axios";
 import { showToast } from "../../../components/master/Helper/ToastHelper";
-import { getCartsAction } from "./CartAction";
-import { encrypt } from "../../../components/utils/EncryptHelper";
+import { decrypt, encrypt } from "../../../components/utils/EncryptHelper";
 
 export const orderInputChange = (name, value) => (dispatch) => {
     const formData = {
@@ -64,7 +63,7 @@ export const storeSells = (orderInputData, carts, totalQuantity, shippingCost, t
         isLoading: true,
         orderData: {}
     }
-    
+
     dispatch({ type: Types.ORDER_SUBMIT, payload: response });
 
     Axios.post(`${process.env.NEXT_PUBLIC_API_URL}sales`, orderPlaceData)
@@ -76,7 +75,6 @@ export const storeSells = (orderInputData, carts, totalQuantity, shippingCost, t
                 response.isLoading = false;
                 // localStorage.removeItem("carts");
                 // dispatch(getCartsAction());
-                localStorage.setItem('tr_no', res.data.data.id);
                 localStorage.setItem('tr', encrypt(res.data.data.id));
                 showToast('success', 'Order Placed Successfully, Please confirm your payment.');
                 dispatch({ type: Types.ORDER_SUBMIT, payload: response });
@@ -90,5 +88,32 @@ export const storeSells = (orderInputData, carts, totalQuantity, shippingCost, t
                 dispatch({ type: Types.ORDER_SUBMIT, payload: response })
             }
         })
+}
 
+/**
+ * Get Last transaction data by transaction id
+ * 
+ * @since 0.0.1
+ * 
+ * @return Object|null transaction data
+ */
+export async function getLastTransactionData () {
+
+    // Check if there is any tr value is in local storage,
+    let transaction_no = await localStorage.getItem('tr');
+    let transactionData = null;
+    
+    // if not, then return null;
+    if (typeof transaction_no !== 'undefined' && transaction_no !== null ) {
+        transaction_no = decrypt(transaction_no);
+        await Axios.get(`${process.env.NEXT_PUBLIC_API_URL}sales/${transaction_no}`)
+            .then(res => {
+                transactionData = res.data.data;
+            })
+            .catch(err => {
+                return null;
+            })
+    }
+
+    return transactionData;
 }

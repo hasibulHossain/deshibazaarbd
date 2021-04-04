@@ -9,8 +9,11 @@ import CashOnDelivery from './PayMethod/CashOnDelivery/CashOnDelivery';
 import Rocket from './PayMethod/Rocket/Rocket';
 import { getPaymentMethodList } from './_redux/Action/CheckoutPayment';
 import PageTitle from '../../../page-title/PageTitle';
+import { getLastTransactionData } from '../../../../store/actions/orders/OrderAction';
+import { showToast } from '../../../master/Helper/ToastHelper';
 
 const CheckoutPayment = () => {
+  const [ transaction, setTransaction ] = useState(-1);
 
   const dispatch = useDispatch()
   const paymentMethod = useSelector((state) => state.CheckoutPaymentReducer.paymentMethod);
@@ -19,8 +22,25 @@ const CheckoutPayment = () => {
   const [payMethod, setPayMethod] = useState('bkash');
 
   useEffect(() => {
-    dispatch(getPaymentMethodList())
+    dispatch(getPaymentMethodList());
+    setTransactionInformation();
   }, []);
+
+  useEffect(() => {
+    if( transaction === null) {
+      showToast('error', 'No Order found. Please buy some product first !');
+      
+      setTimeout(() => {
+        window.location.href = '/';
+      }, 1000);
+    }
+  }, [transaction]);
+
+  const setTransactionInformation = async () => {
+    const transaction = await getLastTransactionData();
+    console.log(`transaction`, transaction);
+    setTransaction(transaction);
+  }
 
   return (
     <div>
@@ -50,10 +70,10 @@ const CheckoutPayment = () => {
                 )}
               </Nav>
 
-              {payMethod === "bkash" && <Bkash />}
-              {payMethod === "rocket" && <Rocket />}
-              {payMethod === "card" && <MasterCard />}
-              {payMethod === "cash_in" && <CashOnDelivery />}
+              {payMethod === "bkash" && <Bkash transaction={transaction} />}
+              {payMethod === "rocket" && <Rocket transaction={transaction} />}
+              {payMethod === "card" && <MasterCard transaction={transaction} />}
+              {payMethod === "cash_in" && <CashOnDelivery transaction={transaction} />}
 
             </div>
             <div className="col-md-4">
