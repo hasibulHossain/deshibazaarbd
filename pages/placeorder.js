@@ -3,7 +3,9 @@ import MainLayout from "../components/layouts/Layout";
 import { useDispatch, useSelector } from "react-redux";
 import { getCartsAction, handleApplyCouponCode, handleChangeCouponInput, handleShippingCost } from "../store/actions/orders/CartAction";
 import { orderInputChange, storeSells } from "../store/actions/orders/OrderAction";
-import ShippingAddressForm from '../components/shipping-address/ShippingAddressForm';
+import AddressForm from '../components/shipping-billing/AddressForm';
+import SidebarShippingBilling from '../components/shipping-billing/SidebarShippingBilling';
+import LoadingSpinner from '../components/loading/LoadingSpinner';
 import { useForm } from "react-hook-form";
 import { Table } from "react-bootstrap";
 import { useRouter } from "next/router";
@@ -65,140 +67,84 @@ const placeorder = (props) => {
   return (
     <>
       <MainLayout>
-        <div className="homebanner pb bg-light">
+        <div className="checkout-page pb bg-light">
           <div className="container">
             <div className="row">
-              <div className="col-lg-8">
-                <div className="card mt-5">
-                  <div className="card-body">
-                    <h5 className="card-title">Shipping Address</h5>
-                    <ShippingAddressForm />
-                    <form onSubmit={(e) => placeOrderSubmit(e)} autoComplete="off">
-                      <div className="row">
-                        <div className="col">
-                          <label>Email</label>
-                          <input
-                            type="text"
-                            className="form-control"
-                            name="Receiveremail"
-                            value={orderInputData.Receiveremail}
-                            onChange={(e) => handleInputChage('Receiveremail', e.target.value)}
-                            placeholder="Enter your or Receiver name"
-                          />
-                        </div>
-                        <div className="col">
-                          <label>Contact Number</label>
-                          <input
-                            type="text"
-                            className="form-control"
-                            placeholder="Contact Number"
-                            name="contactNumber"
-                            value={orderInputData.contactNumber}
-                            onChange={(e) => handleInputChage('contactNumber', e.target.value)}
-                          />
-                        </div>
-                      </div>
-                      <div className="row mt-3 mb-3">
-                        <div className="col">
-                          <label>Shipping address</label>
-                          <textarea
-                            className="form-control"
-                            placeholder="Type your full address"
-                            name="shipping_details"
-                            value={orderInputData.shipping_details}
-                            onChange={(e) => handleInputChage('shipping_details', e.target.value)}
-                          ></textarea>
-                        </div>
-                        <div className="col">
-                          <label>Email</label>
-                          <input
-                            type="text"
-                            className="form-control"
-                            placeholder="Enter your email address (optional)"
-                            name="optionaEmail"
-                            value={orderInputData.optionaEmail}
-                            onChange={(e) => handleInputChage('optionaEmail', e.target.value)}
-                          />
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-
+              <div className="col-lg-8 bg-white mt-4">
                 {
                   carts.length > 0 && (
                     <>
-                      <div className="shippmentDetails">
-                        <div className="shippmentDetailsHeader mt-3 mb-3">
-                          <h1>Order Details</h1>
-                        </div>
-                      </div>
-                      <div className="clearfix"></div>
-                      <Table>
-                        <thead className="custome-background">
+                      <table className="table">
+                        <thead>
                           <tr>
-                            <th>Product </th>
-                            <th>Product Name</th>
-                            <th>Qty</th>
-                            <th>Unit price</th>
-                            <th>Subtotal</th>
+                            <th>&nbsp; &nbsp; &nbsp; &nbsp; Product </th>
+                            <th className="text-center">Price</th>
+                            <th className="text-center">Quantity</th>
                           </tr>
                         </thead>
                         <tbody>
                           {carts.map((item, index) => (
                             <tr className="bg-white" key={index}>
                               <td>
-                                <img className="placeOrder-img p-2" src={item.productImage} alt="product image" />
+                                <div>
+                                  <div className="float-left">
+                                    <img className="placeOrder-img p-2" src={item.productImage} alt="product image" />
+                                  </div>
+                                  <div className="float-left ml-3">
+                                    <h6>{item.productName}</h6>
+                                    {
+                                      item.seller_name !== null &&
+                                      <h6 className="text-secondary">Seller: {item.seller_name}</h6>
+                                    }
+                                  </div>
+                                  <div className="clearfix"></div>
+                                </div>
                               </td>
-                              <td>
-                                <h5>{item.productName}</h5>
-                                <h6 className="text-danger">Seller: {item.seller_name}</h6>
-                              </td>
-                              <td>{item.quantity}</td>
-                              <td> ৳ {item.offerPrice !== null && item.offerPrice !== 0 && item.price !== "" ? item.offerPrice : item.price}</td>
-                              <td>৳ {item.offerPrice !== null && item.offerPrice !== 0 && item.price !== "" ? item.quantity * item.offerPrice : item.quantity * item.price}</td>
+                              <td className="text-center"> ৳ {item.offerPrice !== null && item.offerPrice !== 0 && item.price !== "" ? item.offerPrice : item.price}</td>
+                              <td className="text-center">{item.quantity}</td>
                             </tr>
                           )
                           )}
                         </tbody>
-                      </Table>
+                      </table>
                     </>
                   )
                 }
 
                 <div className="clearfix"></div>
-                <button className="btn btn-primary float-right mt-3 backCartbtn">
+                <button className="btn btn-primary btn-sm float-right mt-3 backCartbtn">
+                  <i className="fa fa-arrow-left"></i> {' '}
                   Back to Cart
-                  </button>
+                </button>
               </div>
 
-              <div className="col-lg-4">
-                <div className="promocodesection priceDetailsHeading py-2 px-3 mt-5 mb-2">
-                  <h1>Price Detail</h1>
-                </div>
-                <div className="placeOrderSummery bg-white p-3">
+              <div className="col-lg-4 mt-4">
+
+                <div className="placeOrderSummery bg-white p-3 py-2 px-3 mb-2">
+                  <SidebarShippingBilling />
 
                   <div className="placeOrder">
-                    <div className="d-flex justify-content-between">
+                    <h4>Order Summery</h4>
+                    <div className="d-flex justify-content-between ecom-label">
                       <p>Price (0 items)</p>
                       <p>৳ {totalPrice}</p>
                     </div>
-                    <div className="d-flex justify-content-between">
+                    <div className="d-flex justify-content-between ecom-label">
                       <p>Number of Items</p>
                       <p> {totalQuantity}</p>
                     </div>
-                    <div className="d-flex justify-content-between">
+                    <div className="d-flex justify-content-between ecom-label">
                       <p>Shipping cost </p>
                       <p> ৳ {shippingCost} </p>
                       {
                         shippingCostLoading && (
                           <p>
-                            <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            <LoadingSpinner />
                           </p>
                         )
                       }
                     </div>
-                    <div className="d-flex justify-content-between">
+                    <div className="d-flex justify-content-between ecom-label">
                       <p>Discount</p>
                       <p> ৳ {couponData && couponData.discount_amount ? couponData.discount_amount : 0} </p>
                     </div>
@@ -233,16 +179,6 @@ const placeorder = (props) => {
                         )
                         )
                       }</p>
-                      {/* {
-                          couponData && !couponData.errors && couponData.message && (
-                            <p className="text-success">{couponData.message}</p>
-                          )
-                        } */}
-                      {/* {
-                          couponData && couponData.errors && (
-                            <p className="text-danger">{couponData.errors.message}</p>
-                          )
-                        } */}
                     </form> <hr />
                     <div className="d-flex justify-content-between">
                       <p>Total Price</p>

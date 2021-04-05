@@ -10,7 +10,7 @@ import { useForm } from 'react-hook-form';
  * 
  * @returns component
  */
-const ShippingAddressForm = () => {
+const AddressForm = () => {
 
     const dispatch = useDispatch()
 
@@ -33,14 +33,16 @@ const ShippingAddressForm = () => {
     const handleInputChage = (name, value) => {
         const addressUpdated = {...address};
         addressUpdated[name] = value;
-        setAddress(addressUpdated);
 
         if(name === 'city' && value !== null) {
-            console.log(`city selected: `, value);
             if( typeof value.value !== 'undefined') {
+                setValue('area', '');
+                addressUpdated['area'] = '';
                 dispatch(getAreasByCity(value.value));
             }
         }
+
+        setAddress(addressUpdated);
     }
 
     const submitShippingAddress = (e) => {
@@ -122,4 +124,4 @@ const ShippingAddressForm = () => {
     );
 }
 
-export default ShippingAddressForm;
+export default AddressForm;
