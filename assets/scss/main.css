@@ -13,8 +13,7 @@ body {
 a {
     text-decoration: none;
 }
-
-.brand-btn {
+.custome-button-component{
     background-color: #E9000F;
     color: #fff!important;
     border: 2px solid #E9000F;
@@ -22,10 +21,11 @@ a {
     border-radius: 6px;
     font-weight: 600;
     transition: 0.6s;
-    text-transform: uppercase;
+    text-transform: capitalize;
+    text-decoration: none!important;
 }
 
-.brand-btn:hover {
+.custome-button-component:hover {
     background-color: #fff;
     color: #E9000F!important;
     text-decoration: none;

@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect } from 'react';
 import { Carousel } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
+import Button from '../master/Button/Button';
 import { getHomeCarouselData } from './_redux/homeBannerCarouselAction/HomeBannerCarouselAction';
 
 const HomeBannerCarousel = () => {
@@ -25,14 +26,13 @@ const HomeBannerCarousel = () => {
                             <p className="homec-carousel-text">Amazing Collection For You</p>
                             <h1 className="home-carousel-title">
                                 {/* {item.title} */}
-                                SOPPING <br/> AS YOU LOVE
+                                SOPPING <br /> AS YOU LOVE
                             </h1>
                             <h6 className="home-carousel-discount">
                                 {item.discountType} | up to {item.dicountRate} off
                             </h6>
-                            <a href={item.ProuctLink} target="_blank" rel="noopener noreferrer" className="brand-btn">
-                                see what's on sale
-                                <FontAwesomeIcon className="ml-3 custome-fontAwesome" icon={faArrowRight} />
+                            <a href={item.ProuctLink} target="_blank" rel="noopener noreferrer">
+                                <Button buttonText="see what's on sale" isFontAwesome={true} />
                             </a>
                         </Carousel.Caption>
                     </Carousel.Item>

@@ -4,6 +4,7 @@ import React from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import HeaderTop from './HeaderTop';
 import Link from 'next/link'
+import Button from '../master/Button/Button';
 
 
 // import logo from './logo.png'
@@ -26,16 +27,16 @@ const Header = () => {
                                 </div>
                             </div>
                             <div className="ml-auto header-nav">
-                                    <Link href="/" className="header-nav-link">Sign In</Link>
-                                    <Link href="/">
-                                        <a className="brand-btn"> Sign up</a>
-                                    </Link>
-                                    <Link href="/" className="header-nav-link">
-                                        <a><FontAwesomeIcon className="custome-fontAwesome" icon={faHeart} /> Wishlist</a>
-                                    </Link>
-                                    <Link href="/" className="header-nav-link">
-                                        <a><FontAwesomeIcon className="custome-fontAwesome" icon={faShoppingBag} /> Cart</a>
-                                    </Link>
+                                <Link href="/" className="header-nav-link">Sign In</Link>
+                                <Link href="/">
+                                    <Button buttonText="Sign up" />
+                                </Link>
+                                <Link href="/" className="header-nav-link">
+                                    <a><FontAwesomeIcon className="custome-fontAwesome" icon={faHeart} /> Wishlist</a>
+                                </Link>
+                                <Link href="/" className="header-nav-link">
+                                    <a><FontAwesomeIcon className="custome-fontAwesome" icon={faShoppingBag} /> Cart</a>
+                                </Link>
                             </div>
                         </Navbar.Collapse>
                     </Navbar>

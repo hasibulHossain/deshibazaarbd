@@ -3,6 +3,7 @@ import { Col, Container, Row } from 'react-bootstrap';
 import Link from 'next/link'
 import FooterBottom from './FooterBottom';
 import SocialMedia from './SocialMedia';
+import Button from '../master/Button/Button';
 const Footer = () => {
     return (
         <section className="footer-section">
@@ -69,8 +70,8 @@ const Footer = () => {
                         <div className="footer-info">
                             <h5>nesletter</h5>
                             <p>Suscribe to our newsletter to get notification about discount information</p>
-                            <input type="text" className="form-control" />
-                            <button className="brand-btn mt-2">Subscribe</button>
+                            <input type="text" className="form-control mb-3" />
+                            <Button buttonText="Subscribe" />
                         </div>
                         <SocialMedia />
                     </Col>
