@@ -21,7 +21,8 @@ a {
     padding: 5px 15px;
     border-radius: 6px;
     font-weight: 600;
-    transition: 0.5s;
+    transition: 0.6s;
+    text-transform: uppercase;
 }
 
 .brand-btn:hover {
@@ -245,5 +246,62 @@ a {
 .social-media .social-instagram:hover a {
     color: #E46258;
 }
-
 /*===========Footer Close========*/
+
+/*================Home Banner Carousel==============*/
+.home-banner-carousel img{
+    height: 500px;
+}
+.carousel-indicators {
+    position: absolute;
+    top: 40%!important;
+    left: 80%!important;
+    z-index: 15;
+    display: block!important;
+    justify-content: center;
+    padding-left: 0;
+    margin-right: 15%;
+    margin-left: 15%;
+    list-style: none;
+}
+.carousel-indicators li{
+   height: 10px!important;
+   width: 10px!important;
+   border: 3px solid white!important;
+   background-color: rgba(255, 255, 255, 0.897);
+   border-radius: 50%!important;
+   margin-top: 6px!important;
+}
+.carousel-indicators .active{
+    background-color: transparent!important;
+}
+.carousel-control-next, .carousel-control-prev{
+    display: none!important;
+}
+.home-carousel-caption{
+    left: 0!important;
+    top: 0!important;
+    margin-top: 15px;
+    margin-left: 20px;
+    text-align: left!important;
+    padding: 50px 50px!important;
+    width: 50%;
+}
+.home-carousel-caption .homec-carousel-text{
+    color: #E9000F;
+    font-size: 1.7em;
+}
+.home-carousel-caption .home-carousel-title{
+    color: black;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 4em;
+}
+.home-carousel-caption .home-carousel-discount{
+    color: #E9000F;
+    text-transform: uppercase;
+    margin-top: 10px;
+    font-size: 1.8em;
+    letter-spacing: 1px;
+    margin-bottom: 25px;
+}

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import Head from "next/head";
 import MainLayout from "../components/layouts/MainLayout";
+import HomeBannerCarousel from "../components/homeBannerCarousel/HomeBannerCarousel";
 
 export default function Home(props) {
   useEffect(() => {
@@ -17,7 +18,7 @@ export default function Home(props) {
         <meta name="description" content="Meta" />
       </Head>
       <MainLayout>
-      
+        <HomeBannerCarousel />
       </MainLayout>
     </>
   );

@@ -7,6 +7,24 @@
     width: 100%;
     margin: 20px 0px;
   }
+  .home-banner-carousel img{
+    height: 350px;
+}
+  .home-carousel-caption {
+    text-align: left!important;
+    padding: 50px 20px!important;
+    width: 60%;
+  }
+  .home-carousel-caption .homec-carousel-text {
+    font-size: 1.1em;
+  }
+  .home-carousel-caption .home-carousel-title {
+    font-size: 2em;
+  }
+  .home-carousel-caption .home-carousel-discount {
+    font-size: .8em;
+    margin-bottom: 25px;
+  }
 }
 
 @media only screen and (max-width: 700px) {}
