@@ -1,1 +1,0 @@
-export const GET_PAYMENT_LIST = "GET_PAYMENT_LIST";

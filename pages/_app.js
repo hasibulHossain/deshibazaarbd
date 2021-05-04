@@ -2,13 +2,7 @@ import App from "next/app";
 import React from "react";
 import { Provider } from "react-redux";
 import { createWrapper } from "next-redux-wrapper";
-import Store from "../store/Store";
-
-// import "slick-carousel/slick/slick-theme.css";
-// import "slick-carousel/slick/slick.css";
-// import "../assets/scss/library/slick-carousel/slick-theme.min.css";
-// import "../assets/scss/library/slick-carousel/slick.min.css";
-// import "../node_modules/font-awesome/css/font-awesome.min.css";
+import Store from "../_redux/Store";
 import "../node_modules/slick-carousel/slick/slick-theme.css";
 import "../node_modules/slick-carousel/slick/slick.css";
 

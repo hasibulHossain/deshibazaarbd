@@ -1,1 +1,0 @@
-export const GET_WISHLIST_DATA = "GET_WISHLIST_DATA";
