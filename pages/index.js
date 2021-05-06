@@ -6,7 +6,8 @@ import ScrollToTop from "react-scroll-to-top";
 import ShopByCategoryContainer from "../components/ShopByCategory/ShopByCategoryContainer";
 import FastestDeliveryContainer from "../components/FastestDelivery/FastestDeliveryContainer";
 import FeaturedProductsContainer from "../components/FeaturedProducts/FeaturedProductsContainer";
-
+import CompanyPolicyContainer from '../components/CompanyPolicy/CompanyPolicyContainer'
+import ShopContainer from "../components/Shop/ShopContainer";
 export default function Home(props) {
   useEffect(() => {
     if (typeof window === "undefined") {
@@ -27,6 +28,8 @@ export default function Home(props) {
         <ShopByCategoryContainer />
         <FeaturedProductsContainer />
         <FastestDeliveryContainer />
+        <ShopContainer />
+        <CompanyPolicyContainer />
       </MainLayout>
     </>
   );

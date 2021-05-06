@@ -4,6 +4,7 @@ body {
     background-color: #f6f6f6!important;
     margin: 0;
     padding: 0;
+    text-transform: capitalize;
 }
 
 .pointer {
@@ -229,9 +230,11 @@ a {
     top: 20%;
     opacity: 0;
 }
-.product-card:hover .product-purchase-section{
+
+.product-card:hover .product-purchase-section {
     opacity: 1;
 }
+
 .product-card .product-purchase-section button {
     margin: 10px 0px;
     border: none;
@@ -245,9 +248,11 @@ a {
     width: 40px;
     border-radius: 50%;
 }
-.product-card .product-purchase-section .withlist{
+
+.product-card .product-purchase-section .withlist {
     color: #E9000F!important;
 }
+
 .product-card .product-card-body {
     display: flex;
     flex-direction: column;
@@ -259,21 +264,71 @@ a {
 .product-card .product-card-body img {
     height: 200px;
 }
-.product-card .product-card-body .product-title{
+
+.product-card .product-card-body .product-title {
     margin-top: 10px;
     font-size: 18px;
     font-weight: 600;
     font-family: 'Segoe UI';
 }
-.product-card .product-card-body .rating{
+
+.product-card .product-card-body .rating {
     position: absolute;
     bottom: 10px;
 }
 
+.company-policy-container {
+    background-color: #E9000F;
+    padding: 20px 0px;
+    color: #ffffff;
+}
 
+/*=============Company policy section==================*/
+.policy-card {
+    text-align: center;
+    margin-bottom: 10px;
+    padding: 20px;
+    cursor: pointer;
+    transition: 0.5s;
+}
 
+.policy-card:hover {
+    -webkit-box-shadow: 0px 4px 15px -9px rgba(43, 43, 43, 1);
+    -moz-box-shadow: 0px 4px 15px -9px rgba(43, 43, 43, 1);
+    box-shadow: 0px 4px 15px -9px rgba(43, 43, 43, 1);
+    background-color: #ffffff;
+    border-radius: 6px;
+    color: #8B8B8B;
+}
 
+.policy-card img {
+    width: 70px;
+    /* filter: brightness(10); */
+}
+.policy-card .policy-card-title{
+    text-transform: capitalize;
+    margin-top: 10px;
+    font-weight: 700;
+}
+/*=============Company policy section close==================*/
+/*=====================Shop by brand section==================*/
+.shop-card .shop-logo{
+    border: 2px solid #8B8B8B;
+    margin: 10px;
+    min-height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.shop-card img{
+    width: 100px;
+}
+/*=====================Shop by brand section close==================*/
 /*===========Footer Start========*/
+
 .footer-section {
     background-color: #172337;
     color: #fff;
