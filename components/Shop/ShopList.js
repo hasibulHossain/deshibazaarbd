@@ -12,7 +12,7 @@ const ShopList = () => {
     const ShopList = useSelector((state) => state.ShopReducer.ShopList);
 
     return (
-        <div className="productList-body">
+        <div className="productList-body p-3">
             <Slider {...SlickSlideSetting}>
                 {
                     ShopList.length > 0 && ShopList.map((item, index) => (

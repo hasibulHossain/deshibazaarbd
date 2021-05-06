@@ -1,0 +1,1 @@
+export const GET_BEST_SELLER_LIST = "GET_BEST_SELLER_LIST";

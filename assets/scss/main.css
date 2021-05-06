@@ -284,6 +284,7 @@ a {
 }
 
 /*=============Company policy section==================*/
+
 .policy-card {
     text-align: center;
     margin-bottom: 10px;
@@ -305,14 +306,18 @@ a {
     width: 70px;
     /* filter: brightness(10); */
 }
-.policy-card .policy-card-title{
+
+.policy-card .policy-card-title {
     text-transform: capitalize;
     margin-top: 10px;
     font-weight: 700;
 }
+
 /*=============Company policy section close==================*/
+
 /*=====================Shop by brand section==================*/
-.shop-card .shop-logo{
+
+.shop-card .shop-logo {
     border: 2px solid #8B8B8B;
     margin: 10px;
     min-height: 80px;
@@ -323,10 +328,49 @@ a {
     border-radius: 5px;
     cursor: pointer;
 }
-.shop-card img{
+
+.shop-card img {
     width: 100px;
 }
+
 /*=====================Shop by brand section close==================*/
+
+/*=====================top products==================*/
+
+.top-product-card {
+    height: 220px;
+    position: relative;
+    padding: 10px;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.top-product-card .top-product-details {
+    position: absolute;
+    top: 10%;
+    left: 5%;
+}
+.top-product-card .top-product-details .title{
+    color: rgb(255, 174, 0);
+    font-weight: bold;
+}
+.top-product-card .top-product-details .top-product-name{
+    font-size: 1.5em;
+    font-weight: 800;
+}
+.top-product-card .top-product-details .price{
+    font-size: 1.3em;
+    color: rgb(255, 174, 0);
+}
+.top-product-card .top-product-details sup{
+    color: rgb(255, 174, 0);
+}
+.top-product-card .top-product-banner img {
+    width: 100%;
+}
+
+/*=====================top products close==================*/
+
 /*===========Footer Start========*/
 
 .footer-section {

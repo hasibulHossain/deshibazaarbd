@@ -8,6 +8,9 @@ import FastestDeliveryContainer from "../components/FastestDelivery/FastestDeliv
 import FeaturedProductsContainer from "../components/FeaturedProducts/FeaturedProductsContainer";
 import CompanyPolicyContainer from '../components/CompanyPolicy/CompanyPolicyContainer'
 import ShopContainer from "../components/Shop/ShopContainer";
+import ShopBanner from "../components/ShopBanner/ShopBanner";
+import BestSellerContainer from "../components/BestSeller/BestSellerContainer";
+import ProductTopListContainer from "../components/ProductTopList/ProductTopListContainer";
 export default function Home(props) {
   useEffect(() => {
     if (typeof window === "undefined") {
@@ -25,9 +28,12 @@ export default function Home(props) {
       <MainLayout>
         <ScrollToTop smooth />
         <HomeBannerCarousel />
+        <BestSellerContainer />
+        <ProductTopListContainer />
         <ShopByCategoryContainer />
         <FeaturedProductsContainer />
         <FastestDeliveryContainer />
+        <ShopBanner />
         <ShopContainer />
         <CompanyPolicyContainer />
       </MainLayout>
