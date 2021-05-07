@@ -8,7 +8,7 @@ const FooterBottom = () => {
                 <div className="row justify-content-between">
                     <div className="col-md-6">
                         <div className="footer-bottom-info">
-                            <p> &#169; {new Date().getFullYear()} deshibazaar. | deshibazzar.net <span>all rights reserved</span></p>
+                            <p> &#169; {new Date().getFullYear()} deshibazaar. | deshibazaar.net <span>All rights reserved</span></p>
                         </div>
                     </div>
                     <div className="col-md-4">
