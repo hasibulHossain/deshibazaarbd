@@ -19,13 +19,13 @@ const HomeBannerCarousel = () => {
                     <Carousel.Item className="home-banner-carousel" key={index + 1}>
                         <img
                             className="d-block w-100"
-                            src="https://i.ibb.co/zSbt1kD/store2-slider-bg.png"
+                            src={item.BannerURL}
                             alt="First slide"
                         />
-                        <Carousel.Caption className="home-carousel-caption">
-                            <p className="homec-carousel-text">Amazing Collection For You</p>
+                        {/* <Carousel.Caption className="home-carousel-caption">
+                            <p className="home-carousel-text">Amazing Collection For You</p>
                             <h1 className="home-carousel-title">
-                                {/* {item.title} */}
+                                {item.title}
                                 SOPPING <br /> AS YOU LOVE
                             </h1>
                             <h6 className="home-carousel-discount">
@@ -34,7 +34,7 @@ const HomeBannerCarousel = () => {
                             <a href={item.ProuctLink} target="_blank" rel="noopener noreferrer">
                                 <Button buttonText="see what's on sale" isFontAwesome={true} />
                             </a>
-                        </Carousel.Caption>
+                        </Carousel.Caption> */}
                     </Carousel.Item>
                 ))
             }

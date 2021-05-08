@@ -121,7 +121,7 @@ a {
 /*================Home Banner Carousel==============*/
 
 .home-banner-carousel img {
-    height: 500px;
+    height: 450px;
 }
 
 .carousel-indicators {
@@ -164,7 +164,7 @@ a {
     width: 50%;
 }
 
-.home-carousel-caption .homec-carousel-text {
+.home-carousel-caption .home-carousel-text {
     color: #E9000F;
     font-size: 1.7em;
 }
@@ -194,6 +194,7 @@ a {
 .product-heading {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .product-container h5 {
@@ -352,26 +353,107 @@ a {
     top: 10%;
     left: 5%;
 }
-.top-product-card .top-product-details .title{
+
+.top-product-card .top-product-details .title {
     color: rgb(255, 174, 0);
     font-weight: bold;
 }
-.top-product-card .top-product-details .top-product-name{
+
+.top-product-card .top-product-details .top-product-name {
     font-size: 1.5em;
     font-weight: 800;
 }
-.top-product-card .top-product-details .price{
+
+.top-product-card .top-product-details .price {
     font-size: 1.3em;
     color: rgb(255, 174, 0);
 }
-.top-product-card .top-product-details sup{
+
+.top-product-card .top-product-details sup {
     color: rgb(255, 174, 0);
 }
+
 .top-product-card .top-product-banner img {
     width: 100%;
 }
 
 /*=====================top products close==================*/
+
+/*=====================Flash Deal section==================*/
+
+.flashDealButton {
+    background-color: #E9000F;
+    color: #f6f6f6;
+    border: 2px solid #E9000F;
+    outline: none;
+    font-weight: 600;
+    text-align: left;
+    border-radius: 6px;
+    transition: 0.6s;
+}
+
+.flashDealButton:hover {
+    background-color: #f6f6f6;
+    color: #E9000F;
+}
+
+.flash-deal-section {
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.flash-deal-card {
+    -webkit-box-shadow: 2px 6px 15px -7px rgba(166, 166, 166, 1);
+    -moz-box-shadow: 2px 6px 15px -7px rgba(166, 166, 166, 1);
+    box-shadow: 2px 6px 15px -7px rgba(166, 166, 166, 1);
+    background-color: #fff;
+    padding: 10px;
+    display: flex;
+    border-radius: 5px;
+    height: 330px;
+    margin-bottom: 10px;
+}
+
+.flash-deal-img {
+    width: 45%;
+    padding: 5px;
+    height: auto;
+    overflow: hidden;
+}
+.flash-deal-detail{
+    width: 65%;
+}
+.flash-deal-detail .title{
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+.flash-deal-detail .price, .inStock{
+    color: #9c9a9a;
+    font-weight: 500;
+}
+.flash-deal-detail .price .offerPrice{
+    color: #E9000F!important;
+    font-size: 22px;
+}
+.flash-deal-detail .inStock span{
+    color: rgb(0, 119, 255)!important;
+}
+/*==========Flash count========*/
+.displayedTime{
+    background-color: #e6e6e6;
+    padding: 10px;
+    border-radius: 5px;
+}
+.countBox{
+    display: flex;
+    justify-content: space-around;
+}
+.countBox .countBoxItem .count{
+    background-color: transparent!important;
+    font-size: 1.2em;
+    font-weight: 500;
+}
+/*=====================Flash Deal section close==================*/
 
 /*===========Footer Start========*/
 

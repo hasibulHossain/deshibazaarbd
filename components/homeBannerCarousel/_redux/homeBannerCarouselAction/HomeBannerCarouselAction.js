@@ -15,28 +15,28 @@ export const getHomeCarouselData = () => (dispatch) => {
             discountType: "Winter Sale",
             dicountRate: "50%",
             ProuctLink: "https://www.google.com",
-            BannerURL: "https://i.ibb.co/zSbt1kD/store2-slider-bg.png"
+            BannerURL: "https://i.ibb.co/VgFb7XN/01-Slider.jpg"
         },
         {
             title: "Sopping as you love",
             discountType: "Winter Sale",
             dicountRate: "50%",
             ProuctLink: "https://www.google.com",
-            BannerURL: "https://cdn5.vectorstock.com/i/1000x1000/52/04/online-shopping-e-commerce-banner-concept-vector-25035204.jpg"
+            BannerURL: "https://i.ibb.co/Y4gtp8Y/02-Slider.jpg"
         },
         {
             title: "Sopping as you love",
             discountType: "Winter Sale",
             dicountRate: "50%",
             ProuctLink: "https://www.google.com",
-            BannerURL: "https://cdn1.vectorstock.com/i/1000x1000/94/20/online-shop-e-commerce-service-banner-template-vector-25109420.jpg"
+            BannerURL: "https://i.ibb.co/bFhznRD/03-Slider.jpg"
         },
         {
             title: "Sopping as you love",
             discountType: "Winter Sale",
             dicountRate: "50%",
             ProuctLink: "https://www.google.com",
-            BannerURL: "https://image.freepik.com/free-vector/e-commerce-online-shopping-banner-template_82574-11343.jpg"
+            BannerURL: "https://i.ibb.co/7QMpmpQ/04-Slider.jpg"
         },
     ]
     const responseData = {
