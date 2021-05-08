@@ -46,8 +46,7 @@ const DealFlash = () => {
                                         <p className="inStock">Availability : <span>{item.stock} in stock</span></p>
                                         <div className="flash-count">
                                             <CountdownTimer
-                                                count={950400}
-                                                border
+                                                count={item.countTime}
                                                 showTitle
                                                 size={20}
                                                 labelSize={18}

@@ -17,6 +17,7 @@ export const getDealFlashList = () => (dispatch) => {
             offerPrice: 200,
             discountPercent: "5%",
             stock: 250,
+            countTime: 5.184e+6,
             productImg: "https://media.mauvetree.com/wp-content/uploads/2018/02/slim-fit-red-jacket.jpg"
         },
         {
@@ -26,6 +27,7 @@ export const getDealFlashList = () => (dispatch) => {
             offerPrice: 170,
             discountPercent: "15%",
             stock: 150,
+            countTime: 950400,
             productImg: "https://www.startech.com.bd/image/cache/catalog/gadget/google-home-smart-assistant/google-home-smart-assistant-1-500x500.jpg"
         },
         
