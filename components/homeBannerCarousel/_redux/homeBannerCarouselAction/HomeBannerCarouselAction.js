@@ -15,28 +15,28 @@ export const getHomeCarouselData = () => (dispatch) => {
             discountType: "Winter Sale",
             dicountRate: "50%",
             ProuctLink: "https://www.google.com",
-            BannerURL: "https://i.ibb.co/VgFb7XN/01-Slider.jpg"
+            BannerURL: "https://deshibazaarbd.com/images/slider/01-Slider.jpeg"
         },
         {
             title: "Sopping as you love",
             discountType: "Winter Sale",
             dicountRate: "50%",
             ProuctLink: "https://www.google.com",
-            BannerURL: "https://i.ibb.co/Y4gtp8Y/02-Slider.jpg"
+            BannerURL: "https://deshibazaarbd.com/images/slider/02-Slider.jpeg"
         },
         {
             title: "Sopping as you love",
             discountType: "Winter Sale",
             dicountRate: "50%",
             ProuctLink: "https://www.google.com",
-            BannerURL: "https://i.ibb.co/bFhznRD/03-Slider.jpg"
+            BannerURL: "https://deshibazaarbd.com/images/slider/03-Slider.jpeg"
         },
         {
             title: "Sopping as you love",
             discountType: "Winter Sale",
             dicountRate: "50%",
             ProuctLink: "https://www.google.com",
-            BannerURL: "https://i.ibb.co/7QMpmpQ/04-Slider.jpg"
+            BannerURL: "https://deshibazaarbd.com/images/slider/04-Slider.jpeg"
         },
     ]
     const responseData = {
