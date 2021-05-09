@@ -77,10 +77,11 @@ a {
     outline: none!important;
 }
 
-.navbar{
+.navbar {
     flex-wrap: wrap!important;
 }
-.custome-navbar{
+
+.custome-navbar {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -88,6 +89,7 @@ a {
     flex-wrap: wrap;
     width: 100%;
 }
+
 .header-search-product {
     display: flex;
     width: 55%;
@@ -130,10 +132,12 @@ a {
 .header-nav a .custome-fontAwesome {
     color: #E9000F;
 }
-.menu_list{
+
+.menu_list {
     padding: 15px;
     padding-left: 8%;
 }
+
 .rc-menu-button {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -147,9 +151,28 @@ a {
     margin: 0px 5px;
     margin-bottom: 15px;
 }
-.rc-menu-button .custome-fontAwesome{
+
+.all_category_menu {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background-color: transparent;
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0px 5px;
+    margin-bottom: 15px;
+    color: #172337;
+    text-decoration: none!important;
+    display: block;
+}
+
+.rc-menu-button .custome-fontAwesome {
     font-size: 18px;
 }
+
 /*===========Header close========*/
 
 /*================Home Banner Carousel==============*/

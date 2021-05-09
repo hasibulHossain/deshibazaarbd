@@ -24,11 +24,10 @@ const HeaderMenu = ({ toggleNav }) => {
         <div className="menu_list">
 
             <Navbar.Collapse id={toggleNav} >
-                <Menu menuButton={<MenuButton>
+                <a href="/" className="all_category_menu">
                     <FontAwesomeIcon className="mr-1" icon={faBars} />
-                    All Categories </MenuButton>
-                } >
-                </Menu>
+                    All Categories
+               </a>
                 {
                     menuList.length > 0 && menuList.map((item, index) => (
                         <Menu menuButton={<MenuButton>{item.menu} <FontAwesomeIcon className="custome-fontAwesome" icon={faCaretDown} /></MenuButton>} key={index}>
