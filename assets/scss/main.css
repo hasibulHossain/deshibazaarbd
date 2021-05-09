@@ -144,12 +144,12 @@ a {
     border: none;
     outline: none;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    /* letter-spacing: 1px; */
     background-color: transparent;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 500;
     margin: 0px 5px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .all_category_menu {
@@ -160,17 +160,17 @@ a {
     text-transform: uppercase;
     letter-spacing: 1px;
     background-color: transparent;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 500;
     margin: 0px 5px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     color: #172337;
     text-decoration: none!important;
     display: block;
 }
 
 .rc-menu-button .custome-fontAwesome {
-    font-size: 18px;
+    font-size: 20px;
 }
 
 /*===========Header close========*/
