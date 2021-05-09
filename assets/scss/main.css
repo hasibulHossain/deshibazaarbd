@@ -15,6 +15,10 @@ a {
     text-decoration: none;
 }
 
+.borderRadius {
+    border-radius: 5px;
+}
+
 .custome-button-component {
     background-color: #E9000F;
     color: #fff!important;
@@ -420,40 +424,117 @@ a {
     height: auto;
     overflow: hidden;
 }
-.flash-deal-detail{
+
+.flash-deal-detail {
     width: 65%;
 }
-.flash-deal-detail .title{
+
+.flash-deal-detail .title {
     font-size: 1.5em;
     margin-bottom: 20px;
 }
-.flash-deal-detail .price, .inStock{
+
+.flash-deal-detail .price, .inStock {
     color: #9c9a9a;
     font-weight: 500;
 }
-.flash-deal-detail .price .offerPrice{
+
+.flash-deal-detail .price .offerPrice {
     color: #E9000F!important;
     font-size: 22px;
 }
-.flash-deal-detail .inStock span{
+
+.flash-deal-detail .inStock span {
     color: rgb(0, 119, 255)!important;
 }
+
 /*==========Flash count========*/
-.displayedTime{
+
+.displayedTime {
     background-color: #f9f9f9;
     padding: 10px;
     border-radius: 5px;
 }
-.countBox{
+
+.countBox {
     display: flex;
     justify-content: space-around;
 }
-.countBox .countBoxItem .count{
+
+.countBox .countBoxItem .count {
     background-color: transparent!important;
     font-size: 1.2em;
     font-weight: 500;
 }
+
 /*=====================Flash Deal section close==================*/
+
+/*=====================New Collection section==================*/
+
+.new-collection-section {
+    -webkit-box-shadow: 2px 6px 15px -7px rgba(166, 166, 166, 1);
+    -moz-box-shadow: 2px 6px 15px -7px rgba(166, 166, 166, 1);
+    box-shadow: 2px 6px 15px -7px rgba(166, 166, 166, 1);
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    height: auto;
+}
+
+.home-appliance {
+    background-color: #d8d8d8;
+    height: 350px;
+}
+
+.stationary_carft {
+    height: 350px;
+    background-color: #F9D452;
+}
+
+.home-appliance .new-collection-datails, .stationary_carft .new-collection-datails {
+    padding: 10px;
+}
+
+.home-appliance .collection-banner, .stationary_carft .collection-banner {
+    position: absolute;
+    bottom: 5%;
+    text-align: center;
+}
+
+.home-appliance .collection-banner img, .stationary_carft .collection-banner img {
+    width: 60%;
+}
+
+.new-collection-datails p {
+    font-weight: 600;
+}
+
+.collectionBtn {
+    background-color: #fff;
+    border: 2px solid #fff;
+    outline: none;
+    border-radius: 20px;
+    padding: 5px 10px;
+    font-weight: 500;
+    transition: 0.5s;
+}
+
+.collectionBtn:hover {
+    background-color: transparent;
+}
+
+.new-collection-card .custome-new-collection-datails {
+    position: absolute;
+    padding: 15px;
+    color: #fff!important;
+}
+
+.new-collection-card .custome-new-collection-datails .title {
+    font-size: 2.2em!important;
+    font-weight: 700;
+}
+
+/*=====================New Collection section close==================*/
 
 /*===========Footer Start========*/
 

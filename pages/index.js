@@ -12,6 +12,7 @@ import ShopBanner from "../components/ShopBanner/ShopBanner";
 import BestSellerContainer from "../components/BestSeller/BestSellerContainer";
 import ProductTopListContainer from "../components/ProductTopList/ProductTopListContainer";
 import DealFlash from "../components/DealFlash/DealFlash";
+import NewCollection from "../components/NewCollection/NewCollection";
 export default function Home(props) {
   useEffect(() => {
     if (typeof window === "undefined") {
@@ -29,6 +30,7 @@ export default function Home(props) {
       <MainLayout>
         <ScrollToTop smooth />
         <HomeBannerCarousel />
+        <NewCollection />
         <ProductTopListContainer />
         <DealFlash />
         <BestSellerContainer />

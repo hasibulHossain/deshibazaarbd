@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getDealFlashList } from './_redux/Action/DealFlashAction';
 import ReactStars from "react-rating-stars-component";
 import CountdownTimer from "react-component-countdown-timer";
-// import "~react-component-countdown-timer/lib/styles.css";
+
 const DealFlash = () => {
     const dispatch = useDispatch();
     const flashDealList = useSelector((state) => state.DealFlashReducer.flashDealList);
