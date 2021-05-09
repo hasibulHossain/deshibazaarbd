@@ -84,6 +84,7 @@ a {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     flex-wrap: wrap;
     width: 100%;
 }
@@ -144,6 +145,7 @@ a {
     font-size: 14px;
     font-weight: 500;
     margin: 0px 5px;
+    margin-bottom: 15px;
 }
 .rc-menu-button .custome-fontAwesome{
     font-size: 18px;
