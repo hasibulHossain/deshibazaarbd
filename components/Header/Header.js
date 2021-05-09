@@ -15,7 +15,7 @@ const Header = () => {
             <div className="bg-light">
                 <Container>
                     <Navbar bg="light" expand="lg">
-                        <Navbar.Brand href="/home">
+                        <Navbar.Brand href="/">
                             <img src={"/images/logo.png"} alt="deshi bazaar bd" className="brand-logo" />
                         </Navbar.Brand>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
