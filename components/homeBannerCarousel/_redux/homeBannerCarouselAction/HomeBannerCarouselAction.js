@@ -11,28 +11,28 @@ export const getHomeCarouselData = () => (dispatch) => {
     //this data is use for only test
     const data = [
         {
-            title: "Sopping as you love",
+            title: "Shopping as you love",
             discountType: "Winter Sale",
             dicountRate: "50%",
             ProuctLink: "https://www.google.com",
             BannerURL: "https://deshibazaarbd.com/images/slider/01-Slider.jpeg"
         },
         {
-            title: "Sopping as you love",
+            title: "Shopping as you love",
             discountType: "Winter Sale",
             dicountRate: "50%",
             ProuctLink: "https://www.google.com",
             BannerURL: "https://deshibazaarbd.com/images/slider/02-Slider.jpeg"
         },
         {
-            title: "Sopping as you love",
+            title: "Shopping as you love",
             discountType: "Winter Sale",
             dicountRate: "50%",
             ProuctLink: "https://www.google.com",
             BannerURL: "https://deshibazaarbd.com/images/slider/03-Slider.jpeg"
         },
         {
-            title: "Sopping as you love",
+            title: "Shopping as you love",
             discountType: "Winter Sale",
             dicountRate: "50%",
             ProuctLink: "https://www.google.com",
