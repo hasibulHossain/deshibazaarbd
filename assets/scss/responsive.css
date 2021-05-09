@@ -25,6 +25,16 @@
     font-size: .8em;
     margin-bottom: 25px;
   }
+  .offer_product_section-right .offer_product_details {
+    width: 35%;
+  }
+  .offer_product_section-right .offer_product_img {
+    width: 65%;
+  }
+  .offer_product_section img{
+    height: 260px;
+    width: 100%;
+  }
 }
 
 @media only screen and (max-width: 700px) {}

@@ -21,5 +21,4 @@ const Button = ({ buttonText, isFontAwesome }) => {
         </button>
     );
 };
-
 export default Button;
