@@ -13,8 +13,8 @@ export const getDealFlashList = () => (dispatch) => {
         {
             title: "Men's Winder Jacket-Red",
             rating: 5,
-            price: 230,
-            offerPrice: 200,
+            price: 23.20,
+            offerPrice: 20.40,
             discountPercent: "5%",
             stock: 250,
             countTime: 5.184e+6,
@@ -23,8 +23,8 @@ export const getDealFlashList = () => (dispatch) => {
         {
             title: "Smart Home Devices",
             rating: 3,
-            price: 200,
-            offerPrice: 170,
+            price: 20.20,
+            offerPrice: 17.10,
             discountPercent: "15%",
             stock: 150,
             countTime: 950400,

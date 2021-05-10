@@ -8,6 +8,7 @@ const initialState = {
 function ShopByCategoriesReducer(state = initialState, action) {
     switch (action.type) {
         case Types.GET_SHOP_BY_CATEGORIES_LIST:
+            console.log('action.payload :>> ', action.payload);
             return {
                 isLoading: action.payload.isLoading,
                 ProductList: action.payload.data,

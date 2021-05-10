@@ -14,8 +14,8 @@ const Header = () => {
             <HeaderTop />
             <div className="bg-light">
                 <Navbar bg="light" expand="lg">
-                    <Container>
-
+                    {/* <Container> */}
+                    <div className="header-container-section">
                         <div className="custome-navbar">
                             <Navbar.Brand href="/">
                                 <img src={"/images/logo.png"} alt="deshi bazaar bd" className="brand-logo" />
@@ -42,7 +42,9 @@ const Header = () => {
                                 </div>
                             </Navbar.Collapse>
                         </div>
-                    </Container>
+                    </div>
+
+                    {/* </Container> */}
                     <HeaderMenu toggleNav={toggleNav} />
                 </Navbar>
             </div>

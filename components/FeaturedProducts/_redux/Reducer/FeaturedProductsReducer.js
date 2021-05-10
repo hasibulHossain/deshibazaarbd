@@ -5,9 +5,9 @@ const initialState = {
     ProductList: [],
 
 }
-function ShopByCategoriesReducer(state = initialState, action) {
+function FeaturedProductsReducer(state = initialState, action) {
     switch (action.type) {
-        case Types.GET_SHOP_BY_CATEGORIES_LIST:
+        case Types.GET_FEATURED_PRODUCT_LIST:
             return {
                 isLoading: action.payload.isLoading,
                 ProductList: action.payload.data,
@@ -17,4 +17,4 @@ function ShopByCategoriesReducer(state = initialState, action) {
     }
     return state;
 }
-export default ShopByCategoriesReducer;
+export default FeaturedProductsReducer;

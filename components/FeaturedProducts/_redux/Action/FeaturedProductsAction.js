@@ -1,13 +1,13 @@
 import Axios from 'axios';
 import * as Types from "../Type/Types";
 
-export const getProductCategiesListByShop = () => (dispatch) => {
+export const getFeaturedProductList = () => (dispatch) => {
     // const responseData = {
     //     data: [],
     //     status: false,
     //     isLoading: true,
     // }
-    // dispatch({type: Types.GET_SHOP_BY_CATEGORIES_LIST, payload: responseData});
+    // dispatch({type: Types.GET_FEATURED_PRODUCT_LIST, payload: responseData});
     //this data is use for only test
     const data = [
         {
@@ -18,18 +18,18 @@ export const getProductCategiesListByShop = () => (dispatch) => {
             productImg: "https://m.media-amazon.com/images/I/61tZQmRl5oL._AC._SR360,460.jpg"
         },
         {
-            title: "Valentino Fragrance",
+            title: "Deshi Bazzar Jacket",
             rating: 4,
-            price: 430,
-            stock: 250,
-            productImg: "https://atelierninetynine.com/wp-content/uploads/2015/09/Valentino_atelier99.jpg"
+            price: 600,
+            stock: 200,
+            productImg: "https://i.ibb.co/HxPy9PP/t-shirt2-removebg-preview.png"
         },
         {
-            title: "Men's Watches",
-            rating: 3,
-            price: 430,
+            title: "Deshi Bazzar T-shirt",
+            rating: 5,
+            price: 400,
             stock: 250,
-            productImg: "https://fossil.scene7.com/is/image/FossilPartners/FS5790-alt?$sfcc_fos_medium$"
+            productImg: "https://i.ibb.co/HKBVM30/t-shirt-removebg-preview.png"
         },
         
         {
@@ -51,7 +51,7 @@ export const getProductCategiesListByShop = () => (dispatch) => {
             rating: 5,
             price: 1230,
             stock: 50,
-            productImg: "https://www.mercator-ocean.fr/wp-content/uploads/2019/11/Mock-Up_BlueBookCopernicus_2.jpg"
+            productImg: "https://i.ibb.co/jHv8dL8/Mock-Up-Blue-Book-Copernicus-2-removebg-preview.png"
         },
         
     ]
@@ -60,5 +60,5 @@ export const getProductCategiesListByShop = () => (dispatch) => {
         status: true,
         isLoading: false,
     }
-    dispatch({type: Types.GET_SHOP_BY_CATEGORIES_LIST, payload: responseData});
+    dispatch({type: Types.GET_FEATURED_PRODUCT_LIST, payload: responseData});
 }

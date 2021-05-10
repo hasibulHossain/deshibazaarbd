@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Slider from 'react-slick';
-import { getProductCategiesListByShop } from './_redux/Action/ShopByCategoriesAction';
+import { getFeaturedProductList } from './_redux/Action/FeaturedProductsAction';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faListAlt, faShoppingBag } from '@fortawesome/free-solid-svg-icons';
 import ReactStars from "react-rating-stars-component";
@@ -10,11 +10,12 @@ import SlickSetting from '../master/slickSetting/SlickSetting';
 const ProductList = () => {
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(getProductCategiesListByShop())
+        dispatch(getFeaturedProductList())
     }, [])
 
-    const ProductList = useSelector((state) => state.ShopByCategoriesReducer.ProductList);
+    const ProductList = useSelector((state) => state.FeaturedProductsReducer.ProductList);
 
+    console.log('ProductList :>> ', ProductList);
     return (
         <div className="productList-body">
             <Slider {...SlickSetting}>

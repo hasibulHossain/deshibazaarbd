@@ -76,7 +76,10 @@ a {
 .custome-select:focus-visible {
     outline: none!important;
 }
-
+.header-container-section{
+    margin: 0px 5%;
+    width: 100%;
+}
 .navbar {
     flex-wrap: wrap!important;
 }
@@ -98,6 +101,7 @@ a {
     box-shadow: 2px 4px 9px -3px rgba(57, 54, 54, 0.44);
     -webkit-box-shadow: 2px 4px 9px -3px rgba(57, 54, 54, 0.44);
     -moz-box-shadow: 2px 4px 9px -3px rgba(57, 54, 54, 0.44);
+    margin-left: 8%;
 }
 
 .header-search-product input {
@@ -511,6 +515,7 @@ a {
 
 .countBox {
     display: flex;
+    flex-direction: row-reverse;
     justify-content: space-around;
 }
 
@@ -596,10 +601,14 @@ a {
     -moz-box-shadow: 2px 6px 15px -7px rgba(166, 166, 166, 1);
     box-shadow: 2px 6px 15px -7px rgba(166, 166, 166, 1);
     background-color: #fff;
-    padding: 10px;
+    padding: 5px;
     border-radius: 5px;
     height: 280px;
     margin-bottom: 15px;
+    overflow: hidden;
+}
+.offer_product_section img{
+    height: 270px!important;
 }
 .offer_product_section-right{
     display: flex;

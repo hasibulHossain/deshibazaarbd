@@ -22,14 +22,14 @@ export const getProductCategiesListByShop = () => (dispatch) => {
             rating: 4,
             price: 430,
             stock: 250,
-            productImg: "https://atelierninetynine.com/wp-content/uploads/2015/09/Valentino_atelier99.jpg"
+            productImg: "https://i.ibb.co/1QWFWqL/axe-signature-deo-500x500.jpg"
         },
         {
             title: "Men's Watches",
             rating: 3,
             price: 430,
             stock: 250,
-            productImg: "https://fossil.scene7.com/is/image/FossilPartners/FS5790-alt?$sfcc_fos_medium$"
+            productImg: "https://i.ibb.co/pJ0S828/uniq-w-14.jpg"
         },
         
         {
@@ -47,11 +47,46 @@ export const getProductCategiesListByShop = () => (dispatch) => {
             productImg: "https://i.pinimg.com/originals/03/b7/ea/03b7ea3ad366cbf9dd45b49bfb9bada9.jpg"
         },
         {
-            title: "The Blue Book",
+            title: "Digital Camera",
             rating: 5,
+            price: 12500,
+            stock: 50,
+            productImg: "https://i.ibb.co/xYB48B0/q-flora-l-681.jpg"
+        },
+        {
+            title: "CCTV",
+            rating: 3,
+            price: 5500,
+            stock: 50,
+            productImg: "https://i.ibb.co/vwv5Z4H/abor-05.jpg"
+        },
+        {
+            title: "Gents Jacket",
+            rating: 4,
             price: 1230,
             stock: 50,
-            productImg: "https://www.mercator-ocean.fr/wp-content/uploads/2019/11/Mock-Up_BlueBookCopernicus_2.jpg"
+            productImg: "https://i.ibb.co/3CwKrwx/sdj07f-3.jpg"
+        },
+        {
+            title: "Beauty & Care",
+            rating: 3,
+            price: 130,
+            stock: 100,
+            productImg: "https://i.ibb.co/D5ww8Dw/d.jpg"
+        },
+        {
+            title: "Gents Jacket",
+            rating: 2,
+            price: 1030,
+            stock: 50,
+            productImg: "https://i.ibb.co/x7Dmjtr/quck-c-07-min.jpg"
+        },
+        {
+            title: "Wall TV 24' ",
+            rating: 4,
+            price: 10500,
+            stock: 50,
+            productImg: "https://i.ibb.co/qgjXs7T/ntl-e-71.jpg"
         },
         
     ]

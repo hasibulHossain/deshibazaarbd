@@ -41,7 +41,7 @@ const DealFlash = () => {
                                         />
                                         <p className="price">
                                             <del>{item.price} </del>
-                                            <span className="offerPrice">${item.price}</span>
+                                            <span className="offerPrice">${item.offerPrice}</span>
                                         </p>
                                         <p className="inStock">Availability : <span>{item.stock} in stock</span></p>
                                         <div className="flash-count">
