@@ -9,7 +9,7 @@ const HeaderTop = () => {
             <div className="container">
                 <div className="row align-items-center">
                     <div className="col-md-5">
-                        <p className="heading-top-text">Get Your <span className="holyday-shopping">Holyday Shopping</span> On Wholesale Pricing</p>
+                        <p className="heading-top-text">Get Your <span className="holyday-shopping">Holiday Shopping</span> On Wholesale Pricing</p>
                     </div>
                     <div className="col-md-7">
                         <div className="row justify-content-end">
