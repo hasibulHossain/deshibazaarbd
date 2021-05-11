@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Slider from 'react-slick';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -6,6 +6,8 @@ import { faHeart, faListAlt, faShoppingBag } from '@fortawesome/free-solid-svg-i
 import ReactStars from "react-rating-stars-component";
 import SlickSetting from '../master/slickSetting/SlickSetting';
 import { getBestSellerList } from './_redux/Action/BestSellerAction';
+import BestSellerDetails from './BestSellerDetails';
+import SimpleModal from '../master/Modal/SimpleModal';
 
 const BestSellerList = () => {
     const dispatch = useDispatch();
@@ -15,12 +17,20 @@ const BestSellerList = () => {
 
     const bestSellerList = useSelector((state) => state.BestSellerReducer.bestSellerList);
 
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const [product, setProduct] = useState('');
+    const handleShow = (item) => {
+        setShow(true);
+        setProduct(item);
+    };
+
     return (
         <div className="productList-body">
             <Slider {...SlickSetting}>
                 {
                     bestSellerList.length > 0 && bestSellerList.map((item, index) => (
-                        <div key={index} className="product-card">
+                        <div key={index} className="product-card" onClick={(() => handleShow(item))}>
                             <div className="product-purchase-section">
                                 <button>
                                     <FontAwesomeIcon className="add-to-cart" icon={faShoppingBag} />
@@ -49,6 +59,15 @@ const BestSellerList = () => {
                     ))
                 }
             </Slider>
+
+            <SimpleModal
+                size="xl"
+                show={show}
+                handleClose={handleClose}
+               
+            >
+                <BestSellerDetails product={product} />
+            </SimpleModal>
         </div>
     );
 };
