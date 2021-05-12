@@ -4,15 +4,19 @@ import React, { useState } from 'react';
 import SocialMedia from '../Footer/SocialMedia';
 import ReactImageZoom from 'react-image-zoom';
 
-const BestSellerDetails = ({ product }) => {
+const FeaturedProductDetails = ({ product }) => {
     const [quantity, setQuantity] = useState(1);
     const [previewImg, setPreviewImg] = useState(product.productImg)
     const previewImage = {
-        zoomWidth: 200,
-        img: previewImg,
+        zoomWidth: 400,
+        // vertical: 1,
+        // horizontal: 2,
         scale: 0.5,
         zoomLensStyle:  'opacity: 0.7;background-color: #ff3e2081;',
+        img: previewImg
     };
+
+    console.log('product :>> ', product);
     return (
         <>
             <div className="row p-3">
@@ -77,23 +81,23 @@ const BestSellerDetails = ({ product }) => {
                             <div className="d-flex mt-3">
                                 <div className="button addToCartBtn">
                                     Add to cart
-                                </div>
+                            </div>
                                 <div className="button buyBtn">
                                     buy now
-                                </div>
+                            </div>
                             </div>
                         </div>
                         <div className="product_details_bottom mt-2">
                             <div>
                                 <div className="category_tags d-flex">
                                     Categories:
-                                <p className="">
+                            <p className="">
                                         {product.categories && product.categories}
                                     </p>
                                 </div>
                                 <div className="category_tags d-flex">
                                     Tags:
-                                <p className="category_tags">
+                            <p className="category_tags">
                                         {product.tags && product.tags}
                                     </p>
                                 </div>
@@ -109,4 +113,4 @@ const BestSellerDetails = ({ product }) => {
     );
 };
 
-export default BestSellerDetails;
+export default FeaturedProductDetails;

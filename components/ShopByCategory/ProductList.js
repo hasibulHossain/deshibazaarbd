@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Slider from 'react-slick';
 import { getProductCategiesListByShop } from './_redux/Action/ShopByCategoriesAction';
@@ -6,6 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faListAlt, faShoppingBag } from '@fortawesome/free-solid-svg-icons';
 import ReactStars from "react-rating-stars-component";
 import SlickSetting from '../master/slickSetting/SlickSetting';
+import ShopByCategoryDetails from './ShopByCategoryDetails';
+import SimpleModal from '../master/Modal/SimpleModal';
 
 const ProductList = () => {
     const dispatch = useDispatch();
@@ -14,13 +16,21 @@ const ProductList = () => {
     }, [])
 
     const ProductList = useSelector((state) => state.ShopByCategoriesReducer.ProductList);
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const [product, setProduct] = useState('');
+    const handleShow = (item) => {
+        setShow(true);
+        setProduct(item);
+    };
 
+    console.log('ProductList for shop :>> ', ProductList);
     return (
         <div className="productList-body">
             <Slider {...SlickSetting}>
                 {
                     ProductList.length > 0 && ProductList.map((item, index) => (
-                        <div key={index} className="product-card">
+                        <div key={index} className="product-card" onClick={(() => handleShow(item))}>
                             <div className="product-purchase-section">
                                 <button>
                                     <FontAwesomeIcon className="add-to-cart" icon={faShoppingBag} />
@@ -49,6 +59,14 @@ const ProductList = () => {
                     ))
                 }
             </Slider>
+            <SimpleModal
+                size="xl"
+                show={show}
+                handleClose={handleClose}
+
+            >
+                <ShopByCategoryDetails product={product} />
+            </SimpleModal>
         </div>
     );
 };

@@ -5,7 +5,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 const SimpleModal = (props) => {
 
-    const { show, handleClose, handleShow, size, modalTitle, status, id } = props;
+    const { show, handleClose, size, id } = props;
     return (
         <Modal
             onClose={handleClose}

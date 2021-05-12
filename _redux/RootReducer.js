@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 import BestSellerReducer from "../components/BestSeller/_redux/Reducer/BestSellerReducer";
 import CompanyPolicyReducer from "../components/CompanyPolicy/_redux/Reducer/CompanyPolicyReducer";
 import DealFlashReducer from "../components/DealFlash/_redux/Reducer/DealFlashReducer";
+import FastestDeliveryReducer from "../components/FastestDelivery/_redux/Reducer/FastestDeliveryReducer";
 import FeaturedProductsReducer from "../components/FeaturedProducts/_redux/Reducer/FeaturedProductsReducer";
 import HeaderReducer from "../components/Header/_redux/HeaderReducer/HeaderReducer";
 import HomeBannerCarouselReducer from "../components/homeBannerCarousel/_redux/homeBannerCarouselReducer/HomeBannerCarouselReducer";
@@ -15,6 +16,7 @@ export default combineReducers({
     BestSellerReducer: BestSellerReducer,
     ProductTopListReducer: ProductTopListReducer,
     ShopByCategoriesReducer: ShopByCategoriesReducer,
+    FastestDeliveryReducer: FastestDeliveryReducer,
     FeaturedProductsReducer: FeaturedProductsReducer,
     CompanyPolicyReducer: CompanyPolicyReducer,
     DealFlashReducer: DealFlashReducer,

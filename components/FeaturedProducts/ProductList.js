@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Slider from 'react-slick';
 import { getFeaturedProductList } from './_redux/Action/FeaturedProductsAction';
@@ -6,6 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faListAlt, faShoppingBag } from '@fortawesome/free-solid-svg-icons';
 import ReactStars from "react-rating-stars-component";
 import SlickSetting from '../master/slickSetting/SlickSetting';
+import SimpleModal from '../master/Modal/SimpleModal';
+import FeaturedProductDetails from './FeaturedProductDetails';
 
 const ProductList = () => {
     const dispatch = useDispatch();
@@ -15,13 +17,19 @@ const ProductList = () => {
 
     const ProductList = useSelector((state) => state.FeaturedProductsReducer.ProductList);
 
-    console.log('ProductList :>> ', ProductList);
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const [product, setProduct] = useState('');
+    const handleShow = (item) => {
+        setShow(true);
+        setProduct(item);
+    };
     return (
         <div className="productList-body">
             <Slider {...SlickSetting}>
                 {
                     ProductList.length > 0 && ProductList.map((item, index) => (
-                        <div key={index} className="product-card">
+                        <div key={index} className="product-card" onClick={(() => handleShow(item))}>
                             <div className="product-purchase-section">
                                 <button>
                                     <FontAwesomeIcon className="add-to-cart" icon={faShoppingBag} />
@@ -50,6 +58,14 @@ const ProductList = () => {
                     ))
                 }
             </Slider>
+            <SimpleModal
+                size="xl"
+                show={show}
+                handleClose={handleClose}
+
+            >
+                <FeaturedProductDetails product={product} />
+            </SimpleModal>
         </div>
     );
 };

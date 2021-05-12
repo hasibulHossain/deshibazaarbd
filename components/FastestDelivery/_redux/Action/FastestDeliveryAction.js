@@ -1,13 +1,13 @@
 import Axios from 'axios';
 import * as Types from "../Type/Types";
 
-export const getProductCategiesListByShop = () => (dispatch) => {
+export const getFastestDeliveryProductList = () => (dispatch) => {
     // const responseData = {
     //     data: [],
     //     status: false,
     //     isLoading: true,
     // }
-    // dispatch({type: Types.GET_SHOP_BY_CATEGORIES_LIST, payload: responseData});
+    // dispatch({type: Types.GET_FASTEST_DELIVERY_PRODUCT, payload: responseData});
     //this data is use for only test
     const data = [
         {
@@ -260,5 +260,5 @@ export const getProductCategiesListByShop = () => (dispatch) => {
         status: true,
         isLoading: false,
     }
-    dispatch({type: Types.GET_SHOP_BY_CATEGORIES_LIST, payload: responseData});
+    dispatch({ type: Types.GET_FASTEST_DELIVERY_PRODUCT, payload: responseData });
 }

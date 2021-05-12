@@ -16,6 +16,10 @@ export const getBestSellerList = () => (dispatch) => {
             price: 230,
             offerPrice: 200,
             productDetails: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer",
+            categories: "Vegetables, Fresh Vegetables, Daily Food",
+            tags: "Vegetables",
+            categories: "Vegetables, Fresh Vegetables, Daily Food",
+            tags: "Vegetables",
             color: [
                 {colorCode: "#f94c5a"},
                 {colorCode: "#ffd447"},
@@ -34,10 +38,12 @@ export const getBestSellerList = () => (dispatch) => {
             title: "Litchi",
             rating: 4,
             price: 430,
-            offerPrice: 200,
             stock: 250,
             productImg: "https://i.ibb.co/tcThVXd/19-590-X668-crop-center-removebg-preview.png",
             productDetails: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer",
+            offerPrice: 200,
+            categories: "Vegetables, Fresh Vegetables, Daily Food",
+            tags: "Vegetables",
             color: [
                 {colorCode: "#f94c5a"},
                 {colorCode: "#ffd447"},
@@ -58,6 +64,8 @@ export const getBestSellerList = () => (dispatch) => {
             stock: 250,
             productImg: "https://i.ibb.co/8DXM1zv/21-590-X668-crop-center-removebg-preview.png",
             productDetails: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer",
+            categories: "Vegetables, Fresh Vegetables, Daily Food",
+            tags: "Vegetables",
             color: [
                 {colorCode: "#f94c5a"},
                 {colorCode: "#ffd447"},
@@ -79,6 +87,8 @@ export const getBestSellerList = () => (dispatch) => {
             stock: 50,
             productImg: "https://i.ibb.co/kHQD9q9/22-590-X668-crop-center-removebg-preview.png",
             productDetails: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer",
+            categories: "Vegetables, Fresh Vegetables, Daily Food",
+            tags: "Vegetables",
             color: [
                 {colorCode: "#f94c5a"},
                 {colorCode: "#ffd447"},
@@ -99,6 +109,8 @@ export const getBestSellerList = () => (dispatch) => {
             stock: 50,
             productImg: "https://i.ibb.co/bBQZvqN/24-590-X668-crop-center-removebg-preview.png",
             productDetails: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer",
+            categories: "Vegetables, Fresh Vegetables, Daily Food",
+            tags: "Vegetables",
             color: [
                 {colorCode: "#f94c5a"},
                 {colorCode: "#ffd447"},
@@ -119,6 +131,8 @@ export const getBestSellerList = () => (dispatch) => {
             stock: 50,
             productImg: "https://i.ibb.co/fxc2YTf/29-590-X668-crop-center-removebg-preview.png",
             productDetails: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer",
+            categories: "Vegetables, Fresh Vegetables, Daily Food",
+            tags: "Vegetables",
             color: [
                 {colorCode: "#f94c5a"},
                 {colorCode: "#ffd447"},
@@ -139,6 +153,8 @@ export const getBestSellerList = () => (dispatch) => {
             stock: 50,
             productImg: "https://i.ibb.co/b6ty9gb/36-1-590-X668-crop-center-removebg-preview.png",
             productDetails: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer",
+            categories: "Vegetables, Fresh Vegetables, Daily Food",
+            tags: "Vegetables",
             color: [
                 {colorCode: "#f94c5a"},
                 {colorCode: "#ffd447"},
@@ -159,6 +175,8 @@ export const getBestSellerList = () => (dispatch) => {
             stock: 50,
             productImg: "https://i.ibb.co/wgMKdFb/37-590-X668-crop-center-removebg-preview.png",
             productDetails: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer",
+            categories: "Vegetables, Fresh Vegetables, Daily Food",
+            tags: "Vegetables",
             color: [
                 {colorCode: "#f94c5a"},
                 {colorCode: "#ffd447"},
@@ -179,6 +197,8 @@ export const getBestSellerList = () => (dispatch) => {
             stock: 50,
             productImg: "https://i.ibb.co/cTZjHkt/40-590-X668-crop-center-removebg-preview.png",
             productDetails: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer",
+            categories: "Vegetables, Fresh Vegetables, Daily Food",
+            tags: "Vegetables",
             color: [
                 {colorCode: "#f94c5a"},
                 {colorCode: "#ffd447"},
@@ -199,6 +219,8 @@ export const getBestSellerList = () => (dispatch) => {
             stock: 50,
             productImg: "https://i.ibb.co/RGnBGVX/41-590-X668-crop-center-removebg-preview.png",
             productDetails: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer",
+            categories: "Vegetables, Fresh Vegetables, Daily Food",
+            tags: "Vegetables",
             color: [
                 {colorCode: "#f94c5a"},
                 {colorCode: "#ffd447"},
@@ -219,6 +241,8 @@ export const getBestSellerList = () => (dispatch) => {
             stock: 50,
             productImg: "https://i.ibb.co/8sV05YG/47-590-X668-crop-center-removebg-preview.png",
             productDetails: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer",
+            categories: "Vegetables, Fresh Vegetables, Daily Food",
+            tags: "Vegetables",
             color: [
                 {colorCode: "#f94c5a"},
                 {colorCode: "#ffd447"},
@@ -240,6 +264,8 @@ export const getBestSellerList = () => (dispatch) => {
             stock: 50,
             productImg: "https://i.ibb.co/25Zcyqf/49-590-X668-crop-center-removebg-preview.png",
             productDetails: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer",
+            categories: "Vegetables, Fresh Vegetables, Daily Food",
+            tags: "Vegetables",
             color: [
                 {colorCode: "#f94c5a"},
                 {colorCode: "#ffd447"},
@@ -260,6 +286,8 @@ export const getBestSellerList = () => (dispatch) => {
             stock: 50,
             productImg: "https://i.ibb.co/T2WbBTP/cat1-removebg-preview.png",
             productDetails: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer",
+            categories: "Vegetables, Fresh Vegetables, Daily Food",
+            tags: "Vegetables",
             color: [
                 {colorCode: "#f94c5a"},
                 {colorCode: "#ffd447"},
@@ -280,6 +308,8 @@ export const getBestSellerList = () => (dispatch) => {
             stock: 50,
             productImg: "https://i.ibb.co/Fh9mszs/cat2-removebg-preview.png",
             productDetails: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer",
+            categories: "Vegetables, Fresh Vegetables, Daily Food",
+            tags: "Vegetables",
             color: [
                 {colorCode: "#f94c5a"},
                 {colorCode: "#ffd447"},
@@ -300,6 +330,8 @@ export const getBestSellerList = () => (dispatch) => {
             stock: 50,
             productImg: "https://i.ibb.co/XktSWjR/cat3-removebg-preview.png",
             productDetails: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer",
+            categories: "Vegetables, Fresh Vegetables, Daily Food",
+            tags: "Vegetables",
             color: [
                 {colorCode: "#f94c5a"},
                 {colorCode: "#ffd447"},
@@ -320,6 +352,8 @@ export const getBestSellerList = () => (dispatch) => {
             stock: 50,
             productImg: "https://i.ibb.co/3Rj1NXc/cat5-removebg-preview.png",
             productDetails: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer",
+            categories: "Vegetables, Fresh Vegetables, Daily Food",
+            tags: "Vegetables",
             color: [
                 {colorCode: "#f94c5a"},
                 {colorCode: "#ffd447"},
@@ -341,6 +375,8 @@ export const getBestSellerList = () => (dispatch) => {
             stock: 50,
             productImg: "https://i.ibb.co/4J2d24j/cat6-removebg-preview.png",
             productDetails: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer",
+            categories: "Vegetables, Fresh Vegetables, Daily Food",
+            tags: "Vegetables",
             color: [
                 {colorCode: "#f94c5a"},
                 {colorCode: "#ffd447"},
@@ -361,6 +397,8 @@ export const getBestSellerList = () => (dispatch) => {
             stock: 50,
             productImg: "https://i.ibb.co/HG4Rwtr/cat7-removebg-preview.png",
             productDetails: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer",
+            categories: "Vegetables, Fresh Vegetables, Daily Food",
+            tags: "Vegetables",
             color: [
                 {colorCode: "#f94c5a"},
                 {colorCode: "#ffd447"},
@@ -381,6 +419,8 @@ export const getBestSellerList = () => (dispatch) => {
             stock: 50,
             productImg: "https://i.ibb.co/QnpyyBm/cat9-removebg-preview.png",
             productDetails: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer",
+            categories: "Vegetables, Fresh Vegetables, Daily Food",
+            tags: "Vegetables",
             color: [
                 {colorCode: "#f94c5a"},
                 {colorCode: "#ffd447"},
