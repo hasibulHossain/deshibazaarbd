@@ -29,9 +29,8 @@ export const getBestSellerList = () => (dispatch) => {
             stock: 250,
             productImg: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png",
               productGallery: [
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
+                { img: "https://www.pngkit.com/png/full/85-857540_turnip-2-turnip.png" },
+                { img: "https://img.favpng.com/2/2/2/radish-transparency-vegetable-food-turnip-png-favpng-RNBtVGFKgJS7fWNKV2uhcB4bN.jpg" },
             ]
         },
         {
@@ -51,9 +50,9 @@ export const getBestSellerList = () => (dispatch) => {
                 {colorCode: "#5cb2e1"},
             ],
               productGallery: [
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
+                { img: "http://assets.stickpng.com/images/5a5f620bee40df432bfac54c.png" },
+                { img: "https://purepng.com/public/uploads/large/purepng.com-lycheefruitslycheelitchiliecheelizhili-zhilichee-981525183324cowb1.png" },
+                { img: "https://image.freepik.com/free-photo/litchi-white-background_42546-2045.jpg" },
             ]
         },
         {
@@ -73,9 +72,8 @@ export const getBestSellerList = () => (dispatch) => {
                 {colorCode: "#5cb2e1"},
             ],
               productGallery: [
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
+                { img: "https://freepngimg.com/thumb/tomato/6-tomato-png-image.png" },
+                { img: "https://www.freepnglogos.com/uploads/tomato-png/tomato-and-kidney-stone-everyday-life-23.png" },
             ]
         },
 
@@ -96,9 +94,9 @@ export const getBestSellerList = () => (dispatch) => {
                 {colorCode: "#5cb2e1"},
             ],
               productGallery: [
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
+                { img: "https://pngimg.com/uploads/eggplant/eggplant_PNG2771.png" },
+                { img: "https://lh3.googleusercontent.com/proxy/niKpTtQ87AwdeJf6EHy1h9mL9wuPnqzz9EGf53PAGZsJrWctNnJacF3n0Y_xw2aayVPT0wXbDp4UXLzQsbsPQoHEYPhSOgWMnhSDL1r4f2dYbMVLJAOQyS8umD7m9iqdpPkxV4A-cQ" },
+                { img: "https://www.vippng.com/png/detail/203-2030944_eggplant-png-transparent-image-eggplants-png.png" },
             ]
         },
         {
@@ -118,9 +116,8 @@ export const getBestSellerList = () => (dispatch) => {
                 {colorCode: "#5cb2e1"},
             ],
               productGallery: [
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
+                { img: "https://freepngimg.com/thumb/apple_fruit/24632-1-apple-fruit-transparent.png" },
+                { img: "https://p.kindpng.com/picc/s/231-2315737_smitten-apples-hd-png-download.png" },
             ]
         },
         {
@@ -140,9 +137,8 @@ export const getBestSellerList = () => (dispatch) => {
                 {colorCode: "#5cb2e1"},
             ],
               productGallery: [
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
+                { img: "https://purepng.com/public/uploads/large/purepng.com-sweet-pumpkin-slicepumpkin-vegetables-halloween-squash-round-941524684625hqhd0.png" },
+                { img: "https://tuigarden.co.nz/media/3238/pumpkin_growing_guide.png" },
             ]
         },
         {
@@ -162,9 +158,8 @@ export const getBestSellerList = () => (dispatch) => {
                 {colorCode: "#5cb2e1"},
             ],
               productGallery: [
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
+                { img: "https://www.vhv.rs/dpng/d/20-208230_black-tiger-shrimp-png-transparent-png.png" },
+                { img: "https://5.imimg.com/data5/JR/IN/MY-13453841/black-tiger-prawns-500x500.png" },
             ]
         },
         {
@@ -184,9 +179,9 @@ export const getBestSellerList = () => (dispatch) => {
                 {colorCode: "#5cb2e1"},
             ],
               productGallery: [
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
+                { img: "https://www.freepnglogos.com/uploads/coconut-png/vitasoy-coconut-milk-unsweetened-vitasoy-11.png" },
+                { img: "https://www.pngfind.com/pngs/m/53-532912_coconut-png-transparent-photo-coconut-png-transparent-png.png" },
+                { img: "https://image.freepik.com/free-photo/coconut-ripe-tasty-isolated-white_103864-185.jpg" },
             ]
         },
         {
@@ -206,9 +201,9 @@ export const getBestSellerList = () => (dispatch) => {
                 {colorCode: "#5cb2e1"},
             ],
               productGallery: [
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
+                { img: "https://png.pngtree.com/png-clipart/20190911/ourlarge/pngtree-group-of-almonds-and-cashew-nuts-png-background-png-image_1729179.jpg" },
+                { img: "http://sugarincakedecor.com/image/catalog/news/almond.png" },
+                { img: "https://png.pngitem.com/pimgs/s/329-3296704_antep-fst-png-transparent-png.png" },
             ]
         },
         {
@@ -227,10 +222,10 @@ export const getBestSellerList = () => (dispatch) => {
                 {colorCode: "#292929"},
                 {colorCode: "#5cb2e1"},
             ],
-              productGallery: [
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
+            productGallery: [
+                { img: "https://png.pngtree.com/png-clipart/20190911/ourlarge/pngtree-group-of-almonds-and-cashew-nuts-png-background-png-image_1729179.jpg" },
+                { img: "http://sugarincakedecor.com/image/catalog/news/almond.png" },
+                { img: "https://png.pngitem.com/pimgs/s/329-3296704_antep-fst-png-transparent-png.png" },
             ]
         },
         {
@@ -251,9 +246,9 @@ export const getBestSellerList = () => (dispatch) => {
                 {colorCode: "#5cb2e1"},
             ],
             productGallery: [
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
+                { img: "https://freepngimg.com/download/juice/4-2-juice-png-clipart.png" },
+                { img: "https://lh3.googleusercontent.com/proxy/3ng0P6pt-Sbz2e8a7OwYA3l00jO5Dr6XKDxqzLqEJRTM2jvf2O33n5KvVZogJIm3xDagL2U3R3nCl8VWO1z91-wvTmIvqL8UgCBoxT_c9rYhZDr-pmW3Y1bhc0FZVw" },
+                { img: "https://freepngimg.com/thumb/juice/22651-1-juice-image.png" },
             ]
         },
         {
@@ -272,10 +267,10 @@ export const getBestSellerList = () => (dispatch) => {
                 {colorCode: "#292929"},
                 {colorCode: "#5cb2e1"},
             ],
-              productGallery: [
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
+            productGallery: [
+                { img: "https://freepngimg.com/download/juice/4-2-juice-png-clipart.png" },
+                { img: "https://lh3.googleusercontent.com/proxy/3ng0P6pt-Sbz2e8a7OwYA3l00jO5Dr6XKDxqzLqEJRTM2jvf2O33n5KvVZogJIm3xDagL2U3R3nCl8VWO1z91-wvTmIvqL8UgCBoxT_c9rYhZDr-pmW3Y1bhc0FZVw" },
+                { img: "https://freepngimg.com/thumb/juice/22651-1-juice-image.png" },
             ]
         },
         {
@@ -295,9 +290,8 @@ export const getBestSellerList = () => (dispatch) => {
                 {colorCode: "#5cb2e1"},
             ],
               productGallery: [
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
+                { img: "https://www.seekpng.com/png/detail/938-9381418_information-about-watermelon.png" },
+                { img: "https://www.pngitem.com/pimgs/m/109-1095674_tropical-watermelon-png-free-image-download-inside-and.png" },
             ]
         },
         {
@@ -317,9 +311,9 @@ export const getBestSellerList = () => (dispatch) => {
                 {colorCode: "#5cb2e1"},
             ],
               productGallery: [
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
+                { img: "http://pngimg.com/uploads/cauliflower/cauliflower_PNG12679.png" },
+                { img: "https://pngimg.com/uploads/cabbage/cabbage_PNG8824.png" },
+                { img: "https://pngimg.com/uploads/cauliflower/cauliflower_PNG12686.png" },
             ]
         },
         {
@@ -339,9 +333,9 @@ export const getBestSellerList = () => (dispatch) => {
                 {colorCode: "#5cb2e1"},
             ],
               productGallery: [
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
+                { img: "https://freepngimg.com/thumb/fruit/4-2-fruit-png-image.png" },
+                { img: "https://i.dlpng.com/static/png/1351662--fruit-png-1098_1200_preview.png" },
+                { img: "https://rockinbillys.co.za/wp-content/uploads/2020/08/Frt.jpg" },
             ]
         },
         {
@@ -361,10 +355,9 @@ export const getBestSellerList = () => (dispatch) => {
                 {colorCode: "#292929"},
                 {colorCode: "#5cb2e1"},
             ],
-              productGallery: [
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
+            productGallery: [
+                { img: "https://freepngimg.com/thumb/tomato/6-tomato-png-image.png" },
+                { img: "https://www.freepnglogos.com/uploads/tomato-png/tomato-and-kidney-stone-everyday-life-23.png" },
             ]
         },
         {
@@ -384,9 +377,9 @@ export const getBestSellerList = () => (dispatch) => {
                 {colorCode: "#5cb2e1"},
             ],
               productGallery: [
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
+                { img: "https://freepngimg.com/thumb/tropical_fish/13-2-fish-png-7.png" },
+                { img: "https://zipgrow.com/wp-content/uploads/2020/03/4fishfarm.png" },
+                { img: "https://www.vippng.com/png/detail/121-1217360_bony-fish-png-download-bony-fish.png" },
             ]
         },
         {
@@ -405,10 +398,9 @@ export const getBestSellerList = () => (dispatch) => {
                 {colorCode: "#292929"},
                 {colorCode: "#5cb2e1"},
             ],
-              productGallery: [
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
+            productGallery: [
+                { img: "https://freepngimg.com/thumb/apple_fruit/24632-1-apple-fruit-transparent.png" },
+                { img: "https://p.kindpng.com/picc/s/231-2315737_smitten-apples-hd-png-download.png" },
             ]
         },
         {
@@ -429,9 +421,9 @@ export const getBestSellerList = () => (dispatch) => {
                 {colorCode: "#ff3c20"},
             ],
               productGallery: [
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
-                { img: "https://i.ibb.co/vL0SPsd/10-590-X668-crop-center-removebg-preview.png" },
+                { img: "https://www.pngitem.com/pimgs/m/529-5294218_cooking-spices-png-transparent-png.png" },
+                { img: "https://i.pinimg.com/736x/5c/b2/c6/5cb2c665702e5459bd68be951836764f.jpg" },
+                { img: "https://cdn.imgbin.com/3/7/13/imgbin-food-seasoning-spices-20TEggjenwbSXv3dEnUf3zKxi.jpg" },
             ]
         },
 

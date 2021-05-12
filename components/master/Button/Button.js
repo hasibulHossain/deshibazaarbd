@@ -10,7 +10,6 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
  */
 const Button = ({ buttonText, isFontAwesome }) => {
-    console.log('buttonText :>> ', buttonText);
     return (
         <button className="custome-button-component">
             {buttonText}

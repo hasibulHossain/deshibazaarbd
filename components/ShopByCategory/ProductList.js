@@ -24,7 +24,6 @@ const ProductList = () => {
         setProduct(item);
     };
 
-    console.log('ProductList for shop :>> ', ProductList);
     return (
         <div className="productList-body">
             <Slider {...SlickSetting}>

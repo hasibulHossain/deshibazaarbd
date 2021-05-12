@@ -16,7 +16,6 @@ const FastestDeliveryDetails = ({ product }) => {
         img: previewImg
     };
 
-    console.log('product :>> ', product);
     return (
         <>
             <div className="row p-3">
