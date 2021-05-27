@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 import BestSellerReducer from "../components/BestSeller/_redux/Reducer/BestSellerReducer";
+import CategoryWiseProductReducer from "../components/CategoryWishProductList/_redux/Reducer/CategoryWiseProductReducer";
 import CompanyPolicyReducer from "../components/CompanyPolicy/_redux/Reducer/CompanyPolicyReducer";
 import DealFlashReducer from "../components/DealFlash/_redux/Reducer/DealFlashReducer";
 import FastestDeliveryReducer from "../components/FastestDelivery/_redux/Reducer/FastestDeliveryReducer";
@@ -20,5 +21,6 @@ export default combineReducers({
     FeaturedProductsReducer: FeaturedProductsReducer,
     CompanyPolicyReducer: CompanyPolicyReducer,
     DealFlashReducer: DealFlashReducer,
+    CategoryWiseProductReducer: CategoryWiseProductReducer,
     ShopReducer: ShopReducer,
 });
