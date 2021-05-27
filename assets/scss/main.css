@@ -360,13 +360,14 @@ a {
     margin-bottom: 10px;
     padding: 20px;
     cursor: pointer;
-    transition: 0.5s;
+    transition: all 0.5s ease;
 }
 
 .policy-card:hover {
     -webkit-box-shadow: 0px 4px 15px -9px rgba(43, 43, 43, 1);
     -moz-box-shadow: 0px 4px 15px -9px rgba(43, 43, 43, 1);
     box-shadow: 0px 4px 15px -9px rgba(43, 43, 43, 1);
+    transform: translateY(-10px);
     background-color: #ffffff;
     border-radius: 6px;
     color: #8B8B8B;
@@ -397,10 +398,18 @@ a {
     align-items: center;
     border-radius: 5px;
     cursor: pointer;
+    transition: 0.5s;
 }
 
 .shop-card img {
     width: 100px;
+}
+
+.shop-card .shop-logo:hover {
+    -webkit-box-shadow: 0px 4px 15px -9px rgba(43, 43, 43, 1);
+    -moz-box-shadow: 0px 4px 15px -9px rgba(43, 43, 43, 1);
+    box-shadow: 0px 4px 15px -9px rgba(43, 43, 43, 1);
+    transform: translateY(-5px);
 }
 
 /*=====================Shop by brand section close==================*/
@@ -665,7 +674,6 @@ a {
     color: #ff3c20;
 }
 
-
 .product_details_img_gallery img {
     width: 80px;
     border: 1px solid #d6d6d6;
@@ -674,9 +682,11 @@ a {
     margin: 5px;
     cursor: pointer;
 }
-.product_details_img_gallery .select_img{
+
+.product_details_img_gallery .select_img {
     border: 2px solid #ff3c20!important;
 }
+
 .product_img {
     width: 100%;
     /* height: 90%; */
@@ -801,23 +811,28 @@ a {
     background-color: #ffff;
     color: #8B8B8B;
 }
-.product_details_bottom{
+
+.product_details_bottom {
     display: flex;
     flex-direction: column;
     position: relative;
 }
-.product_details_bottom .Product_bottom_socail_media{
+
+.product_details_bottom .Product_bottom_socail_media {
     text-align: right;
     margin-bottom: 10px;
 }
+
 .product_details_bottom .category_tags {
     font-weight: bold;
     font-size: 14px;
 }
-.product_details_bottom .category_tags p{
+
+.product_details_bottom .category_tags p {
     margin-left: 10px;
     color: #8B8B8B;
 }
+
 .js-image-zoom__zoomed-image {
     border-radius: 5px!important;
     z-index: 99999 !important;
@@ -827,10 +842,12 @@ a {
     top: -12px!important;
     border: 1px solid #cdcdcd;
     background-color: white !important;
-  }
-  /* .product_img .product-details-img{
+}
+
+/* .product_img .product-details-img{
     height: 450px;
   } */
+
 /*======================Custome Modal Close==================*/
 
 /*===========Footer Start========*/
