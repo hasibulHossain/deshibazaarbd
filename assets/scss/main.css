@@ -1166,3 +1166,85 @@ a {
     color: #cdcdcd;
     margin-left: 10px;
 }
+
+.filter_title {
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.filter_title::after {
+    content: '';
+    border-bottom: 3px solid #E7E7E7;
+    width: 100%;
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.active_category {
+    color: red;
+}
+
+.input-range {
+    height: 3rem!important;
+}
+
+.input-range__label--min, .input-range__label--max {
+    bottom: -1.4rem;
+    position: absolute;
+    display: none;
+}
+
+.input-range__track--active {
+    background: #ff3c20!important;
+}
+
+.input-range__slider {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: #ff3c20!important;
+    border: 1px solid #ff3c20!important;
+    border-radius: 100%;
+    cursor: pointer;
+    display: block;
+    height: 1rem;
+    margin-left: -0.5rem;
+    margin-top: -0.65rem;
+    outline: none;
+    position: absolute;
+    top: 50%;
+    -webkit-transition: -webkit-transform 0.3s ease-out, -webkit-box-shadow 0.3s ease-out;
+    transition: -webkit-transform 0.3s ease-out, -webkit-box-shadow 0.3s ease-out;
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out, -webkit-transform 0.3s ease-out, -webkit-box-shadow 0.3s ease-out;
+    width: 1rem;
+}
+
+.filter_by_colour_outer {
+    display: inline-block;
+    margin: 5px;
+    border: 1px solid gray;
+    border-radius: 50%;
+    padding: 3px;
+    cursor: pointer;
+}
+
+.filter_by_colour_outer .color_filter {
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+}
+
+.filter_size_btn {
+    /* padding: 5px!important; */
+    margin: 5px!important;
+}
+
+.MuiButton-root {
+    color: rgba(0, 0, 0, 0.87);
+    padding: 6px 16px;
+    font-size: 0.875rem;
+    min-width: 50px!important;
+}
