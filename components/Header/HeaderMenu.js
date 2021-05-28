@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getMenuListData } from './_redux/HeaderAction/HeaderAction';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faCaretDown } from '@fortawesome/free-solid-svg-icons';
+import Link from 'next/link'
 
 const HeaderMenu = ({ toggleNav }) => {
     const dispatch = useDispatch();
@@ -24,10 +25,13 @@ const HeaderMenu = ({ toggleNav }) => {
         <div className="menu_list">
 
             <Navbar.Collapse id={toggleNav} >
-                <a href="/" className="all_category_menu">
-                    <FontAwesomeIcon className="mr-1" icon={faBars} />
+                <Link href="/categories-wise-product">
+                    <a className="all_category_menu">
+                        <FontAwesomeIcon className="mr-1" icon={faBars} />
                     All Categories
                </a>
+                </Link>
+
                 {
                     menuList.length > 0 && menuList.map((item, index) => (
                         <Menu menuButton={<MenuButton>{item.menu} <FontAwesomeIcon className="custome-fontAwesome" icon={faCaretDown} /></MenuButton>} key={index}>

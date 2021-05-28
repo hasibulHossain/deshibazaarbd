@@ -4,7 +4,7 @@ import MainLayout from "../components/layouts/MainLayout";
 import ScrollToTop from "react-scroll-to-top";
 import CategoryBanner from "../components/CategoryBanner/CategoryBanner";
 import CategoryWishProductContainer from "../components/CategoryWishProductList/CategoryWishProductContainer";
-export default function Categories_wish_product(props) {
+export default function Categories_wise_product(props) {
   useEffect(() => {
     if (typeof window === "undefined") {
       global.window = {};
