@@ -7,6 +7,7 @@ import "../node_modules/slick-carousel/slick/slick-theme.css";
 import "../node_modules/slick-carousel/slick/slick.css";
 
 import "../assets/scss/main.css";
+import "../assets/scss/carts.css"; // For carts page
 import "../assets/scss/payment.css";
 import "../assets/scss/responsive.css";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
