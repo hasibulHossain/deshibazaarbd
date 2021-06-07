@@ -29,9 +29,15 @@ const Header = () => {
                                     </div>
                                 </div>
                                 <div className="ml-auto header-nav">
-                                    <Link href="/" className="header-nav-link">Sign In</Link>
-                                    <Link href="/">
-                                        <Button buttonText="Sign up" />
+                                    <Link href="/login" className="header-nav-link">
+                                        <a className="">
+                                            Sign In
+                                        </a>
+                                    </Link>
+                                    <Link href="/register">
+                                        <a>
+                                            <Button buttonText="Sign up" />
+                                        </a>
                                     </Link>
                                     <Link href="/" className="header-nav-link">
                                         <a><FontAwesomeIcon className="custome-fontAwesome" icon={faHeart} /> Wishlist</a>
