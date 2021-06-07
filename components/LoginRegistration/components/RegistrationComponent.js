@@ -1,11 +1,15 @@
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useState, Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faFacebookF, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
+import ReactSwipeButton from 'react-swipe-button'
 
 const RegistrationComponent = () => {
     const [showPassword, setShowPassword] = useState(false);
+    const onSucces = () => {
+        console.log('Swip success');
+    }
     return (
         <>
             <h5 className="account_title">New Customers</h5>
@@ -43,8 +47,11 @@ const RegistrationComponent = () => {
 
                         <div className="col-md-6">
                             <div class="mb-3">
-                                <label for="lastName" class="form-label">This is swip button area</label>
-                                <input type="text" class="form-control" placeholder="" />
+                                <ReactSwipeButton
+                                    text='Slide to get SMS Code'
+                                    color='#f00'
+                                    onSuccess={onSucces}
+                                />
                             </div>
                         </div>
 
@@ -62,7 +69,7 @@ const RegistrationComponent = () => {
 
                     </div>
 
-                    <div class="form-check custome_form_checkbox">
+                    <div class="form-check custome_form_checkbox mt-3">
                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
                         <label class="account_info_label pointer" for="flexCheckDefault">
                             I want to receive exclusive offers and promotions from

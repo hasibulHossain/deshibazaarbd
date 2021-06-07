@@ -1378,3 +1378,55 @@ p.account_sub_tite {
     color: #bbbbbb;
     text-decoration: none;
 }
+
+.styles_ReactSwipeButton__2WML2 {
+    height: 40px!important;
+    margin-top: 38px!important;
+}
+
+.styles_rsbContainer__KXpXK {
+    background: #FFE7E9!important;
+    color: #000!important;
+    border-radius: 5px!important;
+}
+
+.styles_rsbcText__16wA0 {
+    position: absolute;
+    /* right: 25px!important; */
+    left: 25%!important;
+    color: #000!important;
+    font-weight: 500;
+    font-family: system-ui!important;
+    line-height: 40px!important;
+}
+
+.styles_rsbcSliderCircle__3G0Zs {
+    border-radius: 1px!important;
+}
+
+.styles_rsbcSliderArrow__2D9q4 {
+    position: absolute;
+    transform: rotate(45deg);
+    border: 3px solid #fff;
+    height: 10px!important;
+    width: 10px!important;
+    top: 40%!important;
+    right: 20px!important;
+    margin-top: -6px;
+    border-left-color: transparent;
+    border-bottom-color: transparent;
+    transform-origin: center;
+    z-index: 10;
+}
+
+.styles_rsbContainerUnlocked__1T0vd {
+    width: 100%!important;
+    border-radius: 5px!important;
+    margin-left: 0px!important;
+    transition: 0.5s;
+    cursor: default;
+}
+
+.styles_rsbcSlider__1yYxD {
+    border-radius: 5px!important;
+}
