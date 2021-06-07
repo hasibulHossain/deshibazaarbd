@@ -19,7 +19,7 @@ a {
     border-radius: 5px;
 }
 
-.custome-button-component {
+.custome-button-component, a .custome-button-component {
     background-color: #E9000F;
     color: #fff!important;
     border: 2px solid #E9000F;
@@ -31,7 +31,7 @@ a {
     text-decoration: none!important;
 }
 
-.custome-button-component:hover {
+.custome-button-component:hover, a .custome-button-component:hover {
     background-color: #fff;
     color: #E9000F!important;
     text-decoration: none;
@@ -1247,4 +1247,134 @@ a {
     padding: 6px 16px;
     font-size: 0.875rem;
     min-width: 50px!important;
+}
+
+.account_info .nav-tabs {
+    border-bottom: 1px solid #E9000F;
+}
+
+.account_info .nav-tabs .nav-link {
+    border: none!important;
+    font-size: 1.5rem;
+    color: #797A87!important;
+    font-weight: 700;
+    text-transform: none;
+    padding: 1% 10%!important;
+}
+
+.account_info .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: #fff!important;
+    background-color: #E9000F!important;
+    padding: 1% 10%!important;
+}
+
+h5.account_title {
+    color: #16B62C;
+    margin-top: 20px;
+    font-weight: 700;
+    font-family: system-ui;
+}
+
+p.account_sub_tite {
+    font-size: initial;
+}
+
+.account_info_label {
+    margin-bottom: 0;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.account_info_label a, .already_account a {
+    color: #FF3C20;
+    margin-left: 10px;
+    transition: 0.5s;
+}
+
+.account_info_label a:hover, .already_account a:hover {
+    text-decoration: none;
+    color: #f12506;
+}
+
+.account_btn_group {
+    display: flex;
+    flex-direction: row;
+    margin-top: 25px;
+    flex-wrap: wrap;
+}
+
+.account_btn_group .account_btn {
+    background-color: #16B62A;
+    border: 2px solid #16B62A;
+    color: #fff;
+    font-weight: 600;
+    transition: all 0.5s ease;
+}
+
+.account_btn_group .account_btn:hover {
+    background-color: #ffff;
+    color: #16B62A;
+}
+
+.account_btn_group p {
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: none;
+    margin: 10px;
+    padding-top: 10px;
+}
+
+.account_btn_group .google_btn {
+    background-color: #FF3C20;
+    border: 2px solid #FF3C20;
+    color: #fff;
+    font-weight: 600;
+    transition: all 0.5s ease;
+}
+
+.account_btn_group .google_btn:hover {
+    background-color: #ffff;
+    color: #FF3C20;
+}
+
+.account_btn_group .facebook_btn {
+    background-color: #3B5998;
+    border: 2px solid #3B5998;
+    color: #fff;
+    font-weight: 600;
+    transition: all 0.5s ease;
+}
+
+.account_btn_group .facebook_btn:hover {
+    background-color: #ffff;
+    color: #3B5998;
+}
+
+.already_account {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.account_input_group {
+    position: relative;
+}
+
+.account_input_group_prepend {
+    position: absolute;
+    right: 10px;
+    top: 6px;
+    cursor: pointer;
+}
+
+.forget_password_link a {
+    color: #C4CDCE;
+    font-weight: 700;
+    font-family: system-ui;
+}
+
+.forget_password_link a:hover {
+    color: #bbbbbb;
+    text-decoration: none;
 }

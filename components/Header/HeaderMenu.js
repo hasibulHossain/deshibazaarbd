@@ -23,7 +23,6 @@ const HeaderMenu = ({ toggleNav }) => {
 
     return (
         <div className="menu_list">
-
             <Navbar.Collapse id={toggleNav} >
                 <Link href="/categories-wise-product">
                     <a className="all_category_menu">
