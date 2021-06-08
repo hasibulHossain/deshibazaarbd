@@ -2,12 +2,16 @@ import React, { useEffect } from "react";
 import Head from "next/head";
 
 // third party import
-import {Button} from 'react-bootstrap'
+import { Button } from "react-bootstrap";
 import { IoIosCheckmarkCircle } from "react-icons/io";
+import { FiChevronRight } from "react-icons/fi";
+import { MdDelete } from "react-icons/md";
 
 // local import
 import MainLayout from "../components/layouts/MainLayout";
 import Card from "../components/Card/Card";
+import SimpleInput from "../components/master/SimpleInput/SimpleInput";
+import SimpleBtn from "../components/master/SimpleBtn/SimpleBtn";
 
 export default function Home() {
   useEffect(() => {
@@ -39,6 +43,34 @@ export default function Home() {
                     <p>Availability and promotions will be shown here</p>
                   </div>
                 </Card>
+
+                <div className="cart_items_box_container">
+                  <Card>
+                    <div className="cart_item_box_top">
+                      <p>Select All (2 items)</p>
+                      <div>
+                        <MdDelete />
+                        <p>Delete</p>
+                      </div>
+                    </div>
+                    <div className="cart_items_by_shop">
+                      <div className="cart_shop_details">
+                        <div>
+                          <div className="cart_shop_name">
+                            <input className="cart-checkbox" type="checkbox" />
+                            <p>Star Watch</p>
+                            <FiChevronRight />
+                          </div>
+                          <p>Estimate time 9 june</p>
+                        </div>
+                        <p>
+                          Spend ৳ 990 enjoy free shipping for Standard delivery
+                          option
+                        </p>
+                      </div>
+                    </div>
+                  </Card>
+                </div>
               </div>
               <div className="cart__right">
                 <Card>
@@ -69,14 +101,16 @@ export default function Home() {
                     <div className="cart__right-footer">
                       <div className="cart__right-discount">
                         <div>
-                          <input type="text" />
+                          <SimpleInput placeholder="Discount Code" />
                         </div>
                         <div>
-                          <Button variant="success">Apply</Button>
+                          <SimpleBtn variant="success">Apply</SimpleBtn>
                         </div>
                       </div>
                       <div>
-                        <Button variant="danger">PROCEED TO CHECKOUT</Button>
+                        <SimpleBtn variant="danger">
+                          PROCEED TO CHECKOUT
+                        </SimpleBtn>
                       </div>
                     </div>
                   </div>
