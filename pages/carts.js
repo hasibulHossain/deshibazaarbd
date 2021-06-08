@@ -12,6 +12,7 @@ import MainLayout from "../components/layouts/MainLayout";
 import Card from "../components/Card/Card";
 import SimpleInput from "../components/master/SimpleInput/SimpleInput";
 import SimpleBtn from "../components/master/SimpleBtn/SimpleBtn";
+import CartProducts from "../components/CartProducts/CartProducts";
 
 export default function Home() {
   useEffect(() => {
@@ -68,6 +69,7 @@ export default function Home() {
                           option
                         </p>
                       </div>
+                      <CartProducts />
                     </div>
                   </Card>
                 </div>
