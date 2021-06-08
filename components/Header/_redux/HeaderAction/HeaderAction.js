@@ -208,6 +208,72 @@ export const getMenuListData = () => (dispatch) => {
                 },
             ]
         },
+        {
+            menu: "PHARMACY",
+            subMenu1: [
+                {
+                    SubMenu: "Gents Dress",
+                    subMenu2: [],
+                },
+                {
+                    SubMenu: "Brand T-shirt",
+                    subMenu2: [],
+                },
+                {
+                    SubMenu: "Brand T-shirt",
+                    subMenu2: [
+                        { subMenu: "Sultan Brand" },
+                        { subMenu: "Arong" },
+                        { subMenu: "Dada" },
+                    ]
+                },
+                {
+                    SubMenu: "Sunglasses",
+                    subMenu2: []
+                },
+                {
+                    SubMenu: "Watch",
+                    subMenu2: [
+                        { subMenu: "Benson" },
+                        { subMenu: "Cartier" },
+                        { subMenu: "Dada" },
+                    ]
+                },
+            ]
+        },
+        {
+            menu: "SPECIAL CATEGORIES",
+            subMenu1: [
+                {
+                    SubMenu: "Gents Dress",
+                    subMenu2: [],
+                },
+                {
+                    SubMenu: "Brand T-shirt",
+                    subMenu2: [],
+                },
+                {
+                    SubMenu: "Brand T-shirt",
+                    subMenu2: [
+                        { subMenu: "Sultan Brand" },
+                        { subMenu: "Arong" },
+                        { subMenu: "Dada" },
+                    ]
+                },
+                {
+                    SubMenu: "Sunglasses",
+                    subMenu2: []
+                },
+                {
+                    SubMenu: "Watch",
+                    subMenu2: [
+                        { subMenu: "Benson" },
+                        { subMenu: "Cartier" },
+                        { subMenu: "Dada" },
+                    ]
+                },
+            ]
+        },
     ]
     const responseData = {
         data: data,

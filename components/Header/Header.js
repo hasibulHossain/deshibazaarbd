@@ -28,7 +28,7 @@ const Header = () => {
                             <Navbar.Toggle aria-controls={toggleNav} />
                             <Navbar.Collapse id={toggleNav} >
                                 <div className="header-search-product">
-                                    <input placeholder="Search for products, brands or more" />
+                                    <input placeholder="Search for products, Brands or more" />
                                     <div className="header-custome-prepend pointer">
                                         <FontAwesomeIcon className="custome-fontAwesome" icon={faSearch} />
                                     </div>
