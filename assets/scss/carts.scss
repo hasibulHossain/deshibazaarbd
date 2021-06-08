@@ -50,9 +50,10 @@ $border-bottom: 1px solid #dfdfdf;
       }
 
       & > div .cart_items_by_shop {
-        padding: 1.2rem 2.5rem 1.2rem 1.2rem;
-
         & .cart_shop_details {
+          padding: 1.2rem 2.5rem 1.2rem 1.2rem;
+          border-bottom: $border-bottom;
+
           & > div {
             display: flex;
             align-items: center;
