@@ -1,9 +1,10 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShippingFast, faUser } from '@fortawesome/free-solid-svg-icons'
-import { FormControl } from 'react-bootstrap';
 import { languages } from '../../assets/FakeData/FakeData';
+
 const HeaderTop = () => {
+    
     return (
         <section className="header-top">
             <div className="container">
@@ -18,7 +19,7 @@ const HeaderTop = () => {
                             <select class="form-select custome-select" aria-label="Default select example">
                                 {
                                     languages.length > 0 && languages.map((lan, index) => (
-                                        <option className="text-dark" value={lan.value}>
+                                        <option className="text-dark" value={lan.value} key={index}>
                                             <span>{lan.label}</span>
                                         </option>
                                     ))

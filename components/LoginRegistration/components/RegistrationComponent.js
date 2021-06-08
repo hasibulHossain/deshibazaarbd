@@ -3,7 +3,7 @@ import React, { useState, Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faFacebookF, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
-import ReactSwipeButton from 'react-swipe-button'
+// import ReactSwipeButton from 'react-swipe-button'
 
 const RegistrationComponent = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -47,11 +47,11 @@ const RegistrationComponent = () => {
 
                         <div className="col-md-6">
                             <div class="mb-3">
-                                <ReactSwipeButton
+                                {/* <ReactSwipeButton
                                     text='Slide to get SMS Code'
                                     color='#f00'
                                     onSuccess={onSucces}
-                                />
+                                /> */}
                             </div>
                         </div>
 

@@ -4,6 +4,7 @@ import MainLayout from "../components/layouts/MainLayout";
 import ScrollToTop from "react-scroll-to-top";
 import CategoryBanner from "../components/CategoryBanner/CategoryBanner";
 import CategoryWishProductContainer from "../components/CategoryWishProductList/CategoryWishProductContainer";
+
 export default function Categories_wise_product(props) {
   useEffect(() => {
     if (typeof window === "undefined") {
@@ -17,9 +18,10 @@ export default function Categories_wise_product(props) {
       <Head>
         <title>
           Deshi Bazaar BD
-      </title>
+        </title>
         <meta name="description" content="Meta" />
       </Head>
+      
       <MainLayout>
         <ScrollToTop smooth />
         <CategoryBanner />
