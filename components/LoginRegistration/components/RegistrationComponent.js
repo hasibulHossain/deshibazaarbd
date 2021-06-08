@@ -1,12 +1,30 @@
 import Link from 'next/link';
-import React, { useState, Component } from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebook, faFacebookF, faGoogle } from '@fortawesome/free-brands-svg-icons';
+import { faFacebookF, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
+import { useDispatch, useSelector } from 'react-redux';
 // import ReactSwipeButton from 'react-swipe-button'
+import { useForm } from "react-hook-form";
+import ErrorMessage from '../../master/ErrorMessage/ErrorMessage';
+import { ChangeRegisterInputField, RegisterFirstStep } from '../_redux/Action/RegisterAction';
 
 const RegistrationComponent = () => {
+    const dispatch = useDispatch()
     const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const { register, handleSubmit, errors, setValue, watch } = useForm();
+
+    const registerInput = useSelector((state) => state.RegisterReducer.registerInput)
+    // const isLoading = useSelector((state) => state.registerReducer.isLoading);
+
+    //handle change input 
+    const handleChangeTextInput = (name, value) => {
+        dispatch(ChangeRegisterInputField(name, value))
+    }
+    const handleRegisterFirstStep = () => {
+        dispatch(RegisterFirstStep(registerInput))
+    }
     const onSucces = () => {
         console.log('Swip success');
     }
@@ -15,43 +33,126 @@ const RegistrationComponent = () => {
             <h5 className="account_title">New Customers</h5>
             <p className="account_sub_tite">Creating an account has many benefits : check out faster, keep more than one <br /> address, track orders and more</p>
             <div className="account_info_body">
-                <form action="">
+                <form
+                    onSubmit={handleSubmit(handleRegisterFirstStep)}
+                    method="post"
+                    autoComplete="off"
+                    encType="multipart/form-data"
+                    autoSave="off"
+                >
                     <div className="row">
                         <div className="col-md-6">
                             <div class="mb-3">
                                 <label for="firstName" class="form-label">First Name</label>
-                                <input type="text" class="form-control" placeholder="" />
+                                <input type="text"
+                                    class="form-control"
+                                    placeholder=""
+                                    name="first_name"
+                                    value={registerInput.first_name}
+                                    onChange={(e) => handleChangeTextInput('first_name', e.target.value)}
+                                    ref={register({
+                                        required: true,
+                                        maxLength: 100,
+                                    })}
+                                />
+                                {
+                                    errors.first_name && errors.first_name.type === 'required' && (
+                                        <ErrorMessage errorText="First name can't be blank!" />
+                                    )
+                                }
                             </div>
                         </div>
 
                         <div className="col-md-6">
                             <div class="mb-3">
                                 <label for="lastName" class="form-label">Last Name</label>
-                                <input type="text" class="form-control" placeholder="" />
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder=""
+                                    name="last_name"
+                                    value={registerInput.last_name}
+                                    onChange={(e) => handleChangeTextInput('last_name', e.target.value)}
+                                    ref={register({
+                                        required: true,
+                                        maxLength: 100,
+                                    })}
+                                />
+                                {
+                                    errors.last_name && errors.last_name.type === 'required' && (
+                                        <ErrorMessage errorText="Last name can't be blank!" />
+                                    )
+                                }
                             </div>
                         </div>
 
                         <div className="col-md-6">
                             <div class="mb-3">
                                 <label for="lastName" class="form-label">Phone Number</label>
-                                <input type="text" class="form-control" placeholder="" />
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder=""
+                                    name="phone_no"
+                                    value={registerInput.phone_no}
+                                    onChange={(e) => handleChangeTextInput('phone_no', e.target.value)}
+                                    ref={register({
+                                        required: true,
+                                        maxLength: 100,
+                                    })}
+                                />
+                                {
+                                    errors.phone_no && errors.phone_no.type === 'required' && (
+                                        <ErrorMessage errorText="Phone number can't be blank!" />
+                                    )
+                                }
                             </div>
                         </div>
 
                         <div className="col-md-6">
                             <div class="mb-3">
                                 <label for="lastName" class="form-label">Email Address</label>
-                                <input type="text" class="form-control" placeholder="" />
+                                <input
+                                    type="email"
+                                    class="form-control"
+                                    placeholder=""
+                                    name="email"
+                                    value={registerInput.email}
+                                    onChange={(e) => handleChangeTextInput('email', e.target.value)}
+                                    ref={register({
+                                        required: true,
+                                        maxLength: 100,
+                                    })}
+                                />
+                                {
+                                    errors.email && errors.email.type === 'required' && (
+                                        <ErrorMessage errorText="Email address can't be blank!" />
+                                    )
+                                }
                             </div>
                         </div>
 
+
+                        <div className="col-md-6">
+                            <div class="mb-3 mt-4">
+                                <button type="submit" className="btn btn-primary mt-1">Get OTP</button>
+                            </div>
+                        </div>
+                        {/* 
                         <div className="col-md-6">
                             <div class="mb-3">
-                                {/* <ReactSwipeButton
+                                <ReactSwipeButton
                                     text='Slide to get SMS Code'
                                     color='#f00'
                                     onSuccess={onSucces}
-                                /> */}
+                                />
+                            </div>
+                        </div> */}
+
+                        <div className="col-md-6">
+                            <div class="mb-3">
+                                <label for="lastName" class="form-label">OTP</label>
+                                <input type="text" class="form-control" placeholder="" />
                             </div>
                         </div>
 
@@ -62,6 +163,17 @@ const RegistrationComponent = () => {
                                 <div class="account_input_group_prepend" onClick={() => setShowPassword(!showPassword)}>
                                     {
                                         showPassword === true ? <FontAwesomeIcon icon={faEyeSlash} /> : <FontAwesomeIcon icon={faEye} />
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-md-6">
+                            <label for="Confirm_password" class="form-label">Confirm Password</label>
+                            <div class="account_input_group">
+                                <input type={showConfirmPassword === true ? "text" : "password"} class="form-control" id="inlineFormInputGroup" placeholder="" />
+                                <div class="account_input_group_prepend" onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
+                                    {
+                                        showConfirmPassword === true ? <FontAwesomeIcon icon={faEyeSlash} /> : <FontAwesomeIcon icon={faEye} />
                                     }
                                 </div>
                             </div>

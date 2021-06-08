@@ -7,6 +7,7 @@ import FastestDeliveryReducer from "../components/FastestDelivery/_redux/Reducer
 import FeaturedProductsReducer from "../components/FeaturedProducts/_redux/Reducer/FeaturedProductsReducer";
 import HeaderReducer from "../components/Header/_redux/HeaderReducer/HeaderReducer";
 import HomeBannerCarouselReducer from "../components/homeBannerCarousel/_redux/homeBannerCarouselReducer/HomeBannerCarouselReducer";
+import RegisterReducer from "../components/LoginRegistration/_redux/Reducer/RegisterReducer";
 import ProductTopListReducer from "../components/ProductTopList/_redux/Reducer/ProductTopListReducer";
 import ShopReducer from "../components/Shop/_redux/Reducer/ShopReducer";
 import ShopByCategoriesReducer from "../components/ShopByCategory/_redux/Reducer/ShopByCategoriesReducer";
@@ -23,4 +24,5 @@ export default combineReducers({
     DealFlashReducer: DealFlashReducer,
     CategoryWiseProductReducer: CategoryWiseProductReducer,
     ShopReducer: ShopReducer,
+    RegisterReducer: RegisterReducer,
 });
