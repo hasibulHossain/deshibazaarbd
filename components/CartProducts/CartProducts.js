@@ -8,9 +8,11 @@ import CartProduct from "./CartProduct.js/CartProduct";
 
 function CartProducts() {
   return (
-    <div>
+    <>
       <CartProduct />
-    </div>
+      <CartProduct />
+      <CartProduct />
+    </>
   );
 }
 

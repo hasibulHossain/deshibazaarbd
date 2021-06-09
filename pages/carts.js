@@ -69,7 +69,9 @@ export default function Home() {
                           option
                         </p>
                       </div>
-                      <CartProducts />
+                      <div>
+                        <CartProducts />
+                      </div>
                     </div>
                   </Card>
                 </div>
