@@ -1,4 +1,6 @@
 import { combineReducers } from "redux";
+
+import GlobalReducer from "./store/reducer/globalReducer";
 import BestSellerReducer from "../components/BestSeller/_redux/Reducer/BestSellerReducer";
 import CategoryWiseProductReducer from "../components/CategoryWishProductList/_redux/Reducer/CategoryWiseProductReducer";
 import CompanyPolicyReducer from "../components/CompanyPolicy/_redux/Reducer/CompanyPolicyReducer";
@@ -13,16 +15,17 @@ import ShopReducer from "../components/Shop/_redux/Reducer/ShopReducer";
 import ShopByCategoriesReducer from "../components/ShopByCategory/_redux/Reducer/ShopByCategoriesReducer";
 
 export default combineReducers({
-    HeaderReducer: HeaderReducer,
-    HomeBannerCarouselReducer: HomeBannerCarouselReducer,
-    BestSellerReducer: BestSellerReducer,
-    ProductTopListReducer: ProductTopListReducer,
-    ShopByCategoriesReducer: ShopByCategoriesReducer,
-    FastestDeliveryReducer: FastestDeliveryReducer,
-    FeaturedProductsReducer: FeaturedProductsReducer,
-    CompanyPolicyReducer: CompanyPolicyReducer,
-    DealFlashReducer: DealFlashReducer,
-    CategoryWiseProductReducer: CategoryWiseProductReducer,
-    ShopReducer: ShopReducer,
-    RegisterReducer: RegisterReducer,
+  GlobalReducer: GlobalReducer,
+  HeaderReducer: HeaderReducer,
+  HomeBannerCarouselReducer: HomeBannerCarouselReducer,
+  BestSellerReducer: BestSellerReducer,
+  ProductTopListReducer: ProductTopListReducer,
+  ShopByCategoriesReducer: ShopByCategoriesReducer,
+  FastestDeliveryReducer: FastestDeliveryReducer,
+  FeaturedProductsReducer: FeaturedProductsReducer,
+  CompanyPolicyReducer: CompanyPolicyReducer,
+  DealFlashReducer: DealFlashReducer,
+  CategoryWiseProductReducer: CategoryWiseProductReducer,
+  ShopReducer: ShopReducer,
+  RegisterReducer: RegisterReducer,
 });

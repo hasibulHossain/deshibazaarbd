@@ -2,14 +2,20 @@ import React from "react";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import DemoWarning from "../Demo/DemoWarning";
+import FloatingCart from "../FloatingCart/FloatingCart";
+
+import { useSelector } from "react-redux";
 
 const MainLayout = (props) => {
+  const { children } = props;
+  const { modalVisible } = useSelector((state) => state.GlobalReducer);
   return (
     <>
       <DemoWarning />
       <Header />
-      {props.children}
-      <Footer/>
+      {modalVisible && <FloatingCart />}
+      <main>{children}</main>
+      <Footer />
     </>
   );
 };
