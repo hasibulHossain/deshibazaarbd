@@ -35,7 +35,6 @@
         "next": "^9.5.4",
         "next-images": "^1.7.0",
         "next-redux-wrapper": "^6.0.2",
-        "node-sass": "^4.14.1",
         "popper.js": "^1.16.1",
         "rc-menu": "^8.10.7",
         "react": "16.13.1",
