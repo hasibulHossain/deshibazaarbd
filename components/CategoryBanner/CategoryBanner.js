@@ -6,7 +6,8 @@ const CategoryBanner = () => {
             <img src={"/images/banner/Image 51@2x.png"} alt="category banner" className="img-fluid" />
             <div className="category_direction">
                 <div className="d-flex">
-                    <p className="mr-2">HOME </p> > <p className="ml-2 text-danger">ELECTRONICS</p>
+                    <p className="mr-2">HOME </p>
+                    <p className="ml-2 text-danger">ELECTRONICS</p>
                 </div>
             </div>
         </section>

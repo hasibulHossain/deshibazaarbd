@@ -1430,3 +1430,11 @@ p.account_sub_tite {
 .styles_rsbcSlider__1yYxD {
     border-radius: 5px!important;
 }
+
+p.error_message {
+    color: #f33a1e;
+    font-weight: 500;
+    font-family: system-ui;
+    font-size: 15px;
+    margin-top: 10px;
+}

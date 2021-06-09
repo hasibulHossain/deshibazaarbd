@@ -17,9 +17,14 @@ const Header = () => {
                     {/* <Container> */}
                     <div className="header-container-section">
                         <div className="custome-navbar">
-                            <Navbar.Brand href="/">
-                                <img src={"/images/logo.png"} alt="deshi bazaar bd" className="brand-logo" />
-                            </Navbar.Brand>
+                            <Link href="/">
+                                <a href="">
+                                    <Navbar.Brand>
+                                        <img src={"/images/logo.png"} alt="deshi bazaar bd" className="brand-logo" />
+                                    </Navbar.Brand>
+                                </a>
+                            </Link>
+                            
                             <Navbar.Toggle aria-controls={toggleNav} />
                             <Navbar.Collapse id={toggleNav} >
                                 <div className="header-search-product">
@@ -42,7 +47,7 @@ const Header = () => {
                                     <Link href="/" className="header-nav-link">
                                         <a><FontAwesomeIcon className="custome-fontAwesome" icon={faHeart} /> Wishlist</a>
                                     </Link>
-                                    <Link href="/" className="header-nav-link">
+                                    <Link href="/carts" className="header-nav-link">
                                         <a><FontAwesomeIcon className="custome-fontAwesome" icon={faShoppingBag} /> Cart</a>
                                     </Link>
                                 </div>
