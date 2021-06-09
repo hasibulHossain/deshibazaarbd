@@ -73,6 +73,25 @@ export default function Home() {
                         <CartProducts />
                       </div>
                     </div>
+                    <div className="cart_items_by_shop">
+                      <div className="cart_shop_details">
+                        <div>
+                          <div className="cart_shop_name">
+                            <input className="cart-checkbox" type="checkbox" />
+                            <p>Star Watch</p>
+                            <FiChevronRight />
+                          </div>
+                          <p>Estimate time 9 june</p>
+                        </div>
+                        <p>
+                          Spend ৳ 990 enjoy free shipping for Standard delivery
+                          option
+                        </p>
+                      </div>
+                      <div>
+                        <CartProducts />
+                      </div>
+                    </div>
                   </Card>
                 </div>
               </div>

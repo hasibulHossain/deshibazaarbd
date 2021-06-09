@@ -5,7 +5,7 @@
 $border-bottom: 1px solid #dfdfdf;
 .cart {
   font-size: 0.88rem; // 16px | 0.77 = 14px
-  margin: 8% 0%;
+  margin: 6% 0% 8% 0%;
 
   &__row {
     max-width: 1200px;
@@ -26,7 +26,6 @@ $border-bottom: 1px solid #dfdfdf;
       & > div .cart_item_box_top {
         font-weight: 700;
         padding: 1.5rem 2.5rem 1.5rem 1.2rem;
-        border-bottom: $border-bottom;
 
         display: flex;
         justify-content: space-between;
@@ -53,6 +52,7 @@ $border-bottom: 1px solid #dfdfdf;
         & .cart_shop_details {
           padding: 1.2rem 2.5rem 1.2rem 1.2rem;
           border-bottom: $border-bottom;
+          border-top: $border-bottom;
 
           & > div {
             display: flex;
@@ -304,6 +304,10 @@ $border-bottom: 1px solid #dfdfdf;
       }
     }
   }
+}
+
+.cart-product-box {
+  margin-bottom: 2rem;
 }
 
 .simple-input {
