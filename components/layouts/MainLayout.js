@@ -8,12 +8,13 @@ import { useSelector } from "react-redux";
 
 const MainLayout = (props) => {
   const { children } = props;
-  const { modalVisible } = useSelector((state) => state.GlobalReducer);
+  const { floatingCartVisible } = useSelector((state) => state.GlobalReducer);
+
   return (
     <>
       <DemoWarning />
       <Header />
-      {modalVisible && <FloatingCart />}
+      {floatingCartVisible && <FloatingCart />}
       <main>{children}</main>
       <Footer />
     </>

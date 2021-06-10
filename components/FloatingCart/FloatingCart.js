@@ -2,17 +2,23 @@ import React from "react";
 
 // third party imports
 import { IoMdCloseCircle } from "react-icons/io";
+import { useDispatch } from "react-redux";
 
 // local imports
 import SimpleBtn from "../master/SimpleBtn/SimpleBtn";
 import FloatingCartProduct from "../FloatingCartProduct/FloatingCartProduct";
+import { toggleModal } from "../../_redux/store/action/globalAction";
 
 function FloatingCart() {
+  const dispatch = useDispatch();
+  const toggleCartHandler = () => {
+    dispatch(toggleModal());
+  };
   return (
     <div className="floating-cart modal-scrollbar">
       <div className="floating-cart__header">
         <p>There are 6 Products</p>
-        <div className="floating-cart__close-icon">
+        <div onClick={toggleCartHandler} className="floating-cart__close-icon">
           <IoMdCloseCircle />
         </div>
       </div>

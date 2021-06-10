@@ -130,7 +130,7 @@ export default function Home() {
                           <SimpleBtn variant="success">Apply</SimpleBtn>
                         </div>
                       </div>
-                      <div>
+                      <div className="cart__proceed-btn">
                         <SimpleBtn variant="danger">
                           PROCEED TO CHECKOUT
                         </SimpleBtn>

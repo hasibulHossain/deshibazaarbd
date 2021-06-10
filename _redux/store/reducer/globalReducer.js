@@ -1,6 +1,6 @@
 import * as types from "../types/types";
 const initialState = {
-  modalVisible: false,
+  floatingCartVisible: false,
   backdrop: false,
 };
 
@@ -9,7 +9,7 @@ function GlobalReducer(state = initialState, { type, payload }) {
     case types.TOGGLE_MODAL:
       return {
         ...state,
-        modalVisible: payload.modalVisible,
+        floatingCartVisible: !state.floatingCartVisible,
       };
 
     default:
