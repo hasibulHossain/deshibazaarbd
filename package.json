@@ -72,13 +72,13 @@
         "react-swipe-button": "^1.0.1",
         "react-toastify": "^6.2.0",
         "redux": "^4.0.5",
-        "redux-devtools-extension": "^2.13.9",
         "redux-thunk": "^2.3.0",
         "sass": "^1.32.8",
         "simple-encrypter": "0.0.6",
         "slick-carousel": "^1.8.1"
     },
     "devDependencies": {
-        "expose-loader": "^1.0.3"
+        "expose-loader": "^1.0.3",
+        "redux-devtools-extension": "^2.13.9"
     }
 }
