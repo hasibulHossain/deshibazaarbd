@@ -13,7 +13,7 @@ function FloatingCartProduct() {
       </div>
       <div className="floating-cart__product-right">
         <div className="floating-cart__product-details">
-          <p className="floating-cart__product-name">Fresh dryed almod (50g)</p>
+          <p className="floating-cart__product-name">Fresh Dryed almod (50g)</p>
           <p className="floating-cart__product-price">
             1 <span>X</span> Tk 300.00 BDT
           </p>

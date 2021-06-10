@@ -1,10 +1,7 @@
 import * as types from "../types/types";
 
-export const toggleModal = (value) => {
+export const toggleModal = () => {
   return {
-    type: types.TOGGLE_MODAL,
-    payload: {
-      modalVisible: value,
-    },
+    type: types.TOGGLE_MODAL
   };
 };

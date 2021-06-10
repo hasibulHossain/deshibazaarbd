@@ -2,6 +2,8 @@
             Carts Page CSS
 /***********************************************************/
 
+//   z-index: 1000; // max z-index 1000
+
 $border-bottom: 1px solid #dfdfdf;
 .cart {
   font-size: 0.88rem; // 16px | 0.77 = 14px
@@ -183,6 +185,11 @@ $border-bottom: 1px solid #dfdfdf;
     }
   }
 
+  &__proceed-btn {
+    width: 80%;
+    margin: 0 auto;
+  }
+
   &__right-discount {
     display: flex;
     align-items: center;
@@ -333,6 +340,7 @@ $border-bottom: 1px solid #dfdfdf;
   border-radius: 4px;
   color: #fff;
   padding: 0.7em 1.5em;
+  width: 100%;
 
   font-weight: 500;
   font-size: 0.77rem;
@@ -352,12 +360,13 @@ $border-bottom: 1px solid #dfdfdf;
 
 .floating-cart {
   $self: &;
+  max-width: 300px;
   height: 100vh;
   background-color: #ffff;
   position: fixed;
   top: 0;
   right: 0;
-  z-index: 10000;
+  z-index: 1000;
   overflow-y: auto;
 
   &__header {
@@ -460,6 +469,39 @@ $border-bottom: 1px solid #dfdfdf;
       }
     }
   }
+
+  &__payment-info {
+    padding: 1rem 0.8rem;
+    margin-top: 1.6rem;
+    border-top: $border-bottom;
+    border-bottom: $border-bottom;
+
+    font-size: 0.77rem;
+    font-weight: 700;
+
+    #{$self}__payment-details {
+      display: flex;
+      justify-content: space-between;
+
+      margin-bottom: 1.1rem;
+      & span:last-child {
+        color: #ca091b;
+      }
+    }
+
+    & #{$self}__payment-details:last-child {
+      margin-top: 1.5rem;
+    }
+  }
+
+  &__actions {
+    padding: 2rem 2rem;
+
+    & div:first-child {
+      // font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+  }
 }
 
 .modal-scrollbar:hover::-webkit-scrollbar-track {
@@ -477,4 +519,14 @@ $border-bottom: 1px solid #dfdfdf;
 .modal-scrollbar:hover::-webkit-scrollbar-thumb {
   background-color: #b6b6b6;
   border-radius: 5px;
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 900;
+  background-color: rgba(0, 0, 0, 0.5);
 }
