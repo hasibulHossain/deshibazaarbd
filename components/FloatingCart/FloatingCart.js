@@ -32,28 +32,22 @@ function FloatingCart() {
         <div>
           <FloatingCartProduct />
         </div>
-        <div>
-          <FloatingCartProduct />
-        </div>
-        <div>
-          <FloatingCartProduct />
-        </div>
       </div>
-      <div className="floating-cart__payment">
-        <div className="floating-cart__sub-total">
+      <div className="floating-cart__payment-info">
+        <div className="floating-cart__payment-details">
           <span>Sub Total</span>
           <span>TK 1400.00 BDT</span>
         </div>
-        <div className="floating-cart__delivery-fee">
+        <div className="floating-cart__payment-details">
           <span>Delivery Fee</span>
           <span>TK 50.00 BDT</span>
         </div>
-        <div className="floating-cart__total">
-          <span>Sub Total</span>
+        <div className="floating-cart__payment-details">
+          <span>Total</span>
           <span>TK 1450.00 BDT</span>
         </div>
       </div>
-      <div className="floating_cart__actions">
+      <div className="floating-cart__actions">
         <div>
           <SimpleBtn variant="danger">view cart</SimpleBtn>
         </div>

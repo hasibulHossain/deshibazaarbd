@@ -9,6 +9,7 @@ function GlobalReducer(state = initialState, { type, payload }) {
     case types.TOGGLE_MODAL:
       return {
         ...state,
+        backdrop: !state.backdrop,
         floatingCartVisible: !state.floatingCartVisible,
       };
 
