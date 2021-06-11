@@ -8,15 +8,13 @@ import { useSelector } from "react-redux";
 
 const MainLayout = (props) => {
   const { children } = props;
-  const { floatingCartVisible, backdrop } = useSelector(
-    (state) => state.GlobalReducer
-  );
+  const { backdrop } = useSelector((state) => state.GlobalReducer);
 
   return (
     <>
       <DemoWarning />
       <Header />
-      {floatingCartVisible && <FloatingCart />}
+      <FloatingCart />
       <main>
         {backdrop && <div className="backdrop"></div>}
         {children}

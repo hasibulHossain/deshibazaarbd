@@ -16,14 +16,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import HeaderTop from "./HeaderTop";
 import HeaderMenu from "./HeaderMenu";
 import Button from "../master/Button/Button";
-import { toggleModal } from "../../_redux/store/action/globalAction";
+import { toggleFloatingCart } from "../../_redux/store/action/globalAction";
 
 const Header = () => {
   const toggleNav = "basic-navbar-nav";
   const dispatch = useDispatch();
 
   const toggleCartHandler = () => {
-    dispatch(toggleModal());
+    dispatch(toggleFloatingCart());
   };
   return (
     <d>
