@@ -1,19 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 // third party imports
 import { IoMdCloseCircle } from "react-icons/io";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 // local imports
 import SimpleBtn from "../master/SimpleBtn/SimpleBtn";
 import FloatingCartProduct from "../FloatingCartProduct/FloatingCartProduct";
-import { toggleModal } from "../../_redux/store/action/globalAction";
+import { toggleFloatingCart } from "../../_redux/store/action/globalAction";
 
 function FloatingCart() {
+  const { floatingCartVisible } = useSelector((state) => state.GlobalReducer);
+
   const dispatch = useDispatch();
   const toggleCartHandler = () => {
-    dispatch(toggleModal());
+    dispatch(toggleFloatingCart());
   };
+
+  useEffect(() => {
+    const bodyDOM = window.document.body;
+
+    // Remove scrollbar when Floating cart is open
+    if (floatingCartVisible) {
+      bodyDOM.style.overflowY = "100vh";
+      bodyDOM.style.overflowY = "hidden";
+    } else {
+      body.style.height = "";
+      body.style.overflowY = "";
+    }
+  });
+
   return (
     <div className="floating-cart modal-scrollbar">
       <div className="floating-cart__header">

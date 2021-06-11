@@ -1,29 +1,32 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-let modalRoot;
-if (typeof window === 'object') {
-    modalRoot = document.getElementById('modal-root');
-}
+import React, { useEffect, useState } from "react";
+import ReactDOM from "react-dom";
 
 function Modal(props) {
-    const {children, closeModalHandler, visible} = props;
-    let modalContent = (
-        <div className="modal-wrapper">
-            <div onClick={ () => closeModalHandler() } className="modal-backdrop"></div>
-            <div className="modal-box modal-scrollbar">
-                <div className="modal-children">
-                    { children }
-                </div>
-            </div>
-        </div>
-    )
+  const [modalRoot, setModalRoot] = useState(null);
+  const { children, closeModalHandler, visible, style } = props;
 
-    if(visible && modalRoot) {
-        return ReactDOM.createPortal(modalContent, modalRoot);
-    } else {
-        return null;
-    }
+  let modalContent = (
+    <div className="modal__modal-wrapper">
+      <div
+        onClick={() => closeModalHandler()}
+        className="modal__backdrop"
+      ></div>
+      <div style={{ ...style }} className="modal__modal-box modal-scrollbar">
+        <div className="modal__children">{children}</div>
+      </div>
+    </div>
+  );
 
+  useEffect(() => {
+    const modalDom = window.document.getElementById("modal-root");
+    setModalRoot(modalDom);
+  });
+
+  if (visible && modalRoot) {
+    return ReactDOM.createPortal(modalContent, modalRoot);
+  } else {
+    return null;
+  }
 }
 
 export default Modal;

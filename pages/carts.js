@@ -2,10 +2,11 @@ import React, { useEffect } from "react";
 import Head from "next/head";
 
 // third party import
-import { Button } from "react-bootstrap";
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import { FiChevronRight } from "react-icons/fi";
 import { MdDelete } from "react-icons/md";
+
+import { useSelector, useDispatch } from "react-redux";
 
 // local import
 import MainLayout from "../components/layouts/MainLayout";
@@ -13,8 +14,19 @@ import Card from "../components/Card/Card";
 import SimpleInput from "../components/master/SimpleInput/SimpleInput";
 import SimpleBtn from "../components/master/SimpleBtn/SimpleBtn";
 import CartProducts from "../components/CartProducts/CartProducts";
+import Modal from "../components/master/Modal/Modal";
+import RemoveCartItem from "../components/RemoveCartItem/RemoveCartItem";
+import { toggleModal } from "../_redux/store/action/globalAction";
 
-export default function Home() {
+export default function Carts() {
+  const { modalShown } = useSelector((state) => state.GlobalReducer);
+
+  const dispatch = useDispatch();
+
+  const deleteItemsHandler = () => {
+    dispatch(toggleModal());
+  };
+
   useEffect(() => {
     if (typeof window === "undefined") {
       global.window = {};
@@ -23,6 +35,17 @@ export default function Home() {
 
   return (
     <>
+      <Modal
+        visible={modalShown}
+        closeModalHandler={() => console.log("modal close handler")}
+      >
+        <div style={{ width: "27rem" }}>
+          <RemoveCartItem>
+            Remove frm cart item will be removed from order
+          </RemoveCartItem>
+        </div>
+      </Modal>
+
       <Head>
         <title>Cart | Deshi Bazaar BD</title>
         <meta name="description" content="Meta" />
@@ -49,7 +72,7 @@ export default function Home() {
                   <Card>
                     <div className="cart_item_box_top">
                       <p>Select All (2 items)</p>
-                      <div>
+                      <div onClick={deleteItemsHandler}>
                         <MdDelete />
                         <p>Delete</p>
                       </div>
