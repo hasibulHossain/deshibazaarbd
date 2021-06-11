@@ -16,8 +16,8 @@ const NewCollection = () => {
             <div className="new-collection-section">
                 <div className="row">
                     <div className="col-md-3">
-                        <div className="home-appliance borderRadius mb-3 pointer">
-                            <div className="new-collection-datails">
+                        <div className="home-appliance border-radius-5 mb-3 pointer">
+                            <div className="new-collection-details">
                                 <p>Explore New Collection Of </p>
                                 <h3 className="title">Home Appliance</h3>
                                 <button className="collectionBtn">View Collection</button>
@@ -29,8 +29,8 @@ const NewCollection = () => {
                     </div>
 
                     <div className="col-md-6">
-                        <div className="new-collection-card borderRadius mb-3 pointer">
-                            <div className="custome-new-collection-datails">
+                        <div className="new-collection-card border-radius-5 mb-3 pointer">
+                            <div className="custome-new-collection-details">
                                 <p>Only This Weak </p>
                                 <h3 className="title">Perfect Fit <br /> For Your Home</h3>
                                 <button className="collectionBtn">View Collection</button>
@@ -42,8 +42,8 @@ const NewCollection = () => {
                     </div>
 
                     <div className="col-md-3">
-                        <div className="stationary_carft borderRadius mb-3 pointer">
-                            <div className="new-collection-datails">
+                        <div className="stationary_carft border-radius-5 mb-3 pointer">
+                            <div className="new-collection-details">
                                 <p> New Collection Of </p>
                                 <h3 className="title">Stationary & Carft</h3>
                                 <Button buttonText="SHOP NOW" />

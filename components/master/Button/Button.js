@@ -11,7 +11,7 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
  */
 const Button = ({ buttonText, isFontAwesome }) => {
     return (
-        <button className="custome-button-component">
+        <button className="custom-button-component">
             {buttonText}
             {
                 isFontAwesome && <FontAwesomeIcon className="ml-2" icon={faArrowRight} />
