@@ -4,7 +4,7 @@ import { faShippingFast, faUser } from '@fortawesome/free-solid-svg-icons'
 import { languages } from '../../assets/FakeData/FakeData';
 
 const HeaderTop = () => {
-    
+
     return (
         <section className="header-top">
             <div className="container">
@@ -16,11 +16,12 @@ const HeaderTop = () => {
                         <div className="row justify-content-end">
                             <p className="heading-top-text pointer"><FontAwesomeIcon className="custome-fontAwesome" icon={faShippingFast} /> Track My Order</p>
                             <p className="heading-top-text pointer"><FontAwesomeIcon className="custome-fontAwesome" icon={faUser} /> My Account</p>
-                            <select class="form-select custome-select" aria-label="Default select example">
+                            
+                            <select className="form-select custome-select" aria-label="Default select example">
                                 {
                                     languages.length > 0 && languages.map((lan, index) => (
-                                        <option className="text-dark" value={lan.value} key={index}>
-                                            <span>{lan.label}</span>
+                                        <option value={lan.value} key={index}>
+                                            {lan.label}
                                         </option>
                                     ))
                                 }

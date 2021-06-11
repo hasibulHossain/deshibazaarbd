@@ -37,8 +37,7 @@ const HeaderMenu = ({ toggleNav }) => {
                         <Menu menuButton={<MenuButton>{item.menu} <FontAwesomeIcon className="custome-fontAwesome" icon={faCaretDown} /></MenuButton>} key={index}>
                             {
                                 item.subMenu1.length > 0 && item.subMenu1.map((item2, index2) => (
-                                    <MenuItem>{item2.SubMenu}</MenuItem>
-
+                                    <MenuItem key={index2}>{item2.SubMenu}</MenuItem>
                                 ))
                             }
                             <SubMenu label="Product Category">
