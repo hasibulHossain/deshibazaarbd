@@ -24,11 +24,12 @@ const HeaderMenu = ({ toggleNav }) => {
     return (
         <div className="menu_list">
             <Navbar.Collapse id={toggleNav} >
+
                 <Link href="/categories-wise-product">
-                    <a className="all_category_menu">
-                        <FontAwesomeIcon className="mr-1" icon={faBars} />
-                    All Categories
-               </a>
+                    <a className="all_category_menu font-weight-bold">
+                        <img src="/images/logos/menu.png" className="menu pr-2" style={{ width: 30 }}/>
+                        All Categories
+                    </a>
                 </Link>
 
                 {
