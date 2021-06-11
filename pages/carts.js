@@ -19,7 +19,7 @@ import RemoveCartItem from "../components/RemoveCartItem/RemoveCartItem";
 import { toggleModal } from "../_redux/store/action/globalAction";
 
 export default function Carts() {
-  const { modalShown } = useSelector((state) => state.GlobalReducer);
+  const { isModalActive } = useSelector((state) => state.GlobalReducer);
 
   const dispatch = useDispatch();
 
@@ -36,7 +36,7 @@ export default function Carts() {
   return (
     <>
       <Modal
-        visible={modalShown}
+        visible={isModalActive}
         closeModalHandler={() => console.log("modal close handler")}
       >
         <div style={{ width: "27rem" }}>
