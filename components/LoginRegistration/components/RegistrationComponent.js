@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from "react-hook-form";
 import ErrorMessage from '../../master/ErrorMessage/ErrorMessage';
 import { ChangeRegisterInputField, customerRegister, RegisterFirstStep } from '../_redux/Action/RegisterAction';
+import { Spinner } from 'react-bootstrap';
 
 const RegistrationComponent = () => {
     const dispatch = useDispatch()
@@ -167,7 +168,7 @@ const RegistrationComponent = () => {
                                     value={registerInput.otp}
                                     onChange={(e) => handleChangeTextInput('otp', e.target.value)}
                                     ref={register({
-                                        required: true,
+                                        required: false,
                                         maxLength: 100,
                                     })}
                                 />
@@ -189,13 +190,13 @@ const RegistrationComponent = () => {
                                     name="password"
                                     value={registerInput.password}
                                     onChange={(e) => handleChangeTextInput("password", e.target.value)}
-                                    ref={register({
-                                        required: "⚠ You must specify a password",
-                                        minLength: {
-                                            value: 8,
-                                            message: "Password must have at least 8 characters"
-                                        }
-                                    })}
+                                // ref={register({
+                                //     required: "⚠ You must specify a password",
+                                //     minLength: {
+                                //         value: 8,
+                                //         message: "Password must have at least 8 characters"
+                                //     }
+                                // })}
                                 />
                                 {
                                     errors.password && (
@@ -223,10 +224,10 @@ const RegistrationComponent = () => {
                                     onChange={(e) =>
                                         handleChangeTextInput("password_confirmation", e.target.value)
                                     }
-                                    ref={register({
-                                        validate: (value) =>
-                                            value === password.current || "The passwords do not match",
-                                    })}
+                                // ref={register({
+                                //     validate: (value) =>
+                                //         value === password.current || "The passwords do not match",
+                                // })}
                                 />
                                 {errors.password_confirmation && (
                                     <ErrorMessage errorText={errors.password_confirmation.message} />
