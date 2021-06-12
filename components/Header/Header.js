@@ -48,10 +48,10 @@ const Header = () => {
               <Navbar.Toggle aria-controls={toggleNav} />
               <Navbar.Collapse id={toggleNav}>
                 <div className="header-search-product">
-                  <input placeholder="Search for products, brands or more" />
-                  <div className="header-custome-prepend pointer">
+                  <input placeholder="Search for Products, Brands or more" />
+                  <div className="header-custom-prepend pointer">
                     <FontAwesomeIcon
-                      className="custome-fontAwesome"
+                      className="custom-fontAwesome"
                       icon={faSearch}
                     />
                   </div>
@@ -68,7 +68,7 @@ const Header = () => {
                   <Link href="/" className="header-nav-link">
                     <a>
                       <FontAwesomeIcon
-                        className="custome-fontAwesome"
+                        className="custom-fontAwesome"
                         icon={faHeart}
                       />{" "}
                       Wishlist
@@ -77,7 +77,7 @@ const Header = () => {
                   {/* <Link href="/carts" className="header-nav-link"> */}
                   <span onClick={toggleCartHandler} className="header-nav-link">
                     <FontAwesomeIcon
-                      className="custome-fontAwesome"
+                      className="custom-fontAwesome"
                       icon={faShoppingBag}
                     />{" "}
                     Cart

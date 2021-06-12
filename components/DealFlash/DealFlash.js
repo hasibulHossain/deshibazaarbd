@@ -7,17 +7,20 @@ import ReactStars from "react-rating-stars-component";
 import CountdownTimer from "react-component-countdown-timer";
 
 const DealFlash = () => {
-    const dispatch = useDispatch();
-    const flashDealList = useSelector((state) => state.DealFlashReducer.flashDealList);
+
+    const dispatch      = useDispatch();
+    const flashDealList = useSelector(state => state.DealFlashReducer.flashDealList);
+    
     useEffect(() => {
         dispatch(getDealFlashList())
-    }, [])
+    }, []);
+
     return (
         <section className="product-container">
             <div className="product-heading">
-                <h5>Deals OF The Day</h5>
+                <h5 className="section-heading">Deals OF The Day</h5>
                 <button className="flashDealButton d-flex align-items-center">
-                    <span className="mr-2"> 6times <br /> Tk-12,500</span>
+                    <span className="mr-2"> 6 items <br /> Tk-12,500</span>
                     <span> <FontAwesomeIcon className="ml-2" icon={faShoppingBag} /></span>
                 </button>
             </div>

@@ -69,8 +69,8 @@ const Footer = () => {
                     <Col md={4} sm={6}>
                         <div className="footer-info">
                             <h5>Newsletter</h5>
-                            <p>Suscribe to our newsletter to get notification about discount information</p>
-                            <input type="text" className="form-control mb-3" />
+                            <p>Subscribe to our newsletter to get notification about discount information</p>
+                            <input type="text" className="form-control mb-3" placeholder="Enter your Email here"/>
                             <Button buttonText="Subscribe" />
                         </div>
                         <SocialMedia />

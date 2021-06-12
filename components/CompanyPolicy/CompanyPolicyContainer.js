@@ -15,7 +15,7 @@ const CompanyPolicyContainer = () => {
                 <div className="row justify-content-center">
                     {
                         policyList.length > 0 && policyList.map((item, index) => (
-                            <div className="col-md-4">
+                            <div className="col-md-4" key={index}>
                                 <div className="policy-card">
                                     <img src={item.icon} alt={item.title} />
                                     <h5 className="policy-card-title">
