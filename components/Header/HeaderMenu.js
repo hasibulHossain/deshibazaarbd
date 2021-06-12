@@ -23,18 +23,41 @@ const HeaderMenu = ({ toggleNav }) => {
 
     return (
         <div className="menu_list">
-            <Navbar.Collapse id={toggleNav} >
+            <Navbar.Collapse id={toggleNav}>
 
-                <Link href="/categories-wise-product">
+                {/* <Link href="/categories-wise-product">
                     <a className="all_category_menu font-weight-bold">
-                        <img src="/images/logos/menu.png" className="menu pr-2" style={{ width: 30 }}/>
+                        <img src="/images/logos/menu.png" className="menu pr-2" style={{ width: 30 }} />
                         All Categories
                     </a>
-                </Link>
+                </Link> */}
+
+                <Menu menuButton={
+                    <MenuButton className="font-weight-bold">
+                        <img src="/images/logos/menu.png" className="menu pr-2" style={{ width: 30 }} />
+                        {'ALL CATEGORIES'} 
+                        </MenuButton>} key={1}
+                    >
+                    {
+                        menuList.map((item, index) => (
+                            <MenuItem key={index}>{item.menu}</MenuItem>
+                        ))
+                    }
+                    
+                    <SubMenu label="Product Category">
+                        <MenuItem>Category-1</MenuItem>
+                        <MenuItem>Category-2</MenuItem>
+                        <SubMenu label="Product Sub Category">
+                            <MenuItem>Category Sub-1</MenuItem>
+                            <MenuItem>Category Sub-2</MenuItem>
+                            <MenuItem>Category Sub-3</MenuItem>
+                        </SubMenu>
+                    </SubMenu>
+                </Menu>
 
                 {
                     menuList.length > 0 && menuList.map((item, index) => (
-                        <Menu menuButton={<MenuButton>{item.menu} <FontAwesomeIcon className="custome-fontAwesome" icon={faCaretDown} /></MenuButton>} key={index}>
+                        <Menu menuButton={<MenuButton>{item.menu} <FontAwesomeIcon className="custom-fontAwesome" icon={faCaretDown} /></MenuButton>} key={index}>
                             {
                                 item.subMenu1.length > 0 && item.subMenu1.map((item2, index2) => (
                                     <MenuItem key={index2}>{item2.SubMenu}</MenuItem>
@@ -49,13 +72,11 @@ const HeaderMenu = ({ toggleNav }) => {
                                     <MenuItem>Category Sub-3</MenuItem>
                                 </SubMenu>
                             </SubMenu>
-                            <MenuItem>Save</MenuItem>
                         </Menu>
                     ))
                 }
             </Navbar.Collapse >
         </div>
-
     );
 };
 

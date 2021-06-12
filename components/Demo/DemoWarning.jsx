@@ -14,7 +14,7 @@ const DemoWarning = () => {
     return (
         <div className="alert alert-info p-2 text-center mb-0" >
             <h2 className="font-weight-light" style={ styleDemoText }>
-                <FontAwesomeIcon className="custome-fontAwesome" icon={faBell} size={'lg'} /> {" "}
+                <FontAwesomeIcon className="custom-fontAwesome" icon={faBell} size={'lg'} /> {" "}
                 Hello Sir, Site is under development. 
                 Please be patient & we'll do business together 
                 {" "}

@@ -2,7 +2,7 @@
                         Global CSS Part :: Start
 /*****************************************************************/
 
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,300;0,400;0,500;1,300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@@100;300;400;500;600;700&display=swap");
 
 body {
   background-color: #f6f6f6 !important;
@@ -77,21 +77,32 @@ a .custom-button-component:hover {
   background-color: #16b62a;
   color: #fff;
   font-weight: 200;
+  padding: 10px;
+}
+
+.dropdown-currency button {
+  padding: 0px;
+  color: #fff !important;
+}
+
+.heading-top-right div, .heading-top-right button, .heading-top-right p {
+  font-size: 14px !important;
+  font-weight: 500;
 }
 
 .heading-top-text {
-  margin-top: 10px;
-  font-size: 0.8em;
+  font-size: 12px;
   margin-right: 15px;
+  margin-bottom: 0px;
+  font-weight: 300;
 }
 
 .heading-top-text .holyday-shopping {
   font-size: 1.2em;
   font-weight: 400;
-  /* font-weight: 600; */
 }
 
-.heading-top-text .custome-fontAwesome {
+.heading-top-text .custom-fontAwesome {
   font-size: 1.2em;
   margin-right: 5px;
 }
@@ -153,7 +164,7 @@ a .custom-button-component:hover {
   color: #8b8b8b;
 }
 
-.header-search-product .header-custome-prepend {
+.header-search-product .header-custom-prepend {
   background-color: #e9000f;
   padding: 10px 20px;
   color: #fff;
@@ -163,7 +174,8 @@ a .custom-button-component:hover {
 }
 
 .brand-logo {
-  width: 120px;
+  width: 150px;
+  height: 100px;
 }
 
 .header-nav a {
@@ -174,7 +186,7 @@ a .custom-button-component:hover {
   font-size: 14px;
 }
 
-.header-nav a .custome-fontAwesome {
+.header-nav a .custom-fontAwesome {
   color: #e9000f;
 }
 
@@ -215,14 +227,13 @@ a .custom-button-component:hover {
   display: block;
 }
 
-.rc-menu-button .custome-fontAwesome {
+.rc-menu-button .custom-fontAwesome {
   font-size: 15px;
 }
 
 /*****************************************************************
                         Header CSS Part :: End
 /*****************************************************************/
-
 
 /*================Home Banner Carousel==============*/
 
@@ -538,11 +549,13 @@ a .custom-button-component:hover {
 
 .flash-deal-detail {
   width: 65%;
+  font-size: 16px;
 }
 
 .flash-deal-detail .title {
-  font-size: 1.5em;
+  font-size: 1.2em;
   margin-bottom: 20px;
+  font-weight: 600;
 }
 
 .flash-deal-detail .price,
@@ -583,6 +596,10 @@ a .custom-button-component:hover {
 /*=====================Flash Deal section close==================*/
 
 /*=====================New Collection section==================*/
+.section-heading {
+  font-size: 17px !important;
+  font-weight: 600;
+}
 
 .new-collection-section {
   -webkit-box-shadow: 2px 6px 15px -7px rgba(166, 166, 166, 1);

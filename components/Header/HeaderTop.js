@@ -1,4 +1,5 @@
 import React from 'react';
+import { Dropdown } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShippingFast, faUser } from '@fortawesome/free-solid-svg-icons'
 import { languages } from '../../assets/FakeData/FakeData';
@@ -12,20 +13,26 @@ const HeaderTop = () => {
                     <div className="col-md-5">
                         <p className="heading-top-text">Get Your <span className="holyday-shopping">Holiday Shopping</span> On Wholesale Pricing</p>
                     </div>
-                    <div className="col-md-7">
+                    <div className="col-md-7 heading-top-right">
                         <div className="row justify-content-end">
-                            <p className="heading-top-text pointer"><FontAwesomeIcon className="custome-fontAwesome" icon={faShippingFast} /> Track My Order</p>
-                            <p className="heading-top-text pointer"><FontAwesomeIcon className="custome-fontAwesome" icon={faUser} /> My Account</p>
+                            <p className="heading-top-text pointer"><FontAwesomeIcon className="custom-fontAwesome" icon={faShippingFast} /> Track My Order</p>
+                            <p className="heading-top-text pointer"><FontAwesomeIcon className="custom-fontAwesome" icon={faUser} /> My Account</p>
                             
-                            <select className="form-select custome-select" aria-label="Default select example">
-                                {
-                                    languages.length > 0 && languages.map((lan, index) => (
-                                        <option value={lan.value} key={index}>
-                                            {lan.label}
-                                        </option>
-                                    ))
-                                }
-                            </select>
+                            <Dropdown className="dropdown-currency">
+                                <Dropdown.Toggle variant="default" id="dropdown-basic">
+                                    <img src='/images/languages/usa.png' /> USD
+                                </Dropdown.Toggle>
+
+                                <Dropdown.Menu> 
+                                    {
+                                        languages.length > 0 && languages.map((lan, index) => (
+                                            <Dropdown.Item href="#"  key={index}>
+                                                {lan.label}
+                                            </Dropdown.Item>
+                                        ))
+                                    }
+                                </Dropdown.Menu>
+                            </Dropdown>
                         </div>
                     </div>
                 </div>
