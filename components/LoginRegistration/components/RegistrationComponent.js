@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookF, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
@@ -7,24 +7,31 @@ import { useDispatch, useSelector } from 'react-redux';
 // import ReactSwipeButton from 'react-swipe-button'
 import { useForm } from "react-hook-form";
 import ErrorMessage from '../../master/ErrorMessage/ErrorMessage';
-import { ChangeRegisterInputField, RegisterFirstStep } from '../_redux/Action/RegisterAction';
+import { ChangeRegisterInputField, customerRegister, RegisterFirstStep } from '../_redux/Action/RegisterAction';
 
 const RegistrationComponent = () => {
     const dispatch = useDispatch()
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const { register, handleSubmit, errors, setValue, watch } = useForm();
-
     const registerInput = useSelector((state) => state.RegisterReducer.registerInput)
-    // const isLoading = useSelector((state) => state.registerReducer.isLoading);
+    const isLoading = useSelector((state) => state.RegisterReducer.isLoading);
 
+    const password = useRef({});
+    password.current = watch("password", "");
     //handle change input 
     const handleChangeTextInput = (name, value) => {
         dispatch(ChangeRegisterInputField(name, value))
     }
+    //get otp by first step register
     const handleRegisterFirstStep = () => {
         dispatch(RegisterFirstStep(registerInput))
     }
+
+    // final customer register
+    const handleRegister = async (e) => {
+        dispatch(customerRegister(registerInput));
+    };
     const onSucces = () => {
         console.log('Swip success');
     }
@@ -152,14 +159,51 @@ const RegistrationComponent = () => {
                         <div className="col-md-6">
                             <div class="mb-3">
                                 <label for="lastName" class="form-label">OTP</label>
-                                <input type="text" class="form-control" placeholder="" />
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder=""
+                                    name="otp"
+                                    value={registerInput.otp}
+                                    onChange={(e) => handleChangeTextInput('otp', e.target.value)}
+                                    ref={register({
+                                        required: true,
+                                        maxLength: 100,
+                                    })}
+                                />
+                                {
+                                    errors.otp && errors.otp.type === 'required' && (
+                                        <ErrorMessage errorText="Please enter your one time password!" />
+                                    )
+                                }
                             </div>
                         </div>
 
                         <div className="col-md-6">
                             <label for="password" class="form-label">Password</label>
                             <div class="account_input_group">
-                                <input type={showPassword === true ? "text" : "password"} class="form-control" id="inlineFormInputGroup" placeholder="" />
+                                <input
+                                    type={showPassword === true ? "text" : "password"}
+                                    class="form-control" id="inlineFormInputGroup"
+                                    placeholder=""
+                                    name="password"
+                                    value={registerInput.password}
+                                    onChange={(e) => handleChangeTextInput("password", e.target.value)}
+                                    ref={register({
+                                        required: "⚠ You must specify a password",
+                                        minLength: {
+                                            value: 8,
+                                            message: "Password must have at least 8 characters"
+                                        }
+                                    })}
+                                />
+                                {
+                                    errors.password && (
+                                        <ErrorMessage errorText={errors.password.message} />
+                                    )
+                                }
+
+
                                 <div class="account_input_group_prepend" onClick={() => setShowPassword(!showPassword)}>
                                     {
                                         showPassword === true ? <FontAwesomeIcon icon={faEyeSlash} /> : <FontAwesomeIcon icon={faEye} />
@@ -170,7 +214,25 @@ const RegistrationComponent = () => {
                         <div className="col-md-6">
                             <label for="Confirm_password" class="form-label">Confirm Password</label>
                             <div class="account_input_group">
-                                <input type={showConfirmPassword === true ? "text" : "password"} class="form-control" id="inlineFormInputGroup" placeholder="" />
+                                <input
+                                    type={showConfirmPassword === true ? "text" : "password"}
+                                    class="form-control" id="inlineFormInputGroup"
+                                    placeholder=""
+                                    name="password_confirmation"
+                                    value={registerInput.password_confirmation}
+                                    onChange={(e) =>
+                                        handleChangeTextInput("password_confirmation", e.target.value)
+                                    }
+                                    ref={register({
+                                        validate: (value) =>
+                                            value === password.current || "The passwords do not match",
+                                    })}
+                                />
+                                {errors.password_confirmation && (
+                                    <ErrorMessage errorText={errors.password_confirmation.message} />
+                                )}
+
+
                                 <div class="account_input_group_prepend" onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
                                     {
                                         showConfirmPassword === true ? <FontAwesomeIcon icon={faEyeSlash} /> : <FontAwesomeIcon icon={faEye} />
@@ -194,7 +256,31 @@ const RegistrationComponent = () => {
                     </div>
 
                     <div className="account_btn_group">
-                        <button className="btn account_btn mt-2">Create an account</button>
+                        {/* <button className="btn account_btn mt-2">Create an account</button> */}
+
+
+                        {isLoading === true && (
+                            <>
+                                <button disabled={true} className="btn account_btn mt-2">
+                                    <Spinner animation="border" role="status">
+                                        {" "}
+                                    </Spinner>{" "}
+                                    Creating account...
+                                </button>
+                            </>
+                        )}
+
+                        {
+                            !isLoading && (
+                                <button type="submit" className="btn account_btn mt-2" onClick={handleSubmit(handleRegister)} >
+                                    Create an account
+                                </button>
+                            )
+                        }
+
+
+
+
                         <p className="mt-2">or Sign up with</p>
                         <button className="btn google_btn mr-3 mt-2"><FontAwesomeIcon className="mr-2" icon={faGoogle} />Google</button>
                         <button className="btn facebook_btn mt-2"><FontAwesomeIcon className="mr-2" icon={faFacebookF} />Google</button>
