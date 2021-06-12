@@ -20,7 +20,7 @@ const DealFlash = () => {
             <div className="product-heading">
                 <h5 className="section-heading">Deals OF The Day</h5>
                 <button className="flashDealButton d-flex align-items-center">
-                    <span className="mr-2"> 6times <br /> Tk-12,500</span>
+                    <span className="mr-2"> 6 items <br /> Tk-12,500</span>
                     <span> <FontAwesomeIcon className="ml-2" icon={faShoppingBag} /></span>
                 </button>
             </div>
