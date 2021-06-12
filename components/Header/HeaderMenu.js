@@ -1,17 +1,21 @@
 import React, { useEffect } from "react";
 
+// third party imports
+import { Navbar } from "react-bootstrap";
 import { Menu, MenuItem, MenuButton, SubMenu } from "@szhsin/react-menu";
 import "@szhsin/react-menu/dist/index.css";
-import { Navbar } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { getMenuListData } from "./_redux/HeaderAction/HeaderAction";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faCaretDown } from "@fortawesome/free-solid-svg-icons";
-import Link from "next/link";
+
+// local imports
+import { getMenuListData } from "./_redux/HeaderAction/HeaderAction";
 
 const HeaderMenu = ({ toggleNav }) => {
+  const { menuList } = useSelector((state) => state.HeaderReducer);
+
   const dispatch = useDispatch();
-  const menuList = useSelector((state) => state.HeaderReducer.menuList);
+
   useEffect(() => {
     dispatch(getMenuListData());
   }, []);
@@ -19,13 +23,6 @@ const HeaderMenu = ({ toggleNav }) => {
   return (
     <div className="menu_list">
       <Navbar.Collapse id={toggleNav}>
-        {/* <Link href="/categories-wise-product">
-                    <a className="all_category_menu font-weight-bold">
-                        <img src="/images/logos/menu.png" className="menu pr-2" style={{ width: 30 }} />
-                        All Categories
-                    </a>
-                </Link> */}
-
         <Menu
           menuButton={
             <MenuButton className="font-weight-bold">
