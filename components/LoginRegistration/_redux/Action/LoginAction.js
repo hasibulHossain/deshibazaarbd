@@ -1,11 +1,9 @@
-import * as Types from "../../Types";
+import * as Types from "./../Type/Types";
 import * as JwtDecode from "jwt-decode";
 // import { generateToken } from "../../services/token/TokenService";
 import axios from "axios";
-import { showToast } from "../../../components/master/Helper/ToastHelper";
-import { getUserDataAction } from "../../../components/getUserData/Action/UserDataAction";
-// import { API_POST_LOGIN } from "../../ApiEndpoint";
-
+import { showToast } from "../../../master/Helper/ToastHelper";
+import { getUserDataAction } from "../../../_redux/getUserData/Action/UserDataAction";
 
 export const handleLoginInput = (name, value) => (dispatch) => {
   const formData = {
@@ -61,7 +59,7 @@ export const loginAction = (loginData) => (dispatch) => {
 
 export const emptyDispatch = () => (dispatch) => {
   const isLogging = false;
-  dispatch({ type: Types.EMPTY_DISPATCH, payload: isLogging});
+  dispatch({ type: Types.EMPTY_DISPATCH, payload: isLogging });
 }
 
 export const getAuthData = () => async (dispatch) => {

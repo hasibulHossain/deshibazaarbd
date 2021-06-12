@@ -3,7 +3,6 @@
 /*****************************************************************/
 
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@@100;300;400;500;600;700&display=swap");
-
 body {
   background-color: #f6f6f6 !important;
   margin: 0;
@@ -12,16 +11,7 @@ body {
   font-family: "Montserrat", sans-serif;
 }
 
-h6,
-h5,
-h4,
-h3,
-h2,
-h1,
-p,
-div,
-a,
-button {
+h6, h5, h4, h3, h2, h1, p, div, a, button {
   font-family: "Montserrat", sans-serif;
 }
 
@@ -45,8 +35,7 @@ a {
                         Global CSS Part :: End
 /*****************************************************************/
 
-.custom-button-component,
-a .custom-button-component {
+.custom-button-component, a .custom-button-component {
   background-color: #e9000f;
   color: #fff !important;
   border: 2px solid #e9000f;
@@ -58,8 +47,7 @@ a .custom-button-component {
   text-decoration: none !important;
 }
 
-.custom-button-component:hover,
-a .custom-button-component:hover {
+.custom-button-component:hover, a .custom-button-component:hover {
   background-color: #fff;
   color: #e9000f !important;
   text-decoration: none;
@@ -271,8 +259,7 @@ a .custom-button-component:hover {
   background-color: transparent !important;
 }
 
-.carousel-control-next,
-.carousel-control-prev {
+.carousel-control-next, .carousel-control-prev {
   display: none !important;
 }
 
@@ -323,8 +310,7 @@ a .custom-button-component:hover {
   text-transform: capitalize;
 }
 
-.slick-prev,
-.slick-next {
+.slick-prev, .slick-next {
   display: none !important;
 }
 
@@ -568,8 +554,7 @@ a .custom-button-component:hover {
   font-weight: 600;
 }
 
-.flash-deal-detail .price,
-.inStock {
+.flash-deal-detail .price, .inStock {
   color: #9c9a9a;
   font-weight: 500;
 }
@@ -606,6 +591,7 @@ a .custom-button-component:hover {
 /*=====================Flash Deal section close==================*/
 
 /*=====================New Collection section==================*/
+
 .section-heading {
   font-size: 17px !important;
   font-weight: 600;
@@ -631,20 +617,17 @@ a .custom-button-component:hover {
   background-color: #f9d452;
 }
 
-.home-appliance .new-collection-details,
-.stationary_carft .new-collection-details {
+.home-appliance .new-collection-details, .stationary_carft .new-collection-details {
   padding: 10px;
 }
 
-.home-appliance .collection-banner,
-.stationary_carft .collection-banner {
+.home-appliance .collection-banner, .stationary_carft .collection-banner {
   position: absolute;
   bottom: 5%;
   text-align: center;
 }
 
-.home-appliance .collection-banner img,
-.stationary_carft .collection-banner img {
+.home-appliance .collection-banner img, .stationary_carft .collection-banner img {
   width: 60%;
 }
 
@@ -681,8 +664,7 @@ a .custom-button-component:hover {
 
 /*=====================Offer Product==================*/
 
-.offer_product_section,
-.offer_product_section-right {
+.offer_product_section, .offer_product_section-right {
   -webkit-box-shadow: 2px 6px 15px -7px rgba(166, 166, 166, 1);
   -moz-box-shadow: 2px 6px 15px -7px rgba(166, 166, 166, 1);
   box-shadow: 2px 6px 15px -7px rgba(166, 166, 166, 1);
@@ -1264,8 +1246,7 @@ a .custom-button-component:hover {
   height: 3rem !important;
 }
 
-.input-range__label--min,
-.input-range__label--max {
+.input-range__label--min, .input-range__label--max {
   bottom: -1.4rem;
   position: absolute;
   display: none;
@@ -1290,12 +1271,10 @@ a .custom-button-component:hover {
   outline: none;
   position: absolute;
   top: 50%;
-  -webkit-transition: -webkit-transform 0.3s ease-out,
-    -webkit-box-shadow 0.3s ease-out;
+  -webkit-transition: -webkit-transform 0.3s ease-out, -webkit-box-shadow 0.3s ease-out;
   transition: -webkit-transform 0.3s ease-out, -webkit-box-shadow 0.3s ease-out;
   transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
-  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out,
-    -webkit-transform 0.3s ease-out, -webkit-box-shadow 0.3s ease-out;
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out, -webkit-transform 0.3s ease-out, -webkit-box-shadow 0.3s ease-out;
   width: 1rem;
 }
 
@@ -1339,8 +1318,7 @@ a .custom-button-component:hover {
   padding: 1% 10% !important;
 }
 
-.account_info .nav-tabs .nav-item.show .nav-link,
-.nav-tabs .nav-link.active {
+.account_info .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
   color: #fff !important;
   background-color: #e9000f !important;
   padding: 1% 10% !important;
@@ -1363,15 +1341,13 @@ p.account_sub_tite {
   font-weight: 700;
 }
 
-.account_info_label a,
-.already_account a {
+.account_info_label a, .already_account a {
   color: #ff3c20;
   margin-left: 10px;
   transition: 0.5s;
 }
 
-.account_info_label a:hover,
-.already_account a:hover {
+.account_info_label a:hover, .already_account a:hover {
   text-decoration: none;
   color: #f12506;
 }
@@ -1517,4 +1493,28 @@ p.error_message {
   font-family: system-ui;
   font-size: 15px;
   margin-top: 10px;
+}
+
+/*** sidebar area **/
+
+.sidebar {
+  padding: 10px 20px;
+  margin: 50px 0px;
+}
+
+.sidebar ul {
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar ul li {
+  list-style: none;
+  padding: 15px 0px;
+}
+
+.sidebar ul li a {
+  color: #000;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
 }
