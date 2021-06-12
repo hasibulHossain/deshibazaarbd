@@ -115,6 +115,26 @@ export default function Carts() {
                         <CartProducts />
                       </div>
                     </div>
+                    <div className="cart__left-footer">
+                      <div>
+                        <SimpleBtn
+                          variant="danger"
+                          onClick={() => console.log("update cart btn clicked")}
+                        >
+                          UPDATE CART
+                        </SimpleBtn>
+                      </div>
+                      <div>
+                        <SimpleBtn
+                          variant="success"
+                          onClick={() =>
+                            console.log("continue shoping btn clicked")
+                          }
+                        >
+                          CONTINUE SHOPPING
+                        </SimpleBtn>
+                      </div>
+                    </div>
                   </Card>
                 </div>
               </div>

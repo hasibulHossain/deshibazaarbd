@@ -98,6 +98,21 @@ $border-bottom: 1px solid #dfdfdf;
     }
   }
 
+  &__left-footer {
+    padding: 2rem;
+    border-top: $border-bottom;
+
+    display: flex;
+
+    & div {
+      width: 35%;
+
+      &:first-child {
+        margin-right: 1.5rem;
+      }
+    }
+  }
+
   &__preferred_delivery {
     font-weight: 700;
   }
@@ -360,7 +375,7 @@ $border-bottom: 1px solid #dfdfdf;
 
 .floating-cart {
   $self: &;
-  max-width: 300px;
+  max-width: 24%;
   height: 100vh;
   background-color: #ffff;
   position: fixed;
@@ -382,6 +397,7 @@ $border-bottom: 1px solid #dfdfdf;
     }
 
     #{$self}__close-icon {
+      cursor: pointer;
       font-size: 1.8rem;
       color: #e9000f;
     }
