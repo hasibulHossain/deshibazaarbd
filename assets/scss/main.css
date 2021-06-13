@@ -1541,5 +1541,28 @@ span.user_email, span.user_phone, span.user_address {
 }
 
 .default_height {
-  min-height: 210px;
+  min-height: 298px;
+}
+
+p.address_sub_title {
+  font-size: 12px;
+  font-weight: 500;
+  color: darkgrey;
+}
+
+.loading_component {
+  display: flex;
+  align-items: center;
+}
+
+.loading_component p {
+  margin-left: 14px;
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 12px;
+}
+
+.loading_component .spinner-border {
+  height: 1.4rem;
+  width: 1.4rem;
 }

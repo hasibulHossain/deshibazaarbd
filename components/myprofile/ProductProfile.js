@@ -1,21 +1,26 @@
 import React, { useEffect } from "react";
-import { Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import ProfileSideBar from "./ProfileSideBar";
 import { getUserDataAction } from "../_redux/getUserData/Action/UserDataAction";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAddressBook, faMailBulk, faMapMarkedAlt, faPhone, faUser } from "@fortawesome/free-solid-svg-icons";
-
+import { faMailBulk, faMapMarkedAlt, faPhone, faUser } from "@fortawesome/free-solid-svg-icons";
+import { getShippingAddress, getBillingAddress } from "../ProfileAccountSetting/_redux/Action/ProfileAccountSettingAction";
+import LoadingSpinner from './../master/LoadingSpinner/LoadingSpinner'
 const ProductProfile = () => {
   const dispatch = useDispatch()
-  useEffect(() => {
-    dispatch(getUserDataAction())
-    // dispatch(fetchWallets());
-  }, [])
-
   // const wallets = useSelector((state) => state.wallet.wallets);
   const userData = useSelector((state) => state.UserDataReducer.userData);
-  console.log('userData :>> ', userData);
+  const isLoading = useSelector((state) => state.ProfileAccountSettingReducer.isLoading);
+  const shippingAddress = useSelector((state) => state.ProfileAccountSettingReducer.shippingAddress);
+  const billingAddress = useSelector((state) => state.ProfileAccountSettingReducer.billingAddress);
+  useEffect(() => {
+    dispatch(getUserDataAction());
+    dispatch(getShippingAddress('shipping_address'));
+    dispatch(getBillingAddress('billing_address'));
+    // dispatch(fetchWallets());
+  }, [])
+  console.log('shippingAddress :>> ', shippingAddress);
+  console.log('billingAddress :>> ', billingAddress);
   return (
     <>
       <div className="wishbanner pb">
@@ -61,14 +66,53 @@ const ProductProfile = () => {
                   <div className="card mb-2 p-3 default_height">
                     <div className="card-title">
                       <h6>Address Book | <span className="edit_protile_link">EDIT</span> </h6>
-                      <p>
-                        <span className="user_icon">
-                          <FontAwesomeIcon icon={faMapMarkedAlt} />
-                        </span>
-                        <span className="user_address">
-                          87 / Ka, Mohakhali Bus Stand, Dhaka-1212, Dhaka, Bangladesh.
-                        </span>
+                      <p className="address_sub_title">
+                        Shipping Address :
                       </p>
+                      {
+                        isLoading && (
+                          <LoadingSpinner text="Loading Shipping Address..." />
+                        )
+                      }
+                      {
+                        shippingAddress !== null && (
+                          <>
+                            <p>
+                              <span className="user_icon">
+                                <FontAwesomeIcon icon={faMapMarkedAlt} />
+                              </span>
+                              <span className="user_address">
+                                {shippingAddress.area}, {shippingAddress.street1}, {shippingAddress.city} <br />
+                                {shippingAddress.country}
+                              </span>
+                            </p>
+                          </>
+                        )
+                      }
+                      <p className="address_sub_title">
+                        Billing Address :
+                      </p>
+                      {
+                        isLoading && (
+                          <LoadingSpinner text="Loading Billing Address..." />
+                        )
+                      }
+                      {
+                        billingAddress !== null && (
+                          <>
+                            <p>
+                              <span className="user_icon">
+                                <FontAwesomeIcon icon={faMapMarkedAlt} />
+                              </span>
+                              <span className="user_address">
+                                {billingAddress.area}, {billingAddress.street1}, {billingAddress.city} <br />
+                                {billingAddress.country}
+                              </span>
+                            </p>
+                          </>
+                        )
+                      }
+
                     </div>
                   </div>
                 </div>
