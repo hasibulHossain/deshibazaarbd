@@ -1,20 +1,35 @@
 import * as Types from "../Type/Types";
 
 const initialState = {
-    isLoading: false,
     ProductList: [],
+    error: false,
+    isLoading: false,
 
 }
-function FastestDeliveryReducer(state = initialState, action) {
-    switch (action.type) {
+function FastestDeliveryReducer(state = initialState, {type, payload}) {
+    switch (type) {
+        case Types.INIT_FASTEST_DELIVERY_PRODUCT:
+            return {
+                ...state,
+                isLoading: true
+            }
+            
         case Types.GET_FASTEST_DELIVERY_PRODUCT:
             return {
-                isLoading: action.payload.isLoading,
-                ProductList: action.payload.data,
+                ...state,
+                ...payload,
+                isLoading: false,
+                error: false
             }
+
+        case Types.GET_FASTEST_DELIVERY_PRODUCT:
+            return {
+                ...state,
+                error: true
+            }
+
         default:
-            break;
+            return state;
     }
-    return state;
 }
 export default FastestDeliveryReducer;
