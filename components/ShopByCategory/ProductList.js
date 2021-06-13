@@ -29,7 +29,7 @@ const ProductList = () => {
             <Slider {...SlickSetting}>
                 {
                     ProductList.length > 0 && ProductList.map((item, index) => (
-                        <div key={index} className="product-card" onClick={(() => handleShow(item))}>
+                        <div key={index} className="product-card">
                             <div className="product-purchase-section">
                                 <button>
                                     <FontAwesomeIcon className="add-to-cart" icon={faShoppingBag} />
@@ -41,7 +41,7 @@ const ProductList = () => {
                                     <FontAwesomeIcon className="" icon={faListAlt} />
                                 </button>
                             </div>
-                            <div className="product-card-body">
+                            <div className="product-card-body" onClick={(() => handleShow(item))}>
                                 <img src={item.productImg} alt={item.title} className="img-fluid" />
                                 <p className="product-title">{item.title}</p>
                                 <div className="rating">

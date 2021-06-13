@@ -1,8 +1,6 @@
 import * as Types from "./../Type/Types";
 import * as JwtDecode from "jwt-decode";
-// import { generateToken } from "../../services/token/TokenService";
 import axios from "axios";
-// import { API_POST_REGISTER } from "../../ApiEndpoint";
 import { showToast } from "../../../master/Helper/ToastHelper";
 
 

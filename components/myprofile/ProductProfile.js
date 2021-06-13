@@ -1,110 +1,124 @@
-import React, { Component, useState, useEffect } from "react";
-import { Row, Col } from "react-bootstrap";
-import Form from "react-bootstrap/Form";
-import { Card } from "react-bootstrap";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ProfileSideBar from "./ProfileSideBar";
 import { getUserDataAction } from "../_redux/getUserData/Action/UserDataAction";
-const ProductProfile = ({ router }, props) => {
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMailBulk, faMapMarkedAlt, faPhone, faUser } from "@fortawesome/free-solid-svg-icons";
+import { getShippingAddress, getBillingAddress } from "../ProfileAccountSetting/_redux/Action/ProfileAccountSettingAction";
+import LoadingSpinner from './../master/LoadingSpinner/LoadingSpinner'
+const ProductProfile = () => {
   const dispatch = useDispatch()
-  useEffect(() => {
-    dispatch(getUserDataAction())
-    // dispatch(fetchWallets());
-  }, [])
-
   // const wallets = useSelector((state) => state.wallet.wallets);
   const userData = useSelector((state) => state.UserDataReducer.userData);
-  console.log('userData :>> ', userData);
+  const isLoading = useSelector((state) => state.ProfileAccountSettingReducer.isLoading);
+  const shippingAddress = useSelector((state) => state.ProfileAccountSettingReducer.shippingAddress);
+  const billingAddress = useSelector((state) => state.ProfileAccountSettingReducer.billingAddress);
+  useEffect(() => {
+    dispatch(getUserDataAction());
+    dispatch(getShippingAddress('shipping_address'));
+    dispatch(getBillingAddress('billing_address'));
+    // dispatch(fetchWallets());
+  }, [])
+  console.log('shippingAddress :>> ', shippingAddress);
+  console.log('billingAddress :>> ', billingAddress);
   return (
     <>
       <div className="wishbanner pb">
         <div className="container-fluid">
           <div className="row">
-            <div className="col-lg-3 offset-lg-1">
+            <div className="col-md-3">
               <ProfileSideBar />
             </div>
 
-            <div className="col-lg-7">
-              <div className="row mt-5 mb-3 profileBox">
-                <div className="col-xl-2 col-lg-2 col-md-2">
-                  <div className="row">
-                    <div className="col-12">
-                      <i className="fas fa-user mr-2 img-thumbnail" style={{ fontSize: "100px" }}></i>
-                    </div>
-                    <p className="text-center ml-4 text-dark mt-2">Change</p>
-                  </div>
-                  {/* <div className=" gradientBox">
-                    <img
-                      className="rounded-circle bg-white"
-                      src="/images/default/chair.png"
-                    />
-                    <p className="text-center text-white mt-2">Change</p>
-                  </div> */}
-                </div>
-                <div className="col-xl-10 col-lg-10 col-md-10">
-                  <div className="bg-white p-3 pb-4">
-                    <div className="registerInfo border-right float-left">
-                      <h6 className="text-success pb-2">
-                        User Information
-                      </h6>
-                      <p>{`${userData !== null && userData.first_name} ${userData !== null && userData.last_name}`}</p>
-                      <p>username : {userData !== null && userData.username}</p>
-                    </div>
-
-                    <div className="registerInfo border-left pl-4 float-right">
-                      <h6 className="text-danger pb-2"> Your address</h6>
-                      <p>address</p>
-                    </div>
-
-                    <div className="registerInfo pl-4  float-left">
-                      <h6 className="text-primary pb-2">
-                        Contact Information
-                      </h6>
-                      <p>{userData !== null && userData.email}</p>
-                      <p>{userData !== null && userData.phone_no}</p>
-                    </div>
-                    <div className="clearfix"></div>
+            {/** user profile data */}
+            <div className="col-md-9">
+              <div className="row mt-5">
+                <div className="col-md-2">
+                  <div className="card mb-2 text-center p-2 shadow-sm align-items-center">
+                    <FontAwesomeIcon icon={faUser} style={{ fontSize: "100px" }} />
                   </div>
                 </div>
-              </div>
-              <div className="myProfileAsset">
-                <h1>My Assets</h1>
-                <div className="row">
-                  <div className="col-xl-4 col-lg-4 col-md-6 myProfileCard">
-                    <Card className="text-center ">
-                      <Card.Body>
-                        <Card.Title>
-                          {/* {wallets && wallets.length > 0 && wallets.length} */}
-                          10
-                        </Card.Title>
-                        <Card.Title>Wallet</Card.Title>
-                      </Card.Body>
-                    </Card>
+                <div className="col-md-5">
+                  <div className="card mb-2 p-3 default_height">
+                    <div className="card-title">
+                      <h6>Personal Profile | <span className="edit_protile_link">EDIT</span></h6>
+                      <p className="user_name"> {`${userData !== null && userData.first_name} ${userData !== null && userData.last_name}`}</p>
+                      <p>
+                        <span className="user_icon">
+                          <FontAwesomeIcon icon={faMailBulk} />
+                        </span>
+                        <span className="user_email">
+                          {userData !== null && userData.email}
+                        </span>
+                      </p>
+                      <p>
+                        <span className="user_icon">
+                          <FontAwesomeIcon icon={faPhone} />
+                        </span>
+                        <span className="user_phone">
+                          {userData !== null && userData.phone_no}
+                        </span>
+                      </p>
+                    </div>
                   </div>
-                  <div className="col-xl-4 col-lg-4 col-md-6 myProfileCard">
-                    <Card className="text-center">
-                      <Card.Body>
-                        <Card.Title>
-                          {/* {wallets && wallets.length > 0 && wallets.length} */}
-                          15
-                        </Card.Title>
-                        <Card.Title>Gift Cards</Card.Title>
-                      </Card.Body>
-                    </Card>
-                  </div>
-                  <div className="col-xl-4 col-lg-4 col-md-6 ">
-                    <Card className="text-center">
-                      <Card.Body>
-                        <Card.Title>
-                          45
-                        </Card.Title>
-                        <Card.Title>Vouchers</Card.Title>
-                      </Card.Body>
-                    </Card>
+                </div>
+                <div className="col-md-5">
+                  <div className="card mb-2 p-3 default_height">
+                    <div className="card-title">
+                      <h6>Address Book | <span className="edit_protile_link">EDIT</span> </h6>
+                      <p className="address_sub_title">
+                        Shipping Address :
+                      </p>
+                      {
+                        isLoading && (
+                          <LoadingSpinner text="Loading Shipping Address..." />
+                        )
+                      }
+                      {
+                        shippingAddress !== null && (
+                          <>
+                            <p>
+                              <span className="user_icon">
+                                <FontAwesomeIcon icon={faMapMarkedAlt} />
+                              </span>
+                              <span className="user_address">
+                                {shippingAddress.area}, {shippingAddress.street1}, {shippingAddress.city} <br />
+                                {shippingAddress.country}
+                              </span>
+                            </p>
+                          </>
+                        )
+                      }
+                      <p className="address_sub_title">
+                        Billing Address :
+                      </p>
+                      {
+                        isLoading && (
+                          <LoadingSpinner text="Loading Billing Address..." />
+                        )
+                      }
+                      {
+                        billingAddress !== null && (
+                          <>
+                            <p>
+                              <span className="user_icon">
+                                <FontAwesomeIcon icon={faMapMarkedAlt} />
+                              </span>
+                              <span className="user_address">
+                                {billingAddress.area}, {billingAddress.street1}, {billingAddress.city} <br />
+                                {billingAddress.country}
+                              </span>
+                            </p>
+                          </>
+                        )
+                      }
+
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+
           </div>
         </div>
       </div>

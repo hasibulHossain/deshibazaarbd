@@ -1518,3 +1518,86 @@ p.error_message {
   font-weight: 600;
   text-decoration: none;
 }
+
+.edit_protile_link {
+  font-size: 13px;
+  color: #e9000f;
+  cursor: pointer;
+}
+
+p.user_name {
+  font-weight: 700;
+  font-size: 16px;
+}
+
+span.user_icon {
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+span.user_email, span.user_phone, span.user_address {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.default_height {
+  min-height: 298px;
+}
+
+p.address_sub_title {
+  font-size: 12px;
+  font-weight: 500;
+  color: darkgrey;
+}
+
+.loading_component {
+  display: flex;
+  align-items: center;
+}
+
+.loading_component p {
+  margin-left: 14px;
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 12px;
+}
+
+.loading_component .spinner-border {
+  height: 1.4rem;
+  width: 1.4rem;
+}
+
+/* .user_profile_setting_body {
+  background-color: #e1f1eb78;
+  padding: 20px;
+} */
+
+.profile_account {
+  background-color: rgb(255 255 255 / 77%);
+  padding: 25px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.custome_form_group {
+  margin-bottom: 10px;
+}
+
+.custome_form_group label {
+  font-size: 16px;
+  font-weight: 500;
+  color: darkgrey;
+}
+
+.custom_form_input {
+  width: 100%;
+  border: 1px solid #f1f1f1;
+  border-radius: 5px;
+  outline: none;
+  font-size: 16px;
+  padding: 5px;
+}
+
+.custom_form_input::placeholder {
+  margin: 5px;
+}

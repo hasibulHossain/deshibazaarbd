@@ -19,8 +19,6 @@ function FloatingCart() {
 
   useEffect(() => {
     const bodyDOM = window.document.body;
-    console.log("from floatingcart useEffect");
-
     // Remove scrollbar when Floating cart is open
     if (floatingCartVisible) {
       bodyDOM.style.height = "100vh";
