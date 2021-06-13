@@ -13,6 +13,8 @@ import RegisterReducer from "../components/LoginRegistration/_redux/Reducer/Regi
 import ProductTopListReducer from "../components/ProductTopList/_redux/Reducer/ProductTopListReducer";
 import ShopReducer from "../components/Shop/_redux/Reducer/ShopReducer";
 import ShopByCategoriesReducer from "../components/ShopByCategory/_redux/Reducer/ShopByCategoriesReducer";
+import AuthReducer from "../components/LoginRegistration/_redux/Reducer/AuthReducer";
+import UserDataReducer from "../components/_redux/getUserData/Reducer/UserDataReducer";
 
 export default combineReducers({
   GlobalReducer: GlobalReducer,
@@ -28,4 +30,6 @@ export default combineReducers({
   CategoryWiseProductReducer: CategoryWiseProductReducer,
   ShopReducer: ShopReducer,
   RegisterReducer: RegisterReducer,
+  AuthReducer: AuthReducer,
+  UserDataReducer: UserDataReducer,
 });
