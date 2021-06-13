@@ -36,3 +36,10 @@ export const getBillingAddress = (addressType) => (dispatch) => {
             dispatch({ type: Types.GET_BILLING_ADDRESS, payload: responseData });
         })
 }
+// get user data for set input field 
+export const handleSetDataIntoInputField = () => (dispatch) => {
+    const userStorageData = JSON.parse(localStorage.getItem("loginData"));
+    console.log('userStorageData :>> ', userStorageData);
+    dispatch({ type: Types.GET_USER_UPDATED_DATA, payload: userStorageData.userData })
+
+}

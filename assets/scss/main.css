@@ -1566,3 +1566,38 @@ p.address_sub_title {
   height: 1.4rem;
   width: 1.4rem;
 }
+
+/* .user_profile_setting_body {
+  background-color: #e1f1eb78;
+  padding: 20px;
+} */
+
+.profile_account {
+  background-color: rgb(255 255 255 / 77%);
+  padding: 25px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.custome_form_group {
+  margin-bottom: 10px;
+}
+
+.custome_form_group label {
+  font-size: 16px;
+  font-weight: 500;
+  color: darkgrey;
+}
+
+.custom_form_input {
+  width: 100%;
+  border: 1px solid #f1f1f1;
+  border-radius: 5px;
+  outline: none;
+  font-size: 16px;
+  padding: 5px;
+}
+
+.custom_form_input::placeholder {
+  margin: 5px;
+}
