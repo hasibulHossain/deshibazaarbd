@@ -1518,3 +1518,28 @@ p.error_message {
   font-weight: 600;
   text-decoration: none;
 }
+
+.edit_protile_link {
+  font-size: 13px;
+  color: #e9000f;
+  cursor: pointer;
+}
+
+p.user_name {
+  font-weight: 700;
+  font-size: 16px;
+}
+
+span.user_icon {
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+span.user_email, span.user_phone, span.user_address {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.default_height {
+  min-height: 210px;
+}

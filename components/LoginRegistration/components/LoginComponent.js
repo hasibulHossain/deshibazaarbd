@@ -12,7 +12,7 @@ import ErrorMessage from '../../master/ErrorMessage/ErrorMessage';
 const LoginComponent = () => {
     const [showPassword, setShowPassword] = useState(false);
     const dispatch = useDispatch();
-    const loginInpiut = useSelector((state) => state.AuthReducer.loginInpiut);
+    const loginInput = useSelector((state) => state.AuthReducer.loginInput);
     const isLoading = useSelector((state) => state.AuthReducer.isLoading);
     const isLogging = useSelector((state) => state.AuthReducer.isLogging);
     const { register, handleSubmit, errors, setValue } = useForm();
@@ -22,7 +22,7 @@ const LoginComponent = () => {
     }
 
     const handleLogin = (e) => {
-        dispatch(loginAction(loginInpiut));
+        dispatch(loginAction(loginInput));
         // e.preventDefault();
     }
     const router = useRouter()
@@ -47,7 +47,7 @@ const LoginComponent = () => {
                                     class="form-control"
                                     placeholder=""
                                     name="email"
-                                    value={loginInpiut.email}
+                                    value={loginInput.email}
                                     onChange={(e) => handleLoginInputChange('email', e.target.value)}
                                     ref={register({
                                         required: true,
@@ -67,7 +67,7 @@ const LoginComponent = () => {
                                 <input
                                     type={showPassword === true ? "text" : "password"} class="form-control" id="inlineFormInputGroup" placeholder=""
                                     name="password"
-                                    value={loginInpiut.password}
+                                    value={loginInput.password}
                                     onChange={(e) => handleLoginInputChange('password', e.target.value)}
                                     ref={register({
                                         required: true,
@@ -106,12 +106,12 @@ const LoginComponent = () => {
                         {/* <button className="btn account_btn mt-2">SIGN IN</button> */}
 
                         {
-                            !isLoading && (
+                            !isLogging && (
                                 <button className="btn account_btn mt-2">SIGN IN</button>
                             )
                         }
                         {
-                            isLoading && (
+                            isLogging && (
                                 <button disabled={true} type="submit" className="btn account_btn mt-2">
                                     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>    Logging
                                 </button>
