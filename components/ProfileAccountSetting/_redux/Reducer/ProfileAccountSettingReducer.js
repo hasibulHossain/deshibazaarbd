@@ -2,6 +2,7 @@ import * as Types from "./../Type/Types";
 
 const initialState = {
     isLoading: false,
+    isSubmitting: false,
     bestSellerList: [],
     shippingAddress: [],
     billingAddress: [],
@@ -18,6 +19,37 @@ const initialState = {
         banner: null,
         address: null
     },
+    billingAddressInput: {
+        type: "billing_address",
+        user_id: null,
+        transaction_id: null,
+        country_id: null, //integer
+        country: null,
+        city_id: null,  //integer
+        city: null,
+        area_id: null,   //integer
+        area: null,
+        street1: null,
+        street2: null,
+        is_default: 1
+    },
+    shippingAddressInput: {
+        type: "shipping_address",
+        user_id: null,
+        transaction_id: null,
+        country_id: null, //integer
+        country: null,
+        city_id: null,  //integer
+        city: null,
+        area_id: null,   //integer
+        area: null,
+        street1: null,
+        street2: null,
+        is_default: 1
+    },
+    countryList: [],
+    cityList: [],
+    areaList: [],
 
 }
 function ProfileAccountSettingReducer(state = initialState, action) {
@@ -42,9 +74,82 @@ function ProfileAccountSettingReducer(state = initialState, action) {
                 ...state,
                 userInputData: getUserInput,
             }
+        case Types.CHANGE_BILLING_ADDRESS_INPUT:
+            const billingAddressInput = { ...state.billingAddressInput };
+            billingAddressInput[action.payload.name] = action.payload.value
+            return {
+                ...state,
+                billingAddressInput
+            };
+        case Types.CHANGE_SHIPPING_ADDRESS_INPUT:
+            const shippingAddressInput = { ...state.shippingAddressInput };
+            shippingAddressInput[action.payload.name] = action.payload.value
+            return {
+                ...state,
+                shippingAddressInput
+            };
+        case Types.GET_COUNTRIES_LIST:
+            return {
+                ...state,
+                countryList: getCountries(action.payload),
+            };
+        case Types.GET_CITIES_LIST:
+            return {
+                ...state,
+                cityList: action.payload,
+            };
+        case Types.GET_AREA_LIST:
+            return {
+                ...state,
+                areaList: action.payload,
+            };
+        case Types.STORE_SHIPPING_ADDRESS:
+            if (action.payload.status == true) {
+                return {
+                    ...state,
+                    isSubmitting: action.payload.isLoading,
+                    billingAddressInput: initialState.billingAddressInput
+
+                };
+            } else {
+                return {
+                    ...state,
+                    isSubmitting: action.payload.isLoading,
+                };
+            }
+        case Types.STORE_BILLING_ADDRESS:
+            if (action.payload.status == true) {
+                return {
+                    ...state,
+                    isSubmitting: action.payload.isLoading,
+                    billingAddressInput: initialState.billingAddressInput
+
+                };
+            } else {
+                return {
+                    ...state,
+                    isSubmitting: action.payload.isLoading,
+                };
+            }
+
         default:
             break;
     }
     return state;
 }
+
+// cargo list
+const getCountries = (data) => {
+    let options = [];
+    if (data) {
+        data.forEach((item) => {
+            let itemData = {
+                value: item.id,
+                label: item.name,
+            };
+            options.push(itemData);
+        });
+    }
+    return options;
+};
 export default ProfileAccountSettingReducer;

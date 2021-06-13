@@ -39,7 +39,86 @@ export const getBillingAddress = (addressType) => (dispatch) => {
 // get user data for set input field 
 export const handleSetDataIntoInputField = () => (dispatch) => {
     const userStorageData = JSON.parse(localStorage.getItem("loginData"));
-    console.log('userStorageData :>> ', userStorageData);
     dispatch({ type: Types.GET_USER_UPDATED_DATA, payload: userStorageData.userData })
+
+}
+
+//handle change input field 
+export const handleChangeBillingAddressInput = (name, value) => (dispatch) => {
+    const addressData = {
+        name: name,
+        value: value
+    }
+    dispatch({ type: Types.CHANGE_BILLING_ADDRESS_INPUT, payload: addressData })
+}
+//handle change input field 
+export const handleChangeShippingAddressInput = (name, value) => (dispatch) => {
+    const addressData = {
+        name: name,
+        value: value
+    }
+    dispatch({ type: Types.CHANGE_SHIPPING_ADDRESS_INPUT, payload: addressData })
+}
+
+// get countries list 
+export const getCountry = () => (dispatch) => {
+    Axios.get(`${process.env.NEXT_PUBLIC_API_URL}countries`)
+        .then((res) => {
+
+            dispatch({ type: Types.GET_COUNTRIES_LIST, payload: res.data.data });
+        })
+}
+// get countries list 
+export const getCity = (country) => (dispatch) => {
+    Axios.get(`${process.env.NEXT_PUBLIC_API_URL}cities?country=${country}`)
+        .then((res) => {
+            dispatch({ type: Types.GET_CITIES_LIST, payload: res.data.data });
+        })
+}
+// get countries list 
+export const getArea = (cityID) => (dispatch) => {
+    Axios.get(`${process.env.NEXT_PUBLIC_API_URL}areas?city=${cityID}`)
+        .then((res) => {
+            dispatch({ type: Types.GET_AREA_LIST, payload: res.data.data });
+        })
+}
+
+//handle store shipping address
+export const handleStoreShippingAddress = (shippingAddressInput) => (dispatch) => {
+    const responseData = {
+        status: false,
+        isLoading: true,
+    }
+    dispatch({ type: Types.STORE_SHIPPING_ADDRESS, payload: responseData });
+    const userStorageData = JSON.parse(localStorage.getItem("loginData"));
+    const submittedData = shippingAddressInput;
+    submittedData.user_id = userStorageData.userData.id;
+    Axios.post(`${process.env.NEXT_PUBLIC_API_URL}address`, shippingAddressInput)
+        .then((res) => {
+            responseData.status = true;
+            responseData.isLoading = false;
+            showToast('success', res.data.message);
+            dispatch({ type: Types.STORE_SHIPPING_ADDRESS, payload: responseData });
+        })
+
+}
+
+//handle store billing address
+export const handleStoreBillingAddress = (billingAddressInput) => (dispatch) => {
+    const responseData = {
+        status: false,
+        isLoading: true,
+    }
+    dispatch({ type: Types.STORE_BILLING_ADDRESS, payload: responseData });
+    const userStorageData = JSON.parse(localStorage.getItem("loginData"));
+    const submittedData = billingAddressInput;
+    submittedData.user_id = userStorageData.userData.id;
+    Axios.post(`${process.env.NEXT_PUBLIC_API_URL}address`, submittedData)
+        .then((res) => {
+            responseData.status = true;
+            responseData.isLoading = false;
+            showToast('success', res.data.message);
+            dispatch({ type: Types.STORE_BILLING_ADDRESS, payload: responseData });
+        })
 
 }

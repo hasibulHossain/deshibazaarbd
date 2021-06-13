@@ -1,25 +1,24 @@
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { getArea, getCity, getCountry, handleChangeBillingAddressInput, handleSetDataIntoInputField, handleStoreBillingAddress } from './_redux/Action/ProfileAccountSettingAction';
+import { getArea, getCity, getCountry, handleChangeShippingAddressInput, handleSetDataIntoInputField, handleStoreShippingAddress } from './_redux/Action/ProfileAccountSettingAction';
 import ErrorMessage from '../master/ErrorMessage/ErrorMessage'
 import { RHFInput } from 'react-hook-form-input';
 import Select from 'react-select';
-import LoadingSpinner from './../master/LoadingSpinner/LoadingSpinner'
 import { Spinner } from 'react-bootstrap'
-const BillingAddressForm = () => {
+const ShippingAddressForm = () => {
     const dispatch = useDispatch();
     const userInputData = useSelector((state) => state.ProfileAccountSettingReducer.userInputData);
     const countryList = useSelector((state) => state.ProfileAccountSettingReducer.countryList);
     const cityList = useSelector((state) => state.ProfileAccountSettingReducer.cityList);
     const areaList = useSelector((state) => state.ProfileAccountSettingReducer.areaList);
     const isSubmitting = useSelector((state) => state.ProfileAccountSettingReducer.isSubmitting);
-    const billingAddressInput = useSelector((state) => state.ProfileAccountSettingReducer.billingAddressInput);
+    const shippingAddressInput = useSelector((state) => state.ProfileAccountSettingReducer.shippingAddressInput);
     const { register, handleSubmit, errors, setValue, watch } = useForm();
 
     //handle change input 
     const handleChangeTextInput = (name, value) => {
-        dispatch(handleChangeBillingAddressInput(name, value))
+        dispatch(handleChangeShippingAddressInput(name, value))
     }
 
     useEffect(() => {
@@ -27,12 +26,12 @@ const BillingAddressForm = () => {
         dispatch(getCountry())
     }, [])
     const StoreBillingAddress = () => {
-        dispatch(handleStoreBillingAddress(billingAddressInput))
+        dispatch(handleStoreShippingAddress(shippingAddressInput))
     }
 
     return (
         <div className="profile_account">
-            <h6>Billing Address</h6>
+            <h6>Shipping Address</h6>
 
             <form
                 onSubmit={handleSubmit(StoreBillingAddress)}
@@ -53,7 +52,7 @@ const BillingAddressForm = () => {
                                     rules={{ required: true }}
                                     name="country_id"
                                     register={register}
-                                    value={billingAddressInput.country_id}
+                                    value={shippingAddressInput.country_id}
                                     onChange={(option) => {
                                         handleChangeTextInput("country", option.label);
                                         handleChangeTextInput("country_id", option.value);
@@ -80,7 +79,7 @@ const BillingAddressForm = () => {
                                     rules={{ required: true }}
                                     name="city_id"
                                     register={register}
-                                    value={billingAddressInput.city_id}
+                                    value={shippingAddressInput.city_id}
                                     onChange={(option) => {
                                         handleChangeTextInput("city", option.label);
                                         handleChangeTextInput("city_id", option.value);
@@ -106,7 +105,7 @@ const BillingAddressForm = () => {
                                     rules={{ required: true }}
                                     name="area_id"
                                     register={register}
-                                    value={billingAddressInput.area_id}
+                                    value={shippingAddressInput.area_id}
                                     onChange={(option) => {
                                         handleChangeTextInput("area", option.label);
                                         handleChangeTextInput("area_id", option.value);
@@ -131,7 +130,7 @@ const BillingAddressForm = () => {
                                     class="custom_form_input"
                                     placeholder="Street-1"
                                     name="street1"
-                                    value={billingAddressInput.street1}
+                                    value={shippingAddressInput.street1}
                                     onChange={(e) => handleChangeTextInput('street1', e.target.value)}
                                     ref={register({
                                         required: true,
@@ -158,7 +157,7 @@ const BillingAddressForm = () => {
                                     class="custom_form_input"
                                     placeholder="Street-2"
                                     name="street2"
-                                    value={billingAddressInput.street2}
+                                    value={shippingAddressInput.street2}
                                     onChange={(e) => handleChangeTextInput('street2', e.target.value)}
                                     ref={register({
                                         required: true,
@@ -198,4 +197,4 @@ const BillingAddressForm = () => {
     );
 };
 
-export default BillingAddressForm;
+export default ShippingAddressForm;
