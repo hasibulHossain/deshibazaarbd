@@ -1,10 +1,5 @@
-import {
-  faHeart,
-  faSearch,
-  faShoppingBag,
-  faUser,
-} from "@fortawesome/free-solid-svg-icons";
-import React from "react";
+import { faHeart, faSearch, faShoppingBag } from "@fortawesome/free-solid-svg-icons";
+import React, { useEffect } from "react";
 import Link from "next/link";
 
 // third party imports
@@ -17,19 +12,21 @@ import HeaderTop from "./HeaderTop";
 import HeaderMenu from "./HeaderMenu";
 import Button from "../master/Button/Button";
 import { toggleFloatingCart } from "../../_redux/store/action/globalAction";
-import { useEffect } from "react";
 import { getCartsAction } from "../_redux/CartProduct/Action/CartAction";
 
 const Header = () => {
-  const dispatch = useDispatch();
+  const dispatch  = useDispatch();
   const toggleNav = "basic-navbar-nav";
-  const carts = useSelector((state) => state.CartReducer.carts)
+  const carts     = useSelector(state => state.CartReducer.carts);
+
   const toggleCartHandler = () => {
     dispatch(toggleFloatingCart());
   };
+
   useEffect(() => {
     dispatch(getCartsAction())
   }, []);
+
   return (
     <d>
       <HeaderTop />

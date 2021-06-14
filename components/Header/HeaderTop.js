@@ -3,6 +3,7 @@ import { Dropdown } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShippingFast, faUser } from '@fortawesome/free-solid-svg-icons'
 import { languages } from '../../assets/FakeData/FakeData';
+import Link from "next/link";
 
 const HeaderTop = () => {
 
@@ -15,8 +16,16 @@ const HeaderTop = () => {
                     </div>
                     <div className="col-md-7 heading-top-right">
                         <div className="row justify-content-end">
-                            <p className="heading-top-text pointer"><FontAwesomeIcon className="custom-fontAwesome" icon={faShippingFast} /> Track My Order</p>
-                            <p className="heading-top-text pointer"><FontAwesomeIcon className="custom-fontAwesome" icon={faUser} /> My Account</p>
+                            <p className="heading-top-text pointer">
+                                <FontAwesomeIcon className="custom-fontAwesome" icon={faShippingFast} /> Track My Order
+                            </p>
+                            <p className="heading-top-text pointer">
+                                <Link href="/profile">
+                                    <a href="/" className="text-white">
+                                        <FontAwesomeIcon className="custom-fontAwesome" icon={faUser} /> My Account
+                                    </a>
+                                </Link>
+                            </p>
                             
                             <Dropdown className="dropdown-currency">
                                 <Dropdown.Toggle variant="default" id="dropdown-basic">
