@@ -40,10 +40,14 @@ const SearchInput = (props) => {
 
       {search.length > 0 && suggestions.length === 0 && !loading && (
         <div className="search-suggestion-area">
-          <p className="text-danger text-center">
-            Sorry, No Product found by - {search} <br />
-            Please try with another keyword !
-          </p>
+          <div
+            className="text-danger text-center"
+            style={{ margin: 0, display: "flex", flexDirection: "column" }}
+          >
+            <p>Sorry, No Product found by - {search}</p>
+
+            <p>Please try with another keyword !</p>
+          </div>
         </div>
       )}
 
