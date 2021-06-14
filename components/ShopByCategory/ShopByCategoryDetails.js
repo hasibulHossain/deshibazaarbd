@@ -15,7 +15,20 @@ const ShopByCategoryDetails = ({ product }) => {
         zoomLensStyle: 'opacity: 0.7;background-color: #ff3e2081;',
         img: previewImg
     };
-
+    console.log('product :>> ', product);
+    // const cartProduct = {
+    //     productID: product.id,
+    //     productName: product.title,
+    //     quantity: quantity,
+    //     price: product.default_selling_price,
+    //     offerPrice: product.offer_selling_price,
+    //     productImage: `${process.env.NEXT_PUBLIC_URL}images/products/${product.featured_image}`,
+    //     business: {
+    //         businessID: product.business_id,
+    //         businessName: product.business.name,
+    //         businessLogo: `${process.env.NEXT_PUBLIC_URL}images/vendors/${product.business.logo_url}`,
+    //     },
+    // };
     return (
         <>
             <div className="row p-3">

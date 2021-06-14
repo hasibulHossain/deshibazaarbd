@@ -75,6 +75,49 @@ const ProductList = () => {
           ))}
       </Slider>
       {/* <SimpleModal
+    const ProductList = useSelector((state) => state.FastestDeliveryReducer.ProductList);
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const [product, setProduct] = useState('');
+    const handleShow = (item) => {
+        setShow(true);
+        setProduct(item);
+    };
+    return (
+        <div className="productList-body">
+            <Slider {...SlickSetting}>
+                {
+                    ProductList.length > 0 && ProductList.map((item, index) => (
+                        <div key={index} className="product-card">
+                            <div className="product-purchase-section">
+                                <button>
+                                    <FontAwesomeIcon className="add_to_cart" icon={faShoppingBag} />
+                                </button>
+                                <button>
+                                    <FontAwesomeIcon className="withlist" icon={faHeart} />
+                                </button>
+                                <button>
+                                    <FontAwesomeIcon className="details" icon={faListAlt} />
+                                </button>
+                            </div>
+                            <div className="product-card-body" onClick={(() => handleShow(item))}>
+                                <img src={item.productImg} alt={item.title} className="img-fluid" />
+                                <p className="product-title">{item.title}</p>
+                                <div className="rating">
+                                    <ReactStars
+                                        value={item.rating}
+                                        // onChange={ratingChanged}
+                                        size={24}
+                                        edit={false}
+                                        activeColor="#ffd700"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    ))
+                }
+            </Slider>
+            <SimpleModal
                 size="xl"
                 show={show}
                 handleClose={handleClose}

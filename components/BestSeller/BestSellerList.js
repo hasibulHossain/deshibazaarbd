@@ -30,19 +30,19 @@ const BestSellerList = () => {
             <Slider {...SlickSetting}>
                 {
                     bestSellerList.length > 0 && bestSellerList.map((item, index) => (
-                        <div key={index} className="product-card" onClick={(() => handleShow(item))}>
+                        <div key={index} className="product-card">
                             <div className="product-purchase-section">
                                 <button>
-                                    <FontAwesomeIcon className="add-to-cart" icon={faShoppingBag} />
+                                    <FontAwesomeIcon className="add_to_cart" icon={faShoppingBag} />
                                 </button>
                                 <button>
                                     <FontAwesomeIcon className="withlist" icon={faHeart} />
                                 </button>
                                 <button>
-                                    <FontAwesomeIcon className="" icon={faListAlt} />
+                                    <FontAwesomeIcon className="details" icon={faListAlt} />
                                 </button>
                             </div>
-                            <div className="product-card-body">
+                            <div className="product-card-body" onClick={(() => handleShow(item))}>
                                 <img src={item.productImg} alt={item.title} className="img-fluid" />
                                 <p className="product-title">{item.title}</p>
                                 <div className="rating">
@@ -64,7 +64,7 @@ const BestSellerList = () => {
                 size="xl"
                 show={show}
                 handleClose={handleClose}
-               
+
             >
                 <BestSellerDetails product={product} />
             </SimpleModal>
