@@ -1,20 +1,35 @@
 import * as Types from "../Type/Types";
 
 const initialState = {
-    isLoading: false,
-    ProductList: [],
+  ProductList: [],
+  error: false,
+  isLoading: false,
+};
+function ShopByCategoriesReducer(state = initialState, { type, payload }) {
+  switch (type) {
+    case Types.INIT_SHOP_BY_CATEGORIES_LIST:
+      return {
+        ...state,
+        isLoading: true,
+      };
 
-}
-function ShopByCategoriesReducer(state = initialState, action) {
-    switch (action.type) {
-        case Types.GET_SHOP_BY_CATEGORIES_LIST:
-            return {
-                isLoading: action.payload.isLoading,
-                ProductList: action.payload.data,
-            }
-        default:
-            break;
-    }
-    return state;
+    case Types.GET_SHOP_BY_CATEGORIES_LIST:
+      console.log("from get shop by categories => //");
+      return {
+        ...state,
+        ProductList: payload.ProductList,
+        isLoading: false,
+        error: false,
+      };
+
+    case Types.FETCH_SHOP_BY_CATEGORIES_LIST_FAILED:
+      return {
+        ...state,
+        ...payload,
+      };
+
+    default:
+      return state;
+  }
 }
 export default ShopByCategoriesReducer;
