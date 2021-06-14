@@ -7,11 +7,11 @@ export const addToCartAction = (cartProduct, id) => async (dispatch) => {
   const previousCart = getCartData().carts;
   let carts = [...previousCart];
   if (carts.find((data) => data.productID === id)) {
-    showToast('error', "This Product already added!")
+    showToast('error', "Product has been already added in cart !")
   } else {
     carts.push(cartProduct);
     localStorage.setItem("carts", JSON.stringify(carts));
-    showToast('success', "Product added successfully!")
+    showToast('success', "Product added to cart successfully !");
   }
   dispatch({ type: Types.POST_CARTS_LOADING, payload: carts });
   dispatch(getCartsAction())

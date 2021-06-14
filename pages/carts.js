@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import Head from "next/head";
 
 // third party import
 import { IoIosCheckmarkCircle } from "react-icons/io";
@@ -46,11 +45,7 @@ export default function Carts() {
         </div>
       </Modal>
 
-      <Head>
-        <title>Cart | Deshi Bazaar BD</title>
-        <meta name="description" content="Meta" />
-      </Head>
-      <MainLayout>
+      <MainLayout pageTitle="Carts">
         <div className="cart">
           <div className="cart__row">
             <div className="cart__container">

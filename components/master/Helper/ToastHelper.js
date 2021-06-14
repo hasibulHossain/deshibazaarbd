@@ -1,6 +1,5 @@
 import { toast } from "react-toastify";
-const defaultPosition = toast.POSITION.TOP_RIGHT;
-
+const defaultPosition = toast.POSITION.BOTTOM_CENTER;
 
 /**
  * show Toast

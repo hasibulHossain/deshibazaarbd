@@ -9,10 +9,11 @@ import { toggleFloatingCart } from "../../_redux/store/action/globalAction";
 import { getCartsAction } from "../_redux/CartProduct/Action/CartAction";
 
 const DealFlash = () => {
+
   const dispatch = useDispatch();
-  const flashDealList = useSelector((state) => state.DealFlashReducer.flashDealList);
-  const carts = useSelector((state) => state.CartReducer.carts)
-  const totalPrice = useSelector((state) => state.CartReducer.totalPrice)
+  const flashDealList = useSelector(state => state.DealFlashReducer.flashDealList);
+  const carts = useSelector(state => state.CartReducer.carts)
+  const totalPrice = useSelector(state => state.CartReducer.totalPrice)
 
   const flashDealBtnHandler = () => {
     dispatch(toggleFloatingCart());

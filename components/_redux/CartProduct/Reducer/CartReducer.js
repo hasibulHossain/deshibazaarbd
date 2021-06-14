@@ -1,38 +1,38 @@
 import * as Types from "../Types/Types";
 
 const initialState = {
-  carts: [],
-  products: [],
-  loading: false,
-  loading_add: false,
+  carts         : [],
+  products      : [],
+  loading       : false,
+  loading_add   : false,
   loading_update: false,
-  add_message: "",
+  add_message   : "",
   delete_message: "",
-  error: null,
+  error         : null,
   cartProduct: {
-    productID: null,
-    productName: '',
-    quantity: '',
-    price: '',
-    offerPrice: '',
+    productID   : null,
+    productName : '',
+    quantity    : '',
+    price       : '',
+    offerPrice  : '',
     productImage: ''
   },
   // Place Order Part
-  totalQuantity: 0,
-  totalPrice: 0,
-  shippingCost: 0,
+  totalQuantity      : 0,
+  totalPrice         : 0,
+  shippingCost       : 0,
   shippingCostLoading: false,
-  coupon: {
-    code: "",
-    carts: [
+  coupon             : {
+    code  : "",
+    carts : [
       {
         productID: "",
-        quantity: ""
+        quantity : ""
       }
     ]
   },
   couponLoading: false,
-  couponData: {}
+  couponData   : {}
 };
 
 const CartReducer = (state = initialState, action) => {
@@ -52,11 +52,11 @@ const CartReducer = (state = initialState, action) => {
       return {
         ...state,
         cartProduct: {
-          productID: null,
-          productName: '',
-          quantity: '',
-          price: '',
-          offerPrice: '',
+          productID   : null,
+          productName : '',
+          quantity    : '',
+          price       : '',
+          offerPrice  : '',
           productImage: ''
         }
       };
@@ -79,24 +79,22 @@ const CartReducer = (state = initialState, action) => {
       };
 
     case Types.GET_CARTS:
-      console.log('action.payload :>> ', action.payload);
       return {
         ...state,
-        carts: action.payload.carts,
-        totalQuantity: calculateTotalQtyAndPrices(action.payload.carts).totalQuantity,
-        totalPrice: calculateTotalQtyAndPrices(action.payload.carts).totalPrice,
+        carts          : action.payload.carts,
+        totalQuantity  : calculateTotalQtyAndPrices(action.payload.carts).totalQuantity,
+        totalPrice     : calculateTotalQtyAndPrices(action.payload.carts).totalPrice,
         // shippingCost: calculateTotalQtyAndPrices(action.payload.carts).shippingCost,
-        products: action.payload.products,
-        loading: false,
-        errors: null,
+        products       : action.payload.products,
+        loading        : false,
+        errors         : null,
       };
     case Types.APPLY_SHIPPING_COST:
-      console.log(`action.payload`, action.payload.shipping)
+
       return {
         ...state,
-        shippingCost: action.payload.shipping,
+        shippingCost       : action.payload.shipping,
         shippingCostLoading: action.payload.shippingCostLoading
-
       };
 
     case Types.POST_CARTS_DATA:
@@ -133,8 +131,9 @@ const CartReducer = (state = initialState, action) => {
     //     delete_message: "Cart Item has been deleted !",
     //   };
     case Types.CHANGE_COUPON_INPUT_DATA:
-      const coupon = { ...state.coupon };
+      const coupon                = { ...state.coupon };
       coupon[action.payload.name] = action.payload.value;
+
       return {
         ...state,
         coupon,
@@ -149,15 +148,26 @@ const CartReducer = (state = initialState, action) => {
 };
 
 const calculateTotalQtyAndPrices = (carts) => {
+
   const response = {
     totalQuantity: 0,
-    totalPrice: 0,
+    totalPrice   : 0,
   }
-  for (let i = 0; i < carts.length; i++) {
+
+  for ( let i = 0; i < carts.length; i++ ) {
     response.totalQuantity += carts[i].quantity;
-    response.totalPrice += (carts[i].offerPrice !== null && carts[i].offerPrice !== 0 && carts[i].price !== "" ? carts[i].quantity * carts[i].offerPrice : carts[i].quantity * carts[i].price);
+
+    if ( carts[i].isOffer !== '0' && carts[i].isOffer !== false ) {
+      response.totalPrice += parseFloat( carts[i].offerPrice );
+    } else {
+      response.totalPrice += parseFloat( carts[i].price );
+    }
+
+    response.totalPrice = response.totalPrice * parseFloat( carts[i].quantity );
+
     // response.shippingCost = (response.totalPrice / 100) * 5;
   }
+
   return response;
 }
 
