@@ -17,6 +17,7 @@ import AuthReducer from "../components/LoginRegistration/_redux/Reducer/AuthRedu
 import UserDataReducer from "../components/_redux/getUserData/Reducer/UserDataReducer";
 import ProfileAccountSettingReducer from "../components/ProfileAccountSetting/_redux/Reducer/ProfileAccountSettingReducer";
 import WishlistReducer from "../components/Wishlist/_redux/Reducer/WishlistReducer";
+import CartReducer from "../components/_redux/CartProduct/Reducer/CartReducer";
 
 export default combineReducers({
   GlobalReducer: GlobalReducer,
@@ -36,4 +37,5 @@ export default combineReducers({
   UserDataReducer: UserDataReducer,
   ProfileAccountSettingReducer: ProfileAccountSettingReducer,
   WishlistReducer: WishlistReducer,
+  CartReducer: CartReducer,
 });

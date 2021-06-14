@@ -6,12 +6,13 @@ import { getDealFlashList } from "./_redux/Action/DealFlashAction";
 import ReactStars from "react-rating-stars-component";
 import CountdownTimer from "react-component-countdown-timer";
 import { toggleFloatingCart } from "../../_redux/store/action/globalAction";
+import { getCartsAction } from "../_redux/CartProduct/Action/CartAction";
 
 const DealFlash = () => {
   const dispatch = useDispatch();
-  const flashDealList = useSelector(
-    (state) => state.DealFlashReducer.flashDealList
-  );
+  const flashDealList = useSelector((state) => state.DealFlashReducer.flashDealList);
+  const carts = useSelector((state) => state.CartReducer.carts)
+  const totalPrice = useSelector((state) => state.CartReducer.totalPrice)
 
   const flashDealBtnHandler = () => {
     dispatch(toggleFloatingCart());
@@ -19,6 +20,7 @@ const DealFlash = () => {
 
   useEffect(() => {
     dispatch(getDealFlashList());
+    dispatch(getCartsAction())
   }, []);
 
   return (
@@ -31,7 +33,7 @@ const DealFlash = () => {
         >
           <span className="mr-2">
             {" "}
-            6 items <br /> Tk-12,500
+            {carts.length} items <br /> Tk-{totalPrice}
           </span>
           <span>
             {" "}

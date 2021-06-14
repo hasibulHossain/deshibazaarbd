@@ -8,9 +8,11 @@ import { useDispatch, useSelector } from "react-redux";
 import SimpleBtn from "../master/SimpleBtn/SimpleBtn";
 import FloatingCartProduct from "../FloatingCartProduct/FloatingCartProduct";
 import { toggleFloatingCart } from "../../_redux/store/action/globalAction";
+import { getCartsAction } from "../_redux/CartProduct/Action/CartAction";
 
 function FloatingCart() {
   const { floatingCartVisible } = useSelector((state) => state.GlobalReducer);
+  const carts = useSelector((state) => state.CartReducer.carts)
 
   const dispatch = useDispatch();
   const toggleCartHandler = () => {
@@ -28,13 +30,15 @@ function FloatingCart() {
       bodyDOM.style.overflowY = "";
     }
   });
-
+  useEffect(() => {
+    dispatch(getCartsAction())
+  }, []);
   let floatingCart = null;
   if (floatingCartVisible) {
     floatingCart = (
       <div className="floating-cart modal-scrollbar">
         <div className="floating-cart__header">
-          <p>There are 6 Products</p>
+          <p>There are {carts.length} Products</p>
           <div
             onClick={toggleCartHandler}
             className="floating-cart__close-icon"
@@ -43,15 +47,14 @@ function FloatingCart() {
           </div>
         </div>
         <div className="floating-cart__products">
-          <div>
-            <FloatingCartProduct />
-          </div>
-          <div>
-            <FloatingCartProduct />
-          </div>
-          <div>
-            <FloatingCartProduct />
-          </div>
+          {
+            carts.length > 0 && carts.map((item, index) => (
+              <div>
+                <FloatingCartProduct item={item} />
+              </div>
+            ))
+          }
+
         </div>
         <div className="floating-cart__payment-info">
           <div className="floating-cart__payment-details">

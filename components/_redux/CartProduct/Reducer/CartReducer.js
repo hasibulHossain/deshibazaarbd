@@ -1,4 +1,4 @@
-import * as Types from "../../Types";
+import * as Types from "../Types/Types";
 
 const initialState = {
   carts: [],
@@ -79,6 +79,7 @@ const CartReducer = (state = initialState, action) => {
       };
 
     case Types.GET_CARTS:
+      console.log('action.payload :>> ', action.payload);
       return {
         ...state,
         carts: action.payload.carts,

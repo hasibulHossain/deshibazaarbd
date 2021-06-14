@@ -1,3 +1,4 @@
+import { CardActions } from "@material-ui/core";
 import * as Types from "../Type/Types";
 
 const initialState = {
@@ -6,30 +7,26 @@ const initialState = {
     isLoading: false,
 
 }
-function FastestDeliveryReducer(state = initialState, {type, payload}) {
-    switch (type) {
+const FastestDeliveryReducer = (state = initialState, action) => {
+    const newState = { ...state };
+    switch (action.type) {
         case Types.INIT_FASTEST_DELIVERY_PRODUCT:
             return {
                 ...state,
                 isLoading: true
             }
-            
-        case Types.GET_FASTEST_DELIVERY_PRODUCT:
-            return {
-                ...state,
-                ...payload,
-                isLoading: false,
-                error: false
-            }
 
         case Types.GET_FASTEST_DELIVERY_PRODUCT:
             return {
                 ...state,
-                error: true
+                isLoading: action.payload.isLoading,
+                ProductList: action.payload.data
             }
+
+
 
         default:
-            return state;
+            return newState;
     }
 }
 export default FastestDeliveryReducer;

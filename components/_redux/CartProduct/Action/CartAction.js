@@ -2,24 +2,16 @@ import { useState } from "react";
 import * as Types from "../Types/Types";
 import Axios from "axios"
 import { showToast } from "../../../master/Helper/ToastHelper";
-// export const addToCartAction = (product, quantity = 1) => async (dispatch) => {
-//   dispatch({ type: Types.POST_CARTS_LOADING, payload: true });
-//   addToCartData(product, quantity);
-//   const payloadData = getCartData();
-
-//   setTimeout(() => {
-//     dispatch({ type: Types.POST_CARTS_DATA, payload: payloadData });
-//   }, 100);
-// };
 
 export const addToCartAction = (cartProduct, id) => async (dispatch) => {
   const previousCart = getCartData().carts;
   let carts = [...previousCart];
   if (carts.find((data) => data.productID === id)) {
-    // alert("This product already added in your carts!");
+    showToast('error', "This Product already added!")
   } else {
     carts.push(cartProduct);
     localStorage.setItem("carts", JSON.stringify(carts));
+    showToast('success', "Product added successfully!")
   }
   dispatch({ type: Types.POST_CARTS_LOADING, payload: carts });
   dispatch(getCartsAction())

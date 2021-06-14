@@ -8,7 +8,7 @@ import React from "react";
 import Link from "next/link";
 
 // third party imports
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Container, Navbar } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -17,14 +17,19 @@ import HeaderTop from "./HeaderTop";
 import HeaderMenu from "./HeaderMenu";
 import Button from "../master/Button/Button";
 import { toggleFloatingCart } from "../../_redux/store/action/globalAction";
+import { useEffect } from "react";
+import { getCartsAction } from "../_redux/CartProduct/Action/CartAction";
 
 const Header = () => {
-  const toggleNav = "basic-navbar-nav";
   const dispatch = useDispatch();
-
+  const toggleNav = "basic-navbar-nav";
+  const carts = useSelector((state) => state.CartReducer.carts)
   const toggleCartHandler = () => {
     dispatch(toggleFloatingCart());
   };
+  useEffect(() => {
+    dispatch(getCartsAction())
+  }, []);
   return (
     <d>
       <HeaderTop />
@@ -80,7 +85,9 @@ const Header = () => {
                       className="custom-fontAwesome"
                       icon={faShoppingBag}
                     />
-                    <span class="cart-qty">0</span>
+                    <span class="cart-qty">
+                      {carts.length}
+                    </span>
                     &nbsp;&nbsp;
                     Cart
                   </span>
