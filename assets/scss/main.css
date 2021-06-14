@@ -170,6 +170,7 @@ a .custom-button-component:hover {
 }
 
 .header-search-product {
+  position: relative;
   display: flex;
   width: 55%;
   line-height: 10px;
@@ -1729,7 +1730,8 @@ p.text-secondary.mb-0 {
   z-index: 10;
   position: absolute;
   background: #eee;
-  width: 93%;
+  top: 100%;
+  width: 90%;
   border-radius: 0px 0px 25px 25px;
   color: #111;
   overflow-y: auto;
