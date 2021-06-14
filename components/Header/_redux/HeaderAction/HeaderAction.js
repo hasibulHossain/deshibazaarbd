@@ -1,7 +1,7 @@
 import Axios from "axios";
 import * as Types from "../Type/Types";
 
-const url = "http://api.allgeneration.com/public/api/v1/frontend-categories";
+const url = `${process.env.NEXT_PUBLIC_API_URL}frontend-categories`;
 
 export const getMenuListData = () => async (dispatch) => {
   try {

@@ -1,1 +1,3 @@
+export const INIT_SHOP_LIST = "INIT_SHOP_LIST";
 export const GET_SHOP_LIST = "GET_SHOP_LIST";
+export const FETCH_SHOP_LIST_FAILED = "FETCH_SHOP_LIST_FAILED";

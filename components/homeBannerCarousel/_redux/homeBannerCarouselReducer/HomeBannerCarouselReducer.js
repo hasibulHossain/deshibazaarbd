@@ -1,20 +1,35 @@
 import * as Types from "../Type/Types";
 
 const initialState = {
-    isLoading: false,
-    carouselList: [],
+  carouselList: [],
+  isLoading: false,
+  error: false,
+};
+function HomeBannerCarouselReducer(state = initialState, { type, payload }) {
+  switch (type) {
+    case Types.INIT_BANNER_CAROUSEL_LIST:
+      return {
+        ...state,
+        isLoading: true,
+      };
 
-}
-function HomeBannerCarouselReducer(state = initialState, action) {
-    switch (action.type) {
-        case Types.GET_BANNER_CAROUSEL_LIST:
-            return {
-                isLoading: action.payload.isLoading,
-                carouselList: action.payload.data,
-            }
-        default:
-            break;
-    }
-    return state;
+    case Types.GET_BANNER_CAROUSEL_LIST:
+      return {
+        ...state,
+        ...payload,
+        isLoading: false,
+        error: false,
+      };
+
+    case Types.FETCH_BANNER_CAROUSEL_LIST_FAILED:
+      return {
+        ...state,
+        isLoading: false,
+        error: true,
+      };
+
+    default:
+      return state;
+  }
 }
 export default HomeBannerCarouselReducer;

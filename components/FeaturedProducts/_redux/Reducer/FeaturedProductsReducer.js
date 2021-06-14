@@ -1,20 +1,27 @@
 import * as Types from "../Type/Types";
 
 const initialState = {
-    isLoading: false,
-    ProductList: [],
+  ProductList: [],
+  error: false,
+  isLoading: false,
+};
+function FeaturedProductsReducer(state = initialState, { type, payload }) {
+  switch (type) {
+    case Types.INIT_FEATURED_PRODUCT_LIST:
+      return {
+        ...state,
+        isLoading: true,
+      };
 
-}
-function FeaturedProductsReducer(state = initialState, action) {
-    switch (action.type) {
-        case Types.GET_FEATURED_PRODUCT_LIST:
-            return {
-                isLoading: action.payload.isLoading,
-                ProductList: action.payload.data,
-            }
-        default:
-            break;
-    }
-    return state;
+    case Types.GET_FEATURED_PRODUCT_LIST:
+      return {
+        ...state,
+        ProductList: payload.ProductList,
+        isLoading: false,
+      };
+
+    default:
+      return state;
+  }
 }
 export default FeaturedProductsReducer;
