@@ -13,6 +13,7 @@ import HeaderMenu from "./HeaderMenu";
 import Button from "../master/Button/Button";
 import { toggleFloatingCart } from "../../_redux/store/action/globalAction";
 import { getCartsAction } from "../_redux/CartProduct/Action/CartAction";
+import SearchInput from "../SearchInput/SearchInput";
 
 const Header = () => {
   const dispatch  = useDispatch();
@@ -24,7 +25,7 @@ const Header = () => {
   };
 
   useEffect(() => {
-    dispatch(getCartsAction())
+    dispatch(getCartsAction());
   }, []);
 
   return (
@@ -50,13 +51,14 @@ const Header = () => {
               <Navbar.Toggle aria-controls={toggleNav} />
               <Navbar.Collapse id={toggleNav}>
                 <div className="header-search-product">
-                  <input placeholder="Search for Products, Brands or more" />
+                  {/* <input placeholder="Search for Products, Brands or more" />
                   <div className="header-custom-prepend pointer">
                     <FontAwesomeIcon
                       className="custom-fontAwesome"
                       icon={faSearch}
                     />
-                  </div>
+                  </div> */}
+                  <SearchInput />
                 </div>
                 <div className="ml-auto header-nav">
                   <Link href="/login" className="header-nav-link">
@@ -80,16 +82,16 @@ const Header = () => {
                   </Link>
                   
                   {/* <Link href="/carts" className="header-nav-link"> */}
-                  <span onClick={toggleCartHandler} className="header-nav-link pointer cart-nav-link">
+                  <span
+                    onClick={toggleCartHandler}
+                    className="header-nav-link pointer cart-nav-link"
+                  >
                     <FontAwesomeIcon
                       className="custom-fontAwesome"
                       icon={faShoppingBag}
                     />
-                    <span class="cart-qty">
-                      {carts.length}
-                    </span>
-                    &nbsp;&nbsp;
-                    Cart
+                    <span class="cart-qty">{carts.length}</span>
+                    &nbsp;&nbsp; Cart
                   </span>
                   {/* </Link> */}
                 </div>

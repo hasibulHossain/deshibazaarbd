@@ -11,7 +11,16 @@ body {
   font-family: "Montserrat", sans-serif;
 }
 
-h6, h5, h4, h3, h2, h1, p, div, a, button {
+h6,
+h5,
+h4,
+h3,
+h2,
+h1,
+p,
+div,
+a,
+button {
   font-family: "Montserrat", sans-serif;
 }
 
@@ -35,7 +44,8 @@ a {
                         Global CSS Part :: End
 /*****************************************************************/
 
-.custom-button-component, a .custom-button-component {
+.custom-button-component,
+a .custom-button-component {
   background-color: #e9000f;
   color: #fff !important;
   border: 2px solid #e9000f;
@@ -47,7 +57,8 @@ a {
   text-decoration: none !important;
 }
 
-.custom-button-component:hover, a .custom-button-component:hover {
+.custom-button-component:hover,
+a .custom-button-component:hover {
   background-color: #fff;
   color: #e9000f !important;
   text-decoration: none;
@@ -73,7 +84,9 @@ a {
   color: #fff !important;
 }
 
-.heading-top-right div, .heading-top-right button, .heading-top-right p {
+.heading-top-right div,
+.heading-top-right button,
+.heading-top-right p {
   font-size: 14px !important;
   font-weight: 500;
 }
@@ -105,7 +118,7 @@ a {
   padding: 5px;
   border-radius: 14px;
   font-size: 10px;
-  width: 20px!important;
+  width: 20px !important;
   height: 20px;
 }
 
@@ -157,6 +170,7 @@ a {
 }
 
 .header-search-product {
+  position: relative;
   display: flex;
   width: 55%;
   line-height: 10px;
@@ -285,7 +299,8 @@ a {
   background-color: transparent !important;
 }
 
-.carousel-control-next, .carousel-control-prev {
+.carousel-control-next,
+.carousel-control-prev {
   display: none !important;
 }
 
@@ -336,7 +351,8 @@ a {
   text-transform: capitalize;
 }
 
-.slick-prev, .slick-next {
+.slick-prev,
+.slick-next {
   display: none !important;
 }
 
@@ -386,11 +402,15 @@ a {
   border-radius: 50%;
 }
 
-.product-card .product-purchase-section .add_to_cart, .product-card .product-purchase-section .withlist, .product-card .product-purchase-section .details {
+.product-card .product-purchase-section .add_to_cart,
+.product-card .product-purchase-section .withlist,
+.product-card .product-purchase-section .details {
   transition: all 0.5s ease;
 }
 
-.product-card .product-purchase-section .add_to_cart:hover, .product-card .product-purchase-section .withlist:hover, .product-card .product-purchase-section .details:hover {
+.product-card .product-purchase-section .add_to_cart:hover,
+.product-card .product-purchase-section .withlist:hover,
+.product-card .product-purchase-section .details:hover {
   color: #e9000f !important;
 }
 
@@ -586,7 +606,8 @@ a {
   font-weight: 600;
 }
 
-.flash-deal-detail .price, .inStock {
+.flash-deal-detail .price,
+.inStock {
   color: #9c9a9a;
   font-weight: 500;
 }
@@ -649,17 +670,20 @@ a {
   background-color: #f9d452;
 }
 
-.home-appliance .new-collection-details, .stationary_carft .new-collection-details {
+.home-appliance .new-collection-details,
+.stationary_carft .new-collection-details {
   padding: 10px;
 }
 
-.home-appliance .collection-banner, .stationary_carft .collection-banner {
+.home-appliance .collection-banner,
+.stationary_carft .collection-banner {
   position: absolute;
   bottom: 5%;
   text-align: center;
 }
 
-.home-appliance .collection-banner img, .stationary_carft .collection-banner img {
+.home-appliance .collection-banner img,
+.stationary_carft .collection-banner img {
   width: 60%;
 }
 
@@ -696,7 +720,8 @@ a {
 
 /*=====================Offer Product==================*/
 
-.offer_product_section, .offer_product_section-right {
+.offer_product_section,
+.offer_product_section-right {
   -webkit-box-shadow: 2px 6px 15px -7px rgba(166, 166, 166, 1);
   -moz-box-shadow: 2px 6px 15px -7px rgba(166, 166, 166, 1);
   box-shadow: 2px 6px 15px -7px rgba(166, 166, 166, 1);
@@ -964,7 +989,10 @@ a {
   color: rgb(202, 202, 202);
 }
 
-.footer-info p, .footer-info input, .footer-info a, .footer-bottom p {
+.footer-info p,
+.footer-info input,
+.footer-info a,
+.footer-bottom p {
   font-size: 14px;
 }
 
@@ -1278,7 +1306,8 @@ a {
   height: 3rem !important;
 }
 
-.input-range__label--min, .input-range__label--max {
+.input-range__label--min,
+.input-range__label--max {
   bottom: -1.4rem;
   position: absolute;
   display: none;
@@ -1303,10 +1332,12 @@ a {
   outline: none;
   position: absolute;
   top: 50%;
-  -webkit-transition: -webkit-transform 0.3s ease-out, -webkit-box-shadow 0.3s ease-out;
+  -webkit-transition: -webkit-transform 0.3s ease-out,
+    -webkit-box-shadow 0.3s ease-out;
   transition: -webkit-transform 0.3s ease-out, -webkit-box-shadow 0.3s ease-out;
   transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
-  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out, -webkit-transform 0.3s ease-out, -webkit-box-shadow 0.3s ease-out;
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out,
+    -webkit-transform 0.3s ease-out, -webkit-box-shadow 0.3s ease-out;
   width: 1rem;
 }
 
@@ -1350,7 +1381,8 @@ a {
   padding: 1% 10% !important;
 }
 
-.account_info .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+.account_info .nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active {
   color: #fff !important;
   background-color: #e9000f !important;
   padding: 1% 10% !important;
@@ -1373,13 +1405,15 @@ p.account_sub_tite {
   font-weight: 700;
 }
 
-.account_info_label a, .already_account a {
+.account_info_label a,
+.already_account a {
   color: #ff3c20;
   margin-left: 10px;
   transition: 0.5s;
 }
 
-.account_info_label a:hover, .already_account a:hover {
+.account_info_label a:hover,
+.already_account a:hover {
   text-decoration: none;
   color: #f12506;
 }
@@ -1567,7 +1601,9 @@ span.user_icon {
   margin-right: 10px;
 }
 
-span.user_email, span.user_phone, span.user_address {
+span.user_email,
+span.user_phone,
+span.user_address {
   font-size: 15px;
   font-weight: 500;
 }
@@ -1609,7 +1645,8 @@ p.address_sub_title {
   padding: 10px;
 }
 
-.profile_account, .inner_product_list {
+.profile_account,
+.inner_product_list {
   background-color: rgb(255 255 255 / 77%);
   padding: 15px;
   border-radius: 10px;
@@ -1636,7 +1673,7 @@ p.address_sub_title {
 }
 
 .css-yk16xz-control {
-  border-color: #f1f1f1!important;
+  border-color: #f1f1f1 !important;
   /* font-size: 16px; */
 }
 
@@ -1646,4 +1683,82 @@ h5.product_name {
 
 .wishsingleproductIcon {
   color: #e9000f;
+}
+
+/*=========== Search ========*/
+
+ext.card-title.h5 {
+  font-size: 22px;
+}
+
+.searchCardText h1 {
+  font-size: 20px;
+}
+
+.sidebar-card-title.searchtext.pl-3.pt-3 {
+  margin-right: 15px;
+}
+
+.searchBorder.border-top {
+  width: 100%;
+  /* margin-left: -8px; */
+}
+
+.searchImg img {
+  height: 185px;
+}
+
+/* .searchBody.card-body {
+  height: 125px;
+} */
+
+p.text-secondary.mb-0 {
+  text-decoration: line-through;
+  display: inline;
+}
+
+.searchBody p.card-text.mb-0.float-left {
+  font-size: 14px;
+}
+
+.searchInput {
+  border-radius: 6px 6px 0px 0px;
+}
+
+.search-suggestion-area {
+  height: auto;
+  min-height: 100px;
+  max-height: 300px;
+  z-index: 10;
+  position: absolute;
+  background: #eee;
+  top: 100%;
+  width: 90%;
+  border-radius: 0px 0px 25px 25px;
+  color: #111;
+  overflow-y: auto;
+}
+
+.search-suggestion-item img {
+  width: 50px;
+}
+
+.search-suggestion-item {
+  border-bottom: 1px solid #ccc;
+  cursor: pointer;
+  width: 100% !important;
+  background: white;
+}
+
+.search-suggestion-item .search-title {
+  font-size: 15px;
+  margin-top: 10px;
+  margin-left: 20px;
+  width: 300px;
+}
+
+.search-suggestion-item .search-price {
+  font-size: 15px;
+  margin-top: 10px;
+  margin-left: 20px;
 }
