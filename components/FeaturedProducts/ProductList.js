@@ -12,10 +12,12 @@ import ReactStars from "react-rating-stars-component";
 import SlickSetting from "../master/slickSetting/SlickSetting";
 import SimpleModal from "../master/Modal/SimpleModal";
 import FeaturedProductDetails from "./FeaturedProductDetails";
+import { addToCartAction } from "../_redux/CartProduct/Action/CartAction";
 
 const ProductList = () => {
   const [show, setShow] = useState(false);
   const [product, setProduct] = useState("");
+  const [quantity, setQuantity] = useState(1);
 
   const { ProductList } = useSelector((state) => state.FeaturedProductsReducer);
 
@@ -32,6 +34,18 @@ const ProductList = () => {
     dispatch(getFeaturedProductList());
   }, []);
 
+  const addToCart = (item) => {
+    const cartProduct = {
+      productID: item.id,
+      productName: item.name,
+      quantity: quantity,
+      isOffer: item.is_offer_enable,
+      price: item.default_selling_price,
+      offerPrice: item.offer_selling_price,
+      productImage: `${process.env.NEXT_PUBLIC_URL}images/products/${item.featured_image}`,
+    };
+    dispatch(addToCartAction(cartProduct, item.id));
+  };
   return (
     <div className="productList-body">
       <Slider {...SlickSetting}>
@@ -40,7 +54,7 @@ const ProductList = () => {
             <div key={index} className="product-card">
               <div className="product-purchase-section">
                 <button>
-                  <FontAwesomeIcon className="add_to_cart" icon={faShoppingBag} />
+                  <FontAwesomeIcon className="add_to_cart" icon={faShoppingBag} onClick={() => addToCart(item)} />
                 </button>
                 <button>
                   <FontAwesomeIcon className="withlist" icon={faHeart} />
