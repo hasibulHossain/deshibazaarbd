@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { handleSetDataIntoInputField } from './_redux/Action/ProfileAccountSettingAction';
-import ErrorMessage from './../master/ErrorMessage/ErrorMessage'
+import { handleSetDataIntoInputField } from '../ProfileAccountSetting/_redux/Action/ProfileAccountSettingAction';
+import ErrorMessage from '../master/ErrorMessage/ErrorMessage'
 
-const PersonalInfoForm = () => {
+const PersonalInformationUpdate = () => {
     const dispatch = useDispatch();
     const userInputData = useSelector((state) => state.ProfileAccountSettingReducer.userInputData);
-    const { register, handleSubmit, errors, setValue, watch } = useForm();
+    const { register, handleSubmit, errors } = useForm();
 
     console.log('userInputData :>> ', userInputData);
     useEffect(() => {
@@ -17,8 +17,8 @@ const PersonalInfoForm = () => {
         // dispatch(RegisterFirstStep(registerInput))
     }
     return (
-        <div className="profile_account">
-            <h6>Personal Information</h6>
+        <div className="">
+            <h6>Personal Information</h6> <hr />
 
             <form
                 onSubmit={handleSubmit(handleUpdatedProfile)}
@@ -123,10 +123,12 @@ const PersonalInfoForm = () => {
                     </div>
 
                 </div>
-                <button type="submit" className="btn btn-primary">update</button>
+                <div className="d-flex justify-content-end">
+                    <button type="submit" className="btn btn-primary">update</button>
+                </div>
             </form>
         </div>
     );
 };
 
-export default PersonalInfoForm;
+export default PersonalInformationUpdate;

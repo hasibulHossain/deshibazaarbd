@@ -1572,9 +1572,14 @@ p.address_sub_title {
   padding: 20px;
 }
 
+.address_book_updated {
+  background-color: #e1f1eb78;
+  padding: 10px;
+}
+
 .profile_account {
   background-color: rgb(255 255 255 / 77%);
-  padding: 25px;
+  padding: 15px;
   border-radius: 10px;
   margin-bottom: 20px;
 }

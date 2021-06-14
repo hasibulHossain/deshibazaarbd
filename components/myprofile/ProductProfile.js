@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ProfileSideBar from "./ProfileSideBar";
 import { getUserDataAction } from "../_redux/getUserData/Action/UserDataAction";
@@ -6,6 +6,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMailBulk, faMapMarkedAlt, faPhone, faUser } from "@fortawesome/free-solid-svg-icons";
 import { getShippingAddress, getBillingAddress } from "../ProfileAccountSetting/_redux/Action/ProfileAccountSettingAction";
 import LoadingSpinner from './../master/LoadingSpinner/LoadingSpinner'
+import SimpleModal from '../master/Modal/SimpleModal';
+import PersonalInformationUpdate from "./PersonalInformationUpdate";
+import AddressUpdate from "./AddressUpdate";
+
 const ProductProfile = () => {
   const dispatch = useDispatch()
   // const wallets = useSelector((state) => state.wallet.wallets);
@@ -19,8 +23,15 @@ const ProductProfile = () => {
     dispatch(getBillingAddress('billing_address'));
     // dispatch(fetchWallets());
   }, [])
-  console.log('shippingAddress :>> ', shippingAddress);
-  console.log('billingAddress :>> ', billingAddress);
+
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);;
+  const [addressShow, setAddressShow] = useState(false);
+  const handleAddressShow = () => setAddressShow(true);;
+  const handleAddressClose = () => setAddressShow(false);
+
+
   return (
     <>
       <div className="wishbanner pb">
@@ -41,7 +52,7 @@ const ProductProfile = () => {
                 <div className="col-md-5">
                   <div className="card mb-2 p-3 default_height">
                     <div className="card-title">
-                      <h6>Personal Profile | <span className="edit_protile_link">EDIT</span></h6>
+                      <h6>Personal Profile | <span className="edit_protile_link" onClick={(() => handleShow())}>EDIT</span></h6>
                       <p className="user_name"> {`${userData !== null && userData.first_name} ${userData !== null && userData.last_name}`}</p>
                       <p>
                         <span className="user_icon">
@@ -65,7 +76,7 @@ const ProductProfile = () => {
                 <div className="col-md-5">
                   <div className="card mb-2 p-3 default_height">
                     <div className="card-title">
-                      <h6>Address Book | <span className="edit_protile_link">EDIT</span> </h6>
+                      <h6>Address Book | <span className="edit_protile_link" onClick={() => handleAddressShow()}>EDIT</span> </h6>
                       <p className="address_sub_title">
                         Shipping Address :
                       </p>
@@ -122,6 +133,23 @@ const ProductProfile = () => {
           </div>
         </div>
       </div>
+
+      <SimpleModal
+        size="lg"
+        show={show}
+        handleClose={handleClose}
+
+      >
+        <PersonalInformationUpdate />
+      </SimpleModal>
+      <SimpleModal
+        size="xl"
+        show={addressShow}
+        handleClose={handleAddressClose}
+
+      >
+        <AddressUpdate />
+      </SimpleModal>
     </>
   );
 };
