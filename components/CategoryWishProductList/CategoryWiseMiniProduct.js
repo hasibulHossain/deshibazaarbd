@@ -21,7 +21,7 @@ const CategoryWiseMiniProduct = ({ columns }) => {
                         <div className={columns == "col-md-3" ? "categories_wise_product_card filter_column_3 shadow-sm p-3 mb-3 bg-white rounded" : "categories_wise_product_card filter_column_10 shadow-sm p-3 mb-3 bg-white rounded"}>
                             <div className="product-purchase-section">
                                 <button>
-                                    <FontAwesomeIcon className="add-to-cart" icon={faShoppingBag} />
+                                    <FontAwesomeIcon className="add_to_cart" icon={faShoppingBag} />
                                 </button>
                                 <button>
                                     <FontAwesomeIcon className="withlist" icon={faHeart} />

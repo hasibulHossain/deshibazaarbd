@@ -31,13 +31,13 @@ const ProductList = () => {
                         <div key={index} className="product-card">
                             <div className="product-purchase-section">
                                 <button>
-                                    <FontAwesomeIcon className="add-to-cart" icon={faShoppingBag} />
+                                    <FontAwesomeIcon className="add_to_cart" icon={faShoppingBag} />
                                 </button>
                                 <button>
                                     <FontAwesomeIcon className="withlist" icon={faHeart} />
                                 </button>
                                 <button>
-                                    <FontAwesomeIcon className="" icon={faListAlt} />
+                                    <FontAwesomeIcon className="details" icon={faListAlt} />
                                 </button>
                             </div>
                             <div className="product-card-body" onClick={(() => handleShow(item))}>

@@ -360,7 +360,11 @@ a {
   border-radius: 50%;
 }
 
-.product-card .product-purchase-section .withlist {
+.product-card .product-purchase-section .add_to_cart, .product-card .product-purchase-section .withlist, .product-card .product-purchase-section .details {
+  transition: all 0.5s ease;
+}
+
+.product-card .product-purchase-section .add_to_cart:hover, .product-card .product-purchase-section .withlist:hover, .product-card .product-purchase-section .details:hover {
   color: #e9000f !important;
 }
 
