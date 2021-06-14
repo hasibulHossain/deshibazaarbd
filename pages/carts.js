@@ -41,7 +41,7 @@ export default function Carts() {
       >
         <div style={{ width: "27rem" }}>
           <RemoveCartItem>
-            Remove frm cart item will be removed from order
+            Remove from cart item will be removed from order
           </RemoveCartItem>
         </div>
       </Modal>

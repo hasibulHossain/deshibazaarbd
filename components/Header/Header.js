@@ -75,11 +75,13 @@ const Header = () => {
                     </a>
                   </Link>
                   {/* <Link href="/carts" className="header-nav-link"> */}
-                  <span onClick={toggleCartHandler} className="header-nav-link">
+                  <span onClick={toggleCartHandler} className="header-nav-link pointer cart-nav-link">
                     <FontAwesomeIcon
                       className="custom-fontAwesome"
                       icon={faShoppingBag}
-                    />{" "}
+                    />
+                    <span class="cart-qty">0</span>
+                    &nbsp;&nbsp;
                     Cart
                   </span>
                   {/* </Link> */}
