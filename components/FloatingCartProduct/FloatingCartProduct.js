@@ -6,11 +6,12 @@ import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 
 function FloatingCartProduct({ item }) {
   const [quantity, setQuantity] = useState(item.quantity);
+
   return (
     <div className="floating-cart__product">
       <div className="floating-cart__product-left">
         <div className="floating-cart__product-photo-container">
-          {/* <img src="" alt="" /> */}
+          <img src={item.productImage} alt="" style={{ width: 80, height: 80 }} />
         </div>
       </div>
       <div className="floating-cart__product-right">
