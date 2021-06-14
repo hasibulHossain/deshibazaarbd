@@ -14,7 +14,6 @@ function ShopByCategoriesReducer(state = initialState, { type, payload }) {
       };
 
     case Types.GET_SHOP_BY_CATEGORIES_LIST:
-      console.log("from get shop by categories => //");
       return {
         ...state,
         ProductList: payload.ProductList,

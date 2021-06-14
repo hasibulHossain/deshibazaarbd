@@ -11,11 +11,11 @@ const initialState = {
   error: null,
   cartProduct: {
     productID: null,
-    productName: '',
-    quantity: '',
-    price: '',
-    offerPrice: '',
-    productImage: ''
+    productName: "",
+    quantity: "",
+    price: "",
+    offerPrice: "",
+    productImage: "",
   },
   // Place Order Part
   totalQuantity: 0,
@@ -27,12 +27,12 @@ const initialState = {
     carts: [
       {
         productID: "",
-        quantity: ""
-      }
-    ]
+        quantity: "",
+      },
+    ],
   },
   couponLoading: false,
-  couponData: {}
+  couponData: {},
 };
 
 const CartReducer = (state = initialState, action) => {
@@ -53,12 +53,12 @@ const CartReducer = (state = initialState, action) => {
         ...state,
         cartProduct: {
           productID: null,
-          productName: '',
-          quantity: '',
-          price: '',
-          offerPrice: '',
-          productImage: ''
-        }
+          productName: "",
+          quantity: "",
+          price: "",
+          offerPrice: "",
+          productImage: "",
+        },
       };
     case Types.EMPTY_CART_MESSAGE:
       return {
@@ -79,11 +79,11 @@ const CartReducer = (state = initialState, action) => {
       };
 
     case Types.GET_CARTS:
-      console.log('action.payload :>> ', action.payload);
       return {
         ...state,
         carts: action.payload.carts,
-        totalQuantity: calculateTotalQtyAndPrices(action.payload.carts).totalQuantity,
+        totalQuantity: calculateTotalQtyAndPrices(action.payload.carts)
+          .totalQuantity,
         totalPrice: calculateTotalQtyAndPrices(action.payload.carts).totalPrice,
         // shippingCost: calculateTotalQtyAndPrices(action.payload.carts).shippingCost,
         products: action.payload.products,
@@ -91,12 +91,10 @@ const CartReducer = (state = initialState, action) => {
         errors: null,
       };
     case Types.APPLY_SHIPPING_COST:
-      console.log(`action.payload`, action.payload.shipping)
       return {
         ...state,
         shippingCost: action.payload.shipping,
-        shippingCostLoading: action.payload.shippingCostLoading
-
+        shippingCostLoading: action.payload.shippingCostLoading,
       };
 
     case Types.POST_CARTS_DATA:
@@ -113,7 +111,6 @@ const CartReducer = (state = initialState, action) => {
         couponLoading: action.payload.couponLoading,
         couponData: action.payload.couponData,
         // coupon: initialState.coupon,
-
       };
 
     // case Types.UPDATE_CARTS_DATA:
@@ -152,13 +149,18 @@ const calculateTotalQtyAndPrices = (carts) => {
   const response = {
     totalQuantity: 0,
     totalPrice: 0,
-  }
+  };
   for (let i = 0; i < carts.length; i++) {
     response.totalQuantity += carts[i].quantity;
-    response.totalPrice += (carts[i].offerPrice !== null && carts[i].offerPrice !== 0 && carts[i].price !== "" ? carts[i].quantity * carts[i].offerPrice : carts[i].quantity * carts[i].price);
+    response.totalPrice +=
+      carts[i].offerPrice !== null &&
+      carts[i].offerPrice !== 0 &&
+      carts[i].price !== ""
+        ? carts[i].quantity * carts[i].offerPrice
+        : carts[i].quantity * carts[i].price;
     // response.shippingCost = (response.totalPrice / 100) * 5;
   }
   return response;
-}
+};
 
 export default CartReducer;

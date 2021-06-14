@@ -1,20 +1,20 @@
 import { useState } from "react";
 import * as Types from "../Types/Types";
-import Axios from "axios"
+import Axios from "axios";
 import { showToast } from "../../../master/Helper/ToastHelper";
 
 export const addToCartAction = (cartProduct, id) => async (dispatch) => {
   const previousCart = getCartData().carts;
   let carts = [...previousCart];
   if (carts.find((data) => data.productID === id)) {
-    showToast('error', "This Product already added!")
+    showToast("error", "This Product already added!");
   } else {
     carts.push(cartProduct);
     localStorage.setItem("carts", JSON.stringify(carts));
-    showToast('success', "Product added successfully!")
+    showToast("success", "Product added successfully!");
   }
   dispatch({ type: Types.POST_CARTS_LOADING, payload: carts });
-  dispatch(getCartsAction())
+  dispatch(getCartsAction());
 };
 
 export const getCartsAction = () => async (dispatch) => {
@@ -24,30 +24,31 @@ export const getCartsAction = () => async (dispatch) => {
 };
 
 //update cart products quantity
-export const updateCartQtyAction = (product_id, quantity) => async (dispatch) => {
-  const cartStorageData = localStorage.getItem("carts");
-  let data = {
-    carts: [],
-    products: [],
-  };
+export const updateCartQtyAction =
+  (product_id, quantity) => async (dispatch) => {
+    const cartStorageData = localStorage.getItem("carts");
+    let data = {
+      carts: [],
+      products: [],
+    };
 
-  if (typeof cartStorageData !== "undefined" && cartStorageData !== null) {
-    data.carts = JSON.parse(cartStorageData);
-    data.products = data.carts.products;
+    if (typeof cartStorageData !== "undefined" && cartStorageData !== null) {
+      data.carts = JSON.parse(cartStorageData);
+      data.products = data.carts.products;
 
-    let findProducts = data.carts.filter(
-      (item) => item.productID === product_id
-    );
-    if (findProducts.length) {
-      const getProductIndex = data.carts.indexOf(findProducts[0]);
-      findProducts[0].quantity = quantity;
-      data.carts[getProductIndex] = findProducts[0];
-      localStorage.setItem("carts", JSON.stringify(data.carts));
+      let findProducts = data.carts.filter(
+        (item) => item.productID === product_id
+      );
+      if (findProducts.length) {
+        const getProductIndex = data.carts.indexOf(findProducts[0]);
+        findProducts[0].quantity = quantity;
+        data.carts[getProductIndex] = findProducts[0];
+        localStorage.setItem("carts", JSON.stringify(data.carts));
+      }
     }
-  }
-  dispatch({ type: Types.UPDATE_CARTS_DATA, payload: getCartData() });
-  dispatch(getCartsAction());
-};
+    dispatch({ type: Types.UPDATE_CARTS_DATA, payload: getCartData() });
+    dispatch(getCartsAction());
+  };
 
 //delete cart product
 export const deleteCartItemAction = (product_id) => async (dispatch) => {
@@ -61,12 +62,14 @@ export const deleteCartItemAction = (product_id) => async (dispatch) => {
     data.carts = JSON.parse(cartStorageData);
     data.products = data.carts.products;
 
-    let findProducts = data.carts.filter((item) => item.productID !== product_id);
+    let findProducts = data.carts.filter(
+      (item) => item.productID !== product_id
+    );
 
     localStorage.setItem("carts", JSON.stringify(findProducts));
   }
   dispatch({ type: Types.DELETE_CARTS_DATA, payload: getCartData() });
-  dispatch(getCartsAction())
+  dispatch(getCartsAction());
 };
 
 export const postEmptyCartMessage = () => async (dispatch) => {
@@ -80,7 +83,6 @@ export const postEmptyCartDeleteMessage = () => async (dispatch) => {
 // function addToCartData(product, quantity) {
 //   // Find product first where product_id = this product_id and
 //   // then if exist increment that totalQuantity or add totalCount
-
 
 //   let products = [];
 //   const cartStorageData = localStorage.getItem("carts");
@@ -143,28 +145,30 @@ function getCartData() {
 export const handleChangeCouponInput = (name, value) => (dispatch) => {
   const couponData = {
     name: name,
-    value: value
-  }
+    value: value,
+  };
   dispatch({ type: Types.CHANGE_COUPON_INPUT_DATA, payload: couponData });
-}
+};
 
-export const handleApplyCouponCode = (coupon, carts) => (dispatch => {
+export const handleApplyCouponCode = (coupon, carts) => (dispatch) => {
   let responseData = {
     status: false,
     message: "",
     errorMessage: "",
     couponData: {},
     couponLoading: true,
-    returnData: ""
+    returnData: "",
   };
   dispatch({ type: Types.APPLY_COUPON_CODE, payload: responseData });
 
   const newCoupon = {
     code: coupon.code,
-    carts: carts
-  }
-  console.log(`newCoupon`, newCoupon)
-  Axios.post(`${process.env.NEXT_PUBLIC_API_URL}coupons/check-by/code`, newCoupon)
+    carts: carts,
+  };
+  Axios.post(
+    `${process.env.NEXT_PUBLIC_API_URL}coupons/check-by/code`,
+    newCoupon
+  )
     .then((res) => {
       if (res.data.status) {
         let data = res.data;
@@ -179,30 +183,32 @@ export const handleApplyCouponCode = (coupon, carts) => (dispatch => {
       const { response } = err;
       const { request, ...errorObject } = response;
       responseData.couponLoading = false;
-      responseData.couponData = response.data,
+      (responseData.couponData = response.data),
         dispatch({ type: Types.APPLY_COUPON_CODE, payload: responseData });
     });
-})
+};
 
 //handle change shipping cost =================================
-export const handleShippingCost = (carts) => (dispatch => {
+export const handleShippingCost = (carts) => (dispatch) => {
   let responseData = {
     status: false,
     message: "",
     errorMessage: "",
     shipping: 0,
     shippingCostLoading: true,
-    returnData: ""
+    returnData: "",
   };
   dispatch({ type: Types.APPLY_SHIPPING_COST, payload: responseData });
 
   const shippingCost = {
-    carts: carts
-  }
-  Axios.post(`${process.env.NEXT_PUBLIC_API_URL}sales/shipping-cost/by-cart`, shippingCost)
+    carts: carts,
+  };
+  Axios.post(
+    `${process.env.NEXT_PUBLIC_API_URL}sales/shipping-cost/by-cart`,
+    shippingCost
+  )
     .then((res) => {
       if (res.data.status) {
-        console.log(`res`, res)
         let data = res.data;
         responseData.message = data.message;
         responseData.status = data.status;
@@ -215,7 +221,7 @@ export const handleShippingCost = (carts) => (dispatch => {
       const { response } = err;
       const { request, ...errorObject } = response;
       responseData.shippingCostLoading = false;
-      responseData.shipping = response.data,
+      (responseData.shipping = response.data),
         dispatch({ type: Types.APPLY_SHIPPING_COST, payload: responseData });
     });
-})
+};
