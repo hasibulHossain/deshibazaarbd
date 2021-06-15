@@ -77,53 +77,6 @@ export const postEmptyCartDeleteMessage = () => async (dispatch) => {
   dispatch({ type: Types.EMPTY_CART_DELETE_MESSAGE, payload: true });
 };
 
-// function addToCartData(product, quantity) {
-//   // Find product first where product_id = this product_id and
-//   // then if exist increment that totalQuantity or add totalCount
-
-
-//   let products = [];
-//   const cartStorageData = localStorage.getItem("carts");
-//   if (typeof cartStorageData !== "undefined" && cartStorageData !== null) {
-//     let carts = JSON.parse(cartStorageData);
-//     if (carts.products.length > 0) {
-//       const findProducts = carts.products.filter(function (x) {
-//         return x.id === product.id;
-//       });
-//       if (findProducts.length > 0) {
-//         const getProductIndex = carts.products.indexOf(findProducts[0]);
-//         findProducts[0].qty = findProducts[0].qty + quantity;
-//         carts.products[getProductIndex] = findProducts[0];
-//         carts = {
-//           products: carts.products,
-//         };
-//       } else {
-//         product.qty = 1;
-//         carts.products.push(product);
-//         carts = {
-//           products: carts.products,
-//         };
-//       }
-//       localStorage.setItem("carts", JSON.stringify(carts));
-//     } else {
-//       // Add as a first item in carts
-//       product.qty = 1;
-//       products.push(product);
-//       let carts = {
-//         products: products,
-//       };
-//       localStorage.setItem("carts", JSON.stringify(carts));
-//     }
-//   } else {
-//     // Add as a first item in carts
-//     product.qty = 1;
-//     products.push(product);
-//     let carts = {
-//       products: products,
-//     };
-//     localStorage.setItem("carts", JSON.stringify(carts));
-//   }
-// }
 
 function getCartData() {
   const cartStorageData = localStorage.getItem("carts");
