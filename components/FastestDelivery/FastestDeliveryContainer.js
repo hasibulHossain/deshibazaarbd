@@ -47,6 +47,7 @@ const FastestDeliveryContainer = () => {
         <Button buttonText="view all" isFontAwesome={true} />
       </div>
       <ProductList
+        type="fastest_delivery"
         productList={productList}
         handleClose={handleClose}
         handleShow={handleShow}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 
 // third party imports
 import Slider from "react-slick";
@@ -19,8 +19,12 @@ import ProductDetails from "../ProductDetails/ProductDetails";
 import LoadingSkelleton from "./../master/skelleton/LoadingSkelleton.jsx";
 
 const ProductList = (props) => {
-  const { show, handleShow, handleClose, productList, product, isLoading } =
+  const { show, handleShow, handleClose, productList, product, isLoading, type } =
     props;
+
+    // useEffect(() => {
+    //   dispatch(getProductListAction(type));
+    // }, []);
   //   const [quantity, setQuantity] = useState(1);
 
   //   const addToCart = (item) => {

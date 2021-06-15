@@ -3,6 +3,7 @@ import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import SocialMedia from "../Footer/SocialMedia";
 import ReactImageZoom from "react-image-zoom";
+import Link from "next/link";
 
 const ProductDetails = ({ product }) => {
   const [quantity, setQuantity] = useState(1);
@@ -60,7 +61,11 @@ const ProductDetails = ({ product }) => {
           </div>
           <div className="col-md-6">
             <div className="product_details_section">
-              <h3 className="product_title">{product.name && product.name}</h3>
+              <Link href={"/products/" + product.sku}>
+                <h3 className="product_title">
+                  {product.name && product.name}
+                </h3>
+              </Link>
               <div className="h3 product_price">
                 $
                 {product.default_selling_price && product.default_selling_price}
@@ -94,15 +99,18 @@ const ProductDetails = ({ product }) => {
                 <div className="mr-3">
                   <h6>Pick your colo</h6>
                   <div className="color_picker">
-                    {/* {product.color &&
-                    product.color.length > 0 &&
-                    product.color.map((singleColor, colorIndex) => (
-                      <p
-                        className="colorBox"
-                        style={{ backgroundColor: singleColor.colorCode }}
-                      ></p>
-                    ))} */}
-                    color picker
+                    <p
+                      className="colorBox"
+                      style={{ backgroundColor: "#2df" }}
+                    ></p>
+                    <p
+                      className="colorBox"
+                      style={{ backgroundColor: "#4c3" }}
+                    ></p>
+                    <p
+                      className="colorBox"
+                      style={{ backgroundColor: "#7d8" }}
+                    ></p>
                   </div>
                 </div>
                 <div className="d-flex mt-3">
@@ -122,7 +130,6 @@ const ProductDetails = ({ product }) => {
                     Tags:
                     <p className="category_tags">
                       {/* {product.tags && product.tags} */}
-                      product tags
                     </p>
                   </div>
                 </div>
