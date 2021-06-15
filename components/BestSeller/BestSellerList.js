@@ -6,7 +6,7 @@ import { faHeart, faListAlt, faShoppingBag } from '@fortawesome/free-solid-svg-i
 import ReactStars from "react-rating-stars-component";
 import SlickSetting from '../master/slickSetting/SlickSetting';
 import { getBestSellerList } from './_redux/Action/BestSellerAction';
-import BestSellerDetails from './BestSellerDetails';
+import ProductDetailModal from '../product-detail/ProductDetailModal';
 import SimpleModal from '../master/Modal/SimpleModal';
 
 const BestSellerList = () => {
@@ -66,7 +66,7 @@ const BestSellerList = () => {
                 handleClose={handleClose}
 
             >
-                <BestSellerDetails product={product} />
+                <ProductDetailModal product={product} />
             </SimpleModal>
         </div>
     );

@@ -1379,6 +1379,7 @@ a .custom-button-component:hover {
   font-weight: 700;
   text-transform: none;
   padding: 1% 10% !important;
+  width: 50%;
 }
 
 .account_info .nav-tabs .nav-item.show .nav-link,
