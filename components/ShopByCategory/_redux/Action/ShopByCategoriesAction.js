@@ -338,7 +338,6 @@ export const getProductCategiesListByShop = () => async (dispatch) => {
 
     const res = await Axios.get(url);
     const data = res.data.data;
-    console.log("data shop by categories => ", data);
     dispatch({
       type: Types.GET_SHOP_BY_CATEGORIES_LIST,
       payload: { ProductList: data },

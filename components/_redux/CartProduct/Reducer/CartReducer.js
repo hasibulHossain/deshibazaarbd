@@ -111,7 +111,6 @@ const CartReducer = (state = initialState, action) => {
         couponLoading: action.payload.couponLoading,
         couponData: action.payload.couponData,
         // coupon: initialState.coupon,
-
       };
 
     // case Types.UPDATE_CARTS_DATA:
@@ -169,6 +168,6 @@ const calculateTotalQtyAndPrices = (carts) => {
   }
 
   return response;
-}
+};
 
 export default CartReducer;

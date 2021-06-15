@@ -4,7 +4,7 @@ import Link from "next/link";
 
 // third party imports
 import { useDispatch, useSelector } from "react-redux";
-import { Container, Navbar } from "react-bootstrap";
+import { Navbar } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // local imports
@@ -51,15 +51,9 @@ const Header = () => {
               <Navbar.Toggle aria-controls={toggleNav} />
               <Navbar.Collapse id={toggleNav}>
                 <div className="header-search-product">
-                  {/* <input placeholder="Search for Products, Brands or more" />
-                  <div className="header-custom-prepend pointer">
-                    <FontAwesomeIcon
-                      className="custom-fontAwesome"
-                      icon={faSearch}
-                    />
-                  </div> */}
                   <SearchInput />
                 </div>
+
                 <div className="ml-auto header-nav">
                   <Link href="/login" className="header-nav-link">
                     <a className="">Sign In</a>
