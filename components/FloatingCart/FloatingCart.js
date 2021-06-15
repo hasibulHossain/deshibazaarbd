@@ -1,24 +1,24 @@
 import React, { useEffect } from "react";
 
 // third party imports
-import { IoMdCloseCircle }          from "react-icons/io";
+import { IoMdCloseCircle } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 
 // local imports
-import SimpleBtn              from "../master/SimpleBtn/SimpleBtn";
-import FloatingCartProduct    from "../FloatingCartProduct/FloatingCartProduct";
+import SimpleBtn from "../master/SimpleBtn/SimpleBtn";
+import FloatingCartProduct from "../FloatingCartProduct/FloatingCartProduct";
 import { toggleFloatingCart } from "../../_redux/store/action/globalAction";
-import { getCartsAction }     from "../_redux/CartProduct/Action/CartAction";
-import Link                   from "next/link";
+import { getCartsAction } from "../_redux/CartProduct/Action/CartAction";
+import Link from "next/link";
 
 function FloatingCart() {
-  const dispatch                = useDispatch();
+  const dispatch = useDispatch();
   const { floatingCartVisible } = useSelector((state) => state.GlobalReducer);
-  const carts                   = useSelector((state) => state.CartReducer.carts)
-  const totalPrice              = useSelector((state) => state.CartReducer.totalPrice)
-  const totalQuantity           = useSelector((state) => state.CartReducer.totalQuantity)
+  const carts = useSelector((state) => state.CartReducer.carts)
+  const totalPrice = useSelector((state) => state.CartReducer.totalPrice)
+  const totalQuantity = useSelector((state) => state.CartReducer.totalQuantity)
 
-  const toggleCartHandler = () =>  {
+  const toggleCartHandler = () => {
     dispatch(toggleFloatingCart());
   };
 
@@ -55,13 +55,13 @@ function FloatingCart() {
         </div>
 
         <div className="floating-cart__products">
-          { carts.length > 0 && carts.map((item, index) => (
-              <div key={index}>
-                <FloatingCartProduct item={item} />
-              </div>
+          {carts.length > 0 && carts.map((item, index) => (
+            <div key={index}>
+              <FloatingCartProduct item={item} />
+            </div>
           ))}
         </div>
-        
+
         <div className="floating-cart__payment-info">
           <div className="floating-cart__payment-details">
             <span>Sub Total</span>

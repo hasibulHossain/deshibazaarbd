@@ -31,7 +31,7 @@ const ProductList = () => {
   return (
     <div className="productList-body">
       <Slider {...SlickSetting}>
-        {ProductList.length > 0 &&
+        {ProductList && ProductList.length > 0 &&
           ProductList.map((item, index) => (
             <div key={index} className="product-card">
               <div className="product-purchase-section">
