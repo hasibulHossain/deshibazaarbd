@@ -1525,6 +1525,7 @@ p.error_message {
   font-weight: 500;
   font-family: system-ui;
   font-size: 15px;
+  text-transform: none;
   margin-top: 10px;
 }
 
@@ -1908,6 +1909,5 @@ h4.innser_cart_product_name {
 
 .close_btn:hover {
   background-color: #e9000f;
-  color: #fff!important;
   text-decoration: none;
 }

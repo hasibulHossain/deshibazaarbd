@@ -76,10 +76,10 @@ const CartProduct = ({ item }) => {
               </div>
               <div className="cart_product_price">
                 <span className="price">
-                  ৳-25
+                  ৳-{item.offerPrice !== null && item.offerPrice !== "0" ? item.offerPrice : item.price}
                 </span>
                 <span className="offer_price">
-                  ৳-10
+                  ৳-{item.offerPrice !== null && item.offerPrice !== "0" ? item.price : 0}
                 </span>
               </div>
               <p className="discount_percantage">-5%</p>

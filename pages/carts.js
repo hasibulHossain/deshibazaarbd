@@ -17,15 +17,28 @@ import RemoveCartItem from "../components/RemoveCartItem/RemoveCartItem";
 import { toggleModal } from "../_redux/store/action/globalAction";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import { getCartsAction } from "../components/_redux/CartProduct/Action/CartAction";
+import { getCartsAction, handleApplyCouponCode, handleChangeCouponInput, handleShippingCost } from "../components/_redux/CartProduct/Action/CartAction";
 import CartProduct from "../components/CartProducts/CartProduct.js/CartProduct";
-
+import { getUserDataAction } from "../components/_redux/getUserData/Action/UserDataAction";
+import { useRouter } from "next/router";
+import { useForm } from "react-hook-form";
+import ErrorMessage from './../components/master/ErrorMessage/ErrorMessage'
 export default function Carts() {
-  const { isModalActive } = useSelector((state) => state.GlobalReducer);
-  const carts = useSelector((state) => state.CartReducer.carts)
-  const totalPrice = useSelector((state) => state.CartReducer.totalPrice)
-  const totalQuantity = useSelector((state) => state.CartReducer.totalQuantity)
+  const router = useRouter();
   const dispatch = useDispatch();
+
+  const { register, handleSubmit, watch, errors } = useForm();
+
+  const { isModalActive } = useSelector((state) => state.GlobalReducer);
+  const carts = useSelector((state) => state.CartReducer.carts);
+  const totalPrice = useSelector((state) => state.CartReducer.totalPrice);
+  const totalQuantity = useSelector((state) => state.CartReducer.totalQuantity);
+  const userData = useSelector((state) => state.UserDataReducer.userData);
+  const coupon = useSelector((state) => state.CartReducer.coupon);
+  const couponLoading = useSelector((state) => state.CartReducer.couponLoading);
+  const couponData = useSelector((state) => state.CartReducer.couponData);
+  const shippingCost = useSelector((state) => state.CartReducer.shippingCost);
+  const shippingCostLoading = useSelector((state) => state.CartReducer.shippingCostLoading);
 
   const deleteItemsHandler = () => {
     dispatch(toggleModal());
@@ -35,10 +48,27 @@ export default function Carts() {
     if (typeof window === "undefined") {
       global.window = {};
     }
-    dispatch(getCartsAction())
+    dispatch(getCartsAction());
+    dispatch(getUserDataAction());
+    dispatch(handleShippingCost(carts))
+
+
   }, []);
 
 
+  const handleChangeCouponCode = (name, value) => {
+    dispatch(handleChangeCouponInput(name, value))
+  }
+  const onSubmit = () => {
+    dispatch(handleApplyCouponCode(coupon, carts))
+  };
+  const placeOrder = () => {
+    if (userData !== null) {
+      router.push('/placeorder')
+    } else if (userData === null) {
+      router.push('/login')
+    }
+  }
   return (
     <>
       <Modal
@@ -149,16 +179,33 @@ export default function Carts() {
                   <div className="cart__right-order_details">
                     <div className="cart__right-order_details_inner">
                       <div className="cart__right-order_details_item">
-                        <p>Sub Total(9 items)</p>
-                        <p>TK 1500.00 BDT</p>
+                        <p>Sub Total({carts.length} items)</p>
+                        <p>TK {totalPrice} BDT</p>
                       </div>
                       <div className="cart__right-order_details_item">
                         <p>Delivery Fee</p>
                         <p>TK 50.00 BDT</p>
                       </div>
                       <div className="cart__right-order_details_item">
-                        <p>Shipping Fee Discount</p>
-                        <p>TK 50.00 BDT</p>
+                        <p>Shipping Cost</p>
+                        {
+                          !shippingCostLoading && (
+                            <p>TK {shippingCost} BDT</p>
+                          )
+                        }
+                        {
+                          shippingCostLoading && (
+                            <p>
+                              <div class="spinner-border" role="status">
+                                <span class="sr-only">Loading...</span>
+                              </div>
+                            </p>
+                          )
+                        }
+                      </div>
+                      <div className="cart__right-order_details_item">
+                        <p> Discount</p>
+                        <p>TK  {couponData && couponData.discount_amount ? couponData.discount_amount : 0} BDT</p>
                       </div>
                       <div className="cart__right-order_details_item">
                         <p>Total</p>
@@ -169,14 +216,49 @@ export default function Carts() {
                   <div className="cart__right-footer">
                     <div className="cart__right-discount">
                       <div>
-                        <SimpleInput placeholder="Discount Code" />
+                        {/* <SimpleInput placeholder="Discount Code" /> */}
+                        <form onSubmit={handleSubmit(onSubmit)}>
+                          <div className="d-flex justify-content-between">
+                            <input
+                              className="form-control mr-1"
+                              name="code"
+                              autoComplete="off"
+                              placeholder="Your Coupon Code"
+                              value={coupon.code && coupon.code}
+                              onChange={(e) => handleChangeCouponCode("code", e.target.value)}
+                              ref={register({ required: true })} /> <br />
+                            {
+                              !couponLoading && (
+                                <button className="btn btn-success ml-2" type="submit"> APPLY </button>
+                              )
+                            }
+
+                            {couponLoading && (
+                              <button disabled={true} className="btn btn-success d-flex">
+                                <span className="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span> APPLY
+                              </button>
+                            )}
+                          </div>
+                          <p> {errors.code ?
+                            <ErrorMessage errorText="Please insert your coupon code if you have." />
+                            :
+                            (couponData && !couponData.errors && couponData.message ? (
+                              <p className="text-success font-weight-bold mt-2">{couponData.message}</p>
+                              // <ErrorMessage text={couponData.message} />
+                            ) : couponData && couponData.errors && (
+                              // <p className="text-danger font-weight-bold mt-2"></p>
+                              <ErrorMessage errorText={couponData.errors.message} />
+                            )
+                            )
+                          }</p>
+                        </form> <hr />
                       </div>
-                      <div>
+                      {/* <div>
                         <SimpleBtn variant="success">Apply</SimpleBtn>
-                      </div>
+                      </div> */}
                     </div>
                     <div className="cart__proceed-btn">
-                      <SimpleBtn variant="danger">
+                      <SimpleBtn variant="danger" onClick={() => placeOrder()} disabled={carts.length === 0 ? true : false}>
                         PROCEED TO CHECKOUT
                       </SimpleBtn>
                     </div>
