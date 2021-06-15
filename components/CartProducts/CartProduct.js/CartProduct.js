@@ -3,15 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteCartItemAction, updateCartQtyAction } from '../../_redux/CartProduct/Action/CartAction';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faMinus, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
-import Modal from '../../master/Modal/Modal';
-import RemoveCartItem from '../../RemoveCartItem/RemoveCartItem'
+import { Modal, Button } from 'react-bootstrap';
+
 const CartProduct = ({ item }) => {
   const dispatch = useDispatch();
-  const { isModalActive } = useSelector((state) => state.GlobalReducer);
   const [quantity, setQuantity] = useState(item.quantity);
-  const handleDeleteCartProduct = (productID) => {
-    dispatch(deleteCartItemAction(productID))
-  }
 
   // increase quantity 
   const increaseQuantity = (id, quantity) => {
@@ -27,23 +23,41 @@ const CartProduct = ({ item }) => {
       dispatch(updateCartQtyAction(id, (quantity - 1)));
     }
   };
+  const [show, setShow] = useState(false);
 
-  const deleteItemsHandler = () => {
-    dispatch(toggleModal());
+  const handleClose = () => setShow(false);
+  const handleShow = (item) => {
+    setShow(true);
   };
+
+  const handleDeleteCartProduct = (productID) => {
+    dispatch(deleteCartItemAction(productID));
+    setShow(false);
+  }
   return (
     <>
       <Modal
-        visible={isModalActive}
-        closeModalHandler={() => console.log("modal close handler")}
+        // {...props}
+        show={show}
+        onHide={handleClose}
+        size="md"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
       >
-        <div style={{ width: "27rem" }}>
-          <RemoveCartItem>
-            Remove from cart item will be removed from order
-          </RemoveCartItem>
-        </div>
-      </Modal>
+        <Modal.Body>
+          <button className="close_btn" onClick={handleClose}>X</button>
+          <p className="remove_title">
+            Remove from cart <br /> item will be removed from order
+          </p>
+          <div className="d-flex justify-content-end">
+            <div>
+              <button className="custom_secondary_btn" onClick={handleClose}>CANCEL</button>
+              <button className="custom-button-component ml-3" onClick={() => handleDeleteCartProduct(item.productID)}>REMOVE</button>
+            </div>
+          </div>
+        </Modal.Body>
 
+      </Modal>
       <div className="row justify-content-between">
         <div className="col-md-7">
           <div className="product_cart_inner row">
@@ -91,7 +105,7 @@ const CartProduct = ({ item }) => {
               </button>
             </div>
             <FontAwesomeIcon className="cart_wish_list" icon={faHeart} />
-            <FontAwesomeIcon className="remove_product_from_cart" icon={faTrash} onClick={deleteItemsHandler} />
+            <FontAwesomeIcon className="remove_product_from_cart" icon={faTrash} onClick={() => handleShow(item)} />
           </div>
         </div>
       </div>
