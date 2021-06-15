@@ -25,7 +25,7 @@ const ProductDetails = ({ product }) => {
 
   return (
     <>
-      {product && (
+      {product ? (
         <div className="row p-3">
           <div className="col-md-1">
             <div className="product_details_img_gallery">
@@ -132,6 +132,10 @@ const ProductDetails = ({ product }) => {
               </div>
             </div>
           </div>
+        </div>
+      ) : (
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <p>Loading...</p>
         </div>
       )}
     </>

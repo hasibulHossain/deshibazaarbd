@@ -31,7 +31,8 @@ const ProductList = () => {
   return (
     <div className="productList-body">
       <Slider {...SlickSetting}>
-        {ProductList && ProductList.length > 0 &&
+        {ProductList &&
+          ProductList.length > 0 &&
           ProductList.map((item, index) => (
             <div key={index} className="product-card">
               <div className="product-purchase-section">
@@ -71,9 +72,9 @@ const ProductList = () => {
             </div>
           ))}
       </Slider>
-      <SimpleModal size="xl" show={show} handleClose={handleClose}>
+      {/* <SimpleModal size="xl" show={show} handleClose={handleClose}>
         <ShopByCategoryDetails product={product} />
-      </SimpleModal>
+      </SimpleModal> */}
     </div>
   );
 };
