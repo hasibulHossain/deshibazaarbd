@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteCartItemAction, updateCartQtyAction } from '../../_redux/CartProduct/Action/CartAction';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faMinus, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faHeart, faMinus, faPlus, faTimes, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { Modal, Button } from 'react-bootstrap';
 
 const CartProduct = ({ item }) => {
@@ -45,7 +45,9 @@ const CartProduct = ({ item }) => {
         centered
       >
         <Modal.Body>
-          <button className="close_btn" onClick={handleClose}>X</button>
+          <button className="close_btn" onClick={handleClose}>
+            <FontAwesomeIcon icon={faTimes} />
+          </button>
           <p className="remove_title">
             Remove from cart <br /> item will be removed from order
           </p>

@@ -1893,10 +1893,9 @@ h4.innser_cart_product_name {
 }
 
 .close_btn {
-  background-color: #e9000f;
+  background-color: grey;
   color: #fff !important;
-  border: 2px solid #e9000f;
-  padding: 5px 12px;
+  padding: 1px 8px;
   border-radius: 3px;
   font-weight: 600;
   transition: 0.6s;
@@ -1908,7 +1907,7 @@ h4.innser_cart_product_name {
 }
 
 .close_btn:hover {
-  background-color: #fff;
-  color: #e9000f !important;
+  background-color: #e9000f;
+  color: #fff!important;
   text-decoration: none;
 }
