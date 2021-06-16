@@ -376,6 +376,7 @@ $border-bottom: 1px solid #dfdfdf;
 .floating-cart {
   $self: &;
   max-width: 24%;
+  width: 24%;
   height: 100vh;
   background-color: #ffff;
   position: fixed;
