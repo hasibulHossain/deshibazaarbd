@@ -46,6 +46,7 @@
         "react-dom": "16.13.1",
         "react-hook-form": "^6.15.8",
         "react-hook-form-input": "^1.1.10",
+        "react-html-parser": "^2.0.2",
         "react-icons": "^3.11.0",
         "react-image-fallback": "^8.0.0",
         "react-image-magnifiers": "^1.4.0",
