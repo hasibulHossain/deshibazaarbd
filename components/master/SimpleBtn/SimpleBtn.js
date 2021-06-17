@@ -1,13 +1,13 @@
 import React from "react";
 
 // variant
-    // success
-    // danger
+// success
+// danger
 
 function SimpleBtn(props) {
-  const { children, variant, style, onClick } = props;
+  const { children, variant, style, onClick, isDisabled } = props;
   return (
-    <button onClick={onClick} className={`simple-btn ${variant}`} style={{ ...style }}>
+    <button onClick={onClick} className={`simple-btn ${variant}`} style={{ ...style }} disabled={isDisabled}>
       {children}
     </button>
   );

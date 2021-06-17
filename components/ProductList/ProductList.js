@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 
 // third party imports
 import Slider from "react-slick";
@@ -22,9 +22,9 @@ const ProductList = (props) => {
   const { show, handleShow, handleClose, productList, product, isLoading, type } =
     props;
 
-    // useEffect(() => {
-    //   dispatch(getProductListAction(type));
-    // }, []);
+  // useEffect(() => {
+  //   dispatch(getProductListAction(type));
+  // }, []);
   //   const [quantity, setQuantity] = useState(1);
 
   //   const addToCart = (item) => {
@@ -59,7 +59,7 @@ const ProductList = (props) => {
                   <FontAwesomeIcon
                     className="add_to_cart"
                     icon={faShoppingBag}
-                    // onClick={() => addToCart(item)}
+                  // onClick={() => addToCart(item)}
                   />
                 </button>
                 <button>

@@ -22,7 +22,7 @@ import CartProduct from "../components/CartProducts/CartProduct.js/CartProduct";
 import { getUserDataAction } from "../components/_redux/getUserData/Action/UserDataAction";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
-import ErrorMessage from './../components/master/ErrorMessage/ErrorMessage'
+import ErrorMessage from '../components/master/ErrorMessage/ErrorMessage'
 export default function Carts() {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -150,6 +150,7 @@ export default function Carts() {
                       <SimpleBtn
                         variant="danger"
                         onClick={() => console.log("update cart btn clicked")}
+                        isDisabled={false}
                       >
                         <FontAwesomeIcon className="mr-2" icon={faSync} />
                         UPDATE CART
@@ -159,8 +160,8 @@ export default function Carts() {
                       <SimpleBtn
                         variant="success"
                         onClick={() =>
-                          console.log("continue shoping btn clicked")
-                        }
+                          console.log("continue shoping btn clicked")}
+                        isDisabled={false}
                       >
                         <FontAwesomeIcon className="mr-2" icon={faShoppingBag} />
                         CONTINUE SHOPPING
@@ -225,7 +226,7 @@ export default function Carts() {
                               className="form-control mr-1"
                               name="code"
                               autoComplete="off"
-                              placeholder="Your Coupon Code"
+                              placeholder="Discount code"
                               value={coupon.code && coupon.code}
                               onChange={(e) => handleChangeCouponCode("code", e.target.value)}
                               ref={register({ required: true })} /> <br />
@@ -260,7 +261,7 @@ export default function Carts() {
                       </div> */}
                     </div>
                     <div className="cart__proceed-btn">
-                      <SimpleBtn variant="danger" onClick={() => placeOrder()} disabled={carts.length === 0 ? true : false}>
+                      <SimpleBtn variant="danger" onClick={() => placeOrder()} isDisabled={carts.length === 0 ? true : false}>
                         PROCEED TO CHECKOUT
                       </SimpleBtn>
                     </div>
