@@ -7,5 +7,4 @@ const ErrorMessage = ({ errorText }) => {
         </p>
     );
 };
-
 export default ErrorMessage;
