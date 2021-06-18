@@ -5,9 +5,9 @@ import React from "react";
 // danger
 
 function SimpleBtn(props) {
-  const { children, variant, style, onClick, isDisabled } = props;
+  const { children, variant, style, onClick } = props;
   return (
-    <button onClick={onClick} className={`simple-btn ${variant}`} style={{ ...style }} disabled={isDisabled}>
+    <button onClick={onClick} className={`simple-btn ${variant}`} style={{ ...style }}>
       {children}
     </button>
   );
