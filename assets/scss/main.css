@@ -1679,11 +1679,12 @@ p.address_sub_title {
   /* font-size: 16px; */
 }
 
-h5.product_name {
+.wishlist_list_product_details h5.product_name {
   font-weight: 600;
+  font-size: 20px;
 }
 
-.wishsingleproductIcon {
+.wishlist_wishIcon {
   color: #e9000f;
 }
 

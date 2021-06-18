@@ -14,7 +14,6 @@ const WishlistReducer = (state = initialState, action) => {
                 isLoading: action.payload.isLoading,
             }
         case Types.GET_WISHLIST_DATA:
-            console.log(`action.payload`, action.payload)
             return {
                 ...state,
                 wishList: action.payload.wishList,
