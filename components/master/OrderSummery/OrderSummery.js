@@ -5,7 +5,7 @@ import { getCartsAction, handleApplyCouponCode, handleChangeCouponInput, handleS
 import { Card } from 'react-bootstrap'
 import { useForm } from 'react-hook-form';
 import ErrorMessage from '../ErrorMessage/ErrorMessage'
-const OrderSummery = ({ handleClick }) => {
+const OrderSummery = ({ handleClick, buttonText }) => {
     const dispatch = useDispatch();
     const { register, handleSubmit, watch, errors } = useForm();
     const carts = useSelector((state) => state.CartReducer.carts);
@@ -120,7 +120,7 @@ const OrderSummery = ({ handleClick }) => {
                         </div>
                         <div className="cart__proceed-btn">
                             <button className="simple-btn btn-danger" onClick={() => handleClick()} disabled={carts.length === 0 ? true : false} >
-                                PROCEED TO CHECKOUT
+                                {buttonText}
                             </button>
                         </div>
                     </div>
