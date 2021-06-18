@@ -6,22 +6,20 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCategoryWiseProductList } from "./_redux/Action/CategoryWiseProductAction";
+import { getProductList } from "./_redux/Action/CategoryWiseProductAction";
 import ReactStars from "react-rating-stars-component";
 
 const CategoryWiseMiniProduct = ({ columns }) => {
   const dispatch = useDispatch();
-  const categoriesProductList = useSelector(
-    (state) => state.CategoryWiseProductReducer.categoriesProductList
-  );
+  const { products } = useSelector((state) => state.CategoryWiseProductReducer);
   useEffect(() => {
-    dispatch(getCategoryWiseProductList());
+    dispatch(getProductList());
   }, []);
 
   return (
     <>
-      {categoriesProductList.length > 0 &&
-        categoriesProductList.map((item, index) => (
+      {products.length > 0 &&
+        products.map((item, index) => (
           <div key={index} className={columns}>
             <div
               className={
@@ -45,19 +43,23 @@ const CategoryWiseMiniProduct = ({ columns }) => {
                 </button>
               </div>
               <div className="product-card-body">
-                <img src={item.productImg} alt={item.title} className="" />
+                <img
+                  src={`${process.env.NEXT_PUBLIC_URL}images/products/${item.featured_image}`}
+                  alt={item.name}
+                  className=""
+                />
                 <div>
-                  <p className="product-title mt-3">{item.title}</p>
+                  <p className="product-title mt-3">{item.name}</p>
                   <ReactStars
-                    value={item.rating}
+                    value={item.average_rating}
                     // onChange={ratingChanged}
                     size={24}
                     edit={false}
                     activeColor="#ffd700"
                   />
                   <div className="product_pirce">
-                    <p className="offerPrice">${item.offerPrice}</p>
-                    <p className="price">${item.price}</p>
+                    <p className="offerPrice">${item.offer_selling_price}</p>
+                    <p className="price">${item.default_selling_price}</p>
                   </div>
                 </div>
               </div>
