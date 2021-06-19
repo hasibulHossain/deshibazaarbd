@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form } from "react-bootstrap";
 import InputRange from "react-input-range";
 import "react-input-range/lib/css/index.css";
 import Button from "@material-ui/core/Button";
+import { useDispatch, useSelector } from "react-redux";
+import { getCategories } from "./_redux/Action/CategoryWiseProductAction";
 
 const CategoryFilter = () => {
+  const dispatch = useDispatch();
+  const { categories } = useSelector(
+    (state) => state.CategoryWiseProductReducer
+  );
   const [value, setValue] = useState({ min: 1, max: 35 });
 
   const filterByCategory = [
@@ -15,7 +21,8 @@ const CategoryFilter = () => {
     { controllID: "5", label: "Smart Home(15)" },
   ];
   const [isChecked, setIsChecked] = useState(false);
-  const handleChecked = (e, index) => {
+  const handleChecked = (e, category) => {
+    console.log("category name => ", category);
     // setIsChecked(e.target.checked);
   };
   const filterColors = [
@@ -39,21 +46,25 @@ const CategoryFilter = () => {
     { size: "XL" },
   ];
 
+  useEffect(() => {
+    dispatch(getCategories());
+  }, []);
+
   return (
     <section className="prodcut_filter_section shadow-sm p-3 mb-5 bg-white rounded">
       <h3 className="product_filter_heading">Product Category</h3>
       {/**filter by categories */}
       <div className="filter_by_category">
         <p>Category</p>
-        {filterByCategory.map((item, index) => (
-          <Form.Group key={index} controlId={item.controllID}>
+        {categories.map((item) => (
+          <Form.Group key={item.id} controlId={item.id}>
             <Form.Check
               type="checkbox"
-              label={item.label}
+              label={item.name}
               className={
                 isChecked == true ? "active_category" : "isNot_active_category"
               }
-              onChange={(e) => handleChecked(e, index)}
+              onChange={(e) => handleChecked(e, item.id)}
             />
           </Form.Group>
         ))}

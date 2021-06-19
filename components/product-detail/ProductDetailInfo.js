@@ -89,7 +89,16 @@ const ProductDetailInfo = (props) => {
     }
   };
 
-  console.log("product => ", product);
+  let zoomImgProps;
+  if (product) {
+    zoomImgProps = {
+      width: 400,
+      zoomWidth: 500,
+      zoomStyle: `opacity: 0.4;`,
+      img: cartProduct.productImage,
+    };
+  }
+  console.log("zoom img props => ", zoomImgProps);
 
   return (
     <>
@@ -141,132 +150,15 @@ const ProductDetailInfo = (props) => {
               </div>
             </div>
 
-            {/* <div className="row single-product-box">
-                            <div className="col-lg-8">
-                                <div className="row">
-
-                                    <div className="col-lg-5">
-                                        <div className="singlechair p-5">
-
-                                            <ReactImageZoom
-                                                className="zoom-image mt-3 card"
-                                                {...zoomImage}
-                                            />
-
-                                            <div className="d-flex m-1 border-top pt-4 image-cart">
-                                                <img onClick={() => handleChangePreviewImg({ image_url: featured_image })} src={featured_image} className="img-thumbnail multiple_preview_images" alt="" />
-                                                {
-                                                    product.images && product.images.length > 0 && product.images.map((item, index) => (
-                                                        <img onClick={() => handleChangePreviewImg(item)} src={item.image_url} className="img-thumbnail multiple_preview_images" alt="" />
-                                                    ))
-                                                }
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="col-lg-7">
-                                        <div className="chairdetails">
-                                            <h1>{product.name}</h1>
-
-                                            <div className="review">
-                                                <Rater total={5} rating={product.average_rating} /> <span> {product.total_rating} Ratings </span>
-                                            </div>
-
-                                            <div>
-                                                {
-                                                    typeof product.brand != "undefined" && product.brand != null &&
-
-                                                    <Link href={`/brand/${product.brand.slug}`} className="LinkToBrandPage">
-                                                        <span>
-                                                            Brand Name: {product.brand.name}
-                                                        </span>
-                                                    </Link>
-
-                                                }
-                                            </div>
-
-                                            <div>
-                                                {
-                                                    product.current_stock > 0 && product.enable_stock ?
-                                                        <div className="stock-area in-stock">
-                                                            <span>In Stock - {product.current_stock} </span>
-                                                        </div>
-                                                        :
-                                                        <div className="stock-area out-stock">
-                                                            <span>Out of Stock</span>
-                                                        </div>
-                                                }
-                                            </div>
-
-                                            <div className="chairdetailstext">
-                                                {product.is_offer_enable === false && (
-                                                    <h2 className="text-warning">
-                                                        ৳{" "}
-                                                        {product.default_selling_price}{" "}
-                                                    </h2>
-                                                )}
-
-                                                {product.is_offer_enable === true && (
-                                                    <>
-                                                        <h2 className="text-warning">
-                                                            ৳{" "}
-                                                            {product.offer_selling_price
-                                                                ? product.offer_selling_price
-                                                                : product.default_selling_price}{" "}
-                                                        </h2>
-                                                        <h4 className="text-danger">
-                                                            ৳ {product.default_selling_price}
-                                                        </h4>
-                                                    </>
-                                                )}
-                                            </div>
-
-                                            <div className="chaircolor">
-                                                <h2>
-                                                    Quantity:
-                                                    <div className="cart-quantity-area">
-                                                        <button
-                                                            className="btn btn-light quantity-btn decrement bg-light text-dark"
-                                                            onClick={(id, quantity) => decrementQunatity(cartProduct.productID, cartProduct.quantity)} >
-                                                            {" "}
-                                                            <Remove />
-                                                        </button>
-                                                        <span className="colorType rounded text-dark">
-                                                            {quantity}
-                                                        </span>
-                                                        <button
-                                                            className="btn btn-light quantity-btn  increment bg-light text-dark ml-2"
-                                                            onClick={(id, quantity) => increaseQuantity(cartProduct.productID, cartProduct.quantity)} >
-                                                            <AddIcon />
-                                                        </button>
-                                                    </div>
-                                                </h2>
-
-
-                                            </div>
-                                            <div className="stock cart two">
-                                                <button onClick={() => addToCart(cartProduct, product.id)}>
-                                                    Add to cart
-                                                </button>
-                                            </div>
-                                            <div className="stock cart">
-                                                <button onClick={() => handleBuyProduct(cartProduct, product.id)}>Buy Now</button>
-                                            </div>
-                                        </div>
-                                        <div className="clearfix"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> */}
-
             <div className="row product-details-info">
               <div className="col-md-4">
                 <div className="product-details-info__image-container">
                   <div className="product-details-info__image-large">
-                    <img
+                    {zoomImgProps.img && <ReactImageZoom {...zoomImgProps} />}
+                    {/* <img
                       src={cartProduct.productImage}
                       alt={cartProduct.productName}
-                    />
+                    /> */}
                   </div>
                   <div className="product-details-info__small-images">
                     {product.images.map((img) => (
