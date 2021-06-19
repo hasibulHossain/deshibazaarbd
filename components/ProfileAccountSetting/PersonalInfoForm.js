@@ -8,8 +8,8 @@ const PersonalInfoForm = () => {
     const dispatch = useDispatch();
     const userInputData = useSelector((state) => state.ProfileAccountSettingReducer.userInputData);
     const { register, handleSubmit, errors, setValue, watch } = useForm();
+    const isSubmitting = useSelector((state) => state.ProfileAccountSettingReducer.isSubmitting);
 
-    console.log('userInputData :>> ', userInputData);
     useEffect(() => {
         dispatch(handleSetDataIntoInputField())
     }, [])
@@ -17,7 +17,7 @@ const PersonalInfoForm = () => {
         // dispatch(RegisterFirstStep(registerInput))
     }
     return (
-        <div className="profile_account">
+        <div className="profile_account shadow-sm bg-white">
             <h6>Personal Information</h6>
 
             <form
@@ -123,7 +123,23 @@ const PersonalInfoForm = () => {
                     </div>
 
                 </div>
-                <button type="submit" className="btn btn-primary">update</button>
+                <div className="row justify-content-end">
+                    {
+                        !isSubmitting && (
+                            <button type="submit" className="btn btn-primary mr-3">submit</button>
+                        )
+                    }
+                    {
+                        isSubmitting && (
+                            <button type="submit" disabled={true} className="btn btn-primary mr-3 d-flex align-items-center">
+                                <Spinner animation="border" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </Spinner>
+                                <span className="ml-2">submitting...</span>
+                            </button>
+                        )
+                    }
+                </div>
             </form>
         </div>
     );
