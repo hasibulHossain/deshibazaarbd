@@ -1587,7 +1587,7 @@ p.error_message {
   text-decoration: none;
 }
 
-.edit_protile_link {
+.edit_profile_link {
   font-size: 13px;
   color: #e9000f;
   cursor: pointer;
@@ -1649,7 +1649,7 @@ p.address_sub_title {
 
 .profile_account,
 .inner_product_list {
-  background-color: rgb(255 255 255 / 77%);
+  /* background-color: rgb(255 255 255 / 77%); */
   padding: 15px;
   border-radius: 10px;
   margin-bottom: 20px;

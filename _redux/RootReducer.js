@@ -20,6 +20,7 @@ import WishlistReducer from "../components/Wishlist/_redux/Reducer/WishlistReduc
 import CartReducer from "../components/_redux/CartProduct/Reducer/CartReducer";
 import SearchReducer from "../components/SearchInput/_redux/Reducer/SearchInputReducer";
 import DeliveryInfoReducer from "../components/Delivery/_redux/Reducer/DeliveryInfoReducer";
+import ProfileUpdateReducer from "../components/myprofile/_redux/Reducer/ProfileUpdateReducer";
 
 export default combineReducers({
   GlobalReducer: GlobalReducer,
@@ -42,4 +43,5 @@ export default combineReducers({
   CartReducer: CartReducer,
   SearchReducer: SearchReducer,
   DeliveryInfoReducer: DeliveryInfoReducer,
+  ProfileUpdateReducer: ProfileUpdateReducer,
 });
