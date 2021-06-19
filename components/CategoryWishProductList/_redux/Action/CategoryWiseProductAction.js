@@ -2,6 +2,7 @@ import Axios from "axios";
 import * as Types from "../Type/Types";
 
 const Base_Url = `${process.env.NEXT_PUBLIC_API_URL}`;
+const Paginate_Url = `${process.env.NEXT_PUBLIC_API_URL}get-items?page=1`;
 
 // export const getCategoryWiseProductList = () => (dispatch) => {
 //   // const responseData = {
@@ -327,21 +328,25 @@ const Base_Url = `${process.env.NEXT_PUBLIC_API_URL}`;
 //   // dispatch({ type: Types.GET_CATEGORY_WISE_PRODUCT_LIST, payload: responseData });
 // };
 
-export const getProductList = () => async (dispatch) => {
-  const responseData = {
-    data: [],
-    isLoading: true,
+export const getProductList =
+  (pageUrl = Paginate_Url) =>
+  async (dispatch) => {
+    const responseData = {
+      data: [],
+      isLoading: true,
+    };
+    try {
+      if (!pageUrl) return;
+      dispatch({ type: Types.INIT_PRODUCT_LIST });
+      const res = await Axios.get(`${pageUrl}&paginate_no=5`);
+      responseData.isLoading = false;
+      responseData.data = res.data.data;
+      dispatch({ type: Types.GET_PRODUCT_LIST, payload: responseData });
+    } catch (error) {
+      console.log("get product list => ", getProductList);
+      dispatch({ type: Types.GET_PRODUCT_LIST_FAILED });
+    }
   };
-  try {
-    dispatch({ type: Types.INIT_PRODUCT_LIST });
-    const res = await Axios.get(`${Base_Url}get-items`);
-    responseData.isLoading = false;
-    responseData.data = res.data.data;
-    dispatch({ type: Types.GET_PRODUCT_LIST, payload: responseData });
-  } catch (error) {
-    dispatch({ type: Types.GET_PRODUCT_LIST_FAILED });
-  }
-};
 
 export const getCategories = () => async (dispatch) => {
   const responseData = {
@@ -356,5 +361,29 @@ export const getCategories = () => async (dispatch) => {
     dispatch({ type: Types.GET_CATEGORIES, payload: responseData });
   } catch (error) {
     dispatch({ type: Types.GET_CATEGORIES_FAILED });
+  }
+};
+
+export const getFilteredProducts = (filterParamObj) => async (dispatch) => {
+  // console.log("filter param => ", filterParamObj);
+
+  const filterParam = Object.keys(filterParamObj)
+    .filter((item) => filterParamObj[item])
+    .map((item) => `${item}=${filterParamObj[item]}`)
+    .join("&");
+
+  const responseData = {
+    data: [],
+    isLoading: true,
+  };
+
+  try {
+    dispatch({ type: Types.INIT_FILTER_PRODUCT_LIST });
+    const res = await Axios(`${Base_Url}get-items?${filterParam}`);
+    responseData.isLoading = false;
+    responseData.data = res.data.data;
+    dispatch({ type: Types.GET_FILTER_PRODUCT_LIST, payload: responseData });
+  } catch (error) {
+    dispatch({ type: Types.GET_FILTER_PRODUCT_LIST_FAILED });
   }
 };

@@ -4,7 +4,10 @@ import InputRange from "react-input-range";
 import "react-input-range/lib/css/index.css";
 import Button from "@material-ui/core/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { getCategories } from "./_redux/Action/CategoryWiseProductAction";
+import {
+  getCategories,
+  getFilteredProducts,
+} from "./_redux/Action/CategoryWiseProductAction";
 
 const CategoryFilter = () => {
   const dispatch = useDispatch();
@@ -12,6 +15,15 @@ const CategoryFilter = () => {
     (state) => state.CategoryWiseProductReducer
   );
   const [value, setValue] = useState({ min: 1, max: 35 });
+  const [filterParam, setFilterParam] = useState({
+    search: "",
+    category: null,
+    brand: null,
+    min_price: null,
+    max_price: null,
+    attributes: null,
+    rating: null,
+  });
 
   const filterByCategory = [
     { controllID: "1", label: "Electronics" },
@@ -22,7 +34,13 @@ const CategoryFilter = () => {
   ];
   const [isChecked, setIsChecked] = useState(false);
   const handleChecked = (e, category) => {
-    console.log("category name => ", category);
+    const filterParamClone = { ...filterParam };
+    filterParamClone.category = category;
+    setFilterParam(filterParamClone);
+    console.log("category name => ", e.target.checked);
+    if (e.target.checked) {
+      dispatch(getFilteredProducts(filterParamClone));
+    }
     // setIsChecked(e.target.checked);
   };
   const filterColors = [
@@ -73,42 +91,42 @@ const CategoryFilter = () => {
       {/**filter by delivery & pickup */}
       <div className="filter_by_delivery_pickup">
         <p className="filter_title">Delivery & Pickup</p>
-        <div class="form-check">
+        <div className="form-check">
           <input
-            class="form-check-input"
+            className="form-check-input"
             type="radio"
             name="exampleRadios"
             id="exampleRadios1"
             value="option1"
             checked
           />
-          <label class="form-check-label" for="exampleRadios1">
+          <label className="form-check-label" htmlFor="exampleRadios1">
             {" "}
             Show All{" "}
           </label>
         </div>
-        <div class="form-check">
+        <div className="form-check">
           <input
-            class="form-check-input"
+            className="form-check-input"
             type="radio"
             name="exampleRadios"
             id="exampleRadios2"
             value="option2"
           />
-          <label class="form-check-label" for="exampleRadios2">
+          <label className="form-check-label" htmlFor="exampleRadios2">
             {" "}
             Delivery To Home{" "}
           </label>
         </div>
-        <div class="form-check">
+        <div className="form-check">
           <input
-            class="form-check-input"
+            className="form-check-input"
             type="radio"
             name="exampleRadios"
             id="exampleRadios3"
             value="option3"
           />
-          <label class="form-check-label" for="exampleRadios3">
+          <label className="form-check-label" htmlFor="exampleRadios3">
             {" "}
             2-Days Delivery{" "}
           </label>
@@ -145,7 +163,7 @@ const CategoryFilter = () => {
         <p className="filter_title">Filter By Size</p>
         {sizeFilter.length > 0 &&
           sizeFilter.map((item, index) => (
-            <Button className="filter_size_btn" variant="outlined">
+            <Button key={index} className="filter_size_btn" variant="outlined">
               {item.size}
             </Button>
           ))}
