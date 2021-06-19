@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 // third party imports
 import Slider from "react-slick";
@@ -17,28 +17,30 @@ import SlickSetting from "../master/slickSetting/SlickSetting";
 import SimpleModal from "../master/Modal/SimpleModal";
 import ProductDetails from "../ProductDetails/ProductDetails";
 import LoadingSkelleton from "./../master/skelleton/LoadingSkelleton.jsx";
+import { useDispatch } from "react-redux";
+import { addToCartAction } from "../_redux/CartProduct/Action/CartAction";
 
 const ProductList = (props) => {
   const { show, handleShow, handleClose, productList, product, isLoading, type } =
     props;
-
+  const dispatch = useDispatch();
   // useEffect(() => {
   //   dispatch(getProductListAction(type));
   // }, []);
-  //   const [quantity, setQuantity] = useState(1);
 
-  //   const addToCart = (item) => {
-  //     const cartProduct = {
-  //       productID: item.id,
-  //       productName: item.name,
-  //       quantity: quantity,
-  //       isOffer: item.is_offer_enable,
-  //       price: item.default_selling_price,
-  //       offerPrice: item.offer_selling_price,
-  //       productImage: `${process.env.NEXT_PUBLIC_URL}images/products/${item.featured_image}`,
-  //     };
-  //     dispatch(addToCartAction(cartProduct, item.id));
-  //   };
+  const [quantity, setQuantity] = useState(1);
+  const addToCart = (item) => {
+    const cartProduct = {
+      productID: item.id,
+      productName: item.name,
+      quantity: quantity,
+      isOffer: item.is_offer_enable,
+      price: item.default_selling_price,
+      offerPrice: item.offer_selling_price,
+      productImage: `${process.env.NEXT_PUBLIC_URL}images/products/${item.featured_image}`,
+    };
+    dispatch(addToCartAction(cartProduct, item.id));
+  };
 
   return (
     <div className="productList-body">
@@ -59,7 +61,7 @@ const ProductList = (props) => {
                   <FontAwesomeIcon
                     className="add_to_cart"
                     icon={faShoppingBag}
-                  // onClick={() => addToCart(item)}
+                    onClick={() => addToCart(item)}
                   />
                 </button>
                 <button>

@@ -10,7 +10,6 @@ const ProductWishList = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector((state) => state.WishlistReducer.isLoading);
   const wishList = useSelector((state) => state.WishlistReducer.wishList);
-
   useEffect(() => {
     dispatch(getWishListData());
   }, []);
@@ -43,16 +42,17 @@ const ProductWishList = () => {
                 <div className="inner_product_list" key={index}>
                   <div className="row">
 
-                    <div className="wishsingleproduct col-4">
-                      <img style={{ width: 60 }} src={item.item && item.item.images.length > 0 ? `${process.env.NEXT_PUBLIC_URL}images/products/` + item.item.images[0].image : ''} />
+                    <div className="wishlist_product col-4">
+                      <img style={{ width: 90 }} src="https://img.icons8.com/plasticine/2x/image.png" />
+                      {/* <img style={{ width: 60 }} src={item.item && item.item.images.length > 0 ? `${process.env.NEXT_PUBLIC_URL}images/products/` + item.item.images[0].image : ''} /> */}
                     </div>
 
-                    <div className="wishsingleproductText col-7">
-                      <h5 className="product_name">{item.item && item.item.name}</h5>
+                    <div className="wishlist_list_product_details col-7">
+                      <h5 className="product_name">{item.item && item.item.name ? item.item.name : "Wishlist title"}</h5>
                       <h4>{item.item && item.item.final_selling_price !== null ? `৳ ${item.item.final_selling_price}` : '0 ৳'}</h4>
                     </div>
 
-                    <div className="wishsingleproductIcon">
+                    <div className="wishlist_wishIcon pointer">
                       <FavoriteIcon />
                     </div>
 
