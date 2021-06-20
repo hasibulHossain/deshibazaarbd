@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Form } from "react-bootstrap";
 import InputRange from "react-input-range";
 import "react-input-range/lib/css/index.css";
@@ -14,59 +14,78 @@ const CategoryFilter = () => {
   const { categories } = useSelector(
     (state) => state.CategoryWiseProductReducer
   );
-  const [value, setValue] = useState({ min: 1, max: 35 });
+  const [value, setValue] = useState({ min: 100, max: 90000 });
+  const [isChecked, setIsChecked] = useState(false);
   const [filterParam, setFilterParam] = useState({
     search: "",
-    category: null,
-    brand: null,
+    category: [],
+    brand: [],
     min_price: null,
     max_price: null,
     attributes: null,
     rating: null,
   });
+  const { search, category, brand, min_price, max_price, attributes, rating } =
+    filterParam;
 
-  const filterByCategory = [
-    { controllID: "1", label: "Electronics" },
-    { controllID: "2", label: "Cell Phones(5)" },
-    { controllID: "3", label: "GPS & Navigation(5)" },
-    { controllID: "4", label: "Home Audio & Threater(5)" },
-    { controllID: "5", label: "Smart Home(15)" },
-  ];
-  const [isChecked, setIsChecked] = useState(false);
+  // checkbox handler
   const handleChecked = (e, category) => {
     const filterParamClone = { ...filterParam };
-    filterParamClone.category = category;
-    setFilterParam(filterParamClone);
-    console.log("category name => ", e.target.checked);
+    // conditionally insert and remove category id from category array
     if (e.target.checked) {
-      dispatch(getFilteredProducts(filterParamClone));
+      filterParamClone.category.push(category);
+    } else {
+      const updatedCategory = filterParamClone.category.filter(
+        (item) => item !== category
+      );
+      filterParamClone.category = updatedCategory;
     }
-    // setIsChecked(e.target.checked);
+    setFilterParam(filterParamClone);
   };
-  const filterColors = [
-    { code: "#32a85c" },
-    { code: "#e86427" },
-    { code: "#e82794" },
-    { code: "#27d8e8" },
-    { code: "#27e867" },
-    { code: "#e827d1" },
-    { code: "#63c7f2" },
-    { code: "#07e8bf" },
-    { code: "#fcba03" },
-    { code: "#ff0004" },
-    { code: "#000000" },
-    { code: "#ff03b7" },
-  ];
-  const sizeFilter = [
-    { size: "XM" },
-    { size: "M" },
-    { size: "L" },
-    { size: "XL" },
-  ];
+
+  // use debounce fn to prevent multiple api call at the same time
+  function debounce(fn, delay) {
+    let timeoutId;
+    return function (...args) {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+      timeoutId = setTimeout(() => {
+        fn(...args);
+      }, delay);
+    };
+  }
+
+  const debounceReturn = useCallback(
+    debounce((newValue) => {
+      const filterParamClone = { ...filterParam };
+      filterParamClone.min_price = newValue.min;
+      filterParamClone.max_price = newValue.max;
+      setFilterParam(filterParamClone);
+    }, 500),
+    []
+  );
+
+  const priceRangeHandler = (newValue) => {
+    debounceReturn(newValue);
+    setValue(newValue);
+  };
 
   useEffect(() => {
     dispatch(getCategories());
   }, []);
+
+  useEffect(() => {
+    dispatch(getFilteredProducts(filterParam));
+  }, [
+    attributes,
+    brand.length,
+    category.length,
+    max_price,
+    min_price,
+    rating,
+    search,
+  ]);
 
   return (
     <section className="prodcut_filter_section shadow-sm p-3 mb-5 bg-white rounded">
@@ -88,85 +107,18 @@ const CategoryFilter = () => {
         ))}
       </div>
 
-      {/**filter by delivery & pickup */}
-      <div className="filter_by_delivery_pickup">
-        <p className="filter_title">Delivery & Pickup</p>
-        <div className="form-check">
-          <input
-            className="form-check-input"
-            type="radio"
-            name="exampleRadios"
-            id="exampleRadios1"
-            value="option1"
-            checked
-          />
-          <label className="form-check-label" htmlFor="exampleRadios1">
-            {" "}
-            Show All{" "}
-          </label>
-        </div>
-        <div className="form-check">
-          <input
-            className="form-check-input"
-            type="radio"
-            name="exampleRadios"
-            id="exampleRadios2"
-            value="option2"
-          />
-          <label className="form-check-label" htmlFor="exampleRadios2">
-            {" "}
-            Delivery To Home{" "}
-          </label>
-        </div>
-        <div className="form-check">
-          <input
-            className="form-check-input"
-            type="radio"
-            name="exampleRadios"
-            id="exampleRadios3"
-            value="option3"
-          />
-          <label className="form-check-label" htmlFor="exampleRadios3">
-            {" "}
-            2-Days Delivery{" "}
-          </label>
-        </div>
-      </div>
-      {/**filter by delivery & pickup */}
+      {/**filter by price range */}
       <div className="filter_by_price_range">
         <p className="filter_title">Filter By Price</p>
         <div className="price_range">
           <InputRange
-            maxValue={100}
+            maxValue={99999}
             formatLabel={(value) => `$${value}`}
-            minValue={1}
+            minValue={100}
             value={value}
-            onChange={(newValue) => setValue(newValue)}
+            onChange={priceRangeHandler}
           />
         </div>
-      </div>
-      {/**filter by color*/}
-      <div className="filter_by_color">
-        <p className="filter_title">Filter By Color</p>
-        {filterColors.length > 0 &&
-          filterColors.map((item, index) => (
-            <div className="filter_by_colour_outer" key={index}>
-              <div
-                className="color_filter"
-                style={{ backgroundColor: item.code }}
-              ></div>
-            </div>
-          ))}
-      </div>
-      {/**filter by size */}
-      <div className="filter_by_size">
-        <p className="filter_title">Filter By Size</p>
-        {sizeFilter.length > 0 &&
-          sizeFilter.map((item, index) => (
-            <Button key={index} className="filter_size_btn" variant="outlined">
-              {item.size}
-            </Button>
-          ))}
       </div>
     </section>
   );
