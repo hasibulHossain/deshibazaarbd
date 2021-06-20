@@ -28,6 +28,9 @@ const initialState = {
         city_id: null,  //integer
         city: null,
         area_id: null,   //integer
+        selectedCountry: null,
+        selectedCity: null,
+        selectedArea: null,
         area: null,
         street1: null,
         street2: null,
@@ -40,6 +43,9 @@ const initialState = {
         country_id: null, //integer
         country: null,
         city_id: null,  //integer
+        selectedCountry: null,
+        selectedCity: null,
+        selectedArea: null,
         city: null,
         area_id: null,   //integer
         area: null,
@@ -52,19 +58,25 @@ const initialState = {
     areaList: [],
 
 }
-function ProfileAccountSettingReducer(state = initialState, action) {
+function ProfileUpdateReducer(state = initialState, action) {
     switch (action.type) {
-        case Types.GET_SHIPPING_ADDRESS:
-            return {
-                ...state,
-                isLoading: action.payload.isLoading,
-                shippingAddress: action.payload.data,
+        case Types.GET_SHIPPING_ADDRESS_FOR_INPUT:
+            if (action.payload.status == true) {
+                return {
+                    ...state,
+                    isLoading: action.payload.isLoading,
+                    shippingAddress: action.payload.data,
+                    shippingAddressInput: action.payload.data,
+                }
             }
-        case Types.GET_BILLING_ADDRESS:
-            return {
-                ...state,
-                isLoading: action.payload.isLoading,
-                billingAddress: action.payload.data,
+        case Types.GET_BILLING_ADDRESS_FOR_INPUT:
+            if (action.payload.status == true) {
+                return {
+                    ...state,
+                    isLoading: action.payload.isLoading,
+                    billingAddress: action.payload.data,
+                    billingAddressInput: action.payload.data,
+                }
             }
         case Types.GET_USER_UPDATED_DATA:
             console.log('action.payload :>> ', action.payload);
@@ -88,21 +100,7 @@ function ProfileAccountSettingReducer(state = initialState, action) {
                 ...state,
                 shippingAddressInput
             };
-        case Types.GET_COUNTRIES_LIST:
-            return {
-                ...state,
-                countryList: getCountries(action.payload),
-            };
-        case Types.GET_CITIES_LIST:
-            return {
-                ...state,
-                cityList: action.payload,
-            };
-        case Types.GET_AREA_LIST:
-            return {
-                ...state,
-                areaList: action.payload,
-            };
+
         case Types.STORE_SHIPPING_ADDRESS:
             if (action.payload.status == true) {
                 return {
@@ -152,4 +150,4 @@ const getCountries = (data) => {
     }
     return options;
 };
-export default ProfileAccountSettingReducer;
+export default ProfileUpdateReducer;

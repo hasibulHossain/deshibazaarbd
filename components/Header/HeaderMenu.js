@@ -44,7 +44,7 @@ const HeaderMenu = ({ toggleNav }) => {
                 <SubMenu key={i} label={category.name}>
                   {category.childs.map((subCategory, i) => {
                     if (subCategory.childs.length === 0) {
-                      return <MenuItem>{subCategory.name}</MenuItem>;
+                      return <MenuItem key={i}>{subCategory.name}</MenuItem>;
                     } else {
                       return (
                         <SubMenu key={i} label={subCategory.name}>

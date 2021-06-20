@@ -30,7 +30,7 @@ const ShippingAddressForm = () => {
     }
 
     return (
-        <div className="profile_account">
+        <div className="profile_account shadow-sm bg-white">
             <h6>Shipping Address</h6>
 
             <form

@@ -1,5 +1,6 @@
 import React from 'react';
 import ShippingAddressUpdate from './ShippingAddressUpdate'
+import BillingAddressUpdate from './BillingAddressUpdate'
 const AddressUpdate = () => {
     return (
         <>
@@ -7,6 +8,7 @@ const AddressUpdate = () => {
             <div className="address_book_updated">
                 <div className="profile_account">
                     <ShippingAddressUpdate />
+                    <BillingAddressUpdate />
                 </div>
             </div>
 

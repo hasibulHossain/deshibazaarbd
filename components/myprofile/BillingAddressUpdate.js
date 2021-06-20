@@ -1,43 +1,42 @@
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { getShippingAddressForInput, handleChangeShippingAddressInput, handleSetDataIntoInputField, handleUpdateShippingAddress } from './_redux/Action/ProfileUpdateAction';
+import { getBillingAddressForInput, handleSetDataIntoInputField, handleChangeBillingAddressInput, handleUpdateBillingAddress } from './_redux/Action/ProfileUpdateAction';
 import ErrorMessage from '../master/ErrorMessage/ErrorMessage'
 import { RHFInput } from 'react-hook-form-input';
 import Select from 'react-select';
 import { Spinner } from 'react-bootstrap'
 import { getArea, getCity, getCountry } from '../ProfileAccountSetting/_redux/Action/ProfileAccountSettingAction';
-const ShippingAddressUpdate = () => {
+const BillingAddressUpdate = () => {
     const dispatch = useDispatch();
     const countryList = useSelector((state) => state.ProfileAccountSettingReducer.countryList);
     const cityList = useSelector((state) => state.ProfileAccountSettingReducer.cityList);
     const areaList = useSelector((state) => state.ProfileAccountSettingReducer.areaList);
     const isSubmitting = useSelector((state) => state.ProfileAccountSettingReducer.isSubmitting);
-    // const shippingAddressInput = useSelector((state) => state.ProfileAccountSettingReducer.shippingAddressInput);
-    const shippingAddressInput = useSelector((state) => state.ProfileUpdateReducer.shippingAddressInput);
+    const billingAddressInput = useSelector((state) => state.ProfileUpdateReducer.billingAddressInput);
     const { register, handleSubmit, errors, setValue } = useForm();
 
     //handle change input 
     const handleChangeTextInput = (name, value) => {
-        dispatch(handleChangeShippingAddressInput(name, value))
+        dispatch(handleChangeBillingAddressInput(name, value))
     }
 
     useEffect(() => {
         dispatch(handleSetDataIntoInputField())
         dispatch(getCountry())
-        dispatch(getShippingAddressForInput('shipping_address'))
+        dispatch(getBillingAddressForInput('billing_address'))
     }, [])
 
-    const updateShippingAddress = () => {
-        dispatch(handleUpdateShippingAddress(shippingAddressInput))
+    const StoreBillingAddress = () => {
+        dispatch(handleUpdateBillingAddress(billingAddressInput))
     }
 
     return (
         <div className="profile_account shadow-sm bg-white">
-            <h6>Shipping Address</h6>
+            <h6>Billing Address</h6>
 
             <form
-                onSubmit={handleSubmit(updateShippingAddress)}
+                onSubmit={handleSubmit(StoreBillingAddress)}
                 method="post"
                 autoComplete="off"
                 encType="multipart/form-data"
@@ -55,7 +54,7 @@ const ShippingAddressUpdate = () => {
                                     rules={{ required: true }}
                                     name="country_id"
                                     register={register}
-                                    value={shippingAddressInput.selectedCountry}
+                                    value={billingAddressInput.selectedCountry}
                                     onChange={(option) => {
                                         handleChangeTextInput("country", option.label);
                                         handleChangeTextInput("country_id", option.value);
@@ -82,7 +81,7 @@ const ShippingAddressUpdate = () => {
                                     rules={{ required: true }}
                                     name="city_id"
                                     register={register}
-                                    value={shippingAddressInput.selectedCity}
+                                    value={billingAddressInput.selectedCity}
                                     onChange={(option) => {
                                         handleChangeTextInput("city", option.label);
                                         handleChangeTextInput("city_id", option.value);
@@ -108,7 +107,7 @@ const ShippingAddressUpdate = () => {
                                     rules={{ required: true }}
                                     name="area_id"
                                     register={register}
-                                    value={shippingAddressInput.selectedArea}
+                                    value={billingAddressInput.selectedArea}
                                     onChange={(option) => {
                                         handleChangeTextInput("area", option.label);
                                         handleChangeTextInput("area_id", option.value);
@@ -133,7 +132,7 @@ const ShippingAddressUpdate = () => {
                                     class="custom_form_input"
                                     placeholder="Street-1"
                                     name="street1"
-                                    value={shippingAddressInput.street1}
+                                    value={billingAddressInput.street1}
                                     onChange={(e) => handleChangeTextInput('street1', e.target.value)}
                                     ref={register({
                                         required: true,
@@ -160,7 +159,7 @@ const ShippingAddressUpdate = () => {
                                     class="custom_form_input"
                                     placeholder="Street-2"
                                     name="street2"
-                                    value={shippingAddressInput.street2}
+                                    value={billingAddressInput.street2}
                                     onChange={(e) => handleChangeTextInput('street2', e.target.value)}
                                     ref={register({
                                         required: true,
@@ -200,4 +199,4 @@ const ShippingAddressUpdate = () => {
     );
 };
 
-export default ShippingAddressUpdate;
+export default BillingAddressUpdate;

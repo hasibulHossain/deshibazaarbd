@@ -52,7 +52,7 @@ const ProductProfile = () => {
                 <div className="col-md-5">
                   <div className="card mb-2 p-3 default_height">
                     <div className="card-title">
-                      <h6>Personal Profile | <span className="edit_protile_link" onClick={(() => handleShow())}>EDIT</span></h6>
+                      <h6>Personal Profile | <span className="edit_profile_link" onClick={(() => handleShow())}>EDIT</span></h6>
                       <p className="user_name"> {`${userData !== null && userData.first_name} ${userData !== null && userData.last_name}`}</p>
                       <p>
                         <span className="user_icon">
@@ -76,7 +76,7 @@ const ProductProfile = () => {
                 <div className="col-md-5">
                   <div className="card mb-2 p-3 default_height">
                     <div className="card-title">
-                      <h6>Address Book | <span className="edit_protile_link" onClick={() => handleAddressShow()}>EDIT</span> </h6>
+                      <h6>Address Book | <span className="edit_profile_link" onClick={() => handleAddressShow()}>EDIT</span> </h6>
                       <p className="address_sub_title">
                         Shipping Address :
                       </p>

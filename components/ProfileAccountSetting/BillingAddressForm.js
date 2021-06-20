@@ -31,7 +31,7 @@ const BillingAddressForm = () => {
     }
 
     return (
-        <div className="profile_account">
+        <div className="profile_account shadow-sm bg-white">
             <h6>Billing Address</h6>
 
             <form
