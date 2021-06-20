@@ -1,4 +1,8 @@
-import { faHeart, faSearch, faShoppingBag } from "@fortawesome/free-solid-svg-icons";
+import {
+  faHeart,
+  faSearch,
+  faShoppingBag,
+} from "@fortawesome/free-solid-svg-icons";
 import React, { useEffect } from "react";
 import Link from "next/link";
 
@@ -16,9 +20,9 @@ import { getCartsAction } from "../_redux/CartProduct/Action/CartAction";
 import SearchInput from "../SearchInput/SearchInput";
 
 const Header = () => {
-  const dispatch  = useDispatch();
+  const dispatch = useDispatch();
   const toggleNav = "basic-navbar-nav";
-  const carts     = useSelector(state => state.CartReducer.carts);
+  const carts = useSelector((state) => state.CartReducer.carts);
 
   const toggleCartHandler = () => {
     dispatch(toggleFloatingCart());
@@ -74,7 +78,7 @@ const Header = () => {
                       Wishlist
                     </a>
                   </Link>
-                  
+
                   {/* <Link href="/carts" className="header-nav-link"> */}
                   <span
                     onClick={toggleCartHandler}
@@ -84,7 +88,7 @@ const Header = () => {
                       className="custom-fontAwesome"
                       icon={faShoppingBag}
                     />
-                    <span class="cart-qty">{carts.length}</span>
+                    <span className="cart-qty">{carts.length}</span>
                     &nbsp;&nbsp; Cart
                   </span>
                   {/* </Link> */}

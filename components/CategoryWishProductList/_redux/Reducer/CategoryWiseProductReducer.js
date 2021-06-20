@@ -2,6 +2,7 @@ import * as Types from "../Type/Types";
 
 const initialState = {
   products: [],
+  filteredProducts: [],
   categories: [],
   paginate: {
     pages: [],
@@ -50,11 +51,39 @@ function CategoryWiseProductReducer(state = initialState, { type, payload }) {
         },
       };
 
+    case Types.GET_FILTER_PRODUCT_LIST:
+      const totalPage_ = Math.ceil(payload.data.total / payload.data.per_page);
+
+      return {
+        ...state,
+        isLoading: payload.isLoading,
+        products: payload.data.data,
+        paginate: {
+          pages: [...new Array(totalPage_)],
+          current_page: payload.data.data.current_page,
+          first_page_url: payload.data.first_page_url,
+          from: payload.data.from,
+          last_page: payload.data.last_page,
+          last_page_url: payload.data.last_page_url,
+          next_page_url: payload.data.next_page_url,
+          per_page: payload.data.per_page,
+          prev_page_url: payload.data.prev_page_url,
+          to: payload.data.to,
+          total: payload.data.total,
+        },
+      };
+
     case Types.GET_PRODUCT_LIST_FAILED:
       return {
         ...state,
         error: true,
         isLoading: false,
+      };
+
+    case Types.INIT_FILTER_PRODUCT_LIST:
+      return {
+        ...state,
+        isLoading: true,
       };
 
     case Types.GET_CATEGORIES:

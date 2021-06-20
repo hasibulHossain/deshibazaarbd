@@ -4,17 +4,12 @@ import {
   faShoppingBag,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getProductList } from "./_redux/Action/CategoryWiseProductAction";
+import React from "react";
+import { useSelector } from "react-redux";
 import ReactStars from "react-rating-stars-component";
 
 const CategoryWiseMiniProduct = ({ columns }) => {
-  const dispatch = useDispatch();
   const { products } = useSelector((state) => state.CategoryWiseProductReducer);
-  useEffect(() => {
-    dispatch(getProductList());
-  }, []);
 
   return (
     <>
@@ -51,7 +46,7 @@ const CategoryWiseMiniProduct = ({ columns }) => {
                 <div>
                   <p className="product-title mt-3">{item.name}</p>
                   <ReactStars
-                    value={item.average_rating}
+                    value={+item.average_rating}
                     // onChange={ratingChanged}
                     size={24}
                     edit={false}
