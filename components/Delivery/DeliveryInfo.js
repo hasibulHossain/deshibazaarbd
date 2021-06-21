@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBriefcase, faHome } from '@fortawesome/free-solid-svg-icons';
 import { handleChangeDeliveryInputData } from './_redux/Action/DeliveryInfoAction';
 
-const DeliiveryInfo = () => {
+const DeliveryInfo = () => {
     const dispatch = useDispatch();
     const { register, handleSubmit, errors, setValue, watch } = useForm();
     const countryList = useSelector((state) => state.ProfileAccountSettingReducer.countryList);
@@ -35,7 +35,7 @@ const DeliiveryInfo = () => {
                 <h4 className="delivery_info_title">Delivery Information</h4>
                 <p className="delivery_info_sub_title">Shipping address</p>
                 <form
-                    onSubmit={handleSubmit(handleSubmitDeliveryInfo)}
+                    // onSubmit={handleSubmit(handleSubmitDeliveryInfo)}
                     method="post"
                     autoComplete="off"
                     encType="multipart/form-data"
@@ -257,4 +257,4 @@ const DeliiveryInfo = () => {
     );
 };
 
-export default DeliiveryInfo;
+export default DeliveryInfo;
