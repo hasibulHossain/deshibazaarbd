@@ -8,12 +8,16 @@ import {
   getCategories,
   getFilteredProducts,
 } from "./_redux/Action/CategoryWiseProductAction";
+import { getShopList } from "../Shop/_redux/Action/ShopAction";
+import ReactStars from "react-rating-stars-component";
 
 const CategoryFilter = () => {
   const dispatch = useDispatch();
   const { categories } = useSelector(
     (state) => state.CategoryWiseProductReducer
   );
+  const { ShopList } = useSelector((state) => state.ShopReducer);
+
   const [value, setValue] = useState({ min: 100, max: 90000 });
   const [isChecked, setIsChecked] = useState(false);
   const [filterParam, setFilterParam] = useState({
@@ -39,6 +43,21 @@ const CategoryFilter = () => {
         (item) => item !== category
       );
       filterParamClone.category = updatedCategory;
+    }
+    setFilterParam(filterParamClone);
+  };
+
+  // checkbox handler
+  const brandCheckboxHandler = (e, brand) => {
+    const filterParamClone = { ...filterParam };
+    // conditionally insert and remove brand id from brand array
+    if (e.target.checked) {
+      filterParamClone.brand.push(brand);
+    } else {
+      const updatedCategory = filterParamClone.brand.filter(
+        (item) => item !== brand
+      );
+      filterParamClone.brand = updatedCategory;
     }
     setFilterParam(filterParamClone);
   };
@@ -71,8 +90,23 @@ const CategoryFilter = () => {
     setValue(newValue);
   };
 
+  const reactStarProps = {
+    size: 40,
+    count: 5,
+    isHalf: false,
+    value: 0,
+    color: "#ddd",
+    activeColor: "#ffd700",
+    onChange: (newValue) => {
+      const filterParamClone = { ...filterParam };
+      filterParamClone.rating = newValue;
+      setFilterParam(filterParamClone);
+    },
+  };
+
   useEffect(() => {
     dispatch(getCategories());
+    dispatch(getShopList());
   }, []);
 
   useEffect(() => {
@@ -90,6 +124,12 @@ const CategoryFilter = () => {
   return (
     <section className="prodcut_filter_section shadow-sm p-3 mb-5 bg-white rounded">
       <h3 className="product_filter_heading">Product Category</h3>
+
+      <div>
+        <p>Filter By Rating</p>
+        <ReactStars {...reactStarProps} />
+      </div>
+
       {/**filter by categories */}
       <div className="filter_by_category">
         <p>Category</p>
@@ -102,6 +142,23 @@ const CategoryFilter = () => {
                 isChecked == true ? "active_category" : "isNot_active_category"
               }
               onChange={(e) => handleChecked(e, item.id)}
+            />
+          </Form.Group>
+        ))}
+      </div>
+
+      {/**filter by categories */}
+      <div className="filter_by_category">
+        <p>Brand</p>
+        {ShopList.map((item) => (
+          <Form.Group key={item.id} controlId={item.id}>
+            <Form.Check
+              type="checkbox"
+              label={item.name}
+              className={
+                isChecked == true ? "active_category" : "isNot_active_category"
+              }
+              onChange={(e) => brandCheckboxHandler(e, item.id)}
             />
           </Form.Group>
         ))}
