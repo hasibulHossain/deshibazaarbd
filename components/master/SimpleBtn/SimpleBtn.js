@@ -1,8 +1,8 @@
 import React from "react";
 
 // variant
-    // success
-    // danger
+// success
+// danger
 
 function SimpleBtn(props) {
   const { children, variant, style, onClick } = props;

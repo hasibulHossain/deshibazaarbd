@@ -5,7 +5,8 @@ import ScrollToTop from "react-scroll-to-top";
 import CategoryBanner from "../components/CategoryBanner/CategoryBanner";
 import CategoryWishProductContainer from "../components/CategoryWishProductList/CategoryWishProductContainer";
 
-export default function Categories_wise_product(props) {
+export default function Categories_wise_product() {
+
   useEffect(() => {
     if (typeof window === "undefined") {
       global.window = {};
@@ -21,7 +22,7 @@ export default function Categories_wise_product(props) {
         </title>
         <meta name="description" content="Meta" />
       </Head>
-      
+
       <MainLayout>
         <ScrollToTop smooth />
         <CategoryBanner />

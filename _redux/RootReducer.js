@@ -13,6 +13,15 @@ import RegisterReducer from "../components/LoginRegistration/_redux/Reducer/Regi
 import ProductTopListReducer from "../components/ProductTopList/_redux/Reducer/ProductTopListReducer";
 import ShopReducer from "../components/Shop/_redux/Reducer/ShopReducer";
 import ShopByCategoriesReducer from "../components/ShopByCategory/_redux/Reducer/ShopByCategoriesReducer";
+import AuthReducer from "../components/LoginRegistration/_redux/Reducer/AuthReducer";
+import UserDataReducer from "../components/_redux/getUserData/Reducer/UserDataReducer";
+import ProfileAccountSettingReducer from "../components/ProfileAccountSetting/_redux/Reducer/ProfileAccountSettingReducer";
+import WishlistReducer from "../components/Wishlist/_redux/Reducer/WishlistReducer";
+import CartReducer from "../components/_redux/CartProduct/Reducer/CartReducer";
+import SearchReducer from "../components/SearchInput/_redux/Reducer/SearchInputReducer";
+import DeliveryInfoReducer from "../components/Delivery/_redux/Reducer/DeliveryInfoReducer";
+import ProfileUpdateReducer from "../components/myprofile/_redux/Reducer/ProfileUpdateReducer";
+import PaymentMethodReducer from "../components/PaymentMethod/_redux/Reducer/PaymentMethodReducer";
 
 export default combineReducers({
   GlobalReducer: GlobalReducer,
@@ -28,4 +37,13 @@ export default combineReducers({
   CategoryWiseProductReducer: CategoryWiseProductReducer,
   ShopReducer: ShopReducer,
   RegisterReducer: RegisterReducer,
+  AuthReducer: AuthReducer,
+  UserDataReducer: UserDataReducer,
+  ProfileAccountSettingReducer: ProfileAccountSettingReducer,
+  WishlistReducer: WishlistReducer,
+  CartReducer: CartReducer,
+  SearchReducer: SearchReducer,
+  DeliveryInfoReducer: DeliveryInfoReducer,
+  ProfileUpdateReducer: ProfileUpdateReducer,
+  PaymentMethodReducer: PaymentMethodReducer,
 });

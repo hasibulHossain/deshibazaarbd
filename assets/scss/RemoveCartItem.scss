@@ -17,6 +17,10 @@
       & svg {
         color: #aaa;
         font-size: 2rem; // icon size
+
+        &:hover {
+          color: #ca091b;
+        }
       }
     }
   }

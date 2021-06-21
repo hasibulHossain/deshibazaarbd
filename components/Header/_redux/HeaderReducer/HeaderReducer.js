@@ -1,20 +1,34 @@
 import * as Types from "../Type/Types";
 
 const initialState = {
-    isLoading: false,
-    menuList: [],
+  menuList: [],
+  isLoading: false,
+  error: null,
+};
+function HeaderReducer(state = initialState, { type, payload }) {
+  switch (type) {
+    case Types.INIT_MENU_LIST:
+      return {
+        ...state,
+        ...payload,
+      };
 
-}
-function HeaderReducer(state = initialState, action) {
-    switch (action.type) {
-        case Types.GET_MENU_LIST:
-            return {
-                isLoading: action.payload.isLoading,
-                menuList: action.payload.data,
-            }
-        default:
-            break;
-    }
-    return state;
+    case Types.GET_MENU_LIST:
+      return {
+        ...state,
+        ...payload,
+        isLoading: false,
+      };
+
+    case Types.FETCH_MENU_LIST_FAILED:
+      return {
+        ...state,
+        ...payload,
+        isLoading: false,
+      };
+
+    default:
+      return state;
+  }
 }
 export default HeaderReducer;
