@@ -13,6 +13,7 @@ import "../assets/scss/product-details-info.scss";
 import "../assets/scss/modal.scss";
 import "../assets/scss/payment.css";
 import "../assets/scss/responsive.css";
+import "../assets/scss/responsive-main.scss";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
