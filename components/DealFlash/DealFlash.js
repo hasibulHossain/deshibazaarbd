@@ -23,7 +23,6 @@ const DealFlash = () => {
   useEffect(() => {
     dispatch(getDealFlashList());
     dispatch(getCartsAction())
-    dispatch(handleCombineCarts())
   }, []);
 
   return (

@@ -41,7 +41,7 @@ function FloatingCart() {
 
   useEffect(() => {
     dispatch(getCartsAction())
-    dispatch(handleCombineCarts())
+    // dispatch(handleCombineCarts())
   }, []);
 
   let floatingCart = null;

@@ -38,12 +38,6 @@ const initialState = {
 
 const CartReducer = (state = initialState, action) => {
   switch (action.type) {
-    // case Types.POST_CARTS_LOADING:
-    //   return {
-    //     ...state,
-    //     loading_add: action.payload,
-    //     add_message: "Item Added to the cart successfully",
-    //   };
     case Types.GET_CARTS_LOADING:
       return {
         ...state,
@@ -82,20 +76,14 @@ const CartReducer = (state = initialState, action) => {
     case Types.GET_CARTS:
       return {
         ...state,
+        combineCartList: action.payload.combineCartList,
         carts: action.payload.carts,
-        // totalQuantity: calculateTotalQtyAndPrices(action.payload.carts).totalQuantity,
-        // totalPrice: calculateTotalQtyAndPrices(action.payload.carts).totalPrice,
+        totalQuantity: calculateTotalQtyAndPrices(action.payload.combineCartList).totalQuantity,
+        totalPrice: calculateTotalQtyAndPrices(action.payload.combineCartList).totalPrice,
         // shippingCost: calculateTotalQtyAndPrices(action.payload.carts).shippingCost,
         products: action.payload.products,
         loading: false,
         errors: null,
-      };
-    case Types.GET_COMBINE_CARTS:
-      return {
-        ...state,
-        combineCartList: action.payload,
-        totalQuantity: calculateTotalQtyAndPrices(action.payload).totalQuantity,
-        totalPrice: calculateTotalQtyAndPrices(action.payload).totalPrice,
       };
     case Types.APPLY_SHIPPING_COST:
       return {
@@ -119,23 +107,6 @@ const CartReducer = (state = initialState, action) => {
         couponData: action.payload.couponData,
         // coupon: initialState.coupon,
       };
-
-    // case Types.UPDATE_CARTS_DATA:
-    //   return {
-    //     ...state,
-    //     carts: action.payload.carts,
-    //     products: action.payload.products,
-    //     errors: null,
-    //   };
-
-    // case Types.DELETE_CARTS_DATA:
-    //   return {
-    //     ...state,
-    //     carts: action.payload.carts,
-    //     products: action.payload.products,
-    //     errors: null,
-    //     delete_message: "Cart Item has been deleted !",
-    //   };
     case Types.CHANGE_COUPON_INPUT_DATA:
       const coupon = { ...state.coupon };
       coupon[action.payload.name] = action.payload.value;

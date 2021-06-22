@@ -31,7 +31,6 @@ export const addToCartAction = (cartProduct, id) => async (dispatch) => {
   }
   dispatch({ type: Types.POST_CARTS_LOADING, payload: carts });
   dispatch(getCartsAction());
-  dispatch(handleCombineCarts());
 };
 
 export const getCartsAction = () => async (dispatch) => {
@@ -41,31 +40,44 @@ export const getCartsAction = () => async (dispatch) => {
 };
 
 //update cart products quantity
-export const updateCartQtyAction =
-  (product_id, quantity) => async (dispatch) => {
-    const cartStorageData = localStorage.getItem("carts");
-    let data = {
-      carts: [],
-      products: [],
-    };
-
-    if (typeof cartStorageData !== "undefined" && cartStorageData !== null) {
-      data.carts = JSON.parse(cartStorageData);
-      data.products = data.carts.products;
-
-      let findProducts = data.carts.filter(
-        (item) => item.productID === product_id
-      );
-      if (findProducts.length) {
-        const getProductIndex = data.carts.indexOf(findProducts[0]);
-        findProducts[0].quantity = quantity;
-        data.carts[getProductIndex] = findProducts[0];
-        localStorage.setItem("carts", JSON.stringify(data.carts));
-      }
-    }
-    dispatch({ type: Types.UPDATE_CARTS_DATA, payload: getCartData() });
-    dispatch(getCartsAction());
+export const updateCartQtyAction = (product_id, quantity) => async (dispatch) => {
+  const getData = getCartData();
+  // console.log('check data by clicking updated:>> ', data1);
+  const cartStorageData = localStorage.getItem("carts");
+  let data = {
+    carts: [],
+    products: [],
+    combineCartList: []
   };
+
+  let filterCarts = getData.combineCartList.filter((item) => item.productID === product_id)
+
+
+  if (filterCarts.length) {
+    const getProductIndex = getData.combineCartList.indexOf(filterCarts[0]);
+    filterCarts[0].quantity = quantity;
+    data.combineCartList[getProductIndex] = filterCarts[0];
+    console.log('data.carts :>> ', data.combineCartList);
+    // localStorage.setItem("carts", JSON.stringify(data.carts));
+  }
+
+  // if (typeof cartStorageData !== "undefined" && cartStorageData !== null) {
+  //   data.carts = JSON.parse(cartStorageData);
+  //   data.products = data.carts.products;
+
+  //   let findProducts = data.carts.filter(
+  //     (item) => item.productID === product_id
+  //   );
+  //   if (findProducts.length) {
+  //     const getProductIndex = data.carts.indexOf(findProducts[0]);
+  //     findProducts[0].quantity = quantity;
+  //     data.carts[getProductIndex] = findProducts[0];
+  //     localStorage.setItem("carts", JSON.stringify(data.carts));
+  //   }
+  // }
+  dispatch({ type: Types.UPDATE_CARTS_DATA, payload: getCartData() });
+  dispatch(getCartsAction());
+};
 
 //delete cart product
 export const deleteCartItemAction = (product_id) => async (dispatch) => {
@@ -103,11 +115,19 @@ function getCartData() {
   let data = {
     carts: [],
     products: [],
+    combineCartList: [],
   };
 
   if (typeof cartStorageData !== "undefined" && cartStorageData !== null) {
     data.carts = JSON.parse(cartStorageData);
     data.products = data.carts.products;
+
+    //combine carts data 
+    data.carts.map((item) => {
+      item.data.map((cartItem) => {
+        data.combineCartList.push(cartItem);
+      })
+    })
   }
   return data;
 }
@@ -195,17 +215,4 @@ export const handleShippingCost = (carts) => (dispatch) => {
       (responseData.shipping = response.data),
         dispatch({ type: Types.APPLY_SHIPPING_COST, payload: responseData });
     });
-};
-
-
-export const handleCombineCarts = () => (dispatch) => {
-  const data = getCartData();
-  let combineCartList = [];
-  data.carts.map((item) => {
-    item.data.map((cartItem) => {
-      combineCartList.push(cartItem);
-    })
-  })
-  dispatch({type: Types.GET_COMBINE_CARTS, payload: combineCartList});
-  return combineCartList;
 };
