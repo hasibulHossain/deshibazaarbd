@@ -90,7 +90,7 @@ const ProductList = (props) => {
                   className="img-fluid"
                 />
                 <p className="product-title">{item.name}</p>
-                {/* <p>Stock : {item.current_stock}</p> */}
+                <p>Stock : {item.current_stock}</p>
                 <div className="rating">
                   <ReactStars
                     value={item.rating}

@@ -12,22 +12,22 @@ export const addToCartAction = (cartProduct, id) => async (dispatch) => {
     data: [cartProduct]
   }
   const filterCarts = carts.filter((item) => item.sellerName == cartProduct.sellerName);
-
-  if (carts.find((data) => data.productID === id)) {
-    showToast('error', "Product has been already added in cart !")
-  } else {
-    if (filterCarts.length > 0) {
+  if (filterCarts.length > 0) {
+    if (filterCarts[0].data.find((item) => item.productID === id)) {
+      showToast('error', "Product has been already added in cart !")
+    } else {
       for (let i = 0; i < filterCarts.length; i++) {
         const item = filterCarts[i];
         item.data.push(cartProduct);
       }
       localStorage.setItem("carts", JSON.stringify(carts));
       showToast('success', "Product added to cart successfully !");
-    } else {
-      carts.push(storeCarts)
-      localStorage.setItem("carts", JSON.stringify(carts));
-      showToast('success', "Product added to cart successfully !");
     }
+
+  } else {
+    carts.push(storeCarts)
+    localStorage.setItem("carts", JSON.stringify(carts));
+    showToast('success', "Product added to cart successfully !");
   }
   dispatch({ type: Types.POST_CARTS_LOADING, payload: carts });
   dispatch(getCartsAction());
@@ -216,3 +216,19 @@ export const handleShippingCost = (carts) => (dispatch) => {
         dispatch({ type: Types.APPLY_SHIPPING_COST, payload: responseData });
     });
 };
+
+
+//store carts data 
+function storeCarts(cartProduct) {
+  const previousCart = getCartData().carts;
+  const combineCartList = getCartData().combineCartList;
+  let carts = [...previousCart];
+  console.log('carts :>> ', carts);
+
+  let storeCarts = {
+    sellerID: cartProduct.sellerID,
+    sellerName: cartProduct.sellerName,
+    data: [cartProduct]
+  }
+  const filterCarts = carts.filter((item) => item.sellerName == cartProduct.sellerName);
+}
