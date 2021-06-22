@@ -128,17 +128,6 @@ export default function Carts() {
                   }
 
 
-                  {/* <div className="p-3">
-                    {
-                      carts.length > 0 && carts.map((item, index) => (
-                        <div className="cart_items_details" key={index + 1}>
-                          <CartProduct item={item} />
-                        </div>
-                      ))
-                    }
-                  </div> */}
-
-
                   <div className="d-flex p-2">
                     <div className="mr-3">
                       <SimpleBtn
