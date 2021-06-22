@@ -6,20 +6,20 @@ import ProductList from "../ProductList/ProductList";
 import { useDispatch, useSelector } from "react-redux";
 
 // local imports
+import { getProductList } from "../ProductList/_redux/Action/ProductListAction";
 import {
   getFastestDeliveryProductDetails,
-  getFastestDeliveryProductList,
   resetFastestDeliveryProductDetails,
 } from "./_redux/Action/FastestDeliveryAction";
 
 const FastestDeliveryContainer = () => {
   const [show, setShow] = useState(false);
 
-  const {
-    ProductList: productList,
-    isLoading,
-    product,
-  } = useSelector((state) => state.FastestDeliveryReducer);
+  const { product } = useSelector((state) => state.FastestDeliveryReducer);
+
+  const { FastestDeliveryProductList: productList, isLoading } = useSelector(
+    (state) => state.ProductListReducer
+  );
 
   const dispatch = useDispatch();
 
@@ -31,7 +31,7 @@ const FastestDeliveryContainer = () => {
   };
 
   useEffect(() => {
-    dispatch(getFastestDeliveryProductList());
+    dispatch(getProductList("fastest-delivery"));
   }, []);
 
   useEffect(() => {

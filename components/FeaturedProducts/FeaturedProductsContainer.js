@@ -11,15 +11,16 @@ import {
   getFeaturedProductList,
   resetFeaturedProductDetails,
 } from "./_redux/Action/FeaturedProductsAction";
+import { getProductList } from "../ProductList/_redux/Action/ProductListAction";
 
 const FeaturedProductsContainer = () => {
   const [show, setShow] = useState(false);
 
-  const {
-    ProductList: productList,
-    isLoading,
-    product,
-  } = useSelector((state) => state.FeaturedProductsReducer);
+  const { product } = useSelector((state) => state.FeaturedProductsReducer);
+
+  const { FeaturedProductList: productList, isLoading } = useSelector(
+    (state) => state.ProductListReducer
+  );
 
   const dispatch = useDispatch();
 
@@ -31,7 +32,7 @@ const FeaturedProductsContainer = () => {
   };
 
   useEffect(() => {
-    dispatch(getFeaturedProductList());
+    dispatch(getProductList("featured"));
   }, []);
 
   useEffect(() => {

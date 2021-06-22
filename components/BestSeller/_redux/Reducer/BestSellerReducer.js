@@ -1,20 +1,26 @@
 import * as Types from "../Type/Types";
 
 const initialState = {
-    isLoading: false,
-    bestSellerList: [],
+  product: null,
+  error: false,
+  isLoading: false,
+};
+const BestSoldProductReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case Types.GET_BEST_SOLD_PRODUCT_DETAILS:
+      return {
+        ...state,
+        product: action.payload.product,
+      };
 
-}
-function BestSellerReducer(state = initialState, action) {
-    switch (action.type) {
-        case Types.GET_BEST_SELLER_LIST:
-            return {
-                isLoading: action.payload.isLoading,
-                bestSellerList: action.payload.data,
-            }
-        default:
-            break;
-    }
-    return state;
-}
-export default BestSellerReducer;
+    case Types.RESET_BEST_SOLD_PRODUCT_DETAILS:
+      return {
+        ...state,
+        product: null,
+      };
+
+    default:
+      return state;
+  }
+};
+export default BestSoldProductReducer;
