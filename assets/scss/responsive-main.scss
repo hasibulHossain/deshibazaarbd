@@ -2,13 +2,20 @@
   .home-banner-carousel img {
     height: 240px;
   }
+
   .section-heading {
-    font-size: 22px !important;
     font-weight: 700;
+    font-size: 22px !important;
     text-transform: uppercase !important;
   }
+
   .img-fluid {
     height: 300px;
+  }
+
+  // @todo: Delete in next day
+  .test-css {
+    color: '#000000'
   }
   
 }
