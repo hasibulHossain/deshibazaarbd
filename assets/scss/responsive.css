@@ -49,6 +49,18 @@
 
 @media only screen and (min-width: 500px) and (max-width: 560px) {}
 
-@media only screen and (max-width: 479px) {}
+@media only screen and (max-width: 479px) {
+  .home-banner-carousel img {
+    height: 240px;
+}
+.section-heading {
+  font-size: 22px !important;
+  font-weight: 700;
+  text-transform: uppercase!important;
+}
+.img-fluid {
+  height: 300px;
+}
+}
 
 @media (max-width: 400px) {}
