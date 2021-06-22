@@ -8,15 +8,19 @@ import { useDispatch, useSelector } from "react-redux";
 import SimpleBtn from "../master/SimpleBtn/SimpleBtn";
 import FloatingCartProduct from "../FloatingCartProduct/FloatingCartProduct";
 import { toggleFloatingCart } from "../../_redux/store/action/globalAction";
-import { getCartsAction } from "../_redux/CartProduct/Action/CartAction";
+import { handleCombineCarts, getCartsAction } from "../_redux/CartProduct/Action/CartAction";
 import Link from "next/link";
+import { useState } from "react";
 
 function FloatingCart() {
   const dispatch = useDispatch();
   const { floatingCartVisible } = useSelector((state) => state.GlobalReducer);
   const carts = useSelector((state) => state.CartReducer.carts)
+  const combineCartList = useSelector((state) => state.CartReducer.combineCartList)
   const totalPrice = useSelector((state) => state.CartReducer.totalPrice)
   const totalQuantity = useSelector((state) => state.CartReducer.totalQuantity)
+  const [cartLength, setCartLength] = useState(null);
+
 
   const toggleCartHandler = () => {
     dispatch(toggleFloatingCart());
@@ -37,15 +41,16 @@ function FloatingCart() {
 
   useEffect(() => {
     dispatch(getCartsAction())
+    dispatch(handleCombineCarts())
   }, []);
 
   let floatingCart = null;
-
+ 
   if (floatingCartVisible) {
     floatingCart = (
       <div className="floating-cart modal-scrollbar">
         <div className="floating-cart__header">
-          <p>There are {carts.length} Products</p>
+          <p>There are {combineCartList.length} Products</p>
           <div
             onClick={toggleCartHandler}
             className="floating-cart__close-icon"
@@ -55,7 +60,7 @@ function FloatingCart() {
         </div>
 
         <div className="floating-cart__products">
-          {carts.length > 0 && carts.map((item, index) => (
+          {combineCartList.length > 0 && combineCartList.map((item, index) => (
             <div key={index}>
               <FloatingCartProduct item={item} />
             </div>

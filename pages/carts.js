@@ -84,33 +84,51 @@ export default function Carts() {
                     </div>
                   </div>
 
-                  <div className="cart_items_by_shop">
-                    <div className="cart_item_box_top_1">
-                      <div>
-                        <div className="cart_shop_name d-flex">
-                          <input className="cart-checkbox" type="checkbox" />
-                          <div className="ml-2">
-                            <div className="cart_details_body">
-                              <p>Star Watch</p>
-                              <div className="cart_trash">
-                                <FiChevronRight />
+                  {
+                    carts.length > 0 && carts.map((item, index) => (
+                      <>
+                        <div className="cart_items_by_shop" key={index}>
+                          <div className="cart_item_box_top_1">
+                            <div>
+                              <div className="cart_shop_name d-flex">
+                                <input className="cart-checkbox" type="checkbox" />
+                                <div className="ml-2">
+                                  <div className="cart_details_body">
+                                    <p>{item.sellerName}</p>
+                                    <div className="cart_trash">
+                                      <FiChevronRight />
+                                    </div>
+                                  </div>
+
+                                </div>
                               </div>
+
                             </div>
 
+                            <p className="estimate">Estimate time 9 june</p>
+
                           </div>
+                          <p className="Spend">
+                            Spend ৳ 990 enjoy free shipping for Standard delivery
+                            option
+                          </p>
                         </div>
 
-                      </div>
+                        <div className="p-3">
+                          {
+                            item.data.length > 0 && item.data.map((cart, keyValue) => (
+                              <div className="cart_items_details" key={keyValue + 1}>
+                                <CartProduct cart={cart} />
+                              </div>
+                            ))
+                          }
+                        </div>
+                      </>
+                    ))
+                  }
 
-                      <p className="estimate">Estimate time 9 june</p>
 
-                    </div>
-                    <p className="Spend">
-                      Spend ৳ 990 enjoy free shipping for Standard delivery
-                      option
-                    </p>
-                  </div>
-                  <div className="p-3">
+                  {/* <div className="p-3">
                     {
                       carts.length > 0 && carts.map((item, index) => (
                         <div className="cart_items_details" key={index + 1}>
@@ -118,7 +136,7 @@ export default function Carts() {
                         </div>
                       ))
                     }
-                  </div>
+                  </div> */}
 
 
                   <div className="d-flex p-2">

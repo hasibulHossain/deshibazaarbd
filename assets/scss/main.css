@@ -1785,6 +1785,7 @@ p.text-secondary.mb-0 {
 
 .cart_items_by_shop {
   border-bottom: 1px solid #0000006b;
+  border-top: 1px solid #0000006b;
 }
 
 .carts_delete {
@@ -1835,7 +1836,9 @@ p.estimate {
   padding: 20px;
   border-bottom: 1px solid darkgrey;
 }
-
+.cart_items_details:last-child{
+  border-bottom: none;
+}
 .cart_checkout_margin {
   margin-top: 44px;
 }

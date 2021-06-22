@@ -19,6 +19,7 @@ import ProductDetails from "../ProductDetails/ProductDetails";
 import LoadingSkelleton from "./../master/skelleton/LoadingSkelleton.jsx";
 import { useDispatch } from "react-redux";
 import { addToCartAction } from "../_redux/CartProduct/Action/CartAction";
+import { showToast } from "../master/Helper/ToastHelper";
 
 const ProductList = (props) => {
   const { show, handleShow, handleClose, productList, product, isLoading, type } =
@@ -28,6 +29,7 @@ const ProductList = (props) => {
   //   dispatch(getProductListAction(type));
   // }, []);
 
+  console.log('productList :>> ', productList);
   const [quantity, setQuantity] = useState(1);
   const addToCart = (item) => {
     const cartProduct = {
@@ -38,8 +40,15 @@ const ProductList = (props) => {
       price: item.default_selling_price,
       offerPrice: item.offer_selling_price,
       productImage: `${process.env.NEXT_PUBLIC_URL}images/products/${item.featured_image}`,
+      sellerID: item.seller_id,
+      sellerName: item.seller_name,
+      sku: item.sku,
     };
-    dispatch(addToCartAction(cartProduct, item.id));
+    if (item.current_stock == 0) {
+      showToast('error', "Product is not available in the stock!")
+    } else {
+      dispatch(addToCartAction(cartProduct, item.id));
+    }
   };
 
   return (
@@ -81,6 +90,7 @@ const ProductList = (props) => {
                   className="img-fluid"
                 />
                 <p className="product-title">{item.name}</p>
+                {/* <p>Stock : {item.current_stock}</p> */}
                 <div className="rating">
                   <ReactStars
                     value={item.rating}

@@ -6,15 +6,32 @@ import { showToast } from "../../../master/Helper/ToastHelper";
 export const addToCartAction = (cartProduct, id) => async (dispatch) => {
   const previousCart = getCartData().carts;
   let carts = [...previousCart];
+  let storeCarts = {
+    sellerID: cartProduct.sellerID,
+    sellerName: cartProduct.sellerName,
+    data: [cartProduct]
+  }
+  const filterCarts = carts.filter((item) => item.sellerName == cartProduct.sellerName);
+
   if (carts.find((data) => data.productID === id)) {
     showToast('error', "Product has been already added in cart !")
   } else {
-    carts.push(cartProduct);
-    localStorage.setItem("carts", JSON.stringify(carts));
-    showToast('success', "Product added to cart successfully !");
+    if (filterCarts.length > 0) {
+      for (let i = 0; i < filterCarts.length; i++) {
+        const item = filterCarts[i];
+        item.data.push(cartProduct);
+      }
+      localStorage.setItem("carts", JSON.stringify(carts));
+      showToast('success', "Product added to cart successfully !");
+    } else {
+      carts.push(storeCarts)
+      localStorage.setItem("carts", JSON.stringify(carts));
+      showToast('success', "Product added to cart successfully !");
+    }
   }
   dispatch({ type: Types.POST_CARTS_LOADING, payload: carts });
   dispatch(getCartsAction());
+  dispatch(handleCombineCarts());
 };
 
 export const getCartsAction = () => async (dispatch) => {
@@ -178,4 +195,17 @@ export const handleShippingCost = (carts) => (dispatch) => {
       (responseData.shipping = response.data),
         dispatch({ type: Types.APPLY_SHIPPING_COST, payload: responseData });
     });
+};
+
+
+export const handleCombineCarts = () => (dispatch) => {
+  const data = getCartData();
+  let combineCartList = [];
+  data.carts.map((item) => {
+    item.data.map((cartItem) => {
+      combineCartList.push(cartItem);
+    })
+  })
+  dispatch({type: Types.GET_COMBINE_CARTS, payload: combineCartList});
+  return combineCartList;
 };
