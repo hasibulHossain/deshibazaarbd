@@ -11,6 +11,10 @@ import ReactStars from "react-rating-stars-component";
 const CategoryWiseMiniProduct = ({ columns }) => {
   const { products } = useSelector((state) => state.CategoryWiseProductReducer);
 
+  const ratingChanged = (value) => {
+    console.log("vlaue => start => ", value);
+  };
+
   return (
     <>
       {products.length > 0 &&
@@ -47,7 +51,7 @@ const CategoryWiseMiniProduct = ({ columns }) => {
                   <p className="product-title mt-3">{item.name}</p>
                   <ReactStars
                     value={+item.average_rating}
-                    // onChange={ratingChanged}
+                    onChange={ratingChanged}
                     size={24}
                     edit={false}
                     activeColor="#ffd700"

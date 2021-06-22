@@ -33,7 +33,12 @@ function DeliveryInfoReducer(state = initialState, action) {
         ...state,
         customerInfo
       };
-      break;
+    case Types.ORDER_SUBMIT:
+      return {
+        ...state,
+        isSubmitting: action.payload.isLoading,
+        customerInfo: initialState.customerInfo
+      }
     default:
       return state;
   }

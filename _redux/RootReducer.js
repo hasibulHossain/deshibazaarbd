@@ -21,6 +21,7 @@ import CartReducer from "../components/_redux/CartProduct/Reducer/CartReducer";
 import SearchReducer from "../components/SearchInput/_redux/Reducer/SearchInputReducer";
 import DeliveryInfoReducer from "../components/Delivery/_redux/Reducer/DeliveryInfoReducer";
 import ProfileUpdateReducer from "../components/myprofile/_redux/Reducer/ProfileUpdateReducer";
+import PaymentMethodReducer from "../components/PaymentMethod/_redux/Reducer/PaymentMethodReducer";
 
 export default combineReducers({
   GlobalReducer: GlobalReducer,
@@ -44,4 +45,5 @@ export default combineReducers({
   SearchReducer: SearchReducer,
   DeliveryInfoReducer: DeliveryInfoReducer,
   ProfileUpdateReducer: ProfileUpdateReducer,
+  PaymentMethodReducer: PaymentMethodReducer,
 });

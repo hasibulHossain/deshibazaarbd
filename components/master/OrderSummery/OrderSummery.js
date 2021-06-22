@@ -16,6 +16,7 @@ const OrderSummery = ({ handleClick, buttonText }) => {
     const couponData = useSelector((state) => state.CartReducer.couponData);
     const shippingCost = useSelector((state) => state.CartReducer.shippingCost);
     const shippingCostLoading = useSelector((state) => state.CartReducer.shippingCostLoading);
+    const isSubmitting = useSelector((state) => state.DeliveryInfoReducer.isSubmitting);
 
     useEffect(() => {
         dispatch(getCartsAction());
@@ -30,18 +31,19 @@ const OrderSummery = ({ handleClick, buttonText }) => {
         dispatch(handleApplyCouponCode(coupon, carts))
     };
     const deliveryFee = 50;
-    let totamAmount;
+    let totalAmount;
     if (couponData && couponData.discount_amount) {
-        totamAmount = (totalPrice + deliveryFee + shippingCost) - discount_amount;
+        totalAmount = (totalPrice + deliveryFee + shippingCost) - discount_amount;
     } else {
-        totamAmount = (totalPrice + deliveryFee + shippingCost);
+        totalAmount = (totalPrice + deliveryFee + shippingCost);
     }
+
     return (
         <>
             <Card>
                 <div className="cart__right-container">
                     <div className="cart__right-header">
-                        <p>Order Summery 2</p>
+                        <p>Order Summery </p>
                     </div>
                     <div className="cart__right-order_details">
                         <div className="cart__right-order_details_inner">
@@ -76,7 +78,7 @@ const OrderSummery = ({ handleClick, buttonText }) => {
                             </div>
                             <div className="cart__right-order_details_item">
                                 <p>Total</p>
-                                <p>TK {totamAmount} BDT</p>
+                                <p>TK {totalAmount} BDT</p>
                             </div>
                         </div>
                     </div>
@@ -89,7 +91,7 @@ const OrderSummery = ({ handleClick, buttonText }) => {
                                             className="form-control mr-1"
                                             name="code"
                                             autoComplete="off"
-                                            placeholder="Your Coupon Code"
+                                            placeholder="Discount Code"
                                             value={coupon.code && coupon.code}
                                             onChange={(e) => handleChangeCouponCode("code", e.target.value)}
                                             ref={register({ required: true })} /> <br />
@@ -106,7 +108,7 @@ const OrderSummery = ({ handleClick, buttonText }) => {
                                         )}
                                     </div>
                                     <p> {errors.code ?
-                                        <ErrorMessage errorText="Please insert your coupon code if you have." />
+                                        <ErrorMessage errorText="Please insert your discount code if you have." />
                                         :
                                         (couponData && !couponData.errors && couponData.message ? (
                                             <p className="text-success font-weight-bold mt-2">{couponData.message}</p>
@@ -119,9 +121,23 @@ const OrderSummery = ({ handleClick, buttonText }) => {
                             </div>
                         </div>
                         <div className="cart__proceed-btn">
-                            <button className="simple-btn btn-danger" onClick={() => handleClick()} disabled={carts.length === 0 ? true : false} >
+                            {/* <button className="simple-btn btn-danger" onClick={() => handleClick()} disabled={carts.length === 0 ? true : false} >
                                 {buttonText}
-                            </button>
+                            </button> */}
+                            {
+                                !isSubmitting && (
+                                    <button className="simple-btn btn-danger" onClick={handleClick} disabled={carts.length === 0 ? true : false} >
+                                        {buttonText}
+                                    </button>
+                                )
+                            }
+                            {
+                                isSubmitting &&
+                                (<button disabled={true} className="simple-btn btn-danger d-flex">
+                                    <span className="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>  {buttonText}
+                                </button>)
+                            }
+
                         </div>
                     </div>
                 </div>
