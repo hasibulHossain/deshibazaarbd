@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Button from "../master/Button/Button";
-import Link from "next/link";
+import { useRouter } from "next/router";
+
 // third party imports
 import { useDispatch, useSelector } from "react-redux";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 // local imports
 import ProductList from "../ProductList/ProductList";
@@ -13,8 +11,10 @@ import {
   getBestSoldProductDetails,
   resetBestSoldProductDetails,
 } from "./_redux/Action/BestSellerAction";
+import { setFilterParams } from "../CategoryWishProductList/_redux/Action/CategoryWiseProductAction";
+import ViewAll from "../ViewAll/ViewAll";
 
-const BestSoldContainer = () => {
+const BestSoldContainer = (props) => {
   const [show, setShow] = useState(false);
 
   const { product } = useSelector((state) => state.BestSellerReducer);
@@ -23,6 +23,11 @@ const BestSoldContainer = () => {
     (state) => state.ProductListReducer
   );
 
+  const { filterParams } = useSelector(
+    (state) => state.CategoryWiseProductReducer
+  );
+
+  const router = useRouter();
   const dispatch = useDispatch();
 
   const handleClose = () => setShow(false);
@@ -30,6 +35,13 @@ const BestSoldContainer = () => {
   const handleShow = (item) => {
     setShow(true);
     dispatch(getBestSoldProductDetails(item.sku));
+  };
+
+  const viewAllHandler = () => {
+    const cloneFilterParams = { ...filterParams };
+    cloneFilterParams.type = "best-sold";
+    dispatch(setFilterParams(cloneFilterParams));
+    router.push("/products");
   };
 
   useEffect(() => {
@@ -46,12 +58,7 @@ const BestSoldContainer = () => {
     <section className="product-container">
       <div className="product-heading">
         <h5>Best Sold</h5>
-        <Link href="/products">
-          <div className="custom-button-component">
-            View all
-            <FontAwesomeIcon className="ml-2" icon={faArrowRight} />
-          </div>
-        </Link>
+        <ViewAll viewAllHandler={viewAllHandler} />
       </div>
       <ProductList
         type="fastest_delivery"

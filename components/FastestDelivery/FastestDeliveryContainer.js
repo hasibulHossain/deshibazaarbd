@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Button from "../master/Button/Button";
-import ProductList from "../ProductList/ProductList";
+import { useRouter } from "next/router";
 
 // third party imports
 import { useDispatch, useSelector } from "react-redux";
@@ -11,9 +11,14 @@ import {
   getFastestDeliveryProductDetails,
   resetFastestDeliveryProductDetails,
 } from "./_redux/Action/FastestDeliveryAction";
+import { setFilterParams } from "../CategoryWishProductList/_redux/Action/CategoryWiseProductAction";
+import ProductList from "../ProductList/ProductList";
+import ViewAll from "../ViewAll/ViewAll";
 
 const FastestDeliveryContainer = () => {
   const [show, setShow] = useState(false);
+  const dispatch = useDispatch();
+  const router = useRouter();
 
   const { product } = useSelector((state) => state.FastestDeliveryReducer);
 
@@ -21,13 +26,22 @@ const FastestDeliveryContainer = () => {
     (state) => state.ProductListReducer
   );
 
-  const dispatch = useDispatch();
+  const { filterParams } = useSelector(
+    (state) => state.CategoryWiseProductReducer
+  );
 
   const handleClose = () => setShow(false);
 
   const handleShow = (item) => {
     setShow(true);
     dispatch(getFastestDeliveryProductDetails(item.sku));
+  };
+
+  const viewAllHandler = () => {
+    const cloneFilterParams = { ...filterParams };
+    cloneFilterParams.type = "fastest-delivery";
+    dispatch(setFilterParams(cloneFilterParams));
+    router.push("/products");
   };
 
   useEffect(() => {
@@ -44,7 +58,7 @@ const FastestDeliveryContainer = () => {
     <section className="product-container">
       <div className="product-heading">
         <h5>Fastest Delivery</h5>
-        <Button buttonText="view all" isFontAwesome={true} />
+        <ViewAll viewAllHandler={viewAllHandler} />
       </div>
       <ProductList
         type="fastest_delivery"
