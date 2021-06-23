@@ -22,7 +22,7 @@ import SearchReducer from "../components/SearchInput/_redux/Reducer/SearchInputR
 import DeliveryInfoReducer from "../components/Delivery/_redux/Reducer/DeliveryInfoReducer";
 import ProfileUpdateReducer from "../components/myprofile/_redux/Reducer/ProfileUpdateReducer";
 import PaymentMethodReducer from "../components/PaymentMethod/_redux/Reducer/PaymentMethodReducer";
-import ProductList from "../components/ProductList/_redux/Reducer/ProductListReducer";
+import ProductListReducer from "../components/ProductList/_redux/Reducer/ProductListReducer";
 
 export default combineReducers({
   GlobalReducer: GlobalReducer,
@@ -47,5 +47,5 @@ export default combineReducers({
   DeliveryInfoReducer: DeliveryInfoReducer,
   ProfileUpdateReducer: ProfileUpdateReducer,
   PaymentMethodReducer: PaymentMethodReducer,
-  ProductListReducer: ProductList,
+  ProductListReducer: ProductListReducer,
 });
