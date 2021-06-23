@@ -59,10 +59,8 @@ export const getFilteredProducts = (filterParamObj) => async (dispatch) => {
 
   try {
     dispatch({ type: Types.INIT_FILTER_PRODUCT_LIST });
-    console.log("url => ", `${Base_Url}get-items?${filterParam}&paginate_no=5`);
-    const res = await Axios(
-      `${Base_Url}get-items?${filterParam}&paginate_no=20`
-    );
+    console.log(`url =:> ${Base_Url}get-items?${filterParam}`);
+    const res = await Axios(`${Base_Url}get-items?${filterParam}`);
     responseData.isLoading = false;
     responseData.data = res.data.data;
     dispatch({ type: Types.GET_FILTER_PRODUCT_LIST, payload: responseData });
@@ -70,3 +68,8 @@ export const getFilteredProducts = (filterParamObj) => async (dispatch) => {
     dispatch({ type: Types.GET_FILTER_PRODUCT_LIST_FAILED });
   }
 };
+
+export const setFilterParams = (filterParams) => ({
+  type: Types.SET_FILTER_PARAM,
+  payload: filterParams,
+});

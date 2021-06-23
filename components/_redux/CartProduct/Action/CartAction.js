@@ -6,10 +6,26 @@ import { showToast } from "../../../master/Helper/ToastHelper";
 export const addToCartAction = (cartProduct, id) => async (dispatch) => {
   const previousCart = getCartData().carts;
   let carts = [...previousCart];
-  if (carts.find((data) => data.productID === id)) {
-    showToast('error', "Product has been already added in cart !")
+  let storeCarts = {
+    sellerID: cartProduct.sellerID,
+    sellerName: cartProduct.sellerName,
+    data: [cartProduct]
+  }
+  const filterCarts = carts.filter((item) => item.sellerName == cartProduct.sellerName);
+  if (filterCarts.length > 0) {
+    if (filterCarts[0].data.find((item) => item.productID === id)) {
+      showToast('error', "Product has been already added in cart !")
+    } else {
+      for (let i = 0; i < filterCarts.length; i++) {
+        const item = filterCarts[i];
+        item.data.push(cartProduct);
+      }
+      localStorage.setItem("carts", JSON.stringify(carts));
+      showToast('success', "Product added to cart successfully !");
+    }
+
   } else {
-    carts.push(cartProduct);
+    carts.push(storeCarts)
     localStorage.setItem("carts", JSON.stringify(carts));
     showToast('success', "Product added to cart successfully !");
   }
@@ -24,31 +40,44 @@ export const getCartsAction = () => async (dispatch) => {
 };
 
 //update cart products quantity
-export const updateCartQtyAction =
-  (product_id, quantity) => async (dispatch) => {
-    const cartStorageData = localStorage.getItem("carts");
-    let data = {
-      carts: [],
-      products: [],
-    };
-
-    if (typeof cartStorageData !== "undefined" && cartStorageData !== null) {
-      data.carts = JSON.parse(cartStorageData);
-      data.products = data.carts.products;
-
-      let findProducts = data.carts.filter(
-        (item) => item.productID === product_id
-      );
-      if (findProducts.length) {
-        const getProductIndex = data.carts.indexOf(findProducts[0]);
-        findProducts[0].quantity = quantity;
-        data.carts[getProductIndex] = findProducts[0];
-        localStorage.setItem("carts", JSON.stringify(data.carts));
-      }
-    }
-    dispatch({ type: Types.UPDATE_CARTS_DATA, payload: getCartData() });
-    dispatch(getCartsAction());
+export const updateCartQtyAction = (product_id, quantity) => async (dispatch) => {
+  const getData = getCartData();
+  // console.log('check data by clicking updated:>> ', data1);
+  const cartStorageData = localStorage.getItem("carts");
+  let data = {
+    carts: [],
+    products: [],
+    combineCartList: []
   };
+
+  let filterCarts = getData.combineCartList.filter((item) => item.productID === product_id)
+
+
+  if (filterCarts.length) {
+    const getProductIndex = getData.combineCartList.indexOf(filterCarts[0]);
+    filterCarts[0].quantity = quantity;
+    data.combineCartList[getProductIndex] = filterCarts[0];
+    console.log('data.carts :>> ', data.combineCartList);
+    // localStorage.setItem("carts", JSON.stringify(data.carts));
+  }
+
+  // if (typeof cartStorageData !== "undefined" && cartStorageData !== null) {
+  //   data.carts = JSON.parse(cartStorageData);
+  //   data.products = data.carts.products;
+
+  //   let findProducts = data.carts.filter(
+  //     (item) => item.productID === product_id
+  //   );
+  //   if (findProducts.length) {
+  //     const getProductIndex = data.carts.indexOf(findProducts[0]);
+  //     findProducts[0].quantity = quantity;
+  //     data.carts[getProductIndex] = findProducts[0];
+  //     localStorage.setItem("carts", JSON.stringify(data.carts));
+  //   }
+  // }
+  dispatch({ type: Types.UPDATE_CARTS_DATA, payload: getCartData() });
+  dispatch(getCartsAction());
+};
 
 //delete cart product
 export const deleteCartItemAction = (product_id) => async (dispatch) => {
@@ -86,11 +115,19 @@ function getCartData() {
   let data = {
     carts: [],
     products: [],
+    combineCartList: [],
   };
 
   if (typeof cartStorageData !== "undefined" && cartStorageData !== null) {
     data.carts = JSON.parse(cartStorageData);
     data.products = data.carts.products;
+
+    //combine carts data 
+    data.carts.map((item) => {
+      item.data.map((cartItem) => {
+        data.combineCartList.push(cartItem);
+      })
+    })
   }
   return data;
 }
@@ -179,3 +216,19 @@ export const handleShippingCost = (carts) => (dispatch) => {
         dispatch({ type: Types.APPLY_SHIPPING_COST, payload: responseData });
     });
 };
+
+
+//store carts data 
+function storeCarts(cartProduct) {
+  const previousCart = getCartData().carts;
+  const combineCartList = getCartData().combineCartList;
+  let carts = [...previousCart];
+  console.log('carts :>> ', carts);
+
+  let storeCarts = {
+    sellerID: cartProduct.sellerID,
+    sellerName: cartProduct.sellerName,
+    data: [cartProduct]
+  }
+  const filterCarts = carts.filter((item) => item.sellerName == cartProduct.sellerName);
+}
