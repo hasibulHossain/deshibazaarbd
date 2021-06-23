@@ -61,7 +61,6 @@ const FastestDeliveryContainer = () => {
         <ViewAll viewAllHandler={viewAllHandler} />
       </div>
       <ProductList
-        type="fastest_delivery"
         productList={productList}
         handleClose={handleClose}
         handleShow={handleShow}
