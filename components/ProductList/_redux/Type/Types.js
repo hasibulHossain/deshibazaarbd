@@ -1,0 +1,4 @@
+export const INIT_PRODUCT_LIST = "INIT_PRODUCT_LIST";
+export const GET_PRODUCT_LIST_ = "INIT_PRODUCT_LIST_";
+
+export const ERROR_OCURRED = "ERROR_OCURRED";

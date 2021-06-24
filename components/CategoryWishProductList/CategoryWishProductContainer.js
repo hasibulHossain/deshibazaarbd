@@ -3,12 +3,18 @@ import CategoryFilter from "./CategoryFilter";
 import CategoryWishProductList from "./CategoryWishProductList";
 import classNames from "classnames";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductList } from "./_redux/Action/CategoryWiseProductAction";
+import {
+  getFilteredProducts,
+  setFilterParams,
+} from "./_redux/Action/CategoryWiseProductAction";
+
+const Base_Url = process.env.NEXT_PUBLIC_API_URL;
 
 const CategoryWishProductContainer = () => {
   const dispatch = useDispatch();
-  const { paginate } = useSelector((state) => state.CategoryWiseProductReducer);
-  const Base_Url = process.env.NEXT_PUBLIC_API_URL;
+  const { paginate, filterParams } = useSelector(
+    (state) => state.CategoryWiseProductReducer
+  );
 
   const classes = classNames({
     "page-item": true,
@@ -22,18 +28,26 @@ const CategoryWishProductContainer = () => {
 
   const paginateHandler = (direction, pageUrl) => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+    const page = +pageUrl.split("page=")[1];
+
+    const filterParamClone = { ...filterParams };
+    filterParamClone.page = page;
+
     if (direction === "previous") {
-      dispatch(getProductList(pageUrl));
+      dispatch(getFilteredProducts(filterParamClone));
+      dispatch(setFilterParams(filterParamClone));
     } else if (direction === "linier") {
-      dispatch(getProductList(pageUrl));
+      dispatch(getFilteredProducts(filterParamClone));
+      dispatch(setFilterParams(filterParamClone));
     } else if (direction === "next") {
-      dispatch(getProductList(pageUrl));
+      dispatch(getFilteredProducts(filterParamClone));
+      dispatch(setFilterParams(filterParamClone));
     }
   };
 
   useEffect(() => {
     if (!paginate.first_page_url) {
-      dispatch(getProductList());
+      dispatch(getFilteredProducts(filterParams));
     }
   }, [paginate.next_page_url]);
 

@@ -7,34 +7,34 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getCategories,
   getFilteredProducts,
+  setFilterParams,
 } from "./_redux/Action/CategoryWiseProductAction";
 import { getShopList } from "../Shop/_redux/Action/ShopAction";
 import ReactStars from "react-rating-stars-component";
 
 const CategoryFilter = () => {
   const dispatch = useDispatch();
-  const { categories } = useSelector(
+  const { categories, filterParams } = useSelector(
     (state) => state.CategoryWiseProductReducer
   );
   const { ShopList } = useSelector((state) => state.ShopReducer);
 
   const [value, setValue] = useState({ min: 100, max: 90000 });
   const [isChecked, setIsChecked] = useState(false);
-  const [filterParam, setFilterParam] = useState({
-    search: "",
-    category: [],
-    brand: [],
-    min_price: null,
-    max_price: null,
-    attributes: null,
-    rating: null,
-  });
-  const { search, category, brand, min_price, max_price, attributes, rating } =
-    filterParam;
+  const {
+    search,
+    category,
+    brand,
+    min_price,
+    max_price,
+    attributes,
+    rating,
+    paginate_no,
+  } = filterParams;
 
   // checkbox handler
   const handleChecked = (e, category) => {
-    const filterParamClone = { ...filterParam };
+    const filterParamClone = { ...filterParams };
     // conditionally insert and remove category id from category array
     if (e.target.checked) {
       filterParamClone.category.push(category);
@@ -44,12 +44,12 @@ const CategoryFilter = () => {
       );
       filterParamClone.category = updatedCategory;
     }
-    setFilterParam(filterParamClone);
+    dispatch(setFilterParams(filterParamClone));
   };
 
   // checkbox handler
   const brandCheckboxHandler = (e, brand) => {
-    const filterParamClone = { ...filterParam };
+    const filterParamClone = { ...filterParams };
     // conditionally insert and remove brand id from brand array
     if (e.target.checked) {
       filterParamClone.brand.push(brand);
@@ -59,7 +59,7 @@ const CategoryFilter = () => {
       );
       filterParamClone.brand = updatedCategory;
     }
-    setFilterParam(filterParamClone);
+    dispatch(setFilterParams(filterParamClone));
   };
 
   // use debounce fn to prevent multiple api call at the same time
@@ -77,10 +77,10 @@ const CategoryFilter = () => {
 
   const debounceReturn = useCallback(
     debounce((newValue) => {
-      const filterParamClone = { ...filterParam };
+      const filterParamClone = { ...filterParams };
       filterParamClone.min_price = newValue.min;
       filterParamClone.max_price = newValue.max;
-      setFilterParam(filterParamClone);
+      dispatch(setFilterParams(filterParamClone));
     }, 500),
     []
   );
@@ -98,9 +98,9 @@ const CategoryFilter = () => {
     color: "#ddd",
     activeColor: "#ffd700",
     onChange: (newValue) => {
-      const filterParamClone = { ...filterParam };
+      const filterParamClone = { ...filterParams };
       filterParamClone.rating = newValue;
-      setFilterParam(filterParamClone);
+      dispatch(setFilterParams(filterParamClone));
     },
   };
 
@@ -110,7 +110,7 @@ const CategoryFilter = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(getFilteredProducts(filterParam));
+    dispatch(getFilteredProducts(filterParams));
   }, [
     attributes,
     brand.length,
@@ -119,6 +119,7 @@ const CategoryFilter = () => {
     min_price,
     rating,
     search,
+    paginate_no,
   ]);
 
   return (

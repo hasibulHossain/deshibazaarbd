@@ -22,14 +22,20 @@ import { addToCartAction } from "../_redux/CartProduct/Action/CartAction";
 import { showToast } from "../master/Helper/ToastHelper";
 
 const ProductList = (props) => {
-  const { show, handleShow, handleClose, productList, product, isLoading, type } =
-    props;
+  const {
+    show,
+    handleShow,
+    handleClose,
+    productList,
+    product,
+    isLoading,
+    type,
+  } = props;
   const dispatch = useDispatch();
   // useEffect(() => {
   //   dispatch(getProductListAction(type));
   // }, []);
 
-  console.log('productList :>> ', productList);
   const [quantity, setQuantity] = useState(1);
   const addToCart = (item) => {
     const cartProduct = {
@@ -45,7 +51,7 @@ const ProductList = (props) => {
       sku: item.sku,
     };
     if (item.current_stock == 0) {
-      showToast('error', "Product is not available in the stock!")
+      showToast("error", "Product is not available in the stock!");
     } else {
       dispatch(addToCartAction(cartProduct, item.id));
     }

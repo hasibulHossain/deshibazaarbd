@@ -2,27 +2,6 @@ import Axios from "axios";
 import * as Types from "../Type/Types";
 
 const Base_Url = `${process.env.NEXT_PUBLIC_API_URL}`;
-const Paginate_Url = `${process.env.NEXT_PUBLIC_API_URL}get-items?page=1`;
-
-export const getProductList =
-  (pageUrl = Paginate_Url) =>
-  async (dispatch) => {
-    const responseData = {
-      data: [],
-      isLoading: true,
-    };
-    try {
-      if (!pageUrl) return;
-      dispatch({ type: Types.INIT_PRODUCT_LIST });
-      const res = await Axios.get(`${pageUrl}&paginate_no=20`);
-      responseData.isLoading = false;
-      responseData.data = res.data.data;
-      dispatch({ type: Types.GET_PRODUCT_LIST, payload: responseData });
-    } catch (error) {
-      console.log("get product list => ", getProductList);
-      dispatch({ type: Types.GET_PRODUCT_LIST_FAILED });
-    }
-  };
 
 export const getCategories = () => async (dispatch) => {
   const responseData = {
@@ -59,10 +38,8 @@ export const getFilteredProducts = (filterParamObj) => async (dispatch) => {
 
   try {
     dispatch({ type: Types.INIT_FILTER_PRODUCT_LIST });
-    console.log("url => ", `${Base_Url}get-items?${filterParam}&paginate_no=5`);
-    const res = await Axios(
-      `${Base_Url}get-items?${filterParam}&paginate_no=20`
-    );
+    console.log(`url =:> ${Base_Url}get-items?${filterParam}`);
+    const res = await Axios(`${Base_Url}get-items?${filterParam}`);
     responseData.isLoading = false;
     responseData.data = res.data.data;
     dispatch({ type: Types.GET_FILTER_PRODUCT_LIST, payload: responseData });
@@ -70,3 +47,8 @@ export const getFilteredProducts = (filterParamObj) => async (dispatch) => {
     dispatch({ type: Types.GET_FILTER_PRODUCT_LIST_FAILED });
   }
 };
+
+export const setFilterParams = (filterParams) => ({
+  type: Types.SET_FILTER_PARAM,
+  payload: filterParams,
+});

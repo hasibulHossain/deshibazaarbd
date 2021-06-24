@@ -4,6 +4,18 @@ const initialState = {
   products: [],
   filteredProducts: [],
   categories: [],
+  filterParams: {
+    type: "",
+    search: "",
+    category: [],
+    brand: [],
+    min_price: null,
+    max_price: null,
+    attributes: null,
+    rating: null,
+    page: 1,
+    paginate_no: 10,
+  },
   paginate: {
     pages: [],
     current_page: null,
@@ -98,6 +110,12 @@ function CategoryWiseProductReducer(state = initialState, { type, payload }) {
         ...state,
         isLoading: false,
         error: true,
+      };
+
+    case Types.SET_FILTER_PARAM:
+      return {
+        ...state,
+        filterParams: payload,
       };
 
     default:
