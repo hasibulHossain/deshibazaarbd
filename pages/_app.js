@@ -15,12 +15,13 @@ import "../assets/scss/payment.css";
 import "../assets/scss/responsive.css";
 import "../assets/scss/responsive-main.scss";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 toast.configure();
 
 // Import axios.js so that it can inject token in every request
 require("../services/axios");
+
 class MyApp extends App {
   render() {
     const { Component, pageProps } = this.props;

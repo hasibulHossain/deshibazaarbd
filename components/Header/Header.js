@@ -44,8 +44,8 @@ const Header = () => {
                 <a href="">
                   <Navbar.Brand>
                     <img
-                      src={"/images/logo.png"}
-                      alt="deshi bazaar bd"
+                      src="/images/logos/logo-en.svg"
+                      alt=""
                       className="brand-logo"
                     />
                   </Navbar.Brand>
@@ -53,6 +53,7 @@ const Header = () => {
               </Link>
 
               <Navbar.Toggle aria-controls={toggleNav} />
+              
               <Navbar.Collapse id={toggleNav}>
                 <div className="header-search-product">
                   <SearchInput />

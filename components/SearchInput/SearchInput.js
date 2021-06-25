@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { InputBase, Paper, IconButton } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import SearchLoadingSkelleton from "./SearchLoadingSkelleton";
 import { searchProductAction } from "./_redux/Action/SearchInputAction";

@@ -12,6 +12,7 @@ const Base_Url = process.env.NEXT_PUBLIC_API_URL;
 
 const CategoryWishProductContainer = () => {
   const dispatch = useDispatch();
+  
   const { paginate, filterParams } = useSelector(
     (state) => state.CategoryWiseProductReducer
   );
@@ -27,11 +28,12 @@ const CategoryWishProductContainer = () => {
   });
 
   const paginateHandler = (direction, pageUrl) => {
+
     window.scrollTo({ top: 0, behavior: "smooth" });
     const page = +pageUrl.split("page=")[1];
 
     const filterParamClone = { ...filterParams };
-    filterParamClone.page = page;
+    filterParamClone.page  = page;
 
     if (direction === "previous") {
       dispatch(getFilteredProducts(filterParamClone));

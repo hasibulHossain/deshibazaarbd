@@ -57,8 +57,8 @@ const CategoryWiseMiniProduct = ({ columns }) => {
                     activeColor="#ffd700"
                   />
                   <div className="product_pirce">
-                    <p className="offerPrice">${item.offer_selling_price}</p>
-                    <p className="price">${item.default_selling_price}</p>
+                    <p className="offerPrice">৳ {item.offer_selling_price}</p>
+                    <p className="price">৳ {item.default_selling_price}</p>
                   </div>
                 </div>
               </div>

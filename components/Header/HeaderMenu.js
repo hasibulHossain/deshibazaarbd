@@ -1,24 +1,39 @@
-import React, { useEffect } from "react";
+import React, { useEffect, memo } from "react";
 
 // third party imports
+import { useRouter } from 'next/router';
 import { Navbar } from "react-bootstrap";
 import { Menu, MenuItem, MenuButton, SubMenu } from "@szhsin/react-menu";
 import "@szhsin/react-menu/dist/index.css";
 import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 
 // local imports
 import { getMenuListData } from "./_redux/HeaderAction/HeaderAction";
 
 const HeaderMenu = ({ toggleNav }) => {
   const { menuList } = useSelector((state) => state.HeaderReducer);
-
-  const dispatch = useDispatch();
+  const router       = useRouter();
+  const dispatch     = useDispatch();
 
   useEffect(() => {
     dispatch(getMenuListData());
   }, []);
+
+  /**
+   * Click Menu Link & Redirect to that page
+   * 
+   * @since 1.0.0
+   * 
+   * @param string categorySlug
+   * 
+   * return void
+   */
+  const clickMenuLink = ( categorySlug ) => {
+    console.log(`categorySlug`, categorySlug)
+    router.push(`/products?category=${categorySlug}`);
+  }
 
   return (
     <div className="menu_list">
@@ -38,18 +53,18 @@ const HeaderMenu = ({ toggleNav }) => {
         >
           {menuList.map((category, i) => {
             if (category.childs.length === 0) {
-              return <MenuItem key={i}>{category.name}</MenuItem>;
+              return <MenuItem onClick={() => clickMenuLink(category.short_code)} key={i}>{category.name}</MenuItem>;
             } else {
               return (
                 <SubMenu key={i} label={category.name}>
                   {category.childs.map((subCategory, i) => {
                     if (subCategory.childs.length === 0) {
-                      return <MenuItem key={i}>{subCategory.name}</MenuItem>;
+                      return <MenuItem key={i} onClick={() => clickMenuLink(subCategory.short_code)}>{subCategory.name}</MenuItem>;
                     } else {
                       return (
-                        <SubMenu key={i} label={subCategory.name}>
+                        <SubMenu key={i} label={subCategory.name} onClick={() => clickMenuLink(subCategory.short_code)}>
                           {subCategory.childs.map((subCtgOne, i) => (
-                            <MenuItem key={i}>{subCtgOne.name}</MenuItem>
+                            <MenuItem key={i} onClick={() => clickMenuLink(subCtgOne.short_code)}>{subCtgOne.name}</MenuItem>
                           ))}
                         </SubMenu>
                       );
@@ -59,16 +74,6 @@ const HeaderMenu = ({ toggleNav }) => {
               );
             }
           })}
-
-          <SubMenu label="Product Category">
-            <MenuItem>Category-1</MenuItem>
-            <MenuItem>Category-2</MenuItem>
-            <SubMenu label="Product Sub Category">
-              <MenuItem>Category Sub-1</MenuItem>
-              <MenuItem>Category Sub-2</MenuItem>
-              <MenuItem>Category Sub-3</MenuItem>
-            </SubMenu>
-          </SubMenu>
         </Menu>
 
         {menuList.length > 0 &&
@@ -88,13 +93,13 @@ const HeaderMenu = ({ toggleNav }) => {
               {category.childs.length > 0 &&
                 category.childs.map((subCategory, i) => {
                   if (subCategory.childs.length === 0) {
-                    return <MenuItem>{subCategory.name}</MenuItem>;
+                    return <MenuItem onClick={() => clickMenuLink(subCategory.short_code)} key={i}>{subCategory.name}</MenuItem>;
                   } else {
                     return (
                       <SubMenu key={i} label={subCategory.name}>
                         {subCategory.childs.length > 0 &&
                           subCategory.childs.map((subCtgOne, i) => (
-                            <MenuItem key={i}>{subCtgOne.name}</MenuItem>
+                            <MenuItem onClick={() => clickMenuLink(subCtgOne.short_code)} key={i}>{subCtgOne.name}</MenuItem>
                           ))}
                       </SubMenu>
                     );
@@ -107,4 +112,4 @@ const HeaderMenu = ({ toggleNav }) => {
   );
 };
 
-export default HeaderMenu;
+export default memo(HeaderMenu);
