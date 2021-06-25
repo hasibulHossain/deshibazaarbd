@@ -3,7 +3,7 @@ import MainLayout from "../components/layouts/MainLayout";
 import ScrollToTop from "react-scroll-to-top";
 import {Tab, Col, Nav, Row, Accordion, Card} from "react-bootstrap";
 
-export default function Products() {
+export default function Faq() {
 
     const data = [
         {
@@ -83,15 +83,6 @@ export default function Products() {
             ]
         }
     ]
-        
-        
-
-  useEffect(() => {
-    if (typeof window === "undefined") {
-      global.window = {};
-    }
-  }, []);
-
 
   return (
     <MainLayout>
@@ -102,12 +93,12 @@ export default function Products() {
                 <Col sm={3}>
                 <Nav variant="pills" className="flex-column">
                     {
-                        data.map(item => (
-                            <>
+                        data.map((item, i) => (
+                            <React.Fragment key={i}>
                                 <Nav.Item>
                                     <Nav.Link eventKey={item.slug}>{item.slug}</Nav.Link>
                                 </Nav.Item>
-                            </>
+                            </React.Fragment>
                         ))
                     }
                 </Nav>
