@@ -59,16 +59,6 @@ const HeaderMenu = ({ toggleNav }) => {
               );
             }
           })}
-
-          <SubMenu label="Product Category">
-            <MenuItem>Category-1</MenuItem>
-            <MenuItem>Category-2</MenuItem>
-            <SubMenu label="Product Sub Category">
-              <MenuItem>Category Sub-1</MenuItem>
-              <MenuItem>Category Sub-2</MenuItem>
-              <MenuItem>Category Sub-3</MenuItem>
-            </SubMenu>
-          </SubMenu>
         </Menu>
 
         {menuList.length > 0 &&

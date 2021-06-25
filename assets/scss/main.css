@@ -237,8 +237,13 @@ a .custom-button-component:hover {
   background-color: transparent;
   font-size: 12px;
   font-weight: 500;
-  margin: 0px 5px;
+  margin: 0px 2px;
   margin-bottom: 10px;
+  display: inline-flex;
+}
+
+.rc-menu-button svg {
+  margin-left: 10px;
 }
 
 .all_category_menu {
