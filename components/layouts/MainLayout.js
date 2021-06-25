@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import DemoWarning from "../Demo/DemoWarning";
@@ -14,6 +14,12 @@ const MainLayout = (props) => {
 
   const title           = typeof pageTitle === 'undefined' ? 'Deshi Bazaar BD' : pageTitle + ' | Deshi Bazaar BD';
   const metaDescription = typeof pageMetaDescription === 'undefined' ? 'Deshi Bazaar BD is a multivendor e-commerce business solution in Bangladesh' : pageMetaDescription + ' .Deshi Bazaar BD is a multivendor e-commerce business solution in Bangladesh';
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      global.window = {};
+    }
+  }, [])
 
   return (
     <>
