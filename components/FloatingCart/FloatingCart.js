@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect , useState} from "react";
+import Link from "next/link";
 
 // third party imports
 import { IoMdCloseCircle } from "react-icons/io";
@@ -9,8 +10,7 @@ import SimpleBtn from "../master/SimpleBtn/SimpleBtn";
 import FloatingCartProduct from "../FloatingCartProduct/FloatingCartProduct";
 import { toggleFloatingCart } from "../../_redux/store/action/globalAction";
 import { handleCombineCarts, getCartsAction } from "../_redux/CartProduct/Action/CartAction";
-import Link from "next/link";
-import { useState } from "react";
+import { formatCurrency, activeCurrency } from '../../services/currency';
 
 function FloatingCart() {
   const dispatch = useDispatch();
@@ -70,18 +70,24 @@ function FloatingCart() {
         <div className="floating-cart__payment-info">
           <div className="floating-cart__payment-details">
             <span>Sub Total</span>
-            <span>TK {totalPrice} BDT</span>
+            <span>
+            { formatCurrency(totalPrice) } { activeCurrency('code') }
+            </span>
           </div>
 
           <div className="floating-cart__payment-details">
             <span>Delivery Fee</span>
-            <span>TK 50.00 BDT</span>
+            <span>{ formatCurrency(50) } { activeCurrency('code') }</span>
           </div>
 
-          <div className="floating-cart__payment-details">
-            <span>Total</span>
-            <span>TK {totalPrice + 50.00} BDT</span>
-          </div>
+          {
+            totalPrice > 0 &&
+            <div className="floating-cart__payment-details">
+              <span>Total</span>
+              <span>{ formatCurrency(totalPrice + 50) } { activeCurrency('code') }</span>
+            </div>
+          }
+          
         </div>
 
         <div className="floating-cart__actions">

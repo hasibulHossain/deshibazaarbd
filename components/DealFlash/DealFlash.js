@@ -7,6 +7,7 @@ import ReactStars from "react-rating-stars-component";
 import CountdownTimer from "react-component-countdown-timer";
 import { toggleFloatingCart } from "../../_redux/store/action/globalAction";
 import { getCartsAction, handleCombineCarts } from "../_redux/CartProduct/Action/CartAction";
+import { formatCurrency, activeCurrency } from '../../services/currency';
 
 const DealFlash = () => {
 
@@ -35,7 +36,9 @@ const DealFlash = () => {
         >
           <span className="mr-2">
             {" "}
-            {combineCartList.length} items <br /> Tk-{totalPrice}
+            {combineCartList.length} items 
+            <br /> 
+            { formatCurrency(totalPrice) } { activeCurrency('code') }
           </span>
           <span>
             {" "}
@@ -43,6 +46,7 @@ const DealFlash = () => {
           </span>
         </button>
       </div>
+
       <div className="flash-deal-section">
         <div className="row">
           {flashDealList.length > 0 &&

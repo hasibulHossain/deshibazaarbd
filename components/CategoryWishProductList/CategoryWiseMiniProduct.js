@@ -6,14 +6,11 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { useSelector } from "react-redux";
-import ReactStars from "react-rating-stars-component";
+import PriceCalculation from "../ProductList/PriceCalculation";
+import ProductRating from "../ProductList/ProductRating";
 
 const CategoryWiseMiniProduct = ({ columns }) => {
   const { products } = useSelector((state) => state.CategoryWiseProductReducer);
-
-  const ratingChanged = (value) => {
-    console.log("vlaue => start => ", value);
-  };
 
   return (
     <>
@@ -47,19 +44,11 @@ const CategoryWiseMiniProduct = ({ columns }) => {
                   alt={item.name}
                   className=""
                 />
+
                 <div>
                   <p className="product-title mt-3">{item.name}</p>
-                  <ReactStars
-                    value={+item.average_rating}
-                    onChange={ratingChanged}
-                    size={24}
-                    edit={false}
-                    activeColor="#ffd700"
-                  />
-                  <div className="product_pirce">
-                    <p className="offerPrice">৳ {item.offer_selling_price}</p>
-                    <p className="price">৳ {item.default_selling_price}</p>
-                  </div>
+                  <PriceCalculation item={item} />
+                  <ProductRating rating={item.average_rating} />
                 </div>
               </div>
             </div>

@@ -20,6 +20,9 @@ import LoadingSkelleton from "./../master/skelleton/LoadingSkelleton.jsx";
 import { useDispatch } from "react-redux";
 import { addToCartAction } from "../_redux/CartProduct/Action/CartAction";
 import { showToast } from "../master/Helper/ToastHelper";
+import { activeCurrency } from "../../services/currency";
+import PriceCalculation from "./PriceCalculation";
+import ProductRating from "./ProductRating";
 
 const ProductList = (props) => {
   const {
@@ -99,15 +102,9 @@ const ProductList = (props) => {
                 <p className={`stock-status ${parseInt(item.current_stock) > 0 ? 'stock-status-in' : 'stock-status-out'}`}>
                   <span>{parseInt(item.current_stock) > 0 ? 'In stock' : 'Out of stock'}</span>
                 </p>
-                <div className="rating">
-                  <ReactStars
-                    value={item.rating}
-                    color="#e8e8e8"
-                    size={24}
-                    edit={false}
-                    activeColor="#ffd700"
-                  />
-                </div>
+
+                <PriceCalculation item={item} />
+                <ProductRating rating={item.average_rating} />
               </div>
             </div>
           ))}

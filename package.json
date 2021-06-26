@@ -43,6 +43,7 @@
         "react-bootstrap": "^1.6.1",
         "react-bootstrap-submenu": "^1.0.2",
         "react-component-countdown-timer": "^0.1.8",
+        "react-currency-format": "^1.0.0",
         "react-dom": "16.13.1",
         "react-hook-form": "^6.15.8",
         "react-hook-form-input": "^1.1.10",
