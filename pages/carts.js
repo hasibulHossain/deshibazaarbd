@@ -1,4 +1,6 @@
 import React, { useEffect } from "react";
+import Link from "next/link";
+
 // third party import
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import { FiChevronRight } from "react-icons/fi";
@@ -139,20 +141,22 @@ export default function Carts() {
                       </SimpleBtn>
                     </div>
                     <div>
-                      <SimpleBtn
-                        variant="success"
-                        onClick={() =>
-                          console.log("continue shoping btn clicked")
-                        }
-                      >
-                        <FontAwesomeIcon className="mr-2" icon={faShoppingBag} />
-                        CONTINUE SHOPPING
-                      </SimpleBtn>
+                      <Link href="/products">
+                        <a href="">
+                          <SimpleBtn
+                            variant="success"
+                            onClick={() =>
+                              console.log("continue shoping btn clicked")
+                            }
+                          >
+                            <FontAwesomeIcon className="mr-2" icon={faShoppingBag} />
+                            CONTINUE SHOPPING
+                          </SimpleBtn>
+                        </a>
+                      </Link>
                     </div>
                   </div>
-
                 </div>
-
               </div>
             </div>
 

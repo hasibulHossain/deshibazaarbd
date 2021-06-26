@@ -1400,6 +1400,10 @@ a .custom-button-component:hover {
   height: 3rem !important;
 }
 
+.price_range {
+  padding: 10px;
+}
+
 .input-range__label--min,
 .input-range__label--max {
   bottom: -1.4rem;

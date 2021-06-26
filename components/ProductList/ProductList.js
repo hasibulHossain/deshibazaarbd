@@ -46,6 +46,7 @@ const ProductList = (props) => {
       sellerName: item.seller_name,
       sku: item.sku,
     };
+
     if (item.current_stock == 0) {
       showToast("error", "Product is not available in the stock!");
     } else {
@@ -63,6 +64,7 @@ const ProductList = (props) => {
           height={200}
         />
       )}
+
       <Slider {...SlickSetting}>
         {productList.length > 0 &&
           productList.map((item, index) => (
@@ -102,6 +104,7 @@ const ProductList = (props) => {
             </div>
           ))}
       </Slider>
+      
       <SimpleModal size="xl" show={show} handleClose={handleClose}>
         <ProductDetails product={product} />
       </SimpleModal>

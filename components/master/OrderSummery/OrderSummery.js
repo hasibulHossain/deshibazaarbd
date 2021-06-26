@@ -27,15 +27,18 @@ const OrderSummery = ({ handleClick, buttonText }) => {
     const handleChangeCouponCode = (name, value) => {
         dispatch(handleChangeCouponInput(name, value))
     }
+
     const onSubmit = () => {
         dispatch(handleApplyCouponCode(coupon, carts))
     };
-    const deliveryFee = 50;
+
     let totalAmount;
+    const updatedShippingCost = 50;
+
     if (couponData && couponData.discount_amount) {
-        totalAmount = (totalPrice + deliveryFee + shippingCost) - discount_amount;
+        totalAmount = (totalPrice + updatedShippingCost) - discount_amount;
     } else {
-        totalAmount = (totalPrice + deliveryFee + shippingCost);
+        totalAmount = (totalPrice + updatedShippingCost);
     }
 
     return (
@@ -51,15 +54,15 @@ const OrderSummery = ({ handleClick, buttonText }) => {
                                 <p>Sub Total({carts.length} items)</p>
                                 <p>TK {totalPrice} BDT</p>
                             </div>
-                            <div className="cart__right-order_details_item">
+                            {/* <div className="cart__right-order_details_item">
                                 <p>Delivery Fee</p>
                                 <p>TK {deliveryFee} BDT</p>
-                            </div>
+                            </div> */}
                             <div className="cart__right-order_details_item">
-                                <p>Shipping Cost</p>
+                                <p>Delivery Fee</p>
                                 {
                                     !shippingCostLoading && (
-                                        <p>TK {shippingCost} BDT</p>
+                                        <p>TK {50} BDT</p>
                                     )
                                 }
                                 {
@@ -74,7 +77,7 @@ const OrderSummery = ({ handleClick, buttonText }) => {
                             </div>
                             <div className="cart__right-order_details_item">
                                 <p> Discount</p>
-                                <p>TK  {couponData && couponData.discount_amount ? couponData.discount_amount : 0} BDT</p>
+                                <p>TK {couponData && couponData.discount_amount ? couponData.discount_amount : 0} BDT</p>
                             </div>
                             <div className="cart__right-order_details_item">
                                 <p>Total</p>

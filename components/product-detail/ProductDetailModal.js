@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
 import SocialMedia from '../Footer/SocialMedia';
 import ReactImageZoom from 'react-image-zoom';
+import PriceCalculation from '../ProductList/PriceCalculation';
 
 const ProductDetailModal = ({ product }) => {
     const [quantity, setQuantity] = useState(1);
@@ -39,14 +40,13 @@ const ProductDetailModal = ({ product }) => {
                 <div className="col-md-6">
                     <div className="product_details_section">
                         <h3 className="product_title">{product.title && product.title}</h3>
+                        
                         <div className="h3 product_price">
-                            ${product.price && product.price}
-                            <span className="product_offerPrice">
-                                ${product.offerPrice && product.offerPrice}
-                            </span>
+                            <PriceCalculation item={product} />
                         </div>
+
                         <p className="product_description">
-                            {product.productDetails && product.productDetails}
+                            {product.short_dscription && product.short_dscription}
                         </p>
                         <div className="product_details_quantity_section">
                             <div>

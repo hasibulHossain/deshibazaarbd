@@ -11,6 +11,7 @@ import {
 } from "./_redux/Action/CategoryWiseProductAction";
 import { getShopList } from "../Shop/_redux/Action/ShopAction";
 import ReactStars from "react-rating-stars-component";
+import { activeCurrency } from "../../services/currency";
 
 const CategoryFilter = () => {
   const dispatch = useDispatch();
@@ -124,7 +125,7 @@ const CategoryFilter = () => {
 
   return (
     <section className="prodcut_filter_section shadow-sm p-3 mb-5 bg-white rounded">
-      <h3 className="product_filter_heading">Product Category</h3>
+      <h3 className="product_filter_heading">Filter Products</h3>
 
       <div>
         <p>Filter By Rating</p>
@@ -133,7 +134,7 @@ const CategoryFilter = () => {
 
       {/**filter by categories */}
       <div className="filter_by_category">
-        <p>Category</p>
+        <p className="filter_title">Category</p>
         {categories.map((item) => (
           <Form.Group key={item.id} controlId={item.id}>
             <Form.Check
@@ -150,7 +151,7 @@ const CategoryFilter = () => {
 
       {/**filter by categories */}
       <div className="filter_by_category">
-        <p>Brand</p>
+        <p className="filter_title">Brand</p>
         {ShopList.map((item) => (
           <Form.Group key={item.id} controlId={item.id}>
             <Form.Check
@@ -171,8 +172,8 @@ const CategoryFilter = () => {
         <div className="price_range">
           <InputRange
             maxValue={99999}
-            formatLabel={(value) => `$${value}`}
-            minValue={100}
+            formatLabel={(value) => `${activeCurrency('sign')}${value}`}
+            minValue={0}
             value={value}
             onChange={priceRangeHandler}
           />

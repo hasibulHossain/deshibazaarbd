@@ -17,7 +17,7 @@ const CategoryWishProductList = () => {
     <section className="category_wise_product_list">
       <div className="row justify-content-between">
         <div className="col-md-5">
-          <h5>We've got 0 products for you..</h5>
+          {/* <h5>We've got 0 products for you..</h5> */}
         </div>
         <div className="col-md-5">
           <div className="d-flex justify-content-end">

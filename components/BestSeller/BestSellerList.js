@@ -11,15 +11,16 @@ import SimpleModal from '../master/Modal/SimpleModal';
 
 const BestSellerList = () => {
     const dispatch = useDispatch();
+
     useEffect(() => {
         dispatch(getBestSellerList())
     }, [])
 
-    const bestSellerList = useSelector((state) => state.BestSellerReducer.bestSellerList);
-
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
+    const bestSellerList        = useSelector((state) => state.BestSellerReducer.bestSellerList);
+    const [show, setShow]       = useState(false);
+    const handleClose           = ()=> setShow(false);
     const [product, setProduct] = useState('');
+
     const handleShow = (item) => {
         setShow(true);
         setProduct(item);
@@ -47,9 +48,9 @@ const BestSellerList = () => {
                                 <p className="product-title">{item.title}</p>
                                 <div className="rating">
                                     <ReactStars
-                                        value={item.rating}
+                                        value={item.average_rating}
                                         // onChange={ratingChanged}
-                                        size={24}
+                                        size={16}
                                         edit={false}
                                         activeColor="#ffd700"
                                     />
@@ -64,7 +65,6 @@ const BestSellerList = () => {
                 size="xl"
                 show={show}
                 handleClose={handleClose}
-
             >
                 <ProductDetailModal product={product} />
             </SimpleModal>

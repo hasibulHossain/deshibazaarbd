@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import SocialMedia from "../Footer/SocialMedia";
 import ReactImageZoom from "react-image-zoom";
 import Link from "next/link";
+import PriceCalculation from "../ProductList/PriceCalculation";
 
 const ProductDetails = ({ product }) => {
   const [quantity, setQuantity] = useState(1);
@@ -62,20 +63,19 @@ const ProductDetails = ({ product }) => {
           <div className="col-md-6">
             <div className="product_details_section">
               <Link href={"/products/" + product.sku}>
-                <h3 className="product_title">
+                <h3 className="product_title pointer">
                   {product.name && product.name}
                 </h3>
               </Link>
+
               <div className="h3 product_price">
-                $
-                {product.default_selling_price && product.default_selling_price}
-                <span className="product_offerPrice">
-                  ${product.offer_selling_price && product.offer_selling_price}
-                </span>
+                <PriceCalculation item={product} />
               </div>
+
               <p className="product_description">
-                {product.description && product.description}
+                {product.short_description && product.short_description}
               </p>
+
               <div className="product_details_quantity_section">
                 <div>
                   <h6>Quantity</h6>

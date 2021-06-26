@@ -55,9 +55,10 @@ const FeaturedProductsContainer = () => {
   return (
     <section className="product-container">
       <div className="product-heading">
-        <h5>Featured Products you you </h5>
+        <h5>Featured Products for you </h5>
         <ViewAll viewAllHandler={viewAllHandler} />
       </div>
+      
       <ProductList
         productList={productList}
         handleClose={handleClose}
