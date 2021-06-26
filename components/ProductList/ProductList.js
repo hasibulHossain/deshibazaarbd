@@ -25,15 +25,8 @@ import PriceCalculation from "./PriceCalculation";
 import ProductRating from "./ProductRating";
 
 const ProductList = (props) => {
-  const {
-    show,
-    handleShow,
-    handleClose,
-    productList,
-    product,
-    isLoading,
-    type,
-  } = props;
+  const { show, handleShow, handleClose, productList, product, isLoading, type } = props;
+  
   const dispatch = useDispatch();
   // useEffect(() => {
   //   dispatch(getProductListAction(type));

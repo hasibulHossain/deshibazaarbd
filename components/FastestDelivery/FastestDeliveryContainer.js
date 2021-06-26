@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Button from "../master/Button/Button";
 import { useRouter } from "next/router";
 
 // third party imports
@@ -17,8 +16,8 @@ import ViewAll from "../ViewAll/ViewAll";
 
 const FastestDeliveryContainer = () => {
   const [show, setShow] = useState(false);
-  const dispatch = useDispatch();
-  const router = useRouter();
+  const dispatch        = useDispatch();
+  const router          = useRouter();
 
   const { product } = useSelector((state) => state.FastestDeliveryReducer);
 
@@ -39,7 +38,7 @@ const FastestDeliveryContainer = () => {
 
   const viewAllHandler = () => {
     const cloneFilterParams = { ...filterParams };
-    cloneFilterParams.type = "fastest-delivery";
+    cloneFilterParams.type  = "fastest-delivery";
     dispatch(setFilterParams(cloneFilterParams));
     router.push("/products");
   };

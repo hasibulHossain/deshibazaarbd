@@ -69,6 +69,10 @@ a .custom-button-component:hover {
   cursor: not-allowed;
 }
 
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+  background-color: #237e33 !important;
+}
+
 /*****************************************************************
                         Header CSS Part :: Start
 /*****************************************************************/
