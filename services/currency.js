@@ -48,6 +48,17 @@ export function activeCurrency ( printableLabel = '' ) {
     return activeCurrency[printableLabel] || '';
 }
 
+/**
+ * Format Currency amount to nice formatting
+ * 
+ * @since 1.0.0
+ * 
+ * @param float amount 
+ * @param string thousandSeparator 
+ * @param string prefix by default it would be the sign of taka
+ * 
+ * @return string Currency format component with data
+ */
 export function formatCurrency (amount, thousandSeparator = true, prefix = activeCurrency('sign')) {
     var CurrencyFormat = require('react-currency-format');
 
