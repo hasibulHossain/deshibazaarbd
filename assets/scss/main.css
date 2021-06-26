@@ -373,13 +373,28 @@ a .custom-button-component:hover {
 }
 
 .product-card {
-  height: 350px;
-  border-right: 2px solid #d6d6d6;
+  height: 300px;
+  border-right: 1px solid #e4e6ec;
   padding: 15px;
   text-align: center;
   position: relative;
   transition: 0.6s ease;
   cursor: pointer;
+}
+
+.stock-status {
+  font-size: 14px;
+  margin-top: -10px;
+  padding: 0px 10px 0px 10px;
+  border-radius: 5px;
+}
+
+.stock-status-in {
+  background: #e2f2c4;
+}
+
+.stock-status-out {
+  background: #fbe7ab;
 }
 
 .category-card {
@@ -463,13 +478,15 @@ a .custom-button-component:hover {
 }
 
 .product-card .product-card-body img {
-  height: 200px;
+  height: 150px;
 }
 
 .product-card .product-card-body .product-title {
+  height: 50px;
   margin-top: 10px;
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 500;
+  overflow: hidden;
 }
 
 .product-card .product-card-body .rating {

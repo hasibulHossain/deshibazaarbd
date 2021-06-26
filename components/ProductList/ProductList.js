@@ -96,11 +96,13 @@ const ProductList = (props) => {
                   className="img-fluid"
                 />
                 <p className="product-title">{item.name}</p>
-                <p>Stock : {item.current_stock}</p>
+                <p className={`stock-status ${parseInt(item.current_stock) > 0 ? 'stock-status-in' : 'stock-status-out'}`}>
+                  <span>{parseInt(item.current_stock) > 0 ? 'In stock' : 'Out of stock'}</span>
+                </p>
                 <div className="rating">
                   <ReactStars
                     value={item.rating}
-                    // onChange={ratingChanged}
+                    color="#e8e8e8"
                     size={24}
                     edit={false}
                     activeColor="#ffd700"
