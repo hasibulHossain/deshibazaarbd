@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { getCategories } from "./_redux/Action/CategoryAction";
+import LoadingSkelleton from "../master/skelleton/LoadingSkelleton";
 
 const CategoryList = ({ parentID }) => {
 
@@ -12,7 +13,7 @@ const CategoryList = ({ parentID }) => {
     dispatch(getCategories(parentID));
   }, []);
 
-  const { categories } = useSelector((state) => state.CategoryReducer);
+  const { categories, loading } = useSelector((state) => state.CategoryReducer);
 
   /**
    * Navigate to Category List page
@@ -30,6 +31,15 @@ const CategoryList = ({ parentID }) => {
   return (
     <div className="category-list">
       <div className="row">
+        {loading && (
+            <LoadingSkelleton
+                alignment="vertical"
+                count={6}
+                width={150}
+                height={150}
+            />
+        )}
+
         {categories && categories.length > 0 &&
           categories.map((item, index) => (
             <div key={index} className="category-card col-md-2">
@@ -46,4 +56,4 @@ const CategoryList = ({ parentID }) => {
   );
 };
 
-export default CategoryList;
+export default memo( CategoryList );

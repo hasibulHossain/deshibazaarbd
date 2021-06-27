@@ -1,13 +1,11 @@
 import React, { useEffect, useState, memo } from "react";
 import PropTypes from 'prop-types';
 
-import LoadingSkelleton from "./../master/skelleton/LoadingSkelleton.jsx";
+import LoadingSkelleton from "./../master/skelleton/LoadingSkelleton";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCartAction } from "../_redux/CartProduct/Action/CartAction";
-import { showToast } from "../master/Helper/ToastHelper";
 
 import { getProductListAction, getProductsData } from "./_redux/Action/ProductAction";
-import ProductSingleMini from "./ProductSingleMini.js";
+import ProductSingleMini from "./ProductSingleMini";
 
 const ProductMainList = (props) => {
     const { type, limit, page } = props;
@@ -46,29 +44,6 @@ const ProductMainList = (props) => {
         setProducts(data);
         setLoading( false );
     }
-
-    const [quantity, setQuantity] = useState(1);
-
-    const addToCart = (item) => {
-        const cartProduct = {
-            productID: item.id,
-            productName: item.name,
-            quantity: quantity,
-            isOffer: item.is_offer_enable,
-            price: item.default_selling_price,
-            offerPrice: item.offer_selling_price,
-            productImage: `${process.env.NEXT_PUBLIC_URL}images/products/${item.featured_image}`,
-            sellerID: item.seller_id,
-            sellerName: item.seller_name,
-            sku: item.sku,
-        };
-
-        if (item.current_stock == 0) {
-            showToast("error", "Product is not available in the stock!");
-        } else {
-            dispatch(addToCartAction(cartProduct, item.id));
-        }
-    };
 
     const { products: allProducts, isProductListloading } = useSelector(state => state.ProductReducer);
 

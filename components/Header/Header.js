@@ -33,7 +33,7 @@ const Header = () => {
   }, []);
 
   return (
-    <d>
+    <div>
       <HeaderTop />
       <div className="bg-light">
         <Navbar bg="light" expand="lg">
@@ -102,7 +102,7 @@ const Header = () => {
           <HeaderMenu toggleNav={toggleNav} />
         </Navbar>
       </div>
-    </d>
+    </div>
   );
 };
 
