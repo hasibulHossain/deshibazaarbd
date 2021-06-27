@@ -8,7 +8,7 @@ import { formatCurrency, activeCurrency } from '../../services/currency';
 
 function FloatingCartProduct({ item }) {
   const dispatch                = useDispatch();
-  const [quantity, setQuantity] = useState(item.quantity);
+  const [quantity, setQuantity] =  useState(item.quantity);
 
   const handleDeleteCartProduct = (productID) => {
     dispatch(deleteCartItemAction(productID))
@@ -42,7 +42,7 @@ function FloatingCartProduct({ item }) {
           <p className="floating-cart__product-name">{item.productName}</p>
           <p className="floating-cart__product-price">
             {item.quantity} <span>X</span>&nbsp;
-            { formatCurrency(item.offerPrice !== null && item.offerPrice !== 0 ? item.offerPrice : item.price) } { activeCurrency('code') }
+            {formatCurrency(item.offerPrice !== null && item.offerPrice !== 0 ? item.offerPrice : item.price)} {activeCurrency('code')}
           </p>
 
           {/* <div className="floating-cart__product-qty">
