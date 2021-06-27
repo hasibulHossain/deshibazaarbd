@@ -1,27 +1,18 @@
 import React, { useEffect } from "react";
-import Head from "next/head";
 import MainLayout from "../components/layouts/MainLayout";
 import HomeBannerCarousel from "../components/homeBannerCarousel/HomeBannerCarousel";
 import ScrollToTop from "react-scroll-to-top";
 import CategoryListContainer from "../components/category/CategoryListContainer";
-import FastestDeliveryContainer from "../components/FastestDelivery/FastestDeliveryContainer";
-import FeaturedProductsContainer from "../components/FeaturedProducts/FeaturedProductsContainer";
 import CompanyPolicyContainer from '../components/CompanyPolicy/CompanyPolicyContainer'
 import ShopContainer from "../components/Shop/ShopContainer";
 import ShopBanner from "../components/ShopBanner/ShopBanner";
-import BestSellerContainer from "../components/BestSeller/BestSellerContainer";
 import ProductTopListContainer from "../components/ProductTopList/ProductTopListContainer";
 import DealFlash from "../components/DealFlash/DealFlash";
 import NewCollection from "../components/NewCollection/NewCollection";
 import OfferProducts from "../components/OfferProducts/OfferProducts";
+import ProductSection from "../components/products/ProductSection";
 
-export default function Home(props) {
-
-  useEffect(() => {
-    if (typeof window === "undefined") {
-      global.window = {};
-    }
-  }, []);
+export default function Home() {
 
   return (
     <MainLayout>
@@ -32,9 +23,12 @@ export default function Home(props) {
       <ProductTopListContainer />
       <DealFlash />
       <CategoryListContainer />
-      <BestSellerContainer />
-      <FeaturedProductsContainer />
-      <FastestDeliveryContainer />
+
+      <ProductSection title="Best Sold" type="best-sold" limit={6} url='best-sold-products' />
+      <ProductSection title="Featured Products For You" type="featured" limit={6} url='featured-products' />
+      <ProductSection title="Fastest Delivery" type="fastest-delivery" limit={6} url='fastest-delivery-products' />
+      <ProductSection title="Latest Products" type="" limit={6} url='latest-products' />
+
       <ShopBanner />
       <ShopContainer />
       <CompanyPolicyContainer />

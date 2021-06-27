@@ -491,6 +491,7 @@ a .custom-button-component:hover {
 .active-price {
   color: #e90110;
   margin-bottom: 0px;
+  font-size: 20px;
 }
 
 .inactive-price {
@@ -617,7 +618,7 @@ a .custom-button-component:hover {
 
 .top-product-card .top-product-details .top-product-name {
   font-size: 1.5em;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .top-product-card .top-product-details .price {
@@ -906,17 +907,18 @@ a .custom-button-component:hover {
 
 .product_details_section .product_title {
   font-weight: 600;
+  font-size: 18px;
 }
 
 .product_price {
   color: #ff3c20;
-  font-weight: 800 !important;
+  font-weight: 600 !important;
   margin-top: 20px;
 }
 
 .product_price .product_offerPrice {
   color: #d8d8d8 !important;
-  font-weight: 800;
+  font-weight: 600;
   font-size: 24px;
   text-decoration: line-through;
   margin-left: 10px;
@@ -2069,7 +2071,7 @@ h4.innser_cart_product_name {
 }
 h4.delivery_info_title {
   font-size: 24px;
-  font-weight: 800;
+  font-weight: 600;
 }
 p.delivery_info_sub_title {
   font-weight: 700;
@@ -2077,7 +2079,7 @@ p.delivery_info_sub_title {
   margin-top: 10px;
 }
 .deliver_info_footer h6.select_title {
-  font-weight: 800;
+  font-weight: 600;
   text-transform: none;
 }
 .home_btn {

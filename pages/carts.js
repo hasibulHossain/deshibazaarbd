@@ -91,7 +91,7 @@ export default function Carts() {
 
                   {
                     supplierWiseCarts.length > 0 && supplierWiseCarts.map((item, index) => (
-                      <>
+                      <div key={index}>
                         <div className="cart_items_by_shop" key={index}>
                           <div className="cart_item_box_top_1">
                             <div>
@@ -129,7 +129,7 @@ export default function Carts() {
                             ))
                           }
                         </div>
-                      </>
+                      </div>
                     ))
                   }
 
