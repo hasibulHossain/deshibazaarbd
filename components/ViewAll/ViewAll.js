@@ -1,17 +1,16 @@
 import React from "react";
+import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
-function ViewAll({ viewAllHandler }) {
+function ViewAll({ url = '' }) {
   return (
-    <div
-      style={{ cursor: "pointer" }}
-      onClick={viewAllHandler}
-      className="custom-button-component"
-    >
-      View all
-      <FontAwesomeIcon className="ml-2" icon={faArrowRight} />
-    </div>
+    <Link href={url}>
+      <div className="custom-button-component pointer" >
+        View all
+        <FontAwesomeIcon className="ml-2" icon={faArrowRight} />
+      </div>
+    </Link>
   );
 }
 

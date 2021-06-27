@@ -5,7 +5,7 @@ const ProductRating = ({ rating, size = 15, edit = false, color = '#e8e8e8', act
     return (
         <div className="rating">
             <ReactStars
-                value={rating}
+                value={parseInt(rating)}
                 color={color}
                 size={size}
                 edit={edit}

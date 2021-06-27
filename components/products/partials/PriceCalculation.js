@@ -1,12 +1,12 @@
 import React from 'react';
-import { formatCurrency } from '../../services/currency';
+import { formatCurrency } from '../../../services/currency';
 
 const PriceCalculation = ({ item }) => {
     const { is_offer_enable, offer_selling_price, default_selling_price } = item;
 
     const default_price    = ( is_offer_enable && offer_selling_price !== 0 ) ? offer_selling_price: default_selling_price;
     const offer_price      = ( is_offer_enable && offer_selling_price !== 0 ) ? offer_selling_price: 0;
-    const discount_percent = parseInt( ( ( default_price - offer_price ) * 100 ) / default_price );
+    const discount_percent = parseInt( ( ( default_selling_price - offer_price ) * 100 ) / default_selling_price );
 
     return ( 
         <div className="price-area">

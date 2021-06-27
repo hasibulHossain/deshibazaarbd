@@ -1,73 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { useRouter } from "next/router";
-
-// third party imports
-import { useDispatch, useSelector } from "react-redux";
-
-// local imports
-import ProductList from "../ProductList/ProductList";
-import { getProductList } from "../ProductList/_redux/Action/ProductListAction";
-import {
-  getBestSoldProductDetails,
-  resetBestSoldProductDetails,
-} from "./_redux/Action/BestSellerAction";
-import { setFilterParams } from "../CategoryWishProductList/_redux/Action/CategoryWiseProductAction";
+import React from "react";
 import ViewAll from "../ViewAll/ViewAll";
+import ProductMainList from "../products/ProductMainList";
 
-const BestSoldContainer = (props) => {
-  const [show, setShow] = useState(false);
-
-  const { product } = useSelector((state) => state.BestSellerReducer);
-
-  const { BestSoldProductList: productList, isLoading } = useSelector(
-    (state) => state.ProductListReducer
-  );
-
-  const { filterParams } = useSelector(
-    (state) => state.CategoryWiseProductReducer
-  );
-
-  const router = useRouter();
-  const dispatch = useDispatch();
-
-  const handleClose = () => setShow(false);
-
-  const handleShow = (item) => {
-    setShow(true);
-    dispatch(getBestSoldProductDetails(item.sku));
-  };
-
-  const viewAllHandler = () => {
-    const cloneFilterParams = { ...filterParams };
-    cloneFilterParams.type = "best-sold";
-    dispatch(setFilterParams(cloneFilterParams));
-    router.push("/products");
-  };
-
-  useEffect(() => {
-    dispatch(getProductList("best-sold"));
-  }, []);
-
-  useEffect(() => {
-    if (!show && product) {
-      dispatch(resetBestSoldProductDetails());
-    }
-  }, [show]);
-
+const BestSoldContainer = () => {
   return (
     <section className="product-container">
       <div className="product-heading">
         <h5>Best Sold</h5>
-        <ViewAll viewAllHandler={viewAllHandler} />
+        <ViewAll url='/best-sold-products' />
       </div>
-      <ProductList
-        productList={productList}
-        handleClose={handleClose}
-        handleShow={handleShow}
-        isLoading={isLoading}
-        product={product}
-        show={show}
-      />
+
+      <ProductMainList type='best-sold' limit={6} page='home' />
     </section>
   );
 };
