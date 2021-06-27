@@ -1973,7 +1973,7 @@ p.estimate {
 } */
 
 h4.innser_cart_product_name {
-  font-size: 20px;
+  font-size: 14px;
   font-weight: 600;
 }
 
@@ -1990,14 +1990,19 @@ h4.innser_cart_product_name {
 .cart_product_price span.price {
   color: #e9000f;
   margin-right: 20px;
-  font-size: 24px;
+  font-size: 16px;
   font-weight: 600;
 }
 
 .cart_product_price span.offer_price {
   text-decoration: line-through;
-  color: gray;
+  color: #bcbcbc;
   font-weight: 700;
+  font-size: 14px;
+}
+
+.discount_percantage {
+  font-size: 14px;
 }
 
 .product_cart_purchase {

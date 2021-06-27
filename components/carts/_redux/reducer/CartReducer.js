@@ -46,7 +46,7 @@ const calculateTotalQtyAndPrices = (carts) => {
   for (let i = 0; i < carts.length; i++) {
     response.totalQuantity += parseInt( carts[i].quantity );
 
-    if (carts[i].isOffer !== '0' && carts[i].isOffer !== false) {
+    if (carts[i].isOffer !== '0' && carts[i].isOffer !== false && carts[i].isOffer !== '') {
       response.totalPrice += parseFloat(carts[i].offerPrice);
     } else {
       response.totalPrice += parseFloat(carts[i].price);

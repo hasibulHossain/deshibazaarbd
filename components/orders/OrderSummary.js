@@ -1,23 +1,20 @@
-import React from 'react';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { handleApplyCouponCode, handleChangeCouponInput, handleShippingCost } from './_redux/action/OrderAction';
-import { getCartsAction } from '../carts/_redux/action/CartAction';
 import { Card } from 'react-bootstrap'
 import { useForm } from 'react-hook-form';
-import ErrorMessage from '../master/ErrorMessage/ErrorMessage'
 
-const OrderSummery = ({ handleClick, buttonText }) => {
-    const dispatch = useDispatch();
-    const { register, handleSubmit, watch, errors } = useForm();
-    const { carts, totalPrice, totalQuantity } = useSelector((state) => state.CartReducer);
+import { handleApplyCouponCode, handleChangeCouponInput, handleShippingCost } from './_redux/action/OrderAction';
+import { getCartsAction } from '../carts/_redux/action/CartAction';
+import ErrorMessage from '../master/ErrorMessage/ErrorMessage'
+import { activeCurrency, formatCurrency } from '../../services/currency';
+
+const OrderSummary = ({ handleClick, buttonText }) => {
+    const dispatch                           = useDispatch();
+    const { register, handleSubmit, errors } = useForm();
+    const isSubmitting                       = useSelector((state) => state.DeliveryInfoReducer.isSubmitting);
+    const { carts, totalPrice }              = useSelector((state) => state.CartReducer);
+
     const { coupon, couponLoading, couponData, shippingCost, shippingCostLoading } = useSelector((state) => state.OrderReducer);
-    // const coupon              = useSelector((state) => state.OrderReducer.coupon);
-    // const couponLoading       = useSelector((state) => state.CartReducer.couponLoading);
-    // const couponData          = useSelector((state) => state.CartReducer.couponData);
-    // const shippingCost        = useSelector((state) => state.CartReducer.shippingCost);
-    // const shippingCostLoading = useSelector((state) => state.CartReducer.shippingCostLoading);
-    const isSubmitting        = useSelector((state) => state.DeliveryInfoReducer.isSubmitting);
 
     useEffect(() => {
         dispatch(getCartsAction());
@@ -52,8 +49,8 @@ const OrderSummery = ({ handleClick, buttonText }) => {
                     <div className="cart__right-order_details">
                         <div className="cart__right-order_details_inner">
                             <div className="cart__right-order_details_item">
-                                <p>Sub Total({carts.length} items)</p>
-                                <p>TK {totalPrice} BDT</p>
+                                <p>Sub Total ({carts.length} items)</p>
+                                <p>{formatCurrency(totalPrice)} {activeCurrency('code')}</p>
                             </div>
                             {/* <div className="cart__right-order_details_item">
                                 <p>Delivery Fee</p>
@@ -63,7 +60,7 @@ const OrderSummery = ({ handleClick, buttonText }) => {
                                 <p>Delivery Fee</p>
                                 {
                                     !shippingCostLoading && (
-                                        <p>TK {50} BDT</p>
+                                        <p>{formatCurrency(50)} {activeCurrency('code')}</p>
                                     )
                                 }
                                 {
@@ -79,12 +76,12 @@ const OrderSummery = ({ handleClick, buttonText }) => {
 
                             <div className="cart__right-order_details_item">
                                 <p> Discount</p>
-                                <p>TK {couponData && couponData.discount_amount ? couponData.discount_amount : 0} BDT</p>
+                                <p>{formatCurrency(couponData && couponData.discount_amount ? couponData.discount_amount : 0)} {activeCurrency('code')} </p>
                             </div>
 
                             <div className="cart__right-order_details_item">
                                 <p>Total</p>
-                                <p>TK {totalAmount} BDT</p>
+                                <p>{formatCurrency(totalAmount)} {activeCurrency('code')}</p>
                             </div>
                         </div>
                     </div>
@@ -153,4 +150,4 @@ const OrderSummery = ({ handleClick, buttonText }) => {
     );
 };
 
-export default OrderSummery;
+export default OrderSummary;

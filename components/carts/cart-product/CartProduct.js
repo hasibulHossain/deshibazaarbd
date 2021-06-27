@@ -1,41 +1,26 @@
 import React, { useState } from 'react';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faMinus, faPlus, faTimes, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { Modal } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { deleteCartItemAction, updateCartQtyAction } from '../_redux/action/CartAction';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart, faTimes, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { deleteCartItemAction } from '../_redux/action/CartAction';
+import CartQuantity from '../partials/CartQuantity';
+import { formatCurrency } from '../../../services/currency';
+import { toggleProductModalAction } from '../../products/_redux/Action/ProductAction';
 
 const CartProduct = ({ cart }) => {
   const dispatch = useDispatch();
-  const [quantity, setQuantity] = useState(cart.quantity);
-
-  // increase quantity 
-  const increaseQuantity = (id, quantity) => {
-    // carts.find((cart) => cart.productID === id && setQuantity((quantity += 1)));
-    setQuantity((quantity + 1))
-    dispatch(updateCartQtyAction(id, (quantity + 1)));
-  };
-
-  //decrease quantity
-  const decrementQunatity = (id, quantity) => {
-    // carts.find((cart) => cart.productID === id && quantity > 1 && setQuantity((quantity -= 1)))
-    setQuantity((quantity - 1))
-    if (quantity > 1) {
-      dispatch(updateCartQtyAction(id, (quantity - 1)));
-    }
-  };
-
+  
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
-  const handleShow = (cart) => {
-    setShow(true);
-  };
+  const handleShow = (cart) => setShow(true);
 
   const handleDeleteCartProduct = (productID) => {
     dispatch(deleteCartItemAction(productID));
     setShow(false);
   }
+
   return (
     <>
       <Modal
@@ -56,7 +41,7 @@ const CartProduct = ({ cart }) => {
           <div className="d-flex justify-content-end">
             <div>
               <button className="custom_secondary_btn" onClick={handleClose}>CANCEL</button>
-              <button className="custom-button-component ml-3" onClick={() => handleDeleteCartProduct(item.productID)}>REMOVE</button>
+              <button className="custom-button-component ml-3" onClick={() => handleDeleteCartProduct(cart.productID)}>REMOVE</button>
             </div>
           </div>
         </Modal.Body>
@@ -74,7 +59,7 @@ const CartProduct = ({ cart }) => {
               />
             </div>
             <div className="product_cart_inner_details col-8">
-              <h4 className="innser_cart_product_name">{cart.productName}</h4>
+              <h4 className="innser_cart_product_name pointer" onClick={() => dispatch(toggleProductModalAction(cart.sku))}>{cart.productName}</h4>
 
               {/* <div className="cart_product_info">
                 <span>No Brand, </span>
@@ -84,40 +69,23 @@ const CartProduct = ({ cart }) => {
 
               <div className="cart_product_price">
                 <span className="price">
-                  ৳{cart.offerPrice !== null && cart.offerPrice !== "0" ? cart.offerPrice : cart.price}
+                  { formatCurrency(cart.offerPrice !== null && cart.offerPrice !== "0" ? cart.offerPrice : cart.price) }
                 </span>
 
                 <span className="offer_price">
-                  ৳{cart.offerPrice !== null && cart.offerPrice !== "0" ? cart.price : 0}
+                  { formatCurrency(cart.offerPrice !== null && cart.offerPrice !== "0" ? cart.price : 0) }
                 </span>
               </div>
 
               <p className="discount_percantage">
-                {(((cart.price - cart.offerPrice) * 100) / cart.price).toFixed(0)} %
+                { (((cart.price - cart.offerPrice) * 100) / cart.price).toFixed(0) }%
               </p>
             </div>
           </div>
         </div>
         <div className="col-md-4">
           <div className="product_cart_purchase">
-            <div className="quantity">
-              <button
-                disabled={quantity <= 1 ? true : false}
-                // onClick={() => setQuantity(quantity - 1)}
-                onClick={() => decrementQunatity(cart.productID, quantity)}
-                className={quantity <= 1 ? `not-allowed` : `pointer`}
-              >
-                <FontAwesomeIcon icon={faMinus} />
-              </button>
-              <input type="text" value={quantity} />
-              <button
-                className="pointer"
-                // onClick={() => setQuantity(quantity + 1)}
-                onClick={() => increaseQuantity(cart.productID, quantity)}
-              >
-                <FontAwesomeIcon className="text-danger" icon={faPlus} />
-              </button>
-            </div>
+            <CartQuantity cart={cart} />
             <FontAwesomeIcon className="cart_wish_list" icon={faHeart} />
             <FontAwesomeIcon className="remove_product_from_cart" icon={faTrash} onClick={() => handleShow(cart)} />
           </div>
