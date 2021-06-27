@@ -6,11 +6,11 @@ import { IoMdCloseCircle } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 
 // local imports
-import SimpleBtn from "../master/SimpleBtn/SimpleBtn";
-import FloatingCartProduct from "../FloatingCartProduct/FloatingCartProduct";
-import { toggleFloatingCart } from "../../_redux/store/action/globalAction";
-import { handleCombineCarts, getCartsAction } from "../_redux/CartProduct/Action/CartAction";
-import { formatCurrency, activeCurrency } from '../../services/currency';
+import SimpleBtn from "../../master/SimpleBtn/SimpleBtn";
+import FloatingCartProduct from "./FloatingCartProduct";
+import { toggleFloatingCart } from "../../../_redux/store/action/globalAction";
+import { handleCombineCarts, getCartsAction } from "../_redux/action/CartAction";
+import { formatCurrency, activeCurrency } from '../../../services/currency';
 
 function FloatingCart() {
   const dispatch = useDispatch();

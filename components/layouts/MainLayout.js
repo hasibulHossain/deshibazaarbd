@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import DemoWarning from "../Demo/DemoWarning";
-import FloatingCart from "../FloatingCart/FloatingCart";
+import FloatingCart from "../carts/floating-cart/FloatingCart";
 import Head from "next/head";
 
 import { useSelector } from "react-redux";
@@ -30,12 +30,14 @@ const MainLayout = (props) => {
 
       <DemoWarning />
       <Header />
-      <FloatingCart />
       <main>
         {backdrop && <div className="backdrop"></div>}
         {children}
       </main>
+
       <Footer />
+
+      <FloatingCart />
     </>
   );
 };

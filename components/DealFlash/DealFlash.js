@@ -6,7 +6,7 @@ import { getDealFlashList } from "./_redux/Action/DealFlashAction";
 import ReactStars from "react-rating-stars-component";
 import CountdownTimer from "react-component-countdown-timer";
 import { toggleFloatingCart } from "../../_redux/store/action/globalAction";
-import { getCartsAction, handleCombineCarts } from "../_redux/CartProduct/Action/CartAction";
+import { getCartsAction, handleCombineCarts } from "../carts/_redux/action/CartAction";
 import { formatCurrency, activeCurrency } from '../../services/currency';
 
 const DealFlash = () => {

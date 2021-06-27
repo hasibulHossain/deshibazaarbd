@@ -16,7 +16,7 @@ import HeaderTop from "./HeaderTop";
 import HeaderMenu from "./HeaderMenu";
 import Button from "../master/Button/Button";
 import { toggleFloatingCart } from "../../_redux/store/action/globalAction";
-import { getCartsAction } from "../_redux/CartProduct/Action/CartAction";
+import { getCartsAction } from "../carts/_redux/action/CartAction";
 import SearchInput from "../SearchInput/SearchInput";
 
 const Header = () => {

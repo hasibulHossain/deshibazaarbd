@@ -1,6 +1,5 @@
-import { useState } from "react";
-import * as Types from "../Types/Types";
 import Axios from "axios";
+import * as Types from "../types/Types";
 import { showToast } from "../../../master/Helper/ToastHelper";
 
 export const addToCartAction = (cartProduct, id) => async (dispatch) => {
@@ -11,6 +10,7 @@ export const addToCartAction = (cartProduct, id) => async (dispatch) => {
     sellerName: cartProduct.sellerName,
     data: [cartProduct]
   }
+  
   const filterCarts = carts.filter((item) => item.sellerName == cartProduct.sellerName);
   if (filterCarts.length > 0) {
     if (filterCarts[0].data.find((item) => item.productID === id)) {

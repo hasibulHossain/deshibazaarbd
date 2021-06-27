@@ -3,8 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { MdDelete } from "react-icons/md";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
-import { deleteCartItemAction, updateCartQtyAction } from "../_redux/CartProduct/Action/CartAction";
-import { formatCurrency, activeCurrency } from '../../services/currency';
+import { deleteCartItemAction, updateCartQtyAction } from "../_redux/action/CartAction";
+import { formatCurrency, activeCurrency } from '../../../services/currency';
 
 function FloatingCartProduct({ item }) {
   const dispatch                = useDispatch();

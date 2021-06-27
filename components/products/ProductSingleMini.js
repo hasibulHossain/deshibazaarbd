@@ -8,7 +8,7 @@ import PriceCalculation from "./partials/PriceCalculation";
 import ProductRating from "./partials/ProductRating";
 import { useDispatch } from "react-redux";
 import { toggleProductModalAction } from "./_redux/Action/ProductAction";
-import { showToast } from '../master/Helper/ToastHelper';
+import { addToCartAction } from '../carts/_redux/action/CartAction';
 
 /**
  * ProductSingleMini Component
@@ -40,11 +40,7 @@ const ProductSingleMini = ({ item = {}, columnClassName = 'col-md-2', cardClassN
             sku         : item.sku,
         };
 
-        if (item.current_stock == 0) {
-            showToast("error", "Product is not available in the stock!");
-        } else {
-            dispatch(addToCartAction(cartProduct, item.id));
-        }
+        dispatch(addToCartAction(cartProduct, item.id));
     };
 
     return (

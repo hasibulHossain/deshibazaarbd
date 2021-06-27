@@ -14,7 +14,7 @@ import AuthReducer from "../components/LoginRegistration/_redux/Reducer/AuthRedu
 import UserDataReducer from "../components/_redux/getUserData/Reducer/UserDataReducer";
 import ProfileAccountSettingReducer from "../components/ProfileAccountSetting/_redux/Reducer/ProfileAccountSettingReducer";
 import WishlistReducer from "../components/Wishlist/_redux/Reducer/WishlistReducer";
-import CartReducer from "../components/_redux/CartProduct/Reducer/CartReducer";
+import CartReducer from "../components/carts/_redux/reducer/CartReducer";
 import SearchReducer from "../components/SearchInput/_redux/Reducer/SearchInputReducer";
 import DeliveryInfoReducer from "../components/Delivery/_redux/Reducer/DeliveryInfoReducer";
 import ProfileUpdateReducer from "../components/myprofile/_redux/Reducer/ProfileUpdateReducer";
