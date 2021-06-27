@@ -6,6 +6,7 @@ import FloatingCart from "../carts/floating-cart/FloatingCart";
 import Head from "next/head";
 
 import { useSelector } from "react-redux";
+import FloatingCartButton from "../carts/floating-cart/FloatingCartButton";
 
 const MainLayout = (props) => {
   
@@ -38,6 +39,7 @@ const MainLayout = (props) => {
       <Footer />
 
       <FloatingCart />
+      <FloatingCartButton />
     </>
   );
 };

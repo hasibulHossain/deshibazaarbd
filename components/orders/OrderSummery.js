@@ -1,22 +1,23 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCartsAction, handleApplyCouponCode, handleChangeCouponInput, handleShippingCost } from '../../_redux/CartProduct/Action/CartAction';
+import { handleApplyCouponCode, handleChangeCouponInput, handleShippingCost } from './_redux/action/OrderAction';
+import { getCartsAction } from '../carts/_redux/action/CartAction';
 import { Card } from 'react-bootstrap'
 import { useForm } from 'react-hook-form';
-import ErrorMessage from '../ErrorMessage/ErrorMessage'
+import ErrorMessage from '../master/ErrorMessage/ErrorMessage'
+
 const OrderSummery = ({ handleClick, buttonText }) => {
     const dispatch = useDispatch();
     const { register, handleSubmit, watch, errors } = useForm();
-    const carts = useSelector((state) => state.CartReducer.carts);
-    const totalPrice = useSelector((state) => state.CartReducer.totalPrice);
-    const totalQuantity = useSelector((state) => state.CartReducer.totalQuantity);
-    const coupon = useSelector((state) => state.CartReducer.coupon);
-    const couponLoading = useSelector((state) => state.CartReducer.couponLoading);
-    const couponData = useSelector((state) => state.CartReducer.couponData);
-    const shippingCost = useSelector((state) => state.CartReducer.shippingCost);
-    const shippingCostLoading = useSelector((state) => state.CartReducer.shippingCostLoading);
-    const isSubmitting = useSelector((state) => state.DeliveryInfoReducer.isSubmitting);
+    const { carts, totalPrice, totalQuantity } = useSelector((state) => state.CartReducer);
+    const { coupon, couponLoading, couponData, shippingCost, shippingCostLoading } = useSelector((state) => state.OrderReducer);
+    // const coupon              = useSelector((state) => state.OrderReducer.coupon);
+    // const couponLoading       = useSelector((state) => state.CartReducer.couponLoading);
+    // const couponData          = useSelector((state) => state.CartReducer.couponData);
+    // const shippingCost        = useSelector((state) => state.CartReducer.shippingCost);
+    // const shippingCostLoading = useSelector((state) => state.CartReducer.shippingCostLoading);
+    const isSubmitting        = useSelector((state) => state.DeliveryInfoReducer.isSubmitting);
 
     useEffect(() => {
         dispatch(getCartsAction());
@@ -46,7 +47,7 @@ const OrderSummery = ({ handleClick, buttonText }) => {
             <Card>
                 <div className="cart__right-container">
                     <div className="cart__right-header">
-                        <p>Order Summery </p>
+                        <p>Order Summary </p>
                     </div>
                     <div className="cart__right-order_details">
                         <div className="cart__right-order_details_inner">
@@ -75,16 +76,19 @@ const OrderSummery = ({ handleClick, buttonText }) => {
                                     )
                                 }
                             </div>
+
                             <div className="cart__right-order_details_item">
                                 <p> Discount</p>
                                 <p>TK {couponData && couponData.discount_amount ? couponData.discount_amount : 0} BDT</p>
                             </div>
+
                             <div className="cart__right-order_details_item">
                                 <p>Total</p>
                                 <p>TK {totalAmount} BDT</p>
                             </div>
                         </div>
                     </div>
+                    
                     <div className="cart__right-footer">
                         <div className="cart__right-discount">
                             <div>

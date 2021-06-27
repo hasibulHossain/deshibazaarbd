@@ -23,32 +23,16 @@ import { addToCartAction } from '../carts/_redux/action/CartAction';
  */
 const ProductSingleMini = ({ item = {}, columnClassName = 'col-md-2', cardClassName = 'product-card' }) => {
 
-    const dispatch                = useDispatch();
-    const [quantity, setQuantity] =  useState(1);
-
-    const addToCart = (item) => {
-        const cartProduct = {
-            productID   : item.id,
-            productName : item.name,
-            quantity    : quantity,
-            isOffer     : item.is_offer_enable,
-            price       : item.default_selling_price,
-            offerPrice  : item.offer_selling_price,
-            productImage: `${process.env.NEXT_PUBLIC_URL}images/products/${item.featured_image}`,
-            sellerID    : item.seller_id,
-            sellerName  : item.seller_name,
-            sku         : item.sku,
-        };
-
-        dispatch(addToCartAction(cartProduct, item.id));
-    };
+    const dispatch = useDispatch();
 
     return (
         <div className={columnClassName}>
             <div className={cardClassName}>
                 <div className="product-purchase-section">
                     <button>
-                        <FontAwesomeIcon className="add_to_cart" icon={faShoppingBag} onClick={() => addToCart(item)} />
+                        <FontAwesomeIcon className="add_to_cart" icon={faShoppingBag} 
+                            onClick={() => dispatch(addToCartAction(item))} 
+                        />
                     </button>
                     <button>
                         <FontAwesomeIcon className="withlist" icon={faHeart} />

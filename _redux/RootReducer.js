@@ -20,26 +20,28 @@ import DeliveryInfoReducer from "../components/Delivery/_redux/Reducer/DeliveryI
 import ProfileUpdateReducer from "../components/myprofile/_redux/Reducer/ProfileUpdateReducer";
 import PaymentMethodReducer from "../components/PaymentMethod/_redux/Reducer/PaymentMethodReducer";
 import ProductReducer from "../components/products/_redux/Reducer/ProductReducer";
+import OrderReducer from "../components/orders/_redux/reducer/OrderReducer";
 
 export default combineReducers({
-  GlobalReducer: GlobalReducer,
-  HeaderReducer: HeaderReducer,
-  HomeBannerCarouselReducer: HomeBannerCarouselReducer,
-  ProductTopListReducer: ProductTopListReducer,
-  CategoryReducer: CategoryReducer,
-  CompanyPolicyReducer: CompanyPolicyReducer,
-  DealFlashReducer: DealFlashReducer,
-  CategoryWiseProductReducer: CategoryWiseProductReducer,
-  ShopReducer: ShopReducer,
-  RegisterReducer: RegisterReducer,
-  AuthReducer: AuthReducer,
-  UserDataReducer: UserDataReducer,
+  GlobalReducer               : GlobalReducer,
+  HeaderReducer               : HeaderReducer,
+  HomeBannerCarouselReducer   : HomeBannerCarouselReducer,
+  ProductTopListReducer       : ProductTopListReducer,
+  CategoryReducer             : CategoryReducer,
+  CompanyPolicyReducer        : CompanyPolicyReducer,
+  DealFlashReducer            : DealFlashReducer,
+  CategoryWiseProductReducer  : CategoryWiseProductReducer,
+  ShopReducer                 : ShopReducer,
+  RegisterReducer             : RegisterReducer,
+  AuthReducer                 : AuthReducer,
+  UserDataReducer             : UserDataReducer,
   ProfileAccountSettingReducer: ProfileAccountSettingReducer,
-  WishlistReducer: WishlistReducer,
-  CartReducer: CartReducer,
-  SearchReducer: SearchReducer,
-  DeliveryInfoReducer: DeliveryInfoReducer,
-  ProfileUpdateReducer: ProfileUpdateReducer,
-  PaymentMethodReducer: PaymentMethodReducer,
-  ProductReducer: ProductReducer
+  WishlistReducer             : WishlistReducer,
+  CartReducer                 : CartReducer,
+  SearchReducer               : SearchReducer,
+  DeliveryInfoReducer         : DeliveryInfoReducer,
+  ProfileUpdateReducer        : ProfileUpdateReducer,
+  PaymentMethodReducer        : PaymentMethodReducer,
+  ProductReducer              : ProductReducer,
+  OrderReducer                : OrderReducer
 });

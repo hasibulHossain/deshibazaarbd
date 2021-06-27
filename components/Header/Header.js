@@ -1,17 +1,12 @@
-import {
-  faHeart,
-  faSearch,
-  faShoppingBag,
-} from "@fortawesome/free-solid-svg-icons";
+
 import React, { useEffect } from "react";
 import Link from "next/link";
+import { faHeart, faShoppingBag } from "@fortawesome/free-solid-svg-icons";
 
-// third party imports
 import { useDispatch, useSelector } from "react-redux";
 import { Navbar } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-// local imports
 import HeaderTop from "./HeaderTop";
 import HeaderMenu from "./HeaderMenu";
 import Button from "../master/Button/Button";
@@ -20,9 +15,9 @@ import { getCartsAction } from "../carts/_redux/action/CartAction";
 import SearchInput from "../SearchInput/SearchInput";
 
 const Header = () => {
-  const dispatch = useDispatch();
-  const toggleNav = "basic-navbar-nav";
-  const carts = useSelector((state) => state.CartReducer.carts);
+  const dispatch          = useDispatch();
+  const toggleNav         = "basic-navbar-nav";
+  const { totalQuantity } = useSelector((state) => state.CartReducer);
 
   const toggleCartHandler = () => {
     dispatch(toggleFloatingCart());
@@ -31,6 +26,16 @@ const Header = () => {
   useEffect(() => {
     dispatch(getCartsAction());
   }, []);
+
+  const formatCartTotalQty = ( totalQuantity ) => {
+    if(totalQuantity <= 9) {
+      return <span style={{ paddingLeft: 2 }}> {totalQuantity} </span>;
+    } else if(totalQuantity > 9 && totalQuantity <= 99) {
+      return totalQuantity;
+    } else {
+      return <span style={{ fontSize: 8 }}> {totalQuantity} </span>;
+    }
+  }
 
   return (
     <div>
@@ -89,7 +94,9 @@ const Header = () => {
                       className="custom-fontAwesome"
                       icon={faShoppingBag}
                     />
-                    <span className="cart-qty">{carts.length}</span>
+                    <span className="cart-qty">
+                      {formatCartTotalQty(totalQuantity)}
+                    </span>
                     &nbsp;&nbsp; Cart
                   </span>
                   {/* </Link> */}

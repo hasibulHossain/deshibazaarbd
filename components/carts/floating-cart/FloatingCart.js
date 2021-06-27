@@ -1,26 +1,19 @@
 import React, { useEffect , useState} from "react";
 import Link from "next/link";
-
-// third party imports
 import { IoMdCloseCircle } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 
-// local imports
 import SimpleBtn from "../../master/SimpleBtn/SimpleBtn";
 import FloatingCartProduct from "./FloatingCartProduct";
 import { toggleFloatingCart } from "../../../_redux/store/action/globalAction";
 import { handleCombineCarts, getCartsAction } from "../_redux/action/CartAction";
 import { formatCurrency, activeCurrency } from '../../../services/currency';
+import router from "next/router";
 
 function FloatingCart() {
-  const dispatch = useDispatch();
-  const { floatingCartVisible } = useSelector((state) => state.GlobalReducer);
-  const carts = useSelector((state) => state.CartReducer.carts)
-  const combineCartList = useSelector((state) => state.CartReducer.combineCartList)
-  const totalPrice = useSelector((state) => state.CartReducer.totalPrice)
-  const totalQuantity = useSelector((state) => state.CartReducer.totalQuantity)
-  const [cartLength, setCartLength] = useState(null);
-
+  const dispatch                            = useDispatch()
+  const { floatingCartVisible }             = useSelector((state) => state.GlobalReducer)
+  const { carts, totalQuantity, totalPrice} = useSelector((state) => state.CartReducer)
 
   const toggleCartHandler = () => {
     dispatch(toggleFloatingCart());
@@ -41,8 +34,20 @@ function FloatingCart() {
 
   useEffect(() => {
     dispatch(getCartsAction())
-    // dispatch(handleCombineCarts())
   }, []);
+
+  /**
+   * Redirect to cart page 
+   * Toggle also the cart handler on sidebar
+   * 
+   * @since 1.0.0
+   * 
+   * return void
+   */
+  const redirectToCart = () => {
+    toggleCartHandler();
+    router.push('/carts');
+  }
 
   let floatingCart = null;
  
@@ -50,7 +55,7 @@ function FloatingCart() {
     floatingCart = (
       <div className="floating-cart modal-scrollbar">
         <div className="floating-cart__header">
-          <p>There are {combineCartList.length} Products</p>
+          <p>There are {totalQuantity} Products</p>
           <div
             onClick={toggleCartHandler}
             className="floating-cart__close-icon"
@@ -60,7 +65,7 @@ function FloatingCart() {
         </div>
 
         <div className="floating-cart__products">
-          {combineCartList.length > 0 && combineCartList.map((item, index) => (
+          {carts.length > 0 && carts.map((item, index) => (
             <div key={index}>
               <FloatingCartProduct item={item} />
             </div>
@@ -77,7 +82,7 @@ function FloatingCart() {
 
           <div className="floating-cart__payment-details">
             <span>Delivery Fee</span>
-            <span>{ formatCurrency(50) } { activeCurrency('code') }</span>
+            <span>{ formatCurrency(totalPrice > 0 ? 50 : 0) } { activeCurrency('code') }</span>
           </div>
 
           {
@@ -91,11 +96,9 @@ function FloatingCart() {
         </div>
 
         <div className="floating-cart__actions">
-          <Link href="/carts">
-            <div>
-              <SimpleBtn variant="danger">View cart</SimpleBtn>
-            </div>
-          </Link>
+          <div onClick={() => redirectToCart()}>
+            <SimpleBtn variant="danger">View cart</SimpleBtn>
+          </div>
 
           <Link href="/checkout">
             <div>

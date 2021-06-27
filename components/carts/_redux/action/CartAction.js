@@ -2,233 +2,152 @@ import Axios from "axios";
 import * as Types from "../types/Types";
 import { showToast } from "../../../master/Helper/ToastHelper";
 
-export const addToCartAction = (cartProduct, id) => async (dispatch) => {
-  const previousCart = getCartData().carts;
-  let carts = [...previousCart];
-  let storeCarts = {
-    sellerID: cartProduct.sellerID,
-    sellerName: cartProduct.sellerName,
-    data: [cartProduct]
-  }
-  
-  const filterCarts = carts.filter((item) => item.sellerName == cartProduct.sellerName);
-  if (filterCarts.length > 0) {
-    if (filterCarts[0].data.find((item) => item.productID === id)) {
-      showToast('error', "Product has been already added in cart !")
-    } else {
-      for (let i = 0; i < filterCarts.length; i++) {
-        const item = filterCarts[i];
-        item.data.push(cartProduct);
-      }
-      localStorage.setItem("carts", JSON.stringify(carts));
-      showToast('success', "Product added to cart successfully !");
-    }
-
-  } else {
-    carts.push(storeCarts)
-    localStorage.setItem("carts", JSON.stringify(carts));
-    showToast('success', "Product added to cart successfully !");
-  }
-  dispatch({ type: Types.POST_CARTS_LOADING, payload: carts });
-  dispatch(getCartsAction());
-};
-
+/**
+ * Get all cart items Action
+ * 
+ * @since 1.0.0
+ * 
+ * @returns void Dispatch event `GET_CARTS`
+ */
 export const getCartsAction = () => async (dispatch) => {
-  dispatch({ type: Types.GET_CARTS_LOADING, payload: true });
-  const data = getCartData();
-  dispatch({ type: Types.GET_CARTS, payload: data });
+  dispatch({ type: Types.GET_CARTS, payload: getCartData() });
 };
 
-//update cart products quantity
-export const updateCartQtyAction = (product_id, quantity) => async (dispatch) => {
-  const getData = getCartData();
-  // console.log('check data by clicking updated:>> ', data1);
-  const cartStorageData = localStorage.getItem("carts");
-  let data = {
-    carts: [],
-    products: [],
-    combineCartList: []
-  };
+/**
+ * Add to cart Action
+ * 
+ * Handle two cases - 
+ * 1) First time add to cart 
+ * 2) Already added item, then again add - Update cart quantity
+ * 
+ * @since 1.0.0
+ * 
+ * @param object product 
+ * @param object args Additional params when adding cart
+ * 
+ * @returns void Dispatch event `ADD_CART_DATA`
+ */
+export const addToCartAction = (product, args = {}) => async (dispatch) => {
+  const carts    = getCartData();
+  const quantity = typeof args['quantity'] !== 'undefined' ? args['quantity']: 1;
 
-  let filterCarts = getData.combineCartList.filter((item) => item.productID === product_id)
+  // Check first if product is already added in the cart, then just update the quantity
+  let isUpdateToProduct = false;
 
+  carts.forEach( ( cart, index ) => {
+    if ( cart.productID === product.id ) {
+      isUpdateToProduct = true;
+      cart.quantity     = cart.quantity + quantity;
+      carts[index]      = cart;
+    }
+  });
 
-  if (filterCarts.length) {
-    const getProductIndex = getData.combineCartList.indexOf(filterCarts[0]);
-    filterCarts[0].quantity = quantity;
-    data.combineCartList[getProductIndex] = filterCarts[0];
-    console.log('data.carts :>> ', data.combineCartList);
-    // localStorage.setItem("carts", JSON.stringify(data.carts));
+  if ( ! isUpdateToProduct ) {
+    const cartData = {
+      productID   : product.id,
+      productName : product.name,
+      quantity    : quantity,
+      isOffer     : product.is_offer_enable,
+      price       : product.default_selling_price,
+      offerPrice  : product.offer_selling_price,
+      productImage: `${process.env.NEXT_PUBLIC_URL}images/products/${product.featured_image}`,
+      sellerID    : product.seller_id,
+      sellerName  : product.seller_name,
+      sku         : product.sku,
+      additional  : {}
+    }
+  
+    carts.push( cartData );
   }
 
-  // if (typeof cartStorageData !== "undefined" && cartStorageData !== null) {
-  //   data.carts = JSON.parse(cartStorageData);
-  //   data.products = data.carts.products;
-
-  //   let findProducts = data.carts.filter(
-  //     (item) => item.productID === product_id
-  //   );
-  //   if (findProducts.length) {
-  //     const getProductIndex = data.carts.indexOf(findProducts[0]);
-  //     findProducts[0].quantity = quantity;
-  //     data.carts[getProductIndex] = findProducts[0];
-  //     localStorage.setItem("carts", JSON.stringify(data.carts));
-  //   }
-  // }
-  dispatch({ type: Types.UPDATE_CARTS_DATA, payload: getCartData() });
+  localStorage.setItem( 'carts', JSON.stringify( carts ) );
+  showToast('success', 'Product added to carts !')
   dispatch(getCartsAction());
 };
 
-//delete cart product
-export const deleteCartItemAction = (product_id) => async (dispatch) => {
-  const cartStorageData = localStorage.getItem("carts");
-  let data = {
-    carts: [],
-    products: [],
-  };
+/**
+ * Update Cart Qty Action
+ * 
+ * @since 1.0.0
+ * 
+ * @param int productID 
+ * @param int quantity 
+ * 
+ * @return void Dispatch 
+ */
+export const updateCartQtyAction = (productID, quantity = 1) => async (dispatch) => {
+  const carts = getCartData();
 
-  if (typeof cartStorageData !== "undefined" && cartStorageData !== null) {
-    data.carts = JSON.parse(cartStorageData);
-    data.products = data.carts.products;
-
-    let findProducts = data.carts.filter(
-      (item) => item.productID !== product_id
-    );
-
-    localStorage.setItem("carts", JSON.stringify(findProducts));
-  }
-  dispatch({ type: Types.DELETE_CARTS_DATA, payload: getCartData() });
+  carts.forEach( ( cart, index ) => {
+    if ( cart.productID === productID ) {
+      cart.quantity     = quantity;
+      carts[index]      = cart;
+    }
+  });
+  
+  localStorage.setItem( 'carts', JSON.stringify( carts ) );
+  showToast('success', 'Carts Item Updated !')
   dispatch(getCartsAction());
 };
 
-export const postEmptyCartMessage = () => async (dispatch) => {
-  dispatch({ type: Types.EMPTY_CART_MESSAGE, payload: true });
+/**
+ * Delete carts data
+ * 
+ * @since 1.0.0
+ * 
+ * @params int productID
+ * 
+ * @return void Delete from localstorage by `productID`
+ */
+export const deleteCartItemAction = (productID) => async (dispatch) => {
+  const carts = getCartData().filter(cart => cart.productID !== productID);
+  localStorage.setItem("carts", JSON.stringify(carts));
+  dispatch(getCartsAction());
 };
 
-export const postEmptyCartDeleteMessage = () => async (dispatch) => {
-  dispatch({ type: Types.EMPTY_CART_DELETE_MESSAGE, payload: true });
-};
+/**
+ * Get Supplier wise formatted carts data
+ * 
+ * @since 1.0.0
+ * 
+ * @return array Supplier Wise Carts based on `sellerID` params
+ */
+export const getSupplierWiseCartsData = () => {
+  const data = getCartData().reduce( function ( results, cartItem ) {
+      (results[cartItem.sellerID] = results[cartItem.sellerID] || []).push(cartItem);
+      return results;
+  }, {});
 
+  const supplierWiseCarts = [];
 
-function getCartData() {
-  const cartStorageData = localStorage.getItem("carts");
-  let data = {
-    carts: [],
-    products: [],
-    combineCartList: [],
-  };
+  Object.keys(data).forEach(index => {
+    const supplierWiseItem = data[index];
 
-  if (typeof cartStorageData !== "undefined" && cartStorageData !== null) {
-    data.carts = JSON.parse(cartStorageData);
-    data.products = data.carts.products;
+    let singleSupplierCart = {
+      data      : supplierWiseItem,
+      sellerID  : supplierWiseItem.length > 0 ? supplierWiseItem[0]['sellerID']  : null,
+      sellerName: supplierWiseItem.length > 0 ? supplierWiseItem[0]['sellerName']: null
+    };
 
-    //combine carts data 
-    data.carts.map((item) => {
-      item.data.map((cartItem) => {
-        data.combineCartList.push(cartItem);
-      })
-    })
-  }
-  return data;
+    supplierWiseCarts.push(singleSupplierCart);
+  });
+
+  return supplierWiseCarts;
 }
 
-//  ===================================handle coupon action==================================
-export const handleChangeCouponInput = (name, value) => (dispatch) => {
-  const couponData = {
-    name: name,
-    value: value,
-  };
-  dispatch({ type: Types.CHANGE_COUPON_INPUT_DATA, payload: couponData });
-};
+/**
+ * Get Formatted carts data
+ * 
+ * @since 1.0.0
+ * 
+ * @returns array Formatted Carts data as array
+ */
+const getCartData = () => {
+  const carts = localStorage.getItem("carts") || '';
 
-export const handleApplyCouponCode = (coupon, carts) => (dispatch) => {
-  let responseData = {
-    status: false,
-    message: "",
-    errorMessage: "",
-    couponData: {},
-    couponLoading: true,
-    returnData: "",
-  };
-  dispatch({ type: Types.APPLY_COUPON_CODE, payload: responseData });
-
-  const newCoupon = {
-    code: coupon.code,
-    carts: carts,
-  };
-  Axios.post(
-    `${process.env.NEXT_PUBLIC_API_URL}coupons/check-by/code`,
-    newCoupon
-  )
-    .then((res) => {
-      if (res.data.status) {
-        let data = res.data;
-        responseData.message = data.message;
-        responseData.status = data.status;
-        responseData.couponData = data.data;
-        responseData.couponLoading = false;
-        dispatch({ type: Types.APPLY_COUPON_CODE, payload: responseData });
-      }
-    })
-    .catch((err) => {
-      const { response } = err;
-      const { request, ...errorObject } = response;
-      responseData.couponLoading = false;
-      (responseData.couponData = response.data),
-        dispatch({ type: Types.APPLY_COUPON_CODE, payload: responseData });
-    });
-};
-
-//handle change shipping cost =================================
-export const handleShippingCost = (carts) => (dispatch) => {
-  let responseData = {
-    status: false,
-    message: "",
-    errorMessage: "",
-    shipping: 0,
-    shippingCostLoading: true,
-    returnData: "",
-  };
-  dispatch({ type: Types.APPLY_SHIPPING_COST, payload: responseData });
-
-  const shippingCost = {
-    carts: carts,
-  };
-  Axios.post(
-    `${process.env.NEXT_PUBLIC_API_URL}sales/shipping-cost/by-cart`,
-    shippingCost
-  )
-    .then((res) => {
-      if (res.data.status) {
-        let data = res.data;
-        responseData.message = data.message;
-        responseData.status = data.status;
-        responseData.shipping = data.data;
-        responseData.shippingCostLoading = false;
-        dispatch({ type: Types.APPLY_SHIPPING_COST, payload: responseData });
-      }
-    })
-    .catch((err) => {
-      const { response } = err;
-      const { request, ...errorObject } = response;
-      responseData.shippingCostLoading = false;
-      (responseData.shipping = response.data),
-        dispatch({ type: Types.APPLY_SHIPPING_COST, payload: responseData });
-    });
-};
-
-
-//store carts data 
-function storeCarts(cartProduct) {
-  const previousCart = getCartData().carts;
-  const combineCartList = getCartData().combineCartList;
-  let carts = [...previousCart];
-  console.log('carts :>> ', carts);
-
-  let storeCarts = {
-    sellerID: cartProduct.sellerID,
-    sellerName: cartProduct.sellerName,
-    data: [cartProduct]
+  if (typeof carts !== "undefined" && carts !== null && carts !== '' ) {
+    return JSON.parse(carts) || [];
   }
-  const filterCarts = carts.filter((item) => item.sellerName == cartProduct.sellerName);
+
+  return [];
 }

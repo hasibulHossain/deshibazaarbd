@@ -14,18 +14,18 @@ import RemoveCartItem from "../components/RemoveCartItem/RemoveCartItem";
 import { toggleModal } from "../_redux/store/action/globalAction";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingBag, faSync, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { getCartsAction } from "../components/_redux/CartProduct/Action/CartAction";
-import CartProduct from "../components/CartProducts/CartProduct.js/CartProduct";
+import { getCartsAction } from "../components/carts/_redux/action/CartAction";
+import CartProduct from "../components/carts/cart-product/CartProduct";
 import { getUserDataAction } from "../components/_redux/getUserData/Action/UserDataAction";
 import { useRouter } from "next/router";
-import OrderSummery from '../components/master/OrderSummery/OrderSummery'
+import OrderSummery from '../components/orders/OrderSummery'
 
 export default function Carts() {
-  const router = useRouter();
-  const dispatch = useDispatch();
+  const router            = useRouter();
+  const dispatch          = useDispatch();
   const { isModalActive } = useSelector((state) => state.GlobalReducer);
-  const carts = useSelector((state) => state.CartReducer.carts);
-  const userData = useSelector((state) => state.UserDataReducer.userData);
+  const { supplierWiseCarts, carts } =  useSelector((state) => state.CartReducer);
+  const userData          = useSelector((state) => state.UserDataReducer.userData);
 
 
   const deleteItemsHandler = () => {
@@ -36,6 +36,9 @@ export default function Carts() {
     if (typeof window === "undefined") {
       global.window = {};
     }
+  }, []);
+
+  useEffect(() => {
     dispatch(getCartsAction());
     dispatch(getUserDataAction());
   }, []);
@@ -47,6 +50,7 @@ export default function Carts() {
       router.push('/login')
     }
   }
+
   return (
     <>
       <Modal
@@ -87,7 +91,7 @@ export default function Carts() {
                   </div>
 
                   {
-                    carts.length > 0 && carts.map((item, index) => (
+                    supplierWiseCarts.length > 0 && supplierWiseCarts.map((item, index) => (
                       <>
                         <div className="cart_items_by_shop" key={index}>
                           <div className="cart_item_box_top_1">
@@ -96,7 +100,9 @@ export default function Carts() {
                                 <input className="cart-checkbox" type="checkbox" />
                                 <div className="ml-2">
                                   <div className="cart_details_body">
-                                    <p>{item.sellerName}</p>
+                                    <p>
+                                      {item.sellerName}
+                                    </p>
                                     <div className="cart_trash">
                                       <FiChevronRight />
                                     </div>

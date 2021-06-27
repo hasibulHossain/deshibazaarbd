@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { deleteCartItemAction, updateCartQtyAction } from '../../_redux/CartProduct/Action/CartAction';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faMinus, faPlus, faTimes, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { Modal, Button } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import { deleteCartItemAction, updateCartQtyAction } from '../_redux/action/CartAction';
 
 const CartProduct = ({ cart }) => {
   const dispatch = useDispatch();
@@ -15,6 +15,7 @@ const CartProduct = ({ cart }) => {
     setQuantity((quantity + 1))
     dispatch(updateCartQtyAction(id, (quantity + 1)));
   };
+
   //decrease quantity
   const decrementQunatity = (id, quantity) => {
     // carts.find((cart) => cart.productID === id && quantity > 1 && setQuantity((quantity -= 1)))
@@ -23,6 +24,7 @@ const CartProduct = ({ cart }) => {
       dispatch(updateCartQtyAction(id, (quantity - 1)));
     }
   };
+
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -58,8 +60,8 @@ const CartProduct = ({ cart }) => {
             </div>
           </div>
         </Modal.Body>
-
       </Modal>
+
       <div className="row justify-content-between">
         <div className="col-md-7">
           <div className="product_cart_inner row">
@@ -121,6 +123,7 @@ const CartProduct = ({ cart }) => {
           </div>
         </div>
       </div>
+    
     </>
   );
 };
