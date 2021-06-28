@@ -13,13 +13,7 @@ const defaultPosition = toast.POSITION.BOTTOM_CENTER;
  * @param {string} position toast position; ex-'top-right', 'top-center', 'top-left', 'bottom-right', 'bottom-center', 'bottom-left'
  */
 
-export const showToast = (
-  type = "success",
-  msg,
-  autoClose = 2000,
-  className = "primaryColor",
-  position = defaultPosition
-) => {
+export const showToast = ( type = "success", msg, autoClose = 2000, className = "primaryColor", position = defaultPosition ) => {
   if (type === "success") {
     toast.success(msg, {
       autoClose: autoClose === null ? 2000 : autoClose,

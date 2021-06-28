@@ -1,5 +1,7 @@
 import React from 'react';
 import { Container, Row } from 'react-bootstrap';
+import ProductModal from '../products/ProductModal';
+
 // import paymentImg from './../../assets/img/Payment-Icon-Buzfi.com-best-online-shopping-in-the-USA-2020-best-e-commerce-shop-in-the-United-States.png'
 const FooterBottom = () => {
     return (
@@ -16,6 +18,8 @@ const FooterBottom = () => {
                     </div>
                 </div>
             </Container>
+
+            <ProductModal />
         </div >
     );
 };
