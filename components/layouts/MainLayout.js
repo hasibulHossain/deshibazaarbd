@@ -11,10 +11,10 @@ import FloatingCartButton from "../carts/floating-cart/FloatingCartButton";
 const MainLayout = (props) => {
   
   const { children, pageTitle, pageMetaDescription } = props;
-  const { backdrop } = useSelector(state => state.GlobalReducer);
+  const { backdrop }    = useSelector(state          =>  state.GlobalReducer);
 
-  const title           = typeof pageTitle === 'undefined' ? 'Deshi Bazaar BD' : pageTitle + ' | Deshi Bazaar BD';
-  const metaDescription = typeof pageMetaDescription === 'undefined' ? 'Deshi Bazaar BD is a multivendor e-commerce business solution in Bangladesh' : pageMetaDescription + ' .Deshi Bazaar BD is a multivendor e-commerce business solution in Bangladesh';
+  const title           = typeof pageTitle           === 'undefined' ? 'Deshi Bazaar BD'                                                            : pageTitle + ' | Deshi Bazaar BD';
+  const metaDescription = typeof pageMetaDescription === 'undefined' ? 'Deshi Bazaar BD is a multivendor e-commerce business solution in Bangladesh': pageMetaDescription + ' .Deshi Bazaar BD is a multivendor e-commerce business solution in Bangladesh';
 
   useEffect(() => {
     if (typeof window === "undefined") {

@@ -69,7 +69,8 @@ a .custom-button-component:hover {
   cursor: not-allowed;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
   background-color: #237e33 !important;
 }
 
@@ -78,7 +79,7 @@ a .custom-button-component:hover {
 /*****************************************************************/
 
 .header-top {
-  background-color: #0C7E33;
+  background-color: #0c7e33;
   color: #fff;
   font-weight: 200;
   padding: 10px;
@@ -368,7 +369,8 @@ a .custom-button-component:hover {
   display: none !important;
 }
 
-.productList-body, .category-list {
+.productList-body,
+.category-list {
   -webkit-box-shadow: 2px 6px 15px -7px rgba(166, 166, 166, 1);
   -moz-box-shadow: 2px 6px 15px -7px rgba(166, 166, 166, 1);
   box-shadow: 2px 6px 15px -7px rgba(166, 166, 166, 1);
@@ -406,7 +408,7 @@ a .custom-button-component:hover {
 
 .category-card {
   height: 200px;
-  border-right: 1px solid #E4E6EC;
+  border-right: 1px solid #e4e6ec;
   padding: 15px;
   text-align: center;
   position: relative;
@@ -433,7 +435,7 @@ a .custom-button-component:hover {
 }
 
 .category-title {
-  font-size: .8rem !important;
+  font-size: 0.8rem !important;
   margin-top: 15px;
 }
 
@@ -1271,7 +1273,7 @@ a .custom-button-component:hover {
   margin-right: 5px;
 }
 
-#exampleFormSelectCustom{
+#exampleFormSelectCustom {
   height: 30px;
   font-size: 12px;
 }
@@ -1946,7 +1948,7 @@ p.estimate {
   padding: 20px;
   border-bottom: 1px solid darkgrey;
 }
-.cart_items_details:last-child{
+.cart_items_details:last-child {
   border-bottom: none;
 }
 .cart_checkout_margin {
@@ -2083,14 +2085,13 @@ p.delivery_info_sub_title {
   text-transform: none;
 }
 .home_btn {
-  background-color: #782ECA!important;
-  color: #ffff!important;
+  background-color: #782eca !important;
+  color: #ffff !important;
 }
 .office_btn {
-  background-color: #00ACD5!important;
-  color: #ffff!important;
+  background-color: #00acd5 !important;
+  color: #ffff !important;
 }
-
 
 /** Page title **/
 .page-title {
@@ -2139,4 +2140,37 @@ p.delivery_info_sub_title {
   width: 100%;
   height: 180px;
   border-radius: 5px;
+}
+
+/**====================user order list==============*/
+.order_section .order_title {
+  font-size: 1.3rem;
+}
+
+.order_filter_section {
+  margin-top: 15px;
+}
+.order_filter_section .nav-tabs {
+  border-bottom: 1px solid #e9000f;
+}
+
+.order_filter_section .nav-tabs .nav-link {
+  border        : none !important;
+  color         : #797a87 !important;
+  font-weight   : 700;
+  text-transform: none;
+  padding       : 5px 25px !important;
+}
+
+.order_filter_section .nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active {
+  color           : #fff !important;
+  background-color: #e9000f !important;
+  padding         : 5px 25px !important;
+}
+.filter_selection {
+  width: 240px;
+}
+.order_list_filtered{
+  border-bottom: 2px solid darkgray;
 }
