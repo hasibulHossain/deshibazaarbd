@@ -65,11 +65,11 @@ const OrderSummary = ({ handleClick, buttonText }) => {
                                 }
                                 {
                                     shippingCostLoading && (
-                                        <pdiv>
+                                        <div>
                                             <p className="spinner-border" role="status">
                                                 <span className="sr-only">Loading...</span>
                                             </p>
-                                        </pdiv>
+                                        </div>
                                     )
                                 }
                             </div>
