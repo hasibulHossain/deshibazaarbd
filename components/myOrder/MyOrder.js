@@ -5,12 +5,14 @@ import { getUserOrderList } from './_redux/action/MyOrderAction';
 import FilterOrderList from './FilterOrderList';
 
 const MyOrder = () => {
+    
     const dispatch                 = useDispatch();
     const { orderList, isLoading } = useSelector((state) => state.MyOrderReducer);
     
     useEffect(() => {
         dispatch(getUserOrderList(1))
     }, [])
+
     return (
         <section className="order_section">
             <h3 className="order_title">My Orders</h3>

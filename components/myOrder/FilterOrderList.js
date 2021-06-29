@@ -3,6 +3,7 @@ import Select from 'react-select';
 import LoadingSkelleton from '../master/skelleton/LoadingSkelleton.jsx';
 
 const FilterOrderList = ({ orderList, isLoading }) => {
+
     const options = [
         { value   : 'All',           label : 'all' },
         { value   : 'last_5_orders', label : 'Last 5 Orders' },
@@ -11,6 +12,7 @@ const FilterOrderList = ({ orderList, isLoading }) => {
         { value   : 'last_2_month',  label : 'Last 2 Months' },
         { value   : 'last_6_month',  label : 'Last 6 Months' },
     ]
+
     return (
         <>
             <div className="card shadow-sm p-2 mt-3">
@@ -45,7 +47,7 @@ const FilterOrderList = ({ orderList, isLoading }) => {
 
             {
                 orderList.length > 0 && orderList.map((item, index) => (
-                    <div className="card shadow-sm mt-3">
+                    <div className="card shadow-sm mt-3" key={ index + 1 }>
                         <div className="d-flex justify-content-between align-items-start order_list_filtered p-2">
                             <div className="order_header">
                                 <h6 className="order">Order : <span className="text-primary">#d454ddf565d6fd</span></h6>

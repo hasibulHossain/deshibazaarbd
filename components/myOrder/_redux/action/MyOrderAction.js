@@ -29,9 +29,11 @@ export const getUserOrderList = (user_id) => async (dispatch) => {
         }).catch((error) => {
             const responseLog      = error.response;
             responseData.isLoading = false;
+
             if (typeof responseLog !== 'undefined') {
                 showToast('error', responseLog.data.message);
                 dispatch({ type: Types.GET_USER_ORDER_LIST, payload: responseData });
+                
             }
         })
 }
