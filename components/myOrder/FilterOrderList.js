@@ -1,16 +1,17 @@
 import React from 'react';
 import Select from 'react-select';
 import LoadingSkelleton from '../master/skelleton/LoadingSkelleton.jsx';
+import Link from 'next/link'
 
 const FilterOrderList = ({ orderList, isLoading }) => {
 
     const options = [
-        { value   : 'All',           label : 'all' },
-        { value   : 'last_5_orders', label : 'Last 5 Orders' },
-        { value   : 'last_15_days',  label : 'Last 15 Days' },
-        { value   : 'last_30_days',  label : 'Last 30 Days' },
-        { value   : 'last_2_month',  label : 'Last 2 Months' },
-        { value   : 'last_6_month',  label : 'Last 6 Months' },
+        { value   : 'All',           label: 'all' },
+        { value   : 'last_5_orders', label: 'Last 5 Orders' },
+        { value   : 'last_15_days',  label: 'Last 15 Days' },
+        { value   : 'last_30_days',  label: 'Last 30 Days' },
+        { value   : 'last_2_month',  label: 'Last 2 Months' },
+        { value   : 'last_6_month',  label: 'Last 6 Months' },
     ]
 
     return (
@@ -47,13 +48,15 @@ const FilterOrderList = ({ orderList, isLoading }) => {
 
             {
                 orderList.length > 0 && orderList.map((item, index) => (
-                    <div className="card shadow-sm mt-3" key={ index + 1 }>
+                    <div className="card shadow-sm mt-3" key={index + 1}>
                         <div className="d-flex justify-content-between align-items-start order_list_filtered p-2">
                             <div className="order_header">
                                 <h6 className="order">Order : <span className="text-primary">#d454ddf565d6fd</span></h6>
                                 <p className="text-secondary">Placed on 28th June, 2021, 21:23:16</p>
                             </div>
-                            <button className="btn text-primary">Manage</button>
+                            <Link href={`/order/${item.id}`}>
+                                <a><button className="btn text-primary">Manage</button></a>
+                            </Link>
                         </div>
                         <div className="order_product_list p-3">
                             <div className="row">
