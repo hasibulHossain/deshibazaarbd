@@ -8,12 +8,13 @@ const ProductReviewHistory = () => {
     const dispatch = useDispatch();
     const {isLoading, reviewList} = useSelector((state) => state.ProductReviewReducer);
 
-    const itemID = 0;
-    const userID = 1;
-
     useEffect(() => {
+        const itemID = 0;
+        const {id: userID} = JSON.parse(localStorage.getItem('userData'));
+
         dispatch(getReviewListByUser(itemID, userID));
     }, []);
+
     return (
         <>
             {isLoading && (
@@ -47,9 +48,7 @@ const ProductReviewHistory = () => {
                                         />,
                                         {
                                             item.comment && (
-                                                <>
                                                     <p> <span className="font-weight-bold">Description : </span> {item.comment}</p>
-                                                </>
                                             )
                                         }
                                     </div>
