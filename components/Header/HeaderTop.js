@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { Dropdown } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShippingFast, faUser } from '@fortawesome/free-solid-svg-icons'
-import { languages } from '../../assets/FakeData/FakeData';
+import { getCurrencies, activeCurrency } from '../../services/currency';
 import Link from "next/link";
 
 const HeaderTop = () => {
+
+    const [currencies, setCurrencies] = useState([]);
+
+    useEffect(() => {
+        setCurrencies(getCurrencies());
+    }, []);
 
     return (
         <section className="header-top">
@@ -16,9 +22,14 @@ const HeaderTop = () => {
                     </div>
                     <div className="col-md-7 heading-top-right">
                         <div className="row justify-content-end">
+                            <p className="heading-top-text pointer mr-3">
+                                <FontAwesomeIcon className="custom-fontAwesome" icon={faUser} /> Become a seller
+                            </p>
+
                             <p className="heading-top-text pointer">
                                 <FontAwesomeIcon className="custom-fontAwesome" icon={faShippingFast} /> Track My Order
                             </p>
+                            
                             <p className="heading-top-text pointer">
                                 <Link href="/profile">
                                     <a href="/" className="text-white">
@@ -29,14 +40,14 @@ const HeaderTop = () => {
                             
                             <Dropdown className="dropdown-currency">
                                 <Dropdown.Toggle variant="default" id="dropdown-basic">
-                                    <img src='/images/languages/usa.png' /> USD
+                                    <img src={activeCurrency('flag_link')} width={30} /> {activeCurrency('code')}
                                 </Dropdown.Toggle>
 
                                 <Dropdown.Menu> 
                                     {
-                                        languages.length > 0 && languages.map((lan, index) => (
-                                            <Dropdown.Item href="#"  key={index}>
-                                                {lan.label}
+                                        currencies.length > 0 && currencies.map((currency, index) => (
+                                            <Dropdown.Item href="#"  key={index} className={activeCurrency('code') === currency.code ? 'bg-light' : ''}>
+                                                <img src={currency.flag_link} width={30} />  {currency.code}
                                             </Dropdown.Item>
                                         ))
                                     }
@@ -50,4 +61,4 @@ const HeaderTop = () => {
     );
 };
 
-export default HeaderTop;
+export default memo( HeaderTop );

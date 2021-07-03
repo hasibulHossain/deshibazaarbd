@@ -11,20 +11,20 @@ const Footer = () => {
                 <Row>
                     <Col md={3} xs={6}>
                         <div className="footer-info">
-                            <h5>information</h5>
-                            <Link href="/">
+                            <h5>Information</h5>
+                            <Link href="/shipping-methods">
                                 <a>Shipping Methods</a>
                             </Link>
-                            <Link href="/">
+                            <Link href="/privacy-policy">
                                 <a>Privacy Policy</a>
                             </Link>
-                            <Link href="/">
+                            <Link href="/terms">
                                 <a>Terms & Condition</a>
                             </Link>
-                            <Link href="/">
+                            <Link href="/faq">
                                 <a>FAQ</a>
                             </Link>
-                            <Link href="/">
+                            <Link href="/how-works">
                                 <a>How It's Work</a>
                             </Link>
                         </div>
@@ -32,10 +32,10 @@ const Footer = () => {
                     <Col md={3} xs={6}>
                         <div className="footer-info">
                             <h5>customer care</h5>
-                            <Link href="/">
+                            <Link href="/about-us">
                                 <a>About us</a>
                             </Link>
-                            <Link href="/">
+                            <Link href="/contact">
                                 <a>Contact</a>
                             </Link>
                             <Link href="/">

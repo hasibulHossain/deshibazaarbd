@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@@100;300;400;500;600;700&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@@100;300;400;500;600;700&display=swap"); */
 
 /*****************************************************************
                         Global CSS Part :: Start
@@ -69,6 +69,10 @@ a .custom-button-component:hover {
   cursor: not-allowed;
 }
 
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+  background-color: #237e33 !important;
+}
+
 /*****************************************************************
                         Header CSS Part :: Start
 /*****************************************************************/
@@ -127,11 +131,12 @@ a .custom-button-component:hover {
   position: absolute;
   background: #16b62a;
   color: #fff;
-  font-size: 12px;
+  font-size: 10px;
   width: 17px;
   height: 17px;
-  padding: 0px 0px 5px 5px;
+  padding: 1px 0px 7px 3px;
   margin-left: -7px;
+  -webkit-border-radius: 20px;
   border-radius: 20px;
   top: 23%;
 }
@@ -373,13 +378,30 @@ a .custom-button-component:hover {
 }
 
 .product-card {
-  height: 350px;
-  border-right: 2px solid #d6d6d6;
+  height: 300px;
+  border-right: 1px solid #e4e6ec;
   padding: 15px;
   text-align: center;
   position: relative;
   transition: 0.6s ease;
   cursor: pointer;
+}
+
+.stock-status {
+  font-size: 14px;
+  margin-top: -10px;
+  padding: 0px 10px 0px 10px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+.stock-status-in {
+  background: #e2f2c4;
+}
+
+.stock-status-out {
+  background: #fbe7ab;
 }
 
 .category-card {
@@ -463,18 +485,47 @@ a .custom-button-component:hover {
 }
 
 .product-card .product-card-body img {
-  height: 200px;
+  height: 100px;
+}
+
+.active-price {
+  color: #e90110;
+  margin-bottom: 0px;
+  font-size: 20px;
+}
+
+.inactive-price {
+  font-size: 14px;
+}
+
+.inactive-price del {
+  color: gray;
+}
+
+.inactive-price .discount-percent {
+  color: #000000;
+}
+
+.price-area {
+  margin-top: -10px;
+  height: 65px;
+}
+
+.rating {
+  display: flex;
+  justify-content: center;
 }
 
 .product-card .product-card-body .product-title {
+  height: 50px;
   margin-top: 10px;
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 500;
+  overflow: hidden;
 }
 
 .product-card .product-card-body .rating {
-  position: absolute;
-  bottom: 10px;
+  margin-top: -12px;
 }
 
 .company-policy-container {
@@ -567,7 +618,7 @@ a .custom-button-component:hover {
 
 .top-product-card .top-product-details .top-product-name {
   font-size: 1.5em;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .top-product-card .top-product-details .price {
@@ -602,8 +653,11 @@ a .custom-button-component:hover {
   top: 50%;
   z-index: 999;
   border: 1px solid #fff;
+  -webkit-border-radius: 6px 0px 0px 6px;
   border-radius: 6px 0px 0px 6px;
   border-right: transparent;
+  font-size: 14px;
+  padding: 5px;
 }
 
 .flashDealButton:hover {
@@ -853,17 +907,18 @@ a .custom-button-component:hover {
 
 .product_details_section .product_title {
   font-weight: 600;
+  font-size: 18px;
 }
 
 .product_price {
   color: #ff3c20;
-  font-weight: 800 !important;
+  font-weight: 600 !important;
   margin-top: 20px;
 }
 
 .product_price .product_offerPrice {
   color: #d8d8d8 !important;
-  font-weight: 800;
+  font-weight: 600;
   font-size: 24px;
   text-decoration: line-through;
   margin-left: 10px;
@@ -1285,7 +1340,6 @@ a .custom-button-component:hover {
 
 .filter_column_3 .product-card-body img {
   height: 150px !important;
-  width: 80%;
 }
 
 .filter_column_10 .product-card-body img {
@@ -1351,6 +1405,10 @@ a .custom-button-component:hover {
 
 .input-range {
   height: 3rem !important;
+}
+
+.price_range {
+  padding: 10px;
 }
 
 .input-range__label--min,
@@ -1917,7 +1975,7 @@ p.estimate {
 } */
 
 h4.innser_cart_product_name {
-  font-size: 20px;
+  font-size: 14px;
   font-weight: 600;
 }
 
@@ -1934,14 +1992,19 @@ h4.innser_cart_product_name {
 .cart_product_price span.price {
   color: #e9000f;
   margin-right: 20px;
-  font-size: 24px;
+  font-size: 16px;
   font-weight: 600;
 }
 
 .cart_product_price span.offer_price {
   text-decoration: line-through;
-  color: gray;
+  color: #bcbcbc;
   font-weight: 700;
+  font-size: 14px;
+}
+
+.discount_percantage {
+  font-size: 14px;
 }
 
 .product_cart_purchase {
@@ -2008,7 +2071,7 @@ h4.innser_cart_product_name {
 }
 h4.delivery_info_title {
   font-size: 24px;
-  font-weight: 800;
+  font-weight: 600;
 }
 p.delivery_info_sub_title {
   font-weight: 700;
@@ -2016,7 +2079,7 @@ p.delivery_info_sub_title {
   margin-top: 10px;
 }
 .deliver_info_footer h6.select_title {
-  font-weight: 800;
+  font-weight: 600;
   text-transform: none;
 }
 .home_btn {

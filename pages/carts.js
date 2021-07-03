@@ -1,29 +1,30 @@
 import React, { useEffect } from "react";
-// third party import
+import Link from "next/link";
+
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import { FiChevronRight } from "react-icons/fi";
 import { useSelector, useDispatch } from "react-redux";
-// local import
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShoppingBag, faSync, faTrash } from "@fortawesome/free-solid-svg-icons";
+
 import MainLayout from "../components/layouts/MainLayout";
 import Card from "../components/Card/Card";
 import SimpleBtn from "../components/master/SimpleBtn/SimpleBtn";
 import Modal from "../components/master/Modal/Modal";
 import RemoveCartItem from "../components/RemoveCartItem/RemoveCartItem";
 import { toggleModal } from "../_redux/store/action/globalAction";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingBag, faSync, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { getCartsAction } from "../components/_redux/CartProduct/Action/CartAction";
-import CartProduct from "../components/CartProducts/CartProduct.js/CartProduct";
+import { getCartsAction } from "../components/carts/_redux/action/CartAction";
+import CartProduct from "../components/carts/cart-product/CartProduct";
 import { getUserDataAction } from "../components/_redux/getUserData/Action/UserDataAction";
 import { useRouter } from "next/router";
-import OrderSummery from '../components/master/OrderSummery/OrderSummery'
+import OrderSummary from '../components/orders/OrderSummary'
 
 export default function Carts() {
-  const router = useRouter();
-  const dispatch = useDispatch();
-  const { isModalActive } = useSelector((state) => state.GlobalReducer);
-  const carts = useSelector((state) => state.CartReducer.carts);
-  const userData = useSelector((state) => state.UserDataReducer.userData);
+  const router                       = useRouter();
+  const dispatch                     = useDispatch();
+  const { isModalActive }            = useSelector((state) => state.GlobalReducer);
+  const { supplierWiseCarts, carts } = useSelector((state) => state.CartReducer);
+  const userData                     = useSelector((state) => state.UserDataReducer.userData);
 
 
   const deleteItemsHandler = () => {
@@ -34,6 +35,9 @@ export default function Carts() {
     if (typeof window === "undefined") {
       global.window = {};
     }
+  }, []);
+
+  useEffect(() => {
     dispatch(getCartsAction());
     dispatch(getUserDataAction());
   }, []);
@@ -45,6 +49,7 @@ export default function Carts() {
       router.push('/login')
     }
   }
+
   return (
     <>
       <Modal
@@ -77,7 +82,7 @@ export default function Carts() {
                 </Card>
                 <div className="card mt-3 mb-2">
                   <div className="cart_item_box_top">
-                    <p>Select All (2 items)</p>
+                    <p>Select All ({carts.length} items)</p>
                     <div className="carts_delete" onClick={deleteItemsHandler}>
                       <FontAwesomeIcon className="cart_trash" icon={faTrash} />
                       <p>Delete</p>
@@ -85,8 +90,8 @@ export default function Carts() {
                   </div>
 
                   {
-                    carts.length > 0 && carts.map((item, index) => (
-                      <>
+                    supplierWiseCarts.length > 0 && supplierWiseCarts.map((item, index) => (
+                      <div key={index}>
                         <div className="cart_items_by_shop" key={index}>
                           <div className="cart_item_box_top_1">
                             <div>
@@ -94,7 +99,9 @@ export default function Carts() {
                                 <input className="cart-checkbox" type="checkbox" />
                                 <div className="ml-2">
                                   <div className="cart_details_body">
-                                    <p>{item.sellerName}</p>
+                                    <p>
+                                      {item.sellerName}
+                                    </p>
                                     <div className="cart_trash">
                                       <FiChevronRight />
                                     </div>
@@ -105,13 +112,12 @@ export default function Carts() {
 
                             </div>
 
-                            <p className="estimate">Estimate time 9 june</p>
+                            <p className="estimate">Estimate time -- </p>
 
                           </div>
-                          <p className="Spend">
-                            Spend ৳ 990 enjoy free shipping for Standard delivery
-                            option
-                          </p>
+                          {/* <p className="Spend">
+                            Spend ৳ 990 enjoy free shipping for Standard delivery option
+                          </p> */}
                         </div>
 
                         <div className="p-3">
@@ -123,41 +129,28 @@ export default function Carts() {
                             ))
                           }
                         </div>
-                      </>
+                      </div>
                     ))
                   }
 
-
-                  <div className="d-flex p-2">
-                    <div className="mr-3">
-                      <SimpleBtn
-                        variant="danger"
-                        onClick={() => console.log("update cart btn clicked")}
-                      >
-                        <FontAwesomeIcon className="mr-2" icon={faSync} />
-                        UPDATE CART
-                      </SimpleBtn>
-                    </div>
-                    <div>
-                      <SimpleBtn
-                        variant="success"
-                        onClick={() =>
-                          console.log("continue shoping btn clicked")
-                        }
-                      >
-                        <FontAwesomeIcon className="mr-2" icon={faShoppingBag} />
-                        CONTINUE SHOPPING
-                      </SimpleBtn>
+                  <div className="p-2">
+                    <div className="text-center" >
+                      <Link href="/products">
+                          <a href="" style={{ display: 'inline-block' }}>
+                            <SimpleBtn variant="success" >
+                              <FontAwesomeIcon className="mr-2" icon={faShoppingBag} />
+                              CONTINUE SHOPPING
+                            </SimpleBtn>
+                          </a>
+                      </Link>
                     </div>
                   </div>
-
                 </div>
-
               </div>
             </div>
 
             <div className="col-md-4 cart_checkout_margin">
-              <OrderSummery handleClick={placeOrder} buttonText="PROCESS TO CHECKOUT" />
+              <OrderSummary handleClick={placeOrder} buttonText="PROCESS TO CHECKOUT" />
             </div>
 
           </div>

@@ -2,22 +2,23 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Form } from "react-bootstrap";
 import InputRange from "react-input-range";
 import "react-input-range/lib/css/index.css";
-import Button from "@material-ui/core/Button";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getCategories,
   getFilteredProducts,
   setFilterParams,
 } from "./_redux/Action/CategoryWiseProductAction";
 import { getShopList } from "../Shop/_redux/Action/ShopAction";
 import ReactStars from "react-rating-stars-component";
+import { activeCurrency } from "../../services/currency";
+import { getCategories } from "../category/_redux/Action/CategoryAction";
 
 const CategoryFilter = () => {
   const dispatch = useDispatch();
-  const { categories, filterParams } = useSelector(
+  const { filterParams } = useSelector(
     (state) => state.CategoryWiseProductReducer
   );
   const { ShopList } = useSelector((state) => state.ShopReducer);
+  const { categories } = useSelector((state) => state.CategoryReducer);
 
   const [value, setValue] = useState({ min: 100, max: 90000 });
   const [isChecked, setIsChecked] = useState(false);
@@ -91,7 +92,7 @@ const CategoryFilter = () => {
   };
 
   const reactStarProps = {
-    size: 40,
+    size: 20,
     count: 5,
     isHalf: false,
     value: 0,
@@ -105,7 +106,7 @@ const CategoryFilter = () => {
   };
 
   useEffect(() => {
-    dispatch(getCategories());
+    dispatch(getCategories(null));
     dispatch(getShopList());
   }, []);
 
@@ -124,16 +125,30 @@ const CategoryFilter = () => {
 
   return (
     <section className="prodcut_filter_section shadow-sm p-3 mb-5 bg-white rounded">
-      <h3 className="product_filter_heading">Product Category</h3>
+      <h3 className="product_filter_heading">Filter Products</h3>
+
+      {/**filter by price range */}
+      <div className="filter_by_price_range">
+        <p className="filter_title">Filter By Price</p>
+        <div className="price_range">
+          <InputRange
+            maxValue={99999}
+            formatLabel={(value) => `${activeCurrency('sign')}${value}`}
+            minValue={0}
+            value={value}
+            onChange={priceRangeHandler}
+          />
+        </div>
+      </div>
 
       <div>
-        <p>Filter By Rating</p>
+        <p className="filter_title">Filter By Rating</p>
         <ReactStars {...reactStarProps} />
       </div>
 
       {/**filter by categories */}
       <div className="filter_by_category">
-        <p>Category</p>
+        <p className="filter_title">Category</p>
         {categories.map((item) => (
           <Form.Group key={item.id} controlId={item.id}>
             <Form.Check
@@ -150,7 +165,7 @@ const CategoryFilter = () => {
 
       {/**filter by categories */}
       <div className="filter_by_category">
-        <p>Brand</p>
+        <p className="filter_title">Brand</p>
         {ShopList.map((item) => (
           <Form.Group key={item.id} controlId={item.id}>
             <Form.Check
@@ -165,19 +180,6 @@ const CategoryFilter = () => {
         ))}
       </div>
 
-      {/**filter by price range */}
-      <div className="filter_by_price_range">
-        <p className="filter_title">Filter By Price</p>
-        <div className="price_range">
-          <InputRange
-            maxValue={99999}
-            formatLabel={(value) => `$${value}`}
-            minValue={100}
-            value={value}
-            onChange={priceRangeHandler}
-          />
-        </div>
-      </div>
     </section>
   );
 };
