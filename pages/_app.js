@@ -17,6 +17,7 @@ import "../assets/scss/responsive-main.scss";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "../components/product-review/productListForReview.css"
 toast.configure();
 
 // Import axios.js so that it can inject token in every request

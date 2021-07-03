@@ -18,7 +18,7 @@ const ProfileSideBar = () => {
                     <Link href="/order">My Orders</Link>
                 </li>
                 <li>
-                    <Link href="productr-review">My Reviews</Link>
+                    <Link href="product-review">My Reviews</Link>
                 </li>
             </ul>
         </div>
