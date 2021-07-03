@@ -41,6 +41,7 @@
         "prop-types": "^15.7.2",
         "rc-menu": "^8.10.8",
         "react": "16.13.1",
+        "react-beautiful-horizontal-timeline": "^6.0.3",
         "react-bootstrap": "^1.6.1",
         "react-bootstrap-submenu": "^1.0.2",
         "react-component-countdown-timer": "^0.1.8",
