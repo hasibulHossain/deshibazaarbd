@@ -1,36 +1,39 @@
 import * as Types from "../types/Types";
 
-const initialState = {
-  loading: false,
-  products: [],
-  loading_add: false,
-  loading_update: false,
-  add_message: "",
-  delete_message: "",
-  error: null,
-  cartProduct: {
-    productID: null,
-    productName: '',
-    quantity: '',
-    price: '',
-    offerPrice: '',
-    productImage: ''
+const initialState    = {
+  loading             : false,
+  products            : [],
+  loading_add         : false,
+  loading_update      : false,
+  add_message         : "",
+  delete_message      : "",
+  error               : null,
+  cartProduct         : {
+    productID         : null,
+    productName       : '',
+    quantity          : '',
+    price             : '',
+    offerPrice        : '',
+    productImage      : ''
   },
   // Place Order Part
 
-  shippingCost: 0,
-  shippingCostLoading: false,
-  coupon: {
-    code: "",
-    carts: [
+  shippingCost        : 0,
+  shippingCostLoading : false,
+  coupon              : {
+    code              : "",
+    carts             : [
       {
-        productID: "",
-        quantity: ""
+        productID     : "",
+        quantity      : ""
       }
     ]
   },
-  couponLoading: false,
-  couponData: {}
+  couponLoading       : false,
+  couponData          : {},
+  orderList           : [],
+  filterOptionList    : [],
+  trackingTimelineList: [],
 };
 
 const OrderReducer = (state = initialState, action) => {
@@ -39,7 +42,7 @@ const OrderReducer = (state = initialState, action) => {
     case Types.APPLY_SHIPPING_COST:
       return {
         ...state,
-        shippingCost: action.payload.shipping,
+        shippingCost       : action.payload.shipping,
         shippingCostLoading: action.payload.shippingCostLoading
       };
 
@@ -50,6 +53,25 @@ const OrderReducer = (state = initialState, action) => {
         couponData   : action.payload.couponData,
         // coupon: initialState.coupon,
       };
+    case Types.GET_USER_ORDER_LIST:
+      return {
+        ...state,
+        orderList: action.payload.orderList,
+        isLoading: action.payload.isLoading,
+      };
+    case Types.GET_ORDER_FILTER_OPTION_DATA:
+      return {
+        ...state,
+        filterOptionList: action.payload.filterOptionList,
+        isLoading       : action.payload.isLoading,
+      };
+    case Types.GET_TRACKING_TIMELINE_DATA:
+      return {
+        ...state,
+        trackingTimelineList: action.payload.trackingTimelineList,
+        isLoading       : action.payload.isLoading,
+      };
+
 
     default:
       return {

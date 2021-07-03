@@ -43,5 +43,6 @@ export default combineReducers({
   ProfileUpdateReducer        : ProfileUpdateReducer,
   PaymentMethodReducer        : PaymentMethodReducer,
   ProductReducer              : ProductReducer,
-  OrderReducer                : OrderReducer
+  OrderReducer                : OrderReducer,
+
 });
