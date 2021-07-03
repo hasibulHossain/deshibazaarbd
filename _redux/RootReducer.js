@@ -21,7 +21,7 @@ import ProfileUpdateReducer from "../components/myprofile/_redux/Reducer/Profile
 import PaymentMethodReducer from "../components/PaymentMethod/_redux/Reducer/PaymentMethodReducer";
 import ProductReducer from "../components/products/_redux/Reducer/ProductReducer";
 import OrderReducer from "../components/orders/_redux/reducer/OrderReducer";
-import ProductReviewReducer from "../components/ProductReview/_redux/reducer/productReviewReducer";
+import ProductReviewReducer from "../components/product-review/_redux/reducer/productReviewReducer";
 
 export default combineReducers({
   GlobalReducer               : GlobalReducer,
