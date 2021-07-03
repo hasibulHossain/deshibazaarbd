@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserOrderList } from './_redux/action/MyOrderAction';
 import FilterOrderList from './FilterOrderList';
 import PageTitle from '../master/page-title/PageTitle.jsx'
+import { getUserOrderList } from './_redux/action/OrderAction';
 
-const MyOrder = () => {
+const OrderList = () => {
 
     const dispatch = useDispatch();
-    const { orderList, isLoading } = useSelector((state) => state.MyOrderReducer);
+    const { orderList, isLoading } = useSelector((state) => state.OrderReducer);
 
     useEffect(() => {
         dispatch(getUserOrderList(1))
@@ -37,4 +37,4 @@ const MyOrder = () => {
     );
 };
 
-export default MyOrder;
+export default OrderList;

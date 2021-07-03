@@ -1,7 +1,7 @@
 import React from "react";
 import MainLayout from "../../components/layouts/MainLayout";
 import ProfileSideBar from "../../components/myprofile/ProfileSideBar";
-import OrderDetails from "../../components/myOrder/OrderDetails";
+import OrderDetails from "../../components/orders/OrderDetails";
 
 export default function ManageOrder({ order }) {
 

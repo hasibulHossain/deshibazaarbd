@@ -1,18 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Select from 'react-select';
 import LoadingSkelleton from '../master/skelleton/LoadingSkelleton.jsx';
 import Link from 'next/link'
+import { useDispatch, useSelector } from 'react-redux';
+import { getFilterOptionDataForOrderList } from './_redux/action/OrderAction.js';
 
 const FilterOrderList = ({ orderList, isLoading }) => {
 
-    const options = [
-        { value   : 'All',           label: 'all' },
-        { value   : 'last_5_orders', label: 'Last 5 Orders' },
-        { value   : 'last_15_days',  label: 'Last 15 Days' },
-        { value   : 'last_30_days',  label: 'Last 30 Days' },
-        { value   : 'last_2_month',  label: 'Last 2 Months' },
-        { value   : 'last_6_month',  label: 'Last 6 Months' },
-    ]
+    const dispatch = useDispatch();
+    const { filterOptionList } = useSelector((state) => state.OrderReducer);
+
+    useEffect(() => {
+        dispatch(getFilterOptionDataForOrderList(1))
+    }, [])
 
     return (
         <>
@@ -23,13 +23,13 @@ const FilterOrderList = ({ orderList, isLoading }) => {
                         <Select
                             className       = "basic-single"
                             classNamePrefix = "select"
-                            defaultValue    = {options[0]}
+                            defaultValue    = {filterOptionList[0]}
                             isDisabled      = {false}
                             isLoading       = {false}
                             isClearable     = {true}
                             isSearchable    = {true}
                             name            = "color"
-                            options         = {options}
+                            options         = {filterOptionList}
                         />
                     </div>
                 </div>
@@ -38,10 +38,10 @@ const FilterOrderList = ({ orderList, isLoading }) => {
             {isLoading && (
                 <div className="card shadow-sm mt-3 p-1">
                     <LoadingSkelleton
-                        alignment = "vertical"
-                        count     = {1}
-                        width     = "100%"
-                        height    = {150}
+                        alignment="vertical"
+                        count={1}
+                        width="100%"
+                        height={150}
                     />
                 </div>
             )}
