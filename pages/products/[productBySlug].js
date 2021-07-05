@@ -1,8 +1,8 @@
 import React from "react";
 import { useRouter } from 'next/router';
 import MainLayout from "../../components/layouts/MainLayout";
-import ProductDetailInfo from "../../components/product-detail/ProductDetailInfo";
 import LoadingSkelleton from "../../components/master/skelleton/LoadingSkelleton";
+import ProductDetailInfo from "../../components/product-detail/ProductDetailInfo"
 
 export default function ProductBySlug({ product }) {
     const router = useRouter();

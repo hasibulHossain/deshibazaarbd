@@ -29,6 +29,7 @@ export const getCartsAction = () => async (dispatch) => {
  */
 export const addToCartAction = (product, args = {}) => async (dispatch) => {
   const carts    = getCartData();
+
   const quantity = typeof args['quantity'] !== 'undefined' ? args['quantity']: 1;
 
   // Check first if product is already added in the cart, then just update the quantity
@@ -50,7 +51,7 @@ export const addToCartAction = (product, args = {}) => async (dispatch) => {
       isOffer     : product.is_offer_enable,
       price       : product.default_selling_price,
       offerPrice  : product.offer_selling_price,
-      productImage: `${process.env.NEXT_PUBLIC_URL}images/products/${product.featured_image}`,
+      productImage: `${process.env.NEXT_PUBLIC_URL}public/images/products/${product.featured_image}`,
       sellerID    : product.seller_id,
       sellerName  : product.seller_name,
       sku         : product.sku,
