@@ -199,11 +199,11 @@ const ProductDetailInfo = (props) => {
                                 </button>
                               </div>
 
-                              <div className="row mt-3">
-                                <div className="col-md-6">
+                              <div className="row">
+                                <div className="col-md-6 mt-3">
                                   <button className="btn buy_now_btn">Buy Now</button>
                                 </div>
-                                <div className="col-md-6">
+                                <div className="col-md-6 mt-3">
                                   <button className="btn add_to_cart_btn" onClick={() => dispatch(addToCartAction(cartProduct))}>Add To Cart</button>
                                 </div>
                               </div>
