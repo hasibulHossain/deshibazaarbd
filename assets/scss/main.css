@@ -2464,7 +2464,7 @@ button.btn.buy_now_btn {
 .rating_body {
   border-bottom: 1px solid darkgrey;
 }
-.rating_body:last-child{
+.rating_body:last-child {
   border: none;
 }
 p.rating_by {
@@ -2473,4 +2473,58 @@ p.rating_by {
 }
 span.text-success.verify_review {
   font-weight: 700;
+}
+
+img.multiple_preview_images {
+  height: 85px;
+  padding: 0.25rem;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  -webkit-border-radius: 0.25rem;
+  border-radius: 0.25rem;
+  margin-top: 10px;
+}
+.slick-slide.slick-active:focus {
+  outline: none;
+}
+.product_preview_gallery .slick-prev,
+.product_preview_gallery .slick-next {
+  display: block !important;
+  background-color: red;
+  height: 25px;
+  width: 25px;
+  border-radius: 5px;
+  margin-top: -5px;
+}
+.slick-list {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  margin-left: 10px;
+}
+.js-image-zoom__zoomed-image {
+  border-radius: 6px !important;
+  z-index: 99999 !important;
+  width: 650px !important;
+  height: 380px !important;
+  right: -20px !important;
+  border: 1px solid #cdcdcd;
+  background-color: white !important;
+  box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+}
+.delivery_features_section{
+  border-bottom: 1px solid #cdcdcd;
+}
+small.delivery_time {
+  font-weight: 600;
+  color: #868888cc;
+}
+.product_details_font_awesome{
+  color: #b5b5b5;
+  margin-top: 6px;
+}
+.return_font_awesome{
+  color: #172337;
 }

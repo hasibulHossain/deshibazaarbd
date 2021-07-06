@@ -8,74 +8,52 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import SimpleBtn from "../master/SimpleBtn/SimpleBtn";
 import ReactImageZoom from "react-image-zoom";
-import { useRouter } from "next/router";
 import Link from "next/link";
-import ReactHtmlParser from "react-html-parser";
-import { addToCartAction, getCartsAction, updateCartQtyAction } from "../carts/_redux/action/CartAction";
+import { addToCartAction, getCartsAction } from "../carts/_redux/action/CartAction";
 import ProductDetailsDescription from "./ProductDetailsDescription";
 import AddWishList from "../Wishlist/AddWishList";
-import CartQuantity from "../carts/partials/CartQuantity";
 import ProductRatings from "./ProductRatings";
 import DeliveryFeatures from "./DeliveryFeatures";
+import Slider from "react-slick";
 
 const ProductDetailInfo = (props) => {
-  const { product } = props;
 
-  //product quantity set
-  const [quantity, setQuantity] = useState(1);
-
-  const router = useRouter();
-  const dispatch = useDispatch();
-  const carts = useSelector((state) => state.CartReducer.carts);
+  const dispatch                    = useDispatch();
+  const { product }                 = props;
+  const [quantity, setQuantity]     = useState(1);
+  const featured_image              = `${process.env.NEXT_PUBLIC_URL}public/images/products/${product.featured_image}`;
+  const [previewImg, setPreviewImg] = useState(featured_image);
+  const zoomImage                   = { width             :  200, height: 250, zoomWidth: 600, img: previewImg };
+  const userData                    = useSelector((state) => state.UserDataReducer.userData);
 
   useEffect(() => {
     dispatch(getCartsAction());
   }, []);
 
-
-
-  const featured_image = `${process.env.NEXT_PUBLIC_URL}public/images/products/${product.featured_image}`;
-  const [previewImg, setPreviewImg] = useState(featured_image);
   const handleChangePreviewImg = (image) => {
     setPreviewImg(image.image_url);
   };
-  const zoomImage = { height: 280, zoomWidth: 700, img: previewImg };
-  // const zoomImage = {width: 400, height: 250, zoomWidth: 500, img: previewImg}
-  const userData = useSelector((state) => state.UserDataReducer.userData);
-
-  // const handleBuyProduct = (cartProduct, id) => {
-  //   dispatch(addToCartAction(cartProduct, id));
-  //   if (userData !== null) {
-  //     router.push("/placeorder");
-  //   } else if (userData === null) {
-  //     router.push("/login");
-  //   }
-  // };
-
-  // let zoomImgProps;
-  // if (product) {
-  //   zoomImgProps = {
-  //     width: 400,
-  //     zoomWidth: 500,
-  //     zoomStyle: `opacity: 0.4;`,
-  //     img: cartProduct.productImage,
-  //   };
-  // }
-
   const cartProduct = {
-    id: product.id,
-    name: product.name,
-    quantity: quantity,
-    isOffer: product.is_offer_enable,
+    id                   : product.id,
+    name                 : product.name,
+    quantity             : quantity,
+    isOffer              : product.is_offer_enable,
     default_selling_price: product.default_selling_price,
-    offer_selling_price: product.offer_selling_price,
-    featured_image: product.featured_image,
-    seller_id: product.business.id,
-    seller_name: product.business.name,
-    sku: product.sku,
+    offer_selling_price  : product.offer_selling_price,
+    featured_image       : product.featured_image,
+    seller_id            : product.business.id,
+    seller_name          : product.business.name,
+    sku                  : product.sku,
   }
 
-  console.log('product :>> ', product);
+  const settings = {
+    dots          : false,
+    infinite      : true,
+    speed         : 500,
+    slidesToShow  : 3,
+    slidesToScroll: 3
+  };
+
   return (
     <>
       {
@@ -126,13 +104,19 @@ const ProductDetailInfo = (props) => {
                                 {...zoomImage}
                               />
                             </div>
-                            <div className="d-flex m-1 border-top pt-4 image-cart">
-                              <img onClick={() => handleChangePreviewImg({ image_url: featured_image })} src={featured_image} className="img-thumbnail multiple_preview_images pointer" alt="" />
-                              {
-                                product.images && product.images.length > 0 && product.images.map((item, index) => (
-                                  <img onClick={() => handleChangePreviewImg(item)} src={item.image_url} className="img-thumbnail multiple_preview_images" alt="" />
-                                ))
-                              }
+                            <div className="product_preview_gallery">
+                              <Slider {...settings}>
+                                <div>
+                                  <img onClick={() => handleChangePreviewImg({ image_url: featured_image })} src={featured_image} className="multiple_preview_images pointer" alt="" />
+                                </div>
+                                {
+                                  product.images && product.images.length > 0 && product.images.map((item, index) => (
+                                    <div key={index + 1} >
+                                      <img onClick={() => handleChangePreviewImg(item)} src={item.image_url} className="multiple_preview_images pointer" alt="" />
+                                    </div>
+                                  ))
+                                }
+                              </Slider>
                             </div>
                           </div>
                           <div className="col-lg-8">

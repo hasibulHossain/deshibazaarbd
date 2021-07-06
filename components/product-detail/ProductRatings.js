@@ -17,8 +17,8 @@ const ProductRatings = ({ product }) => {
     // dispatch(getReviewListByUser(product.id, 0, 1));
   }, []);
 
-  const { itemList, reviewList, isLoading } = useSelector((state) => state.ProductReviewReducer);
-  console.log('reviewList :>> ', reviewList);
+  const { reviewList, isLoading } = useSelector((state) => state.ProductReviewReducer);
+
   return (
     <div className="row mt-3 mb-3">
       <div className="col-lg-9">
@@ -33,23 +33,23 @@ const ProductRatings = ({ product }) => {
           {
             isLoading && (
               <LoadingSkelleton
-                alignment="vertical"
-                count={1}
-                width="100%"
-                height={120}
+                alignment = "vertical"
+                count     = {1}
+                width     = "100%"
+                height    = {120}
               />
             )
           }
 
           {
             reviewList.length > 0 && reviewList.map((item, index) => (
-              <div className="rating_body">
+              <div className="rating_body" key={index}>
                 <ReactStars
-                  count={5}
-                  size={30}
-                  value={item.rating_value}
-                  edit={false}
-                  activeColor="#ffab00"
+                  count       = {5}
+                  size        = {30}
+                  value       = {item.rating_value}
+                  edit        = {false}
+                  activeColor = "#ffab00"
                 />
                 <p className="rating_by">By {item.rating_by} <span className="text-success verify_review"> <FontAwesomeIcon icon={faShieldAlt} /> Verified Purchase</span></p>
                 <p> {item.comment ? item.comment : "----"}</p>

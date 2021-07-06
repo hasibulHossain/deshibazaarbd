@@ -2,6 +2,7 @@ import React from 'react';
 import Parser from 'html-react-parser';
 
 const ProductDetailsDescription = ({ product }) => {
+    
     return (
         <div className="product_description">
             <div className="container">
