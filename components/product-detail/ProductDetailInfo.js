@@ -6,7 +6,6 @@ import Breadcrumb from "react-bootstrap/Breadcrumb";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import SimpleBtn from "../master/SimpleBtn/SimpleBtn";
 import ReactImageZoom from "react-image-zoom";
 import Link from "next/link";
 import { addToCartAction, getCartsAction } from "../carts/_redux/action/CartAction";
@@ -18,13 +17,13 @@ import Slider from "react-slick";
 
 const ProductDetailInfo = (props) => {
 
-  const dispatch                    = useDispatch();
-  const { product }                 = props;
-  const [quantity, setQuantity]     = useState(1);
-  const featured_image              = `${process.env.NEXT_PUBLIC_URL}public/images/products/${product.featured_image}`;
+  const dispatch = useDispatch();
+  const { product } = props;
+  const [quantity, setQuantity] = useState(1);
+  const featured_image = `${process.env.NEXT_PUBLIC_URL}public/images/products/${product.featured_image}`;
   const [previewImg, setPreviewImg] = useState(featured_image);
-  const zoomImage                   = { width             :  200, height: 250, zoomWidth: 600, img: previewImg };
-  const userData                    = useSelector((state) => state.UserDataReducer.userData);
+  const zoomImage = { width: 200, height: 250, zoomWidth: 600, img: previewImg };
+  const userData = useSelector((state) => state.UserDataReducer.userData);
 
   useEffect(() => {
     dispatch(getCartsAction());
@@ -34,23 +33,23 @@ const ProductDetailInfo = (props) => {
     setPreviewImg(image.image_url);
   };
   const cartProduct = {
-    id                   : product.id,
-    name                 : product.name,
-    quantity             : quantity,
-    isOffer              : product.is_offer_enable,
+    id: product.id,
+    name: product.name,
+    quantity: quantity,
+    isOffer: product.is_offer_enable,
     default_selling_price: product.default_selling_price,
-    offer_selling_price  : product.offer_selling_price,
-    featured_image       : product.featured_image,
-    seller_id            : product.business.id,
-    seller_name          : product.business.name,
-    sku                  : product.sku,
+    offer_selling_price: product.offer_selling_price,
+    featured_image: product.featured_image,
+    seller_id: product.business.id,
+    seller_name: product.business.name,
+    sku: product.sku,
   }
 
   const settings = {
-    dots          : false,
-    infinite      : true,
-    speed         : 500,
-    slidesToShow  : 3,
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
     slidesToScroll: 3
   };
 
@@ -105,18 +104,27 @@ const ProductDetailInfo = (props) => {
                               />
                             </div>
                             <div className="product_preview_gallery">
-                              <Slider {...settings}>
+                              {
+                                product.images && product.images.length > 0 &&
+                                <Slider {...settings}>
+                                  <div>
+                                    <img onClick={() => handleChangePreviewImg({ image_url: featured_image })} src={featured_image} className="multiple_preview_images pointer" alt="" />
+                                  </div>
+                                  {
+                                    product.images.map((item, index) => (
+                                      <div key={index + 1} >
+                                        <img onClick={() => handleChangePreviewImg(item)} src={item.image_url} className="multiple_preview_images pointer" alt="" />
+                                      </div>
+                                    ))
+                                  }
+                                </Slider>
+                              }
+                              {
+                                product.images && product.images.length === 0 &&
                                 <div>
                                   <img onClick={() => handleChangePreviewImg({ image_url: featured_image })} src={featured_image} className="multiple_preview_images pointer" alt="" />
                                 </div>
-                                {
-                                  product.images && product.images.length > 0 && product.images.map((item, index) => (
-                                    <div key={index + 1} >
-                                      <img onClick={() => handleChangePreviewImg(item)} src={item.image_url} className="multiple_preview_images pointer" alt="" />
-                                    </div>
-                                  ))
-                                }
-                              </Slider>
+                              }
                             </div>
                           </div>
                           <div className="col-lg-8">

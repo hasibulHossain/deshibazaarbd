@@ -7,7 +7,6 @@ import { updateCartQtyAction } from "../_redux/action/CartAction";
 
 const CartQuantity = ({ cart }) => {
 
-    console.log('cart :>> ', cart);
     const dispatch                = useDispatch();
     const [quantity, setQuantity] = useState(cart.quantity);
 

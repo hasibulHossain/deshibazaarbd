@@ -8,7 +8,6 @@ const AddWishList = ({ product }) => {
    
     const dispatch                    = useDispatch()
     const [isWishList, setIsWishList] = useState(false)
-    const isLoading                   = ((state) => state.wishListReducer.isLoading)
 
     const handleAddedWishList = (product) => {
         setIsWishList(true);
