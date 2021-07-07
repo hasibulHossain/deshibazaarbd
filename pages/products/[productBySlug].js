@@ -1,11 +1,11 @@
 import React from "react";
 import { useRouter } from 'next/router';
 import MainLayout from "../../components/layouts/MainLayout";
-import ProductDetailInfo from "../../components/product-detail/ProductDetailInfo";
 import LoadingSkelleton from "../../components/master/skelleton/LoadingSkelleton";
+import ProductDetailInfo from "../../components/product-detail/ProductDetailInfo"
 
 export default function ProductBySlug({ product }) {
-    const router = useRouter();
+    const router  = useRouter();
     const loading = false;
 
     return (
@@ -19,10 +19,10 @@ export default function ProductBySlug({ product }) {
                     <div className="mb-5">
                         {loading && (
                             <LoadingSkelleton
-                                alignment="vertical"
-                                count={1}
-                                width={730}
-                                height={200}
+                                alignment = "vertical"
+                                count     = {1}
+                                width     = {730}
+                                height    = {200}
                             />
                         )}
                     </div>
@@ -35,9 +35,9 @@ export default function ProductBySlug({ product }) {
 
 export const getServerSideProps = async (context) => {
     const productBySlug = context.params.productBySlug
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}get-item-detail/${productBySlug}`)
-    const dataJSON = await res.json();
-    const data = dataJSON.data;
+    const res           = await fetch(`${process.env.NEXT_PUBLIC_API_URL}get-item-detail/${productBySlug}`)
+    const dataJSON      = await res.json();
+    const data          = dataJSON.data;
     return {
         props: { product: data }
     }
