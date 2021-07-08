@@ -23,9 +23,8 @@ const DealFlash = () => {
         <div className="row">
           {flashDealList.length > 0 &&
             flashDealList.map((item, index) => {
-              const offerEndDate = new Date(item.offer_end_date).getTime();
-              const currentTime  = new Date().getTime();
-
+              const offerEndDate     = new Date(item.offer_end_date).getTime();
+              const currentTime      = new Date().getTime();
               const offerEndCount    = (offerEndDate - currentTime) / 1000
               const isOfferAvailable = offerEndCount > 1;
 
