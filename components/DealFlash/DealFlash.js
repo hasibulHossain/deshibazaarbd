@@ -22,7 +22,14 @@ const DealFlash = () => {
       <div className="flash-deal-section">
         <div className="row">
           {flashDealList.length > 0 &&
-            flashDealList.map((item, index) => (
+            flashDealList.map((item, index) => {
+              const offerEndDate = new Date(item.offer_end_date).getTime();
+              const currentTime  = new Date().getTime();
+
+              const offerEndCount    = (offerEndDate - currentTime) / 1000
+              const isOfferAvailable = offerEndCount > 1;
+
+              return (
               <div className="col-md-6" key={index + 1}>
                 <div className="flash-deal-card p-3">
                   <div className="flash-deal-img">
@@ -35,7 +42,7 @@ const DealFlash = () => {
                   <div className="flash-deal-detail">
                     <h3 className="title">{item.name}</h3>
                     <ReactStars
-                      value={item.average_rating}
+                      value={+item.average_rating}
                       // onChange={ratingChanged}
                       size={24}
                       edit={false}
@@ -50,7 +57,7 @@ const DealFlash = () => {
                     </p>
                     <div className="flash-count">
                       <CountdownTimer
-                        count={999999}
+                        count={isOfferAvailable ? offerEndCount : 0}
                         showTitle
                         size={20}
                         labelSize={18}
@@ -59,7 +66,7 @@ const DealFlash = () => {
                   </div>
                 </div>
               </div>
-            ))}
+            )})}
         </div>
       </div>
     </section>
