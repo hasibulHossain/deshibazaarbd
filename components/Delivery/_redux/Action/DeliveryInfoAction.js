@@ -1,9 +1,9 @@
 import Axios from "axios";
 import { showToast } from "../../../master/Helper/ToastHelper";
-import { getCartsAction } from "../../../_redux/CartProduct/Action/CartAction";
 import * as Types from "../Type/Types";
 import moment from "moment";
 import { decrypt, encrypt } from "../../../master/utils/EncryptHelper";
+import { getCartsAction } from "../../../carts/_redux/action/CartAction";
 
 // import { useRouter } from "next/router";
 

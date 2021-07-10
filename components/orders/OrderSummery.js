@@ -2,13 +2,12 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Card } from 'react-bootstrap'
 import { useForm } from 'react-hook-form';
-
 import { handleApplyCouponCode, handleChangeCouponInput, handleShippingCost } from './_redux/action/OrderAction';
 import { getCartsAction } from '../carts/_redux/action/CartAction';
 import ErrorMessage from '../master/ErrorMessage/ErrorMessage'
 import { activeCurrency, formatCurrency } from '../../services/currency';
 
-const OrderSummary = ({ handleClick, buttonText }) => {
+const OrderSummery = ({ handleClick, buttonText }) => {
     const dispatch                           = useDispatch();
     const { register, handleSubmit, errors } = useForm();
     const isSubmitting                       = useSelector((state) => state.DeliveryInfoReducer.isSubmitting);
@@ -150,4 +149,4 @@ const OrderSummary = ({ handleClick, buttonText }) => {
     );
 };
 
-export default OrderSummary;
+export default OrderSummery;

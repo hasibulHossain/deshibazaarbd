@@ -17,14 +17,16 @@ import { getCartsAction } from "../components/carts/_redux/action/CartAction";
 import CartProduct from "../components/carts/cart-product/CartProduct";
 import { getUserDataAction } from "../components/_redux/getUserData/Action/UserDataAction";
 import { useRouter } from "next/router";
-import OrderSummary from '../components/orders/OrderSummary'
+import OrderSummery from '../components/orders/OrderSummery'
+import ShippingInfo from "../components/ShippingInfo/ShippingInfo";
+import CheckoutPaymentMethod from "../components/ShippingInfo/CheckoutPaymentMethod";
 
 export default function Carts() {
-  const router                       = useRouter();
-  const dispatch                     = useDispatch();
-  const { isModalActive }            = useSelector((state) => state.GlobalReducer);
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const { isModalActive } = useSelector((state) => state.GlobalReducer);
   const { supplierWiseCarts, carts } = useSelector((state) => state.CartReducer);
-  const userData                     = useSelector((state) => state.UserDataReducer.userData);
+  const userData = useSelector((state) => state.UserDataReducer.userData);
 
 
   const deleteItemsHandler = () => {
@@ -136,12 +138,12 @@ export default function Carts() {
                   <div className="p-2">
                     <div className="text-center" >
                       <Link href="/products">
-                          <a href="" style={{ display: 'inline-block' }}>
-                            <SimpleBtn variant="success" >
-                              <FontAwesomeIcon className="mr-2" icon={faShoppingBag} />
-                              CONTINUE SHOPPING
-                            </SimpleBtn>
-                          </a>
+                        <a href="" style={{ display: 'inline-block' }}>
+                          <SimpleBtn variant="success" >
+                            <FontAwesomeIcon className="mr-2" icon={faShoppingBag} />
+                            CONTINUE SHOPPING
+                          </SimpleBtn>
+                        </a>
                       </Link>
                     </div>
                   </div>
@@ -150,7 +152,9 @@ export default function Carts() {
             </div>
 
             <div className="col-md-4 cart_checkout_margin">
-              <OrderSummary handleClick={placeOrder} buttonText="PROCESS TO CHECKOUT" />
+              <ShippingInfo />
+              <CheckoutPaymentMethod />
+              <OrderSummery handleClick={placeOrder} buttonText="PROCESS TO CHECKOUT" />
             </div>
 
           </div>

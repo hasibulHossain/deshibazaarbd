@@ -22,6 +22,7 @@ import PaymentMethodReducer from "../components/PaymentMethod/_redux/Reducer/Pay
 import ProductReducer from "../components/products/_redux/Reducer/ProductReducer";
 import OrderReducer from "../components/orders/_redux/reducer/OrderReducer";
 import ProductReviewReducer from "../components/product-review/_redux/reducer/productReviewReducer";
+import ShippingInfoReducer from "../components/ShippingInfo/_redux/Reducer/ShippingInfoReducer";
 
 export default combineReducers({
   GlobalReducer               : GlobalReducer,
@@ -45,5 +46,6 @@ export default combineReducers({
   PaymentMethodReducer        : PaymentMethodReducer,
   ProductReducer              : ProductReducer,
   OrderReducer                : OrderReducer,
-  ProductReviewReducer        : ProductReviewReducer
+  ProductReviewReducer        : ProductReviewReducer,
+  ShippingInfoReducer         : ShippingInfoReducer
 });

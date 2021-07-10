@@ -2,14 +2,14 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 // local import
 import MainLayout from "../components/layouts/MainLayout";
-import { getCartsAction, handleShippingCost } from "../components/_redux/CartProduct/Action/CartAction";
-import CartProduct from "../components/CartProducts/CartProduct.js/CartProduct";
 import { getUserDataAction } from "../components/_redux/getUserData/Action/UserDataAction";
 import { useRouter } from "next/router";
-import OrderSummery from '../components/master/OrderSummery/OrderSummery';
 import DeliveryInfo from '../components/Delivery/DeliveryInfo';
 import { storeSells } from "../components/Delivery/_redux/Action/DeliveryInfoAction";
-// import CartProduct from "../components/CartProducts/CartProduct.js/CartProduct";
+import OrderSummery from "../components/orders/OrderSummery";
+import CartProduct from "../components/carts/cart-product/CartProduct";
+import { getCartsAction } from "../components/carts/_redux/action/CartAction";
+import { handleShippingCost } from "../components/orders/_redux/action/OrderAction";
 
 export default function Carts() {
   const router = useRouter();
@@ -58,7 +58,7 @@ export default function Carts() {
                   {
                     carts.length > 0 && carts.map((item, index) => (
                       <div className="cart_items_details" key={index + 1}>
-                        <CartProduct item={item} />
+                        <CartProduct cart={item} />
                       </div>
                     ))
                   }

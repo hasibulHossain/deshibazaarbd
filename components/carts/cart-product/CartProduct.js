@@ -10,9 +10,7 @@ import { toggleProductModalAction } from '../../products/_redux/Action/ProductAc
 
 const CartProduct = ({ cart }) => {
   const dispatch = useDispatch();
-  
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = (cart) => setShow(true);
 
