@@ -40,7 +40,7 @@ const OrderSummery = ({ handleClick, buttonText }) => {
 
     return (
         <>
-            <Card>
+            <Card className="mb-3">
                 <div className="cart__right-container">
                     <div className="cart__right-header">
                         <p>Order Summary </p>
