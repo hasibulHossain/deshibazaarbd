@@ -5,9 +5,10 @@ import { faComments, faExclamationCircle, faGift } from '@fortawesome/free-solid
 import OrderTracking from './OrderTracking.js';
 import SimpleTooltip from '../master/Tooltip/SimpleTooltip'
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 const OrderDetails = ({ order }) => {
-
+    const router = useRouter();
     const [showTooltip, setShowTooltip] = useState(false);
     const [target, setTarget]           = useState(null);
     const ref                           = useRef(null);
@@ -16,6 +17,8 @@ const OrderDetails = ({ order }) => {
         setShowTooltip(!showTooltip);
         setTarget(event.target);
     };
+    // get order id for fetch order details
+    const {manageOrder} = router.query;
     return (
         <>
             <PageTitle title="Order Details" />

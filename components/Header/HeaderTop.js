@@ -4,10 +4,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShippingFast, faUser } from '@fortawesome/free-solid-svg-icons'
 import { getCurrencies, activeCurrency } from '../../services/currency';
 import Link from "next/link";
+import SimpleModal from '../master/Modal/SimpleModal';
+import TrackingForm from './TrackingForm';
 
 const HeaderTop = () => {
-
     const [currencies, setCurrencies] = useState([]);
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     useEffect(() => {
         setCurrencies(getCurrencies());
@@ -26,10 +30,10 @@ const HeaderTop = () => {
                                 <FontAwesomeIcon className="custom-fontAwesome" icon={faUser} /> Become a seller
                             </p>
 
-                            <p className="heading-top-text pointer">
+                            <p className="heading-top-text pointer" onClick={() => handleShow()}>
                                 <FontAwesomeIcon className="custom-fontAwesome" icon={faShippingFast} /> Track My Order
                             </p>
-                            
+
                             <p className="heading-top-text pointer">
                                 <Link href="/profile">
                                     <a href="/" className="text-white">
@@ -37,16 +41,16 @@ const HeaderTop = () => {
                                     </a>
                                 </Link>
                             </p>
-                            
+
                             <Dropdown className="dropdown-currency">
                                 <Dropdown.Toggle variant="default" id="dropdown-basic">
                                     <img src={activeCurrency('flag_link')} width={30} /> {activeCurrency('code')}
                                 </Dropdown.Toggle>
 
-                                <Dropdown.Menu> 
+                                <Dropdown.Menu>
                                     {
                                         currencies.length > 0 && currencies.map((currency, index) => (
-                                            <Dropdown.Item href="#"  key={index} className={activeCurrency('code') === currency.code ? 'bg-light' : ''}>
+                                            <Dropdown.Item href="#" key={index} className={activeCurrency('code') === currency.code ? 'bg-light' : ''}>
                                                 <img src={currency.flag_link} width={30} />  {currency.code}
                                             </Dropdown.Item>
                                         ))
@@ -57,8 +61,15 @@ const HeaderTop = () => {
                     </div>
                 </div>
             </div>
+            <SimpleModal
+                handleClose={handleClose}
+                size={"md"}
+                show={show}
+            >
+                <TrackingForm show={show} setShow={setShow} />
+            </SimpleModal>
         </section>
     );
 };
 
-export default memo( HeaderTop );
+export default memo(HeaderTop);
