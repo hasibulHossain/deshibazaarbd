@@ -19,12 +19,12 @@ const ProductTopList = () => {
                     topProductList.length > 0 && topProductList.map((item, index) => (
                         <div key={index} className="top-product-card">
                             <div className="top-product-details">
-                               <p className="title">{item.title}</p>
+                               <p className="title">Hot Deal Products</p>
                                <h5 className="top-product-name">{item.name}</h5>
-                               <p>Price: <span className="price">${item.price}</span> <sup>99</sup></p>
+                               <p>Price: <span className="price">${item.default_selling_price}</span> <sup>99</sup></p>
                             </div>
                             <div className="top-product-banner">
-                                <img src={item.productImg} alt={item.title} className="img-fluid" />                             
+                                <img src={`${process.env.NEXT_PUBLIC_URL}images/products/${item.featured_image}`} alt={item.name} className="img-fluid" />                             
                             </div>
                         </div>
                     ))
