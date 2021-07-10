@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getDealFlashList } from "./_redux/Action/DealFlashAction";
 import ReactStars from "react-rating-stars-component";
 import CountdownTimer from "react-component-countdown-timer";
+import { toggleProductModalAction } from "../products/_redux/Action/ProductAction";
 
 const DealFlash = () => {
 
@@ -29,7 +30,7 @@ const DealFlash = () => {
               const isOfferAvailable = offerEndCount > 1;
 
               return (
-              <div className="col-md-6" key={index + 1}>
+              <div className="col-md-6" key={index + 1} onClick={() => dispatch(toggleProductModalAction(item.sku))}>
                 <div className="flash-deal-card p-3">
                   <div className="flash-deal-img">
                     <img

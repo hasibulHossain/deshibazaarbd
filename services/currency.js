@@ -8,12 +8,12 @@
  */
 export function getCurrencies () {
     const currencies = [
-        {
-            'code'     : 'USD',
-            'sign'     : '$',
-            'flag_link': '/images/languages/usa.png',
-            'active'   : false
-        },
+        // {
+        //     'code'     : 'USD',
+        //     'sign'     : '$',
+        //     'flag_link': '/images/languages/usa.png',
+        //     'active'   : false
+        // },
         {
             'code'     : 'BDT',
             'sign'     : '৳',

@@ -5,6 +5,7 @@ import SocialMedia from "../Footer/SocialMedia";
 import ReactImageZoom from "react-image-zoom";
 import Link from "next/link";
 import PriceCalculation from "./partials/PriceCalculation";
+import ShareProduct from "./partials/ShareProduct";
 
 const ProductSingleFull = ({ product }) => {
     const [quantity, setQuantity] = useState(1);
@@ -125,7 +126,7 @@ const ProductSingleFull = ({ product }) => {
                                     </div>
                                 </div>
                                 <div className="Product_bottom_socail_media">
-                                    <SocialMedia />
+                                    <ShareProduct product={product} />
                                 </div>
                             </div>
                         </div>
