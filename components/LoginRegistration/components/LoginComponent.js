@@ -108,24 +108,18 @@ const LoginComponent = () => {
                         </div>
 
                         <div className="account_btn_group">
-                            {/* <button className="btn account_btn mt-2">SIGN IN</button> */}
 
                             {
-                                !isLogging && (
+                                !isLoading && (
                                     <button className="btn account_btn mt-2">SIGN IN</button>
                                 )
                             }
                             {
-                                isLogging && (
+                                isLoading && (
                                     <button disabled={true} type="submit" className="btn account_btn mt-2">
-                                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>    Logging
+                                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                        signing...
                                     </button>
-                                    //         <a>
-                                    //             {" "}
-                                    //             <Button disabled={true} variant="primary" type="submit">
-                                    //                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Login
-                                    // </Button>
-                                    //         </a>
                                 )
                             }
 

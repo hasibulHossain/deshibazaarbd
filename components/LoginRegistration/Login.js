@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, {  useState } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import LoginComponent from './components/LoginComponent';
 import RegistrationComponent from './components/RegistrationComponent'
 const Login = () => {
     const [key, setKey] = useState('sign-in');
-
+    
     return (
         <div>
             <div className="container">
