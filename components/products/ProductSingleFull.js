@@ -5,8 +5,13 @@ import ReactImageZoom from "react-image-zoom";
 import Link from "next/link";
 import PriceCalculation from "./partials/PriceCalculation";
 import ShareProduct from "./partials/ShareProduct";
+import { useDispatch } from "react-redux";
+import { addToCartAction } from "../carts/_redux/action/CartAction";
+import { showToast } from "../master/Helper/ToastHelper";
+import router from "next/router";
 
 const ProductSingleFull = ({ product }) => {
+    const dispatch = useDispatch();
     const [quantity, setQuantity] = useState(1);
     const [previewImg, setPreviewImg] = useState(null);
     const zoomImg = { width: 200, height: 250, zoomWidth: 600, img: previewImg };
@@ -16,6 +21,24 @@ const ProductSingleFull = ({ product }) => {
             setPreviewImg(product.featured_url);
         }
     }, [product]);
+
+    const addToCart = () => {
+        if (parseInt(product.current_stock) === 0) {
+            showToast("error", "This product is out of stock!");
+        } else {
+            dispatch(addToCartAction(product));
+        }
+    }
+
+    const redirectToCheckoutPage = () => {
+        if (parseInt(product.current_stock) === 0) {
+            showToast("error", "This product is out of stock!");
+        } else {
+            dispatch(addToCartAction(product));
+            router.push("/checkout")
+
+        }
+    }
 
     return (
         <>
@@ -97,8 +120,8 @@ const ProductSingleFull = ({ product }) => {
                                     </div>
                                 </div>
                                 <div className="d-flex mt-3">
-                                    <div className="button addToCartBtn">Add to cart</div>
-                                    <div className="button buyBtn">Buy now</div>
+                                    <div className="button addToCartBtn" onClick={() => addToCart()}>Add to cart</div>
+                                    <div className="button buyBtn" onClick={() => redirectToCheckoutPage()}>Buy now</div>
                                 </div>
                             </div>
                             <div className="product_details_bottom mt-2">
