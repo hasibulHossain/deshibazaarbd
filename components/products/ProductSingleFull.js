@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import SocialMedia from "../Footer/SocialMedia";
 import ReactImageZoom from "react-image-zoom";
 import Link from "next/link";
 import PriceCalculation from "./partials/PriceCalculation";
@@ -9,20 +8,12 @@ import ShareProduct from "./partials/ShareProduct";
 
 const ProductSingleFull = ({ product }) => {
     const [quantity, setQuantity] = useState(1);
-    // const [previewImg, setPreviewImg] = useState(product.featured_image);
     const [previewImg, setPreviewImg] = useState(null);
-    const previewImage = {
-        zoomWidth: 400,
-        // vertical: 1,
-        // horizontal: 2,
-        scale: 0.5,
-        zoomLensStyle: "opacity: 0.7;background-color: #ff3e2081;",
-        img: previewImg,
-    };
+    const zoomImg = { width: 200, height: 250, zoomWidth: 600, img: previewImg };
 
     useEffect(() => {
         if (product) {
-            setPreviewImg(product.featured_image);
+            setPreviewImg(product.featured_url);
         }
     }, [product]);
 
@@ -34,7 +25,8 @@ const ProductSingleFull = ({ product }) => {
                         <div className="product_details_img_gallery">
                             <img
                                 src={product.featured_url}
-                                // onClick={() => setPreviewImg(product.productImg)}
+                                className={previewImg == product.featured_url ? "select_img" : ""}
+                                onClick={() => setPreviewImg(product.featured_url)}
                                 alt={product.name}
                             />
                             {product.images &&
@@ -43,22 +35,21 @@ const ProductSingleFull = ({ product }) => {
                                     <img
                                         src={img.image_url}
                                         className={
-                                            previewImage.img == img.image ? "select_img" : ""
+                                            previewImg == img.image_url ? "select_img" : ""
                                         }
                                         alt={img.image_title}
                                         key={index}
-                                        onClick={() => setPreviewImg(img.image)}
+                                        onClick={() => setPreviewImg(img.image_url)}
                                     />
                                 ))}
                         </div>
                     </div>
                     <div className="col-md-5">
                         <div className="product_img">
-                            <img src={product.featured_url} alt={product.name} />
                             {/* <ReactImageZoom
-                {...previewImage}
-                className="product-details-img"
-              /> */}
+                                {...zoomImg}
+                            /> */}
+                            <img src={previewImg} alt={product.name} />
                         </div>
                     </div>
                     <div className="col-md-6">
@@ -88,7 +79,7 @@ const ProductSingleFull = ({ product }) => {
                                         >
                                             <FontAwesomeIcon icon={faMinus} />
                                         </button>
-                                        <input type="text" value={quantity} onChange={() => {}}/>
+                                        <input type="text" value={quantity} onChange={() => { }} />
                                         <button
                                             className="pointer"
                                             onClick={() => setQuantity(quantity + 1)}

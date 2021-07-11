@@ -81,7 +81,7 @@ export const customerRegister = (registerInput) => async (dispatch) => {
     message: null,
     status: false,
     data: null,
-    IsCreating: true,
+    isCreating: true,
   };
   dispatch({ type: Types.AUTH_REGISTER, payload: response });
   axios
@@ -90,7 +90,7 @@ export const customerRegister = (registerInput) => async (dispatch) => {
       if (res.data.status) {
         response.message = res.data.message;
         response.data = null;
-        response.IsCreating = false;
+        response.isCreating = false;
         showToast("success", response.message);
         dispatch({ type: Types.AUTH_REGISTER, payload: response });
       }
@@ -98,7 +98,7 @@ export const customerRegister = (registerInput) => async (dispatch) => {
     .catch((err) => {
       const { response } = err;
       const { request, ...errorObject } = response;
-      response.IsCreating = false;
+      response.isCreating = false;
       dispatch({ type: Types.AUTH_REGISTER, payload: response });
       showToast("error", response.data.message);
     });
