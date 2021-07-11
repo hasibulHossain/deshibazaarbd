@@ -3,7 +3,7 @@ import { Modal } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faTimes, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { deleteCartItemAction } from '../_redux/action/CartAction';
+import { deleteCartItemAction, toggleAllCartSelection } from '../_redux/action/CartAction';
 import CartQuantity from '../partials/CartQuantity';
 import { formatCurrency } from '../../../services/currency';
 import { toggleProductModalAction } from '../../products/_redux/Action/ProductAction';
@@ -49,7 +49,7 @@ const CartProduct = ({ cart }) => {
         <div className="col-md-7">
           <div className="product_cart_inner row">
             <div className="col-4 product_cart_left">
-              <input type="checkbox" className="cart-checkbox" />
+              <input type="checkbox" className="cart-checkbox"  checked={cart.isChecked} onClick={() => dispatch(toggleAllCartSelection(! cart.isChecked, cart.productID))} />
               <img
                 src={cart.productImage === null ? 'https://img.icons8.com/plasticine/2x/image.png' : cart.productImage }
                 alt={cart.productName}
@@ -84,7 +84,7 @@ const CartProduct = ({ cart }) => {
         <div className="col-md-4">
           <div className="product_cart_purchase">
             <CartQuantity cart={cart} />
-            <FontAwesomeIcon className="cart_wish_list" icon={faHeart} />
+            {/* <FontAwesomeIcon className="cart_wish_list" icon={faHeart} /> */}
             <FontAwesomeIcon className="remove_product_from_cart" icon={faTrash} onClick={() => handleShow(cart)} />
           </div>
         </div>

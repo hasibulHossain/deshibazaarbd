@@ -55,6 +55,7 @@ export const addToCartAction = (product, args = {}) => async (dispatch) => {
       sellerID    : product.seller_id,
       sellerName  : product.seller_name,
       sku         : product.sku,
+      isChecked   : false,
       additional  : {}
     }
   
@@ -92,6 +93,38 @@ export const updateCartQtyAction = (productID, quantity = 1) => async (dispatch)
 };
 
 /**
+ * Toggle all carts are selected or deselected
+ * 
+ * @since 1.0.0
+ * 
+ * @param boolean checked 
+ * 
+ * @return void
+ */
+export const toggleAllCartSelection = (checked = true, productID = null ) => dispatch => {
+  const carts = getCartData();
+
+  if ( productID === null ) {
+    carts.forEach( ( cart, index ) => {
+        cart.isChecked = checked;
+        carts[index]   = cart;
+    });
+  } else {
+    carts.forEach( ( cart, index ) => {
+      if(cart.productID === productID) {
+        cart.isChecked = checked;
+        carts[index]   = cart;
+      }
+    });
+  }
+  
+  // dispatch({ type: Types.TOGGLE_ALL_CART_SELECT, payload: checked });
+
+  localStorage.setItem( 'carts', JSON.stringify( carts ) );
+  dispatch(getCartsAction());
+}
+
+/**
  * Delete carts data
  * 
  * @since 1.0.0
@@ -125,6 +158,7 @@ export const getSupplierWiseCartsData = () => {
     const supplierWiseItem = data[index];
 
     let singleSupplierCart = {
+      isChecked : supplierWiseItem.every(item => item.isChecked === true ),
       data      : supplierWiseItem,
       sellerID  : supplierWiseItem.length > 0 ? supplierWiseItem[0]['sellerID']  : null,
       sellerName: supplierWiseItem.length > 0 ? supplierWiseItem[0]['sellerName']: null

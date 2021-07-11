@@ -1,13 +1,16 @@
 import React, { useEffect } from "react";
+import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 // local import
 import MainLayout from "../components/layouts/MainLayout";
-import { getUserDataAction } from "../components/_redux/getUserData/Action/UserDataAction";
-import { useRouter } from "next/router";
-import DeliveryInfo from '../components/Delivery/DeliveryInfo';
-import { storeSells } from "../components/Delivery/_redux/Action/DeliveryInfoAction";
+import ShippingInfo from "../components/ShippingInfo/ShippingInfo";
+import CheckoutPaymentMethod from "../components/ShippingInfo/CheckoutPaymentMethod";
 import OrderSummery from "../components/orders/OrderSummery";
 import CartProduct from "../components/carts/cart-product/CartProduct";
+import DeliveryInfo from '../components/Delivery/DeliveryInfo';
+
+import { getUserDataAction } from "../components/_redux/getUserData/Action/UserDataAction";
+import { storeSells } from "../components/Delivery/_redux/Action/DeliveryInfoAction";
 import { getCartsAction } from "../components/carts/_redux/action/CartAction";
 import { handleShippingCost } from "../components/orders/_redux/action/OrderAction";
 
@@ -23,14 +26,9 @@ export default function Carts() {
   const shippingCost = useSelector((state) => state.CartReducer.shippingCost);
 
   useEffect(() => {
-    if (typeof window === "undefined") {
-      global.window = {};
-    }
     dispatch(getCartsAction());
     dispatch(getUserDataAction());
     dispatch(handleShippingCost(carts))
-
-
   }, []);
 
 
@@ -38,6 +36,7 @@ export default function Carts() {
     dispatch(storeSells(customerInfo, carts, totalQuantity, shippingCost, totalPrice));
     router.push('/payment-system')
   }
+  
   return (
     <>
       <MainLayout pageTitle="checkout">
@@ -66,7 +65,9 @@ export default function Carts() {
               </div>
             </div>
             <div className="col-md-4 cart_checkout_margin">
+              <ShippingInfo />
               <OrderSummery handleClick={() => handleStoreOrder()} buttonText="PROCEED TO PAY" />
+              <CheckoutPaymentMethod />
             </div>
           </div>
         </div>
