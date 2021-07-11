@@ -13,6 +13,8 @@ const initialState = {
     max_price: null,
     attributes: null,
     rating: null,
+    order_by: "",
+    order: "",
     page: 1,
     paginate_no: 10,
   },

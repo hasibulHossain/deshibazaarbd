@@ -33,6 +33,8 @@ const CategoryFilter = () => {
     attributes,
     rating,
     paginate_no,
+    order_by,
+    order
   } = filterParams;
 
   // checkbox handler
@@ -145,6 +147,8 @@ const CategoryFilter = () => {
     rating,
     search,
     paginate_no,
+    order_by,
+    order
   ]);
 
   return (
