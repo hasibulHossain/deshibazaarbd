@@ -12,6 +12,7 @@ import ReactStars from "react-rating-stars-component";
 import { activeCurrency } from "../../services/currency";
 import { getCategories } from "../category/_redux/Action/CategoryAction";
 import {useRouter} from 'next/router'
+import Axios from 'axios'
 
 const CategoryFilter = () => {
   const router = useRouter();
@@ -35,7 +36,8 @@ const CategoryFilter = () => {
     paginate_no,
     order_by,
     order,
-    type
+    type,
+    page
   } = filterParams;
 
   // checkbox handler
@@ -142,11 +144,16 @@ const CategoryFilter = () => {
   }, [brandQuery, categoryQuery, typeQuery]);
 
   useEffect(() => {
-    dispatch(getFilteredProducts(filterParams));
+    const source = Axios.CancelToken.source();
+    dispatch(getFilteredProducts(filterParams, source));
+    console.log('from use effect => ', filterParams)
+    return () => {
+      source.cancel()
+    }
   }, [
     attributes,
-    brand.length,
-    category.length,
+    JSON.stringify(brand),
+    JSON.stringify(category),
     max_price,
     min_price,
     rating,
@@ -154,7 +161,8 @@ const CategoryFilter = () => {
     paginate_no,
     order_by,
     order,
-    type
+    type,
+    page
   ]);
 
   return (

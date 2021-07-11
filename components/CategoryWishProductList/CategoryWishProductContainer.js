@@ -36,22 +36,22 @@ const CategoryWishProductContainer = () => {
     filterParamClone.page  = page;
 
     if (direction === "previous") {
-      dispatch(getFilteredProducts(filterParamClone));
+      // dispatch(getFilteredProducts(filterParamClone));
       dispatch(setFilterParams(filterParamClone));
-    } else if (direction === "linier") {
-      dispatch(getFilteredProducts(filterParamClone));
+    } else if (direction === "linier") { 
+      // dispatch(getFilteredProducts(filterParamClone));
       dispatch(setFilterParams(filterParamClone));
     } else if (direction === "next") {
-      dispatch(getFilteredProducts(filterParamClone));
+      // dispatch(getFilteredProducts(filterParamClone));
       dispatch(setFilterParams(filterParamClone));
     }
   };
 
-  useEffect(() => {
-    if (!paginate.first_page_url) {
-      dispatch(getFilteredProducts(filterParams));
-    }
-  }, [paginate.next_page_url]);
+  // useEffect(() => {
+  //   if (!paginate.first_page_url) {
+  //     dispatch(getFilteredProducts(filterParams));
+  //   }
+  // }, [paginate.next_page_url]);
 
   return (
     <section className="product-container">

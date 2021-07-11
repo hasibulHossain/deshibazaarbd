@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Slider from 'react-slick';
 import TopProductSlickSetting from './TopProductSlickSetting';
 import { getTopProductList } from './_redux/Action/ProductTopListAction';
+import { toggleProductModalAction } from "../products/_redux/Action/ProductAction";
 
 const ProductTopList = () => {
     const dispatch = useDispatch();
@@ -17,7 +18,7 @@ const ProductTopList = () => {
             <Slider {...TopProductSlickSetting}>
                 {
                     topProductList.length > 0 && topProductList.map((item, index) => (
-                        <div key={index} className="top-product-card">
+                        <div key={index} className="top-product-card" onClick={() => dispatch(toggleProductModalAction(item.sku))}>
                             <div className="top-product-details">
                                <p className="title">Hot Deal Products</p>
                                <h5 className="top-product-name">{item.name}</h5>
