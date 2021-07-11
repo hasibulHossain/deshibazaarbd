@@ -27,7 +27,12 @@ const HeaderTop = () => {
                     <div className="col-md-7 heading-top-right">
                         <div className="row justify-content-end">
                             <p className="heading-top-text pointer mr-3">
-                                <FontAwesomeIcon className="custom-fontAwesome" icon={faUser} /> Become a seller
+                                <a 
+                                    href="http://seller.deshibazaarbd.com/login" 
+                                    target="_blank" 
+                                    style={{color: '#fff', textDecoration: 'none'}} >
+                                    <FontAwesomeIcon className="custom-fontAwesome" icon={faUser} /> Become a seller
+                                </a>
                             </p>
 
                             <p className="heading-top-text pointer" onClick={() => handleShow()}>

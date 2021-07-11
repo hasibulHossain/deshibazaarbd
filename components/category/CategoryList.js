@@ -24,8 +24,8 @@ const CategoryList = ({ parentID }) => {
    * 
    * @return void
    */
-  const navigateCategoryList = (categorySlug) => {
-    router.push(`/products?category=${categorySlug}`);
+  const navigateCategoryList = (categoryId) => {
+    router.push(`/products?category=${categoryId}`);
   }
 
   return (
@@ -43,7 +43,7 @@ const CategoryList = ({ parentID }) => {
         {categories && categories.length > 0 &&
           categories.map((item, index) => (
             <div key={index} className="category-card col-md-2">
-              <div className="category-card-body" onClick={() => navigateCategoryList(item.short_code)}>
+              <div className="category-card-body" onClick={() => navigateCategoryList(item.id)}>
                 <div className="category-img-area">
                   <img src={item.image_url} alt={item.name} className="img-fluid" />
                 </div>

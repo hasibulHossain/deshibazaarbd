@@ -3,15 +3,45 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faColumns, faList } from "@fortawesome/free-solid-svg-icons";
 import { Form } from "react-bootstrap";
 import CategoryWiseMiniProduct from "./CategoryWiseMiniProduct";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setFilterParams,
+} from "./_redux/Action/CategoryWiseProductAction";
 
 const CategoryWishProductList = () => {
-
+  const dispatch = useDispatch();
   const { isLoading } = useSelector(
     (state) => state.CategoryWiseProductReducer
   );
 
+  const { filterParams } = useSelector(
+    (state) => state.CategoryWiseProductReducer
+  );
+
   const [columns, setColumns] = useState("col-md-3");
+
+  const selectHandler = (e) => {
+    const filterParamClone = { ...filterParams };
+    switch (e.target.value) {
+      case "Best Match":
+        filterParamClone.order_by = ""
+        filterParamClone.order = ""
+        break;
+      case "Price":
+        filterParamClone.order_by = "price"
+        filterParamClone.order = "desc"
+        break;
+      case "Rating":
+        filterParamClone.order_by = "rating"
+        filterParamClone.order = "desc"
+        break;
+      case "Stock":
+        filterParamClone.order_by = "stock"
+        filterParamClone.order = "desc"
+        break;
+    }
+    dispatch(setFilterParams(filterParamClone));
+  }
 
   return (
     <section className="category_wise_product_list">
@@ -46,10 +76,11 @@ const CategoryWishProductList = () => {
               <span>Sort by :</span>
               <Form>
                 <Form.Group controlId="exampleFormSelectCustom">
-                  <Form.Control as="select" custom>
+                  <Form.Control onChange={selectHandler} as="select" custom>
+                    <option>Best Match</option>
                     <option>Price</option>
                     <option>Rating</option>
-                    <option>Offer</option>
+                    <option>Stock</option>
                   </Form.Control>
                 </Form.Group>
               </Form>

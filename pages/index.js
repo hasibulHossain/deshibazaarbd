@@ -29,7 +29,7 @@ export default function Home() {
       <ProductSection title="Fastest Delivery" type="fastest-delivery" limit={6} url='fastest-delivery-products' />
       <ProductSection title="Latest Products" type="" limit={6} url='latest-products' />
 
-      <ShopBanner />
+      {/* <ShopBanner /> */}
       <ShopContainer />
       <CompanyPolicyContainer />
     </MainLayout>

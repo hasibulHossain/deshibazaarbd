@@ -11,8 +11,11 @@ import { getShopList } from "../Shop/_redux/Action/ShopAction";
 import ReactStars from "react-rating-stars-component";
 import { activeCurrency } from "../../services/currency";
 import { getCategories } from "../category/_redux/Action/CategoryAction";
+import {useRouter} from 'next/router'
+import Axios from 'axios'
 
 const CategoryFilter = () => {
+  const router = useRouter();
   const dispatch = useDispatch();
   const { filterParams } = useSelector(
     (state) => state.CategoryWiseProductReducer
@@ -31,6 +34,10 @@ const CategoryFilter = () => {
     attributes,
     rating,
     paginate_no,
+    order_by,
+    order,
+    type,
+    page
   } = filterParams;
 
   // checkbox handler
@@ -97,30 +104,65 @@ const CategoryFilter = () => {
     isHalf: false,
     value: 0,
     color: "#ddd",
-    activeColor: "#ffd700",
+    activeColor: '#ffd700',
     onChange: (newValue) => {
       const filterParamClone = { ...filterParams };
       filterParamClone.rating = newValue;
       dispatch(setFilterParams(filterParamClone));
     },
   };
+  
+  const resetRatingHandler = () => {
+    const filterParamClone = { ...filterParams };
+    filterParamClone.rating = null;
+
+    dispatch(setFilterParams(filterParamClone));
+  }
+
+  const {brand: brandQuery = "", category: categoryQuery = "", type: typeQuery = ""} = router.query;
 
   useEffect(() => {
+    const queries = router.query;
+    const cloneFilterParams = {...filterParams};
+    for(const query in queries) {
+      if(Array.isArray(cloneFilterParams[query])) {
+        cloneFilterParams[query] = [];
+        if(query === 'brand') {
+          cloneFilterParams[query].push(+queries[query]);
+        }
+        if(query === 'category') {
+          cloneFilterParams[query].push(+queries[query]);
+        }
+      } else {
+        cloneFilterParams[query] = queries[query];
+      }
+    }
+    dispatch(setFilterParams(cloneFilterParams));
+
     dispatch(getCategories(null));
     dispatch(getShopList());
-  }, []);
+  }, [brandQuery, categoryQuery, typeQuery]);
 
   useEffect(() => {
-    dispatch(getFilteredProducts(filterParams));
+    const source = Axios.CancelToken.source();
+    dispatch(getFilteredProducts(filterParams, source));
+    console.log('from use effect => ', filterParams)
+    return () => {
+      source.cancel()
+    }
   }, [
     attributes,
-    brand.length,
-    category.length,
+    JSON.stringify(brand),
+    JSON.stringify(category),
     max_price,
     min_price,
     rating,
     search,
     paginate_no,
+    order_by,
+    order,
+    type,
+    page
   ]);
 
   return (
@@ -143,7 +185,10 @@ const CategoryFilter = () => {
 
       <div>
         <p className="filter_title">Filter By Rating</p>
-        <ReactStars {...reactStarProps} />
+        <div style={{display: 'flex', justifyContent: 'space-between'}}>
+          <ReactStars {...reactStarProps} />
+          <span style={{cursor: 'pointer'}} onClick={resetRatingHandler}>Clear</span>
+        </div>
       </div>
 
       {/**filter by categories */}

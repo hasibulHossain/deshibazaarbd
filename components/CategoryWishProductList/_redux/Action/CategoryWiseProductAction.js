@@ -19,7 +19,7 @@ export const getCategories = () => async (dispatch) => {
   }
 };
 
-export const getFilteredProducts = (filterParamObj) => async (dispatch) => {
+export const getFilteredProducts = (filterParamObj, source = {token: ""}) => async (dispatch) => {
   const filterParamObjClone = {
     ...filterParamObj,
     category: filterParamObj.category.join(","),
@@ -38,12 +38,14 @@ export const getFilteredProducts = (filterParamObj) => async (dispatch) => {
 
   try {
     dispatch({ type: Types.INIT_FILTER_PRODUCT_LIST });
-    console.log(`url =:> ${Base_Url}get-items?${filterParam}`);
-    const res = await Axios(`${Base_Url}get-items?${filterParam}`);
+    const res = await Axios.get(`${Base_Url}get-items?${filterParam}`, {cancelToken: source.token});
     responseData.isLoading = false;
     responseData.data = res.data.data;
     dispatch({ type: Types.GET_FILTER_PRODUCT_LIST, payload: responseData });
   } catch (error) {
+    if(Axios.isCancel(error)) {
+      console.log('axios error handled')
+    }
     dispatch({ type: Types.GET_FILTER_PRODUCT_LIST_FAILED });
   }
 };
