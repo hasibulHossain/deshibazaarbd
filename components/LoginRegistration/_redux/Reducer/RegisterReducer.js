@@ -3,6 +3,7 @@ import * as Types from "./../Type/Types";
 // Initial state
 const initialState = {
     isLoading: false,
+    isCreating: false,
     is_first_validated: false,
     registerInput: {
         first_name: '',
@@ -35,7 +36,7 @@ const RegisterReducer = (state = initialState, action) => {
         case Types.AUTH_REGISTER:
             return {
                 ...state,
-                isLoading: action.payload.isLoading,
+                isCreating: action.payload.isCreating,
                 registerInput: initialState.registerInput
             }
         default:
