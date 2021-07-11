@@ -20,7 +20,7 @@ const ProductDetailInfo = (props) => {
   const dispatch = useDispatch();
   const { product } = props;
   const [quantity, setQuantity] = useState(1);
-  const featured_image = `${process.env.NEXT_PUBLIC_URL}public/images/products/${product.featured_image}`;
+  const featured_image = `${process.env.NEXT_PUBLIC_URL}images/products/${product.featured_image}`;
   const [previewImg, setPreviewImg] = useState(featured_image);
   const zoomImage = { width: 200, height: 250, zoomWidth: 600, img: previewImg };
   const userData = useSelector((state) => state.UserDataReducer.userData);

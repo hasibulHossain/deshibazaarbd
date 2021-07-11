@@ -51,7 +51,7 @@ export const addToCartAction = (product, args = {}) => async (dispatch) => {
       isOffer     : product.is_offer_enable,
       price       : product.default_selling_price,
       offerPrice  : product.offer_selling_price,
-      productImage: `${process.env.NEXT_PUBLIC_URL}public/images/products/${product.featured_image}`,
+      productImage: `${process.env.NEXT_PUBLIC_URL}images/products/${product.featured_image}`,
       sellerID    : product.seller_id,
       sellerName  : product.seller_name,
       sku         : product.sku,
