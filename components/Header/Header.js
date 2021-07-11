@@ -18,6 +18,7 @@ const Header = () => {
   const dispatch          = useDispatch();
   const toggleNav         = "basic-navbar-nav";
   const { totalQuantity } = useSelector((state) => state.CartReducer);
+  const { userData } = useSelector((state) => state.UserDataReducer);
 
   const toggleCartHandler = () => {
     dispatch(toggleFloatingCart());
@@ -65,41 +66,50 @@ const Header = () => {
                 </div>
 
                 <div className="ml-auto header-nav">
-                  <Link href="/login" className="header-nav-link">
-                    <a className="">Sign In</a>
-                  </Link>
+                  {
+                    !userData ? (
+                      <>
+                        <Link href="/login" className="header-nav-link">
+                          <a className="">Sign In</a>
+                        </Link>
 
-                  <Link href="/register">
-                    <a>
-                      <Button buttonText="Sign up" />
-                    </a>
-                  </Link>
+                        <Link href="/register">
+                          <a>
+                            <Button buttonText="Sign up" />
+                          </a>
+                        </Link>
 
-                  <Link href="/wishlist" className="header-nav-link">
-                    <a>
-                      <FontAwesomeIcon
-                        className="custom-fontAwesome"
-                        icon={faHeart}
-                      />{" "}
-                      Wishlist
-                    </a>
-                  </Link>
+                      </>
+                    ) : ( 
+                      <>
+                        <Link href="/wishlist" className="header-nav-link">
+                          <a>
+                            <FontAwesomeIcon
+                              className="custom-fontAwesome"
+                              icon={faHeart}
+                            />{" "}
+                            Wishlist
+                          </a>
+                        </Link>
 
-                  {/* <Link href="/carts" className="header-nav-link"> */}
-                  <span
-                    onClick={toggleCartHandler}
-                    className="header-nav-link pointer cart-nav-link"
-                  >
-                    <FontAwesomeIcon
-                      className="custom-fontAwesome"
-                      icon={faShoppingBag}
-                    />
-                    <span className="cart-qty">
-                      {formatCartTotalQty(totalQuantity)}
-                    </span>
-                    &nbsp;&nbsp; Cart
-                  </span>
-                  {/* </Link> */}
+                        {/* <Link href="/carts" className="header-nav-link"> */}
+                        <span
+                          onClick={toggleCartHandler}
+                          className="header-nav-link pointer cart-nav-link"
+                        >
+                          <FontAwesomeIcon
+                            className="custom-fontAwesome"
+                            icon={faShoppingBag}
+                          />
+                          <span className="cart-qty">
+                            {formatCartTotalQty(totalQuantity)}
+                          </span>
+                          &nbsp;&nbsp; Cart
+                        </span>
+                        {/* </Link> */}
+                      </>
+                    )
+                  }
                 </div>
               </Navbar.Collapse>
             </div>
