@@ -11,8 +11,10 @@ import { getShopList } from "../Shop/_redux/Action/ShopAction";
 import ReactStars from "react-rating-stars-component";
 import { activeCurrency } from "../../services/currency";
 import { getCategories } from "../category/_redux/Action/CategoryAction";
+import {useRouter} from 'next/router'
 
 const CategoryFilter = () => {
+  const router = useRouter();
   const dispatch = useDispatch();
   const { filterParams } = useSelector(
     (state) => state.CategoryWiseProductReducer
@@ -113,9 +115,23 @@ const CategoryFilter = () => {
   }
 
   useEffect(() => {
+    const queries = router.query;
+    const cloneFilterParams = {...filterParams};
+    for(const query in queries) {
+      if(query === 'brand') {
+        cloneFilterParams[query] = [];
+        cloneFilterParams[query].push(+queries[query]);
+      }
+      if(query === 'category') {
+        cloneFilterParams[query] = [];
+        cloneFilterParams[query].push(+queries[query])
+      }
+    }
+    dispatch(setFilterParams(cloneFilterParams))
+
     dispatch(getCategories(null));
     dispatch(getShopList());
-  }, []);
+  }, [router.query]);
 
   useEffect(() => {
     dispatch(getFilteredProducts(filterParams));
