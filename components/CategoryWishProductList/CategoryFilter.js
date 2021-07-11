@@ -34,7 +34,8 @@ const CategoryFilter = () => {
     rating,
     paginate_no,
     order_by,
-    order
+    order,
+    type
   } = filterParams;
 
   // checkbox handler
@@ -116,25 +117,29 @@ const CategoryFilter = () => {
     dispatch(setFilterParams(filterParamClone));
   }
 
+  const {brand: brandQuery = "", category: categoryQuery = "", type: typeQuery = ""} = router.query;
+
   useEffect(() => {
     const queries = router.query;
     const cloneFilterParams = {...filterParams};
     for(const query in queries) {
       if(Array.isArray(cloneFilterParams[query])) {
         cloneFilterParams[query] = [];
-      }
-      if(query === 'brand') {
-        cloneFilterParams[query].push(+queries[query]);
-      }
-      if(query === 'category') {
-        cloneFilterParams[query].push(+queries[query])
+        if(query === 'brand') {
+          cloneFilterParams[query].push(+queries[query]);
+        }
+        if(query === 'category') {
+          cloneFilterParams[query].push(+queries[query]);
+        }
+      } else {
+        cloneFilterParams[query] = queries[query];
       }
     }
-    dispatch(setFilterParams(cloneFilterParams))
+    dispatch(setFilterParams(cloneFilterParams));
 
     dispatch(getCategories(null));
     dispatch(getShopList());
-  }, [router.query]);
+  }, [brandQuery, categoryQuery, typeQuery]);
 
   useEffect(() => {
     dispatch(getFilteredProducts(filterParams));
@@ -148,7 +153,8 @@ const CategoryFilter = () => {
     search,
     paginate_no,
     order_by,
-    order
+    order,
+    type
   ]);
 
   return (

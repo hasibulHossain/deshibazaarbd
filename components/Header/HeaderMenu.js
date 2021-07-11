@@ -52,18 +52,18 @@ const HeaderMenu = ({ toggleNav }) => {
         >
           {menuList.map((category, i) => {
             if (category.childs.length === 0) {
-              return <MenuItem onClick={() => clickMenuLink(category.short_code)} key={i}>{category.name}</MenuItem>;
+              return <MenuItem onClick={() => clickMenuLink(category.id)} key={i}>{category.name}</MenuItem>;
             } else {
               return (
                 <SubMenu key={i} label={category.name}>
                   {category.childs.map((subCategory, i) => {
                     if (subCategory.childs.length === 0) {
-                      return <MenuItem key={i} onClick={() => clickMenuLink(subCategory.short_code)}>{subCategory.name}</MenuItem>;
+                      return <MenuItem key={i} onClick={() => clickMenuLink(subCategory.id)}>{subCategory.name}</MenuItem>;
                     } else {
                       return (
-                        <SubMenu key={i} label={subCategory.name} onClick={() => clickMenuLink(subCategory.short_code)}>
+                        <SubMenu key={i} label={subCategory.name} onClick={() => clickMenuLink(subCategory.id)}>
                           {subCategory.childs.map((subCtgOne, i) => (
-                            <MenuItem key={i} onClick={() => clickMenuLink(subCtgOne.short_code)}>{subCtgOne.name}</MenuItem>
+                            <MenuItem key={i} onClick={() => clickMenuLink(subCtgOne.id)}>{subCtgOne.name}</MenuItem>
                           ))}
                         </SubMenu>
                       );
@@ -92,13 +92,13 @@ const HeaderMenu = ({ toggleNav }) => {
               {category.childs.length > 0 &&
                 category.childs.map((subCategory, i) => {
                   if (subCategory.childs.length === 0) {
-                    return <MenuItem onClick={() => clickMenuLink(subCategory.short_code)} key={i}>{subCategory.name}</MenuItem>;
+                    return <MenuItem onClick={() => clickMenuLink(subCategory.id)} key={i}>{subCategory.name}</MenuItem>;
                   } else {
                     return (
                       <SubMenu key={i} label={subCategory.name}>
                         {subCategory.childs.length > 0 &&
                           subCategory.childs.map((subCtgOne, i) => (
-                            <MenuItem onClick={() => clickMenuLink(subCtgOne.short_code)} key={i}>{subCtgOne.name}</MenuItem>
+                            <MenuItem onClick={() => clickMenuLink(subCtgOne.id)} key={i}>{subCtgOne.name}</MenuItem>
                           ))}
                       </SubMenu>
                     );

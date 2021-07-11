@@ -11,7 +11,7 @@ const ProductSection = ({ title, description = null, url = '', type = '', limit 
         {
            description !== null && <p>{ description }</p>
         }
-        <ViewAll url={url} />
+        <ViewAll type={type} />
       </div>
 
       <ProductMainList type={type} limit={limit} page={page} />
