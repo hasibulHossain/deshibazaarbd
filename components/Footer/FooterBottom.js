@@ -1,16 +1,30 @@
-import React from 'react';
-import { Container, Row } from 'react-bootstrap';
+import React, {useEffect} from 'react';
+import { Container } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
 import ProductModal from '../products/ProductModal';
+import { getWebsiteInformation } from '../_redux/WebsiteInformation/Action/WebsiteInformationAction';
 
-// import paymentImg from './../../assets/img/Payment-Icon-Buzfi.com-best-online-shopping-in-the-USA-2020-best-e-commerce-shop-in-the-United-States.png'
 const FooterBottom = () => {
+    
+    const dispatch = useDispatch();
+    const { websiteInfo, isLoading } = useSelector((state) => state.WebsiteInformationReducer);
+    useEffect(() => {
+        dispatch(getWebsiteInformation())
+    }, [])
+
     return (
         <div className="footer-bottom">
             <Container>
                 <div className="row justify-content-between align-items-center">
                     <div className="col-md-6">
                         <div className="footer-bottom-info">
-                            <p> &#169; {new Date().getFullYear()} deshibazaar. | deshibazaar.net <span>All rights reserved</span></p>
+                            {
+                                isLoading && <p>Loading info.....</p>
+                            }
+                            {
+                                websiteInfo &&
+                                <p> {websiteInfo.footer_text} </p>
+                            }
                         </div>
                     </div>
                     <div className="col-md-4">
