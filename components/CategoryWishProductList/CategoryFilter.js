@@ -118,12 +118,13 @@ const CategoryFilter = () => {
     const queries = router.query;
     const cloneFilterParams = {...filterParams};
     for(const query in queries) {
-      if(query === 'brand') {
+      if(Array.isArray(cloneFilterParams[query])) {
         cloneFilterParams[query] = [];
+      }
+      if(query === 'brand') {
         cloneFilterParams[query].push(+queries[query]);
       }
       if(query === 'category') {
-        cloneFilterParams[query] = [];
         cloneFilterParams[query].push(+queries[query])
       }
     }
