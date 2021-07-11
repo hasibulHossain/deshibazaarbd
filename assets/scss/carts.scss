@@ -162,10 +162,6 @@ $border-bottom: 1px solid #dfdfdf;
     }
   }
 
-  &__right-order_details {
-    border-bottom: $border-bottom;
-  }
-
   &__right-order_details_inner {
     padding: 1rem 1.2rem;
     font-size: 0.77rem;
@@ -192,7 +188,7 @@ $border-bottom: 1px solid #dfdfdf;
   }
 
   &__right-footer {
-    padding: 1.2rem;
+    padding: 0rem 3rem 2rem 3rem;
 
     & div:last-child {
       display: flex;

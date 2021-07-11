@@ -156,7 +156,7 @@ export default function Carts() {
             </div>
 
             <div className="col-md-4 cart_checkout_margin">
-              <OrderSummery handleClick={placeOrder} buttonText="PROCESS TO CHECKOUT" />
+              <OrderSummery handleClick={placeOrder} buttonText="PROCEED TO CHECKOUT" />
             </div>
           </div>
         </div>

@@ -55,7 +55,7 @@ export const addToCartAction = (product, args = {}) => async (dispatch) => {
       sellerID    : product.seller_id,
       sellerName  : product.seller_name,
       sku         : product.sku,
-      isChecked   : false,
+      isChecked   : true, // By default item price will be added as checked
       additional  : {}
     }
   
