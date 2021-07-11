@@ -97,13 +97,20 @@ const CategoryFilter = () => {
     isHalf: false,
     value: 0,
     color: "#ddd",
-    activeColor: "#ffd700",
+    activeColor: '#ffd700',
     onChange: (newValue) => {
       const filterParamClone = { ...filterParams };
       filterParamClone.rating = newValue;
       dispatch(setFilterParams(filterParamClone));
     },
   };
+  
+  const resetRatingHandler = () => {
+    const filterParamClone = { ...filterParams };
+    filterParamClone.rating = null;
+
+    dispatch(setFilterParams(filterParamClone));
+  }
 
   useEffect(() => {
     dispatch(getCategories(null));
@@ -143,7 +150,10 @@ const CategoryFilter = () => {
 
       <div>
         <p className="filter_title">Filter By Rating</p>
-        <ReactStars {...reactStarProps} />
+        <div style={{display: 'flex', justifyContent: 'space-between'}}>
+          <ReactStars {...reactStarProps} />
+          <span style={{cursor: 'pointer'}} onClick={resetRatingHandler}>Clear</span>
+        </div>
       </div>
 
       {/**filter by categories */}
