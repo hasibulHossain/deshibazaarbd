@@ -98,17 +98,29 @@ export const updateCartQtyAction = (productID, quantity = 1) => async (dispatch)
  * @since 1.0.0
  * 
  * @param boolean checked 
+ * @param int     productID 
+ * @param int     sellerID 
  * 
  * @return void
  */
-export const toggleAllCartSelection = (checked = true, productID = null ) => dispatch => {
+export const toggleAllCartSelection = (checked = true, productID = null, sellerID = null) => dispatch => {
   const carts = getCartData();
 
   if ( productID === null ) {
-    carts.forEach( ( cart, index ) => {
-        cart.isChecked = checked;
-        carts[index]   = cart;
-    });
+    if ( sellerID === null) {
+      carts.forEach( ( cart, index ) => {
+          cart.isChecked = checked;
+          carts[index]   = cart;
+      });
+    } else {
+
+      carts.forEach( ( cart, index ) => {
+        if( cart.sellerID === sellerID ) {
+          cart.isChecked = checked;
+          carts[index]   = cart;
+        }
+      });
+    }
   } else {
     carts.forEach( ( cart, index ) => {
       if(cart.productID === productID) {
@@ -118,8 +130,6 @@ export const toggleAllCartSelection = (checked = true, productID = null ) => dis
     });
   }
   
-  // dispatch({ type: Types.TOGGLE_ALL_CART_SELECT, payload: checked });
-
   localStorage.setItem( 'carts', JSON.stringify( carts ) );
   dispatch(getCartsAction());
 }

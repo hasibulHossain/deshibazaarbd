@@ -102,7 +102,7 @@ export default function Carts() {
                           <div className="cart_item_box_top_1">
                             <div>
                               <div className="cart_shop_name d-flex">
-                                <input className="cart-checkbox" type="checkbox" checked={item.isChecked} />
+                                <input className="cart-checkbox" type="checkbox" checked={item.isChecked} onClick={() => dispatch(toggleAllCartSelection(! item.isChecked, null, item.sellerID))} />
                                 <div className="ml-2">
                                   <div className="cart_details_body">
                                     <p>

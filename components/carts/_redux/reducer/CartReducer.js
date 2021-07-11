@@ -23,12 +23,6 @@ const CartReducer = (state = initialState, action) => {
         checkedAllCarts  : checkedAllCartsSelectedOrNot(action.payload)
       };
 
-    case Types.TOGGLE_ALL_CART_SELECT:
-      return {
-        ...state,
-        checkedAllCarts: action.payload
-      };
-
     default:
       return {
         ...state,
