@@ -23,6 +23,7 @@ import ProductReducer from "../components/products/_redux/Reducer/ProductReducer
 import OrderReducer from "../components/orders/_redux/reducer/OrderReducer";
 import ProductReviewReducer from "../components/product-review/_redux/reducer/productReviewReducer";
 import ShippingInfoReducer from "../components/ShippingInfo/_redux/Reducer/ShippingInfoReducer";
+import WebsiteInformationReducer from "../components/_redux/WebsiteInformation/Reducer/WebsiteInformationReducer";
 
 export default combineReducers({
   GlobalReducer               : GlobalReducer,
@@ -47,5 +48,6 @@ export default combineReducers({
   ProductReducer              : ProductReducer,
   OrderReducer                : OrderReducer,
   ProductReviewReducer        : ProductReviewReducer,
-  ShippingInfoReducer         : ShippingInfoReducer
+  ShippingInfoReducer         : ShippingInfoReducer,
+  WebsiteInformationReducer   : WebsiteInformationReducer
 });

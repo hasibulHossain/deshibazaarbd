@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import Link from 'next/link'
 import FooterBottom from './FooterBottom';
 import SocialMedia from './SocialMedia';
 import Button from '../master/Button/Button';
+import { useDispatch, useSelector } from 'react-redux';
+import { getWebsiteInformation } from '../_redux/WebsiteInformation/Action/WebsiteInformationAction';
+
 const Footer = () => {
+    const dispatch = useDispatch();
+    const { websiteInfo, isLoading } = useSelector((state) => state.WebsiteInformationReducer);
+    useEffect(() => {
+        dispatch(getWebsiteInformation())
+    }, [])
+
     return (
         <section className="footer-section">
             <Container>
@@ -70,7 +79,7 @@ const Footer = () => {
                         <div className="footer-info">
                             <h5>Newsletter</h5>
                             <p>Subscribe to our newsletter to get notification about discount information</p>
-                            <input type="text" className="form-control mb-3" placeholder="Enter your Email here"/>
+                            <input type="text" className="form-control mb-3" placeholder="Enter your Email here" />
                             <Button buttonText="Subscribe" />
                         </div>
                         <SocialMedia />

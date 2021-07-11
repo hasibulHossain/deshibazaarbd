@@ -1135,10 +1135,24 @@ a .custom-button-component:hover {
 
 .social-media .social-facebook:hover {
   background-color: #fff;
+  transform: translateY(-3px);
 }
 
 .social-media .social-facebook:hover a {
   color: #6081c4;
+}
+.social-media .social-youtube {
+  background-color: #f12506;
+  border: 2px solid #f12506;
+}
+
+.social-media .social-youtube:hover {
+  background-color: #fff;
+  transform: translateY(-3px);
+}
+
+.social-media .social-youtube:hover a {
+  color: #f12506;
 }
 
 .social-media .social-twitter {
@@ -1148,6 +1162,7 @@ a .custom-button-component:hover {
 
 .social-media .social-twitter:hover {
   background-color: #fff;
+  transform: translateY(-3px);
   color: #43bdef !important;
 }
 
@@ -1162,6 +1177,7 @@ a .custom-button-component:hover {
 
 .social-media .social-linkedIn:hover {
   background-color: #fff;
+  transform: translateY(-3px);
   color: #2797cf !important;
 }
 
@@ -1176,6 +1192,7 @@ a .custom-button-component:hover {
 
 .social-media .social-whatsApp:hover {
   background-color: #fff;
+  transform: translateY(-3px);
   color: #23b180 !important;
 }
 
@@ -1190,6 +1207,7 @@ a .custom-button-component:hover {
 
 .social-media .social-instagram:hover {
   background-color: #fff;
+  transform: translateY(-3px);
   color: #e46258 !important;
 }
 
@@ -2528,7 +2546,8 @@ small.delivery_time {
 .return_font_awesome {
   color: #172337;
 }
-.shipping_info_title, .checkout_payment_method_title {
+.shipping_info_title,
+.checkout_payment_method_title {
   border-bottom: 1px solid #d6d6d6;
   font-weight: 800;
 }
@@ -2581,14 +2600,14 @@ p.shipping_address {
   color: #797979;
 }
 
-.shipping_billing_details_info span{
+.shipping_billing_details_info span {
   margin-left: 15px;
 }
 
-.shipping_billing_info_fontAwesome{
+.shipping_billing_info_fontAwesome {
   color: #f12506;
 }
-.shipping_payment_method_section{
+.shipping_payment_method_section {
   padding: 10px 20px;
 }
 img.payment_method_in_shipping {
@@ -2603,9 +2622,9 @@ img.payment_method_in_shipping {
   font-weight: 700;
   font-size: 16px;
 }
-.shipping_method_checkbox.active{
-  color: #0C7E33;
+.shipping_method_checkbox.active {
+  color: #0c7e33;
 }
 .shipping_method_checkbox.active input[type="radio"] {
-  background: #990000;    
+  background: #990000;
 }
