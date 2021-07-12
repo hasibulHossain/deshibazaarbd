@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCartsAction, handleShippingCost } from '../_redux/CartProduct/Action/CartAction';
+// import { getCartsAction, handleShippingCost } from '../_redux/CartProduct/Action/CartAction';
 import { Card } from 'react-bootstrap'
+import { getCartsAction } from '../carts/_redux/action/CartAction';
+import { handleShippingCost } from '../orders/_redux/action/OrderAction';
 
 const PaymentAmount = () => {
     const dispatch = useDispatch();

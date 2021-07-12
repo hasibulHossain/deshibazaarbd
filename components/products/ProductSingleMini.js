@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { toggleProductModalAction } from "./_redux/Action/ProductAction";
 import { addToCartAction } from '../carts/_redux/action/CartAction';
 import { showToast } from '../master/Helper/ToastHelper';
+import AddWishList from '../Wishlist/AddWishList';
 
 /**
  * ProductSingleMini Component
@@ -44,7 +45,8 @@ const ProductSingleMini = ({ item = {}, columnClassName = 'col-md-2', cardClassN
                         />
                     </button>
                     <button>
-                        <FontAwesomeIcon className="withlist" icon={faHeart} />
+                        <AddWishList product={item} />
+                        {/* <FontAwesomeIcon className="withlist" icon={faHeart} /> */}
                     </button>
                     <button>
                         <FontAwesomeIcon className="details" icon={faListAlt} />
