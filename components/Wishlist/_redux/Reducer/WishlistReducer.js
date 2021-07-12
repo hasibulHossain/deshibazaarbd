@@ -14,6 +14,11 @@ const WishlistReducer = (state = initialState, action) => {
                 ...state,
                 isSubmitting: action.payload.isLoading,
             }
+        case Types.REMOVE_FROM_WISHLIST:
+            return {
+                ...state,
+                isSubmitting: action.payload.isLoading,
+            }
         case Types.GET_WISHLIST_DATA:
             return {
                 ...state,

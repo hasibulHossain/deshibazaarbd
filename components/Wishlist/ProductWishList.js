@@ -10,7 +10,7 @@ import { Button } from '@material-ui/core';
 const ProductWishList = () => {
 
   const dispatch = useDispatch();
-  const { wishList, isLoading } = useSelector((state) => state.WishlistReducer);
+  const { wishList, isLoading, isSubmitting } = useSelector((state) => state.WishlistReducer);
 
   useEffect(() => {
     dispatch(getWishListData());
@@ -39,10 +39,10 @@ const ProductWishList = () => {
 
                   {isLoading && (
                     <LoadingSkelleton
-                      alignment = "vertical"
-                      count     = {1}
-                      width     = {"100%"}
-                      height    = {150}
+                      alignment="vertical"
+                      count={1}
+                      width={"100%"}
+                      height={150}
                     />
                   )}
 
@@ -74,8 +74,6 @@ const ProductWishList = () => {
                   )}
                 </div>
               </div>
-
-
             </div>
           </div>
         </div>
