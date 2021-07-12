@@ -1,16 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import LoadingSkeleton from '../master/skelleton/LoadingSkelleton';
 import { Modal } from 'react-bootstrap';
+import { getItemListByUser } from './_redux/action/reviewAction';
+import ProductReviewCreate from './ProductReviewCreate';
 
 const ProductListForReview = () => {
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
     const {isLoading, itemList} = useSelector((state) => state.ProductReviewReducer);
 
-    // useEffect(() => {
-    //     dispatch(getItemListByUser());
-    // }, []);
+    useEffect(() => {
+        dispatch(getItemListByUser());
+    }, []);
     const [show, setShow] = useState(false);
     const [ReviewItem, setReviewItem] = useState(null);
     const handleClose = () => {
@@ -62,7 +64,7 @@ const ProductListForReview = () => {
                 )
             }
 
-            {/* <Modal
+            <Modal
                 size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
@@ -70,7 +72,7 @@ const ProductListForReview = () => {
                 onHide={handleClose}
             >
                 <ProductReviewCreate ReviewItem={ReviewItem} />
-            </Modal> */}
+            </Modal>
         </>
     );
 };

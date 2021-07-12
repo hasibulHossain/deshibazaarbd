@@ -10,7 +10,8 @@ const ProductReviewHistory = () => {
 
     useEffect(() => {
         const itemID = 0;
-        const {id: userID} = JSON.parse(localStorage.getItem('userData'));
+        const { userData } = JSON.parse(localStorage.getItem('loginData'));
+        const userID = userData.id
 
         dispatch(getReviewListByUser(itemID, userID));
     }, []);
