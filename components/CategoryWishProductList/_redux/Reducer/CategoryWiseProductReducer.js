@@ -120,6 +120,26 @@ function CategoryWiseProductReducer(state = initialState, { type, payload }) {
         filterParams: payload,
       };
 
+    case Types.RESET_FILTER_PARAM:
+      return {
+        ...state,
+        filterParams: {
+          ...state.filterParams,
+          type: "",
+          search: "",
+          category: [],
+          brand: [],
+          min_price: null,
+          max_price: null,
+          attributes: null,
+          rating: null,
+          order_by: "",
+          order: "",
+          page: 1,
+          paginate_no: 10,
+        },
+      };
+
     default:
       return state;
   }
