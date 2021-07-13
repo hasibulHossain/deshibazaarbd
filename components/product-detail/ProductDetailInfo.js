@@ -14,6 +14,7 @@ import AddWishList from "../Wishlist/AddWishList";
 import ProductRatings from "./ProductRatings";
 import DeliveryFeatures from "./DeliveryFeatures";
 import Slider from "react-slick";
+import PriceCalculation from "../products/partials/PriceCalculation";
 
 const ProductDetailInfo = (props) => {
 
@@ -171,24 +172,8 @@ const ProductDetailInfo = (props) => {
                             <hr />
 
                             <div className="product_details_price">
-                              {product.is_offer_enable == false && (
-                                <h2 className="product_details_current_price">
-                                  Tk-{product.default_selling_price}
-                                </h2>
-                              )}
-
-                              {product.is_offer_enable == true && (
-                                <>
-                                  <h4 className="product_details_current_price">
-                                    Tk-{product.offer_selling_price
-                                      ? product.offer_selling_price
-                                      : product.default_selling_price}
-                                  </h4>
-                                  <h6 className="product_details_default_price">
-                                    Tk-{product.default_selling_price}
-                                  </h6>
-                                </>
-                              )}
+                              
+                              <PriceCalculation item={product} />
 
                               <div className="quantity">
                                 <button
