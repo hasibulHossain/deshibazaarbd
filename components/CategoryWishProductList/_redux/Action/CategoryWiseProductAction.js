@@ -44,7 +44,6 @@ export const getFilteredProducts = (filterParamObj, source = {token: ""}) => asy
     dispatch({ type: Types.GET_FILTER_PRODUCT_LIST, payload: responseData });
   } catch (error) {
     if(Axios.isCancel(error)) {
-      console.log('axios error handled')
     }
     dispatch({ type: Types.GET_FILTER_PRODUCT_LIST_FAILED });
   }
@@ -53,4 +52,8 @@ export const getFilteredProducts = (filterParamObj, source = {token: ""}) => asy
 export const setFilterParams = (filterParams) => ({
   type: Types.SET_FILTER_PARAM,
   payload: filterParams,
+});
+
+export const resetFilterParams = () => ({
+  type: Types.RESET_FILTER_PARAM
 });

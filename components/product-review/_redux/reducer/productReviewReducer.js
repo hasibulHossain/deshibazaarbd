@@ -1,8 +1,16 @@
 import * as Types from "../types/types";
+import moment from "moment";
 const initialState = {
-    isLoading      : false,
-    itemList       : [],
-    reviewList     : [],
+    isLoading: false,
+    itemList: [],
+    reviewList: [],
+    reviewInput: {
+        item_id: '',
+        rating_value: "",
+        comment: "",
+        images: ""
+    },
+    reviewSubmitting: false,
 };
 
 const ReviewReducer = (state = initialState, action) => {
@@ -10,17 +18,32 @@ const ReviewReducer = (state = initialState, action) => {
         case Types.GET_ITEM_LIST_BY_USER:
             return {
                 ...state,
-                itemList : action.payload.itemList,
+                itemList: action.payload.itemList,
                 isLoading: action.payload.isLoading,
             };
         case Types.GET_REVIEW_LIST_BY_USER:
             return {
                 ...state,
                 reviewList: action.payload.reviewList,
-                isLoading : action.payload.isLoading,
+                isLoading: action.payload.isLoading,
+            };
+        case Types.CHANGE_REVIEW_INPUT:
+            const reviewInput = { ...state.reviewInput };
+            reviewInput[action.payload.name] = action.payload.value;
+            return {
+                ...state,
+                reviewInput,
+            };
+        case Types.STORE_REVIEW_DATA:
+            return {
+                ...state,
+                reviewSubmitting: action.payload.isLoading,
             };
         default:
-            return state;
+            return {
+                ...state,
+            };
+            break;
     }
 };
 

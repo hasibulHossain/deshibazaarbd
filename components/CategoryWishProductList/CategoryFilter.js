@@ -5,6 +5,7 @@ import "react-input-range/lib/css/index.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getFilteredProducts,
+  resetFilterParams,
   setFilterParams,
 } from "./_redux/Action/CategoryWiseProductAction";
 import { getShopList } from "../Shop/_redux/Action/ShopAction";
@@ -144,9 +145,14 @@ const CategoryFilter = () => {
   }, [brandQuery, categoryQuery, typeQuery]);
 
   useEffect(() => {
+    return () => {
+      dispatch(resetFilterParams())
+    }
+  }, [])
+
+  useEffect(() => {
     const source = Axios.CancelToken.source();
     dispatch(getFilteredProducts(filterParams, source));
-    console.log('from use effect => ', filterParams)
     return () => {
       source.cancel()
     }
