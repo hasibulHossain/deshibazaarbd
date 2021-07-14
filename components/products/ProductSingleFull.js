@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { addToCartAction } from "../carts/_redux/action/CartAction";
 import { showToast } from "../master/Helper/ToastHelper";
 import router from "next/router";
+import { toggleProductModalAction } from "./_redux/Action/ProductAction";
 
 const ProductSingleFull = ({ product }) => {
     const dispatch = useDispatch();
@@ -38,6 +39,11 @@ const ProductSingleFull = ({ product }) => {
             router.push("/checkout")
 
         }
+    }
+
+    const redirectToProductDetailsPage = (product) => {
+        dispatch(toggleProductModalAction(''));
+        router.push("/products/" + product.sku);
     }
 
     return (
@@ -77,11 +83,14 @@ const ProductSingleFull = ({ product }) => {
                     </div>
                     <div className="col-md-6">
                         <div className="product_details_section">
-                            <Link href={"/products/" + product.sku}>
+                            <h3 className="product_title pointer" onClick={() => redirectToProductDetailsPage(product)}>
+                                {product.name && product.name}
+                            </h3>
+                            {/* <Link href={"/products/" + product.sku}>
                                 <h3 className="product_title pointer">
                                     {product.name && product.name}
                                 </h3>
-                            </Link>
+                            </Link> */}
 
                             <div className="h3 product_price">
                                 <PriceCalculation item={product} />

@@ -207,7 +207,7 @@ const ProductDetailInfo = (props) => {
                     </div>
                     {/*Location Section*/}
                     <div className="col-lg-3 bg-light">
-                      <DeliveryFeatures />
+                      <DeliveryFeatures product={product} />
                     </div>
                   </div>
                 </div>

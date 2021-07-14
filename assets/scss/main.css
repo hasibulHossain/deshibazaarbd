@@ -1740,6 +1740,15 @@ span.user_address {
   font-weight: 500;
 }
 
+span.user_address.store_name {
+  font-size: 20px;
+}
+span.user_address a {
+  color:#000!important;
+}
+span.user_address a:hover{
+  text-decoration: none;
+}
 .default_height {
   min-height: 315px;
 }
