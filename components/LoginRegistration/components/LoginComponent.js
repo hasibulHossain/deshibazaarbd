@@ -118,7 +118,7 @@ const LoginComponent = () => {
                                 isLoading && (
                                     <button disabled={true} type="submit" className="btn account_btn mt-2">
                                         <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                                        signing...
+                                        {' '} Signing in...
                                     </button>
                                 )
                             }
@@ -130,7 +130,7 @@ const LoginComponent = () => {
                         </div>
                     </form>
                 }
-                
+
 
                 <p className="already_account">
                     Don't have an account?

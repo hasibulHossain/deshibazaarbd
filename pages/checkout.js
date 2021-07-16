@@ -34,7 +34,7 @@ export default function Carts() {
 
   const handleStoreOrder = () => {
     dispatch(storeSells(customerInfo, carts, totalQuantity, shippingCost, totalPrice));
-    router.push('/payment-system')
+    // router.push('/payment-system')
   }
 
   return (
