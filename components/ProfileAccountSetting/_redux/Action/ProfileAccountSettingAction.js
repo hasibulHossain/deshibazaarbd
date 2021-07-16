@@ -19,9 +19,28 @@ export const getShippingAddress = (addressType) => (dispatch) => {
             responseData.status    = true;
             dispatch({ type: Types.GET_SHIPPING_ADDRESS, payload: responseData });
         })
+    }
+    //get billing address
+    export const getBillingAddress = (addressType) => (dispatch) => {
+        const responseData = {
+            data: null,
+        status: false,
+        isLoading: true
+    }
+    dispatch({ type: Types.GET_BILLING_ADDRESS, payload: responseData });
+    const userStorageData = JSON.parse(localStorage.getItem("loginData"));
+    Axios.get(`${process.env.NEXT_PUBLIC_API_URL}address?user_id=${userStorageData.userData.id}&type=${addressType}`)
+    .then((res) => {
+        responseData.data = res.data.data[0];
+        responseData.isLoading = false;
+        responseData.status = true;
+        dispatch({ type: Types.GET_BILLING_ADDRESS, payload: responseData });
+    })
 }
+
+
 //get billing address
-export const getBillingAddress = (addressType) => (dispatch) => {
+export const getAddress = (addressType) => (dispatch) => {
     const responseData = {
         data     : null,
         status   : false,
@@ -30,13 +49,30 @@ export const getBillingAddress = (addressType) => (dispatch) => {
     dispatch({ type: Types.GET_BILLING_ADDRESS, payload: responseData });
     const userStorageData = JSON.parse(localStorage.getItem("loginData"));
     Axios.get(`${process.env.NEXT_PUBLIC_API_URL}address?user_id=${userStorageData.userData.id}&type=${addressType}`)
-        .then((res) => {
-            responseData.data      = res.data.data[0];
-            responseData.isLoading = false;
-            responseData.status    = true;
+
+    .then((res) => {
+        responseData.data = res.data.data;
+        responseData.isLoading = false;
+        responseData.status = true;
+      
+        if(addressType === 'billing_address') {
             dispatch({ type: Types.GET_BILLING_ADDRESS, payload: responseData });
-        })
+        }
+      
+        if(addressType === 'shipping_address') {
+            dispatch({ type: Types.GET_SHIPPING_ADDRESS, payload: responseData });
+        }
+    })
 }
+    
+    
+    
+    
+    
+    
+    
+
+
 // get user data for set input field 
 export const getUserData = () => (dispatch) => {
     const userStorageData = JSON.parse(localStorage.getItem("loginData"));

@@ -4,11 +4,12 @@ import ProfileSideBar from "./ProfileSideBar";
 import { getUserDataAction } from "../_redux/getUserData/Action/UserDataAction";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMailBulk, faMapMarkedAlt, faPhone, faUser } from "@fortawesome/free-solid-svg-icons";
-import { getShippingAddress, getBillingAddress } from "../ProfileAccountSetting/_redux/Action/ProfileAccountSettingAction";
+import { getShippingAddress, getBillingAddress, getAddress } from "../ProfileAccountSetting/_redux/Action/ProfileAccountSettingAction";
 import LoadingSpinner from './../master/LoadingSpinner/LoadingSpinner'
 import SimpleModal from '../master/Modal/SimpleModal';
 import PersonalInformationUpdate from "./PersonalInformationUpdate";
 import AddressUpdate from "./AddressUpdate";
+import Link from 'next/link'
 
 const ProductProfile = () => {
 
@@ -20,8 +21,10 @@ const ProductProfile = () => {
 
   useEffect(() => {
     dispatch(getUserDataAction());
-    dispatch(getShippingAddress('shipping_address'));
-    dispatch(getBillingAddress('billing_address'));
+    // dispatch(getShippingAddress('shipping_address'));
+    // dispatch(getBillingAddress('billing_address'));
+    dispatch(getAddress('shipping_address'))
+    dispatch(getAddress('billing_address'))
     // dispatch(fetchWallets());
   }, [])
 
@@ -74,12 +77,19 @@ const ProductProfile = () => {
                     </div>
                   </div>
                 </div>
-                <div className="col-md-6">
-                  <div className="card mb-2 default_height shadow-sm p-3 mb-5 bg-white rounded">
-                    <h6>Address Book | <span className="edit_profile_link" onClick={() => handleAddressShow()}>EDIT</span> </h6>
-                    <div className="border-top">
-                      <p className="address_sub_title mt-2">
-                        Shipping Address :
+                <div className="col-md-5">
+                  <div className="card mb-2 p-3 default_height">
+                    <div className="card-title">
+                      <h6>Address Book | 
+                        <Link href="/account-setting#address-book">
+                          <a>
+                            <span className="edit_profile_link">EDIT</span>
+                          </a>
+                          {/* <span className="edit_profile_link" onClick={() => handleAddressShow()}>EDIT</span> */}
+                        </Link>
+                      </h6>
+                      <p className="address_sub_title">
+                        Default Shipping Address :
                       </p>
                       {
                         isLoading && (
@@ -87,22 +97,22 @@ const ProductProfile = () => {
                         )
                       }
                       {
-                        shippingAddress !== null && (
+                        shippingAddress  && shippingAddress.length > 0 && (
                           <>
                             <p>
                               <span className="user_icon">
                                 <FontAwesomeIcon icon={faMapMarkedAlt} />
                               </span>
                               <span className="user_address">
-                                {shippingAddress.area}, {shippingAddress.street1}, {shippingAddress.city} <br />
-                                {shippingAddress.country}
+                                {shippingAddress[0].area}, {shippingAddress[0].street1}, {shippingAddress[0].city} <br />
+                                {shippingAddress[0].country}
                               </span>
                             </p>
                           </>
                         )
                       }
                       <p className="address_sub_title">
-                        Billing Address :
+                        Default Billing Address :
                       </p>
                       {
                         isLoading && (
@@ -110,15 +120,15 @@ const ProductProfile = () => {
                         )
                       }
                       {
-                        billingAddress !== null && (
+                        billingAddress && billingAddress.length > 0 && (
                           <>
                             <p>
                               <span className="user_icon">
                                 <FontAwesomeIcon icon={faMapMarkedAlt} />
                               </span>
                               <span className="user_address">
-                                {billingAddress.area}, {billingAddress.street1}, {billingAddress.city} <br />
-                                {billingAddress.country}
+                                {billingAddress[0].area}, {billingAddress[0].street1}, {billingAddress[0].city} <br />
+                                {billingAddress[0].country}
                               </span>
                             </p>
                           </>

@@ -1,12 +1,21 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ProfileSideBar from '../myprofile/ProfileSideBar'
 import PersonalInfoForm from './PersonalInfoForm'
 import ShippingAddressForm from './ShippingAddressForm'
 import BillingAddressForm from './BillingAddressForm'
+import SingleAddress from './SingleAddress';
+import { getAddress } from './_redux/Action/ProfileAccountSettingAction';
+
+
 const ProfileAccountSetting = () => {
     const dispatch = useDispatch();
+    const {billingAddress, shippingAddress, userInputData} = useSelector(state => state.ProfileAccountSettingReducer)
 
+    useEffect(() => {
+        dispatch(getAddress('billing_address'));
+        dispatch(getAddress('shipping_address'));
+    }, [])
 
     return (
         <>
@@ -18,8 +27,52 @@ const ProfileAccountSetting = () => {
                     <div className="col-md-9 mt-3">
                         <div className="user_profile_setting_body">
                             <PersonalInfoForm />
-                            <ShippingAddressForm />
-                            <BillingAddressForm />
+                            <div className="profile_account shadow-sm bg-white" id="address-book">
+                                <h6 className="mb-4">Address book</h6>
+                                <ul className="address-list">
+                                        <div className="address-list__header">
+                                            <div>Full name</div>
+                                            <div>Address</div>
+                                            <div>Region</div>
+                                            <div>Mobile</div>
+                                            <div></div>
+                                            <div></div>
+                                        </div> 
+                                    <div>
+                                        { 
+                                            billingAddress && billingAddress.map((item, i) => {
+                                                return (
+                                                    <SingleAddress
+                                                        key={i} 
+                                                        id={item.id}
+                                                        type={item.type}
+                                                        is_default={item.is_default}
+                                                        city={item.city}
+                                                        area={item.area}
+                                                        street1={item.street1}
+                                                        street2={item.street2}
+                                                        userName={userInputData.first_name} />
+                                                );
+                                            })
+                                        }
+                                        { 
+                                            shippingAddress && shippingAddress.map((item, i) => {
+                                                return (
+                                                    <SingleAddress
+                                                        key={i} 
+                                                        type={item.type}
+                                                        is_default={item.is_default}
+                                                        city={item.city}
+                                                        area={item.area}
+                                                        street1={item.street1}
+                                                        street2={item.street2}
+                                                        userName={userInputData.first_name} />
+                                                );
+                                            })
+                                        }
+                                    </div>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
