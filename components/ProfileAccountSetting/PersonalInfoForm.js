@@ -132,9 +132,9 @@ const PersonalInfoForm = () => {
                     {
                         isSubmitting && (
                             <button type="submit" disabled={true} className="btn btn-primary mr-3 d-flex align-items-center">
-                                <Spinner animation="border" role="status">
+                                {/* <Spinner animation="border" role="status">
                                     <span className="sr-only">Loading...</span>
-                                </Spinner>
+                                </Spinner> */}
                                 <span className="ml-2">submitting...</span>
                             </button>
                         )

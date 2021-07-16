@@ -17,7 +17,8 @@ const initialState = {
         language: "en",
         avatar: null,
         banner: null,
-        address: null
+        address: null,
+        id: null
     },
     billingAddressInput: {
         type: "billing_address",
@@ -32,6 +33,20 @@ const initialState = {
         street1: null,
         street2: null,
         is_default: 1
+    },
+    selectedAddress: {
+        type: null,
+        user_id: null,
+        transaction_id: null,
+        country_id: null, //integer
+        country: null,
+        city_id: null,  //integer
+        city: null,
+        area_id: null,   //integer
+        area: null,
+        street1: null,
+        street2: null,
+        is_default: null
     },
     shippingAddressInput: {
         type: "shipping_address",
@@ -67,19 +82,19 @@ function ProfileAccountSettingReducer(state = initialState, action) {
                 billingAddress: action.payload.data,
             }
         case Types.GET_USER_UPDATED_DATA:
-            console.log('action.payload :>> ', action.payload);
             let getUserInput = { ...state.userInputData };
             getUserInput = action.payload;
             return {
                 ...state,
                 userInputData: getUserInput,
             }
-        case Types.CHANGE_BILLING_ADDRESS_INPUT:
-            const billingAddressInput = { ...state.billingAddressInput };
-            billingAddressInput[action.payload.name] = action.payload.value
+        case Types.CHANGE_ADDRESS_INPUT:
+            const selectedAddressClone = { ...state.selectedAddress };
+            selectedAddressClone[action.payload.name] = action.payload.value;
+
             return {
                 ...state,
-                billingAddressInput
+                selectedAddress: selectedAddressClone
             };
         case Types.CHANGE_SHIPPING_ADDRESS_INPUT:
             const shippingAddressInput = { ...state.shippingAddressInput };
@@ -132,6 +147,33 @@ function ProfileAccountSettingReducer(state = initialState, action) {
                 };
             }
 
+            case Types.GET_SINGLE_ADDRESS:
+                let cloneAddress;
+                if(action.payload.type === "billing_address") {
+                    cloneAddress = state.billingAddress.filter(item => item.id === action.payload.id);
+                } else {
+                    cloneAddress = state.shippingAddress.filter(item => item.id === action.payload.id);
+                }
+                
+                const cloneSelectedAddress = {
+                    ...state.selectedAddress,
+                    id: +cloneAddress[0].id,
+                    is_default: +cloneAddress[0].is_default,
+                    type: action.payload.type,
+                    user_id: state.userInputData.id && state.userInputData.id,
+                    country_id: +cloneAddress[0].country_id,
+                    country: cloneAddress[0].country,
+                    city_id: +cloneAddress[0].city_id,
+                    city: cloneAddress[0].city,
+                    area_id: +cloneAddress[0].area_id,
+                    area: cloneAddress[0].area,
+                    street1: cloneAddress[0].street1,
+                    street2: cloneAddress[0].street2,
+                }
+                return {
+                    ...state,
+                    selectedAddress: cloneSelectedAddress
+                }
         default:
             break;
     }
