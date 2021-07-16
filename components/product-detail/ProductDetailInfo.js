@@ -14,13 +14,14 @@ import AddWishList from "../Wishlist/AddWishList";
 import ProductRatings from "./ProductRatings";
 import DeliveryFeatures from "./DeliveryFeatures";
 import Slider from "react-slick";
+import PriceCalculation from "../products/partials/PriceCalculation";
 
 const ProductDetailInfo = (props) => {
 
   const dispatch = useDispatch();
   const { product } = props;
   const [quantity, setQuantity] = useState(1);
-  const featured_image = `${process.env.NEXT_PUBLIC_URL}public/images/products/${product.featured_image}`;
+  const featured_image = `${process.env.NEXT_PUBLIC_URL}images/products/${product.featured_image}`;
   const [previewImg, setPreviewImg] = useState(featured_image);
   const zoomImage = { width: 200, height: 250, zoomWidth: 600, img: previewImg };
   const userData = useSelector((state) => state.UserDataReducer.userData);
@@ -171,24 +172,8 @@ const ProductDetailInfo = (props) => {
                             <hr />
 
                             <div className="product_details_price">
-                              {product.is_offer_enable == false && (
-                                <h2 className="product_details_current_price">
-                                  Tk-{product.default_selling_price}
-                                </h2>
-                              )}
-
-                              {product.is_offer_enable == true && (
-                                <>
-                                  <h4 className="product_details_current_price">
-                                    Tk-{product.offer_selling_price
-                                      ? product.offer_selling_price
-                                      : product.default_selling_price}
-                                  </h4>
-                                  <h6 className="product_details_default_price">
-                                    Tk-{product.default_selling_price}
-                                  </h6>
-                                </>
-                              )}
+                              
+                              <PriceCalculation item={product} />
 
                               <div className="quantity">
                                 <button
@@ -222,7 +207,7 @@ const ProductDetailInfo = (props) => {
                     </div>
                     {/*Location Section*/}
                     <div className="col-lg-3 bg-light">
-                      <DeliveryFeatures />
+                      <DeliveryFeatures product={product} />
                     </div>
                   </div>
                 </div>

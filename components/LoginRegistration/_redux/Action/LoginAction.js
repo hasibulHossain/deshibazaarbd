@@ -24,7 +24,9 @@ export const loginAction = (loginData) => (dispatch) => {
     isLoading: true,
   }
   dispatch({ type: Types.AUTH_LOGIN_CHECK, payload: response })
+
   const URL = `${process.env.NEXT_PUBLIC_API_URL}auth/login`;
+
   try {
     axios.post(URL, loginData)
       .then((res) => {
@@ -54,7 +56,7 @@ export const loginAction = (loginData) => (dispatch) => {
     response.isLoading = false;
     showToast('error', 'Network Error, Please Fix this !');
   }
-  dispatch({ type: Types.AUTH_LOGIN_CHECK, payload: response })
+  
 }
 
 export const emptyDispatch = () => (dispatch) => {

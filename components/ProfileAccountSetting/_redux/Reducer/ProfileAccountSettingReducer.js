@@ -20,19 +20,19 @@ const initialState = {
         address: null,
         id: null
     },
-    billingAddressInput: {
-        type: "billing_address",
-        user_id: null,
-        transaction_id: null,
-        country_id: null, //integer
-        country: null,
-        city_id: null,  //integer
-        city: null,
-        area_id: null,   //integer
-        area: null,
-        street1: null,
-        street2: null,
-        is_default: 1
+    billingAddressInput : {
+        type            : "billing_address",
+        user_id         : null,
+        transaction_id  : null,
+        country_id      : null, //integer
+        country         : null,
+        city_id         : null,  //integer
+        city            : null,
+        area_id         : null,   //integer
+        area            : null,
+        street1         : null,
+        street2         : null,
+        is_default      : 1
     },
     selectedAddress: {
         type: null,
@@ -49,36 +49,36 @@ const initialState = {
         is_default: null
     },
     shippingAddressInput: {
-        type: "shipping_address",
-        user_id: null,
-        transaction_id: null,
-        country_id: null, //integer
-        country: null,
-        city_id: null,  //integer
-        city: null,
-        area_id: null,   //integer
-        area: null,
-        street1: null,
-        street2: null,
-        is_default: 1
+        type            : "shipping_address",
+        user_id         : null,
+        transaction_id  : null,
+        country_id      : null, //integer
+        country         : null,
+        city_id         : null,  //integer
+        city            : null,
+        area_id         : null,   //integer
+        area            : null,
+        street1         : null,
+        street2         : null,
+        is_default      : 1
     },
-    countryList: [],
-    cityList: [],
-    areaList: [],
-
+    countryList         : [],
+    cityList            : [],
+    areaList            : [],
+    userDetails         : null,
 }
 function ProfileAccountSettingReducer(state = initialState, action) {
     switch (action.type) {
         case Types.GET_SHIPPING_ADDRESS:
             return {
                 ...state,
-                isLoading: action.payload.isLoading,
+                isLoading      : action.payload.isLoading,
                 shippingAddress: action.payload.data,
             }
         case Types.GET_BILLING_ADDRESS:
             return {
                 ...state,
-                isLoading: action.payload.isLoading,
+                isLoading     : action.payload.isLoading,
                 billingAddress: action.payload.data,
             }
         case Types.GET_USER_UPDATED_DATA:
@@ -86,7 +86,8 @@ function ProfileAccountSettingReducer(state = initialState, action) {
             getUserInput = action.payload;
             return {
                 ...state,
-                userInputData: getUserInput,
+                userInputData: action.payload,
+                userDetails  : action.payload,
             }
         case Types.CHANGE_ADDRESS_INPUT:
             const selectedAddressClone = { ...state.selectedAddress };
@@ -136,7 +137,7 @@ function ProfileAccountSettingReducer(state = initialState, action) {
             if (action.payload.status == true) {
                 return {
                     ...state,
-                    isSubmitting: action.payload.isLoading,
+                    isSubmitting       : action.payload.isLoading,
                     billingAddressInput: initialState.billingAddressInput
 
                 };

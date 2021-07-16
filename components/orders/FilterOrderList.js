@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getFilterOptionDataForOrderList } from './_redux/action/OrderAction.js';
 
 const FilterOrderList = ({ orderList, isLoading }) => {
-
     const dispatch = useDispatch();
     const { filterOptionList } = useSelector((state) => state.OrderReducer);
 

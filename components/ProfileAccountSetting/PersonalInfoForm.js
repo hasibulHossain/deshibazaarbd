@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { handleSetDataIntoInputField } from './_redux/Action/ProfileAccountSettingAction';
+import { getUserData } from './_redux/Action/ProfileAccountSettingAction';
 import ErrorMessage from './../master/ErrorMessage/ErrorMessage'
 
 const PersonalInfoForm = () => {
@@ -11,7 +11,7 @@ const PersonalInfoForm = () => {
     const isSubmitting = useSelector((state) => state.ProfileAccountSettingReducer.isSubmitting);
 
     useEffect(() => {
-        dispatch(handleSetDataIntoInputField())
+        dispatch(getUserData())
     }, [])
     const handleUpdatedProfile = () => {
         // dispatch(RegisterFirstStep(registerInput))

@@ -2,9 +2,9 @@ import React from 'react';
 
 const ErrorMessage = ({ errorText }) => {
     return (
-        <p className="error_message">
+        <div className="error_message">
             {errorText}
-        </p>
+        </div>
     );
 };
 export default ErrorMessage;

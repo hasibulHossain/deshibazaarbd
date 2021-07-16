@@ -12,12 +12,13 @@ import AddressUpdate from "./AddressUpdate";
 import Link from 'next/link'
 
 const ProductProfile = () => {
-  const dispatch = useDispatch()
-  // const wallets = useSelector((state) => state.wallet.wallets);
-  const userData = useSelector((state) => state.UserDataReducer.userData);
-  const isLoading = useSelector((state) => state.ProfileAccountSettingReducer.isLoading);
+
+  const dispatch        = useDispatch()
+  const userData        = useSelector((state) => state.UserDataReducer.userData);
+  const isLoading       = useSelector((state) => state.ProfileAccountSettingReducer.isLoading);
   const shippingAddress = useSelector((state) => state.ProfileAccountSettingReducer.shippingAddress);
-  const billingAddress = useSelector((state) => state.ProfileAccountSettingReducer.billingAddress);
+  const billingAddress  = useSelector((state) => state.ProfileAccountSettingReducer.billingAddress);
+
   useEffect(() => {
     dispatch(getUserDataAction());
     // dispatch(getShippingAddress('shipping_address'));
@@ -27,13 +28,12 @@ const ProductProfile = () => {
     // dispatch(fetchWallets());
   }, [])
 
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);;
+  const [show, setShow]               = useState(false);
+  const handleClose                   = () => setShow(false);
+  const handleShow                    = () => setShow(true);;
   const [addressShow, setAddressShow] = useState(false);
-  const handleAddressShow = () => setAddressShow(true);;
-  const handleAddressClose = () => setAddressShow(false);
-
+  const handleAddressShow             = () => setAddressShow(true);;
+  const handleAddressClose            = () => setAddressShow(false);
 
   return (
     <>
@@ -47,15 +47,16 @@ const ProductProfile = () => {
             {/** user profile data */}
             <div className="col-md-9">
               <div className="row mt-5">
-                <div className="col-md-2">
-                  <div className="card mb-2 text-center p-2 shadow-sm align-items-center">
-                    <FontAwesomeIcon icon={faUser} style={{ fontSize: "100px" }} />
-                  </div>
-                </div>
-                <div className="col-md-5">
-                  <div className="card mb-2 p-3 default_height">
-                    <div className="card-title">
-                      <h6>Personal Profile | <span className="edit_profile_link" onClick={(() => handleShow())}>EDIT</span></h6>
+                <div className="col-md-6">
+                  <div className="card mb-2 default_height shadow-sm p-3 mb-5 bg-white rounded">
+                    <h6>Personal Profile | <span className="edit_profile_link" onClick={(() => handleShow())}>EDIT</span></h6>
+                    <div className="border-top">
+                      <div className="text-center mt-2">
+                        {/* <div className="border rounded-circle p-1" style={{height: "90px", width: "90px"}}>
+                          <FontAwesomeIcon icon={faUser} style={{ fontSize: "70px" }} />
+                        </div> */}
+                        <img className="border rounded-circle p-1 mb-2" style={{height: "100px"}} src="https://cdn.iconscout.com/icon/free/png-256/laptop-user-1-1179329.png" alt="user image" />
+                      </div>
                       <p className="user_name"> {`${userData !== null && userData.first_name} ${userData !== null && userData.last_name}`}</p>
                       <p>
                         <span className="user_icon">
@@ -145,18 +146,17 @@ const ProductProfile = () => {
       </div>
 
       <SimpleModal
-        size="lg"
-        show={show}
-        handleClose={handleClose}
-
+        size        = "lg"
+        show        = {show}
+        handleClose = {handleClose}
       >
         <PersonalInformationUpdate />
       </SimpleModal>
-      <SimpleModal
-        size="xl"
-        show={addressShow}
-        handleClose={handleAddressClose}
 
+      <SimpleModal
+        size        = "xl"
+        show        = {addressShow}
+        handleClose = {handleAddressClose}
       >
         <AddressUpdate />
       </SimpleModal>

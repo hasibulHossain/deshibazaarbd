@@ -40,8 +40,12 @@ export const RegisterFirstStep = (registerInput) => (dispatch) => {
           dispatch({ type: Types.REGISTER_FIRST_STEP, payload: responseLog });
 
           if (responseLog.data.errors) {
-            const errorMessage = responseLog.data.errors.phone_no[0];
-
+            let errorMessage;
+            if (responseLog.data.errors.phone_no !== undefined) {
+              errorMessage = responseLog.data.errors.phone_no[0];
+            } else if (responseLog.data.errors.email !== undefined) {
+              errorMessage = responseLog.data.errors.email[0];
+            }
             showToast("error", errorMessage);
           } else {
             showToast("error", responseLog.data.message);
@@ -77,7 +81,7 @@ export const customerRegister = (registerInput) => async (dispatch) => {
     message: null,
     status: false,
     data: null,
-    isLoading: true,
+    isCreating: true,
   };
   dispatch({ type: Types.AUTH_REGISTER, payload: response });
   axios
@@ -86,7 +90,7 @@ export const customerRegister = (registerInput) => async (dispatch) => {
       if (res.data.status) {
         response.message = res.data.message;
         response.data = null;
-        response.isLoading = false;
+        response.isCreating = false;
         showToast("success", response.message);
         dispatch({ type: Types.AUTH_REGISTER, payload: response });
       }
@@ -94,7 +98,7 @@ export const customerRegister = (registerInput) => async (dispatch) => {
     .catch((err) => {
       const { response } = err;
       const { request, ...errorObject } = response;
-      response.isLoading = false;
+      response.isCreating = false;
       dispatch({ type: Types.AUTH_REGISTER, payload: response });
       showToast("error", response.data.message);
     });

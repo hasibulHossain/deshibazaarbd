@@ -9,6 +9,8 @@ import ProductRating from "./partials/ProductRating";
 import { useDispatch } from "react-redux";
 import { toggleProductModalAction } from "./_redux/Action/ProductAction";
 import { addToCartAction } from '../carts/_redux/action/CartAction';
+import { showToast } from '../master/Helper/ToastHelper';
+import AddWishList from '../Wishlist/AddWishList';
 
 /**
  * ProductSingleMini Component
@@ -25,17 +27,26 @@ const ProductSingleMini = ({ item = {}, columnClassName = 'col-md-2', cardClassN
 
     const dispatch = useDispatch();
 
+    const addToCart = (item) => {
+        if (parseInt(item.current_stock) === 0) {
+            showToast("error", "This product is out of stock!");
+        } else {
+            dispatch(addToCartAction(item));
+        }
+    }
+
     return (
         <div className={columnClassName}>
             <div className={cardClassName}>
                 <div className="product-purchase-section">
                     <button>
-                        <FontAwesomeIcon className="add_to_cart" icon={faShoppingBag} 
-                            onClick={() => dispatch(addToCartAction(item))} 
+                        <FontAwesomeIcon className="add_to_cart" icon={faShoppingBag}
+                            onClick={() => addToCart(item)}
                         />
                     </button>
                     <button>
-                        <FontAwesomeIcon className="withlist" icon={faHeart} />
+                        <AddWishList product={item} />
+                        {/* <FontAwesomeIcon className="withlist" icon={faHeart} /> */}
                     </button>
                     <button>
                         <FontAwesomeIcon className="details" icon={faListAlt} />
@@ -57,14 +68,14 @@ const ProductSingleMini = ({ item = {}, columnClassName = 'col-md-2', cardClassN
                 </div>
             </div>
         </div>
-        
-     );
+
+    );
 }
 
 ProductSingleMini.propTypes = {
-    item           : PropTypes.object,
+    item: PropTypes.object,
     columnClassName: PropTypes.string,
-    cardClassName  : PropTypes.string
+    cardClassName: PropTypes.string
 };
- 
+
 export default ProductSingleMini;

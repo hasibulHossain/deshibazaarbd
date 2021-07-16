@@ -11,12 +11,13 @@ import { ChangeRegisterInputField, customerRegister, RegisterFirstStep } from '.
 import { Spinner } from 'react-bootstrap';
 
 const RegistrationComponent = () => {
-    const dispatch = useDispatch()
-    const [showPassword, setShowPassword] = useState(false);
-    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const dispatch                                            = useDispatch()
+    const [showPassword, setShowPassword]                     = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword]       = useState(false);
     const { register, handleSubmit, errors, setValue, watch } = useForm();
-    const registerInput = useSelector((state) => state.RegisterReducer.registerInput)
-    const isLoading = useSelector((state) => state.RegisterReducer.isLoading);
+    const registerInput                                       = useSelector((state) => state.RegisterReducer.registerInput)
+    const isLoading                                           = useSelector((state) => state.RegisterReducer.isLoading);
+    const isCreating                                          = useSelector((state) => state.RegisterReducer.isCreating);
 
     const password = useRef({});
     password.current = watch("password", "");
@@ -33,20 +34,21 @@ const RegistrationComponent = () => {
     const handleRegister = async (e) => {
         dispatch(customerRegister(registerInput));
     };
-    const onSucces = () => {
-        console.log('Swip success');
-    }
+
+    // const onSucces = () => {
+    //     console.log('Swip success');
+    // }
     return (
         <>
             <h5 className="account_title">New Customers</h5>
             <p className="account_sub_tite">Creating an account has many benefits : check out faster, keep more than one <br /> address, track orders and more</p>
             <div className="account_info_body">
                 <form
-                    onSubmit={handleSubmit(handleRegisterFirstStep)}
-                    method="post"
-                    autoComplete="off"
-                    encType="multipart/form-data"
-                    autoSave="off"
+                    onSubmit     = {handleSubmit(handleRegisterFirstStep)}
+                    method       = "post"
+                    autoComplete = "off"
+                    encType      = "multipart/form-data"
+                    autoSave     = "off"
                 >
                     <div className="row">
                         <div className="col-md-6">
@@ -142,12 +144,25 @@ const RegistrationComponent = () => {
 
 
                         <div className="col-md-6">
-                            <div class="mb-3 mt-4">
-                                <button type="submit" className="btn btn-primary mt-1">Get OTP</button>
-                            </div>
+                            {isLoading && (
+                                <div className="mb-3 mt-4">
+                                    <button disabled={true} className="btn btn-primary mt-1">
+                                        <div className="d-flex align-items-center">
+                                            <Spinner animation="border" role="status">
+                                            </Spinner>
+                                            <span className="ml-2"> Getting OTP...</span>
+                                        </div>
+                                    </button>
+                                </div>
+                            )}
+                            {!isLoading && (
+                                <div class="mb-3 mt-4">
+                                    <button type="submit" className="btn btn-primary mt-1">Get OTP</button>
+                                </div>
+                            )}
                         </div>
-                        {/* 
-                        <div className="col-md-6">
+
+                        {/* <div className="col-md-6">
                             <div class="mb-3">
                                 <ReactSwipeButton
                                     text='Slide to get SMS Code'
@@ -260,7 +275,7 @@ const RegistrationComponent = () => {
                         {/* <button className="btn account_btn mt-2">Create an account</button> */}
 
 
-                        {isLoading === true && (
+                        {isCreating === true && (
                             <>
                                 <button disabled={true} className="btn account_btn mt-2">
                                     <Spinner animation="border" role="status">
@@ -272,7 +287,7 @@ const RegistrationComponent = () => {
                         )}
 
                         {
-                            !isLoading && (
+                            !isCreating && (
                                 <button type="submit" className="btn account_btn mt-2" onClick={handleSubmit(handleRegister)} >
                                     Create an account
                                 </button>

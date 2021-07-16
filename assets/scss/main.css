@@ -165,6 +165,7 @@ a .custom-button-component:hover {
 
 .navbar {
   flex-wrap: wrap !important;
+  padding: 10px 0px 0rem 0px !important;
 }
 
 .custome-navbar {
@@ -229,6 +230,10 @@ a .custom-button-component:hover {
 .menu_list {
   padding: 15px;
   padding-left: 69px;
+  display: block;
+  -webkit-box-shadow: 0px 20px 20px 0px #cccccc3b;
+  box-shadow: 0px 20px 20px 20px #cccccc54;
+  width: 100%;
 }
 
 .rc-menu__item {
@@ -1135,10 +1140,24 @@ a .custom-button-component:hover {
 
 .social-media .social-facebook:hover {
   background-color: #fff;
+  transform: translateY(-3px);
 }
 
 .social-media .social-facebook:hover a {
   color: #6081c4;
+}
+.social-media .social-youtube {
+  background-color: #f12506;
+  border: 2px solid #f12506;
+}
+
+.social-media .social-youtube:hover {
+  background-color: #fff;
+  transform: translateY(-3px);
+}
+
+.social-media .social-youtube:hover a {
+  color: #f12506;
 }
 
 .social-media .social-twitter {
@@ -1148,6 +1167,7 @@ a .custom-button-component:hover {
 
 .social-media .social-twitter:hover {
   background-color: #fff;
+  transform: translateY(-3px);
   color: #43bdef !important;
 }
 
@@ -1162,6 +1182,7 @@ a .custom-button-component:hover {
 
 .social-media .social-linkedIn:hover {
   background-color: #fff;
+  transform: translateY(-3px);
   color: #2797cf !important;
 }
 
@@ -1176,6 +1197,7 @@ a .custom-button-component:hover {
 
 .social-media .social-whatsApp:hover {
   background-color: #fff;
+  transform: translateY(-3px);
   color: #23b180 !important;
 }
 
@@ -1190,6 +1212,7 @@ a .custom-button-component:hover {
 
 .social-media .social-instagram:hover {
   background-color: #fff;
+  transform: translateY(-3px);
   color: #e46258 !important;
 }
 
@@ -1717,8 +1740,17 @@ span.user_address {
   font-weight: 500;
 }
 
+span.user_address.store_name {
+  font-size: 20px;
+}
+span.user_address a {
+  color:#000!important;
+}
+span.user_address a:hover{
+  text-decoration: none;
+}
 .default_height {
-  min-height: 298px;
+  min-height: 315px;
 }
 
 p.address_sub_title {
@@ -1756,9 +1788,7 @@ p.address_sub_title {
 
 .profile_account,
 .inner_product_list {
-  /* background-color: rgb(255 255 255 / 77%); */
   padding: 15px;
-  border-radius: 10px;
   margin-bottom: 20px;
 }
 
@@ -2512,19 +2542,114 @@ img.multiple_preview_images {
   right: -20px !important;
   border: 1px solid #cdcdcd;
   background-color: white !important;
-  box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
 }
-.delivery_features_section{
+.delivery_features_section {
   border-bottom: 1px solid #cdcdcd;
 }
 small.delivery_time {
   font-weight: 600;
   color: #868888cc;
 }
-.product_details_font_awesome{
+.product_details_font_awesome {
   color: #b5b5b5;
   margin-top: 6px;
 }
-.return_font_awesome{
+.return_font_awesome {
   color: #172337;
 }
+.shipping_info_title,
+.checkout_payment_method_title {
+  border-bottom: 1px solid #d6d6d6;
+  font-weight: 800;
+}
+.shipping_info_fontAwesome {
+  color: #f12506;
+  font-size: 1.4rem;
+}
+.customer_name span {
+  font-weight: 700;
+  margin-left: 10px;
+}
+p.customer_info_edit {
+  font-size: 15px;
+  color: #797979;
+  margin-top: 5px;
+  cursor: pointer;
+}
+
+span.delivery_area {
+  background-color: #ffdfe1;
+  padding: 5px 15px;
+  -webkit-border-radius: 25px;
+  border-radius: 25px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+p.shipping_address {
+  font-size: 15px;
+  margin-left: 20px;
+}
+
+.delivery_collection {
+  border: 2px solid #16b62a;
+  border-style: dashed;
+  padding: 10px;
+}
+
+.delivery_collection .delivery_collecting_message {
+  color: #f12506;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.delivery_collection .collecting_suggesting {
+  font-size: 15px;
+}
+.delivery_collection .collection_suggesting_fontAwesome {
+  color: #797979;
+}
+
+.shipping_billing_details_info span {
+  margin-left: 15px;
+}
+
+.shipping_billing_info_fontAwesome {
+  color: #f12506;
+}
+.shipping_payment_method_section {
+  padding: 10px 20px;
+}
+img.payment_method_in_shipping {
+  height: 50px;
+  margin: 10px;
+  border: 1px solid #d6d6d6;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 5px;
+}
+.shipping_method_checkbox {
+  font-weight: 700;
+  font-size: 16px;
+}
+.shipping_method_checkbox.active {
+  color: #0c7e33;
+}
+.shipping_method_checkbox.active input[type="radio"] {
+  background: #990000;
+}
+
+/** Coupon **/
+.coupon-input {
+  font-size: 0.8rem !important;
+  padding: 20px !important;
+}
+
+.btn-coupon-apply {
+  font-weight: 500 !important;
+  font-size: 0.7rem !important;
+  padding: 10px 25px !important;
+}
+/** Coupon **/

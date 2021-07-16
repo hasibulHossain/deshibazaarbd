@@ -5,6 +5,7 @@ const initialState = {
   error: false,
   isLoading: false,
   isSubmitting: false,
+  
   customerInfo: {
     first_name: null,
     surname: null,
@@ -21,11 +22,11 @@ const initialState = {
     area: null,
     address: null,
     is_default: 1
-
   },
 };
 function DeliveryInfoReducer(state = initialState, action) {
   switch (action.type) {
+    
     case Types.DELIVER_CUSTOMER_INPUT_CHANGE:
       const customerInfo = { ...state.customerInfo };
       customerInfo[action.payload.name] = action.payload.value
@@ -33,6 +34,13 @@ function DeliveryInfoReducer(state = initialState, action) {
         ...state,
         customerInfo
       };
+
+    case Types.SET_CUSTOMER_DELIVERY_INFO:
+      return {
+        ...state,
+        customerInfo: action.payload
+      };
+
     case Types.ORDER_SUBMIT:
       return {
         ...state,

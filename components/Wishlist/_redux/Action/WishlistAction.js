@@ -4,10 +4,11 @@ import { showToast } from "../../../master/Helper/ToastHelper";
 
 export const WishListAdded = (itemID) => (dispatch) => {
     const response = {
-        isLoading: true,
-        status: false,
-        data: null
+        isLoading  : true,
+        status     : false,
+        data       : null
     }
+   
     dispatch({ type: Types.WISHLIST_ADDED, payload: response });
     const postData = {
         item_id: itemID
@@ -17,7 +18,8 @@ export const WishListAdded = (itemID) => (dispatch) => {
             if (response.data.status) {
                 response.isLoading = false;
                 showToast('success', response.data.message);
-                dispatch({ type: Types.WISHLIST_ADDED, payload: responseLog })
+                dispatch(getWishListData())
+                dispatch({ type: Types.WISHLIST_ADDED, payload: responseLog });
             }
         }).catch((error) => {
             const responseLog = error.response;
@@ -29,20 +31,50 @@ export const WishListAdded = (itemID) => (dispatch) => {
             }
         })
 }
+export const removeFromWishList = (itemID) => (dispatch) => {
+    const response = {
+        isLoading  : true,
+        status     : false,
+        data       : null
+    }
+    dispatch({ type: Types.REMOVE_FROM_WISHLIST, payload: response });
+    const postData = {
+        item_id: itemID
+    }
+    Axios.delete(`${process.env.NEXT_PUBLIC_API_URL}wishlist`, postData)
+        .then((response) => {
+            console.log('response :>> ', response);
+            if (response.data.status) {
+
+                response.isLoading = false;
+                showToast('success', response.data.message);
+                dispatch(getWishListData())
+                dispatch({ type: Types.REMOVE_FROM_WISHLIST, payload: responseLog });
+            }
+        }).catch((error) => {
+            const responseLog = error.response;
+            response.isLoading = false;
+            if (typeof responseLog !== 'undefined') {
+                const { request, ...errorObject } = responseLog;
+                showToast('error', responseLog.data.message);
+                dispatch({ type: Types.REMOVE_FROM_WISHLIST, payload: responseLog })
+            }
+        })
+}
 
 //get wish list
 export const getWishListData = () => (dispatch) => {
     const responseList = {
-        status: false,
-        isLoading: true,
-        wishList: []
+        status         : false,
+        isLoading      : true,
+        wishList       : []
     }
     dispatch({ type: Types.GET_WISHLIST_DATA, payload: responseList });
     Axios.get(`${process.env.NEXT_PUBLIC_API_URL}wishlist`)
         .then((res) => {
             if (res.data.status) {
-                responseList.status = res.data.status;
-                responseList.wishList = res.data.data;
+                responseList.status    = res.data.status;
+                responseList.wishList  = res.data.data;
                 responseList.isLoading = false;
                 dispatch({ type: Types.GET_WISHLIST_DATA, payload: responseList })
             }

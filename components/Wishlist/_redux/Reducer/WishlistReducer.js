@@ -2,6 +2,7 @@ import * as Types from "../Types/Types";
 import moment from "moment";
 const initialState = {
     isLoading: false,
+    isSubmitting: false,
     wishList: [],
 };
 
@@ -11,7 +12,12 @@ const WishlistReducer = (state = initialState, action) => {
         case Types.WISHLIST_ADDED:
             return {
                 ...state,
-                isLoading: action.payload.isLoading,
+                isSubmitting: action.payload.isLoading,
+            }
+        case Types.REMOVE_FROM_WISHLIST:
+            return {
+                ...state,
+                isSubmitting: action.payload.isLoading,
             }
         case Types.GET_WISHLIST_DATA:
             return {

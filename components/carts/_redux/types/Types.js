@@ -1,5 +1,5 @@
 export const GET_CARTS                 = "GET_CARTS";
-export const ADD_CART_DATA           = "ADD_CART_DATA";
+export const ADD_CART_DATA             = "ADD_CART_DATA";
 
 export const GET_COMBINE_CARTS         = "GET_COMBINE_CARTS";
 export const GET_CARTS_LOADING         = "GET_CARTS_LOADING";

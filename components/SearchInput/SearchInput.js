@@ -7,12 +7,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 const SearchInput = (props) => {
-  const dispatch = useDispatch();
-  const router = useRouter();
-
+  
+  const dispatch            = useDispatch();
+  const router              = useRouter();
   const [search, setSearch] = useState("");
-  const suggestions = useSelector((state) => state.SearchReducer.products);
-  const loading = useSelector((state) => state.SearchReducer.loading);
+  const suggestions         = useSelector((state) => state.SearchReducer.products);
+  const loading             = useSelector((state) => state.SearchReducer.loading);
 
   const searchProduct = (e) => {
     setSearch(e.target.value);
@@ -23,7 +23,11 @@ const SearchInput = (props) => {
     if (searchData.is_item) {
       router.push(`/products/${searchData.slug}`);
     }
+    if (searchData.is_category) {
+      router.push(`/products?category=${searchData.slug}`);
+    }
   };
+
 
   return (
     <>

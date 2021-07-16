@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useSelector, useDispatch } from "react-redux";
 
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import { FiChevronRight } from "react-icons/fi";
-import { useSelector, useDispatch } from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingBag, faSync, faTrash } from "@fortawesome/free-solid-svg-icons";
 
@@ -12,30 +13,24 @@ import Card from "../components/Card/Card";
 import SimpleBtn from "../components/master/SimpleBtn/SimpleBtn";
 import Modal from "../components/master/Modal/Modal";
 import RemoveCartItem from "../components/RemoveCartItem/RemoveCartItem";
-import { toggleModal } from "../_redux/store/action/globalAction";
-import { getCartsAction } from "../components/carts/_redux/action/CartAction";
+import OrderSummery from '../components/orders/OrderSummery'
 import CartProduct from "../components/carts/cart-product/CartProduct";
+
+import { toggleModal } from "../_redux/store/action/globalAction";
+import { getCartsAction, toggleAllCartSelection } from "../components/carts/_redux/action/CartAction";
 import { getUserDataAction } from "../components/_redux/getUserData/Action/UserDataAction";
-import { useRouter } from "next/router";
-import OrderSummary from '../components/orders/OrderSummary'
 
 export default function Carts() {
-  const router                       = useRouter();
-  const dispatch                     = useDispatch();
-  const { isModalActive }            = useSelector((state) => state.GlobalReducer);
-  const { supplierWiseCarts, carts } = useSelector((state) => state.CartReducer);
-  const userData                     = useSelector((state) => state.UserDataReducer.userData);
-
+  const router   = useRouter();
+  const dispatch = useDispatch();
+  
+  const { isModalActive } = useSelector((state) => state.GlobalReducer);
+  const { supplierWiseCarts, carts, checkedAllCarts } = useSelector((state) => state.CartReducer);
+  const userData = useSelector((state) => state.UserDataReducer.userData);
 
   const deleteItemsHandler = () => {
     dispatch(toggleModal());
   };
-
-  useEffect(() => {
-    if (typeof window === "undefined") {
-      global.window = {};
-    }
-  }, []);
 
   useEffect(() => {
     dispatch(getCartsAction());
@@ -65,7 +60,7 @@ export default function Carts() {
 
       <MainLayout pageTitle="Carts">
         <div className="container-fluid">
-          <div className="row">
+          <div className="row mt-3">
             <div className="col-md-8">
               <div className="cart_container_body">
                 <p className="cart__preferred_delivery">
@@ -81,8 +76,12 @@ export default function Carts() {
                   </div>
                 </Card>
                 <div className="card mt-3 mb-2">
+
                   <div className="cart_item_box_top">
-                    <p>Select All ({carts.length} items)</p>
+                    <p className="pointer" onClick={() => dispatch(toggleAllCartSelection(! checkedAllCarts))}>
+                      <input className="cart-checkbox" type="checkbox" checked={checkedAllCarts} onChange={() => {}} /> 
+                      &nbsp; Select All ({carts.length} items)
+                    </p>
                     <div className="carts_delete" onClick={deleteItemsHandler}>
                       <FontAwesomeIcon className="cart_trash" icon={faTrash} />
                       <p>Delete</p>
@@ -96,7 +95,7 @@ export default function Carts() {
                           <div className="cart_item_box_top_1">
                             <div>
                               <div className="cart_shop_name d-flex">
-                                <input className="cart-checkbox" type="checkbox" />
+                                <input className="cart-checkbox" type="checkbox" checked={item.isChecked} onChange={() => dispatch(toggleAllCartSelection(! item.isChecked, null, item.sellerID))} />
                                 <div className="ml-2">
                                   <div className="cart_details_body">
                                     <p>
@@ -106,14 +105,11 @@ export default function Carts() {
                                       <FiChevronRight />
                                     </div>
                                   </div>
-
                                 </div>
                               </div>
-
                             </div>
 
                             <p className="estimate">Estimate time -- </p>
-
                           </div>
                           {/* <p className="Spend">
                             Spend ৳ 990 enjoy free shipping for Standard delivery option
@@ -136,12 +132,12 @@ export default function Carts() {
                   <div className="p-2">
                     <div className="text-center" >
                       <Link href="/products">
-                          <a href="" style={{ display: 'inline-block' }}>
-                            <SimpleBtn variant="success" >
-                              <FontAwesomeIcon className="mr-2" icon={faShoppingBag} />
-                              CONTINUE SHOPPING
-                            </SimpleBtn>
-                          </a>
+                        <a href="/products" style={{ display: 'inline-block' }}>
+                          <SimpleBtn variant="success" >
+                            <FontAwesomeIcon className="mr-2" icon={faShoppingBag} />
+                            CONTINUE SHOPPING
+                          </SimpleBtn>
+                        </a>
                       </Link>
                     </div>
                   </div>
@@ -150,13 +146,9 @@ export default function Carts() {
             </div>
 
             <div className="col-md-4 cart_checkout_margin">
-              <OrderSummary handleClick={placeOrder} buttonText="PROCESS TO CHECKOUT" />
+              <OrderSummery handleClick={placeOrder} buttonText="PROCEED TO CHECKOUT" />
             </div>
-
           </div>
-
-
-
         </div>
       </MainLayout>
     </>
