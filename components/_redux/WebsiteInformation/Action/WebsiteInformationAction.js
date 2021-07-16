@@ -1,6 +1,6 @@
 import Axios from "axios";
 import { showToast } from "../../../master/Helper/ToastHelper";
-import * as Types from "../types/Types";
+import * as Types from "../Types/Types";
 
 /**
  * Get website information

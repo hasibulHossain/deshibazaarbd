@@ -49,7 +49,7 @@ const CartProduct = ({ cart }) => {
         <div className="col-md-7">
           <div className="product_cart_inner row">
             <div className="col-4 product_cart_left">
-              <input type="checkbox" className="cart-checkbox"  checked={cart.isChecked} onClick={() => dispatch(toggleAllCartSelection(! cart.isChecked, cart.productID))} />
+              <input type="checkbox" className="cart-checkbox" checked={cart.isChecked} onChange={() => dispatch(toggleAllCartSelection(! cart.isChecked, cart.productID))} />
               <img
                 src={cart.productImage === null ? 'https://img.icons8.com/plasticine/2x/image.png' : cart.productImage }
                 alt={cart.productName}

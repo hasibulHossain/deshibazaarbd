@@ -7,28 +7,23 @@ import { getArea, getCity, getCountry } from '../ProfileAccountSetting/_redux/Ac
 import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBriefcase, faHome } from '@fortawesome/free-solid-svg-icons';
-import { handleChangeDeliveryInputData } from './_redux/Action/DeliveryInfoAction';
+import { getCurrentUserDataAction, handleChangeDeliveryInputData } from './_redux/Action/DeliveryInfoAction';
 
 const DeliveryInfo = () => {
     const dispatch = useDispatch();
-    const { register, handleSubmit, errors, setValue, watch } = useForm();
-    const countryList = useSelector((state) => state.ProfileAccountSettingReducer.countryList);
-    const cityList = useSelector((state) => state.ProfileAccountSettingReducer.cityList);
-    const areaList = useSelector((state) => state.ProfileAccountSettingReducer.areaList);
+    const { register, errors, setValue } = useForm();
+    const {countryList, cityList, areaList} = useSelector((state) => state.ProfileAccountSettingReducer);
     const customerInfo = useSelector((state) => state.DeliveryInfoReducer.customerInfo);
 
     useEffect(() => {
-        // dispatch(handleSetDataIntoInputField())
+        dispatch(getCurrentUserDataAction())
         dispatch(getCountry())
-    }, [])
+    }, []);
 
-    //handle change input 
     const handleChangeTextInput = (name, value) => {
-        dispatch(handleChangeDeliveryInputData(name, value))
+        dispatch(handleChangeDeliveryInputData(name, value));
     }
-    const handleSubmitDeliveryInfo = () => {
-        // dispatch(handleStoreShippingAddress(shippingAddressInput))
-    }
+
     return (
         <>
             <div className="card p-4 shadow-sm">
@@ -43,13 +38,14 @@ const DeliveryInfo = () => {
                 >
                     <div className="row">
                         <div className="col-md-6">
-                            <div class="custome_form_group">
-                                <label for="firstName">First Name</label>
+                            <div className="custome_form_group">
+                                <label htmlFor="first_name">First Name</label>
                                 <input
+                                    id="first_name"
                                     type="text"
                                     className="form-control"
                                     name="first_name"
-                                    value={customerInfo.first_name && customerInfo.first_name}
+                                    value={customerInfo.first_name ? customerInfo.first_name : ''}
                                     onChange={(e) => handleChangeTextInput("first_name", e.target.value)}
                                     ref={register({ required: true })}
                                 />
@@ -61,13 +57,14 @@ const DeliveryInfo = () => {
                             </div>
                         </div>
                         <div className="col-md-6">
-                            <div class="custome_form_group">
-                                <label for="firstName">Last Name</label>
+                            <div className="custome_form_group">
+                                <label htmlFor="last_name">Last Name</label>
                                 <input
+                                    id="last_name"
                                     type="text"
                                     className="form-control"
                                     name="last_name"
-                                    value={customerInfo.last_name && customerInfo.last_name}
+                                    value={customerInfo.last_name ? customerInfo.last_name : ''}
                                     onChange={(e) => handleChangeTextInput("last_name", e.target.value)}
                                     ref={register({ required: true })}
                                 />
@@ -79,13 +76,14 @@ const DeliveryInfo = () => {
                             </div>
                         </div>
                         <div className="col-md-6">
-                            <div class="custome_form_group">
-                                <label for="firstName">Phone</label>
+                            <div className="custome_form_group">
+                                <label htmlFor="phone_no">Phone</label>
                                 <input
+                                    id="phone_no"
                                     type="text"
                                     className="form-control"
                                     name="phone_no"
-                                    value={customerInfo.phone_no && customerInfo.phone_no}
+                                    value={customerInfo.phone_no ? customerInfo.phone_no : ''}
                                     onChange={(e) => handleChangeTextInput("phone_no", e.target.value)}
                                     ref={register({ required: true })}
                                 />
@@ -97,13 +95,14 @@ const DeliveryInfo = () => {
                             </div>
                         </div>
                         <div className="col-md-6">
-                            <div class="custome_form_group">
-                                <label for="firstName">Email</label>
+                            <div className="custome_form_group">
+                                <label htmlFor="email">Email</label>
                                 <input
+                                    id="email"
                                     type="text"
                                     className="form-control"
                                     name="email"
-                                    value={customerInfo.email && customerInfo.email}
+                                    value={customerInfo.email ? customerInfo.email : ''}
                                     onChange={(e) => handleChangeTextInput("email", e.target.value)}
                                     ref={register({ required: true })}
                                 />
@@ -115,10 +114,10 @@ const DeliveryInfo = () => {
                             </div>
                         </div>
                         <div className="col-md-6">
-                            <div class="custome_form_group">
-                                <label for="firstName">Region</label>
+                            <div className="custome_form_group">
+                                <label htmlFor="country_id">Region</label>
                                 <RHFInput
-                                    as={<Select options={countryList} />}
+                                    as={<Select options={countryList} id="country_id" instanceId="country_id" />}
                                     placeholder="Select region"
                                     rules={{ required: true }}
                                     name="country_id"
@@ -139,10 +138,10 @@ const DeliveryInfo = () => {
                             </div>
                         </div>
                         <div className="col-md-6">
-                            <div class="custome_form_group">
-                                <label for="firstName">City</label>
+                            <div className="custome_form_group">
+                                <label htmlFor="city_id">City</label>
                                 <RHFInput
-                                    as={<Select options={cityList} />}
+                                    as={<Select options={cityList} id="city_id" instanceId="city_id" />}
                                     placeholder="Select city"
                                     rules={{ required: true }}
                                     name="city_id"
@@ -163,10 +162,10 @@ const DeliveryInfo = () => {
                             </div>
                         </div>
                         <div className="col-md-6">
-                            <div class="custome_form_group">
-                                <label for="firstName">Area</label>
+                            <div className="custome_form_group">
+                                <label htmlFor="area_id">Area</label>
                                 <RHFInput
-                                    as={<Select options={areaList} />}
+                                    as={<Select options={areaList} id="area_id" instanceId="area_id" />}
                                     placeholder="Select area"
                                     rules={{ required: true }}
                                     name="area_id"
@@ -186,13 +185,14 @@ const DeliveryInfo = () => {
                             </div>
                         </div>
                         <div className="col-md-6">
-                            <div class="custome_form_group">
-                                <label for="firstName">Postal Code</label>
+                            <div className="custome_form_group">
+                                <label htmlFor="postal_code">Postal Code</label>
                                 <input
+                                    id="postal_code"
                                     type="text"
                                     className="form-control"
                                     name="postal_code"
-                                    value={customerInfo.postal_code && customerInfo.postal_code}
+                                    value={customerInfo.postal_code ? customerInfo.postal_code : ''}
                                     onChange={(e) => handleChangeTextInput("postal_code", e.target.value)}
                                     ref={register({ required: true })}
                                 />
@@ -204,14 +204,14 @@ const DeliveryInfo = () => {
                             </div>
                         </div>
                         <div className="col-md-12">
-                            <div class="custome_form_group">
-                                <label for="firstName">Address</label>
+                            <div className="custome_form_group">
+                                <label htmlFor="address">Address</label>
                                 <textarea
                                     name="address"
-                                    id=""
+                                    id="address"
                                     cols="30" rows="2"
                                     className="form-control"
-                                    value={customerInfo.address && customerInfo.address}
+                                    value={customerInfo.address ? customerInfo.address : ''}
                                     onChange={(e) => handleChangeTextInput("address", e.target.value)}
                                     ref={register({ required: true })}
                                 >
@@ -227,7 +227,7 @@ const DeliveryInfo = () => {
                         <div className="col-md-12">
                             <div className="form-check">
                                 <input className="form-check-input" type="checkbox" value="" id="remember" />
-                                <label className="form-check-label pointer" for="remember">
+                                <label className="form-check-label pointer" htmlFor="remember">
                                     Save this information for next time
                                 </label>
                             </div>
@@ -241,14 +241,14 @@ const DeliveryInfo = () => {
                         </h6>
                         <div className="d-flex justify-content-between mt-3">
                             <div>
-                                <button className="btn home_btn mr-3">
+                                <button className="btn home_btn mr-3" type="button">
                                     <FontAwesomeIcon icon={faHome} className="mr-2" /> Home
                                 </button>
-                                <button className="btn office_btn">
+                                <button className="btn office_btn" type="button">
                                     <FontAwesomeIcon icon={faBriefcase} className="mr-2" /> Office
                                 </button>
                             </div>
-                            <button type="submit" className="btn btn-success">Save</button>
+                            <button type="submit" className="btn btn-success" type="button">Save</button>
                         </div>
                     </div>
                 </form>

@@ -33,7 +33,7 @@ const ShippingInfo = () => {
                 </div>
                 <div className="d-flex align-items-start mt-2">
                     <span className="delivery_area">OFFICE</span>
-                    <p className="shipping_address">
+                    <div className="shipping_address">
                         {
                             isLoading && (
                                 <LoadingSpinner text="Loading Shipping Address..." />
@@ -47,7 +47,7 @@ const ShippingInfo = () => {
                                 </>
                             )
                         }
-                    </p>
+                    </div>
                 </div>
                 <div className="delivery_collection">
                     <p className="delivery_collecting_message">Free Delivery on collecting your order from Deshibazaarbd Pick-up point</p>

@@ -22,7 +22,7 @@ const CheckoutPaymentMethod = () => {
                         <div className="shipping_payment_method_section" key={index + 1}>
                             <Form.Check
                                 className={`shipping_method_checkbox ${payMethod === item.id ? 'active' : ''}`} 
-                                onClick={() => setPayMethod(item.id)}
+                                onChange={() => setPayMethod(item.id)}
                                 type="radio"
                                 label={item.name}
                                 name="formHorizontalRadios"

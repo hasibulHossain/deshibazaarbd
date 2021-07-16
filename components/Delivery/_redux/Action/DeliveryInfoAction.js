@@ -5,10 +5,6 @@ import moment from "moment";
 import { decrypt, encrypt } from "../../../master/utils/EncryptHelper";
 import { getCartsAction } from "../../../carts/_redux/action/CartAction";
 
-// import { useRouter } from "next/router";
-
-
-//handle change input field 
 export const handleChangeDeliveryInputData = (name, value) => (dispatch) => {
     const addressData = {
         name: name,
@@ -17,76 +13,84 @@ export const handleChangeDeliveryInputData = (name, value) => (dispatch) => {
     dispatch({ type: Types.DELIVER_CUSTOMER_INPUT_CHANGE, payload: addressData })
 }
 
-export const storeSells = (customerInfo, carts, totalQuantity, shippingCost, totalPrice) => (dispatch) => {
-    // const router = useRouter();
+export const storeSells = (customerInfo, carts, totalQuantity, shippingCost, totalPrice, couponData) => (dispatch) => {
+    
+    let discountAmount = 0, discountType = 1;
+    if ( typeof couponData !== 'undefined' ) {
+        discountAmount = couponData.discount_amount;
+        discountType   = 2; // 2 = Coupon Discount
+    } 
 
+    shippingCost = 50;
     shippingCost = isNaN(shippingCost) ? 0 : parseFloat(shippingCost);
 
-    const getUserData = JSON.parse(localStorage.getItem('loginData'))
+    const getUserData  = JSON.parse(localStorage.getItem('loginData'))
     const { userData } = getUserData;
-    let sale_lines = [];
+    let sale_lines     = [];
 
     carts.forEach((item) => {
         const singleItem = {
-            item_id: item.productID,
-            quantity: item.quantity,
-            unit_price: item.price,
+            item_id           : item.productID,
+            quantity          : item.quantity,
+            unit_price        : item.price,
             unit_price_inc_tax: item.price,
-            discount_amount: 0,
-            item_tax: 0
+            discount_amount   : 0,
+            item_tax          : 0
         }
         sale_lines.push(singleItem)
     })
 
-    const orderPlaceData = {
-        business_id: userData.business_id,
-        created_by: 1,
-        type: "sell",
-        status: true,
-        delivery_status: 'not_delivered',
-        payment_status: 'due',
-        title: 'Ecommerce Sale',
-        invoice_no: null,
-        ref_no: null,
+    const orderPostedData = {
+        business_id     : userData.business_id,
+        created_by      : 1,
+        type            : "sell",
+        status          : true,
+        delivery_status : 'not_delivered',
+        payment_status  : 'due',
+        title           : 'Ecommerce Sale',
+        invoice_no      : null,
+        ref_no          : null,
         transaction_date: moment().format("YYYY-MM-DD"),
         total_before_tax: totalPrice,
-        tax_amount: 0,
-        discount_type_id: 1,
-        tax_id: 1,
-        discount_amount: 0,
-        shipping_details: '', //this is shipping address
-        order_quantity: totalQuantity,
+        tax_amount      : 0,
+        discount_type_id: discountType,
+        tax_id          : 1,
+        discount_amount : discountAmount,
+        shipping_details: '', // @todo set user default shipping address here
+        order_quantity  : totalQuantity,
         shipping_charges: shippingCost,
         additional_notes: '',
-        staff_note: '',
-        paid_total: 0,
-        due_total: shippingCost + totalPrice,
-        final_total: shippingCost + totalPrice,
-        sale_lines: sale_lines,
+        staff_note      : '',
+        paid_total      : 0,
+        due_total       : shippingCost + totalPrice,
+        final_total     : shippingCost + totalPrice,
+        sale_lines      : sale_lines,
     }
+
     let response = {
-        status: false,
+        status   : false,
         isLoading: true,
         orderData: {}
     }
 
     dispatch({ type: Types.ORDER_SUBMIT, payload: response });
 
-    Axios.post(`${process.env.NEXT_PUBLIC_API_URL}sales`, orderPlaceData)
+    Axios.post(`${process.env.NEXT_PUBLIC_API_URL}sales`, orderPostedData)
         .then((res) => {
             if (res.data.status) {
-                response.status = res.data.status;
+                response.status    = res.data.status;
                 response.orderData = res.data.data;
                 response.isLoading = false;
                 localStorage.removeItem("carts");
                 dispatch(getCartsAction());
                 localStorage.setItem('tr', encrypt(res.data.data.id));
-                showToast('success', res.data.message);
-                dispatch({ type: Types.ORDER_SUBMIT, payload: response });
+                showToast('success', 'Your order placed successfully');
+                dispatch({ type    : Types.ORDER_SUBMIT, payload: response });
             }
         }).catch((err) => {
             const responseLog = err.response;
             response.isLoading = false;
+
             if (typeof responseLog !== 'undefined') {
                 const { request, ...errorObject } = responseLog;
                 showToast('error', responseLog.data.message);
@@ -121,4 +125,16 @@ export async function getLastTransactionData() {
     }
 
     return transactionData;
+}
+
+export const getCurrentUserDataAction = () => (dispatch) => {
+    const loginData = localStorage.getItem("loginData") || '';
+
+    if (typeof loginData !== "undefined" && loginData !== null && loginData !== '' ) {
+        const data = JSON.parse(loginData) || null;
+
+        if ( typeof data.userData !== 'undefined' && data.userData !== null ) {
+            dispatch({ type: Types.SET_CUSTOMER_DELIVERY_INFO, payload: data.userData });
+        }
+    }
 }

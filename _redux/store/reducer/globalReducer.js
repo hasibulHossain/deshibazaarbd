@@ -8,10 +8,12 @@ const initialState = {
 function GlobalReducer(state = initialState, { type, payload }) {
   switch (type) {
     case types.TOGGLE_FLOATING_CART:
+      const isModalVisible = typeof payload !== 'undefined' && typeof payload === 'boolean' ? payload : !state.floatingCartVisible;
+
       return {
         ...state,
-        backdrop: !state.backdrop,
-        floatingCartVisible: !state.floatingCartVisible,
+        backdrop           : !state.backdrop,
+        floatingCartVisible: isModalVisible,
       };
 
     case types.TOGGLE_MODAL:

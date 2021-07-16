@@ -13,32 +13,29 @@ import { getUserDataAction } from "../components/_redux/getUserData/Action/UserD
 import { storeSells } from "../components/Delivery/_redux/Action/DeliveryInfoAction";
 import { getCartsAction } from "../components/carts/_redux/action/CartAction";
 import { handleShippingCost } from "../components/orders/_redux/action/OrderAction";
+// import { toggleFloatingCart } from "../_redux/store/action/globalAction";
 
 export default function Carts() {
   const router = useRouter();
   const dispatch = useDispatch();
-  const carts = useSelector((state) => state.CartReducer.carts);
-  const userData = useSelector((state) => state.UserDataReducer.userData);
-  const isSubmitting = useSelector((state) => state.DeliveryInfoReducer.isSubmitting);
-  const customerInfo = useSelector((state) => state.DeliveryInfoReducer.customerInfo);
-  const totalPrice = useSelector((state) => state.CartReducer.totalPrice);
-  const totalQuantity = useSelector((state) => state.CartReducer.totalQuantity);
-  const shippingCost = useSelector((state) => state.CartReducer.shippingCost);
+  const {carts, totalPrice, totalQuantity, shippingCost} = useSelector((state) => state.CartReducer);
+  const {customerInfo} = useSelector((state) => state.DeliveryInfoReducer);
+  const {couponData} = useSelector((state) => state.OrderReducer);
 
   useEffect(() => {
     dispatch(getCartsAction());
     dispatch(getUserDataAction());
     dispatch(handleShippingCost(carts))
+    // dispatch(toggleFloatingCart(false));
   }, []);
 
-
   const handleStoreOrder = () => {
-    dispatch(storeSells(customerInfo, carts, totalQuantity, shippingCost, totalPrice));
-    // router.push('/payment-system')
+    dispatch(storeSells(customerInfo, carts, totalQuantity, shippingCost, totalPrice, couponData));
+    router.push('/');
   }
 
   return (
-    <MainLayout pageTitle="Checkout Items">
+    <MainLayout pageTitle="Checkout">
       <div className="container-fluid">
         <div className="row">
           <div className="col-md-8">

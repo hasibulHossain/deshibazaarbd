@@ -33,9 +33,9 @@ const OrderSummery = ({ handleClick, buttonText }) => {
     const updatedShippingCost = 50;
 
     if (couponData && couponData.discount_amount) {
-        totalAmount = (totalPrice + updatedShippingCost) - discount_amount;
+        totalAmount = parseFloat( (totalPrice + updatedShippingCost) - couponData.discount_amount );
     } else {
-        totalAmount = (totalPrice + updatedShippingCost);
+        totalAmount = parseFloat( totalPrice + updatedShippingCost );
     }
 
     return (
@@ -83,29 +83,23 @@ const OrderSummery = ({ handleClick, buttonText }) => {
                                         placeholder="Discount Code"
                                         value={coupon.code && coupon.code}
                                         onChange={(e) => handleChangeCouponCode("code", e.target.value)}
-                                        ref={register({ required: true })} /> <br />
-                                    {
-                                        !couponLoading && (
-                                            <button className="btn btn-success ml-2 btn-coupon-apply" type="submit"> APPLY </button>
-                                        )
-                                    }
-
-                                    {couponLoading && (
-                                        <button disabled={true} className="btn btn-success d-flex">
-                                            <span className="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span> APPLY
-                                        </button>
-                                    )}
+                                        ref={register({ required: true })} 
+                                    /> 
+                                    <br />
+                                    <button disabled={couponLoading ? true : false} className="btn btn-success ml-2 btn-coupon-apply" type="submit">
+                                        { couponLoading ? 'Checking...' : 'APPLY' }
+                                    </button>
                                 </div>
-                                <p> {errors.code ?
-                                    <ErrorMessage errorText="Please insert your discount code if you have." />
+                                <div> {errors.code ?
+                                    <ErrorMessage errorText="Please add your discount code." />
                                     :
                                     (couponData && !couponData.errors && couponData.message ? (
                                         <p className="text-success font-weight-bold mt-2">{couponData.message}</p>
                                     ) : couponData && couponData.errors && (
                                         <ErrorMessage errorText={couponData.errors.message} />
                                     )
-                                    )
-                                }</p>
+                                    )}
+                                </div>
                             </form> <hr />
 
                             <div className="cart__right-order_details_item">
@@ -133,7 +127,6 @@ const OrderSummery = ({ handleClick, buttonText }) => {
                                     <span className="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>  {buttonText}
                                 </button>)
                             }
-
                         </div>
                     </div>
                 </div>
