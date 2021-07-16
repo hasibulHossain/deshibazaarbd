@@ -7192,11 +7192,6 @@
     "@types/prop-types" "^15.7.3"
     "prop-types" "^15.7.2"
 
-"react-swipe-button@^1.0.1":
-  "integrity" "sha512-2+aAujWn3gAiep6swZMXO4aEm+UEbTZxF+mrztN487mvpoR0Ps8TmyPs2uhquA9/4yioh7zZ+OLz2Vqi8WA5Cg=="
-  "resolved" "https://registry.npmjs.org/react-swipe-button/-/react-swipe-button-1.0.1.tgz"
-  "version" "1.0.1"
-
 "react-toastify@^6.2.0":
   "integrity" "sha512-XpjFrcBhQ0/nBOL4syqgP/TywFnOyxmstYLWgSQWcj39qpp+WU4vPt3C/ayIDx7RFyxRWfzWTdR2qOcDGo7G0w=="
   "resolved" "https://registry.npmjs.org/react-toastify/-/react-toastify-6.2.0.tgz"

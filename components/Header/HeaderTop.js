@@ -41,7 +41,7 @@ const HeaderTop = () => {
 
                             <p className="heading-top-text pointer">
                                 <Link href="/profile">
-                                    <a href="/" className="text-white">
+                                    <a href="/profile" className="text-white">
                                         <FontAwesomeIcon className="custom-fontAwesome" icon={faUser} /> My Account
                                     </a>
                                 </Link>
