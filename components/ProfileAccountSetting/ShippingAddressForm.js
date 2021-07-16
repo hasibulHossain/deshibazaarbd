@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { getArea, getCity, getCountry, handleChangeShippingAddressInput, handleSetDataIntoInputField, handleStoreShippingAddress } from './_redux/Action/ProfileAccountSettingAction';
+import { getArea, getCity, getCountry, handleChangeShippingAddressInput, getUserData, handleStoreShippingAddress } from './_redux/Action/ProfileAccountSettingAction';
 import ErrorMessage from '../master/ErrorMessage/ErrorMessage'
 import { RHFInput } from 'react-hook-form-input';
 import Select from 'react-select';
@@ -22,7 +22,7 @@ const ShippingAddressForm = () => {
     }
 
     useEffect(() => {
-        dispatch(handleSetDataIntoInputField())
+        dispatch(getUserData())
         dispatch(getCountry())
     }, [])
     const StoreBillingAddress = () => {

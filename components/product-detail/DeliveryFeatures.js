@@ -1,46 +1,57 @@
-import { faCheckSquare, faMapMarkedAlt, faMoneyCheckAlt, faTruck} from "@fortawesome/free-solid-svg-icons";
+import { faCheckSquare, faEnvelopeOpenText, faMapMarkedAlt, faMoneyCheckAlt, faPhoneSquare, faStore, faTruck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import LoadingSpinner from "../master/LoadingSpinner/LoadingSpinner";
-import { getShippingAddress } from '../ProfileAccountSetting/_redux/Action/ProfileAccountSettingAction';
+import React from 'react';
 
-const DeliveryFeatures = () => {
+const DeliveryFeatures = ({ product }) => {
 
-    const dispatch = useDispatch()
-    const { shippingAddress, isLoading } = useSelector((state) => state.ProfileAccountSettingReducer);
-
-    useEffect(() => {
-        dispatch(getShippingAddress('shipping_address'));
-    }, [])
+    const { name, website, email, mobile, landmark, zip_code, city, country, state } = product.business.location;
 
     return (
         <>
             <div className="delivery_features_section p-2">
                 <div className="d-flex justify-content-between">
-                    <small className="text-secondary font-weight-bold mb-2">Delivery Options</small>
-                    <small className="text-secondary font-weight-bold mb-2 pointer">Change</small>
+                    <small className="text-secondary font-weight-bold mb-2">Seller Information</small>
                 </div>
-                {
-                    isLoading && (
-                        <LoadingSpinner text="Loading Shipping Address..." />
-                    )
-                }
-                {
-                    shippingAddress !== null && (
-                        <>
-                            <p>
-                                <span className="user_icon">
-                                    <FontAwesomeIcon className="product_details_font_awesome" icon={faMapMarkedAlt} />
-                                </span>
-                                <span className="user_address">
-                                    {shippingAddress.area}, {shippingAddress.street1}, {shippingAddress.city} <br />
-                                    {shippingAddress.country}
-                                </span>
-                            </p>
-                        </>
-                    )
-                }
+                <p>
+                    <span className="user_icon">
+                        <FontAwesomeIcon className="product_details_font_awesome" icon={faStore} />
+                    </span>
+                    <span className="user_address store_name">
+                        <a href={`http://${website}`} target="_blank" rel="noopener noreferrer">
+                            {name}
+                        </a>
+                    </span>
+                </p>
+                <p>
+                    <span className="user_icon">
+                        <FontAwesomeIcon className="product_details_font_awesome" icon={faEnvelopeOpenText} />
+                    </span>
+                    <span className="user_address text-lowercase">
+                        <a href={`mailto:${email}`} target="_blank" rel="noopener noreferrer">
+                            {email}
+                        </a>
+                    </span>
+                </p>
+                <p>
+                    <span className="user_icon">
+                        <FontAwesomeIcon className="product_details_font_awesome" icon={faPhoneSquare} />
+                    </span>
+                    <span className="user_address text-lowercase">
+                        <a href={`tel:${mobile}`}>
+                            {mobile}
+                        </a>
+                    </span>
+                </p>
+                <p>
+                    <span className="user_icon">
+                        <FontAwesomeIcon className="product_details_font_awesome" icon={faMapMarkedAlt} />
+                    </span>
+                    <span className="user_address">
+                        <a href={`http://maps.google.com/?q=${landmark}, ${zip_code}, ${city}, ${state}, ${country}`} target="_blank" rel="noopener noreferrer">
+                            {`${landmark}, ${zip_code}, ${city}, ${state}, ${country}`}
+                        </a>
+                    </span>
+                </p>
             </div>
             <div className="delivery_fee delivery_features_section mt-3 p-2">
                 <div className="d-flex justify-content-between align-items-end">

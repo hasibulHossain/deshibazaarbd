@@ -53,18 +53,21 @@ const OrderReducer = (state = initialState, action) => {
         couponData   : action.payload.couponData,
         // coupon: initialState.coupon,
       };
+
     case Types.GET_USER_ORDER_LIST:
       return {
         ...state,
         orderList: action.payload.orderList,
         isLoading: action.payload.isLoading,
       };
+
     case Types.GET_ORDER_FILTER_OPTION_DATA:
       return {
         ...state,
         filterOptionList: action.payload.filterOptionList,
         isLoading       : action.payload.isLoading,
       };
+
     case Types.GET_TRACKING_TIMELINE_DATA:
       return {
         ...state,
@@ -72,6 +75,9 @@ const OrderReducer = (state = initialState, action) => {
         isLoading       : action.payload.isLoading,
       };
 
+    case Types.CHANGE_COUPON_INPUT_DATA:
+      const couponData = { ...state.coupon, code: action.payload.value }
+      return { ...state, coupon: couponData }
 
     default:
       return {

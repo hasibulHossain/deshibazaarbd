@@ -51,10 +51,11 @@ export const addToCartAction = (product, args = {}) => async (dispatch) => {
       isOffer     : product.is_offer_enable,
       price       : product.default_selling_price,
       offerPrice  : product.offer_selling_price,
-      productImage: `${process.env.NEXT_PUBLIC_URL}public/images/products/${product.featured_image}`,
+      productImage: `${process.env.NEXT_PUBLIC_URL}images/products/${product.featured_image}`,
       sellerID    : product.seller_id,
       sellerName  : product.seller_name,
       sku         : product.sku,
+      isChecked   : true, // By default item price will be added as checked
       additional  : {}
     }
   
@@ -92,6 +93,48 @@ export const updateCartQtyAction = (productID, quantity = 1) => async (dispatch)
 };
 
 /**
+ * Toggle all carts are selected or deselected
+ * 
+ * @since 1.0.0
+ * 
+ * @param boolean checked 
+ * @param int     productID 
+ * @param int     sellerID 
+ * 
+ * @return void
+ */
+export const toggleAllCartSelection = (checked = true, productID = null, sellerID = null) => dispatch => {
+  const carts = getCartData();
+
+  if ( productID === null ) {
+    if ( sellerID === null) {
+      carts.forEach( ( cart, index ) => {
+          cart.isChecked = checked;
+          carts[index]   = cart;
+      });
+    } else {
+
+      carts.forEach( ( cart, index ) => {
+        if( cart.sellerID === sellerID ) {
+          cart.isChecked = checked;
+          carts[index]   = cart;
+        }
+      });
+    }
+  } else {
+    carts.forEach( ( cart, index ) => {
+      if(cart.productID === productID) {
+        cart.isChecked = checked;
+        carts[index]   = cart;
+      }
+    });
+  }
+  
+  localStorage.setItem( 'carts', JSON.stringify( carts ) );
+  dispatch(getCartsAction());
+}
+
+/**
  * Delete carts data
  * 
  * @since 1.0.0
@@ -125,6 +168,7 @@ export const getSupplierWiseCartsData = () => {
     const supplierWiseItem = data[index];
 
     let singleSupplierCart = {
+      isChecked : supplierWiseItem.every(item => item.isChecked === true ),
       data      : supplierWiseItem,
       sellerID  : supplierWiseItem.length > 0 ? supplierWiseItem[0]['sellerID']  : null,
       sellerName: supplierWiseItem.length > 0 ? supplierWiseItem[0]['sellerName']: null

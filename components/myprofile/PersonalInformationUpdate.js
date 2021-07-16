@@ -1,20 +1,25 @@
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { handleSetDataIntoInputField } from '../ProfileAccountSetting/_redux/Action/ProfileAccountSettingAction';
+import { getUserData, handleChangeUserInput, handleUpdateUserData } from '../ProfileAccountSetting/_redux/Action/ProfileAccountSettingAction';
 import ErrorMessage from '../master/ErrorMessage/ErrorMessage'
+import LoadingSpinner from '../master/LoadingSpinner/LoadingSpinner';
 
 const PersonalInformationUpdate = () => {
     const dispatch = useDispatch();
-    const userInputData = useSelector((state) => state.ProfileAccountSettingReducer.userInputData);
+    const { userInputData, userDetails, isSubmitting } = useSelector((state) => state.ProfileAccountSettingReducer);
     const { register, handleSubmit, errors } = useForm();
 
-    console.log('userInputData :>> ', userInputData);
     useEffect(() => {
-        dispatch(handleSetDataIntoInputField())
+        dispatch(getUserData())
     }, [])
+
+    const handleChangeTextInput = (name, value) => {
+        dispatch(handleChangeUserInput(name, value))
+    }
+
     const handleUpdatedProfile = () => {
-        // dispatch(RegisterFirstStep(registerInput))
+        dispatch(handleUpdateUserData(userInputData, userDetails.id))
     }
     return (
         <div className="">
@@ -123,9 +128,27 @@ const PersonalInformationUpdate = () => {
                     </div>
 
                 </div>
-                <div className="d-flex justify-content-end">
-                    <button type="submit" className="btn btn-primary">update</button>
-                </div>
+                {
+                    isSubmitting && (
+                        <div className="d-flex justify-content-end">
+                            <button type="submit" className="btn btn-primary">
+                                <div className="d-flex align-items-center">
+                                    <div className="spinner-border mr-3" role="status">
+                                        <span className="sr-only">Loading...</span>
+                                    </div>
+                                    <span>updating...</span>
+                                </div>
+                            </button>
+                        </div>
+                    )
+                }
+                {
+                    !isSubmitting && (
+                        <div className="d-flex justify-content-end">
+                            <button type="submit" className="btn btn-primary">update</button>
+                        </div>
+                    )
+                }
             </form>
         </div>
     );

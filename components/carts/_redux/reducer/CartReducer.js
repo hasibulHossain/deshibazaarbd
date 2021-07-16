@@ -6,6 +6,8 @@ const initialState = {
   supplierWiseCarts: [],
   totalQuantity    : 0,
   totalPrice       : 0,
+
+  checkedAllCarts  : false
 };
 
 const CartReducer = (state = initialState, action) => {
@@ -17,7 +19,8 @@ const CartReducer = (state = initialState, action) => {
         supplierWiseCarts: getSupplierWiseCartsData(action.payload),
         carts            : action.payload,
         totalQuantity    : calculateTotalQtyAndPrices(action.payload).totalQuantity,
-        totalPrice       : calculateTotalQtyAndPrices(action.payload).totalPrice
+        totalPrice       : calculateTotalQtyAndPrices(action.payload).totalPrice,
+        checkedAllCarts  : checkedAllCartsSelectedOrNot(action.payload)
       };
 
     default:
@@ -57,5 +60,9 @@ const calculateTotalQtyAndPrices = (carts) => {
 
   return response;
 };
+
+const checkedAllCartsSelectedOrNot = (carts) => {
+  return carts.every( cart => cart.isChecked === true );
+}
 
 export default CartReducer;
