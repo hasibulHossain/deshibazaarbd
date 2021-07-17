@@ -24,6 +24,7 @@ import OrderReducer from "../components/orders/_redux/reducer/OrderReducer";
 import ProductReviewReducer from "../components/product-review/_redux/reducer/productReviewReducer";
 import ShippingInfoReducer from "../components/ShippingInfo/_redux/Reducer/ShippingInfoReducer";
 import WebsiteInformationReducer from "../components/_redux/WebsiteInformation/Reducer/WebsiteInformationReducer";
+import WebsitePageReducer from "../components/_redux/WebsiteInformation/Reducer/WebsitePageReducer";
 import FooterReducer from "../components/Footer/_redux/Reducer/FooterReducer";
 import ReviewReducer from "../components/product-review/_redux/reducer/productReviewReducer";
 
@@ -53,5 +54,6 @@ export default combineReducers({
   ShippingInfoReducer         : ShippingInfoReducer,
   WebsiteInformationReducer   : WebsiteInformationReducer,
   FooterReducer               : FooterReducer,
-  ReviewReducer               : ReviewReducer
+  ReviewReducer               : ReviewReducer,
+  WebsitePageReducer          : WebsitePageReducer
 });
