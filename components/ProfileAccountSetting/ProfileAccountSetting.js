@@ -8,6 +8,7 @@ import SingleAddress from './SingleAddress';
 import { getAddress, getArea, getCity, getCountry } from './_redux/Action/ProfileAccountSettingAction';
 import SimpleModal from '../master/Modal/SimpleModal';
 import AddressUpdate from './AddressUpdate';
+import SimpleBtn from '../master/SimpleBtn/SimpleBtn';
 
 
 const ProfileAccountSetting = () => {
@@ -38,7 +39,9 @@ const ProfileAccountSetting = () => {
                             <div className="profile_account shadow-sm bg-white" id="address-book">
                                 <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem'}}>
                                     <h6>Address book</h6>
-                                    <button onClick={toggleShowHandler}>Add new address</button>
+                                    <SimpleBtn variant="success" style={{width: 'fit-content'}} onClick={toggleShowHandler}>
+                                        Add new address
+                                    </SimpleBtn>
                                 </div>
                                 <ul className="address-list">
                                         <div className="address-list__header">
@@ -46,6 +49,7 @@ const ProfileAccountSetting = () => {
                                             <div>Address</div>
                                             <div>Region</div>
                                             <div>Mobile</div>
+                                            <div></div>
                                             <div></div>
                                             <div></div>
                                         </div> 

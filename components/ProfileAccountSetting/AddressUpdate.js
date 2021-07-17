@@ -30,12 +30,9 @@ const BillingAddressUpdate = (props) => {
     }
     
     const submitUpdatedAddressHandler = () => {
-        if(props.type === 'new_address') {
-            dispatch(addAddress(selectedAddress))
-        } else {
-            dispatch(handleUpdateBillingAddress(selectedAddress));
-        }
+        dispatch(addAddress(selectedAddress, props.type))
         props.closeModal();
+        console.log('form errors => ', errors)
     }
 
     return (

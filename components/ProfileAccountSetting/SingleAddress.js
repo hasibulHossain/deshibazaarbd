@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import SimpleModal from '../master/Modal/SimpleModal';
 import {useDispatch} from 'react-redux';
 import AddressUpdate from './AddressUpdate';
-import { getSingleAddress } from './_redux/Action/ProfileAccountSettingAction';
+import { getSingleAddress, deleteAddress } from './_redux/Action/ProfileAccountSettingAction';
 
 function SingleAddress(props) {
     const dispatch = useDispatch();
@@ -49,6 +49,9 @@ function SingleAddress(props) {
             <div onClick={() => editHandler(id, type)} className="single-address__edit single-address__item" >
                 <div>edit</div>
             </div>
+            <div onClick={() => dispatch(deleteAddress(id))} className="single-address__edit single-address__item" >
+                <div>delete</div>
+            </div>
         </li>
         <SimpleModal
                 size="xl"
@@ -56,8 +59,6 @@ function SingleAddress(props) {
                 handleClose={toggleShowHandler}
             >
                 <AddressUpdate type={type} closeModal={toggleShowHandler} />
-                {/* <BillingAddressUpdateCopy /> */}
-                {/* <BillingAddressUpdate /> */}
         </SimpleModal>
         </>
     );

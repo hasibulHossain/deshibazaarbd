@@ -2,7 +2,7 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { WishListAdded } from './_redux/Action/wishListAction'
+import {WishListAdded} from './_redux/Action/WishlistAction'
 
 const AddWishList = ({ product }) => {
    
@@ -12,6 +12,7 @@ const AddWishList = ({ product }) => {
     const handleAddedWishList = (product) => {
         setIsWishList(true);
         dispatch(WishListAdded(product.id))
+        
     }
 
     return (
