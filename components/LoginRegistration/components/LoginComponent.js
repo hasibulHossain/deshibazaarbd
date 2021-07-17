@@ -134,7 +134,7 @@ const LoginComponent = () => {
 
                 <p className="already_account">
                     Don't have an account?
-                    <Link href="/">
+                    <Link href="/register">
                         <a> Sign up </a>
                     </Link>
                 </p>

@@ -294,9 +294,6 @@ const RegistrationComponent = () => {
                             )
                         }
 
-
-
-
                         <p className="mt-2">or Sign up with</p>
                         <button className="btn google_btn mr-3 mt-2"><FontAwesomeIcon className="mr-2" icon={faGoogle} />Google</button>
                         <button className="btn facebook_btn mt-2"><FontAwesomeIcon className="mr-2" icon={faFacebookF} />Google</button>
@@ -317,7 +314,7 @@ const RegistrationComponent = () => {
 
                 <p className="already_account">
                     Already have an account ?
-                    <Link href="/">
+                    <Link href="/login">
                         <a> Sign In </a>
                     </Link>
                 </p>

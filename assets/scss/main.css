@@ -650,7 +650,7 @@ a .custom-button-component:hover {
   color: #f6f6f6;
   border: 2px solid #e9000f;
   outline: none;
-  font-weight: 600;
+  font-weight: 500;
   text-align: left;
   -webkit-border-radius: 6px;
   -webkit-transition: 0.6s;
@@ -663,13 +663,18 @@ a .custom-button-component:hover {
   -webkit-border-radius: 6px 0px 0px 6px;
   border-radius: 6px 0px 0px 6px;
   border-right: transparent;
-  font-size: 14px;
+  font-size: 10px;
   padding: 5px;
+  height: 60px;
+  width: auto;
+  opacity: .7;
+  box-shadow: 10px 20px 30px #8bc34a0d;
 }
 
 .flashDealButton:hover {
-  background-color: #f6f6f6;
-  color: #e9000f;
+	background-color: #ffffff;
+    color: #e9000f;
+    box-shadow: 6px 5px 15px #37b62985;
 }
 
 .flash-deal-section {

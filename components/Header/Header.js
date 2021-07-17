@@ -18,7 +18,7 @@ const Header = () => {
   const dispatch          = useDispatch();
   const toggleNav         = "basic-navbar-nav";
   const { totalQuantity } = useSelector((state) => state.CartReducer);
-  const { userData } = useSelector((state) => state.UserDataReducer);
+  const { userData }      = useSelector((state) => state.UserDataReducer);
 
   const toggleCartHandler = () => {
     dispatch(toggleFloatingCart());

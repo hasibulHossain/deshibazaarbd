@@ -1,4 +1,5 @@
 import React, { useState, useEffect, memo } from 'react';
+import { useSelector } from "react-redux";
 import { Dropdown } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShippingFast, faUser } from '@fortawesome/free-solid-svg-icons'
@@ -12,6 +13,7 @@ const HeaderTop = () => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const { userData } = useSelector((state) => state.UserDataReducer);
 
     useEffect(() => {
         setCurrencies(getCurrencies());
@@ -39,13 +41,17 @@ const HeaderTop = () => {
                                 <FontAwesomeIcon className="custom-fontAwesome" icon={faShippingFast} /> Track My Order
                             </p>
 
-                            <p className="heading-top-text pointer">
-                                <Link href="/profile">
-                                    <a href="/profile" className="text-white">
-                                        <FontAwesomeIcon className="custom-fontAwesome" icon={faUser} /> My Account
-                                    </a>
-                                </Link>
-                            </p>
+                            {
+                                userData &&
+                                <p className="heading-top-text pointer">
+                                    <Link href="/profile">
+                                        <a href="/profile" className="text-white">
+                                            <FontAwesomeIcon className="custom-fontAwesome" icon={faUser} /> My Account
+                                        </a>
+                                    </Link>
+                                </p>
+                            }
+                            
 
                             <Dropdown className="dropdown-currency">
                                 <Dropdown.Toggle variant="default" id="dropdown-basic">
