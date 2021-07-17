@@ -54,7 +54,6 @@ export const getAddress = (addressType) => (dispatch) => {
         responseData.data = res.data.data;
         responseData.isLoading = false;
         responseData.status = true;
-      
         if(addressType === 'billing_address') {
             dispatch({ type: Types.GET_BILLING_ADDRESS, payload: responseData });
         }
@@ -64,7 +63,17 @@ export const getAddress = (addressType) => (dispatch) => {
         }
     })
 }
-    
+
+// get single address
+export const getSingleAddress = (id, type) => {
+    return {
+        type: Types.GET_SINGLE_ADDRESS,
+        payload: {
+            id: id,
+            type: type
+        }
+    }
+}
     
     
     
@@ -126,14 +135,6 @@ export const handleUpdateUserData = (userInputData, user_id) => (dispatch) => {
         })
 }
 
-//handle change input field 
-export const handleChangeBillingAddressInput = (name, value) => (dispatch) => {
-    const addressData = {
-        name : name,
-        value: value
-    }
-    dispatch({ type: Types.CHANGE_BILLING_ADDRESS_INPUT, payload: addressData })
-}
 //handle change input field 
 export const handleChangeShippingAddressInput = (name, value) => (dispatch) => {
     const addressData = {
@@ -201,6 +202,84 @@ export const handleStoreBillingAddress = (billingAddressInput) => (dispatch) => 
             responseData.isLoading = false;
             showToast('success', res.data.message);
             dispatch({ type: Types.STORE_BILLING_ADDRESS, payload: responseData });
+        })
+
+}
+
+
+
+
+
+
+////////
+
+
+
+//handle change input field 
+export const handleChangeBillingAddressInput = (name, value) => (dispatch) => {
+    const addressData = {
+        name: name,
+        value: value,
+    }
+    dispatch({ type: Types.CHANGE_ADDRESS_INPUT, payload: addressData })
+}
+
+
+
+
+
+
+
+
+
+//handle store billing address
+export const handleUpdateBillingAddress = (billingAddressInput) => (dispatch) => {
+    billingAddressInput['id'] = +billingAddressInput.id; 
+    billingAddressInput['is_default'] = +billingAddressInput.is_default; 
+    billingAddressInput['area_id'] = +billingAddressInput.area_id; 
+    billingAddressInput['city_id'] = +billingAddressInput.city_id; 
+    billingAddressInput['country_id'] = +billingAddressInput.country_id; 
+    const responseData = {
+        status: false,
+        isLoading: true,
+    }
+    dispatch({ type: Types.STORE_BILLING_ADDRESS, payload: responseData });
+    // const userStorageData = JSON.parse(localStorage.getItem("loginData"));
+    // const submittedData = billingAddressInput;
+    // submittedData.user_id = userStorageData.userData.id;
+
+    Axios.put(`${process.env.NEXT_PUBLIC_API_URL}address`, billingAddressInput)
+        .then((res) => {
+            responseData.status = true;
+            responseData.isLoading = false;
+            showToast('success', res.data.message);
+            dispatch({ type: Types.STORE_BILLING_ADDRESS, payload: responseData });
+        })
+        .catch(err => {
+            console.log('address update err => ', err);
+        })
+
+}
+
+//handle store billing address
+export const addAddress = (billingAddressInput) => (dispatch) => {
+    const responseData = {
+        status: false,
+        isLoading: true,
+    }
+    dispatch({ type: Types.STORE_BILLING_ADDRESS, payload: responseData });
+    const userStorageData = JSON.parse(localStorage.getItem("loginData"));
+    billingAddressInput['user_id'] = userStorageData.userData.id;
+
+    Axios.post(`${process.env.NEXT_PUBLIC_API_URL}address`, billingAddressInput)
+        .then((res) => {
+            responseData.status = true;
+            responseData.isLoading = false;
+            showToast('success', res.data.message);
+            dispatch({ type: Types.STORE_BILLING_ADDRESS, payload: responseData });
+        })
+        .catch(err => {
+            console.log('address update err => ', err);
         })
 
 }

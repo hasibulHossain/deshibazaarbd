@@ -5,16 +5,24 @@ import PersonalInfoForm from './PersonalInfoForm'
 import ShippingAddressForm from './ShippingAddressForm'
 import BillingAddressForm from './BillingAddressForm'
 import SingleAddress from './SingleAddress';
-import { getAddress } from './_redux/Action/ProfileAccountSettingAction';
+import { getAddress, getArea, getCity, getCountry } from './_redux/Action/ProfileAccountSettingAction';
+import SimpleModal from '../master/Modal/SimpleModal';
+import AddressUpdate from './AddressUpdate';
 
 
 const ProfileAccountSetting = () => {
     const dispatch = useDispatch();
     const {billingAddress, shippingAddress, userInputData} = useSelector(state => state.ProfileAccountSettingReducer)
 
+    const [show, setShow] = useState(false);
+    const toggleShowHandler = () => {
+        setShow(preState => !preState);
+    }
+
     useEffect(() => {
         dispatch(getAddress('billing_address'));
         dispatch(getAddress('shipping_address'));
+        dispatch(getCountry())
     }, [])
 
     return (
@@ -28,7 +36,10 @@ const ProfileAccountSetting = () => {
                         <div className="user_profile_setting_body">
                             <PersonalInfoForm />
                             <div className="profile_account shadow-sm bg-white" id="address-book">
-                                <h6 className="mb-4">Address book</h6>
+                                <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem'}}>
+                                    <h6>Address book</h6>
+                                    <button onClick={toggleShowHandler}>Add new address</button>
+                                </div>
                                 <ul className="address-list">
                                         <div className="address-list__header">
                                             <div>Full name</div>
@@ -60,6 +71,7 @@ const ProfileAccountSetting = () => {
                                                 return (
                                                     <SingleAddress
                                                         key={i} 
+                                                        id={item.id}
                                                         type={item.type}
                                                         is_default={item.is_default}
                                                         city={item.city}
@@ -77,6 +89,15 @@ const ProfileAccountSetting = () => {
                     </div>
                 </div>
             </div>
+            <SimpleModal
+                size="xl"
+                show={show}
+                handleClose={toggleShowHandler}
+            >
+                <AddressUpdate addAddress={true} type="new_address" closeModal={toggleShowHandler} />
+                {/* <BillingAddressUpdateCopy /> */}
+                {/* <BillingAddressUpdate /> */}
+        </SimpleModal>
         </>
     );
 };

@@ -138,16 +138,3 @@ export const handleUpdateBillingAddress = (billingAddressInput) => (dispatch) =>
         })
 
 }
-
-
-// get single address
-export const getSingleAddress = (id, type) => {
-    console.log('from action => ', id, type)
-    return {
-        type: Types.GET_SINGLE_ADDRESS,
-        payload: {
-            id: id,
-            type: type
-        }
-    }
-}

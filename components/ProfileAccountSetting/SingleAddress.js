@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import SimpleModal from '../master/Modal/SimpleModal';
 import {useDispatch} from 'react-redux';
-import AddressUpdate from '../myprofile/AddressUpdate';
-import BillingAddressUpdateCopy from '../myprofile/BillingAddressUpdateCopy';
-import { getSingleAddress } from '../myprofile/_redux/Action/ProfileUpdateAction';
+import AddressUpdate from './AddressUpdate';
+import { getSingleAddress } from './_redux/Action/ProfileAccountSettingAction';
 
 function SingleAddress(props) {
     const dispatch = useDispatch();
@@ -56,7 +55,9 @@ function SingleAddress(props) {
                 show={show}
                 handleClose={toggleShowHandler}
             >
-                <BillingAddressUpdateCopy />
+                <AddressUpdate type={type} closeModal={toggleShowHandler} />
+                {/* <BillingAddressUpdateCopy /> */}
+                {/* <BillingAddressUpdate /> */}
         </SimpleModal>
         </>
     );

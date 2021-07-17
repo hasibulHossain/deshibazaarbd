@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { getBillingAddressForInput, handleSetDataIntoInputField, handleChangeBillingAddressInput, handleUpdateBillingAddress } from './_redux/Action/ProfileUpdateAction';
+import { handleChangeBillingAddressInput, handleUpdateBillingAddress, getArea, getCity, addAddress } from './_redux/Action/ProfileAccountSettingAction';
 import ErrorMessage from '../master/ErrorMessage/ErrorMessage'
 import { RHFInput } from 'react-hook-form-input';
 import Select from 'react-select';
 import { Spinner } from 'react-bootstrap'
-import { getArea, getCity, getCountry } from '../ProfileAccountSetting/_redux/Action/ProfileAccountSettingAction'; 
 
 const BillingAddressUpdate = (props) => {
     const dispatch = useDispatch();
@@ -22,18 +21,36 @@ const BillingAddressUpdate = (props) => {
         dispatch(handleChangeBillingAddressInput(name, value))
     }
 
-    // useEffect(() => {
-    //     dispatch(handleSetDataIntoInputField())
-    //     dispatch(getCountry())
-    // }, [])
+    useEffect(() => {
+        // dispatch(handleSetDataIntoInputField())
+    }, [])
 
     const StoreBillingAddress = () => {
-        dispatch(handleUpdateBillingAddress(selectedAddress))
+        // dispatch(handleUpdateBillingAddress(selectedAddress))
+    }
+    
+    const submitUpdatedAddressHandler = () => {
+        if(props.type === 'new_address') {
+            dispatch(addAddress(selectedAddress))
+        } else {
+            dispatch(handleUpdateBillingAddress(selectedAddress));
+        }
+        props.closeModal();
     }
 
     return (
         <div className="profile_account shadow-sm bg-white">
-            <h6>Billing Address</h6>
+            <h6>
+                {
+                    props.type === "billing_address" && "Billing address"                }
+                {
+                    props.type === "shipping_address" && "Shipping address"
+                }
+                {
+                    props.type === "new_address" && "Add new address"
+                }
+                
+            </h6>
 
             <form
                 onSubmit={handleSubmit(StoreBillingAddress)}
@@ -43,7 +60,35 @@ const BillingAddressUpdate = (props) => {
                 autoSave="off"
             >
                 <div className="row">
+                    {
+                        props.type === 'new_address' &&
+                        <div className="col-md-4">
+                            <div class="custome_form_group row">
+                                <label className="col-sm-3" for="firstName">Address Type</label>
+                                <div className="col-sm-9">
+                                    <RHFInput
+                                        as={<Select options={[{label: 'Shipping address', value: 'shipping_address'}, {label: 'Billing address', value: 'billing_address'}]} />}
+                                        placeholder="address type"
+                                        rules={{ required: true }}
+                                        name="address_type"
+                                        register={register}
+                                        value={selectedAddress.type}
+                                        onChange={(option) => {
+                                            handleChangeTextInput("type", option.value);
+                                            dispatch(getCity(option.label));
+                                        }}
+                                        setValue={setValue}
+                                    />
+                                    {
+                                        errors.country_id && errors.country_id.type === 'required' && (
+                                            <ErrorMessage errorText="Type can't be blank!" />
+                                        )
+                                    }
+                                </div>
 
+                            </div>
+                        </div>
+                    }
                     <div className="col-md-4">
                         <div class="custome_form_group row">
                             <label className="col-sm-3" for="firstName">Country</label>
@@ -54,7 +99,7 @@ const BillingAddressUpdate = (props) => {
                                     rules={{ required: true }}
                                     name="country_id"
                                     register={register}
-                                    value="Bangladesh"
+                                    value={selectedAddress.country}
                                     onChange={(option) => {
                                         handleChangeTextInput("country", option.label);
                                         handleChangeTextInput("country_id", option.value);
@@ -176,14 +221,29 @@ const BillingAddressUpdate = (props) => {
 
                         </div>
                     </div>
+                    <div className="col-md-4">
+                        <div class="custome_form_group row">
+                            <label className="col-sm-3" for="firstName">Default</label>
+                            <div className="col-sm-9">
+                                <RHFInput
+                                    as={<Select options={[{label: "Yes", value: "1"}, {label: "No", value: "0"}]} />}
+                                    placeholder="Default address"
+                                    register={register}
+                                    name="is_default"
+                                    value={selectedAddress.is_default}
+                                    onChange={(option) => {
+                                        handleChangeTextInput("is_default", option.value);
+                                    }}
+                                    setValue={setValue}
+                                />
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div className="row justify-content-end">
-                    {
-                        !isSubmitting && (
-                            <button type="submit" className="btn btn-primary mr-3">submit</button>
-                        )
-                    }
-                    {
+
+                            <button onClick={submitUpdatedAddressHandler} type="submit" className="btn btn-primary mr-3">Submit</button>
+                    {/* {
                         isSubmitting && (
                             <button type="submit" disabled={true} className="btn btn-primary mr-3 d-flex align-items-center">
                                 <Spinner animation="border" role="status">
@@ -192,7 +252,7 @@ const BillingAddressUpdate = (props) => {
                                 <span className="ml-2">submitting...</span>
                             </button>
                         )
-                    }
+                    } */}
                 </div>
             </form>
         </div>

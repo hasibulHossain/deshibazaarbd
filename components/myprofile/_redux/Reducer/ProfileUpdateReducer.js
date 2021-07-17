@@ -79,7 +79,6 @@ function ProfileUpdateReducer(state = initialState, action) {
                 }
             }
         case Types.GET_USER_UPDATED_DATA:
-            console.log('action.payload :>> ', action.payload);
             let getUserInput = { ...state.userInputData };
             getUserInput = action.payload;
             return {
@@ -128,41 +127,6 @@ function ProfileUpdateReducer(state = initialState, action) {
                     ...state,
                     isSubmitting: action.payload.isLoading,
                 };
-            }
-        case Types.GET_SINGLE_ADDRESS:
-            console.log('payload => ', action)
-            if(action.payload.type === "billing_address") {
-                console.log('billing address >>>> ', state.billingAddress)
-                const cloneBillingAddress = state.billingAddress.filter(item => item.id === action.payload.id);
-
-                // const cloneBillingAddressInput = {
-                //     ...state.billingAddressInput,
-                //     country: cloneBillingAddress[0].country,
-                //     city: cloneBillingAddress[0].city,
-                //     area: cloneBillingAddress[0].area,
-                // }
-
-                // console.log('clone obj => ', cloneBillingAddressInput)
-                console.log('clone obj => ', cloneBillingAddress)
-
-                return {
-                    ...state,
-                    billingAddressInput: cloneBillingAddressInput
-                }
-            } else if(action.payload.type === "shipping_address") {
-                const cloneShippingAddress = state.shippingAddress.filter(item => item.id === action.payload.id);
-                
-                const cloneShippingAddressInput = {
-                    ...state.shippingAddressInput,
-                    country: cloneShippingAddress[0].country,
-                    city: cloneShippingAddress[0].city,
-                    area: cloneShippingAddress[0].area,
-                }
-                
-                return {
-                    ...state,
-                    shippingAddressInput: cloneShippingAddressInput
-                }
             }
 
         default:
