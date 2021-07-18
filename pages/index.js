@@ -22,7 +22,7 @@ export default function Home() {
       <OfferProducts />
       <ProductTopListContainer />
       <DealFlash />
-      <CategoryListContainer />
+      <CategoryListContainer url='categories' />
 
       <ProductSection title="Best Sold" type="best-sold" limit={6} url='best-sold-products' />
       <ProductSection title="Featured Products For You" type="featured" limit={6} url='featured-products' />

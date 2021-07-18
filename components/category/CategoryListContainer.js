@@ -1,16 +1,24 @@
 import React from 'react';
+import Link from 'next/link';
 import Button from '../master/Button/Button';
 import CategoryList from './CategoryList';
 
-const CategoryListContainer = () => {
+const CategoryListContainer = ({ parentID = null }) => {
     return (
         <section className="product-container">
             <div className="product-heading">
                 <h5>Shop by categories</h5>
-                <Button buttonText="view all" isFontAwesome={true} />
+                {
+                    parentID !== 'all' && 
+                    <Link href="/categories">
+                        <a href="/categories">
+                            <Button buttonText="View All" isFontAwesome={true} />
+                        </a>
+                    </Link>
+                }
             </div>
 
-            <CategoryList parentID={null} />
+            <CategoryList parentID={parentID} />
         </section>
     );
 };

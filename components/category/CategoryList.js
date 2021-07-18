@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { getCategories } from "./_redux/Action/CategoryAction";
 import LoadingSkelleton from "../master/skelleton/LoadingSkelleton";
 
-const CategoryList = ({ parentID }) => {
+const CategoryList = ({ parentID = null }) => {
 
   const dispatch = useDispatch();
   const router   = useRouter();
