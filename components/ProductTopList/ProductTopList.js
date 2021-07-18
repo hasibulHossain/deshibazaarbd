@@ -4,6 +4,7 @@ import Slider from 'react-slick';
 import TopProductSlickSetting from './TopProductSlickSetting';
 import { getTopProductList } from './_redux/Action/ProductTopListAction';
 import { toggleProductModalAction } from "../products/_redux/Action/ProductAction";
+import { formatCurrency } from '../../services/currency';
 
 const ProductTopList = () => {
     const dispatch = useDispatch();
@@ -22,7 +23,11 @@ const ProductTopList = () => {
                             <div className="top-product-details">
                                <p className="title">Hot Deal Products</p>
                                <h5 className="top-product-name">{item.name}</h5>
-                               <p>Price: <span className="price">${item.default_selling_price}</span> <sup>99</sup></p>
+                               <p>Price: 
+                                   <span className="price">
+                                    {formatCurrency(item.offer_selling_price)}
+                                   </span> <sup><del>{formatCurrency(item.default_selling_price)}</del></sup>
+                                </p>
                             </div>
                             <div className="top-product-banner">
                                 <img src={`${process.env.NEXT_PUBLIC_URL}images/products/${item.featured_image}`} alt={item.name} className="img-fluid" />                             

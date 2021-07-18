@@ -4,6 +4,7 @@ import { getDealFlashList } from "./_redux/Action/DealFlashAction";
 import ReactStars from "react-rating-stars-component";
 import CountdownTimer from "react-component-countdown-timer";
 import { toggleProductModalAction } from "../products/_redux/Action/ProductAction";
+import { formatCurrency } from "../../services/currency";
 
 const DealFlash = () => {
 
@@ -49,11 +50,11 @@ const DealFlash = () => {
                       activeColor="#ffd700"
                     />
                     <p className="price">
-                      <del>{item.default_selling_price} </del>
-                      <span className="offerPrice">${item.offer_selling_price}</span>
+                      <del>{formatCurrency(item.default_selling_price)} </del>
+                      <span className="offerPrice">{formatCurrency(item.offer_selling_price)}</span>
                     </p>
                     <p className="inStock">
-                      Availability : <span>{item.current_stock} in stock</span>
+                      Availability : <span>{formatCurrency(item.current_stock, ',', '')} in stock</span>
                     </p>
                     <div className="flash-count">
                       <CountdownTimer
