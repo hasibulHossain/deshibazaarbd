@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import CategoryFilter from "./CategoryFilter";
+import ProductFilter from "./ProductFilter";
 import CategoryWishProductList from "./CategoryWishProductList";
 import classNames from "classnames";
 import { useDispatch, useSelector } from "react-redux";
@@ -57,7 +57,7 @@ const CategoryWishProductContainer = () => {
     <section className="product-container">
       <div className="row">
         <div className="col-md-3">
-          <CategoryFilter />
+          <ProductFilter />
         </div>
         <div className="col-md-9 mb-5">
           <CategoryWishProductList />

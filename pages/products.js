@@ -5,14 +5,6 @@ import ScrollToTop from "react-scroll-to-top";
 import CategoryWishProductContainer from "../components/CategoryWishProductList/CategoryWishProductContainer";
 
 export default function Products() {
-
-  useEffect(() => {
-    if (typeof window === "undefined") {
-      global.window = {};
-    }
-  }, []);
-
-
   return (
     <MainLayout>
       <ScrollToTop smooth />

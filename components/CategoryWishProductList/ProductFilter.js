@@ -15,7 +15,7 @@ import { getCategories } from "../category/_redux/Action/CategoryAction";
 import {useRouter} from 'next/router'
 import Axios from 'axios'
 
-const CategoryFilter = () => {
+const ProductFilter = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const { filterParams } = useSelector(
@@ -235,4 +235,4 @@ const CategoryFilter = () => {
   );
 };
 
-export default CategoryFilter;
+export default ProductFilter;
