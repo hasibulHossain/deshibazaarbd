@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import Select from 'react-select';
+import moment from 'moment';
 import LoadingSkelleton from '../master/skelleton/LoadingSkelleton.jsx';
 import Link from 'next/link'
 import { useDispatch, useSelector } from 'react-redux';
@@ -50,45 +51,51 @@ const FilterOrderList = ({ orderList, isLoading }) => {
                     <div className="card shadow-sm mt-3" key={index + 1}>
                         <div className="d-flex justify-content-between align-items-start order_list_filtered p-2">
                             <div className="order_header">
-                                <h6 className="order">Order : <span className="text-primary">#d454ddf565d6fd</span></h6>
-                                <p className="text-secondary">Placed on 28th June, 2021, 21:23:16</p>
+                                <h6 className="order">Order : <span className="text-primary">#{item.id}</span></h6>
+                                <p className="text-secondary">Placed on {moment(item.transaction_date).format("dddd, MMMM Do YYYY")}</p>
                             </div>
                             <Link href={`/order/${item.id}`}>
                                 <a><button className="btn text-primary">Manage</button></a>
                             </Link>
                         </div>
                         <div className="order_product_list p-3">
-                            <div className="row">
-                                <div className="col-md-6">
-                                    <div className="row align-items-center">
-                                        <div className="col-4">
-                                            <img src="https://static-01.daraz.com.bd/p/a2a62d3c0dcbc4727545ee6e227a2980.jpg_340x340q80.jpg_.webp" alt="product img" className="img-fluid img-thumbnail" />
+                        {
+                            item.items.map((product, indexProduct) => (
+                                <div className="row mt-2" key={indexProduct}>
+                                    <div className="col-md-6">
+                                        <div className="row align-items-center">
+                                            <div className="col-4">
+                                                <img src={`${process.env.NEXT_PUBLIC_URL}images/products/${product.featured_image}`} alt="product img" className="img-fluid img-thumbnail" />
+                                            </div>
+                                            <div className="col-8">
+                                                <h5 className="order_product_title">
+                                                    { product.name }
+                                                </h5>
+                                            </div>
                                         </div>
-                                        <div className="col-8">
-                                            <h4 className="order_product_title">Colour T-Shirt</h4>
+                                    </div>
+                                    <div className="col-md-6 mt-3">
+                                        <div className="row">
+                                            <div className="col-3">
+                                                <p className="order_product_qty"> 
+                                                <span className="text-secondary">Qty : </span> {product.quantity}
+                                                </p>
+                                            </div>
+                                            <div className="col-4">
+                                                <div className="badge badge-secondary">Processing</div>
+                                            </div>
+                                            <div className="col-5">
+                                                <p className="text-success">Estimated Delivery By {moment(product.approx_delivery_date).format("dddd, MMMM Do YYYY")}</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div className="col-md-6 mt-3">
-                                    <div className="row">
-                                        <div className="col-3">
-                                            <p className="order_product_qty"> <span className="text-secondary">Qty : </span> 2</p>
-                                        </div>
-                                        <div className="col-4">
-                                            <div className="badge badge-secondary">Processing</div>
-                                        </div>
-                                        <div className="col-5">
-                                            <p className="text-success">Estimated Delivery By Sat, 03 July - Mon, 12 July 2021</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
+                            ))
+                        }
                         </div>
                     </div>
                 ))
             }
-
         </>
     );
 };

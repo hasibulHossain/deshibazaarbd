@@ -96,7 +96,7 @@ export const handleShippingCost = (carts) => (dispatch) => {
  * @params int userID
  * @return array oderList based on user_id
  */
- export const getUserOrderList = (user_id) => async (dispatch) => {
+ export const getUserOrderList = (user_id) => (dispatch) => {
   const responseData = {
       orderList      : [],
       status         : false,
@@ -105,7 +105,7 @@ export const handleShippingCost = (carts) => (dispatch) => {
 
   dispatch({ type: Types.GET_USER_ORDER_LIST, payload: responseData });
 
-  await Axios.get(`${baseUrl}sales?business_id=${user_id}`)  // @todo Need to change the URL soon
+  Axios.get(`${baseUrl}sales/orders/customer`)
       .then((res) => {
           responseData.orderList = res.data.data.data;
           responseData.status    = true;
@@ -118,7 +118,6 @@ export const handleShippingCost = (carts) => (dispatch) => {
           if (typeof responseLog !== 'undefined') {
               showToast('error', responseLog.data.message);
               dispatch({ type: Types.GET_USER_ORDER_LIST, payload: responseData });
-              
           }
       })
 }
