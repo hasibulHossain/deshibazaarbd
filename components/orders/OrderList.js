@@ -22,7 +22,7 @@ const OrderList = () => {
                     <Tab eventKey="all" title="All">
                         <FilterOrderList orderList={orderList} isLoading={isLoading} />
                     </Tab>
-                    <Tab eventKey="to_pay" title={`To Pay(${orderList.length})`}>
+                    {/* <Tab eventKey="to_pay" title={`To Pay(${orderList.length})`}>
                         <FilterOrderList orderList={orderList} isLoading={isLoading} />
                     </Tab>
                     <Tab eventKey="to_ship" title={`To Ship(${orderList.length})`}>
@@ -30,7 +30,7 @@ const OrderList = () => {
                     </Tab>
                     <Tab eventKey="to_receive" title={`To Receive(${orderList.length})`}>
                         <FilterOrderList orderList={orderList} isLoading={isLoading} />
-                    </Tab>
+                    </Tab> */}
                 </Tabs>
             </div>
         </section>
