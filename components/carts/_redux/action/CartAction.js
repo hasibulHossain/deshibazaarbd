@@ -196,12 +196,28 @@ const getCartData = () => {
     carts = JSON.parse(carts) || [];
   }
 
-  carts.forEach((cart, index) => {
-    const duration          = moment.duration(cart.approxDeliveryTime, 'minutes');
-    const days              = duration.days();
-    cart.approxDeliveryDate = moment().add(days, 'days').format("dddd, MMMM Do YYYY");
-    carts[index]            = cart;
-  });
+  if(Array.isArray(carts)) {
+    carts.forEach((cart, index) => {
+      cart.approxDeliveryDate = getDeliveryDateFromTime(cart.approxDeliveryTime);
+      carts[index]            = cart;
+    });
+    return carts;
+  }
+  
+  return [];
+}
 
-  return carts;
+/**
+ * getDeliveryDateFromTime
+ * 
+ * @since 1.0.0
+ * 
+ * @param float approxDeliveryTime 
+ * 
+ * @return string approxDeliveryDate
+ */
+export const getDeliveryDateFromTime = (approxDeliveryTime) => {
+  const duration = moment.duration(approxDeliveryTime, 'minutes');
+  
+  return moment().add(duration.days(), 'days').format("dddd, MMMM Do YYYY");
 }
