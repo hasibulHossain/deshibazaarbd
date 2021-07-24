@@ -1,21 +1,18 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import Head from "next/head";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import DemoWarning from "../Demo/DemoWarning";
 import FloatingCart from "../carts/floating-cart/FloatingCart";
 
+import PageMeta from './PageMeta';
 import FloatingCartButton from "../carts/floating-cart/FloatingCartButton";
 import MessengerCustomerChat from 'react-messenger-customer-chat';
 
 const MainLayout = (props) => {
 
-  const { children, pageTitle, pageMetaDescription } = props;
+  const { children } = props;
   const { backdrop } = useSelector(state => state.GlobalReducer);
-
-  const title = typeof pageTitle === 'undefined' ? 'Deshi Bazaar BD' : pageTitle + ' | Deshi Bazaar BD';
-  const metaDescription = typeof pageMetaDescription === 'undefined' ? 'Deshi Bazaar BD is a multivendor e-commerce business solution in Bangladesh' : pageMetaDescription + ' .Deshi Bazaar BD is a multivendor e-commerce business solution in Bangladesh';
 
   useEffect(() => {
     if (typeof window === "undefined") {
@@ -25,10 +22,7 @@ const MainLayout = (props) => {
 
   return (
     <>
-      <Head>
-        <title>{title}</title>
-        <meta name="description" content={metaDescription} />
-      </Head>
+      <PageMeta props={props} />
 
       {
         process.env.NODE_ENV === 'production' &&
@@ -39,7 +33,8 @@ const MainLayout = (props) => {
         />
       }
 
-      <DemoWarning />
+      { process.env.NODE_ENV === 'production' && <DemoWarning /> }
+
       <Header />
       <main>
         {backdrop && <div className="backdrop"></div>}
