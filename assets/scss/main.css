@@ -82,7 +82,7 @@ a .custom-button-component:hover {
   background-color: #0c7e33;
   color: #fff;
   font-weight: 200;
-  padding: 10px;
+  padding: 4px;
 }
 
 .dropdown-currency button {
@@ -211,8 +211,8 @@ a .custom-button-component:hover {
 }
 
 .brand-logo {
-  width: 150px;
-  height: 100px;
+  width: 120px;
+  height: 70px;
 }
 
 .header-nav a {
@@ -228,7 +228,8 @@ a .custom-button-component:hover {
 }
 
 .menu_list {
-  padding: 15px;
+  padding: 0px;
+  padding-top: 10px;
   padding-left: 69px;
   display: block;
   -webkit-box-shadow: 0px 20px 20px 0px #cccccc3b;
