@@ -109,7 +109,7 @@ export default function Carts() {
                               </div>
                             </div>
 
-                            <p className="estimate">Estimate time -- </p>
+                            <p className="estimate">Estimate time - {item.approxDeliveryDate} </p>
                           </div>
                           {/* <p className="Spend">
                             Spend ৳ 990 enjoy free shipping for Standard delivery option

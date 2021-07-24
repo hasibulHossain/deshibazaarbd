@@ -1,4 +1,4 @@
-import Axios from "axios";
+import moment from 'moment';
 import * as Types from "../types/Types";
 import { showToast } from "../../../master/Helper/ToastHelper";
 
@@ -45,18 +45,19 @@ export const addToCartAction = (product, args = {}) => async (dispatch) => {
 
   if ( ! isUpdateToProduct ) {
     const cartData = {
-      productID   : product.id,
-      productName : product.name,
-      quantity    : quantity,
-      isOffer     : product.is_offer_enable,
-      price       : product.default_selling_price,
-      offerPrice  : product.offer_selling_price,
-      productImage: `${process.env.NEXT_PUBLIC_URL}images/products/${product.featured_image}`,
-      sellerID    : product.seller_id,
-      sellerName  : product.seller_name,
-      sku         : product.sku,
-      isChecked   : true, // By default item price will be added as checked
-      additional  : {}
+      productID         : product.id,
+      productName       : product.name,
+      quantity          : quantity,
+      isOffer           : product.is_offer_enable,
+      price             : product.default_selling_price,
+      offerPrice        : product.offer_selling_price,
+      productImage      : `${process.env.NEXT_PUBLIC_URL}images/products/${product.featured_image}`,
+      sellerID          : product.seller_id,
+      sellerName        : product.seller_name,
+      approxDeliveryTime: product.approx_delivery_time,
+      sku               : product.sku,
+      isChecked         : true, // By default item price will be added as checked
+      additional        : {}
     }
   
     carts.push( cartData );
@@ -168,10 +169,11 @@ export const getSupplierWiseCartsData = () => {
     const supplierWiseItem = data[index];
 
     let singleSupplierCart = {
-      isChecked : supplierWiseItem.every(item => item.isChecked === true ),
-      data      : supplierWiseItem,
-      sellerID  : supplierWiseItem.length > 0 ? supplierWiseItem[0]['sellerID']  : null,
-      sellerName: supplierWiseItem.length > 0 ? supplierWiseItem[0]['sellerName']: null
+      isChecked         : supplierWiseItem.every(item => item.isChecked === true ),
+      data              : supplierWiseItem,
+      sellerID          : supplierWiseItem.length > 0 ? supplierWiseItem[0]['sellerID']  : null,
+      sellerName        : supplierWiseItem.length > 0 ? supplierWiseItem[0]['sellerName']: null,
+      approxDeliveryDate: supplierWiseItem.length > 0 ? supplierWiseItem[0]['approxDeliveryDate']: null
     };
 
     supplierWiseCarts.push(singleSupplierCart);
@@ -188,11 +190,18 @@ export const getSupplierWiseCartsData = () => {
  * @returns array Formatted Carts data as array
  */
 const getCartData = () => {
-  const carts = localStorage.getItem("carts") || '';
+  let carts = localStorage.getItem("carts") || '';
 
   if (typeof carts !== "undefined" && carts !== null && carts !== '' ) {
-    return JSON.parse(carts) || [];
+    carts = JSON.parse(carts) || [];
   }
 
-  return [];
+  carts.forEach((cart, index) => {
+    const duration          = moment.duration(cart.approxDeliveryTime, 'minutes');
+    const days              = duration.days();
+    cart.approxDeliveryDate = moment().add(days, 'days').format("dddd, MMMM Do YYYY");
+    carts[index]            = cart;
+  });
+
+  return carts;
 }
