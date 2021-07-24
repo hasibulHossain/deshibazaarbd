@@ -1,10 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import ProductFilter from "./ProductFilter";
 import CategoryWishProductList from "./CategoryWishProductList";
 import classNames from "classnames";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getFilteredProducts,
   setFilterParams,
 } from "./_redux/Action/CategoryWiseProductAction";
 
