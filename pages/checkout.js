@@ -16,57 +16,58 @@ import { handleShippingCost } from "../components/orders/_redux/action/OrderActi
 // import { toggleFloatingCart } from "../_redux/store/action/globalAction";
 
 export default function Carts() {
-  const router = useRouter();
-  const dispatch = useDispatch();
-  const {carts, totalPrice, totalQuantity, shippingCost} = useSelector((state) => state.CartReducer);
-  const {customerInfo} = useSelector((state) => state.DeliveryInfoReducer);
-  const {couponData} = useSelector((state) => state.OrderReducer);
+	// const router = useRouter();
+	const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getCartsAction());
-    dispatch(getUserDataAction());
-    dispatch(handleShippingCost(carts))
-    // dispatch(toggleFloatingCart(false));
-  }, []);
+	const { carts, totalPrice, totalQuantity, shippingCost } = useSelector((state) => state.CartReducer);
+	const { customerInfo } = useSelector((state) => state.DeliveryInfoReducer);
+	const { couponData } = useSelector((state) => state.OrderReducer);
 
-  const handleStoreOrder = () => {
-    dispatch(storeSells(customerInfo, carts, totalQuantity, shippingCost, totalPrice, couponData));
-    router.push('/');
-  }
+	useEffect(() => {
+		dispatch(getCartsAction());
+		dispatch(getUserDataAction());
+		dispatch(handleShippingCost(carts))
+		// dispatch(toggleFloatingCart(false));
+	}, []);
 
-  return (
-    <MainLayout pageTitle="Checkout">
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-md-8">
-            <div className="delivery_info mb-3 mt-5">
-              <DeliveryInfo />
-              <div className="card mt-3 pl-3 pr-3 pt-2 shadow-sm">
-                <div className="d-flex justify-content-between align-items-center">
-                  <p className="deliver_content">{carts.length} Items</p>
-                  <p className="deliver_content">Price</p>
-                  <p className="deliver_content">Quantity</p>
-                </div>
-              </div>
+	const handleStoreOrder = () => {
+		dispatch(storeSells(customerInfo, carts, totalQuantity, shippingCost, totalPrice, couponData));
+		// router.push('/');
+	}
 
-              <div className="p-3 card shadow-sm">
-                {
-                  carts.length > 0 && carts.map((item, index) => (
-                    <div className="cart_items_details" key={index + 1}>
-                      <CartProduct cart={item} />
-                    </div>
-                  ))
-                }
-              </div>
-            </div>
-          </div>
-          <div className="col-md-4 cart_checkout_margin">
-            <ShippingInfo />
-            <CheckoutPaymentMethod />
-            <OrderSummery handleClick={() => handleStoreOrder()} buttonText="CONFIRM ORDER" />
-          </div>
-        </div>
-      </div>
-    </MainLayout>
-  );
+	return (
+		<MainLayout pageTitle="Checkout">
+			<div className="container-fluid">
+				<div className="row">
+					<div className="col-md-8">
+						<div className="delivery_info mb-3 mt-5">
+							<DeliveryInfo />
+							<div className="card mt-3 pl-3 pr-3 pt-2 shadow-sm">
+								<div className="d-flex justify-content-between align-items-center">
+									<p className="deliver_content">{carts.length} Items</p>
+									<p className="deliver_content">Price</p>
+									<p className="deliver_content">Quantity</p>
+								</div>
+							</div>
+
+							<div className="p-3 card shadow-sm">
+								{
+									carts.length > 0 && carts.map((item, index) => (
+										<div className="cart_items_details" key={index + 1}>
+											<CartProduct cart={item} />
+										</div>
+									))
+								}
+							</div>
+						</div>
+					</div>
+					<div className="col-md-4 cart_checkout_margin">
+						<ShippingInfo />
+						<CheckoutPaymentMethod />
+						<OrderSummery handleClick={() => handleStoreOrder()} buttonText="CONFIRM PAYMENT" />
+					</div>
+				</div>
+			</div>
+		</MainLayout>
+	);
 }

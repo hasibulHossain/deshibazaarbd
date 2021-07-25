@@ -85,7 +85,11 @@ export const storeSells = (customerInfo, carts, totalQuantity, shippingCost, tot
                 dispatch(getCartsAction());
                 localStorage.setItem('tr', encrypt(res.data.data.id));
                 showToast('success', 'Your order placed successfully');
-                dispatch({ type    : Types.ORDER_SUBMIT, payload: response });
+                dispatch({ type : Types.ORDER_SUBMIT, payload: response });
+
+                if(res.data.data.payment !== null) {
+                    window.location.href = res.data.data.payment.forwarding_url
+                }
             }
         }).catch((err) => {
             const responseLog = err.response;
