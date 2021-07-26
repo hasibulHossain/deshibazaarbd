@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import ProfileSideBar from "./ProfileSideBar";
 import { getUserDataAction } from "../_redux/getUserData/Action/UserDataAction";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMailBulk, faMapMarkedAlt, faPhone, faUser } from "@fortawesome/free-solid-svg-icons";
-import { getShippingAddress, getBillingAddress, getAddress } from "../ProfileAccountSetting/_redux/Action/ProfileAccountSettingAction";
+import { faMailBulk, faMapMarkedAlt, faPhone } from "@fortawesome/free-solid-svg-icons";
+import { getAddress } from "../ProfileAccountSetting/_redux/Action/ProfileAccountSettingAction";
 import LoadingSpinner from './../master/LoadingSpinner/LoadingSpinner'
 import SimpleModal from '../master/Modal/SimpleModal';
 import PersonalInformationUpdate from "./PersonalInformationUpdate";
@@ -21,11 +21,8 @@ const ProductProfile = () => {
 
   useEffect(() => {
     dispatch(getUserDataAction());
-    // dispatch(getShippingAddress('shipping_address'));
-    // dispatch(getBillingAddress('billing_address'));
     dispatch(getAddress('shipping_address'))
     dispatch(getAddress('billing_address'))
-    // dispatch(fetchWallets());
   }, [])
 
   const [show, setShow]               = useState(false);
@@ -55,7 +52,7 @@ const ProductProfile = () => {
                         {/* <div className="border rounded-circle p-1" style={{height: "90px", width: "90px"}}>
                           <FontAwesomeIcon icon={faUser} style={{ fontSize: "70px" }} />
                         </div> */}
-                        <img className="border rounded-circle p-1 mb-2" style={{height: "100px"}} src="https://cdn.iconscout.com/icon/free/png-256/laptop-user-1-1179329.png" alt="user image" />
+                        <img className="border rounded-circle p-1 mb-2" style={{ height: "100px" }} src="https://cdn.iconscout.com/icon/free/png-256/laptop-user-1-1179329.png" alt="user image" />
                       </div>
                       <p className="user_name"> {`${userData !== null && userData.first_name} ${userData !== null && userData.last_name}`}</p>
                       <p>
@@ -80,60 +77,62 @@ const ProductProfile = () => {
                 <div className="col-md-5">
                   <div className="card mb-2 p-3 default_height">
                     <div className="card-title">
-                      <h6>Address Book | 
+                      <h6>Address Book |
                         <Link href="/account-setting#address-book">
-                          <a>
-                            <span className="edit_profile_link">EDIT</span>
+                          <a className="text-decoration-none">
+                            <span className="edit_profile_link ml-2">EDIT</span>
                           </a>
                           {/* <span className="edit_profile_link" onClick={() => handleAddressShow()}>EDIT</span> */}
                         </Link>
                       </h6>
-                      <p className="address_sub_title">
-                        Default Shipping Address :
-                      </p>
-                      {
-                        isLoading && (
-                          <LoadingSpinner text="Loading Shipping Address..." />
-                        )
-                      }
-                      {
-                        shippingAddress  && shippingAddress.length > 0 && (
-                          <>
-                            <p>
-                              <span className="user_icon">
-                                <FontAwesomeIcon icon={faMapMarkedAlt} />
-                              </span>
-                              <span className="user_address">
-                                {shippingAddress[0].area}, {shippingAddress[0].street1}, {shippingAddress[0].city} <br />
-                                {shippingAddress[0].country}
-                              </span>
-                            </p>
-                          </>
-                        )
-                      }
-                      <p className="address_sub_title">
-                        Default Billing Address :
-                      </p>
-                      {
-                        isLoading && (
-                          <LoadingSpinner text="Loading Billing Address..." />
-                        )
-                      }
-                      {
-                        billingAddress && billingAddress.length > 0 && (
-                          <>
-                            <p>
-                              <span className="user_icon">
-                                <FontAwesomeIcon icon={faMapMarkedAlt} />
-                              </span>
-                              <span className="user_address">
-                                {billingAddress[0].area}, {billingAddress[0].street1}, {billingAddress[0].city} <br />
-                                {billingAddress[0].country}
-                              </span>
-                            </p>
-                          </>
-                        )
-                      }
+                      <div className="border-top">
+                        <p className="address_sub_title mt-2">
+                          Default Shipping Address :
+                        </p>
+                        {
+                          isLoading && (
+                            <LoadingSpinner text="Loading Shipping Address..." />
+                          )
+                        }
+                        {
+                          shippingAddress && shippingAddress.length > 0 && (
+                            <>
+                              <p>
+                                <span className="user_icon">
+                                  <FontAwesomeIcon icon={faMapMarkedAlt} />
+                                </span>
+                                <span className="user_address">
+                                  {shippingAddress[0].area}, {shippingAddress[0].street1}, {shippingAddress[0].city} <br />
+                                  {shippingAddress[0].country}
+                                </span>
+                              </p>
+                            </>
+                          )
+                        }
+                        <p className="address_sub_title">
+                          Default Billing Address :
+                        </p>
+                        {
+                          isLoading && (
+                            <LoadingSpinner text="Loading Billing Address..." />
+                          )
+                        }
+                        {
+                          billingAddress && billingAddress.length > 0 && (
+                            <>
+                              <p>
+                                <span className="user_icon">
+                                  <FontAwesomeIcon icon={faMapMarkedAlt} />
+                                </span>
+                                <span className="user_address">
+                                  {billingAddress[0].area}, {billingAddress[0].street1}, {billingAddress[0].city} <br />
+                                  {billingAddress[0].country}
+                                </span>
+                              </p>
+                            </>
+                          )
+                        }
+                      </div>
 
                     </div>
                   </div>
@@ -146,17 +145,17 @@ const ProductProfile = () => {
       </div>
 
       <SimpleModal
-        size        = "lg"
-        show        = {show}
-        handleClose = {handleClose}
+        size="lg"
+        show={show}
+        handleClose={handleClose}
       >
         <PersonalInformationUpdate />
       </SimpleModal>
 
       <SimpleModal
-        size        = "xl"
-        show        = {addressShow}
-        handleClose = {handleAddressClose}
+        size="xl"
+        show={addressShow}
+        handleClose={handleAddressClose}
       >
         <AddressUpdate />
       </SimpleModal>

@@ -8,11 +8,11 @@ import Select from 'react-select';
 import { Spinner } from 'react-bootstrap'
 
 const BillingAddressUpdate = (props) => {
-    const dispatch = useDispatch();
-    const countryList = useSelector((state) => state.ProfileAccountSettingReducer.countryList);
-    const cityList = useSelector((state) => state.ProfileAccountSettingReducer.cityList);
-    const areaList = useSelector((state) => state.ProfileAccountSettingReducer.areaList);
-    const isSubmitting = useSelector((state) => state.ProfileAccountSettingReducer.isSubmitting);
+    const dispatch        = useDispatch();
+    const countryList     = useSelector((state) => state.ProfileAccountSettingReducer.countryList);
+    const cityList        = useSelector((state) => state.ProfileAccountSettingReducer.cityList);
+    const areaList        = useSelector((state) => state.ProfileAccountSettingReducer.areaList);
+    const isSubmitting    = useSelector((state) => state.ProfileAccountSettingReducer.isSubmitting);
     const selectedAddress = useSelector((state) => state.ProfileAccountSettingReducer.selectedAddress);
     const { register, handleSubmit, errors, setValue } = useForm();
 
@@ -35,6 +35,7 @@ const BillingAddressUpdate = (props) => {
         console.log('form errors => ', errors)
     }
 
+    console.log('selectedAddress :>> ', selectedAddress);
     return (
         <div className="profile_account shadow-sm bg-white">
             <h6>
@@ -96,10 +97,14 @@ const BillingAddressUpdate = (props) => {
                                     rules={{ required: true }}
                                     name="country_id"
                                     register={register}
-                                    value={selectedAddress.country}
+                                    value={selectedAddress.selectedCountry}
                                     onChange={(option) => {
                                         handleChangeTextInput("country", option.label);
                                         handleChangeTextInput("country_id", option.value);
+                                        dispatch(handleChangeBillingAddressInput("selectedCity", ""))
+                                        dispatch(handleChangeBillingAddressInput("selectedArea", ""))
+                                        dispatch(handleChangeBillingAddressInput("street1", ""))
+                                        dispatch(handleChangeBillingAddressInput("street2", ""))
                                         dispatch(getCity(option.label));
                                     }}
                                     setValue={setValue}
@@ -123,7 +128,7 @@ const BillingAddressUpdate = (props) => {
                                     rules={{ required: true }}
                                     name="city_id"
                                     register={register}
-                                    value={selectedAddress.city}
+                                    value={selectedAddress.selectedCity}
                                     onChange={(option) => {
                                         handleChangeTextInput("city", option.label);
                                         handleChangeTextInput("city_id", option.value);
@@ -149,7 +154,7 @@ const BillingAddressUpdate = (props) => {
                                     rules={{ required: true }}
                                     name="area_id"
                                     register={register}
-                                    value={selectedAddress.aria}
+                                    value={selectedAddress.selectedArea}
                                     onChange={(option) => {
                                         handleChangeTextInput("area", option.label);
                                         handleChangeTextInput("area_id", option.value);

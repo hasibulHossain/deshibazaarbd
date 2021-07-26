@@ -155,13 +155,17 @@ function ProfileAccountSettingReducer(state = initialState, action) {
                 } else {
                     cloneAddress = state.shippingAddress.filter(item => item.id === action.payload.id);
                 }
-                
+                console.log('cloneAddress :>> ', cloneAddress)
+
                 const cloneSelectedAddress = {
                     ...state.selectedAddress,
                     id: +cloneAddress[0].id,
                     is_default: +cloneAddress[0].is_default,
                     type: action.payload.type,
                     user_id: state.userInputData.id && state.userInputData.id,
+                    selectedCountry: { label: cloneAddress[0].country,  value: +cloneAddress[0].country_id },
+                    selectedCity: { label: cloneAddress[0].city,  value: +cloneAddress[0].city_id },
+                    selectedArea: { label: cloneAddress[0].area,  value: +cloneAddress[0].area_id },
                     country_id: +cloneAddress[0].country_id,
                     country: cloneAddress[0].country,
                     city_id: +cloneAddress[0].city_id,
