@@ -6,7 +6,7 @@ import { getSingleAddress, deleteAddress } from './_redux/Action/ProfileAccountS
 
 function SingleAddress(props) {
     const dispatch = useDispatch();
-    const {id, type, userName, city, area, street1, street2, is_default} = props;
+    const {id, type, name, phone_no, location, userName, city, area, street1, street2, is_default} = props;
     const [show, setShow] = useState(false);
     const toggleShowHandler = () => {
         setShow(preState => !preState);
@@ -22,7 +22,7 @@ function SingleAddress(props) {
         <li className="single-address" >
             <div className="single-address__item">
                 <div>
-                    {userName}
+                    {name ? name : "N/A"}
                 </div>
             </div>
             <div className="single-address__item">
@@ -33,7 +33,7 @@ function SingleAddress(props) {
             </div>
             <div className="single-address__item">
                 <div>
-                    0121111222222222221119
+                    {phone_no ? phone_no : "N/A"}
                 </div>
             </div>
             <div className="single-address__item">

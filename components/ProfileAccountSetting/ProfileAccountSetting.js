@@ -9,12 +9,12 @@ import { getAddress, getArea, getCity, getCountry } from './_redux/Action/Profil
 import SimpleModal from '../master/Modal/SimpleModal';
 import AddressUpdate from './AddressUpdate';
 import SimpleBtn from '../master/SimpleBtn/SimpleBtn';
+import LoadingSpinner from '../master/LoadingSpinner/LoadingSpinner';
 
 
 const ProfileAccountSetting = () => {
     const dispatch = useDispatch();
-    const {billingAddress, shippingAddress, userInputData} = useSelector(state => state.ProfileAccountSettingReducer)
-
+    const { billingAddress, shippingAddress, userInputData, isLoading } = useSelector(state => state.ProfileAccountSettingReducer)
     const [show, setShow] = useState(false);
     const toggleShowHandler = () => {
         setShow(preState => !preState);
@@ -37,13 +37,20 @@ const ProfileAccountSetting = () => {
                         <div className="user_profile_setting_body">
                             <PersonalInfoForm />
                             <div className="profile_account shadow-sm bg-white" id="address-book">
-                                <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem'}}>
+                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
                                     <h6>Address book</h6>
-                                    <SimpleBtn variant="success" style={{width: 'fit-content'}} onClick={toggleShowHandler}>
+                                    <SimpleBtn variant="success" style={{ width: 'fit-content' }} onClick={toggleShowHandler}>
                                         Add new address
                                     </SimpleBtn>
                                 </div>
-                                <ul className="address-list">
+                                {
+                                    isLoading && <div className="d-flex justify-content-center">
+                                        <LoadingSpinner text="Loading Address...." />
+                                    </div>
+                                }
+                                {
+                                    !isLoading &&
+                                    <ul className="address-list">
                                         <div className="address-list__header">
                                             <div>Full name</div>
                                             <div>Address</div>
@@ -52,42 +59,49 @@ const ProfileAccountSetting = () => {
                                             <div></div>
                                             <div></div>
                                             <div></div>
-                                        </div> 
-                                    <div>
-                                        { 
-                                            billingAddress && billingAddress.map((item, i) => {
-                                                return (
-                                                    <SingleAddress
-                                                        key={i} 
-                                                        id={item.id}
-                                                        type={item.type}
-                                                        is_default={item.is_default}
-                                                        city={item.city}
-                                                        area={item.area}
-                                                        street1={item.street1}
-                                                        street2={item.street2}
-                                                        userName={userInputData.first_name} />
-                                                );
-                                            })
-                                        }
-                                        { 
-                                            shippingAddress && shippingAddress.map((item, i) => {
-                                                return (
-                                                    <SingleAddress
-                                                        key={i} 
-                                                        id={item.id}
-                                                        type={item.type}
-                                                        is_default={item.is_default}
-                                                        city={item.city}
-                                                        area={item.area}
-                                                        street1={item.street1}
-                                                        street2={item.street2}
-                                                        userName={userInputData.first_name} />
-                                                );
-                                            })
-                                        }
-                                    </div>
-                                </ul>
+                                        </div>
+                                        <div>
+                                            {
+                                                billingAddress && billingAddress.map((item, i) => {
+                                                    return (
+                                                        <SingleAddress
+                                                            key={i}
+                                                            id={item.id}
+                                                            type={item.type}
+                                                            name={item.name}
+                                                            phone_no={item.phone_no}
+                                                            location={item.location}
+                                                            is_default={item.is_default}
+                                                            city={item.city}
+                                                            area={item.area}
+                                                            street1={item.street1}
+                                                            street2={item.street2}
+                                                            userName={userInputData.first_name} />
+                                                    );
+                                                })
+                                            }
+                                            {
+                                                shippingAddress && shippingAddress.map((item, i) => {
+                                                    return (
+                                                        <SingleAddress
+                                                            key={i}
+                                                            id={item.id}
+                                                            type={item.type}
+                                                            name={item.name}
+                                                            phone_no={item.phone_no}
+                                                            location={item.location}
+                                                            is_default={item.is_default}
+                                                            city={item.city}
+                                                            area={item.area}
+                                                            street1={item.street1}
+                                                            street2={item.street2}
+                                                            userName={userInputData.first_name} />
+                                                    );
+                                                })
+                                            }
+                                        </div>
+                                    </ul>
+                                }
                             </div>
                         </div>
                     </div>
@@ -101,7 +115,7 @@ const ProfileAccountSetting = () => {
                 <AddressUpdate addAddress={true} type="new_address" closeModal={toggleShowHandler} />
                 {/* <BillingAddressUpdateCopy /> */}
                 {/* <BillingAddressUpdate /> */}
-        </SimpleModal>
+            </SimpleModal>
         </>
     );
 };

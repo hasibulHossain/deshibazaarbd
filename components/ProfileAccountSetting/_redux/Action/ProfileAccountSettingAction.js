@@ -234,37 +234,53 @@ export const handleUpdateBillingAddress = (billingAddressInput) => (dispatch) =>
 }
 
 //handle store billing address
-export const addAddress = (addressInput, type) => (dispatch) => {
+export const addAddress = (addressInput, type, closeModal) => (dispatch) => {
     const responseData = {
-        status: false,
-        isLoading: true,
+        status         : false,
+        isLoading      : true,
     }
 
     let method;
     if(type === 'new_address') {
         method = 'post'
     } else {
-        method = 'put'
+        method = ''
+        // method = '?_method=PUT'
     }
 
     dispatch({ type: Types.STORE_BILLING_ADDRESS, payload: responseData });
     const userStorageData = JSON.parse(localStorage.getItem("loginData"));
     addressInput['user_id'] = userStorageData.userData.id;
 
+    let url;
+    if(type === 'new_address') {
+        url = `${process.env.NEXT_PUBLIC_API_URL}address`
+    } else {
+        url = `${process.env.NEXT_PUBLIC_API_URL}address?user_id=${userStorageData.userData.id}&type=${type}?_method=PUT`
+    }
+
     Axios({
         method: method,
-        url: `${process.env.NEXT_PUBLIC_API_URL}address`,
-        data: addressInput
+        url   : url,
+        data  : addressInput
     })
     .then((res) => {
-        responseData.status = true;
+        responseData.status    = true;
         responseData.isLoading = false;
         showToast('success', res.data.message);
         dispatch({ type: Types.STORE_BILLING_ADDRESS, payload: responseData });
+        dispatch(getAddress('billing_address'));
+        dispatch(getAddress('shipping_address'));
+        closeModal();
     })
     .catch(err => {
         responseData.isLoading = false;
         dispatch({ type: Types.STORE_BILLING_ADDRESS, payload: responseData });
+        const { response } = err;
+        // const { request, ...errorObject } = response;
+        responseData.isLoading = false;
+        // showToast("error", response.data.message)
+        closeModal();
         console.log('err => ', err);
     })
     
@@ -289,4 +305,11 @@ export const deleteAddress = (id) => (dispatch) => {
             console.log('err => ', err);
         })
 
+}
+
+export const handleEmptyDispatch = (type) => (dispatch)=> {
+    const data = {
+        type: type
+    }
+    dispatch({type: Types.EMPTY_DISPATCH, payload: data})
 }

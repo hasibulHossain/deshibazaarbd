@@ -1,18 +1,20 @@
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { handleChangeBillingAddressInput, handleUpdateBillingAddress, getArea, getCity, addAddress } from './_redux/Action/ProfileAccountSettingAction';
+import { handleChangeBillingAddressInput, handleUpdateBillingAddress, getArea, getCity, addAddress, handleEmptyDispatch } from './_redux/Action/ProfileAccountSettingAction';
 import ErrorMessage from '../master/ErrorMessage/ErrorMessage'
 import { RHFInput } from 'react-hook-form-input';
 import Select from 'react-select';
-import { Spinner } from 'react-bootstrap'
+import { Form, Spinner } from 'react-bootstrap'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBriefcase, faHome } from '@fortawesome/free-solid-svg-icons';
 
 const BillingAddressUpdate = (props) => {
-    const dispatch        = useDispatch();
-    const countryList     = useSelector((state) => state.ProfileAccountSettingReducer.countryList);
-    const cityList        = useSelector((state) => state.ProfileAccountSettingReducer.cityList);
-    const areaList        = useSelector((state) => state.ProfileAccountSettingReducer.areaList);
-    const isSubmitting    = useSelector((state) => state.ProfileAccountSettingReducer.isSubmitting);
+    const dispatch = useDispatch();
+    const countryList = useSelector((state) => state.ProfileAccountSettingReducer.countryList);
+    const cityList = useSelector((state) => state.ProfileAccountSettingReducer.cityList);
+    const areaList = useSelector((state) => state.ProfileAccountSettingReducer.areaList);
+    const isSubmitting = useSelector((state) => state.ProfileAccountSettingReducer.isSubmitting);
     const selectedAddress = useSelector((state) => state.ProfileAccountSettingReducer.selectedAddress);
     const { register, handleSubmit, errors, setValue } = useForm();
 
@@ -28,26 +30,37 @@ const BillingAddressUpdate = (props) => {
     const StoreBillingAddress = () => {
         // dispatch(handleUpdateBillingAddress(selectedAddress))
     }
-    
+
     const submitUpdatedAddressHandler = () => {
-        dispatch(addAddress(selectedAddress, props.type))
-        props.closeModal();
+        dispatch(addAddress(selectedAddress, props.type, props.closeModal))
+        // props.closeModal();
         console.log('form errors => ', errors)
     }
 
-    console.log('selectedAddress :>> ', selectedAddress);
+    useEffect(() => {
+        if (selectedAddress.country && selectedAddress.city) {
+            dispatch(getCity(selectedAddress.country));
+            dispatch(getArea(selectedAddress.city_id));
+        }
+        if (props.type === "new_address") {
+            dispatch(handleEmptyDispatch("new_address"))
+        }
+
+    }, [])
+
+
     return (
-        <div className="profile_account shadow-sm bg-white">
-            <h6>
+        <>
+            <h6 className="address_book_updated_title">
                 {
-                    props.type === "billing_address" && "Billing address"                }
+                    props.type === "billing_address" && "Billing address"}
                 {
                     props.type === "shipping_address" && "Shipping address"
                 }
                 {
                     props.type === "new_address" && "Add new address"
                 }
-                
+
             </h6>
 
             <form
@@ -56,16 +69,67 @@ const BillingAddressUpdate = (props) => {
                 autoComplete="off"
                 encType="multipart/form-data"
                 autoSave="off"
+                className="mt-3"
             >
                 <div className="row">
+                    <div className="col-md-6">
+                        <div class="custome_form_group row">
+                            <label className="col-sm-3" for="firstName">Name</label>
+                            <div className="col-sm-9">
+                                <input
+                                    type="text"
+                                    class="custom_form_input"
+                                    placeholder="Name"
+                                    name="name"
+                                    value={selectedAddress.name}
+                                    onChange={(e) => handleChangeTextInput('name', e.target.value)}
+                                    ref={register({
+                                        required: true,
+                                        maxLength: 100,
+                                    })}
+                                />
+                                {
+                                    errors.name && errors.name.type === 'required' && (
+                                        <ErrorMessage errorText="Name can't be blank!" />
+                                    )
+                                }
+                            </div>
+
+                        </div>
+                    </div>
+                    <div className="col-md-6">
+                        <div class="custome_form_group row">
+                            <label className="col-sm-3" for="firstName">Phone No</label>
+                            <div className="col-sm-9">
+                                <input
+                                    type="number"
+                                    class="custom_form_input"
+                                    placeholder="Phone No"
+                                    name="phone_no"
+                                    value={selectedAddress.phone_no}
+                                    onChange={(e) => handleChangeTextInput('phone_no', e.target.value)}
+                                    ref={register({
+                                        required: true,
+                                        maxLength: 100,
+                                    })}
+                                />
+                                {
+                                    errors.phone_no && errors.phone_no.type === 'required' && (
+                                        <ErrorMessage errorText="Phone number can't be blank!" />
+                                    )
+                                }
+                            </div>
+
+                        </div>
+                    </div>
                     {
                         props.type === 'new_address' &&
-                        <div className="col-md-4">
+                        <div className="col-md-6">
                             <div class="custome_form_group row">
                                 <label className="col-sm-3" for="firstName">Address Type</label>
                                 <div className="col-sm-9">
                                     <RHFInput
-                                        as={<Select options={[{label: 'Shipping address', value: 'shipping_address'}, {label: 'Billing address', value: 'billing_address'}]} />}
+                                        as={<Select options={[{ label: 'Shipping address', value: 'shipping_address' }, { label: 'Billing address', value: 'billing_address' }]} />}
                                         placeholder="address type"
                                         rules={{ required: true }}
                                         name="address_type"
@@ -87,7 +151,7 @@ const BillingAddressUpdate = (props) => {
                             </div>
                         </div>
                     }
-                    <div className="col-md-4">
+                    <div className="col-md-6">
                         <div class="custome_form_group row">
                             <label className="col-sm-3" for="firstName">Country</label>
                             <div className="col-sm-9">
@@ -107,7 +171,9 @@ const BillingAddressUpdate = (props) => {
                                         dispatch(handleChangeBillingAddressInput("street2", ""))
                                         dispatch(getCity(option.label));
                                     }}
+                                    // setValue={dispatch(getCity(selectedAddress.label))}
                                     setValue={setValue}
+
                                 />
                                 {
                                     errors.country_id && errors.country_id.type === 'required' && (
@@ -118,7 +184,7 @@ const BillingAddressUpdate = (props) => {
 
                         </div>
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-md-6">
                         <div class="custome_form_group row">
                             <label className="col-sm-3" for="firstName">City</label>
                             <div className="col-sm-9">
@@ -144,7 +210,7 @@ const BillingAddressUpdate = (props) => {
                             </div>
                         </div>
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-md-6">
                         <div class="custome_form_group row">
                             <label className="col-sm-3" for="firstName">Area</label>
                             <div className="col-sm-9">
@@ -169,7 +235,7 @@ const BillingAddressUpdate = (props) => {
                             </div>
                         </div>
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-md-6">
                         <div class="custome_form_group row">
                             <label className="col-sm-3" for="firstName">Street-1</label>
                             <div className="col-sm-9">
@@ -196,7 +262,7 @@ const BillingAddressUpdate = (props) => {
 
                         </div>
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-md-6">
                         <div class="custome_form_group row">
                             <label className="col-sm-3" for="firstName">Street-2</label>
                             <div className="col-sm-9">
@@ -223,16 +289,16 @@ const BillingAddressUpdate = (props) => {
 
                         </div>
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-md-6">
                         <div class="custome_form_group row">
                             <label className="col-sm-3" for="firstName">Default</label>
                             <div className="col-sm-9">
                                 <RHFInput
-                                    as={<Select options={[{label: "Yes", value: "1"}, {label: "No", value: "0"}]} />}
+                                    as={<Select options={[{ label: "Yes", value: "1" }, { label: "No", value: "0" }]} />}
                                     placeholder="Default address"
                                     register={register}
                                     name="is_default"
-                                    value={selectedAddress.is_default}
+                                    value={selectedAddress.is_default_selected}
                                     onChange={(option) => {
                                         handleChangeTextInput("is_default", option.value);
                                     }}
@@ -242,10 +308,30 @@ const BillingAddressUpdate = (props) => {
                         </div>
                     </div>
                 </div>
-                <div className="row justify-content-end">
 
+
+                <div className="deliver_info_footer col-md-6 mt-3">
+                    <h6 className="select_title">
+                        Select a label for effective delivery:
+                    </h6>
+                    <div className="d-flex mt-3">
+                        <p className={`btn home_btn mr-3 pointer ${selectedAddress.location === "home" ? "active_delivery_label" : ""}`} onClick={() => handleChangeTextInput("location", "home")}>
+                            <FontAwesomeIcon icon={faHome} className="mr-1" /> Home
+                        </p>
+
+                        <p className={`btn office_btn pointer ${selectedAddress.location === "office" ? "active_delivery_label" : ""}`} onClick={() => handleChangeTextInput("location", "office")}>
+                            <FontAwesomeIcon icon={faBriefcase} className="mr-1" /> Office
+                        </p>
+                    </div>
+                </div>
+
+                <div className="row justify-content-end">
+                    {
+                        !isSubmitting && (
                             <button onClick={submitUpdatedAddressHandler} type="submit" className="btn btn-primary mr-3">Submit</button>
-                    {/* {
+                        )
+                    }
+                    {
                         isSubmitting && (
                             <button type="submit" disabled={true} className="btn btn-primary mr-3 d-flex align-items-center">
                                 <Spinner animation="border" role="status">
@@ -254,10 +340,10 @@ const BillingAddressUpdate = (props) => {
                                 <span className="ml-2">submitting...</span>
                             </button>
                         )
-                    } */}
+                    }
                 </div>
             </form>
-        </div>
+        </>
     );
 };
 

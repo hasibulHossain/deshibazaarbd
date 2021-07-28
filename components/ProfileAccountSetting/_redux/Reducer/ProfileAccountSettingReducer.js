@@ -21,46 +21,55 @@ const initialState = {
         id: null
     },
     billingAddressInput : {
-        type            : "billing_address",
-        user_id         : null,
-        transaction_id  : null,
-        country_id      : null, //integer
-        country         : null,
-        city_id         : null,  //integer
-        city            : null,
-        area_id         : null,   //integer
-        area            : null,
-        street1         : null,
-        street2         : null,
-        is_default      : 1
+        type          : "billing_address",
+        user_id       : null,
+        name          : null,
+        phone_no      : null,
+        transaction_id: null,
+        country_id    : null, //integer
+        country       : null,
+        city_id       : null,  //integer
+        city          : null,
+        area_id       : null,   //integer
+        area          : null,
+        street1       : null,
+        street2       : null,
+        is_default    : null,
+        location      : null
     },
     selectedAddress: {
-        type: null,
-        user_id: null,
+        type          : null,
+        user_id       : null,
+        name          : null,
+        phone_no      : null,
         transaction_id: null,
-        country_id: null, //integer
-        country: null,
-        city_id: null,  //integer
-        city: null,
-        area_id: null,   //integer
-        area: null,
-        street1: null,
-        street2: null,
-        is_default: null
+        country_id    : null, //integer
+        country       : null,
+        city_id       : null,  //integer
+        city          : null,
+        area_id       : null,   //integer
+        area          : null,
+        street1       : null,
+        street2       : null,
+        is_default    : null,
+        location      : null
     },
     shippingAddressInput: {
-        type            : "shipping_address",
-        user_id         : null,
-        transaction_id  : null,
-        country_id      : null, //integer
-        country         : null,
-        city_id         : null,  //integer
-        city            : null,
-        area_id         : null,   //integer
-        area            : null,
-        street1         : null,
-        street2         : null,
-        is_default      : 1
+        type          : "shipping_address",
+        user_id       : null,
+        name          : null,
+        phone_no      : null,
+        transaction_id: null,
+        country_id    : null, //integer
+        country       : null,
+        city_id       : null,  //integer
+        city          : null,
+        area_id       : null,   //integer
+        area          : null,
+        street1       : null,
+        street2       : null,
+        is_default    : null,
+        location      : null
     },
     countryList         : [],
     cityList            : [],
@@ -138,7 +147,8 @@ function ProfileAccountSettingReducer(state = initialState, action) {
                 return {
                     ...state,
                     isSubmitting       : action.payload.isLoading,
-                    billingAddressInput: initialState.billingAddressInput
+                    billingAddressInput: initialState.billingAddressInput,
+                    selectedAddress: initialState.selectedAddress
 
                 };
             } else {
@@ -148,6 +158,12 @@ function ProfileAccountSettingReducer(state = initialState, action) {
                 };
             }
 
+            case Types.EMPTY_DISPATCH: 
+            return{
+                ...state,
+                selectedAddress: initialState.selectedAddress
+            }
+
             case Types.GET_SINGLE_ADDRESS:
                 let cloneAddress;
                 if(action.payload.type === "billing_address") {
@@ -155,25 +171,28 @@ function ProfileAccountSettingReducer(state = initialState, action) {
                 } else {
                     cloneAddress = state.shippingAddress.filter(item => item.id === action.payload.id);
                 }
-                console.log('cloneAddress :>> ', cloneAddress)
 
                 const cloneSelectedAddress = {
                     ...state.selectedAddress,
-                    id: +cloneAddress[0].id,
-                    is_default: +cloneAddress[0].is_default,
-                    type: action.payload.type,
-                    user_id: state.userInputData.id && state.userInputData.id,
-                    selectedCountry: { label: cloneAddress[0].country,  value: +cloneAddress[0].country_id },
-                    selectedCity: { label: cloneAddress[0].city,  value: +cloneAddress[0].city_id },
-                    selectedArea: { label: cloneAddress[0].area,  value: +cloneAddress[0].area_id },
-                    country_id: +cloneAddress[0].country_id,
-                    country: cloneAddress[0].country,
-                    city_id: +cloneAddress[0].city_id,
-                    city: cloneAddress[0].city,
-                    area_id: +cloneAddress[0].area_id,
-                    area: cloneAddress[0].area,
-                    street1: cloneAddress[0].street1,
-                    street2: cloneAddress[0].street2,
+                    id                 : +cloneAddress[0].id,
+                    is_default         : +cloneAddress[0].is_default,
+                    type               : action.payload.type,
+                    user_id            : state.userInputData.id && state.userInputData.id,
+                    name               : cloneAddress[0].name,
+                    phone_no           : cloneAddress[0].phone_no,
+                    is_default_selected: +cloneAddress[0].is_default === 1 ? {label : "Yes",  value: +cloneAddress[0].is_default}: {label: "No", value: +cloneAddress[0].is_default},
+                    selectedCountry    : { label : cloneAddress[0].country,  value: +cloneAddress[0].country_id },
+                    selectedCity       : { label : cloneAddress[0].city,     value: +cloneAddress[0].city_id },
+                    selectedArea       : { label : cloneAddress[0].area,     value: +cloneAddress[0].area_id },
+                    country_id         : +cloneAddress[0].country_id,
+                    country            : cloneAddress[0].country,
+                    city_id            : +cloneAddress[0].city_id,
+                    city               : cloneAddress[0].city,
+                    area_id            : +cloneAddress[0].area_id,
+                    area               : cloneAddress[0].area,
+                    street1            : cloneAddress[0].street1,
+                    street2            : cloneAddress[0].street2,
+                    location           : cloneAddress[0].location
                 }
                 return {
                     ...state,
