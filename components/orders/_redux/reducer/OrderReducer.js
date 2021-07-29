@@ -67,6 +67,11 @@ const OrderReducer = (state = initialState, action) => {
         filterOptionList: action.payload.filterOptionList,
         isLoading       : action.payload.isLoading,
       };
+    case Types.CANCEL_ORDER:
+      return {
+        ...state,
+        isLoading : action.payload.isLoading,
+      };
 
     case Types.GET_TRACKING_TIMELINE_DATA:
       return {

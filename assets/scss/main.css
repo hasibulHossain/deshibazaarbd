@@ -2674,3 +2674,22 @@ img.payment_method_in_shipping {
   margin-bottom: 5px;
   text-transform: none;
 }
+
+
+.simple_btn_bg{
+  background-color: #172337!important;
+  color: #ffff!important;
+}
+.simple_confirm_com{
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.simple_confirm_message{
+  text-align: center;
+  font-size: 22px;
+  font-weight: 600;
+  text-transform: none;
+}

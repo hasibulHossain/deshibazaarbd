@@ -232,3 +232,38 @@ export const handleShippingCost = (carts) => (dispatch) => {
           }
       })
 }
+/**
+ * Cancel order
+ * 
+ * @since 1.0.0
+ * 
+ * @param id //order id
+ * 
+ * @return array for tracking step timeline
+ */
+export const handleCancelOrder = (order_id, closeModal, user_id) => (dispatch) => {
+  const responseData = {
+    status           : false,
+    isLoading        : true
+  }
+  dispatch({type: Types.CANCEL_ORDER, payload: responseData});
+  
+  Axios.put(`${baseUrl}sales/orders/suspend/${order_id}`)
+  .then((res)=>{
+    if (res.data.status) {
+      responseData.status    = true;
+      responseData.isLoading = false;
+      showToast("success", res.data.message);
+      dispatch({type: Types.CANCEL_ORDER, payload: responseData});
+      closeModal()
+      dispatch(getFilterOptionDataForOrderList(user_id))
+    }
+  }).catch((err)=>{
+    const { response }     = err;
+    responseData.isLoading = false;
+    const { request, ...errorObject } = response;
+    console.log('response :>> ', response);
+    dispatch({type: Types.CANCEL_ORDER, payload: responseData});
+
+  })
+}

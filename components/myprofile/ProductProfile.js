@@ -85,7 +85,7 @@ const ProductProfile = () => {
                       <h6>Address Book |
 
                         {
-                          !isLoading && defaultBillingAddress && defaultBillingAddress.length > 0 || defaultShippingAddress && defaultShippingAddress.length > 0 && (
+                          (( defaultBillingAddress.length > 0) || (defaultShippingAddress.length > 0)) && (
                             <Link href="/account-setting#address-book">
                               <a className="text-decoration-none">
                                 <span className="edit_profile_link ml-2">EDIT</span>
@@ -94,11 +94,11 @@ const ProductProfile = () => {
                           )
                         }
 
-                        <Link href="/account-setting#address-book">
+                        {/* <Link href="/account-setting#address-book">
                           <a className="text-decoration-none">
                             <span className="edit_profile_link ml-2">EDIT</span>
                           </a>
-                        </Link>
+                        </Link> */}
 
                         {
                           !isLoading && defaultBillingAddress && defaultBillingAddress.length === 0 && defaultShippingAddress.length === 0 && (

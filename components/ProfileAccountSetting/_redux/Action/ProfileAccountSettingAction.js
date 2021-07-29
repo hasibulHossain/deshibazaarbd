@@ -324,7 +324,7 @@ export const handleEmptyDispatch = (type) => (dispatch) => {
  */
 export const getDefaultAddress = (addressType) => (dispatch) => {
     const responseData = {
-        data           : null,
+        data           : [],
         status         : false,
         isLoading      : true
     }
