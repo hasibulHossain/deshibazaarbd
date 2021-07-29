@@ -456,7 +456,7 @@ a .custom-button-component:hover {
 
 .product-card:hover .product-purchase-section {
   opacity: 1;
-  z-index: 9999;
+  z-index: 999;
 }
 
 .product-card .product-purchase-section button {
@@ -489,8 +489,8 @@ a .custom-button-component:hover {
   /* display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  width: 90%; */
+  align-items: center; */
+  width: 90%;
 }
 
 .product-card .product-card-body img {
@@ -526,7 +526,7 @@ a .custom-button-component:hover {
 }
 
 .product-card .product-card-body .product-title {
-  /* height: 50px; */
+  height: 50px;
   margin-top: 10px;
   font-size: 16px;
   font-weight: 500;
@@ -1355,14 +1355,15 @@ h6.address_book_updated_title {
 
 .filter_column_3 {
   height: 350px;
-  /* display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center; */
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .filter_column_10 .product-card-body {
-  min-height: 400px;
+  /* height: 350px; */
   /* display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -1379,18 +1380,19 @@ h6.address_book_updated_title {
 
 .filter_column_10 .product-card-body img {
   height: 200px !important;
-  /* margin-right: 25px; */
+  margin-right: 25px;
 }
 
 .filter_column_3 .product-card-body .product-title {
   font-weight: 500;
   font-size: 16px;
   overflow: hidden;
-  height: 45px;
+  /* height: 45px; */
 }
 
 .filter_column_10 .product-card-body .product-title {
-  font-size: 24px;
+  height: auto!important;
+  font-size: 22px;
   font-weight: 700;
 }
 
@@ -2677,35 +2679,34 @@ img.payment_method_in_shipping {
   text-transform: none;
 }
 
-
-.simple_btn_bg{
-  background-color: #172337!important;
-  color: #ffff!important;
+.simple_btn_bg {
+  background-color: #172337 !important;
+  color: #ffff !important;
 }
-.simple_confirm_com{
+.simple_confirm_com {
   min-height: 200px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-.simple_confirm_message{
+.simple_confirm_message {
   text-align: center;
   font-size: 22px;
   font-weight: 600;
   text-transform: none;
 }
-.search_product_no_found{
+.search_product_no_found {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-top: 20px;
 }
-.search_product_no_found .product_no_found_title{
+.search_product_no_found .product_no_found_title {
   font-weight: 700;
 }
-.search_product_no_found .product_no_found_description{
- margin-top: 20px;
- font-weight: 400;
+.search_product_no_found .product_no_found_description {
+  margin-top: 20px;
+  font-weight: 400;
 }

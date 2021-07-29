@@ -10,6 +10,7 @@ import { addToCartAction } from "../carts/_redux/action/CartAction";
 import { showToast } from "../master/Helper/ToastHelper";
 import router from "next/router";
 import { toggleProductModalAction } from "./_redux/Action/ProductAction";
+import LoadingSpinner from "../master/LoadingSpinner/LoadingSpinner";
 
 const ProductSingleFull = ({ product }) => {
     const dispatch = useDispatch();
@@ -157,7 +158,8 @@ const ProductSingleFull = ({ product }) => {
                 </div>
             ) : (
                 <div style={{ display: "flex", justifyContent: "center" }}>
-                    <p>Loading...</p>
+                    {/* <p>Loading...</p> */}
+                    <LoadingSpinner text="Loading Product..." />
                 </div>
             )}
         </>
