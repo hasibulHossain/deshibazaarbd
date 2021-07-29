@@ -1,34 +1,30 @@
-import React, { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
-import ErrorMessage from '../master/ErrorMessage/ErrorMessage'
-import { RHFInput } from 'react-hook-form-input';
-import Select from 'react-select';
-import { getArea, getCity, getCountry } from '../ProfileAccountSetting/_redux/Action/ProfileAccountSettingAction';
-import { useDispatch, useSelector } from 'react-redux';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBriefcase, faHome } from '@fortawesome/free-solid-svg-icons';
-import { getCurrentUserDataAction, handleChangeDeliveryInputData } from './_redux/Action/DeliveryInfoAction';
+import React, { useEffect, useState } from 'react';
+import { getCountry } from '../ProfileAccountSetting/_redux/Action/ProfileAccountSettingAction';
+import { useDispatch } from 'react-redux';
+import { getCurrentUserDataAction } from './_redux/Action/DeliveryInfoAction';
+import AddressUpdate from './../ProfileAccountSetting/AddressUpdate';
 
 const DeliveryInfo = () => {
-    const dispatch = useDispatch();
-    const { register, errors, setValue } = useForm();
-    const {countryList, cityList, areaList} = useSelector((state) => state.ProfileAccountSettingReducer);
-    const customerInfo = useSelector((state) => state.DeliveryInfoReducer.customerInfo);
+    
+    const dispatch        = useDispatch();
+    const [show, setShow] = useState(false);
 
+    const toggleShowHandler = () => {
+        setShow(preState => !preState);
+      }
+    
     useEffect(() => {
         dispatch(getCurrentUserDataAction())
         dispatch(getCountry())
     }, []);
 
-    const handleChangeTextInput = (name, value) => {
-        dispatch(handleChangeDeliveryInputData(name, value));
-    }
-
     return (
         <>
-            <div className="card p-4 shadow-sm">
+            <div className="card p-3 shadow-sm">
                 <h4 className="delivery_info_title">Delivery Information</h4>
-                <p className="delivery_info_sub_title">Shipping address</p>
+                <AddressUpdate addAddress={true} type="shipping_address" closeModal={toggleShowHandler} />
+
+                {/* <p className="delivery_info_sub_title">Shipping address</p>
                 <form
                     // onSubmit={handleSubmit(handleSubmitDeliveryInfo)}
                     method="post"
@@ -251,7 +247,7 @@ const DeliveryInfo = () => {
                             <button type="submit" className="btn btn-success" type="button">Save</button>
                         </div>
                     </div>
-                </form>
+                </form> */}
             </div>
         </>
     );

@@ -17,11 +17,11 @@ import { handleShippingCost } from "../components/orders/_redux/action/OrderActi
 
 export default function Carts() {
 	// const router = useRouter();
-	const dispatch = useDispatch();
+	const dispatch         = useDispatch();
+	const { customerInfo } = useSelector((state) => state.DeliveryInfoReducer);
+	const { couponData }   = useSelector((state) => state.OrderReducer);
 
 	const { carts, totalPrice, totalQuantity, shippingCost } = useSelector((state) => state.CartReducer);
-	const { customerInfo } = useSelector((state) => state.DeliveryInfoReducer);
-	const { couponData } = useSelector((state) => state.OrderReducer);
 
 	useEffect(() => {
 		dispatch(getCartsAction());

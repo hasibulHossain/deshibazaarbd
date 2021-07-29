@@ -9,69 +9,69 @@ const initialState = {
     defaultShippingAddress: [],
     defaultBillingAddress : [],
     userInputData         : {
-        first_name        : null,
-        surname           : null,
-        last_name         : null,
-        email             : null,
-        username          : null,
-        phone_no          : null,
+        first_name        : "",
+        surname           : "",
+        last_name         : "",
+        email             : "",
+        username          : "",
+        phone_no          : "",
         password          : '123456',
         language          : "en",
-        avatar            : null,
-        banner            : null,
-        address           : null,
+        avatar            : "",
+        banner            : "",
+        address           : "",
         id                : null
     },
     billingAddressInput : {
         type          : "billing_address",
         user_id       : null,
-        name          : null,
-        phone_no      : null,
-        transaction_id: null,
-        country_id    : null, //integer
-        country       : null,
-        city_id       : null,  //integer
-        city          : null,
-        area_id       : null,   //integer
-        area          : null,
-        street1       : null,
-        street2       : null,
-        is_default    : null,
-        location      : null
+        name          : "",
+        phone_no      : "",
+        transaction_id: "",
+        country_id    : "", //integer
+        country       : "",
+        city_id       : "",  //integer
+        city          : "",
+        area_id       : "",   //integer
+        area          : "",
+        street1       : "",
+        street2       : "",
+        is_default    : "",
+        location      : ""
     },
     selectedAddress: {
-        type          : null,
-        user_id       : null,
-        name          : null,
-        phone_no      : null,
-        transaction_id: null,
-        country_id    : null, //integer
-        country       : null,
-        city_id       : null,  //integer
-        city          : null,
-        area_id       : null,   //integer
-        area          : null,
-        street1       : null,
-        street2       : null,
-        is_default    : null,
-        location      : null
+        type          : "",
+        user_id       : "",
+        name          : "",
+        phone_no      : "",
+        transaction_id: "",
+        country_id    : "", //integer
+        country       : "",
+        city_id       : "",  //integer
+        city          : "",
+        area_id       : "",   //integer
+        area          : "",
+        street1       : "",
+        street2       : "",
+        is_default    : "",
+        location      : ""
     },
     shippingAddressInput: {
         type          : "shipping_address",
-        user_id       : null,
-        name          : null,
-        phone_no      : null,
-        transaction_id: null,
-        country_id    : null, //integer
-        country       : null,
-        city_id       : null,  //integer
-        city          : null,
-        area_id       : null,   //integer
-        area          : null,
-        street1       : null,
-        street2       : null,
-        is_default    : null,
-        location      : null
+        user_id       : "",
+        name          : "",
+        phone_no      : "",
+        transaction_id: "",
+        country_id    : "", //integer
+        country       : "",
+        city_id       : "",  //integer
+        city          : "",
+        area_id       : "",   //integer
+        area          : "",
+        street1       : "",
+        street2       : "",
+        is_default    : "",
+        location      : ""
     },
     countryList         : [],
     cityList            : [],

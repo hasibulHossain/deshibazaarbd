@@ -30,11 +30,11 @@ const PersonalInfoForm = () => {
                 <div className="row">
 
                     <div className="col-md-6">
-                        <div class="custome_form_group row">
-                            <label className="col-sm-4" for="firstName">First Name</label>
+                        <div className="custome_form_group row">
+                            <label className="col-sm-4" htmlFor="firstName">First Name</label>
                             <div className="col-sm-8">
                                 <input type="text"
-                                    class="custom_form_input"
+                                    className="custom_form_input"
                                     placeholder=""
                                     name="first_name"
                                     value={userInputData.first_name}
@@ -53,11 +53,11 @@ const PersonalInfoForm = () => {
                         </div>
                     </div>
                     <div className="col-md-6">
-                        <div class="custome_form_group row">
-                            <label className="col-sm-4" for="firstName">Last Name</label>
+                        <div className="custome_form_group row">
+                            <label className="col-sm-4" htmlFor="lastName">Last Name</label>
                             <div className="col-sm-8">
                                 <input type="text"
-                                    class="custom_form_input"
+                                    className="custom_form_input"
                                     placeholder=""
                                     name="last_name"
                                     value={userInputData.last_name}
@@ -76,11 +76,11 @@ const PersonalInfoForm = () => {
                         </div>
                     </div>
                     <div className="col-md-6">
-                        <div class="custome_form_group row">
-                            <label className="col-sm-4" for="firstName">Email</label>
+                        <div className="custome_form_group row">
+                            <label className="col-sm-4" htmlFor="email">Email</label>
                             <div className="col-sm-8">
                                 <input type="text"
-                                    class="custom_form_input"
+                                    className="custom_form_input"
                                     placeholder=""
                                     name="email"
                                     value={userInputData.email}
@@ -99,11 +99,11 @@ const PersonalInfoForm = () => {
                         </div>
                     </div>
                     <div className="col-md-6">
-                        <div class="custome_form_group row">
-                            <label className="col-sm-4" for="firstName">Phone</label>
+                        <div className="custome_form_group row">
+                            <label className="col-sm-4" htmlFor="phone">Phone</label>
                             <div className="col-sm-8">
                                 <input type="text"
-                                    class="custom_form_input"
+                                    className="custom_form_input"
                                     placeholder=""
                                     name="phone_no"
                                     value={userInputData.phone_no}

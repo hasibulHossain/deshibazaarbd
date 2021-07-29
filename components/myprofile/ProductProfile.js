@@ -37,8 +37,6 @@ const ProductProfile = () => {
   const handleAddressShow = () => setAddressShow(true);;
   const handleAddressClose = () => setAddressShow(false);
 
-  console.log('defaultBillingAddress :>> ', defaultBillingAddress);
-  console.log('defaultShippingAddress :>> ', defaultShippingAddress);
   return (
     <>
       <div className="wishbanner pb">
@@ -95,6 +93,12 @@ const ProductProfile = () => {
                             </Link>
                           )
                         }
+
+                        <Link href="/account-setting#address-book">
+                          <a className="text-decoration-none">
+                            <span className="edit_profile_link ml-2">EDIT</span>
+                          </a>
+                        </Link>
 
                         {
                           !isLoading && defaultBillingAddress && defaultBillingAddress.length === 0 && defaultShippingAddress.length === 0 && (
