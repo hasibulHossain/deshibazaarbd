@@ -1,24 +1,26 @@
 import * as Types from "./../Type/Types";
 
 const initialState = {
-    isLoading: false,
-    isSubmitting: false,
-    bestSellerList: [],
-    shippingAddress: [],
-    billingAddress: [],
-    userInputData: {
-        first_name: null,
-        surname: null,
-        last_name: null,
-        email: null,
-        username: null,
-        phone_no: null,
-        password: '123456',
-        language: "en",
-        avatar: null,
-        banner: null,
-        address: null,
-        id: null
+    isLoading             : false,
+    isSubmitting          : false,
+    bestSellerList        : [],
+    shippingAddress       : [],
+    billingAddress        : [],
+    defaultShippingAddress: [],
+    defaultBillingAddress : [],
+    userInputData         : {
+        first_name        : null,
+        surname           : null,
+        last_name         : null,
+        email             : null,
+        username          : null,
+        phone_no          : null,
+        password          : '123456',
+        language          : "en",
+        avatar            : null,
+        banner            : null,
+        address           : null,
+        id                : null
     },
     billingAddressInput : {
         type          : "billing_address",
@@ -89,6 +91,18 @@ function ProfileAccountSettingReducer(state = initialState, action) {
                 ...state,
                 isLoading     : action.payload.isLoading,
                 billingAddress: action.payload.data,
+            }
+        case Types.GET_DEFAULT_SHIPPING_ADDRESS:
+            return {
+                ...state,
+                isLoading      : action.payload.isLoading,
+                defaultShippingAddress: action.payload.data,
+            }
+        case Types.GET_DEFAULT_BILLING_ADDRESS:
+            return {
+                ...state,
+                isLoading     : action.payload.isLoading,
+                defaultBillingAddress: action.payload.data,
             }
         case Types.GET_USER_UPDATED_DATA:
             let getUserInput = { ...state.userInputData };

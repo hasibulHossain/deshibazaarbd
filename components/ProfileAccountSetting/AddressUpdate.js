@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { handleChangeBillingAddressInput, handleUpdateBillingAddress, getArea, getCity, addAddress, handleEmptyDispatch } from './_redux/Action/ProfileAccountSettingAction';
+import { handleChangeBillingAddressInput, handleUpdateBillingAddress, getArea, getCity, addAddress, handleEmptyDispatch, getCountry } from './_redux/Action/ProfileAccountSettingAction';
 import ErrorMessage from '../master/ErrorMessage/ErrorMessage'
 import { RHFInput } from 'react-hook-form-input';
 import Select from 'react-select';
@@ -38,6 +38,7 @@ const BillingAddressUpdate = (props) => {
     }
 
     useEffect(() => {
+        dispatch(getCountry())
         if (selectedAddress.country && selectedAddress.city) {
             dispatch(getCity(selectedAddress.country));
             dispatch(getArea(selectedAddress.city_id));

@@ -4,34 +4,41 @@ import ProfileSideBar from "./ProfileSideBar";
 import { getUserDataAction } from "../_redux/getUserData/Action/UserDataAction";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMailBulk, faMapMarkedAlt, faPhone } from "@fortawesome/free-solid-svg-icons";
-import { getAddress } from "../ProfileAccountSetting/_redux/Action/ProfileAccountSettingAction";
+import { getAddress, getDefaultAddress } from "../ProfileAccountSetting/_redux/Action/ProfileAccountSettingAction";
 import LoadingSpinner from './../master/LoadingSpinner/LoadingSpinner'
 import SimpleModal from '../master/Modal/SimpleModal';
 import PersonalInformationUpdate from "./PersonalInformationUpdate";
-import AddressUpdate from "./AddressUpdate";
+import AddressUpdate from "./../ProfileAccountSetting/AddressUpdate";
 import Link from 'next/link'
+import WarningMessage from "../master/warningMessage/WarningMessage";
 
 const ProductProfile = () => {
 
-  const dispatch        = useDispatch()
-  const userData        = useSelector((state) => state.UserDataReducer.userData);
-  const isLoading       = useSelector((state) => state.ProfileAccountSettingReducer.isLoading);
-  const shippingAddress = useSelector((state) => state.ProfileAccountSettingReducer.shippingAddress);
-  const billingAddress  = useSelector((state) => state.ProfileAccountSettingReducer.billingAddress);
+  const dispatch = useDispatch()
+  const userData = useSelector((state) => state.UserDataReducer.userData);
+  const isLoading = useSelector((state) => state.ProfileAccountSettingReducer.isLoading);
+  const defaultShippingAddress = useSelector((state) => state.ProfileAccountSettingReducer.defaultShippingAddress);
+  const defaultBillingAddress = useSelector((state) => state.ProfileAccountSettingReducer.defaultBillingAddress);
 
   useEffect(() => {
     dispatch(getUserDataAction());
-    dispatch(getAddress('shipping_address'))
-    dispatch(getAddress('billing_address'))
+    dispatch(getDefaultAddress('shipping_address'))
+    dispatch(getDefaultAddress('billing_address'))
   }, [])
 
-  const [show, setShow]               = useState(false);
-  const handleClose                   = () => setShow(false);
-  const handleShow                    = () => setShow(true);;
-  const [addressShow, setAddressShow] = useState(false);
-  const handleAddressShow             = () => setAddressShow(true);;
-  const handleAddressClose            = () => setAddressShow(false);
+  const toggleShowHandler = () => {
+    setShow(preState => !preState);
+  }
 
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);;
+  const [addressShow, setAddressShow] = useState(false);
+  const handleAddressShow = () => setAddressShow(true);;
+  const handleAddressClose = () => setAddressShow(false);
+
+  console.log('defaultBillingAddress :>> ', defaultBillingAddress);
+  console.log('defaultShippingAddress :>> ', defaultShippingAddress);
   return (
     <>
       <div className="wishbanner pb">
@@ -78,12 +85,24 @@ const ProductProfile = () => {
                   <div className="card mb-2 p-3 default_height">
                     <div className="card-title">
                       <h6>Address Book |
-                        <Link href="/account-setting#address-book">
-                          <a className="text-decoration-none">
-                            <span className="edit_profile_link ml-2">EDIT</span>
-                          </a>
-                          {/* <span className="edit_profile_link" onClick={() => handleAddressShow()}>EDIT</span> */}
-                        </Link>
+
+                        {
+                          !isLoading && defaultBillingAddress && defaultBillingAddress.length > 0 || defaultShippingAddress && defaultShippingAddress.length > 0 && (
+                            <Link href="/account-setting#address-book">
+                              <a className="text-decoration-none">
+                                <span className="edit_profile_link ml-2">EDIT</span>
+                              </a>
+                            </Link>
+                          )
+                        }
+
+                        {
+                          !isLoading && defaultBillingAddress && defaultBillingAddress.length === 0 && defaultShippingAddress.length === 0 && (
+                            <span className="edit_profile_link ml-2" onClick={toggleShowHandler}>ADD NEW</span>
+
+                          )
+                        }
+
                       </h6>
                       <div className="border-top">
                         <p className="address_sub_title mt-2">
@@ -95,18 +114,23 @@ const ProductProfile = () => {
                           )
                         }
                         {
-                          shippingAddress && shippingAddress.length > 0 && (
+                          defaultShippingAddress && defaultShippingAddress.length > 0 && (
                             <>
                               <p>
                                 <span className="user_icon">
                                   <FontAwesomeIcon icon={faMapMarkedAlt} />
                                 </span>
                                 <span className="user_address">
-                                  {shippingAddress[0].area}, {shippingAddress[0].street1}, {shippingAddress[0].city} <br />
-                                  {shippingAddress[0].country}
+                                  {defaultShippingAddress[0].area}, {defaultShippingAddress[0].street1}, {defaultShippingAddress[0].city} <br />
+                                  {defaultShippingAddress[0].country}
                                 </span>
                               </p>
                             </>
+                          )
+                        }
+                        {
+                          !isLoading && defaultShippingAddress && defaultShippingAddress.length === 0 && (
+                            <WarningMessage text="Default shipping address not found" />
                           )
                         }
                         <p className="address_sub_title">
@@ -118,18 +142,23 @@ const ProductProfile = () => {
                           )
                         }
                         {
-                          billingAddress && billingAddress.length > 0 && (
+                          defaultBillingAddress && defaultBillingAddress.length > 0 && (
                             <>
                               <p>
                                 <span className="user_icon">
                                   <FontAwesomeIcon icon={faMapMarkedAlt} />
                                 </span>
                                 <span className="user_address">
-                                  {billingAddress[0].area}, {billingAddress[0].street1}, {billingAddress[0].city} <br />
-                                  {billingAddress[0].country}
+                                  {defaultBillingAddress[0].area}, {defaultBillingAddress[0].street1}, {defaultBillingAddress[0].city} <br />
+                                  {defaultBillingAddress[0].country}
                                 </span>
                               </p>
                             </>
+                          )
+                        }
+                        {
+                          !isLoading && defaultBillingAddress && defaultBillingAddress.length === 0 && (
+                            <WarningMessage text="Default billing address not found" />
                           )
                         }
                       </div>
@@ -152,12 +181,20 @@ const ProductProfile = () => {
         <PersonalInformationUpdate />
       </SimpleModal>
 
-      <SimpleModal
+      {/* <SimpleModal
         size="xl"
         show={addressShow}
         handleClose={handleAddressClose}
       >
         <AddressUpdate />
+      </SimpleModal> */}
+
+      <SimpleModal
+        size="xl"
+        show={show}
+        handleClose={toggleShowHandler}
+      >
+        <AddressUpdate addAddress={true} type="new_address" closeModal={toggleShowHandler} />
       </SimpleModal>
     </>
   );
