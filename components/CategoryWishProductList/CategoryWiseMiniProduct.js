@@ -7,13 +7,13 @@ const CategoryWiseMiniProduct = ({ columns }) => {
   const { products } = useSelector((state) => state.CategoryWiseProductReducer);
   const [cardClassName, setCardClassName] = useState('product-card categories_wise_product_card shadow-sm p-3 mb-3 bg-white rounded');
 
-  useEffect(() => {
-    if (columns == "col-md-3") {
-      setCardClassName(`${cardClassName} filter_column_3`);
-    } else {
-      setCardClassName(`${cardClassName} filter_column_10`);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (columns == "col-md-3") {
+  //     setCardClassName(`${cardClassName} filter_column_3`);
+  //   } else {
+  //     setCardClassName(`${cardClassName} filter_column_10`);
+  //   }
+  // }, []);
 
   return (
     <>
