@@ -289,20 +289,30 @@ export const addAddress = (addressInput, type, closeModal) => (dispatch) => {
 
 
 //handle store billing address
-export const deleteAddress = (id) => (dispatch) => {
+export const deleteAddress = (id, toggleDeleteModal) => (dispatch) => {
     const responseData = {
         status         : false,
         isLoading      : true,
     }
+    dispatch({type: Types.DELETE_ADDRESS, payload: responseData});
 
     Axios.delete(`${process.env.NEXT_PUBLIC_API_URL}address/${id}`)
         .then((res) => {
-            responseData.status    = true;
-            responseData.isLoading = false;
-            showToast('success', res.data.message);
+            if (res.data.status) {
+                responseData.status    = true;
+                responseData.isLoading = false;
+                showToast('success', res.data.message);
+                dispatch({type: Types.DELETE_ADDRESS, payload: responseData});
+                toggleDeleteModal();
+            }
         })
         .catch(err => {
-            console.log('err => ', err);
+            responseData.isLoading = false;
+            const { response } = err;
+            console.log('err => ', response);
+            showToast('error', response.data.message);
+            dispatch({type: Types.DELETE_ADDRESS, payload: responseData});
+            toggleDeleteModal();
         })
 
 }

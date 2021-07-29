@@ -1771,6 +1771,7 @@ p.address_sub_title {
 .loading_component {
   display: flex;
   align-items: center;
+  flex-direction: row;
 }
 
 .loading_component p {

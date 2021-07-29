@@ -5,6 +5,7 @@ const initialState    = {
   products            : [],
   loading_add         : false,
   loading_update      : false,
+  isDeleting          : false,
   add_message         : "",
   delete_message      : "",
   error               : null,
@@ -70,14 +71,14 @@ const OrderReducer = (state = initialState, action) => {
     case Types.CANCEL_ORDER:
       return {
         ...state,
-        isLoading : action.payload.isLoading,
+        isDeleting: action.payload.isLoading,
       };
 
     case Types.GET_TRACKING_TIMELINE_DATA:
       return {
         ...state,
         trackingTimelineList: action.payload.trackingTimelineList,
-        isLoading       : action.payload.isLoading,
+        isLoading           : action.payload.isLoading,
       };
 
     case Types.CHANGE_COUPON_INPUT_DATA:

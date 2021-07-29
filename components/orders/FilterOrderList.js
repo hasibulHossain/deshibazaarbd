@@ -12,7 +12,7 @@ import { getUserDataAction } from '../_redux/getUserData/Action/UserDataAction.j
 
 const FilterOrderList = ({ orderList, isLoading }) => {
     const dispatch                  = useDispatch();
-    const { filterOptionList }      = useSelector((state) => state.OrderReducer);
+    const { filterOptionList, isDeleting }      = useSelector((state) => state.OrderReducer);
     const userData                  = useSelector((state) => state.UserDataReducer.userData);
     const [orderItem, setOrderItem] = useState(null);
     const [show, setShow]           = useState(false);
@@ -132,6 +132,7 @@ const FilterOrderList = ({ orderList, isLoading }) => {
             >
                 <SimpleConfirmComponent
                     text="Are you sure to cancel your order ?"
+                    isLoading={isDeleting}
                     confirmClick={cancelOrder}
                     closeModal={toggleShowHandler}
                     confirmBtnVariant="simple_btn_bg"

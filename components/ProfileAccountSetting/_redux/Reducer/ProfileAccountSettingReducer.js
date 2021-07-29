@@ -104,6 +104,11 @@ function ProfileAccountSettingReducer(state = initialState, action) {
                 isLoading     : action.payload.isLoading,
                 defaultBillingAddress: action.payload.data,
             }
+        case Types.DELETE_ADDRESS:
+            return {
+                ...state,
+                isLoading : action.payload.isLoading,
+            }
         case Types.GET_USER_UPDATED_DATA:
             let getUserInput = { ...state.userInputData };
             getUserInput = action.payload;
