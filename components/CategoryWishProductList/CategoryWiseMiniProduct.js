@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import ProductNoFound from "../master/productNoFound/ProductNoFound";
 import ProductSingleMini from "../products/ProductSingleMini";
 
 const CategoryWiseMiniProduct = ({ columns }) => {
@@ -8,14 +9,21 @@ const CategoryWiseMiniProduct = ({ columns }) => {
 
   useEffect(() => {
     if (columns == "col-md-3") {
-      setCardClassName( `${cardClassName} filter_column_3`);
+      setCardClassName(`${cardClassName} filter_column_3`);
     } else {
-      setCardClassName( `${cardClassName} filter_column_10`);
+      setCardClassName(`${cardClassName} filter_column_10`);
     }
   }, []);
 
   return (
     <>
+      {
+        products.length === 0 && (
+          <div className="col-lg-12">
+            <ProductNoFound />
+          </div>
+        )
+      }
       {products.length > 0 &&
         products.map((item, index) => (
           <ProductSingleMini

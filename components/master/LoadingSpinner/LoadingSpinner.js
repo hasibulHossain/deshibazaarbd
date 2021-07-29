@@ -6,7 +6,6 @@ const LoadingSpinner = ({ text }) => {
             <div className="spinner-border" role="status">
                 <span className="sr-only">Loading...</span>
             </div>
-
             { text !== "" && text.length > 0 && <p>{text}</p> }
                 
         </div>

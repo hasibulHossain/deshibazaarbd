@@ -2694,3 +2694,17 @@ img.payment_method_in_shipping {
   font-weight: 600;
   text-transform: none;
 }
+.search_product_no_found{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+.search_product_no_found .product_no_found_title{
+  font-weight: 700;
+}
+.search_product_no_found .product_no_found_description{
+ margin-top: 20px;
+ font-weight: 400;
+}

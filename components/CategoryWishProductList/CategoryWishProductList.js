@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   setFilterParams,
 } from "./_redux/Action/CategoryWiseProductAction";
+import LoadingSpinner from "../master/LoadingSpinner/LoadingSpinner";
 
 const CategoryWishProductList = () => {
   const dispatch = useDispatch();
@@ -94,12 +95,19 @@ const CategoryWishProductList = () => {
           </div>
         </div>
       </div>
+      {
+        isLoading && (
+          <div className="d-flex justify-content-center">
+            <LoadingSpinner text="Loading Products...." />
+          </div>
+        )
+      }
       <div className="row">
-        {isLoading ? (
-          <div>Loading...</div>
-        ) : (
-          <CategoryWiseMiniProduct columns={columns} />
-        )}
+        {
+          !isLoading && (
+            <CategoryWiseMiniProduct columns={columns} />
+          )
+        }
       </div>
     </section>
   );
