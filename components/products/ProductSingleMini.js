@@ -92,23 +92,6 @@ const ProductSingleMini = ({ item = {}, columnClassName = 'col-md-2', cardClassN
                             </div>
                         </div>
                     }
-                    {/* <div className="row">
-                        <div className={columnClassName == "col-md-3" ? "col-md-12" : "col-5"}>
-                            <img src={`${process.env.NEXT_PUBLIC_URL}images/products/${item.featured_image}`} alt={item.name} className="img-fluid" />
-                        </div>
-                        <div className={columnClassName === "col-md-3" ? "col-md-12" : "col-7"}>
-                            <div>
-                                <p className="product-title">{item.name}</p>
-                                <p className={`stock-status ${parseInt(item.current_stock) > 0 ? 'stock-status-in' : 'stock-status-out'}`}>
-                                    <span>{parseInt(item.current_stock) > 0 ? 'In stock' : 'Out of stock'}</span>
-                                </p>
-                                <PriceCalculation item={item} />
-                                <div className={columnClassName === "col-md-3" ? "" : "d-flex justify-content-start"}>
-                                    <ProductRating rating={item.average_rating} />
-                                </div>
-                            </div>
-                        </div>
-                    </div> */}
                 </div>
             </div>
         </div>

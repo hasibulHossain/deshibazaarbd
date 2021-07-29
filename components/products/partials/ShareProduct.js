@@ -5,7 +5,7 @@ import React from 'react';
 const ShareProduct = ({ product }) => {
 
     const hostAddress = "https://deshibazaarbd.com"; // @todo dynamically get host address by js
-console.log('product :>> ', product);
+
     return (
         <ul className="social-media">
             <li className="social-facebook">
@@ -21,25 +21,21 @@ console.log('product :>> ', product);
             </li>
            
             <li className="social-linkedIn">
-                <a href={`https://www.linkedin.com/shareArticle?mini=true&url=${hostAddress}/products?category=7`} target="_blank" rel="noopener noreferrer">
+                <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${hostAddress}/products/${product.sku}`} target="_blank" rel="noopener noreferrer">
                     <FontAwesomeIcon className="custom-fontAwesome" icon={faLinkedin} />
                 </a>
             </li>
-            {/* <li className="social-linkedIn">
-                <a href="http://linkedin.com/" target="_blank" rel="noopener noreferrer">
-                    <FontAwesomeIcon className="custom-fontAwesome" icon={faLinkedin} />
-                </a>
-            </li> */}
+            
             <li className="social-whatsApp">
-                <a href="https://web.whatsapp.com/" target="_blank" rel="noopener noreferrer">
+                <a href={`https://api.whatsapp.com/send?phone=01871929132&text=${product.name}%20${hostAddress}/products/${product.sku}`} target="_blank" rel="noopener noreferrer">
                     <FontAwesomeIcon className="custom-fontAwesome" icon={faWhatsapp} />
                 </a>
             </li>
-            <li className="social-instagram">
+            {/* <li className="social-instagram">
                 <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
                     <FontAwesomeIcon className="custom-fontAwesome" icon={faInstagram} />
                 </a>
-            </li>
+            </li> */}
         </ul>
     );
 };
