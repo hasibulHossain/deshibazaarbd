@@ -1,13 +1,14 @@
 import Axios from "axios";
 import * as Types from "../types/Types";
 import { showToast } from "../../../master/Helper/ToastHelper";
+import moment from "moment";
 
 const baseUrl = `${process.env.NEXT_PUBLIC_API_URL}`;
 
 //  ===================================handle coupon action==================================
 export const handleChangeCouponInput = (name, value) => (dispatch) => {
   const couponData = {
-    name : name,
+    name: name,
     value: value,
   };
   dispatch({ type: Types.CHANGE_COUPON_INPUT_DATA, payload: couponData });
@@ -43,9 +44,9 @@ export const handleApplyCouponCode = (coupon, carts) => (dispatch) => {
       }
     })
     .catch((err) => {
-      const { response }                = err;
+      const { response } = err;
       const { request, ...errorObject } = response;
-      responseData.couponLoading        = false;
+      responseData.couponLoading = false;
       (responseData.couponData = response.data),
         dispatch({ type: Types.APPLY_COUPON_CODE, payload: responseData });
     });
@@ -78,9 +79,9 @@ export const handleShippingCost = (carts) => (dispatch) => {
       }
     })
     .catch((err) => {
-      const { response }                = err;
+      const { response } = err;
       const { request, ...errorObject } = response;
-      responseData.shippingCostLoading  = false;
+      responseData.shippingCostLoading = false;
       (responseData.shipping = response.data),
         dispatch({ type: Types.APPLY_SHIPPING_COST, payload: responseData });
     });
@@ -93,33 +94,62 @@ export const handleShippingCost = (carts) => (dispatch) => {
  * 
  * @since 1.0.0
  *  
- * @params int userID
+ * @params int value
  * @return array oderList based on user_id
  */
- export const getUserOrderList = (user_id) => (dispatch) => {
+export const getUserOrderList = (value = 5) => (dispatch) => {
   const responseData = {
-      orderList      : [],
-      status         : false,
-      isLoading      : true,
+    orderList: [],
+    status   : false,
+    isLoading: true,
+  }
+  dispatch({ type: Types.GET_USER_ORDER_LIST, payload: responseData });
+  var date         = new Date();
+  const startDate  = new Date()
+  const start_date = moment(startDate).format("YYYY-MM-DD");
+  let end_date;
+  // let end_date = moment(date.toLocaleString()).format("YYYY-MM-DD");
+
+  let orderListURL;;
+
+  if (value == 15) {
+    console.log('value :>> ', value);
+    date.setDate(date.getDate() - 15);
+    end_date = moment(date.toLocaleString()).format("YYYY-MM-DD");
+  } else if (value == 30) {
+    date.setDate(date.getDate() - 30);
+    end_date = moment(date.toLocaleString()).format("YYYY-MM-DD");
+  } else if (value == 60) {
+    date.setDate(date.getDate() - 60);
+    end_date = moment(date.toLocaleString()).format("YYYY-MM-DD");
+  } else if (value == 5) {
+    orderListURL = `${baseUrl}sales/orders/customer?paginate_no=${value}`
+  } else {
+    // orderListURL = `${baseUrl}sales/orders/customer?paginate_no=${value}`
   }
 
-  dispatch({ type: Types.GET_USER_ORDER_LIST, payload: responseData });
 
-  Axios.get(`${baseUrl}sales/orders/customer`)
-      .then((res) => {
-          responseData.orderList = res.data.data.data;
-          responseData.status    = true;
-          responseData.isLoading = false;
-          dispatch({ type: Types.GET_USER_ORDER_LIST, payload: responseData });
-      }).catch((error) => {
-          const responseLog      = error.response;
-          responseData.isLoading = false;
 
-          if (typeof responseLog !== 'undefined') {
-              showToast('error', responseLog.data.message);
-              dispatch({ type: Types.GET_USER_ORDER_LIST, payload: responseData });
-          }
-      })
+  if (value == 5) {
+    orderListURL = `${baseUrl}sales/orders/customer?paginate_no=${value}`
+  } else {
+    orderListURL = `${baseUrl}sales/orders/customer?start_date=${start_date}&end_date=${end_date}`
+  }
+
+  Axios.get(orderListURL)
+    .then((res) => {
+      responseData.orderList = res.data.data.data;
+      responseData.status    = true;
+      responseData.isLoading = false;
+      dispatch({ type: Types.GET_USER_ORDER_LIST, payload: responseData });
+    }).catch((error) => {
+      const responseLog      = error.response;
+      responseData.isLoading = false;
+      if (typeof responseLog !== 'undefined') {
+        showToast('error', responseLog.data.message);
+        dispatch({ type: Types.GET_USER_ORDER_LIST, payload: responseData });
+      }
+    })
 }
 
 /**
@@ -129,38 +159,15 @@ export const handleShippingCost = (carts) => (dispatch) => {
  * 
  * @return array filter value of order list
  */
- export const getFilterOptionDataForOrderList = (user_id) => async (dispatch) => {
-  const responseData = {
-      filterOptionList: [],
-      status          : false,
-      isLoading       : true,
-  }
+export const getFilterOptionDataForOrderList = () => async (dispatch) => {
+  const filterOptionList = [
+    { value: '5',  label: 'Last 5 Orders' },
+    { value: '15', label: 'Last 15 Days' },
+    { value: '30', label: 'Last 30 Days' },
+    { value: '60', label: 'Last 2 Months' },
+  ]
 
-  dispatch({ type: Types.GET_ORDER_FILTER_OPTION_DATA, payload: responseData });
-
-  await Axios.get(`${baseUrl}sales?business_id=${user_id}`) 
-      .then((res) => {
-          responseData.filterOptionList = [  // @todo this data will be change, when use real api
-            { value   : 'All',           label: 'all' },
-            { value   : 'last_5_orders', label: 'Last 5 Orders' },
-            { value   : 'last_15_days',  label: 'Last 15 Days' },
-            { value   : 'last_30_days',  label: 'Last 30 Days' },
-            { value   : 'last_2_month',  label: 'Last 2 Months' },
-            { value   : 'last_6_month',  label: 'Last 6 Months' },
-          ]
-          responseData.status    = true;
-          responseData.isLoading = false;
-          dispatch({ type: Types.GET_ORDER_FILTER_OPTION_DATA, payload: responseData });
-      }).catch((error) => {
-          const responseLog      = error.response;
-          responseData.isLoading = false;
-
-          if (typeof responseLog !== 'undefined') {
-              showToast('error', responseLog.data.message);
-              dispatch({ type: Types.GET_ORDER_FILTER_OPTION_DATA, payload: responseData });
-              
-          }
-      })
+  dispatch({ type: Types.GET_ORDER_FILTER_OPTION_DATA, payload: filterOptionList });
 }
 
 
@@ -171,66 +178,66 @@ export const handleShippingCost = (carts) => (dispatch) => {
  * 
  * @return array for tracking step timeline
  */
- export const getTrackingTimelineDate = () => async (dispatch) => {
+export const getTrackingTimelineDate = () => async (dispatch) => {
   const responseData = {
-      trackingTimelineList: [],
-      status          : false,
-      isLoading       : true,
+    trackingTimelineList: [],
+    status              : false,
+    isLoading           : true,
   }
 
   dispatch({ type: Types.GET_TRACKING_TIMELINE_DATA, payload: responseData });
 
-  await Axios.get(`${baseUrl}sales?business_id=${1}`) 
-      .then((res) => {
-          responseData.trackingTimelineList = [  // @todo this data will be change, when use real api
-            {
-              date   : "28 July, 2021",
-              name   : "Your order has been received!",
-            //   s   : "lorem imp ",
-            //   t   : "maor k"
-            },
-            {
-                date : "30 July, 2021",
-                name : "Your order has been on processing..!",
-            },
-            {
-                date : "01 July, 2021",
-                name : "Your order has been packing..!",
-            },
-            {
-                date : "03 July, 2021",
-                name : "We handover your order on Sundar Ban courier service!",
-            },
-            {
-                date : "04 July, 2021",
-                name : "We pick up your parcel!",
-            },
-            {
-                date : "06 July, 2021",
-                name : "Your parcel is move to chittagong!",
-            },
-            {
-                date : "08 July, 2021",
-                name : "Chittagong branch receive your parcel!",
-            },
-            {
-                date : "10 July, 2021",
-                name : "Order delivered successfully!",
-            },
-          ]
-          responseData.status    = true;
-          responseData.isLoading = false;
-          dispatch({ type: Types.GET_TRACKING_TIMELINE_DATA, payload: responseData });
-      }).catch((error) => {
-          const responseLog      = error.response;
-          responseData.isLoading = false;
+  await Axios.get(`${baseUrl}sales?business_id=${1}`)
+    .then((res) => {
+      responseData.trackingTimelineList = [  // @todo this data will be change, when use real api
+        {
+          date: "28 July, 2021",
+          name: "Your order has been received!",
+          //   s   : "lorem imp ",
+          //   t   : "maor k"
+        },
+        {
+          date: "30 July, 2021",
+          name: "Your order has been on processing..!",
+        },
+        {
+          date: "01 July, 2021",
+          name: "Your order has been packing..!",
+        },
+        {
+          date: "03 July, 2021",
+          name: "We handover your order on Sundar Ban courier service!",
+        },
+        {
+          date: "04 July, 2021",
+          name: "We pick up your parcel!",
+        },
+        {
+          date: "06 July, 2021",
+          name: "Your parcel is move to chittagong!",
+        },
+        {
+          date: "08 July, 2021",
+          name: "Chittagong branch receive your parcel!",
+        },
+        {
+          date: "10 July, 2021",
+          name: "Order delivered successfully!",
+        },
+      ]
+      responseData.status    = true;
+      responseData.isLoading = false;
+      dispatch({ type: Types.GET_TRACKING_TIMELINE_DATA, payload: responseData });
+    }).catch((error) => {
+      const responseLog      = error.response;
+      responseData.isLoading = false;
 
-          if (typeof responseLog !== 'undefined') {
-              showToast('error', responseLog.data.message);
-              dispatch({ type: Types.GET_TRACKING_TIMELINE_DATA, payload: responseData });
-              
-          }
-      })
+      if (typeof responseLog !== 'undefined') {
+        showToast('error', responseLog.data.message);
+        dispatch({ type: Types.GET_TRACKING_TIMELINE_DATA, payload: responseData });
+
+      }
+    })
 }
 /**
  * Cancel order
@@ -243,27 +250,27 @@ export const handleShippingCost = (carts) => (dispatch) => {
  */
 export const handleCancelOrder = (order_id, closeModal, user_id) => (dispatch) => {
   const responseData = {
-    status           : false,
-    isLoading        : true
+    status   : false,
+    isLoading: true
   }
-  dispatch({type: Types.CANCEL_ORDER, payload: responseData});
-  
-  Axios.put(`${baseUrl}sales/orders/suspend/${order_id}`)
-  .then((res)=>{
-    if (res.data.status) {
-      responseData.status    = true;
-      responseData.isLoading = false;
-      showToast("success", res.data.message);
-      dispatch({type: Types.CANCEL_ORDER, payload: responseData});
-      closeModal()
-      dispatch(getFilterOptionDataForOrderList(user_id))
-    }
-  }).catch((err)=>{
-    const { response }     = err;
-    responseData.isLoading = false;
-    const { request, ...errorObject } = response;
-    console.log('response :>> ', response);
-    dispatch({type: Types.CANCEL_ORDER, payload: responseData});
+  dispatch({ type: Types.CANCEL_ORDER, payload: responseData });
 
-  })
+  Axios.put(`${baseUrl}sales/orders/suspend/${order_id}`)
+    .then((res) => {
+      if (res.data.status) {
+        responseData.status    = true;
+        responseData.isLoading = false;
+        showToast("success", res.data.message);
+        dispatch({ type: Types.CANCEL_ORDER, payload: responseData });
+        closeModal()
+        dispatch(getFilterOptionDataForOrderList(user_id))
+      }
+    }).catch((err) => {
+      const { response }     = err;
+      responseData.isLoading = false;
+      const { request, ...errorObject } = response;
+      console.log('response :>> ', response);
+      dispatch({ type: Types.CANCEL_ORDER, payload: responseData });
+
+    })
 }

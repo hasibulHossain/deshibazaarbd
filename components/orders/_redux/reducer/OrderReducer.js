@@ -1,39 +1,39 @@
 import * as Types from "../types/Types";
 
-const initialState    = {
-  loading             : false,
-  products            : [],
-  loading_add         : false,
-  loading_update      : false,
-  isDeleting          : false,
-  add_message         : "",
-  delete_message      : "",
-  error               : null,
-  cartProduct         : {
-    productID         : null,
-    productName       : '',
-    quantity          : '',
-    price             : '',
-    offerPrice        : '',
-    productImage      : ''
+const initialState = {
+  loading: false,
+  products: [],
+  loading_add: false,
+  loading_update: false,
+  isDeleting: false,
+  add_message: "",
+  delete_message: "",
+  error: null,
+  cartProduct: {
+    productID: null,
+    productName: '',
+    quantity: '',
+    price: '',
+    offerPrice: '',
+    productImage: ''
   },
   // Place Order Part
 
-  shippingCost        : 0,
-  shippingCostLoading : false,
-  coupon              : {
-    code              : "",
-    carts             : [
+  shippingCost: 0,
+  shippingCostLoading: false,
+  coupon: {
+    code: "",
+    carts: [
       {
-        productID     : "",
-        quantity      : ""
+        productID: "",
+        quantity: ""
       }
     ]
   },
-  couponLoading       : false,
-  couponData          : {},
-  orderList           : [],
-  filterOptionList    : [],
+  couponLoading: false,
+  couponData: {},
+  orderList: [],
+  filterOptionList: [],
   trackingTimelineList: [],
 };
 
@@ -43,7 +43,7 @@ const OrderReducer = (state = initialState, action) => {
     case Types.APPLY_SHIPPING_COST:
       return {
         ...state,
-        shippingCost       : action.payload.shipping,
+        shippingCost: action.payload.shipping,
         shippingCostLoading: action.payload.shippingCostLoading
       };
 
@@ -51,7 +51,7 @@ const OrderReducer = (state = initialState, action) => {
       return {
         ...state,
         couponLoading: action.payload.couponLoading,
-        couponData   : action.payload.couponData,
+        couponData: action.payload.couponData,
         // coupon: initialState.coupon,
       };
 
@@ -65,8 +65,7 @@ const OrderReducer = (state = initialState, action) => {
     case Types.GET_ORDER_FILTER_OPTION_DATA:
       return {
         ...state,
-        filterOptionList: action.payload.filterOptionList,
-        isLoading       : action.payload.isLoading,
+        filterOptionList: action.payload,
       };
     case Types.CANCEL_ORDER:
       return {
@@ -78,7 +77,7 @@ const OrderReducer = (state = initialState, action) => {
       return {
         ...state,
         trackingTimelineList: action.payload.trackingTimelineList,
-        isLoading           : action.payload.isLoading,
+        isLoading: action.payload.isLoading,
       };
 
     case Types.CHANGE_COUPON_INPUT_DATA:

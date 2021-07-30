@@ -11,7 +11,7 @@ const OrderList = () => {
     const { orderList, isLoading } = useSelector((state) => state.OrderReducer);
 
     useEffect(() => {
-        dispatch(getUserOrderList(1))
+        dispatch(getUserOrderList(5))
     }, [])
 
     return (

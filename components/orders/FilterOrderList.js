@@ -4,19 +4,22 @@ import moment from 'moment';
 import LoadingSkelleton from '../master/skelleton/LoadingSkelleton.jsx';
 import Link from 'next/link'
 import { useDispatch, useSelector } from 'react-redux';
-import { getFilterOptionDataForOrderList, handleCancelOrder } from './_redux/action/OrderAction.js';
+import { getFilterOptionDataForOrderList, getUserOrderList, handleCancelOrder } from './_redux/action/OrderAction.js';
 import SimpleBtn from '../master/SimpleBtn/SimpleBtn.js';
 import SimpleModal from '../master/Modal/SimpleModal.js';
 import SimpleConfirmComponent from '../master/Modal/SimpleConfirmComponent.js';
 import { getUserDataAction } from '../_redux/getUserData/Action/UserDataAction.js';
+import WarningMessage from '../master/warningMessage/WarningMessage.js';
 
-const FilterOrderList = ({ orderList, isLoading }) => {
+const FilterOrderList = () => {
     const dispatch                  = useDispatch();
-    const { filterOptionList, isDeleting }      = useSelector((state) => state.OrderReducer);
     const userData                  = useSelector((state) => state.UserDataReducer.userData);
     const [orderItem, setOrderItem] = useState(null);
     const [show, setShow]           = useState(false);
 
+    const { orderList, isLoading } = useSelector((state) => state.OrderReducer);
+    const { filterOptionList, isDeleting } = useSelector((state) => state.OrderReducer);
+    
     const toggleShowHandler = (item) => {
         setShow(preState => !preState);
         setOrderItem(item)
@@ -30,9 +33,7 @@ const FilterOrderList = ({ orderList, isLoading }) => {
 
     useEffect(() => {
         dispatch(getUserDataAction());
-        if (userData !== null) {
-            dispatch(getFilterOptionDataForOrderList(userData.id));
-        }
+        dispatch(getFilterOptionDataForOrderList());
     }, [])
 
     return (
@@ -42,15 +43,19 @@ const FilterOrderList = ({ orderList, isLoading }) => {
                     <h6>Show :</h6>
                     <div className="filter_selection ml-2">
                         <Select
-                            className="basic-single"
-                            classNamePrefix="select"
-                            defaultValue={filterOptionList[0]}
-                            isDisabled={false}
-                            isLoading={false}
-                            isClearable={true}
-                            isSearchable={true}
-                            name="color"
-                            options={filterOptionList}
+                            className     = "basic-single"
+                            placeholder   = "Last 5 Orders"
+                            selectedValue = {filterOptionList[0]}
+                            defaultValue  = {filterOptionList[0]}
+                            isDisabled    = {false}
+                            isLoading     = {false}
+                            isClearable   = {true}
+                            isSearchable  = {true}
+                            onChange={(option) => (
+                                dispatch(getUserOrderList(option.value))
+                            )}
+                            name    = "color"
+                            options = {filterOptionList}
                         />
                     </div>
                 </div>
@@ -59,16 +64,23 @@ const FilterOrderList = ({ orderList, isLoading }) => {
             {isLoading && (
                 <div className="card shadow-sm mt-3 p-1">
                     <LoadingSkelleton
-                        alignment="vertical"
-                        count={1}
-                        width="100%"
-                        height={150}
+                        alignment = "vertical"
+                        count     = {1}
+                        width     = "100%"
+                        height    = {150}
                     />
                 </div>
             )}
+            {
+                !isLoading && orderList.length === 0 && (
+                    <div className="shadow-sm mt-3">
+                        <WarningMessage text="Sorry! Order list not found..." />
+                    </div>
+                )
+            }
 
             {
-               !isLoading && orderList.length > 0 && orderList.map((item, index) => (
+                !isLoading && orderList.length > 0 && orderList.map((item, index) => (
                     <div className="card shadow-sm mt-3" key={index + 1}>
                         <div className="d-flex justify-content-between align-items-start order_list_filtered p-2">
                             <div className="order_header">
