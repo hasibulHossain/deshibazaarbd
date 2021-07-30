@@ -1,24 +1,24 @@
 import React from 'react';
-import Link from "next/link";
+import ActiveLink from '../master/activeLink/ActiveLink';
 
 const ProfileSideBar = () => {
     return (
         <div className="sidebar card">
             <ul>
                 <li>
-                    <Link href="/profile">My Profile</Link>
+                    <ActiveLink href="/profile"> My Profile</ActiveLink>
                 </li>
                 <li>
-                    <Link href="/account-setting">Account Setting</Link>
+                    <ActiveLink href="/account-setting">  Account Setting</ActiveLink>
                 </li>
                 <li>
-                    <Link href="wishlist">My Wish list</Link>
+                    <ActiveLink href="/wishlist">My Wish list</ActiveLink>
                 </li>
                 <li>
-                    <Link href="/order">My Orders</Link>
+                    <ActiveLink href="/order">My Orders</ActiveLink>
                 </li>
                 <li>
-                    <Link href="product-review">My Reviews</Link>
+                    <ActiveLink href="/product-review">My Reviews</ActiveLink>
                 </li>
             </ul>
         </div>

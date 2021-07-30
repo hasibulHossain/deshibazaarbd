@@ -2710,3 +2710,9 @@ img.payment_method_in_shipping {
   margin-top: 20px;
   font-weight: 400;
 }
+
+/****Next js active link or inActive link****/
+.activeLink{
+  font-weight: 700!important;
+  color: #e94651!important;
+}
