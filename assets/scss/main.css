@@ -1696,7 +1696,7 @@ p.account_sub_tite {
   border-radius: 5px !important;
 }
 
-p.error_message {
+.error_message {
   color: #f33a1e;
   font-weight: 500;
   font-family: system-ui;
@@ -2715,4 +2715,8 @@ img.payment_method_in_shipping {
 .activeLink{
   font-weight: 700!important;
   color: #e94651!important;
+}
+.order_tracking_form_title{
+  color: #172337;
+  margin-bottom: 15px;
 }

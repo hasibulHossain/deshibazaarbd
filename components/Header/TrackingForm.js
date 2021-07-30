@@ -12,16 +12,17 @@ const TrackingForm = ({ show, setShow }) => {
     };
 
     return (
-        <div className="mt-4 p-2">
+        <div className="p-2">
+            <h6 className="order_tracking_form_title"> Track My Order</h6>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <input
                     className="form-control mr-1"
                     name="orderID"
                     autoComplete="off"
-                    placeholder="Enter your order ID..."
+                    placeholder="Enter your order id..."
                     ref={register({ required: true })} />
 
-                {errors.orderID && <ErrorMessage errorText="Please enter your order ID..." />}
+                {errors.orderID && <ErrorMessage errorText="Please enter your order id..." />}
                 <button className="custom-button-component float-right mt-2" type="submit">
                     Track Now
                 </button>
