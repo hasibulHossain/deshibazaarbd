@@ -92,11 +92,16 @@ const FilterOrderList = () => {
                                 <Link href={`/order/${item.id}`}>
                                     <a><button className="btn text-primary">Manage</button></a>
                                 </Link>
-                                <div className="d-block">
-                                    <SimpleBtn variant="simple_btn_bg" style={{ width: 'fit-content' }} onClick={() => toggleShowHandler(item)}>
-                                        Cancel
-                                    </SimpleBtn>
-                                </div>
+
+                                {
+                                    item.is_suspend == 0 && (
+                                        <div className="d-block">
+                                            <SimpleBtn variant="simple_btn_bg" style={{ width: 'fit-content' }} onClick={() => toggleShowHandler(item)}>
+                                                Cancel
+                                            </SimpleBtn>
+                                        </div>
+                                    )
+                                }
                             </div>
                         </div>
                         <div className="order_product_list p-3">
@@ -123,11 +128,19 @@ const FilterOrderList = () => {
                                                     </p>
                                                 </div>
                                                 <div className="col-4">
-                                                    <div className="badge badge-secondary">Processing</div>
+                                                    <div className="badge badge-secondary p-1">
+                                                        {
+                                                            item.is_suspend == 0 ? "Processing" : "Cancel"
+                                                        }
+                                                    </div>
                                                 </div>
-                                                <div className="col-5">
-                                                    <p className="text-success">Estimated Delivery By {moment(product.approx_delivery_date).format("dddd, MMMM Do YYYY")}</p>
-                                                </div>
+                                                {
+                                                    item.is_suspend == 0 && (
+                                                        <div className="col-5">
+                                                            <p className="text-success">Estimated Delivery By {moment(product.approx_delivery_date).format("dddd, MMMM Do YYYY")}</p>
+                                                        </div>
+                                                    )
+                                                }
                                             </div>
                                         </div>
                                     </div>
@@ -139,17 +152,17 @@ const FilterOrderList = () => {
             }
 
             <SimpleModal
-                size="md"
-                show={show}
-                handleClose={toggleShowHandler}
+                size        = "md"
+                show        = {show}
+                handleClose = {toggleShowHandler}
             >
                 <SimpleConfirmComponent
-                    text="Are you sure to cancel your order ?"
-                    isLoading={isDeleting}
-                    confirmClick={cancelOrder}
-                    closeModal={toggleShowHandler}
-                    confirmBtnVariant="simple_btn_bg"
-                    closeBtnVariant="secondary"
+                    text              = "Are you sure to cancel your order ?"
+                    isLoading         = {isDeleting}
+                    confirmClick      = {cancelOrder}
+                    closeModal        = {toggleShowHandler}
+                    confirmBtnVariant = "simple_btn_bg"
+                    closeBtnVariant   = "secondary"
                 />
             </SimpleModal>
         </>
