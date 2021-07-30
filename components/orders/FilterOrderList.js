@@ -17,9 +17,8 @@ const FilterOrderList = () => {
     const [orderItem, setOrderItem] = useState(null);
     const [show, setShow]           = useState(false);
 
-    const { orderList, isLoading } = useSelector((state) => state.OrderReducer);
-    const { filterOptionList, isDeleting } = useSelector((state) => state.OrderReducer);
-    
+    const { orderList, isLoading, filterOptionList, isDeleting } = useSelector((state) => state.OrderReducer);
+
     const toggleShowHandler = (item) => {
         setShow(preState => !preState);
         setOrderItem(item)
@@ -32,10 +31,12 @@ const FilterOrderList = () => {
     }
 
     useEffect(() => {
+        dispatch(getUserOrderList(5))
         dispatch(getUserDataAction());
         dispatch(getFilterOptionDataForOrderList());
     }, [])
 
+    console.log('orderList :>> ', orderList);
     return (
         <>
             <div className="card shadow-sm p-2 mt-3">
