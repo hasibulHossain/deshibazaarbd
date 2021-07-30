@@ -2,7 +2,15 @@ import React from 'react';
 import { withRouter } from "next/router";
 import Link from "next/link";
 
-const ActiveLink = ({ router, href, children }) => {
+/**
+ * 
+ * @param {href} string //path direction
+ * @param {activeLink} string //active className which will be dynamic
+ * 
+ * @returns ActiveLink
+ */
+
+const ActiveLink = ({ router, href, children, activeLink }) => {
 
     (function prefetchPages() {
         if (typeof window !== "undefined") {
@@ -20,7 +28,7 @@ const ActiveLink = ({ router, href, children }) => {
     return (
         <div>
             <Link href={href} onClick={handleClick}>
-                <a className={isCurrentPath ? "activeLink" : "inActiveLink"}>
+                <a className={isCurrentPath ? activeLink : "inActiveLink"}>
                     {children}
                 </a>
             </Link>
