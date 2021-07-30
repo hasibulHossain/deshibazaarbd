@@ -12,6 +12,7 @@ import { getUserDataAction } from '../_redux/getUserData/Action/UserDataAction.j
 import WarningMessage from '../master/warningMessage/WarningMessage.js';
 
 const FilterOrderList = () => {
+    
     const dispatch                  = useDispatch();
     const userData                  = useSelector((state) => state.UserDataReducer.userData);
     const [orderItem, setOrderItem] = useState(null);
@@ -36,7 +37,6 @@ const FilterOrderList = () => {
         dispatch(getFilterOptionDataForOrderList());
     }, [])
 
-    console.log('orderList :>> ', orderList);
     return (
         <>
             <div className="card shadow-sm p-2 mt-3">
