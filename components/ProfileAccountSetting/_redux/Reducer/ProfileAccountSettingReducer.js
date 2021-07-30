@@ -103,6 +103,7 @@ function ProfileAccountSettingReducer(state = initialState, action) {
                 ...state,
                 isLoading     : action.payload.isLoading,
                 defaultBillingAddress: action.payload.data,
+                // selectedAddress: action.payload.data[0],
             }
         case Types.DELETE_ADDRESS:
             return {
@@ -191,28 +192,33 @@ function ProfileAccountSettingReducer(state = initialState, action) {
                     cloneAddress = state.shippingAddress.filter(item => item.id === action.payload.id);
                 }
 
-                const cloneSelectedAddress = {
-                    ...state.selectedAddress,
-                    id                 : +cloneAddress[0].id,
-                    is_default         : +cloneAddress[0].is_default,
-                    type               : action.payload.type,
-                    user_id            : state.userInputData.id && state.userInputData.id,
-                    name               : cloneAddress[0].name,
-                    phone_no           : cloneAddress[0].phone_no,
-                    is_default_selected: +cloneAddress[0].is_default === 1 ? {label : "Yes",  value: +cloneAddress[0].is_default}: {label: "No", value: +cloneAddress[0].is_default},
-                    selectedCountry    : { label : cloneAddress[0].country,  value: +cloneAddress[0].country_id },
-                    selectedCity       : { label : cloneAddress[0].city,     value: +cloneAddress[0].city_id },
-                    selectedArea       : { label : cloneAddress[0].area,     value: +cloneAddress[0].area_id },
-                    country_id         : +cloneAddress[0].country_id,
-                    country            : cloneAddress[0].country,
-                    city_id            : +cloneAddress[0].city_id,
-                    city               : cloneAddress[0].city,
-                    area_id            : +cloneAddress[0].area_id,
-                    area               : cloneAddress[0].area,
-                    street1            : cloneAddress[0].street1,
-                    street2            : cloneAddress[0].street2,
-                    location           : cloneAddress[0].location
+                let cloneSelectedAddress;
+
+                if (cloneAddress.length > 0) {
+                     cloneSelectedAddress = {
+                        ...state.selectedAddress,
+                        id                 : +cloneAddress[0].id,
+                        is_default         : +cloneAddress[0].is_default,
+                        type               : action.payload.type,
+                        user_id            : state.userInputData.id && state.userInputData.id,
+                        name               : cloneAddress[0].name,
+                        phone_no           : cloneAddress[0].phone_no,
+                        is_default_selected: +cloneAddress[0].is_default === 1 ? {label : "Yes",  value: +cloneAddress[0].is_default}: {label: "No", value: +cloneAddress[0].is_default},
+                        selectedCountry    : { label : cloneAddress[0].country,  value: +cloneAddress[0].country_id },
+                        selectedCity       : { label : cloneAddress[0].city,     value: +cloneAddress[0].city_id },
+                        selectedArea       : { label : cloneAddress[0].area,     value: +cloneAddress[0].area_id },
+                        country_id         : +cloneAddress[0].country_id,
+                        country            : cloneAddress[0].country,
+                        city_id            : +cloneAddress[0].city_id,
+                        city               : cloneAddress[0].city,
+                        area_id            : +cloneAddress[0].area_id,
+                        area               : cloneAddress[0].area,
+                        street1            : cloneAddress[0].street1,
+                        street2            : cloneAddress[0].street2,
+                        location           : cloneAddress[0].location
+                    }
                 }
+                
                 return {
                     ...state,
                     selectedAddress: cloneSelectedAddress
