@@ -60,7 +60,7 @@ const OrderDetails = ({ orderID }) => {
                                 </div>
                                 <div className="">
                                     <small className="order_total_price"><span className="text-secondary">Due Total</span>&nbsp; &nbsp; :  {formatCurrency(orderDetails.due_total)}</small>
-                                    <small className="order_total_price"><span className="text-secondary">Pain Total</span>&nbsp; &nbsp; :  {formatCurrency(orderDetails.paid_total)}</small>
+                                    <small className="order_total_price"><span className="text-secondary">Paid Total</span>&nbsp; &nbsp; :  {formatCurrency(orderDetails.paid_total)}</small>
                                     <small className="order_total_price"><span className="text-secondary">Grand Total </span> :  {formatCurrency(orderDetails.final_total)}</small>
                                 </div>
                             </div>
