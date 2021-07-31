@@ -23,7 +23,7 @@ const ProductReview = () => {
                 <div className="col-md-3">
                     <ProfileSideBar />
                 </div>
-                <div className="col-md-9">
+                <div className="col-md-9 mt-5 mb-2">
                     <div className="card card-middle">
                         <div className="sidebar-card-title">
                             <Tabs defaultActiveKey="waitingForReview" id="uncontrolled-tab-example">

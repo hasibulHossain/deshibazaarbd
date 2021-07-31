@@ -16,6 +16,7 @@ const ProductReviewHistory = () => {
         dispatch(getReviewListByUser(itemID, userID));
     }, []);
 
+    console.log('reviewList :>> ', reviewList);
     return (
         <>
             {isLoading && (

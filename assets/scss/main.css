@@ -1391,7 +1391,7 @@ h6.address_book_updated_title {
 }
 
 .filter_column_10 .product-card-body .product-title {
-  height: auto!important;
+  height: auto !important;
   font-size: 22px;
   font-weight: 700;
 }
@@ -2712,11 +2712,24 @@ img.payment_method_in_shipping {
 }
 
 /****Next js active link or inActive link****/
-.activeLink{
-  font-weight: 700!important;
-  color: #e94651!important;
+.activeLink {
+  font-weight: 700 !important;
+  color: #e94651 !important;
 }
-.order_tracking_form_title{
+.order_tracking_form_title {
   color: #172337;
   margin-bottom: 15px;
+}
+.product_preview_inner_item {
+  border-bottom: 2px solid #cdcdcd;
+  padding: 20px;
+}
+.product_preview_title {
+  font-size: 20px;
+  color: #172337;
+}
+.product_preview_button_section {
+  position: absolute;
+  right: 0;
+  top: 0;
 }

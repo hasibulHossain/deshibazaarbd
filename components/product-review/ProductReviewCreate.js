@@ -3,11 +3,10 @@ import { Form, Modal } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import ReactStars from "react-rating-stars-component";
 import { useDispatch, useSelector } from 'react-redux';
+import PriceCalculation from '../products/partials/PriceCalculation';
 import { handleChangeReviewItemInput, storeReviewData } from './_redux/action/reviewAction';
 
 const ProductReviewCreate = ({ ReviewItem }) => {
-
-    console.log('reveiw => ', ReviewItem)
 
     const dispatch = useDispatch()
     const [ratingValue, setRatingValue] = React.useState(1);
@@ -32,10 +31,10 @@ const ProductReviewCreate = ({ ReviewItem }) => {
     const reviewInput = useSelector((state) => state.ReviewReducer.reviewInput);
 
     const reviewStoreInput = {
-        item_id: ReviewItem.item_id,
+        item_id     : ReviewItem.item_id,
         rating_value: ratingValue,
-        comment: reviewInput.comment,
-        images: reviewInput.images
+        comment     : reviewInput.comment,
+        images      : reviewInput.images
     }
     const handleChangeCouponCode = (name, value) => {
         dispatch(handleChangeReviewItemInput(name, value))
@@ -63,14 +62,14 @@ const ProductReviewCreate = ({ ReviewItem }) => {
                             <p>Rate and review purchased product:</p>
                             <div className="row">
                                 <div className="col-2">
-                                    <img width="120px" className="img-thumbnail" src="https://images.vexels.com/media/users/3/158212/isolated/preview/e2d389a08c3c2766bc12bbefac44ec7c-simple-smile-emoticon-face-by-vexels.png" />
+                                    <img width="120px" src={`${process.env.NEXT_PUBLIC_URL}images/products/${ReviewItem.featured_image}`} alt={ReviewItem.item_name} className="img-thumbnail" />
                                 </div>
                                 <div className="col-10">
                                     <h3>{ReviewItem.item_name && ReviewItem.item_name}</h3>
                                     <p>Seller : {ReviewItem.business_name && ReviewItem.business_name}</p>
-                                    <div className="d-flex">
-                                        <p>Price : ৳ {ReviewItem.selling_price && ReviewItem.selling_price}</p>
-                                        <p className="ml-3">Discount Amount : ৳ {ReviewItem.tax_amount && ReviewItem.tax_amount}</p>
+                                    <div className="">
+                                        <PriceCalculation item={ReviewItem} />
+                                        <p>Discount Amount : ৳ {ReviewItem.tax_amount && ReviewItem.tax_amount}</p>
                                     </div>
                                     <ReactStars {...secondExample} />
                                     <label>Review detail</label>
@@ -94,7 +93,7 @@ const ProductReviewCreate = ({ ReviewItem }) => {
                                                 isValid />
                                             <Form.File.Label data-browse="UPLOAD">
                                                 Choose Your Review Image
-                                             </Form.File.Label>
+                                            </Form.File.Label>
                                         </Form.File>
                                     </div>
                                     {/* <div class="input-group">
