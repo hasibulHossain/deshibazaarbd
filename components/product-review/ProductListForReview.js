@@ -1,23 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import FavoriteIcon from "@material-ui/icons/Favorite";
 import LoadingSkeleton from '../master/skelleton/LoadingSkelleton';
-import { Modal } from 'react-bootstrap';
 import { getItemListByUser } from './_redux/action/reviewAction';
 import ProductReviewCreate from './ProductReviewCreate';
+import PriceCalculation from '../products/partials/PriceCalculation';
+import SimpleBtn from '../master/SimpleBtn/SimpleBtn';
+import AddWishList from '../Wishlist/AddWishList';
+import SimpleModal from '../master/Modal/SimpleModal';
+import WarningMessage from '../master/warningMessage/WarningMessage';
 
 const ProductListForReview = () => {
+
     const dispatch = useDispatch();
-    const {isLoading, itemList} = useSelector((state) => state.ProductReviewReducer);
+    const [show, setShow] = useState(false);
+    const [ReviewItem, setReviewItem] = useState(null);
+
+    const { isLoading, itemList } = useSelector((state) => state.ProductReviewReducer);
 
     useEffect(() => {
         dispatch(getItemListByUser());
     }, []);
-    const [show, setShow] = useState(false);
-    const [ReviewItem, setReviewItem] = useState(null);
+
     const handleClose = () => {
         setShow(false)
     };
+
     const handleShow = (item) => {
         setShow(true)
         setReviewItem(item)
@@ -36,26 +43,34 @@ const ProductListForReview = () => {
                 </div>
             )}
             {
+               !isLoading && itemList.length === 0 && (
+                    <div className="mt-1 p-2">
+                        <WarningMessage text="Sorry! Product list not found....." />
+                    </div>
+                )
+            }
+            {
                 itemList.length > 0 && (
                     <>
                         {itemList.map((item, index) => (
-                            <div className="mt-2 p-2" key={index}>
-                                <div className="innerItemList p-3">
-                                    <div className="wishsingleproduct">
-                                        <img src="/images/default/chair.png" />
+                            <div className="product_preview_inner_item" key={index + 1}>
+                                <div className="row">
+                                    <div className="col-lg-4">
+                                        <img src={`${process.env.NEXT_PUBLIC_URL}images/products/${item.featured_image}`} alt={item.item_name} className="img-fluid" />
                                     </div>
-                                    <div className="wishsingleproductText">
-                                        <h1 style={{fontSize: '1.3rem'}}>{item.item_name && item.item_name}</h1>
-                                        <h4>৳ {item.selling_price && `${item.selling_price}`}</h4>
-                                        <h6>Tax Amount : {item.tax_amount && `৳ ${item.tax_amount}`}</h6>
-                                        <h5 style={{ color: "#6c6c6c", fontWeight: 400, fontSize: '1rem' }}>Seller: {item.business_name && item.business_name}</h5>
-                                    </div>
-
-                                    <div className="wishsingleproductIcon">
-                                        <div>
-                                            <FavoriteIcon />
+                                    <div className="col-lg-7">
+                                        <div className="">
+                                            <h4 className="product_preview_title">{item.item_name && item.item_name}</h4>
+                                            <PriceCalculation item={item} />
+                                            <h6>Tax Amount : {item.tax_amount && `৳ ${item.tax_amount}`}</h6>
+                                            <h6 style={{ color: "#6c6c6c", fontWeight: 400, fontSize: '1rem' }}>Seller: {item.business_name && item.business_name}</h6>
+                                            <SimpleBtn variant="btn-warning" style={{ width: 'fit-content' }} onClick={() => handleShow(item)}>
+                                                REVIEW
+                                            </SimpleBtn>
                                         </div>
-                                        <button onClick={() => handleShow(item)} className="btn btn-warning float-right mt-5">REVIEW</button>
+                                        <div className="product_preview_button_section float-bottom">
+                                            <AddWishList product={item} />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -64,15 +79,13 @@ const ProductListForReview = () => {
                 )
             }
 
-            <Modal
+            <SimpleModal
                 size="lg"
-                aria-labelledby="contained-modal-title-vcenter"
-                centered
                 show={show}
-                onHide={handleClose}
+                handleClose={handleClose}
             >
                 <ProductReviewCreate ReviewItem={ReviewItem} />
-            </Modal>
+            </SimpleModal>
         </>
     );
 };

@@ -282,7 +282,7 @@ export const handleCancelOrder = (order_id, closeModal, user_id) => (dispatch) =
  * 
  * @param order_id //order id
  * 
- * @return array for tracking step timeline
+ * @return orders details
  */
  export const getOrderDetails = (order_id) => (dispatch) => {
   const responseData = {
