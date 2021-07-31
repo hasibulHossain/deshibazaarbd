@@ -295,11 +295,9 @@ export const handleCancelOrder = (order_id, closeModal, user_id) => (dispatch) =
   Axios.get(`${baseUrl}sales/${order_id}`)
     .then((res) => {
       if (res.data.status) {
-        console.log('res.data.data :>> ', res.data.data);
         responseData.data      = res.data.data;
         responseData.status    = true;
         responseData.isLoading = false;
-        showToast("success", res.data.message);
         dispatch({ type: Types.GET_ORDER_DETAILS, payload: responseData });
       }
     }).catch((err) => {

@@ -4,6 +4,7 @@ import ProfileSideBar from "../../components/myprofile/ProfileSideBar";
 import OrderDetails from "../../components/orders/OrderDetails";
 import router from "next/router"
 import { useDispatch } from "react-redux";
+import axios from "axios";
 export default function ManageOrder({ order }) {
 
     return (
@@ -24,9 +25,12 @@ export default function ManageOrder({ order }) {
 
 export const getServerSideProps = async (context) => {
     const orderID = context.params.manageOrder;
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}sales/${orderID}`);
-    const dataJSON = await res.json();
-    const data = dataJSON.data;
+    let data = {};
+    // if (process.browser) {
+    //     const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}sales/${orderID}`);
+    //     const dataJSON = await res.json();
+    //     data = dataJSON.data;
+    // }
 
     return {
         props: {

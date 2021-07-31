@@ -33,6 +33,7 @@ const initialState = {
   couponLoading: false,
   couponData: {},
   orderList: [],
+  orderDetails: [],
   filterOptionList: [],
   trackingTimelineList: [],
 };
@@ -59,6 +60,12 @@ const OrderReducer = (state = initialState, action) => {
       return {
         ...state,
         orderList: action.payload.orderList,
+        isLoading: action.payload.isLoading,
+      };
+    case Types.GET_ORDER_DETAILS:
+      return {
+        ...state,
+        orderDetails: action.payload.data,
         isLoading: action.payload.isLoading,
       };
 

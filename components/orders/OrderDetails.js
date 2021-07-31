@@ -5,8 +5,10 @@ import { faComments, faExclamationCircle, faGift } from '@fortawesome/free-solid
 import OrderTracking from './OrderTracking.js';
 import SimpleTooltip from '../master/Tooltip/SimpleTooltip'
 import { useRouter } from 'next/router';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getOrderDetails } from './_redux/action/OrderAction.js';
+import LoadingSpinner from '../master/LoadingSpinner/LoadingSpinner.js';
+import LoadingSkelleton from '../master/skelleton/LoadingSkelleton.jsx';
 
 const OrderDetails = ({ orderID }) => {
     const router = useRouter();
@@ -15,27 +17,40 @@ const OrderDetails = ({ orderID }) => {
     const [target, setTarget] = useState(null);
     const ref = useRef(null);
     const { manageOrder } = router.query;
-    console.log('manageOrder :>> ', manageOrder);
 
+    const { orderDetails, isLoading } = useSelector((state) => state.OrderReducer);
+    console.log('orderDetails :>> ', orderDetails);
     useEffect(() => {
-       dispatch(getOrderDetails(manageOrder))
+        dispatch(getOrderDetails(manageOrder))
     }, [])
 
     const handleClick = (event) => {
         setShowTooltip(!showTooltip);
         setTarget(event.target);
     };
-    // get order id for fetch order details
+
     return (
         <>
             <PageTitle title="Order Details" />
-            {/* {
-                order !== null && (
+            {
+                isLoading && (
+                    <div className="card shadow-sm">
+                        <LoadingSkelleton
+                            alignment="vertical"
+                            count={1}
+                            width="100%"
+                            height={150}
+                        />
+                    </div>
+                )
+            }
+            {
+                orderDetails !== null && (
                     <>
                         <div className="card shadow-sm p-2">
                             <div className="d-flex justify-content-between">
                                 <div className="details_heading">
-                                    <div className="order_id">Order #{order.id}</div>
+                                    <div className="order_id">Order #{orderDetails.id}</div>
                                     <small className="order_placed_date text-secondary">Placed on 28th June, 2021, 21:23:16</small>
                                 </div>
                                 <div className="order_total_price"><span className="text-secondary">Price</span> : Tk-135</div>
@@ -102,7 +117,7 @@ const OrderDetails = ({ orderID }) => {
                         </div>
                     </>
                 )
-            } */}
+            }
 
         </>
     );
