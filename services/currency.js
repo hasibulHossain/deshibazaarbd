@@ -8,14 +8,18 @@
  */
 export function getCurrencies () {
     const currencies = [
-        // {
-        //     'code'     : 'USD',
-        //     'sign'     : '$',
-        //     'flag_link': '/images/languages/usa.png',
-        //     'active'   : false
-        // },
         {
+            'slug'     : 'en',
+            'code'     : 'USD',
+            'lang'     : 'EN',
+            'sign'     : '$',
+            'flag_link': '/images/languages/usa.png',
+            'active'   : false
+        },
+        {
+            'slug'     : 'bn',
             'code'     : 'BDT',
+            'lang'     : 'বাংলা',
             'sign'     : '৳',
             'flag_link': '/images/languages/bn.png',
             'active'   : true
@@ -35,17 +39,31 @@ export function getCurrencies () {
  * @return string|null|object active currency data
  */
 export function activeCurrency ( printableLabel = '' ) {
-    let activeCurrency     = null;
-    const currencies       = getCurrencies();
-    const activeCurrencies = currencies.filter(cur => cur.active === true);
+    if(process.browser) {
+        let activeLang = localStorage.getItem('lang') || 'en';
 
-    if ( typeof activeCurrencies !== 'undefined' && activeCurrencies !== null && activeCurrencies.length > 0 ) {
-        activeCurrency = activeCurrencies[0];
+        if ( typeof activeLang === 'undefined' || ( activeLang !== 'en' && activeLang !== 'bn' ) ) {
+            activeLang = 'en';
+        }
+
+        let activeCurrency     = null;
+        const currencies       = getCurrencies();
+        const activeCurrencies = currencies.filter(cur => cur.slug === activeLang);
+
+        if ( typeof activeCurrencies !== 'undefined' && activeCurrencies !== null && activeCurrencies.length > 0 ) {
+            activeCurrency = activeCurrencies[0];
+        }
+
+        if ( printableLabel === '' || printableLabel === null || activeCurrency === null ) return activeCurrency;
+
+        return activeCurrency[printableLabel] || '';
     }
+    
+    return '';
+}
 
-    if ( printableLabel === '' || printableLabel === null || activeCurrency === null ) return activeCurrency;
-
-    return activeCurrency[printableLabel] || '';
+export function activeLang ( printableLabel = '' ) {
+    ge
 }
 
 /**
