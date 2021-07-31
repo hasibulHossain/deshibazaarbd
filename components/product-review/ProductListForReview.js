@@ -1,31 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import FavoriteIcon from "@material-ui/icons/Favorite";
 import LoadingSkeleton from '../master/skelleton/LoadingSkelleton';
-import { Modal } from 'react-bootstrap';
 import { getItemListByUser } from './_redux/action/reviewAction';
 import ProductReviewCreate from './ProductReviewCreate';
 import PriceCalculation from '../products/partials/PriceCalculation';
 import SimpleBtn from '../master/SimpleBtn/SimpleBtn';
 import AddWishList from '../Wishlist/AddWishList';
+import SimpleModal from '../master/Modal/SimpleModal';
+import WarningMessage from '../master/warningMessage/WarningMessage';
 
 const ProductListForReview = () => {
+
     const dispatch = useDispatch();
+    const [show, setShow] = useState(false);
+    const [ReviewItem, setReviewItem] = useState(null);
+
     const { isLoading, itemList } = useSelector((state) => state.ProductReviewReducer);
 
     useEffect(() => {
         dispatch(getItemListByUser());
     }, []);
-    const [show, setShow] = useState(false);
-    const [ReviewItem, setReviewItem] = useState(null);
+
     const handleClose = () => {
         setShow(false)
     };
+
     const handleShow = (item) => {
         setShow(true)
         setReviewItem(item)
     };
-    console.log('itemList :>> ', itemList);
+
     return (
         <>
             {isLoading && (
@@ -38,6 +42,13 @@ const ProductListForReview = () => {
                     />
                 </div>
             )}
+            {
+               !isLoading && itemList.length === 0 && (
+                    <div className="mt-1 p-2">
+                        <WarningMessage text="Sorry! Product list not found....." />
+                    </div>
+                )
+            }
             {
                 itemList.length > 0 && (
                     <>
@@ -68,15 +79,13 @@ const ProductListForReview = () => {
                 )
             }
 
-            <Modal
+            <SimpleModal
                 size="lg"
-                aria-labelledby="contained-modal-title-vcenter"
-                centered
                 show={show}
-                onHide={handleClose}
+                handleClose={handleClose}
             >
                 <ProductReviewCreate ReviewItem={ReviewItem} />
-            </Modal>
+            </SimpleModal>
         </>
     );
 };
