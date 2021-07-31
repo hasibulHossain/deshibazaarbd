@@ -11,6 +11,7 @@ import { toggleProductModalAction } from "./_redux/Action/ProductAction";
 import { addToCartAction } from '../carts/_redux/action/CartAction';
 import { showToast } from '../master/Helper/ToastHelper';
 import AddWishList from '../Wishlist/AddWishList';
+import Translate from '../translation/Translate';
 
 /**
  * ProductSingleMini Component
@@ -59,7 +60,9 @@ const ProductSingleMini = ({ item = {}, columnClassName = 'col-md-2', cardClassN
                             <>
                                 <img src={`${process.env.NEXT_PUBLIC_URL}images/products/${item.featured_image}`} alt={item.name} className="img-fluid" />
                                 <div>
-                                    <p className="product-title">{item.name}</p>
+                                    <p className="product-title">
+                                        <Translate>{item.name}</Translate>
+                                    </p>
                                     <p className={`stock-status ${parseInt(item.current_stock) > 0 ? 'stock-status-in' : 'stock-status-out'}`}>
                                         <span>{parseInt(item.current_stock) > 0 ? 'In stock' : 'Out of stock'}</span>
                                     </p>

@@ -133,4 +133,11 @@ export default [
         'en' : 'TV',
         'bn' : 'টেলিভিশন'
     },
+
+    // Product Translations
+    {
+        'key': 'Sony Camera',
+        'en' : 'Sony Camera',
+        'bn' : 'সনি ক্যামেরা'
+    },
 ];
