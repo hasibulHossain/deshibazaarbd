@@ -20,6 +20,9 @@ import "react-toastify/dist/ReactToastify.css";
 import "../components/product-review/productListForReview.css"
 import "../components/ProfileAccountSetting/ProfileAccountSetting.scss"
 
+// For Order Pages
+import '../components/orders/scss/order-success.scss';
+
 toast.configure();
 
 // Import axios.js so that it can inject token in every request

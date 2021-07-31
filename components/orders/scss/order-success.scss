@@ -1,0 +1,22 @@
+#order-success-page {
+    padding-bottom: 3rem!important;
+    padding-top: 1rem!important;
+
+    .order-success-left {
+        h3 {
+            color: green;
+            font-size: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid red;
+        }
+    }
+
+    .order-success-right {
+        h3 {
+            font-size: 1rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid red;
+        }
+    }
+    
+}
