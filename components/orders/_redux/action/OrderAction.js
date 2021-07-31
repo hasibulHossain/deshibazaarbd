@@ -274,3 +274,40 @@ export const handleCancelOrder = (order_id, closeModal, user_id) => (dispatch) =
 
     })
 }
+
+/**
+ * order details
+ * 
+ * @since 1.0.0
+ * 
+ * @param order_id //order id
+ * 
+ * @return array for tracking step timeline
+ */
+ export const getOrderDetails = (order_id) => (dispatch) => {
+  const responseData = {
+    data: null,
+    status   : false,
+    isLoading: true
+  }
+  dispatch({ type: Types.GET_ORDER_DETAILS, payload: responseData });
+
+  Axios.get(`${baseUrl}sales/${order_id}`)
+    .then((res) => {
+      if (res.data.status) {
+        console.log('res.data.data :>> ', res.data.data);
+        responseData.data      = res.data.data;
+        responseData.status    = true;
+        responseData.isLoading = false;
+        showToast("success", res.data.message);
+        dispatch({ type: Types.GET_ORDER_DETAILS, payload: responseData });
+      }
+    }).catch((err) => {
+      const { response }     = err;
+      responseData.isLoading = false;
+      const { request, ...errorObject } = response;
+      console.log('response :>> ', response);
+      dispatch({ type: Types.GET_ORDER_DETAILS, payload: responseData });
+
+    })
+}
