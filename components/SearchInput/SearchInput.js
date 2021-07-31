@@ -5,8 +5,10 @@ import { searchProductAction } from "./_redux/Action/SearchInputAction";
 import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { translate } from "../../services/translation/translation";
+import Translate from "../translation/Translate";
 
-const SearchInput = (props) => {
+const SearchInput = () => {
   
   const dispatch            = useDispatch();
   const router              = useRouter();
@@ -32,7 +34,7 @@ const SearchInput = (props) => {
   return (
     <>
       <input
-        placeholder="Search for Products, Brands or more"
+        placeholder={translate('Search for Products, Brands or more')}
         onChange={(e) => searchProduct(e)}
       />
       <div className="header-custom-prepend pointer">
@@ -47,9 +49,9 @@ const SearchInput = (props) => {
             className="text-danger text-center"
             style={{ margin: 0, display: "flex", flexDirection: "column" }}
           >
-            <p>Sorry, No Product found by - {search}</p>
+            <p><Translate>Sorry, No Product found by</Translate> - {search} </p>
 
-            <p>Please try with another keyword !</p>
+            <p><Translate>Please try with another keyword</Translate> !</p>
           </div>
         </div>
       )}
