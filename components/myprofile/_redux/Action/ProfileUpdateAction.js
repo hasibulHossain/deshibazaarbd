@@ -109,7 +109,7 @@ export const handleUpdateShippingAddress = (shippingAddressInput) => (dispatch) 
     const userStorageData = JSON.parse(localStorage.getItem("loginData"));
     const submittedData = shippingAddressInput;
     submittedData.user_id = userStorageData.userData.id;
-    Axios.post(`${process.env.NEXT_PUBLIC_API_URL}address`, shippingAddressInput)
+    Axios.put(`${process.env.NEXT_PUBLIC_API_URL}address`, shippingAddressInput)
         .then((res) => {
             responseData.status = true;
             responseData.isLoading = false;
@@ -129,7 +129,7 @@ export const handleUpdateBillingAddress = (billingAddressInput) => (dispatch) =>
     const userStorageData = JSON.parse(localStorage.getItem("loginData"));
     const submittedData = billingAddressInput;
     submittedData.user_id = userStorageData.userData.id;
-    Axios.post(`${process.env.NEXT_PUBLIC_API_URL}address`, submittedData)
+    Axios.put(`${process.env.NEXT_PUBLIC_API_URL}address`, submittedData)
         .then((res) => {
             responseData.status = true;
             responseData.isLoading = false;

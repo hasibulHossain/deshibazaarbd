@@ -17,7 +17,6 @@ const BillingAddressForm = () => {
     const billingAddressInput = useSelector((state) => state.ProfileAccountSettingReducer.billingAddressInput);
     const { register, handleSubmit, errors, setValue, watch } = useForm();
 
-    //handle change input 
     const handleChangeTextInput = (name, value) => {
         dispatch(handleChangeBillingAddressInput(name, value))
     }
@@ -26,6 +25,7 @@ const BillingAddressForm = () => {
         dispatch(getUserData())
         dispatch(getCountry())
     }, [])
+    
     const StoreBillingAddress = () => {
         dispatch(handleStoreBillingAddress(billingAddressInput))
     }

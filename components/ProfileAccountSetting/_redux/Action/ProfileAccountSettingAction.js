@@ -228,7 +228,6 @@ export const handleUpdateBillingAddress = (billingAddressInput) => (dispatch) =>
             dispatch({ type: Types.STORE_BILLING_ADDRESS, payload: responseData });
         })
         .catch(err => {
-            console.log('address update err => ', err);
         })
 
 }
@@ -244,8 +243,7 @@ export const addAddress = (addressInput, type, closeModal) => (dispatch) => {
     if (type === 'new_address') {
         method = 'post'
     } else {
-        method = ''
-        // method = '?_method=PUT'
+        method = 'put'
     }
 
     dispatch({ type: Types.STORE_BILLING_ADDRESS, payload: responseData });
@@ -256,7 +254,7 @@ export const addAddress = (addressInput, type, closeModal) => (dispatch) => {
     if (type === 'new_address') {
         url = `${process.env.NEXT_PUBLIC_API_URL}address`
     } else {
-        url = `${process.env.NEXT_PUBLIC_API_URL}address?user_id=${userStorageData.userData.id}&type=${type}?_method=PUT`
+        url = `${process.env.NEXT_PUBLIC_API_URL}address/${addressInput.id}`
     }
 
     Axios({
@@ -281,7 +279,6 @@ export const addAddress = (addressInput, type, closeModal) => (dispatch) => {
             responseData.isLoading = false;
             // showToast("error", response.data.message)
             closeModal();
-            console.log('err => ', err);
         })
 
     // Axios.post(`${process.env.NEXT_PUBLIC_API_URL}address`, billingAddressInput)
@@ -302,6 +299,8 @@ export const deleteAddress = (id, toggleDeleteModal) => (dispatch) => {
                 responseData.status    = true;
                 responseData.isLoading = false;
                 showToast('success', res.data.message);
+                dispatch(getAddress('billing_address'));
+                dispatch(getAddress('shipping_address'));
                 dispatch({type: Types.DELETE_ADDRESS, payload: responseData});
                 toggleDeleteModal();
             }
@@ -309,7 +308,6 @@ export const deleteAddress = (id, toggleDeleteModal) => (dispatch) => {
         .catch(err => {
             responseData.isLoading = false;
             const { response } = err;
-            console.log('err => ', response);
             showToast('error', response.data.message);
             dispatch({type: Types.DELETE_ADDRESS, payload: responseData});
             toggleDeleteModal();
@@ -358,6 +356,6 @@ export const getDefaultAddress = (addressType) => (dispatch) => {
             }
 
         }).catch((err) => {
-            console.log('err :>> ', err);
+
         })
 }

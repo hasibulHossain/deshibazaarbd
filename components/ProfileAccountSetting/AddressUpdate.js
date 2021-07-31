@@ -28,13 +28,11 @@ const AddressUpdate = (props) => {
     }, [])
 
     const StoreBillingAddress = () => {
-        // dispatch(handleUpdateBillingAddress(selectedAddress))
+        dispatch(handleUpdateBillingAddress(selectedAddress))
     }
 
     const submitUpdatedAddressHandler = () => {
         dispatch(addAddress(selectedAddress, props.type, props.closeModal))
-        // props.closeModal();
-        console.log('form errors => ', errors)
     }
 
     useEffect(() => {
