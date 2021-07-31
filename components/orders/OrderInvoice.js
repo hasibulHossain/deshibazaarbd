@@ -3,6 +3,7 @@ import React from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faPrint, faTimes } from "@fortawesome/free-solid-svg-icons";
 import Translate from '../translation/Translate';
+import { formatCurrency } from '../../services/currency';
 
 /**
  * Order Invoice component
@@ -30,7 +31,7 @@ const OrderInvoice = ({ title = translate('Invoice'), id }) => {
                     <div className="card card-body order-success-left">
                         <div className="row order-invoice-header">
                             <div className="col-3">
-                                <img src={'/images/logos/logo-en.svg'} alt="" class="invoice-logo" />
+                                <img src={'/images/logos/logo-en.svg'} alt="" className="invoice-logo" width={100} />
                             </div>
                             <div className="col-9">
                                 <h3>{title}</h3>
@@ -89,20 +90,74 @@ const OrderInvoice = ({ title = translate('Invoice'), id }) => {
                 </div>
                 <div className="col-md-5">
                     <div className="card card-body order-success-right">
-                        <button className="btn btn-success btn-sm btn-print" onClick={() => printDiv('printable-invoice-area')}> 
+                        <button className="btn btn-success btn-sm btn-print non-printable" onClick={() => printDiv('printable-invoice-area')}> 
                             <FontAwesomeIcon className="custom-fontAwesome" icon={faPrint} />
                             {' '} <Translate>Print</Translate>
                         </button>
                         <h3><Translate>Order Summary</Translate></h3>
+                        
                         <div className="order-product-item">
                             <div className="row">
                                 <div className="col-2">
-
+                                    <img src={'http://api.allgeneration.com/public/images/products/product-samsung-gallaxy-a1.png'} width={50} />
                                 </div>
-                                <div className="col-2">
-
+                                <div className="col-6">
+                                    <h4>Samsung Gallaxy J2</h4>
+                                </div>
+                                <div className="col-4">
+                                    <p>
+                                        <b>{formatCurrency(2, ',', '')} </b>
+                                        X
+                                        <b>{formatCurrency(200)} </b>
+                                    </p>
+                                    <p className="product-subtotal">
+                                        {formatCurrency(400)}
+                                    </p>
                                 </div>
                             </div>
+                        </div>
+                        <div className="order-product-item">
+                            <div className="row">
+                                <div className="col-2">
+                                    <img src={'http://api.allgeneration.com/public/images/products/product-samsung-gallaxy-a1.png'} width={50} />
+                                </div>
+                                <div className="col-6">
+                                    <h4>Samsung Gallaxy J2</h4>
+                                </div>
+                                <div className="col-4">
+                                    <p>
+                                        <b>{formatCurrency(2, ',', '')} </b>
+                                        X
+                                        <b>{formatCurrency(200)} </b>
+                                    </p>
+                                    <p className="product-subtotal">
+                                        {formatCurrency(400)}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div className="mt-2">
+                            <table className="table table-borderless order-calculation-table">
+                                <tbody>
+                                    <tr>
+                                        <td><Translate>Sub Total</Translate></td>
+                                        <td>{formatCurrency(400)}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><Translate>Shipping Cost</Translate></td>
+                                        <td>{formatCurrency(50)}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><Translate>Discount</Translate></td>
+                                        <td>{formatCurrency(10)}</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="grand-total-text"><Translate>Grand Total</Translate></td>
+                                        <td className="grand-total-amount">{formatCurrency(440)}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
