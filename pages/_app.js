@@ -21,7 +21,7 @@ import "../components/product-review/productListForReview.css"
 import "../components/ProfileAccountSetting/ProfileAccountSetting.scss"
 
 // For Order Pages
-import '../components/orders/scss/order-success.scss';
+import '../components/orders/scss/order-invoice.scss';
 
 toast.configure();
 

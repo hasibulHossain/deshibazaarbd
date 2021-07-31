@@ -1,0 +1,69 @@
+@media print {
+    .non-printable { display: none; }
+    #printable-invoice-area { display: block; }
+}
+
+.btn-print {
+    right: 0;
+    top: -2px;
+    float: right;
+    position: absolute;
+    border-radius: 0px;
+}
+
+#order-success-page {
+    padding-bottom: 3rem!important;
+    padding-top: 1rem!important;
+    font-size: 0.7rem;
+
+    .order-success-left {
+        .invoice-logo {
+            width: 100px;
+            margin-top: 20px;
+        }
+    
+        .order-invoice-header {
+            border-bottom: 1px solid #ccc;    
+        }
+
+        h3 {
+            color: green;
+            font-size: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid red;
+        }
+
+        h4 {
+            font-size: 1rem;
+        }
+
+        .order-details {
+            margin-top: 30px;
+
+            .single-order-row-item {
+                padding: 10px;
+                margin-bottom: 5px;
+            }
+
+            h5 {
+                font-size: 0.8rem;
+                font-weight: bold;
+            }
+
+            p {
+                margin: 0px;
+                margin-top: 5px;
+                margin-left: 5px;
+            }
+        }
+    }
+
+    .order-success-right {
+        h3 {
+            font-size: 1rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid red;
+        }
+    }
+    
+}
