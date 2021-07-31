@@ -15,6 +15,9 @@ import { toggleFloatingCart } from "../../_redux/store/action/globalAction";
 import { getCartsAction } from "../carts/_redux/action/CartAction";
 import { getUserDataAction } from "../_redux/getUserData/Action/UserDataAction";
 
+import Translate from "../translation/Translate";
+import { translate } from "../../services/translation/translation";
+
 const Header = () => {
 	const dispatch = useDispatch();
 	const toggleNav = "basic-navbar-nav";
@@ -72,12 +75,12 @@ const Header = () => {
 										!userData ? (
 											<>
 												<Link href="/login" className="header-nav-link">
-													<a className="">Sign In</a>
+													<a className=""><Translate>Sign In</Translate></a>
 												</Link>
 
 												<Link href="/register">
 													<a>
-														<Button buttonText="Sign up" />
+														<Button buttonText={translate('Sign up')} />
 													</a>
 												</Link>
 
@@ -90,7 +93,7 @@ const Header = () => {
 															className="custom-fontAwesome"
 															icon={faUser}
 														/>{" "}
-														My Account
+														<Translate>My Account</Translate>
 													</a>
 												</Link>
 
@@ -100,7 +103,7 @@ const Header = () => {
 															className="custom-fontAwesome"
 															icon={faHeart}
 														/>{" "}
-														Wishlist
+														<Translate>Wishlist</Translate>
 													</a>
 												</Link>
 
@@ -121,7 +124,7 @@ const Header = () => {
 										<span className="cart-qty">
 											{formatCartTotalQty(totalQuantity)}
 										</span>
-										&nbsp;&nbsp; Cart
+										&nbsp;&nbsp; <Translate>Cart</Translate>
 									</span>
 								</div>
 							</Navbar.Collapse>

@@ -11,6 +11,8 @@ import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 
 // local imports
 import { getMenuListData } from "./_redux/HeaderAction/HeaderAction";
+import Translate from "../translation/Translate";
+import { translate } from "../../services/translation/translation";
 
 const HeaderMenu = ({ toggleNav }) => {
   const { menuList } = useSelector((state) => state.HeaderReducer);
@@ -45,26 +47,26 @@ const HeaderMenu = ({ toggleNav }) => {
                 className="menu pr-2"
                 style={{ width: 30 }}
               />
-              {"ALL CATEGORIES"}
+              <Translate>All Categories</Translate>
             </MenuButton>
           }
           key={1}
         >
           {menuList.map((category, i) => {
             if (category.childs.length === 0) {
-              return <MenuItem onClick={() => clickMenuLink(category.id)} key={i}>{category.name}</MenuItem>;
+              return <MenuItem onClick={() => clickMenuLink(category.id)} key={i}><Translate>{category.name}</Translate></MenuItem>;
             } else {
               return (
-                <SubMenu key={i} label={category.name}>
+                <SubMenu key={i} label={translate(category.name)}>
                   {category.childs.map((subCategory, i) => {
                     if (subCategory.childs.length === 0) {
-                      return <MenuItem key={i} onClick={() => clickMenuLink(subCategory.id)}>{subCategory.name}</MenuItem>;
+                      return <MenuItem key={i} onClick={() => clickMenuLink(subCategory.id)}><Translate>{subCategory.name}</Translate></MenuItem>;
                     } else {
                       return (
-                        <SubMenu key={i} label={subCategory.name} onClick={() => clickMenuLink(subCategory.id)}>
+                        <SubMenu key={i} label={translate(subCategory.name)} onClick={() => clickMenuLink(subCategory.id)}>
                           {subCategory.childs.map((subCtgOne, i) => (
                             <MenuItem key={i} onClick={() => clickMenuLink(subCtgOne.id)}>
-                              {subCtgOne.name}
+                              <Translate>{subCtgOne.name}</Translate>
                             </MenuItem>
                           ))}
                         </SubMenu>
@@ -82,7 +84,7 @@ const HeaderMenu = ({ toggleNav }) => {
             <Menu
               menuButton={
                 <MenuButton>
-                  {category.name}{" "}
+                  {translate(category.name)}{" "}
                   <FontAwesomeIcon
                     className="custom-fontAwesome"
                     icon={faCaretDown}
@@ -94,13 +96,13 @@ const HeaderMenu = ({ toggleNav }) => {
               {category.childs.length > 0 &&
                 category.childs.map((subCategory, i) => {
                   if (subCategory.childs.length === 0) {
-                    return <MenuItem onClick={() => clickMenuLink(subCategory.id)} key={i}>{subCategory.name}</MenuItem>;
+                    return <MenuItem onClick={() => clickMenuLink(subCategory.id)} key={i}><Translate>{subCategory.name}</Translate></MenuItem>;
                   } else {
                     return (
-                      <SubMenu key={i} label={subCategory.name}>
+                      <SubMenu key={i} label={translate(subCategory.name)}>
                         {subCategory.childs.length > 0 &&
                           subCategory.childs.map((subCtgOne, i) => (
-                            <MenuItem onClick={() => clickMenuLink(subCtgOne.id)} key={i}>{subCtgOne.name}</MenuItem>
+                            <MenuItem onClick={() => clickMenuLink(subCtgOne.id)} key={i}><Translate>{subCtgOne.name}</Translate></MenuItem>
                           ))}
                       </SubMenu>
                     );
