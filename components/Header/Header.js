@@ -10,9 +10,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import HeaderTop from "./HeaderTop";
 import HeaderMenu from "./HeaderMenu";
 import Button from "../master/Button/Button";
+import SearchInput from "../SearchInput/SearchInput";
 import { toggleFloatingCart } from "../../_redux/store/action/globalAction";
 import { getCartsAction } from "../carts/_redux/action/CartAction";
-import SearchInput from "../SearchInput/SearchInput";
+import { getUserDataAction } from "../_redux/getUserData/Action/UserDataAction";
 
 const Header = () => {
 	const dispatch = useDispatch();
@@ -26,6 +27,7 @@ const Header = () => {
 
 	useEffect(() => {
 		dispatch(getCartsAction());
+		dispatch(getUserDataAction());
 	}, []);
 
 	const formatCartTotalQty = (totalQuantity) => {
