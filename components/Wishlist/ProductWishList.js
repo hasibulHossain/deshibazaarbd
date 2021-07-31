@@ -51,11 +51,11 @@ const ProductWishList = () => {
                       <div className="inner_product_list" key={index}>
                         <div className="row">
 
-                          <div className="wishlist_product col-3">
-                            <img className="img-fluid p-2" src={`${process.env.NEXT_PUBLIC_URL}images/products/${item.featured_image}`} />
+                          <div className="wishlist_product col-2">
+                            <img className="img-fluid p-2" style={{ maxHeight: 100 }} src={`${process.env.NEXT_PUBLIC_URL}images/products/${item.featured_image}`} />
                           </div>
 
-                          <div className="wishlist_list_product_details col-8">
+                          <div className="wishlist_list_product_details col-9">
                             <h5 className="product_name">{item.name}</h5>
                             <div className="h3 product_price">
                               <PriceCalculation item={item} />

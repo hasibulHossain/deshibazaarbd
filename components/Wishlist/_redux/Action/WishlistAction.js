@@ -41,21 +41,20 @@ export const removeFromWishList = (itemID) => (dispatch) => {
     const postData = {
         item_id: itemID
     }
-    Axios.delete(`${process.env.NEXT_PUBLIC_API_URL}wishlist`, postData)
-        .then((response) => {
-            console.log('response :>> ', response);
-            if (response.data.status) {
 
+    Axios.delete(`${process.env.NEXT_PUBLIC_API_URL}wishlist/${itemID}`, postData)
+        .then((response) => {
+            if (response.data.status) {
                 response.isLoading = false;
                 showToast('success', response.data.message);
-                dispatch(getWishListData())
+                dispatch(getWishListData());
                 dispatch({ type: Types.REMOVE_FROM_WISHLIST, payload: responseLog });
             }
         }).catch((error) => {
             const responseLog = error.response;
             response.isLoading = false;
             if (typeof responseLog !== 'undefined') {
-                const { request, ...errorObject } = responseLog;
+                // const { request, ...errorObject } = responseLog;
                 showToast('error', responseLog.data.message);
                 dispatch({ type: Types.REMOVE_FROM_WISHLIST, payload: responseLog })
             }

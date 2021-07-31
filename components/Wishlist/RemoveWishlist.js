@@ -5,7 +5,8 @@ import { useDispatch, } from 'react-redux';
 import { removeFromWishList } from './_redux/Action/wishListAction'
 
 const RemoveWishlist = ({ product }) => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    
     const addOrRemoveWishlist = (product) => {
         dispatch(removeFromWishList(product.id));
     }
