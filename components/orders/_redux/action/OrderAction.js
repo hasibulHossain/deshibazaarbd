@@ -104,24 +104,23 @@ export const getUserOrderList = (value = 5) => (dispatch) => {
     isLoading: true,
   }
   dispatch({ type: Types.GET_USER_ORDER_LIST, payload: responseData });
-  var date         = new Date();
-  const startDate  = new Date()
-  const start_date = moment(startDate).format("YYYY-MM-DD");
-  let end_date;
-  // let end_date = moment(date.toLocaleString()).format("YYYY-MM-DD");
+  var date        = new Date();
+  const startDate = new Date() 
+  const end_date  = moment(startDate).format("YYYY-MM-DD");
+  let start_date;
+  // let start_date = moment(date.toLocaleString()).format("YYYY-MM-DD");
 
   let orderListURL;;
 
   if (value == 15) {
-    console.log('value :>> ', value);
     date.setDate(date.getDate() - 15);
-    end_date = moment(date.toLocaleString()).format("YYYY-MM-DD");
+    start_date = moment(date.toLocaleString()).format("YYYY-MM-DD");
   } else if (value == 30) {
     date.setDate(date.getDate() - 30);
-    end_date = moment(date.toLocaleString()).format("YYYY-MM-DD");
+    start_date = moment(date.toLocaleString()).format("YYYY-MM-DD");
   } else if (value == 60) {
     date.setDate(date.getDate() - 60);
-    end_date = moment(date.toLocaleString()).format("YYYY-MM-DD");
+    start_date = moment(date.toLocaleString()).format("YYYY-MM-DD");
   } else if (value == 5) {
     orderListURL = `${baseUrl}sales/orders/customer?paginate_no=${value}`
   } else {
@@ -292,10 +291,11 @@ export const handleCancelOrder = (order_id, closeModal, user_id) => (dispatch) =
   }
   dispatch({ type: Types.GET_ORDER_DETAILS, payload: responseData });
 
-  Axios.get(`${baseUrl}sales/${order_id}`)
+  Axios.get(`${baseUrl}sales/orders/customer?id=${order_id}`)
+  // Axios.get(`${baseUrl}sales/${order_id}`)
     .then((res) => {
       if (res.data.status) {
-        responseData.data      = res.data.data;
+        responseData.data      = res.data.data.data[0];
         responseData.status    = true;
         responseData.isLoading = false;
         dispatch({ type: Types.GET_ORDER_DETAILS, payload: responseData });

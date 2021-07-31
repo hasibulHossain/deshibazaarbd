@@ -9,6 +9,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getOrderDetails } from './_redux/action/OrderAction.js';
 import LoadingSpinner from '../master/LoadingSpinner/LoadingSpinner.js';
 import LoadingSkelleton from '../master/skelleton/LoadingSkelleton.jsx';
+import SingleOrder from './SingleOrder.js';
+import moment from 'moment';
+import { activeCurrency, formatCurrency } from '../../services/currency.js';
+
 
 const OrderDetails = ({ orderID }) => {
     const router = useRouter();
@@ -19,7 +23,7 @@ const OrderDetails = ({ orderID }) => {
     const { manageOrder } = router.query;
 
     const { orderDetails, isLoading } = useSelector((state) => state.OrderReducer);
-    console.log('orderDetails :>> ', orderDetails);
+
     useEffect(() => {
         dispatch(getOrderDetails(manageOrder))
     }, [])
@@ -51,14 +55,20 @@ const OrderDetails = ({ orderID }) => {
                             <div className="d-flex justify-content-between">
                                 <div className="details_heading">
                                     <div className="order_id">Order #{orderDetails.id}</div>
-                                    <small className="order_placed_date text-secondary">Placed on 28th June, 2021, 21:23:16</small>
+                                    <p className="text-secondary">Placed on {moment(orderDetails.transaction_date).format("dddd, MMMM Do YYYY")}</p>
+                                    {/* <small className="order_placed_date text-secondary">Placed on 28th June, 2021, 21:23:16</small> */}
                                 </div>
-                                <div className="order_total_price"><span className="text-secondary">Price</span> : Tk-135</div>
+                                <div className="">
+                                    <small className="order_total_price"><span className="text-secondary">Due Total</span>&nbsp; &nbsp; :  {formatCurrency(orderDetails.due_total)}</small>
+                                    <small className="order_total_price"><span className="text-secondary">Pain Total</span>&nbsp; &nbsp; :  {formatCurrency(orderDetails.paid_total)}</small>
+                                    <small className="order_total_price"><span className="text-secondary">Grand Total </span> :  {formatCurrency(orderDetails.final_total)}</small>
+                                </div>
                             </div>
                         </div>
 
-                        <div className="card mt-3 mb-3">
-                            <div className="order_package d-flex justify-content-between p-3">
+                        <div className="mt-3 mb-3">
+                            <SingleOrder item={orderDetails} isManageable={false} />
+                            {/* <div className="order_package d-flex justify-content-between p-3">
                                 <div className="package_vendor_details">
                                     <h6 className="package_no"><FontAwesomeIcon icon={faGift} /> Package 1</h6>
                                     <small>Sold By : <span className="text-primary">Akash Shop</span></small>
@@ -112,7 +122,7 @@ const OrderDetails = ({ orderID }) => {
 
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
 
                         </div>
                     </>
