@@ -301,11 +301,36 @@ export const handleCancelOrder = (order_id, closeModal, user_id) => (dispatch) =
         dispatch({ type: Types.GET_ORDER_DETAILS, payload: responseData });
       }
     }).catch((err) => {
-      const { response }     = err;
-      responseData.isLoading = false;
+      const { response }                = err;
+      responseData.isLoading            = false;
       const { request, ...errorObject } = response;
       console.log('response :>> ', response);
       dispatch({ type: Types.GET_ORDER_DETAILS, payload: responseData });
 
     })
+}
+
+//get order life cycle details data 
+export const getOrderLifeCycleData = (id) => (dispatch) => {
+  let responseList = {
+      isLoading    : true,
+      data         : {},
+      status       : false,
+  };
+  dispatch({ type: Types.GET_ORDER_LIFECYCLE_DETAILS, payload: responseList });
+  Axios.get(`${baseUrl}sales/order-lifecycle/${id}`)
+      .then((res) => {
+          if (res.data.status) {
+              const { data, message, status } = res.data;
+              responseList.status             = status;
+              responseList.data               = data;
+              responseList.message            = message;
+              responseList.isLoading          = false;
+              dispatch({ type: Types.GET_ORDER_LIFECYCLE_DETAILS, payload: responseList });
+          }
+      }).catch((err) => {
+          responseList.isLoading = false;
+          console.log('err order lifecycle :>> ', err);
+          dispatch({ type: Types.GET_ORDER_LIFECYCLE_DETAILS, payload: responseList });
+      })
 }

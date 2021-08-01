@@ -8,6 +8,7 @@ import SimpleBtn from '../master/SimpleBtn/SimpleBtn';
 import AddWishList from '../Wishlist/AddWishList';
 import SimpleModal from '../master/Modal/SimpleModal';
 import WarningMessage from '../master/warningMessage/WarningMessage';
+import Link from 'next/link';
 
 const ProductListForReview = () => {
 
@@ -43,7 +44,7 @@ const ProductListForReview = () => {
                 </div>
             )}
             {
-               !isLoading && itemList.length === 0 && (
+                !isLoading && itemList.length === 0 && (
                     <div className="mt-1 p-2">
                         <WarningMessage text="Sorry! Product list not found....." />
                     </div>
@@ -56,11 +57,17 @@ const ProductListForReview = () => {
                             <div className="product_preview_inner_item" key={index + 1}>
                                 <div className="row">
                                     <div className="col-lg-4">
-                                        <img src={`${process.env.NEXT_PUBLIC_URL}images/products/${item.featured_image}`} alt={item.item_name} className="img-fluid" />
+                                        <div className="text-center">
+                                            <img style={{ maxHeight: "150px" }} src={`${process.env.NEXT_PUBLIC_URL}images/products/${item.featured_image}`} alt={item.item_name} className="img-fluid" />
+                                        </div>
                                     </div>
                                     <div className="col-lg-7">
                                         <div className="">
-                                            <h4 className="product_preview_title">{item.item_name && item.item_name}</h4>
+                                            <Link href={"/products/" + item.item_sku}>
+                                                <a className="text-decoration-none">
+                                                    <h4 className="product_preview_title pointer">{item.item_name && item.item_name}</h4>
+                                                </a>
+                                            </Link>
                                             <PriceCalculation item={item} />
                                             <h6>Tax Amount : {item.tax_amount && `৳ ${item.tax_amount}`}</h6>
                                             <h6 style={{ color: "#6c6c6c", fontWeight: 400, fontSize: '1rem' }}>Seller: {item.business_name && item.business_name}</h6>
@@ -84,7 +91,7 @@ const ProductListForReview = () => {
                 show={show}
                 handleClose={handleClose}
             >
-                <ProductReviewCreate ReviewItem={ReviewItem} />
+                <ProductReviewCreate ReviewItem={ReviewItem} handleClose={handleClose} />
             </SimpleModal>
         </>
     );

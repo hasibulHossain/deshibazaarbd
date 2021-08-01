@@ -5,6 +5,7 @@ import { getReviewListByUser } from './_redux/action/reviewAction';
 import ReactStars from "react-rating-stars-component";
 import WarningMessage from '../master/warningMessage/WarningMessage';
 import PriceCalculation from '../products/partials/PriceCalculation';
+import Link from 'next/link';
 
 const ProductReviewHistory = () => {
     const dispatch = useDispatch();
@@ -50,7 +51,11 @@ const ProductReviewHistory = () => {
                                     </div>
                                     <div className="col-lg-7">
                                         <div className="">
-                                            <h4 className="product_preview_title">{item.item_name && item.item_name}</h4>
+                                            <Link href={"/products/" + item.item_sku}>
+                                                <a className="text-decoration-none">
+                                                    <h4 className="product_preview_title pointer">{item.item_name && item.item_name}</h4>
+                                                </a>
+                                            </Link>
                                             <PriceCalculation item={item} />
                                             <h6> By : {item.rating_by}</h6>
                                             <ReactStars
