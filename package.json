@@ -2,6 +2,7 @@
     "name": "deshibazaarbd",
     "version": "0.0.1",
     "private": true,
+    "homepage": "https://deshi.programmingshikhi.com",
     "scripts": {
         "dev": "next dev",
         "dev2": "next dev -p 3001",
