@@ -8,6 +8,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import SimpleModal from '../master/Modal/SimpleModal.js';
 import SimpleConfirmComponent from '../master/Modal/SimpleConfirmComponent.js';
 
+import { faEye, faPrint, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 const SingleOrder = ({ item, isManageable = true }) => {
 
     const dispatch = useDispatch();
@@ -55,16 +58,18 @@ const SingleOrder = ({ item, isManageable = true }) => {
                                 isManageable && (
                                     <Link href={`/order/${item.id}`}>
                                         <a>
-                                            <SimpleBtn variant="btn_danger" style={{ width: 'fit-content', marginRight: "10px" }}>View</SimpleBtn>
+                                            <button class="btn btn-info btn-sm mr-2">
+                                                <FontAwesomeIcon icon={faEye} /> View
+                                            </button>
                                         </a>
                                     </Link>
                                 )
                             }
                             <Link href={`/order/invoice/${item.id}`}>
                                 <a>
-                                    <SimpleBtn variant="btn-secondary" style={{ width: 'fit-content' }}>
-                                        Invoice
-                                    </SimpleBtn>
+                                    <button class="btn btn-danger btn-sm">
+                                        <FontAwesomeIcon icon={faPrint} /> Invoice
+                                    </button>
                                 </a>
                             </Link>
                         </div>
@@ -72,7 +77,7 @@ const SingleOrder = ({ item, isManageable = true }) => {
                             isManageable && item.is_suspend == 0 && (
                                 <div className="float-right">
                                     <SimpleBtn variant="simple_btn_bg" style={{ width: 'fit-content' }} onClick={() => toggleShowHandler(item)}>
-                                        Cancel
+                                        <FontAwesomeIcon icon={faTimes} /> Cancel
                                     </SimpleBtn>
                                 </div>
                             )

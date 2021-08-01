@@ -31,9 +31,11 @@ const FilterOrderList = () => {
                             isLoading     = {false}
                             isClearable   = {true}
                             isSearchable  = {true}
-                            onChange={(option) => (
-                                dispatch(getUserOrderList(option.value))
-                            )}
+                            onChange={(option) => {
+                                if (typeof option !== 'undefined' && option !== null) {
+                                    dispatch(getUserOrderList(option.value))
+                                }
+                            }}
                             name    = "color"
                             options = {filterOptionList}
                         />
