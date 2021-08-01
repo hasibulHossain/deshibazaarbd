@@ -10,9 +10,7 @@ const OrderSuccess = ({ invoice }) => {
 
     useEffect(() => {
         dispatch(getOrderDetails(invoice))
-    }, [])
-
-    console.log('orderDetails :>> ', orderDetails);
+    }, []);
 
     return (
         <OrderInvoice title={translate('Order Successfull')} id={52} />
