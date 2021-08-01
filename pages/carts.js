@@ -64,9 +64,9 @@ export default function Carts() {
             <div className="col-md-8">
               <div className="cart_container_body">
                 <p className="cart__preferred_delivery">
-                  preferred delivery option
+                  My Carts
                 </p>
-                <Card>
+                {/* <Card>
                   <div className="cart__left-top">
                     <div>
                       <IoIosCheckmarkCircle />
@@ -74,7 +74,7 @@ export default function Carts() {
                     </div>
                     <p>Availability and promotions will be shown here</p>
                   </div>
-                </Card>
+                </Card> */}
                 <div className="card mt-3 mb-2">
 
                   <div className="cart_item_box_top">
@@ -82,10 +82,10 @@ export default function Carts() {
                       <input className="cart-checkbox" type="checkbox" checked={checkedAllCarts} onChange={() => {}} /> 
                       &nbsp; Select All ({carts.length} items)
                     </p>
-                    <div className="carts_delete" onClick={deleteItemsHandler}>
+                    {/* <div className="carts_delete" onClick={deleteItemsHandler}>
                       <FontAwesomeIcon className="cart_trash" icon={faTrash} />
                       <p>Delete</p>
-                    </div>
+                    </div> */}
                   </div>
 
                   {
