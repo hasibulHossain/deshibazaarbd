@@ -56,7 +56,7 @@ export const handleChangeReviewItemInput = (name, value) => (dispatch) => {
 }
 
 // store review 
-export const storeReviewData = (reviewStoreInput) => (dispatch => {
+export const storeReviewData = (reviewStoreInput, handleClose) => (dispatch => {
     let responseData = {
         status: false,
         message: "",
@@ -64,6 +64,9 @@ export const storeReviewData = (reviewStoreInput) => (dispatch => {
         returnData: ""
     };
     dispatch({ type: Types.STORE_REVIEW_DATA, payload: responseData });
+
+    const { userData } = JSON.parse(localStorage.getItem('loginData'));
+    const userID       = userData.id;
 
     Axios.post(`${process.env.NEXT_PUBLIC_API_URL}item-review/create`, reviewStoreInput)
         .then((res) => {
@@ -74,12 +77,16 @@ export const storeReviewData = (reviewStoreInput) => (dispatch => {
                 responseData.isLoading = false;
                 showToast('success', "your review added successfully!")
                 dispatch({ type: Types.STORE_REVIEW_DATA, payload: responseData });
+                dispatch(getItemListByUser());
+                dispatch(getReviewListByUser(reviewStoreInput.item_id, userID));
+                handleClose();
             }
         })
         .catch((err) => {
             const { response } = err;
-            const { request, ...errorObject } = response;
+            // const { request, ...errorObject } = response;
             responseData.isLoading = false;
             dispatch({ type: Types.STORE_REVIEW_DATA, payload: responseData });
+            // handleClose();
         });
 })

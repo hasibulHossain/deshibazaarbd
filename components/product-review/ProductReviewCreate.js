@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Modal } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import ReactStars from "react-rating-stars-component";
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,42 +8,26 @@ import SimpleBtn from '../master/SimpleBtn/SimpleBtn';
 import PriceCalculation from '../products/partials/PriceCalculation';
 import { handleChangeReviewItemInput, storeReviewData } from './_redux/action/reviewAction';
 
-const ProductReviewCreate = ({ ReviewItem }) => {
+const ProductReviewCreate = ({ ReviewItem, handleClose }) => {
 
-    const dispatch = useDispatch()
-    const [ratingValue, setRatingValue] = React.useState(1);
-    const secondExample = {
-        size: 25,
-        count: 5,
-        color: "black",
-        activeColor: "gold",
-        value: ratingValue,
-        a11y: true,
-        // isHalf: true,
-        emptyIcon: <i className="far fa-star" />,
-        halfIcon: <i className="fa fa-star-half-alt" />,
-        filledIcon: <i className="fa fa-star" />,
-        onChange: (newValue) => {
-            setRatingValue(newValue)
-        }
-    };
-
+    const dispatch                                  = useDispatch()
+    const [ratingValue, setRatingValue]             = React.useState(1);
+    const reviewSubmitting                          = useSelector((state) => state.ReviewReducer.reviewSubmitting);
+    const reviewInput                               = useSelector((state) => state.ReviewReducer.reviewInput);
     const { register, handleSubmit, watch, errors } = useForm();
-    const reviewSubmitting = useSelector((state) => state.ReviewReducer.reviewSubmitting);
-    const reviewInput = useSelector((state) => state.ReviewReducer.reviewInput);
 
     const reviewStoreInput = {
-        item_id: ReviewItem.item_id,
+        item_id     : ReviewItem.item_id,
         rating_value: ratingValue,
-        comment: reviewInput.comment,
-        images: reviewInput.images
+        comment     : reviewInput.comment,
+        images      : reviewInput.images
     }
     const handleChangeCouponCode = (name, value) => {
         dispatch(handleChangeReviewItemInput(name, value))
     }
 
     const onSubmit = () => {
-        dispatch(storeReviewData(reviewStoreInput))
+        dispatch(storeReviewData(reviewStoreInput, handleClose))
     };
 
     return (
@@ -68,7 +52,13 @@ const ProductReviewCreate = ({ ReviewItem }) => {
                                     <PriceCalculation item={ReviewItem} />
                                     <p>Discount Amount : ৳ {ReviewItem.tax_amount && ReviewItem.tax_amount}</p>
                                 </div>
-                                <ReactStars {...secondExample} />
+                                <ReactStars
+                                    count={5}
+                                    value={ratingValue}
+                                    onChange={(newValue) => setRatingValue(newValue)}
+                                    size={30}
+                                    activeColor="#ffd700"
+                                />,
                                 <label>Review detail</label>
                                 <textarea
                                     className="form-control"
@@ -110,7 +100,7 @@ const ProductReviewCreate = ({ ReviewItem }) => {
 
                     {reviewSubmitting && (
                         <SimpleBtn variant="simple_btn_bg" style={{ width: 'fit-content', float: "right", marginTop: "10px", cursor: "not-allowed" }}>
-                            <span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span> Submitting...
+                            <span className="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span> Submitting...
                         </SimpleBtn>
                     )}
                 </form>

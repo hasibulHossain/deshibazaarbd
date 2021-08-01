@@ -18,7 +18,7 @@ const ProductReview = () => {
     }, []);
 
     return (
-        <div class="container">
+        <div className="container">
             <div className="row">
                 <div className="col-md-3">
                     <ProfileSideBar />
