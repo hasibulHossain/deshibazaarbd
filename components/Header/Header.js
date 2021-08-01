@@ -51,13 +51,6 @@ const Header = () => {
 		dispatch(handleLogoutUser());
 	}
 
-	useEffect(() => {
-		if (!userData) {
-			router.push("/login");
-		}
-	}, [userData])
-
-
 	return (
 		<div>
 			<HeaderTop />
