@@ -2733,3 +2733,6 @@ img.payment_method_in_shipping {
   right: 0;
   top: 0;
 }
+.order_total_price{
+  display: block;
+}
