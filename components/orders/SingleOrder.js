@@ -10,11 +10,11 @@ import SimpleConfirmComponent from '../master/Modal/SimpleConfirmComponent.js';
 
 const SingleOrder = ({ item, isManageable = true }) => {
 
-    const dispatch                  = useDispatch();
-    const [show, setShow]           = useState(false);
+    const dispatch = useDispatch();
+    const [show, setShow] = useState(false);
     const [orderItem, setOrderItem] = useState(null);
-    const userData                  = useSelector((state) => state.UserDataReducer.userData);
-    const { isDeleting }            = useSelector((state) => state.OrderReducer);
+    const userData = useSelector((state) => state.UserDataReducer.userData);
+    const { isDeleting } = useSelector((state) => state.OrderReducer);
 
     const toggleShowHandler = (item) => {
         setShow(preState => !preState);
@@ -48,15 +48,40 @@ const SingleOrder = ({ item, isManageable = true }) => {
                         {
                             !isManageable && <h6>{item.delivery_status && item.delivery_status == "not_delivered" ? "Not Delivered" : "Delivered"}</h6>
                         }
-
                     </div>
-                    {
+                    <div>
+                        <div className="d-flex mb-2">
+                            {
+                                isManageable && (
+                                    <Link href={`/order/${item.id}`}>
+                                        <a>
+                                            <SimpleBtn variant="btn_danger" style={{ width: 'fit-content', marginRight: "10px" }}>View</SimpleBtn>
+                                        </a>
+                                    </Link>
+                                )
+                            }
+                            <Link href={`/order/invoice/${item.id}`}>
+                                <a>
+                                    <SimpleBtn variant="btn-secondary" style={{ width: 'fit-content' }}>
+                                        Invoice
+                                    </SimpleBtn>
+                                </a>
+                            </Link>
+                        </div>
+                        {
+                            isManageable && item.is_suspend == 0 && (
+                                <div className="float-right">
+                                    <SimpleBtn variant="simple_btn_bg" style={{ width: 'fit-content' }} onClick={() => toggleShowHandler(item)}>
+                                        Cancel
+                                    </SimpleBtn>
+                                </div>
+                            )
+                        }
+                    </div>
+
+                    {/* {
                         isManageable && (
                             <div>
-                                <Link href={`/order/${item.id}`}>
-                                    <a><button className="btn text-primary">Manage</button></a>
-                                </Link>
-
                                 {
                                     item.is_suspend == 0 && (
                                         <div className="d-block">
@@ -68,7 +93,7 @@ const SingleOrder = ({ item, isManageable = true }) => {
                                 }
                             </div>
                         )
-                    }
+                    } */}
 
                 </div>
                 <div className="order_product_list p-3">

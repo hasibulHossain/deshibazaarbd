@@ -2741,3 +2741,6 @@ img.payment_method_in_shipping {
   top: 25%;
   left: 20%;
 }
+.btn_danger{
+  background-color: #f33a1e!important;
+}
