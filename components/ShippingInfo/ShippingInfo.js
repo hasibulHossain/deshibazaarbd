@@ -94,35 +94,38 @@ const ShippingInfo = () => {
                             <p> <FontAwesomeIcon className="collection_suggesting_fontAwesome" icon={faQuestionCircle} /> </p>
                         </div>
                     </div>
-                    <div className="mt-4">
-                        <div className="d-flex justify-content-between">
-                            <p className="shipping_billing_details_info">
-                                <FontAwesomeIcon className="shipping_billing_info_fontAwesome" icon={faHome} />
-                                <span>Bill to the same address</span>
-                            </p>
-                            <p className="customer_info_edit">
-                                <FontAwesomeIcon icon={faPencilAlt} /> <span>Edit</span>
-                            </p>
+
+                    { defaultBillingAddress !== null && defaultBillingAddress.length > 0 &&
+                        <div className="mt-4">
+                            <div className="d-flex justify-content-between">
+                                <p className="shipping_billing_details_info">
+                                    <FontAwesomeIcon className="shipping_billing_info_fontAwesome" icon={faHome} />
+                                    <span>Bill to the same address</span>
+                                </p>
+                                <p className="customer_info_edit" onClick={() => editHandler(defaultBillingAddress[0].id, defaultBillingAddress[0].type)} >
+                                    <FontAwesomeIcon icon={faPencilAlt} /> <span>Edit</span>
+                                </p>
+                            </div>
+                            <div className="d-flex justify-content-between">
+                                <p className="shipping_billing_details_info">
+                                    <FontAwesomeIcon className="shipping_billing_info_fontAwesome ml-1" icon={faMobileAlt} />
+                                    <span> {userData && userData.phone_no} </span>
+                                </p>
+                                <p className="customer_info_edit" onClick={() => editHandler(defaultBillingAddress[0].id, defaultBillingAddress[0].type)} >
+                                    <FontAwesomeIcon icon={faPencilAlt} /> <span>Edit</span>
+                                </p>
+                            </div>
+                            <div className="d-flex justify-content-between">
+                                <p className="shipping_billing_details_info">
+                                    <FontAwesomeIcon className="shipping_billing_info_fontAwesome" icon={faEnvelopeOpen} />
+                                    <span>{userData && userData.email}</span>
+                                </p>
+                                <p className="customer_info_edit" onClick={() => editHandler(defaultBillingAddress[0].id, defaultBillingAddress[0].type)}>
+                                    <FontAwesomeIcon icon={faPencilAlt} /> <span>Edit</span>
+                                </p>
+                            </div>
                         </div>
-                        <div className="d-flex justify-content-between">
-                            <p className="shipping_billing_details_info">
-                                <FontAwesomeIcon className="shipping_billing_info_fontAwesome ml-1" icon={faMobileAlt} />
-                                <span> {userData && userData.phone_no} </span>
-                            </p>
-                            <p className="customer_info_edit">
-                                <FontAwesomeIcon icon={faPencilAlt} /> <span>Edit</span>
-                            </p>
-                        </div>
-                        <div className="d-flex justify-content-between">
-                            <p className="shipping_billing_details_info">
-                                <FontAwesomeIcon className="shipping_billing_info_fontAwesome" icon={faEnvelopeOpen} />
-                                <span>{userData && userData.email}</span>
-                            </p>
-                            <p className="customer_info_edit">
-                                <FontAwesomeIcon icon={faPencilAlt} /> <span>Edit</span>
-                            </p>
-                        </div>
-                    </div>
+                    }
                 </div>
             </div>
             <SimpleModal

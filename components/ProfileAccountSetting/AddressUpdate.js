@@ -286,38 +286,41 @@ const AddressUpdate = (props) => {
                     </div>
                 </div>
 
+                <div className="row">
+                    <div className="deliver_info_footer col-md-6 mt-3">
+                        <h6 className="select_title">
+                            Select a label for effective delivery:
+                        </h6>
+                        <div className="d-flex mt-3">
+                            <p className={`btn home_btn mr-3 pointer ${selectedAddress.location === "home" ? "active_delivery_label" : ""}`} onClick={() => handleChangeTextInput("location", "home")}>
+                                <FontAwesomeIcon icon={faHome} className="mr-1" /> Home
+                            </p>
 
-                <div className="deliver_info_footer col-md-6 mt-3">
-                    <h6 className="select_title">
-                        Select a label for effective delivery:
-                    </h6>
-                    <div className="d-flex mt-3">
-                        <p className={`btn home_btn mr-3 pointer ${selectedAddress.location === "home" ? "active_delivery_label" : ""}`} onClick={() => handleChangeTextInput("location", "home")}>
-                            <FontAwesomeIcon icon={faHome} className="mr-1" /> Home
-                        </p>
-
-                        <p className={`btn office_btn pointer ${selectedAddress.location === "office" ? "active_delivery_label" : ""}`} onClick={() => handleChangeTextInput("location", "office")}>
-                            <FontAwesomeIcon icon={faBriefcase} className="mr-1" /> Office
-                        </p>
+                            <p className={`btn office_btn pointer ${selectedAddress.location === "office" ? "active_delivery_label" : ""}`} onClick={() => handleChangeTextInput("location", "office")}>
+                                <FontAwesomeIcon icon={faBriefcase} className="mr-1" /> Office
+                            </p>
+                        </div>
                     </div>
-                </div>
 
-                <div className="row justify-content-end">
-                    {
-                        !isSubmitting && (
-                            <button onClick={submitUpdatedAddressHandler} type="submit" className="btn btn-primary mr-3">Submit</button>
-                        )
-                    }
-                    {
-                        isSubmitting && (
-                            <button type="submit" disabled={true} className="btn btn-primary mr-3 d-flex align-items-center">
-                                <Spinner animation="border" role="status">
-                                    <span className="sr-only">Loading...</span>
-                                </Spinner>
-                                <span className="ml-2">submitting...</span>
-                            </button>
-                        )
-                    }
+                    <div className="col-md-6 mt-3 text-right mt-5">
+                        {
+                            !isSubmitting && (
+                                <button onClick={submitUpdatedAddressHandler} type="submit" className="btn btn-success mr-3">
+                                    Save
+                                </button>
+                            )
+                        }
+                        {
+                            isSubmitting && (
+                                <button type="submit" disabled={true} className="btn btn-success mr-3 d-flex align-items-center">
+                                    <Spinner animation="border" role="status">
+                                        <span className="sr-only">Loading...</span>
+                                    </Spinner>
+                                    <span className="ml-2">Saving...</span>
+                                </button>
+                            )
+                        }
+                    </div>
                 </div>
             </form>
         </>
