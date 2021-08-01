@@ -37,7 +37,7 @@ const SingleOrder = ({ item, isManageable = true }) => {
 
     return (
         <>
-            <div className="card shadow-sm mt-3">
+            <div className="card shadow-sm mt-2 mb-2">
                 <div className="d-flex justify-content-between align-items-start order_list_filtered p-2">
                     <div className="order_header">
                         {
@@ -67,7 +67,7 @@ const SingleOrder = ({ item, isManageable = true }) => {
                             }
                             <Link href={`/order/invoice/${item.id}`}>
                                 <a>
-                                    <button class="btn btn-danger btn-sm">
+                                    <button class="btn btn-success btn-sm">
                                         <FontAwesomeIcon icon={faPrint} /> Invoice
                                     </button>
                                 </a>
@@ -76,9 +76,9 @@ const SingleOrder = ({ item, isManageable = true }) => {
                         {
                             isManageable && item.is_suspend == 0 && (
                                 <div className="float-right">
-                                    <SimpleBtn variant="simple_btn_bg" style={{ width: 'fit-content' }} onClick={() => toggleShowHandler(item)}>
+                                    <button class="btn btn-danger btn-sm" onClick={() => toggleShowHandler(item)}>
                                         <FontAwesomeIcon icon={faTimes} /> Cancel
-                                    </SimpleBtn>
+                                    </button>
                                 </div>
                             )
                         }
