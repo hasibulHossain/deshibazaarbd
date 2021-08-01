@@ -1,5 +1,8 @@
+import router from 'next/router';
 import React, { useEffect } from 'react';
+import { translate } from '../../services/translation/translation';
 import Button from '../master/Button/Button';
+import Translate from '../translation/Translate';
 
 const OfferProducts = () => {
 
@@ -14,8 +17,8 @@ const OfferProducts = () => {
                 <div className="col-md-6">
                     <div className="offer_product_section-right">
                         <div className="offer_product_details">
-                            <h2>crazy <br /> offer</h2>
-                            <Button buttonText="Shop Now" />
+                            <h2><Translate>Crazy Offer</Translate></h2>
+                            <Button buttonText={translate('Shop Now')} onClick={() => router.push('/products')} />
                         </div>
                         <div className="offer_product_img">
                             <img src={"/images/offer/bike.png"} alt="Car offers" className="img-fluid" />

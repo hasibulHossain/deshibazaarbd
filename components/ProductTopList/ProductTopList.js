@@ -5,6 +5,7 @@ import TopProductSlickSetting from './TopProductSlickSetting';
 import { getTopProductList } from './_redux/Action/ProductTopListAction';
 import { toggleProductModalAction } from "../products/_redux/Action/ProductAction";
 import { formatCurrency } from '../../services/currency';
+import Translate from '../translation/Translate';
 
 const ProductTopList = () => {
     const dispatch = useDispatch();
@@ -21,12 +22,15 @@ const ProductTopList = () => {
                     topProductList.length > 0 && topProductList.map((item, index) => (
                         <div key={index} className="top-product-card" onClick={() => dispatch(toggleProductModalAction(item.sku))}>
                             <div className="top-product-details">
-                               <p className="title">Hot Deal Products</p>
+                               <p className="title">
+                                   <Translate>Hot Deal Products</Translate>
+                                </p>
                                <h5 className="top-product-name">{item.name}</h5>
-                               <p>Price: 
-                                   <span className="price">
-                                    {formatCurrency(item.offer_selling_price)}
-                                   </span> <sup><del>{formatCurrency(item.default_selling_price)}</del></sup>
+                               <p>
+                                    <Translate>Price</Translate>: 
+                                    <span className="price">
+                                        {formatCurrency(item.offer_selling_price)}
+                                    </span> <sup><del>{formatCurrency(item.default_selling_price)}</del></sup>
                                 </p>
                             </div>
                             <div className="top-product-banner">

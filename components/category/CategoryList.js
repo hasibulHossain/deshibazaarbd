@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { getCategories } from "./_redux/Action/CategoryAction";
 import LoadingSkelleton from "../master/skelleton/LoadingSkelleton";
+import Translate from "../translation/Translate";
+import { translate } from "../../services/translation/translation";
 
 const CategoryList = ({ parentID = null }) => {
 
@@ -45,9 +47,11 @@ const CategoryList = ({ parentID = null }) => {
             <div key={index} className="category-card col-md-2">
               <div className="category-card-body" onClick={() => navigateCategoryList(item.id)}>
                 <div className="category-img-area">
-                  <img src={item.image_url} alt={item.name} className="img-fluid" />
+                  <img src={item.image_url} alt={translate(item.name)} className="img-fluid" />
                 </div>
-                <p className="category-title">{item.name}</p>
+                <p className="category-title">
+                  <Translate>{item.name}</Translate>
+                </p>
               </div>
             </div>
           ))}

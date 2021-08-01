@@ -16,7 +16,7 @@ const CategoryListContainer = ({ parentID = null }) => {
                     parentID !== 'all' && 
                     <Link href="/categories">
                         <a href="/categories">
-                            <Button buttonText={translate('View All')} isFontAwesome={true} />
+                            <Button buttonText={translate('View all')} isFontAwesome={true} />
                         </a>
                     </Link>
                 }

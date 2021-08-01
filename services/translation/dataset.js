@@ -67,6 +67,46 @@ export default [
 
     // Home Page
     {
+        'key': 'Only This Weak',
+        'en' : 'Only This Weak',
+        'bn' : 'শুধুমাত্র এই সপ্তাহের জন্য'
+    },
+    {
+        'key': 'New Collection Of',
+        'en' : 'New Collection Of',
+        'bn' : 'নতুন কালেকশন'
+    },
+    {
+        'key': 'Explore New Collection Of',
+        'en' : 'Explore New Collection Of',
+        'bn' : 'নতুন কালেকশন দেখুন'
+    },
+    {
+        'key': 'View Collection',
+        'en' : 'View Collection',
+        'bn' : 'কালেকশনগুলো দেখুন'
+    },
+    {
+        'key': 'Shop Now',
+        'en' : 'Shop Now',
+        'bn' : 'কেনাকাটা করুন'
+    },
+    {
+        'key': 'Crazy Offer',
+        'en' : 'Crazy Offer',
+        'bn' : 'আকর্ষণীয় অফার'
+    },
+    {
+        'key': 'Hot Deal Products',
+        'en' : 'Hot Deal Products',
+        'bn' : 'হট ডিল প্রোডাক্টসমূহ'
+    },
+    {
+        'key': 'Price',
+        'en' : 'Price',
+        'bn' : 'মূল্য'
+    },
+    {
         'key': 'Deals OF The Day',
         'en' : 'Deals OF The Day',
         'bn' : 'আজকের ডিলস'
