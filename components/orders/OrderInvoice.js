@@ -33,8 +33,6 @@ const OrderInvoice = ({ title = translate('Invoice'), id, is_invoice = false }) 
         document.body.innerHTML = originalContents;
     }
 
-    console.log(`orderDetails`, orderDetails);
-
     return (
         <div>
             {
@@ -49,7 +47,7 @@ const OrderInvoice = ({ title = translate('Invoice'), id, is_invoice = false }) 
                                 <div className="col-9">
                                     <h3>{title} {is_invoice ? `#${id}` : ``} </h3>
                                     <h4><Translate>Order No </Translate>: <span className="small">{id}</span></h4>
-                                    <p><Translate>Order Placed at </Translate>: 
+                                    <p><Translate>Order Placed at </Translate> : {' '}
                                     <span className="small">
                                         {moment(orderDetails.transaction_date).format("dddd, MMMM Do YYYY")}
                                     </span></p>
@@ -183,7 +181,7 @@ const OrderInvoice = ({ title = translate('Invoice'), id, is_invoice = false }) 
             {
                  typeof orderDetails === 'undefined' || orderDetails === null &&
                  <div className="card card-body p-5">
-                     <h5>Loading Order Information...</h5>
+                     <h5>Loading Order Information for <span className="text-success">Invoice #{id}</span>...</h5>
                  </div>
             }
             
