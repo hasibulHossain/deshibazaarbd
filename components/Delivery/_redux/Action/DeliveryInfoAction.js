@@ -24,9 +24,10 @@ export const storeSells = (customerInfo, carts, totalQuantity, shippingCost, tot
     shippingCost = 50;
     shippingCost = isNaN(shippingCost) ? 0 : parseFloat(shippingCost);
 
-    const getUserData  = JSON.parse(localStorage.getItem('loginData'))
-    const { userData } = getUserData;
-    let sale_lines     = [];
+    const getUserData    = JSON.parse(localStorage.getItem('loginData'))
+    const { userData }   = getUserData;
+    const payment_method = localStorage.getItem('payment_method') || 'cash';
+    let sale_lines       = [];
 
     carts.forEach((item) => {
         const singleItem = {
@@ -38,7 +39,7 @@ export const storeSells = (customerInfo, carts, totalQuantity, shippingCost, tot
             item_tax          : 0
         }
         sale_lines.push(singleItem)
-    })
+    });
 
     const orderPostedData = {
         business_id     : userData.business_id,
@@ -56,7 +57,7 @@ export const storeSells = (customerInfo, carts, totalQuantity, shippingCost, tot
         discount_type_id: discountType,
         tax_id          : 1,
         discount_amount : discountAmount,
-        shipping_details: '', // @todo set user default shipping address here
+        shipping_details: '', // @todo No needs, remove when fixed api
         order_quantity  : totalQuantity,
         shipping_charges: shippingCost,
         additional_notes: '',
@@ -65,6 +66,7 @@ export const storeSells = (customerInfo, carts, totalQuantity, shippingCost, tot
         due_total       : shippingCost + totalPrice,
         final_total     : shippingCost + totalPrice,
         sale_lines      : sale_lines,
+        payment_method  : payment_method
     }
 
     let response = {
@@ -74,6 +76,12 @@ export const storeSells = (customerInfo, carts, totalQuantity, shippingCost, tot
     }
 
     dispatch({ type: Types.ORDER_SUBMIT, payload: response });
+    const invoiceURL = `${window.location.protocol}//${window.location.host}/order/invoice/`;
+
+    if(typeof payment_method === 'undefined' && payment_method === null || payment_method === '') {
+        showToast('error', 'Please select a payment method');
+        return false;
+    }
 
     Axios.post(`${process.env.NEXT_PUBLIC_API_URL}sales`, orderPostedData)
         .then((res) => {
@@ -84,12 +92,20 @@ export const storeSells = (customerInfo, carts, totalQuantity, shippingCost, tot
                 localStorage.removeItem("carts");
                 dispatch(getCartsAction());
                 localStorage.setItem('tr', encrypt(res.data.data.id));
-                showToast('success', 'Your order placed successfully');
+
+                showToast('success', res.data.message);
                 dispatch({ type : Types.ORDER_SUBMIT, payload: response });
 
-                if(res.data.data.payment !== null) {
-                    window.location.href = res.data.data.payment.forwarding_url
-                }
+                setTimeout(() => {
+                    if(payment_method === 'cash') {
+                        const url = `${invoiceURL}${res.data.data.id}`;
+                        window.location.href = url;
+                    } else {
+                        if(res.data.data.payment !== null) {
+                            window.location.href = res.data.data.payment.forwarding_url
+                        }
+                    }
+                }, 1000);
             }
         }).catch((err) => {
             const responseLog = err.response;
