@@ -2733,6 +2733,11 @@ img.payment_method_in_shipping {
   right: 0;
   top: 0;
 }
-.order_total_price{
+.order_total_price {
   display: block;
+}
+.order_lifecycle_order_ID p {
+  position: absolute;
+  top: 25%;
+  left: 20%;
 }

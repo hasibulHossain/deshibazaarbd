@@ -5,6 +5,7 @@ const initialState = {
   products: [],
   loading_add: false,
   loading_update: false,
+  lifeCycleLoading: false,
   isDeleting: false,
   add_message: "",
   delete_message: "",
@@ -32,6 +33,7 @@ const initialState = {
   },
   couponLoading: false,
   couponData: {},
+  OrderLifeCycleDetails: null,
   orderList: [],
   orderDetails: [],
   filterOptionList: [],
@@ -68,7 +70,12 @@ const OrderReducer = (state = initialState, action) => {
         orderDetails: action.payload.data,
         isLoading: action.payload.isLoading,
       };
-
+    case Types.GET_ORDER_LIFECYCLE_DETAILS:
+      return {
+        ...state,
+        OrderLifeCycleDetails: action.payload.data,
+        lifeCycleLoading: action.payload.isLoading,
+      }
     case Types.GET_ORDER_FILTER_OPTION_DATA:
       return {
         ...state,

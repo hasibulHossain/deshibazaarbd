@@ -12,5 +12,4 @@ const WarningMessage = ({text}) => {
         </div>
     );
 };
-
 export default WarningMessage;

@@ -309,3 +309,27 @@ export const handleCancelOrder = (order_id, closeModal, user_id) => (dispatch) =
 
     })
 }
+
+//get order life cycle details data 
+export const getOrderLifeCycleData = (id) => (dispatch) => {
+  let responseList = {
+      isLoading: true,
+      data: {},
+      status: false,
+  };
+  dispatch({ type: Types.GET_ORDER_LIFECYCLE_DETAILS, payload: responseList });
+  Axios.get(`${baseUrl}sales/order-lifecycle/${id}`)
+      .then((res) => {
+          if (res.data.status) {
+              const { data, message, status } = res.data;
+              responseList.status = status;
+              responseList.data = data;
+              responseList.message = message;
+              responseList.isLoading = false;
+              dispatch({ type: Types.GET_ORDER_LIFECYCLE_DETAILS, payload: responseList });
+          }
+      }).catch((err) => {
+          responseList.isLoading = false;
+          dispatch({ type: Types.GET_ORDER_LIFECYCLE_DETAILS, payload: responseList });
+      })
+}
