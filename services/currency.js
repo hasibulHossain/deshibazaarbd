@@ -10,9 +10,9 @@ export function getCurrencies () {
     const currencies = [
         {
             'slug'     : 'en',
-            'code'     : 'USD',
+            'code'     : 'BDT', // USD
             'lang'     : 'EN',
-            'sign'     : '$',
+            'sign'     : '৳', //$
             'flag_link': '/images/languages/usa.png',
             'active'   : false
         },
