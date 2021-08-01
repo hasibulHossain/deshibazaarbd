@@ -75,7 +75,7 @@ export const storeReviewData = (reviewStoreInput, handleClose) => (dispatch => {
                 responseData.message = data.message;
                 responseData.status = data.status;
                 responseData.isLoading = false;
-                showToast('success', "your review added successfully!")
+                showToast('success', responseData.message);
                 dispatch({ type: Types.STORE_REVIEW_DATA, payload: responseData });
                 dispatch(getItemListByUser());
                 dispatch(getReviewListByUser(reviewStoreInput.item_id, userID));
@@ -83,10 +83,11 @@ export const storeReviewData = (reviewStoreInput, handleClose) => (dispatch => {
             }
         })
         .catch((err) => {
-            const { response } = err;
-            // const { request, ...errorObject } = response;
+            // const { response } = err;e
+            const { request, ...errorObject } = err;
             responseData.isLoading = false;
+            showToast("error", "Sorry! Something went wrong...")
             dispatch({ type: Types.STORE_REVIEW_DATA, payload: responseData });
-            // handleClose();
+            handleClose();
         });
 })
