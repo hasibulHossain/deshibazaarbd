@@ -127,7 +127,7 @@ const OrderInvoice = ({ title = translate('Invoice'), id }) => {
                                 <div className="col-4">
                                     <p>
                                         <b>{formatCurrency(2, ',', '')} </b>
-                                        X
+                                        X {' '}
                                         <b>{formatCurrency(200)} </b>
                                     </p>
                                     <p className="product-subtotal">
