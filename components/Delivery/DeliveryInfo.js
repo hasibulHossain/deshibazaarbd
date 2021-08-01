@@ -1,28 +1,46 @@
 import React, { useEffect, useState } from 'react';
-import { getCountry } from '../ProfileAccountSetting/_redux/Action/ProfileAccountSettingAction';
-import { useDispatch } from 'react-redux';
+import { getAddress, getCountry, getDefaultAddress, getSingleAddress } from '../ProfileAccountSetting/_redux/Action/ProfileAccountSettingAction';
+import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentUserDataAction } from './_redux/Action/DeliveryInfoAction';
 import AddressUpdate from './../ProfileAccountSetting/AddressUpdate';
+import LoadingSpinner from '../master/LoadingSpinner/LoadingSpinner';
 
 const DeliveryInfo = () => {
-    
-    const dispatch        = useDispatch();
+
+    const dispatch = useDispatch();
     const [show, setShow] = useState(false);
+    const defaultShippingAddress = useSelector((state) => state.ProfileAccountSettingReducer.defaultShippingAddress);
+    const isLoading = useSelector((state) => state.ProfileAccountSettingReducer.isLoading);
 
     const toggleShowHandler = () => {
         setShow(preState => !preState);
-      }
-    
+    }
+
     useEffect(() => {
-        dispatch(getCurrentUserDataAction())
-        dispatch(getCountry())
+        dispatch(getCurrentUserDataAction());
+        dispatch(getDefaultAddress('shipping_address'));
+        dispatch(getCountry());
+        dispatch(getAddress('shipping_address'));
+        if (defaultShippingAddress.length > 0) {
+            dispatch(getSingleAddress(defaultShippingAddress[0].id, defaultShippingAddress[0].type));
+        }
     }, []);
 
     return (
         <>
             <div className="card p-3 shadow-sm">
                 <h4 className="delivery_info_title">Delivery Information</h4>
-                <AddressUpdate addAddress={true} type="shipping_address" closeModal={toggleShowHandler} />
+                {
+                    !isLoading && defaultShippingAddress.length > 0 && (
+                        <AddressUpdate addAddress={true} type="shipping_address" />
+
+                    )
+                }
+                {
+                    isLoading && (
+                        <LoadingSpinner text="Loading Address..." />
+                    )
+                }
 
                 {/* <p className="delivery_info_sub_title">Shipping address</p>
                 <form

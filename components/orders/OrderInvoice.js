@@ -33,8 +33,6 @@ const OrderInvoice = ({ title = translate('Invoice'), id, is_invoice = false }) 
         document.body.innerHTML = originalContents;
     }
 
-    console.log(`orderDetails`, orderDetails);
-
     return (
         <div>
             {

@@ -190,6 +190,7 @@ export const handleStoreBillingAddress = (billingAddressInput) => (dispatch) => 
 
 // get single address
 export const getSingleAddress = (id, type) => {
+    console.log('id, type :>> ', id, type);
     return {
         type: Types.GET_SINGLE_ADDRESS,
         payload : {
