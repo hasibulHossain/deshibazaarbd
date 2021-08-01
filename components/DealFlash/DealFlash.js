@@ -5,6 +5,7 @@ import ReactStars from "react-rating-stars-component";
 import CountdownTimer from "react-component-countdown-timer";
 import { toggleProductModalAction } from "../products/_redux/Action/ProductAction";
 import { formatCurrency } from "../../services/currency";
+import Translate from "../translation/Translate";
 
 const DealFlash = () => {
 
@@ -18,7 +19,9 @@ const DealFlash = () => {
   return (
     <section className="product-container">
       <div className="product-heading">
-        <h5 className="section-heading">Deals OF The Day</h5>
+        <h5 className="section-heading">
+          <Translate>Deals OF The Day</Translate>
+        </h5>
       </div>
 
       <div className="flash-deal-section">
@@ -54,7 +57,7 @@ const DealFlash = () => {
                       <span className="offerPrice">{formatCurrency(item.offer_selling_price)}</span>
                     </p>
                     <p className="inStock">
-                      Availability : <span>{formatCurrency(item.current_stock, ',', '')} in stock</span>
+                      <Translate>Availability</Translate> : <span>{formatCurrency(item.current_stock, ',', '')}  <Translate>in stock </Translate></span>
                     </p>
                     <div className="flash-count">
                       <CountdownTimer

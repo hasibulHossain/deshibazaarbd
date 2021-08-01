@@ -11,6 +11,7 @@ import DealFlash from "../components/DealFlash/DealFlash";
 import NewCollection from "../components/NewCollection/NewCollection";
 import OfferProducts from "../components/OfferProducts/OfferProducts";
 import ProductSection from "../components/products/ProductSection";
+import { translate } from "../services/translation/translation";
 
 export default function Home() {
 
@@ -24,10 +25,10 @@ export default function Home() {
       <DealFlash />
       <CategoryListContainer url='categories' />
 
-      <ProductSection title="Best Sold" type="best-sold" limit={6} url='best-sold-products' />
-      <ProductSection title="Featured Products For You" type="featured" limit={6} url='featured-products' />
-      <ProductSection title="Fastest Delivery" type="fastest-delivery" limit={6} url='fastest-delivery-products' />
-      <ProductSection title="Latest Products" type="" limit={6} url='latest-products' />
+      <ProductSection title={translate('Best Sold')} type="best-sold" limit={6} url='best-sold-products' />
+      <ProductSection title={translate('Featured Products For You')} type="featured" limit={6} url='featured-products' />
+      <ProductSection title={translate('Fastest Delivery')} type="fastest-delivery" limit={6} url='fastest-delivery-products' />
+      <ProductSection title={translate('Latest Products')} type="" limit={6} url='latest-products' />
 
       {/* <ShopBanner /> */}
       <ShopContainer />

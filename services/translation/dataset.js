@@ -65,6 +65,58 @@ export default [
         'bn' : 'অন্য কীওয়ার্ড দিয়ে চেষ্টা করুন'
     },
 
+    // Home Page
+    {
+        'key': 'Deals OF The Day',
+        'en' : 'Deals OF The Day',
+        'bn' : 'আজকের ডিলস'
+    },
+    {
+        'key': 'Availability',
+        'en' : 'Availability',
+        'bn' : 'এভেইলিবিলিটি'
+    },
+    {
+        'key': 'in stock',
+        'en' : 'in stock',
+        'bn' : 'স্টকে আছে'
+    },
+    {
+        'key': 'Shop by categories',
+        'en' : 'Shop by categories',
+        'bn' : 'ক্যাটাগরি অনুযায়ী দেখুন'
+    },
+    {
+        'key': 'Shop by brands',
+        'en' : 'Shop by brands',
+        'bn' : 'ব্র্যান্ড অনুযায়ী দেখুন'
+    },
+    {
+        'key': 'View all',
+        'en' : 'View all',
+        'bn' : 'সব দেখুন'
+    },
+    {
+        'key': 'Best Sold',
+        'en' : 'Best Sold',
+        'bn' : 'সবচেয়ে বেশি বিক্রিত'
+    },
+    {
+        'key': 'Featured Products For You',
+        'en' : 'Featured Products For You',
+        'bn' : 'ফিচারড প্রোডাক্টস'
+    },
+    {
+        'key': 'Fastest Delivery',
+        'en' : 'Fastest Delivery',
+        'bn' : 'দ্রুততম ডেলিভারি প্রোডাক্টসমূহ'
+    },
+    {
+        'key': 'Latest Products',
+        'en' : 'Latest Products',
+        'bn' : 'সাম্প্রতিক প্রোডাক্টস'
+    },
+
 
 
 
