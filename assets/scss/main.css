@@ -2716,6 +2716,22 @@ img.payment_method_in_shipping {
   font-weight: 700 !important;
   color: #e94651 !important;
 }
+.custom_dropdown_link{
+  color: #e94651!important;
+  font-weight: 400!important;
+}
+.custom_drop_item{
+  transition: 0.5s!important;
+  padding: 5px;
+  display: inline-block!important;
+  width: 90%;
+}
+.custom_drop_item:hover{
+  background-color: #e94651!important;
+  color: #fff!important;
+  border-radius: 5px;
+  width: 90%;
+}
 .order_tracking_form_title {
   color: #172337;
   margin-bottom: 15px;
