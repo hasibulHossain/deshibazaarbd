@@ -26,7 +26,7 @@ const Header = () => {
 	const dispatch = useDispatch();
 	const toggleNav = "basic-navbar-nav";
 	const { totalQuantity } = useSelector((state) => state.CartReducer);
-	const { userData } = useSelector((state) => state.UserDataReducer);
+	const { userData, isLogOut } = useSelector((state) => state.UserDataReducer);
 
 	const toggleCartHandler = () => {
 		dispatch(toggleFloatingCart());
@@ -48,12 +48,15 @@ const Header = () => {
 	}
 
 	const handleLogOut = () => {
-		console.log('object :>> ');
 		dispatch(handleLogoutUser());
-		if (typeof userData !== "undefined" && userData !== null) {
-			router.push("/login")
-		}
 	}
+
+	useEffect(() => {
+		if (!userData) {
+			router.push("/login");
+		}
+	}, [userData])
+
 
 	return (
 		<div>

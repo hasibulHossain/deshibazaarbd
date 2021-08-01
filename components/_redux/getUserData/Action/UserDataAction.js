@@ -7,8 +7,9 @@ export const getUserDataAction = () => async (dispatch) => {
 //logout user    
 export const handleLogoutUser = () => (dispatch) => {
   const logout = localStorage.removeItem('loginData');
+  const isLogOut = true;
   dispatch(getUserDataAction())
-  dispatch({ type: Types.LOGOUT_USER, payload: logout });
+  dispatch({ type: Types.LOGOUT_USER, payload: isLogOut });
 }
 
 //updated user data in local localStorage

@@ -3,6 +3,7 @@ import * as Types from "../Types/Types";
 const initialState = {
   userData: null,
   access_token: null,
+  isLogOut: false,
 };
 
 const UserDataReducer = (state = initialState, action) => {
@@ -12,6 +13,11 @@ const UserDataReducer = (state = initialState, action) => {
         ...state,
         userData: action.payload.userData,
         access_token: action.payload.access_token,
+      };
+    case Types.LOGOUT_USER:
+      return {
+        ...state,
+        isLogOut: action.payload,
       };
 
     default:
