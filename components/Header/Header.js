@@ -1,10 +1,10 @@
 
 import React, { useEffect } from "react";
 import Link from "next/link";
-import { faHeart, faShoppingBag, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faComment, faHeart, faShoppingBag, faSignOutAlt, faUser, faUserCog } from "@fortawesome/free-solid-svg-icons";
 
 import { useDispatch, useSelector } from "react-redux";
-import { Navbar } from "react-bootstrap";
+import { Dropdown, Navbar } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import HeaderTop from "./HeaderTop";
@@ -17,6 +17,8 @@ import { getUserDataAction } from "../_redux/getUserData/Action/UserDataAction";
 
 import Translate from "../translation/Translate";
 import { translate } from "../../services/translation/translation";
+import SimpleBtn from "../master/SimpleBtn/SimpleBtn";
+import ActiveLink from "../master/activeLink/ActiveLink";
 
 const Header = () => {
 	const dispatch = useDispatch();
@@ -71,23 +73,24 @@ const Header = () => {
 								</div>
 
 								<div className="ml-auto header-nav">
-									{
-										!userData ? (
-											<>
-												<Link href="/login" className="header-nav-link">
-													<a className=""><Translate>Sign In</Translate></a>
-												</Link>
+									<div className="d-flex">
+										{
+											!userData ? (
+												<>
+													<Link href="/login" className="header-nav-link">
+														<a className=""><Translate>Sign In</Translate></a>
+													</Link>
 
-												<Link href="/register">
-													<a>
-														<Button buttonText={translate('Sign up')} />
-													</a>
-												</Link>
+													<Link href="/register">
+														<a>
+															<Button buttonText={translate('Sign up')} />
+														</a>
+													</Link>
 
-											</>
-										) : (
-											<>
-												<Link href="/profile" className="header-nav-link">
+												</>
+											) : (
+												<>
+													{/* <Link href="/profile" className="header-nav-link">
 													<a>
 														<FontAwesomeIcon
 															className="custom-fontAwesome"
@@ -95,37 +98,88 @@ const Header = () => {
 														/>{" "}
 														<Translate>My Account</Translate>
 													</a>
-												</Link>
+												</Link> */}
+													<Dropdown>
+														<Dropdown.Toggle variant="simple_btn_bg" className="btn-sm" id="dropdown-basic">
+															<Translate>{userData && userData.first_name + " " + userData.last_name}</Translate>
+														</Dropdown.Toggle>
 
-												<Link href="/wishlist" className="header-nav-link">
-													<a>
-														<FontAwesomeIcon
-															className="custom-fontAwesome"
-															icon={faHeart}
-														/>{" "}
-														<Translate>Wishlist</Translate>
-													</a>
-												</Link>
+														<Dropdown.Menu>
+															<ActiveLink href="/profile" activeLink="activeLink">
+																<FontAwesomeIcon
+																	className=""
+																	icon={faUser}
+																/>{" "}
+																<Translate>My Account</Translate>
+															</ActiveLink>
+															<ActiveLink href="/account-setting" activeLink="activeLink">
+																<FontAwesomeIcon
+																	className=""
+																	icon={faUserCog}
+																/>{" "}
+																<Translate>Account Setting</Translate>
+															</ActiveLink>
+															<ActiveLink href="/wishlist" activeLink="activeLink">
+																<FontAwesomeIcon
+																	className=""
+																	icon={faHeart}
+																/>{" "}
+																<Translate>My Wish list</Translate>
+															</ActiveLink>
+															<ActiveLink href="/order" activeLink="activeLink">
+																<FontAwesomeIcon
+																	className=""
+																	icon={faShoppingBag}
+																/>{" "}
+																<Translate>My Orders</Translate>
+															</ActiveLink>
+															<ActiveLink href="/product-review" activeLink="activeLink">
+																<FontAwesomeIcon
+																	className=""
+																	icon={faComment}
+																/>{" "}
+																<Translate>My Reviews</Translate>
+															</ActiveLink>
+															<ActiveLink href="" activeLink="activeLink">
+																<FontAwesomeIcon
+																	className=""
+																	icon={faSignOutAlt}
+																/>{" "}
+																<Translate>Logout</Translate>
+															</ActiveLink>
+														</Dropdown.Menu>
+													</Dropdown>
 
-												{/* <Link href="/carts" className="header-nav-link"> */}
+													<Link href="/wishlist" className="header-nav-link">
+														<a>
+															<FontAwesomeIcon
+																className="custom-fontAwesome"
+																icon={faHeart}
+															/>{" "}
+															<Translate>Wishlist</Translate>
+														</a>
+													</Link>
 
-												{/* </Link> */}
-											</>
-										)
-									}
-									<span
-										onClick={toggleCartHandler}
-										className="header-nav-link pointer cart-nav-link"
-									>
-										<FontAwesomeIcon
-											className="custom-fontAwesome"
-											icon={faShoppingBag}
-										/>
-										<span className="cart-qty">
-											{formatCartTotalQty(totalQuantity)}
+													{/* <Link href="/carts" className="header-nav-link"> */}
+
+													{/* </Link> */}
+												</>
+											)
+										}
+										<span
+											onClick={toggleCartHandler}
+											className="header-nav-link pointer cart-nav-link"
+										>
+											<FontAwesomeIcon
+												className="custom-fontAwesome"
+												icon={faShoppingBag}
+											/>
+											<span className="cart-qty">
+												{formatCartTotalQty(totalQuantity)}
+											</span>
+											&nbsp;&nbsp; <Translate>Cart</Translate>
 										</span>
-										&nbsp;&nbsp; <Translate>Cart</Translate>
-									</span>
+									</div>
 								</div>
 							</Navbar.Collapse>
 						</div>

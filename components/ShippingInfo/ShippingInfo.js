@@ -15,7 +15,6 @@ const ShippingInfo = () => {
     const dispatch               = useDispatch();
     const { userData }           = useSelector((state) => state.UserDataReducer);
     const isLoading              = useSelector((state) => state.ProfileAccountSettingReducer.isLoading);
-    const defaultShippingAddress = useSelector((state) => state.ProfileAccountSettingReducer.defaultShippingAddress);
     const defaultBillingAddress  = useSelector((state) => state.ProfileAccountSettingReducer.defaultBillingAddress);
     const [show, setShow]        = useState(false);
 
@@ -25,6 +24,7 @@ const ShippingInfo = () => {
 
     const editHandler = (id, type) => {
         dispatch(getSingleAddress(id, type));
+        // dispatch(getSingleAddress(1, "shipping_address"));
         setShow(preState => !preState);
     }
 
