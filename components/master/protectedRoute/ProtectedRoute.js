@@ -1,5 +1,5 @@
 import { useRouter } from "next/router"
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAuthData } from "../../LoginRegistration/_redux/Action/LoginAction";
 import { getUserDataAction } from "../../_redux/getUserData/Action/UserDataAction";
@@ -10,7 +10,8 @@ const ProtectedRoute = (ProtectedComponent) => {
       if (typeof window !== "undefined") {
 
          const Router = useRouter();
-         const dispatch = useDispatch()
+         const dispatch = useDispatch();
+         const [isLoggedIn, setIsLoggedIn] = useState(false)
          const userData = useSelector((state) => state.UserDataReducer.userData);
 
          useEffect(() => {

@@ -46,7 +46,7 @@ const TrackingForm = ({ show, setShow }) => {
                                 <p key={index}>
                                     <Link href={`/order/${item.id}`}>
                                         <a className="text-decoration-none">
-                                            {moment(item.transaction_date).format("DD/MM/YYYY")} - Order {item.id} - {formatCurrency(item.final_total)} {activeCurrency('code')}
+                                            {moment(item.transaction_date).format("DD/MM/YYYY")} - #{item.id} - {formatCurrency(item.final_total)} {activeCurrency('code')}
                                         </a>
                                     </Link>
                                 </p>
