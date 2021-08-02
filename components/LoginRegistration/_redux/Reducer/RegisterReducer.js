@@ -6,12 +6,12 @@ const initialState = {
     isCreating: false,
     is_first_validated: false,
     registerInput: {
-        first_name: '',
-        last_name: '',
-        phone_no: null,
-        email: null,
-        otp: "",
-        password: "",
+        first_name           : "",
+        last_name            : "",
+        phone_no             : "",
+        email                : "",
+        otp                  : "",
+        password             : "",
         password_confirmation: ""
     },
     registerData: null,
