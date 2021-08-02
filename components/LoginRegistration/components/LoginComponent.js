@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookF, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
@@ -8,6 +8,7 @@ import { useRouter } from 'next/dist/client/router';
 import { emptyDispatch, handleLoginInput, loginAction } from '../_redux/Action/LoginAction';
 import { useForm } from 'react-hook-form';
 import ErrorMessage from '../../master/ErrorMessage/ErrorMessage';
+import { getUserDataAction } from '../../_redux/getUserData/Action/UserDataAction';
 
 const LoginComponent = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -33,6 +34,13 @@ const LoginComponent = () => {
         dispatch(emptyDispatch())
     }
 
+    const userData = useSelector((state) => state.UserDataReducer.userData);
+
+    useEffect(() => {
+        dispatch(getUserDataAction());
+    }, [])
+
+    console.log('userData :>> ', userData);
     return (
         <>
             <div className="account_info_body mt-5">

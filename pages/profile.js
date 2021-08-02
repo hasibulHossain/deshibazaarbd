@@ -46,10 +46,6 @@ import ProtectedRoute from "../components/master/protectedRoute/ProtectedRoute";
 
 const profile = () => {
 
-        const router    = useRouter();
-    	const dispatch     = useDispatch();
-    	const { userData } = useSelector((state) => state.UserDataReducer);
-
         useEffect(() => {
             if (typeof window === "undefined") {
                 global.window = {};
