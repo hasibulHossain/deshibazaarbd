@@ -6,6 +6,7 @@ import { getWishListData } from "./_redux/Action/WishlistAction";
 import PriceCalculation from "../products/partials/PriceCalculation.js";
 import RemoveWishlist from "./RemoveWishlist.js";
 import { Button } from '@material-ui/core';
+import Translate from "../translation/Translate.js";
 
 const ProductWishList = () => {
 
@@ -29,7 +30,7 @@ const ProductWishList = () => {
               <div className="card">
                 <div className="card-header bg-white">
                   <h5 className="card-title">
-                    My Wishlist
+                    <Translate> My Wishlist </Translate>
                   </h5>
                 </div>
                 <div className="card-body">

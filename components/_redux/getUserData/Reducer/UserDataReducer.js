@@ -4,6 +4,7 @@ const initialState = {
   userData: null,
   access_token: null,
   isLogOut: false,
+  isLoggedIn: false,
 };
 
 const UserDataReducer = (state = initialState, action) => {

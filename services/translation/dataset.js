@@ -243,6 +243,11 @@ export default [
         'bn' : 'আমার পছন্দ তালিকা'  
     },
     {
+        'key': 'My Wishlist',
+        'en' : 'My Wishlist',
+        'bn' : 'আমার পছন্দ তালিকা'  
+    },
+    {
         'key': 'My Orders',
         'en' : 'My Orders',
         'bn' : 'আমার অর্ডার'  
@@ -261,6 +266,16 @@ export default [
         'key': 'Address Book',
         'en' : 'Address Book',
         'bn' : 'ঠিকানা বই'  
+    },
+    {
+        'key': 'Personal Information',
+        'en' : 'Personal Information',
+        'bn' : 'ব্যক্তিগত তথ্য'  
+    },
+    {
+        'key': 'Add New Address',
+        'en' : 'Add New Address',
+        'bn' : 'নতুন ঠিকানা যোগ করুন'  
     },
     {
         'key': 'Logout',

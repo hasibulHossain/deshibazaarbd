@@ -9,6 +9,7 @@ import AddressUpdate from './AddressUpdate';
 import SimpleBtn from '../master/SimpleBtn/SimpleBtn';
 import LoadingSpinner from '../master/LoadingSpinner/LoadingSpinner';
 import WarningMessage from '../master/warningMessage/WarningMessage';
+import Translate from '../translation/Translate';
 
 const ProfileAccountSetting = () => {
     const dispatch = useDispatch();
@@ -36,9 +37,9 @@ const ProfileAccountSetting = () => {
                             <PersonalInfoForm />
                             <div className="profile_account shadow-sm bg-white" id="address-book">
                                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
-                                    <h6>Address book</h6>
+                                    <h6><Translate>Address Book</Translate></h6>
                                     <SimpleBtn variant="success" style={{ width: 'fit-content' }} onClick={toggleShowHandler}>
-                                        Add new address
+                                        <Translate>Add New Address</Translate>
                                     </SimpleBtn>
                                 </div>
                                 {

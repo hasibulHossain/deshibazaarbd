@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import FilterOrderList from './FilterOrderList';
 import PageTitle from '../master/page-title/PageTitle.jsx'
 import { getUserOrderList } from './_redux/action/OrderAction';
+import Translate from "../translation/Translate.js";
 
 const OrderList = () => {
 
@@ -16,7 +17,7 @@ const OrderList = () => {
 
     return (
         <section className="order_section">
-            <PageTitle title="My Orders" />
+            <PageTitle title={<Translate>My Orders</Translate>} />
             <div className="order_filter_section">
                 <Tabs defaultActiveKey="all" id="uncontrolled-tab-example">
                     <Tab eventKey="all" title="All">
