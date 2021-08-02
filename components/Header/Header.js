@@ -49,6 +49,7 @@ const Header = () => {
 
 	const handleLogOut = () => {
 		dispatch(handleLogoutUser());
+		window.location.reload();
 	}
 
 	return (

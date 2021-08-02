@@ -268,8 +268,8 @@ export default [
         'bn' : 'প্রস্থান'  
     },
     {
-        'key': 'Edit',
-        'en' : 'Edit',
+        'key': 'EDIT',
+        'en' : 'EDIT',
         'bn' : 'এডিট'  
     },
 
