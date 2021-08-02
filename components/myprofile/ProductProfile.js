@@ -11,6 +11,7 @@ import PersonalInformationUpdate from "./PersonalInformationUpdate";
 import AddressUpdate from "./../ProfileAccountSetting/AddressUpdate";
 import Link from 'next/link'
 import WarningMessage from "../master/warningMessage/WarningMessage";
+import Translate from "../translation/Translate";
 
 const ProductProfile = () => {
 
@@ -51,7 +52,7 @@ const ProductProfile = () => {
               <div className="row mt-5">
                 <div className="col-md-6">
                   <div className="card mb-2 default_height shadow-sm p-3 mb-5 bg-white rounded">
-                    <h6>Personal Profile | <span className="edit_profile_link" onClick={(() => handleShow())}>EDIT</span></h6>
+                    <h6> <Translate>Personal Profile</Translate> | <span className="edit_profile_link" onClick={(() => handleShow())}><Translate>EDIT</Translate></span></h6>
                     <div className="border-top">
                       <div className="text-center mt-2">
                         {/* <div className="border rounded-circle p-1" style={{height: "90px", width: "90px"}}>
@@ -82,13 +83,13 @@ const ProductProfile = () => {
                 <div className="col-md-5">
                   <div className="card mb-2 p-3 default_height">
                     <div className="card-title">
-                      <h6>Address Book |
+                      <h6> <Translate>Address Book</Translate> |
 
                         {
                           (( defaultBillingAddress.length > 0) || (defaultShippingAddress.length > 0)) && (
                             <Link href="/account-setting#address-book">
                               <a className="text-decoration-none">
-                                <span className="edit_profile_link ml-2">EDIT</span>
+                                <span className="edit_profile_link ml-2"><Translate>EDIT</Translate></span>
                               </a>
                             </Link>
                           )

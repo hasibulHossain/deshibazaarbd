@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserData } from './_redux/Action/ProfileAccountSettingAction';
 import ErrorMessage from './../master/ErrorMessage/ErrorMessage'
+import Translate from '../translation/Translate';
 
 const PersonalInfoForm = () => {
     const dispatch = useDispatch();
@@ -18,7 +19,7 @@ const PersonalInfoForm = () => {
     }
     return (
         <div className="profile_account shadow-sm bg-white">
-            <h6>Personal Information</h6>
+            <h6><Translate>Personal Information</Translate></h6>
 
             <form
                 onSubmit={handleSubmit(handleUpdatedProfile)}

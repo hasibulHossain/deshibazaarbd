@@ -226,6 +226,68 @@ export default [
         'bn' : 'টেলিভিশন'
     },
 
+    //user profile
+    {
+        'key': 'My Profile',
+        'en' : 'My Profile',
+        'bn' : 'আমার প্রোফাইল'  
+    },
+    {
+        'key': 'Account Setting',
+        'en' : 'Account Setting',
+        'bn' : 'অ্যাকাউন্ট সেটিং'  
+    },
+    {
+        'key': 'My Wish list',
+        'en' : 'My Wish list',
+        'bn' : 'আমার পছন্দ তালিকা'  
+    },
+    {
+        'key': 'My Wishlist',
+        'en' : 'My Wishlist',
+        'bn' : 'আমার পছন্দ তালিকা'  
+    },
+    {
+        'key': 'My Orders',
+        'en' : 'My Orders',
+        'bn' : 'আমার অর্ডার'  
+    },
+    {
+        'key': 'My Reviews',
+        'en' : 'My Reviews',
+        'bn' : 'আমার পর্যালোচনা'  
+    },
+    {
+        'key': 'Personal Profile',
+        'en' : 'Personal Profile',
+        'bn' : 'ব্যক্তিগত প্রোফাইল'  
+    },
+    {
+        'key': 'Address Book',
+        'en' : 'Address Book',
+        'bn' : 'ঠিকানা বই'  
+    },
+    {
+        'key': 'Personal Information',
+        'en' : 'Personal Information',
+        'bn' : 'ব্যক্তিগত তথ্য'  
+    },
+    {
+        'key': 'Add New Address',
+        'en' : 'Add New Address',
+        'bn' : 'নতুন ঠিকানা যোগ করুন'  
+    },
+    {
+        'key': 'Logout',
+        'en' : 'Logout',
+        'bn' : 'প্রস্থান'  
+    },
+    {
+        'key': 'EDIT',
+        'en' : 'EDIT',
+        'bn' : 'এডিট'  
+    },
+
     // Product Translations
     {
         'key': 'Sony Camera',
