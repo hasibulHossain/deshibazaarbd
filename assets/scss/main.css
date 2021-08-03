@@ -793,6 +793,7 @@ a .custom-button-component:hover {
 .home-appliance .collection-banner img,
 .stationary_carft .collection-banner img {
   width: 60%;
+  z-index: 000;
 }
 
 .new-collection-details p {
