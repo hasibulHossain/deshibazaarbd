@@ -302,7 +302,7 @@ const AddressUpdate = (props) => {
                         </div>
                     </div>
 
-                    <div className="col-md-6 mt-3 text-right mt-5">
+                    <div className="col-md-6 mt-3 text-right mt-5 float-right">
                         {
                             !isSubmitting && (
                                 <button onClick={submitUpdatedAddressHandler} type="submit" className="btn btn-success mr-3">
@@ -312,8 +312,8 @@ const AddressUpdate = (props) => {
                         }
                         {
                             isSubmitting && (
-                                <button type="submit" disabled={true} className="btn btn-success mr-3 d-flex align-items-center">
-                                    <Spinner animation="border" role="status">
+                                <button type="submit" disabled={true} className="btn btn-success mr-3 d-flex align-items-center float-right">
+                                    <Spinner animation="border" role="status" size="sm">
                                         <span className="sr-only">Loading...</span>
                                     </Spinner>
                                     <span className="ml-2">Saving...</span>
