@@ -15,6 +15,7 @@ import Translate from "../translation/Translate";
 import { translate } from "../../services/translation/translation";
 
 const HeaderMenu = ({ toggleNav }) => {
+
   const { menuList } = useSelector((state) => state.HeaderReducer);
   const router       = useRouter();
   const dispatch     = useDispatch();
@@ -32,6 +33,7 @@ const HeaderMenu = ({ toggleNav }) => {
    * 
    * return void
    */
+
   const clickMenuLink = ( categorySlug ) => {
     router.push(`/products?category=${categorySlug}`);
   }
