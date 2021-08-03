@@ -40,7 +40,6 @@ const LoginComponent = () => {
         dispatch(getUserDataAction());
     }, [])
 
-    console.log('userData :>> ', userData);
     return (
         <>
             <div className="account_info_body mt-5">
@@ -53,11 +52,11 @@ const LoginComponent = () => {
                         encType="multipart/form-data">
                         <div className="row">
                             <div className="col-md-6">
-                                <div class="mb-3">
-                                    <label for="lastName" class="form-label">Email Or Phone Number</label>
+                                <div className="mb-3">
+                                    <label htmlFor="lastName" className="form-label">Email Or Phone Number</label>
                                     <input
                                         type="text"
-                                        class="form-control"
+                                        className="form-control"
                                         placeholder=""
                                         name="email"
                                         value={loginInput.email}
@@ -75,10 +74,10 @@ const LoginComponent = () => {
                             </div>
 
                             <div className="col-md-6">
-                                <label for="password" class="form-label">Password</label>
-                                <div class="account_input_group">
+                                <label htmlFor="password" className="form-label">Password</label>
+                                <div className="account_input_group">
                                     <input
-                                        type={showPassword === true ? "text" : "password"} class="form-control" id="inlineFormInputGroup" placeholder=""
+                                        type={showPassword === true ? "text" : "password"} className="form-control" id="inlineFormInputGroup" placeholder=""
                                         name="password"
                                         value={loginInput.password}
                                         onChange={(e) => handleLoginInputChange('password', e.target.value)}
@@ -91,7 +90,7 @@ const LoginComponent = () => {
                                         <ErrorMessage errorText="Password can't be blank!" />
                                     )}
 
-                                    <div class="account_input_group_prepend" onClick={() => setShowPassword(!showPassword)}>
+                                    <div className="account_input_group_prepend" onClick={() => setShowPassword(!showPassword)}>
                                         {
                                             showPassword === true ? <FontAwesomeIcon icon={faEyeSlash} /> : <FontAwesomeIcon icon={faEye} />
                                         }
@@ -102,9 +101,9 @@ const LoginComponent = () => {
                         </div>
 
                         <div className="d-flex justify-content-between">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="loginRememberMe" />
-                                <label class="account_info_label pointer" for="loginRememberMe">
+                            <div className="form-check">
+                                <input className="form-check-input" type="checkbox" value="" id="loginRememberMe" />
+                                <label className="account_info_label pointer" htmlFor="loginRememberMe">
                                     Remember me
                                 </label>
                             </div>
@@ -125,7 +124,7 @@ const LoginComponent = () => {
                             {
                                 isLoading && (
                                     <button disabled={true} type="submit" className="btn account_btn mt-2">
-                                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                        <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                         {' '} Signing in...
                                     </button>
                                 )

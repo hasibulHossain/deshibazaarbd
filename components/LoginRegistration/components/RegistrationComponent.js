@@ -52,10 +52,10 @@ const RegistrationComponent = () => {
                 >
                     <div className="row">
                         <div className="col-md-6">
-                            <div class="mb-3">
-                                <label for="firstName" class="form-label">First Name</label>
+                            <div className="mb-3">
+                                <label htmlFor="firstName" className="form-label">First Name</label>
                                 <input type="text"
-                                    class="form-control"
+                                    className="form-control"
                                     placeholder=""
                                     name="first_name"
                                     value={registerInput.first_name}
@@ -74,11 +74,11 @@ const RegistrationComponent = () => {
                         </div>
 
                         <div className="col-md-6">
-                            <div class="mb-3">
-                                <label for="lastName" class="form-label">Last Name</label>
+                            <div className="mb-3">
+                                <label htmlFor="lastName" className="form-label">Last Name</label>
                                 <input
                                     type="text"
-                                    class="form-control"
+                                    className="form-control"
                                     placeholder=""
                                     name="last_name"
                                     value={registerInput.last_name}
@@ -97,11 +97,11 @@ const RegistrationComponent = () => {
                         </div>
 
                         <div className="col-md-6">
-                            <div class="mb-3">
-                                <label for="lastName" class="form-label">Phone Number</label>
+                            <div className="mb-3">
+                                <label htmlFor="lastName" className="form-label">Phone Number</label>
                                 <input
                                     type="text"
-                                    class="form-control"
+                                    className="form-control"
                                     placeholder=""
                                     name="phone_no"
                                     value={registerInput.phone_no}
@@ -120,11 +120,11 @@ const RegistrationComponent = () => {
                         </div>
 
                         <div className="col-md-6">
-                            <div class="mb-3">
-                                <label for="lastName" class="form-label">Email Address</label>
+                            <div className="mb-3">
+                                <label htmlFor="lastName" className="form-label">Email Address</label>
                                 <input
                                     type="email"
-                                    class="form-control"
+                                    className="form-control"
                                     placeholder=""
                                     name="email"
                                     value={registerInput.email}
@@ -156,14 +156,14 @@ const RegistrationComponent = () => {
                                 </div>
                             )}
                             {!isLoading && (
-                                <div class="mb-3 mt-4">
+                                <div className="mb-3 mt-4">
                                     <button type="submit" className="btn btn-primary mt-1">Get OTP</button>
                                 </div>
                             )}
                         </div>
 
                         {/* <div className="col-md-6">
-                            <div class="mb-3">
+                            <div className="mb-3">
                                 <ReactSwipeButton
                                     text='Slide to get SMS Code'
                                     color='#f00'
@@ -173,11 +173,11 @@ const RegistrationComponent = () => {
                         </div> */}
 
                         <div className="col-md-6">
-                            <div class="mb-3">
-                                <label for="lastName" class="form-label">OTP</label>
+                            <div className="mb-3">
+                                <label htmlFor="lastName" className="form-label">OTP</label>
                                 <input
                                     type="text"
-                                    class="form-control"
+                                    className="form-control"
                                     placeholder=""
                                     name="otp"
                                     value={registerInput.otp}
@@ -196,11 +196,11 @@ const RegistrationComponent = () => {
                         </div>
 
                         <div className="col-md-6">
-                            <label for="password" class="form-label">Password</label>
-                            <div class="account_input_group">
+                            <label htmlFor="password" className="form-label">Password</label>
+                            <div className="account_input_group">
                                 <input
                                     type={showPassword === true ? "text" : "password"}
-                                    class="form-control" id="inlineFormInputGroup"
+                                    className="form-control" id="inlineFormInputGroup"
                                     placeholder=""
                                     name="password"
                                     value={registerInput.password}
@@ -220,7 +220,7 @@ const RegistrationComponent = () => {
                                 }
 
 
-                                <div class="account_input_group_prepend" onClick={() => setShowPassword(!showPassword)}>
+                                <div className="account_input_group_prepend" onClick={() => setShowPassword(!showPassword)}>
                                     {
                                         showPassword === true ? <FontAwesomeIcon icon={faEyeSlash} /> : <FontAwesomeIcon icon={faEye} />
                                     }
@@ -228,11 +228,11 @@ const RegistrationComponent = () => {
                             </div>
                         </div>
                         <div className="col-md-6">
-                            <label for="Confirm_password" class="form-label">Confirm Password</label>
-                            <div class="account_input_group">
+                            <label htmlFor="Confirm_password" className="form-label">Confirm Password</label>
+                            <div className="account_input_group">
                                 <input
                                     type={showConfirmPassword === true ? "text" : "password"}
-                                    class="form-control" id="inlineFormInputGroup"
+                                    className="form-control" id="inlineFormInputGroup"
                                     placeholder=""
                                     name="password_confirmation"
                                     value={registerInput.password_confirmation}
@@ -249,7 +249,7 @@ const RegistrationComponent = () => {
                                 )}
 
 
-                                <div class="account_input_group_prepend" onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
+                                <div className="account_input_group_prepend" onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
                                     {
                                         showConfirmPassword === true ? <FontAwesomeIcon icon={faEyeSlash} /> : <FontAwesomeIcon icon={faEye} />
                                     }
@@ -259,9 +259,9 @@ const RegistrationComponent = () => {
 
                     </div>
 
-                    <div class="form-check custome_form_checkbox mt-3">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                        <label class="account_info_label pointer" for="flexCheckDefault">
+                    <div className="form-check custome_form_checkbox mt-3">
+                        <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                        <label className="account_info_label pointer" htmlFor="flexCheckDefault">
                             I want to receive exclusive offers and promotions from
                             <Link href="/">
                                 <a>

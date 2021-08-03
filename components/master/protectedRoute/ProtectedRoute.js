@@ -8,7 +8,7 @@ const ProtectedRoute = (ProtectedComponent) => {
    return (props) => {
       if (typeof window !== "undefined") {
 
-         const Router = useRouter();
+         const Router   = useRouter();
          const dispatch = useDispatch();
          const userData = useSelector((state) => state.UserDataReducer.userData);
 
