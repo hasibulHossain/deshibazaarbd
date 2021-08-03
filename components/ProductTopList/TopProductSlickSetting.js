@@ -4,7 +4,7 @@ const TopProductSlickSetting = {
     slidesToShow: 2,
     slidesToScroll: 1,
     initialSlide: 0,
-    autoplay: false,
+    autoplay: true,
     autoplaySpeed: 2000,
     responsive: [
         {

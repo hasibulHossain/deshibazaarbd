@@ -7,7 +7,7 @@ export const getTopProductList = () => (dispatch) => {
     const responseData = {
         data: [],
         status: true,
-        isLoading: false,
+        isLoading: true,
     }
     dispatch({type: Types.GET_TOP_PRODUCTS_LIST, payload: responseData});
 

@@ -6,7 +6,8 @@ import { getTopProductList } from './_redux/Action/ProductTopListAction';
 import { toggleProductModalAction } from "../products/_redux/Action/ProductAction";
 import { formatCurrency } from '../../services/currency';
 import Translate from '../translation/Translate';
-import PriceCalculation from '../products/partials/PriceCalculation';
+// import PriceCalculation from '../products/partials/PriceCalculation';
+import LoadingSkelleton from '../master/skelleton/LoadingSkelleton';
 
 const ProductTopList = () => {
     const dispatch = useDispatch();
@@ -15,9 +16,20 @@ const ProductTopList = () => {
     }, [])
 
     const topProductList = useSelector((state) => state.ProductTopListReducer.topProductList);
+    const isLoading = useSelector((state) => state.ProductTopListReducer.isLoading);
 
     return (
         <div>
+            {isLoading && (
+                <div className="card shadow-sm mt-3 p-1">
+                    <LoadingSkelleton
+                        alignment="vertical"
+                        count={2}
+                        width="100%"
+                        height={150}
+                    />
+                </div>
+            )}
             <Slider {...TopProductSlickSetting}>
                 {
                     topProductList.length > 0 && topProductList.map((item, index) => (

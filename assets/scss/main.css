@@ -619,9 +619,7 @@ a .custom-button-component:hover {
   background-color: #172337!important;
   border: none!important;
 }
-/* .top-product-card:first-child{
-  border: none;
-} */
+
 .top-product-card .top-product-details {
   /* position: absolute;
   top: 10%;
@@ -646,10 +644,7 @@ a .custom-button-component:hover {
 .top-product-card .top-product-details sup {
   color: rgb(255, 174, 0);
 }
-/* 
-.top-product-card .top-product-banner img {
-  width: 100%;
-} */
+
 
 /*=====================top products close==================*/
 
