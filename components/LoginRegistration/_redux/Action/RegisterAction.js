@@ -18,6 +18,7 @@ export const RegisterFirstStep = (registerInput) => (dispatch) => {
     message: null,
     status: false,
     isLoading: true,
+    getOTP: false,
   };
   dispatch({ type: Types.REGISTER_FIRST_STEP, payload: response });
   const URL = `${process.env.NEXT_PUBLIC_API_URL}auth/register`;
@@ -28,6 +29,7 @@ export const RegisterFirstStep = (registerInput) => (dispatch) => {
         if (res.data.status) {
           response.message = res.data.message;
           response.isLoading = false;
+          response.getOTP = true;
           showToast("success", response.message);
           dispatch({ type: Types.REGISTER_FIRST_STEP, payload: response });
         }
@@ -35,6 +37,7 @@ export const RegisterFirstStep = (registerInput) => (dispatch) => {
       .catch((error) => {
         const responseLog = error.response;
         response.isLoading = false;
+        response.getOTP = false;
         if (typeof responseLog !== "undefined") {
           const { request, ...errorObject } = responseLog;
           dispatch({ type: Types.REGISTER_FIRST_STEP, payload: responseLog });

@@ -2764,3 +2764,17 @@ img.payment_method_in_shipping {
 .btn_danger{
   background-color: #f33a1e!important;
 }
+.alert_warning_bg {
+  border: solid transparent;
+  background-color: #ff3c201a;
+  /* background: #fff3e1; */
+  padding: 0.6rem;
+  margin: 0;
+  color: #f26d3e;
+  font-size: 0.8rem!important;
+  line-height: 1em;
+  letter-spacing: 1px;
+}
+.button_disabled{
+  cursor: not-allowed!important;
+}
