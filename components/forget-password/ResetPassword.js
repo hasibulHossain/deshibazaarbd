@@ -1,5 +1,6 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import {useForm} from "react-hook-form";
+import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 import ErrorMessage from "../master/ErrorMessage/ErrorMessage";
 import SimpleBtn from "../master/SimpleBtn/SimpleBtn";
@@ -8,13 +9,21 @@ import { resetPassword } from "./_redux/action/forget-password-action";
 export default function App() {
   const { register, errors, handleSubmit, watch } = useForm({});
   const dispatch = useDispatch();
-  const {otp, isLoading} = useSelector(state => state.ForgetPasswordReducer)
+  const router = useRouter();
+  const {otp, isLoading, email} = useSelector(state => state.ForgetPasswordReducer)
   const password = useRef({});
   password.current = watch("password", "");
+
   
   const onSubmit = async data => {
-      dispatch(resetPassword(otp, data.password));
-  };
+      dispatch(resetPassword(otp, email, data.password));
+    };
+    
+   useEffect(() => {        
+        if(!email) {
+          router.push('/login')
+        }
+   }, [])
 
   return (
       <>

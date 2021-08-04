@@ -1,5 +1,8 @@
+import Axios from 'axios';
 import { showToast } from '../../../master/Helper/ToastHelper';
 import * as Types from '../types/types';
+
+const baseUrl = `${process.env.NEXT_PUBLIC_API_URL}`;
 
 /**
  * this function will check if the user email exists on the database or not
@@ -15,19 +18,27 @@ import * as Types from '../types/types';
          email: email,
          isValidEmail: false
      }
+     
+     const url = `${baseUrl}auth/forget-password/step1`
+     const data = {
+        username: email
+     };
 
      try {
-         // call api
          dispatch({type: Types.CHECK_EMAIL_STATUS, payload: response});
-         response.loading = false;
-         response.isValidEmail = true;
          
-         setTimeout(() => {
-            dispatch({type: Types.CHECK_EMAIL_STATUS, payload: response});
-            // showToast('error', 'error message')
-         }, 400);
-     } catch (err) {
-        // caught unexpected error
+         const res = await Axios.post(url, data);
+         
+         if(!res.data.errors) {
+             response.loading = false;
+             response.isValidEmail = res.data.data;
+             dispatch({type: Types.CHECK_EMAIL_STATUS, payload: response});
+             showToast('success', res.data.message);
+        }
+    } catch (err) {
+        response.loading = false;
+        dispatch({type: Types.CHECK_EMAIL_STATUS, payload: response});
+        showToast('error', 'Please input a verified email or phone number');
      }
  };
 
@@ -41,24 +52,18 @@ import * as Types from '../types/types';
 
  export const validateOtp = (otp) => async (dispatch) => {
      let response = {
-         loading: true,
-         otpVerified: false
+         loading: false,
+         otpVerified: true,
+         otp: otp
      }
 
-     console.log('OTP => ', otp)
+     dispatch({type: Types.VALIDATE_OTP, payload: response});
 
-     try {
-         // call api with OTP
-         dispatch({type: Types.VALIDATE_OTP, payload: response});
-         response.loading = false;
-         response.otpVerified = true
-
-         setTimeout(() => {
-            dispatch({type: Types.VALIDATE_OTP, payload: response});
-         }, 400);
-     } catch (err) {
-        // caught unexpected error
-     }
+    //  try {
+    //      // call api to validate OTP
+    //  } catch (err) {
+    //     // caught unexpected error
+    //  }
  };
 
 /**
@@ -69,20 +74,29 @@ import * as Types from '../types/types';
  * @returns void Dispatch event `POST_RESET_PASSWORD`
  */
 
- export const resetPassword = (otp, password) => async (dispatch) => {
+ export const resetPassword = (otp, username, password) => async (dispatch) => {
      let response = {
          loading: true,
      }
 
+     const url = `${baseUrl}auth/forget-password/step2`;
+     const data = {
+        username: username,
+        otp: otp,
+        password : password,
+        password_confirmation: password
+     }
      try {
-         // call api with OTP
          dispatch({type: Types.POST_RESET_PASSWORD, payload: response});
-         response.loading = false;
+         const res = await Axios.post(url, data);
+         console.log('reset res => ', res)
 
-         setTimeout(() => {
-            dispatch({type: Types.POST_RESET_PASSWORD, payload: response});
-         }, 400);
+         response.loading = false;
+         dispatch({type: Types.SUCCESSFULLY_RESET_PASSWORD, payload: response});
+
      } catch (err) {
-        // caught unexpected error
+        response.loading = false;
+        dispatch({type: Types.RESET_PASSWORD_FAILED, payload: response});
+        showToast('error', 'OTP mismatch');
      }
  };

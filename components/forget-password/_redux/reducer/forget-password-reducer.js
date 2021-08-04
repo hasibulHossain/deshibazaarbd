@@ -23,15 +23,30 @@ const forgetPasswordReducer = (state = initialState, {type, payload}) => {
       return {
         ...state,
         isLoading: payload.loading,
-        isOtpVerified: payload.otpVerified
+        isOtpVerified: payload.otpVerified,
+        otp: payload.otp
       };
 
     case Types.POST_RESET_PASSWORD:
       return {
         ...state,
         isLoading: payload.loading,
+      };
+
+    case Types.SUCCESSFULLY_RESET_PASSWORD:
+      return {
+        ...state,
         email: "",
+        otp: null,
         isValidEmail: false,
+        isOtpVerified: false,
+        isLoading: false
+      };
+
+    case Types.RESET_PASSWORD_FAILED:
+      return {
+        ...state,
+        isLoading: payload.loading,
         isOtpVerified: false
       };
 
