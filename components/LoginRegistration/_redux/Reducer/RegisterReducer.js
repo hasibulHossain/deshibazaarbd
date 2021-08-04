@@ -2,10 +2,11 @@ import * as Types from "./../Type/Types";
 
 // Initial state
 const initialState = {
-    isLoading: false,
-    isCreating: false,
-    is_first_validated: false,
-    registerInput: {
+    isLoading                : false,
+    isCreating               : false,
+    getOTP                   : false,
+    is_first_validated       : false,
+    registerInput            : {
         first_name           : "",
         last_name            : "",
         phone_no             : "",
@@ -14,7 +15,7 @@ const initialState = {
         password             : "",
         password_confirmation: ""
     },
-    registerData: null,
+    registerData             : null,
 };
 const RegisterReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -30,7 +31,8 @@ const RegisterReducer = (state = initialState, action) => {
             const newReg = { ...state.registerInput };
             return {
                 ...state,
-                isLoading: action.payload.isLoading,
+                isLoading    : action.payload.isLoading,
+                getOTP       : action.payload.getOTP,
                 registerInput: newReg,
             }
         case Types.AUTH_REGISTER:

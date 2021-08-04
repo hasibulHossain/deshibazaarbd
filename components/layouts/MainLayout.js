@@ -33,8 +33,6 @@ const MainLayout = (props) => {
         />
       }
 
-      { process.env.NODE_ENV === 'production' && <DemoWarning /> }
-
       <Header />
       <main>
         {backdrop && <div className="backdrop"></div>}

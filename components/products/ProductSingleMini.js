@@ -49,9 +49,9 @@ const ProductSingleMini = ({ item = {}, columnClassName = 'col-md-2', cardClassN
                         <AddWishList product={item} />
                         {/* <FontAwesomeIcon className="withlist" icon={faHeart} /> */}
                     </button>
-                    <button>
+                    {/* <button>
                         <FontAwesomeIcon className="details" icon={faListAlt} />
-                    </button>
+                    </button> */}
                 </div>
 
                 <div className="product-card-body" onClick={() => dispatch(toggleProductModalAction(item.sku))}>

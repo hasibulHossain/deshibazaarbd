@@ -21,7 +21,7 @@ const NewCollection = () => {
                         <div className="home-appliance border-radius-5 mb-3 pointer">
                             <div className="new-collection-details">
                                 <p><Translate>Explore New Collection Of</Translate> </p>
-                                <h3 className="title"><Translate>Home Appliance</Translate></h3>
+                                <h4 className="new_collection_title"><Translate>Home Appliance</Translate></h4>
                                 <button className="collectionBtn">
                                     <Translate>View Collection</Translate>
                                 </button>
@@ -36,7 +36,7 @@ const NewCollection = () => {
                         <div className="new-collection-card border-radius-5 mb-3 pointer">
                             <div className="custome-new-collection-details">
                                 <p><Translate>Only This Weak</Translate></p>
-                                <h3 className="title"><Translate>Perfect Fit</Translate> <br /> <Translate>For Your Home</Translate></h3>
+                                <h4 className="new_collection_title"><Translate>Perfect Fit</Translate> <br /> <Translate>For Your Home</Translate></h4>
                                 <button className="collectionBtn"><Translate>View Collection</Translate></button>
                             </div>
                             <div className="middle-collection-banner">
@@ -49,7 +49,7 @@ const NewCollection = () => {
                         <div className="stationary_carft border-radius-5 mb-3 pointer">
                             <div className="new-collection-details">
                                 <p> <Translate>New Collection Of</Translate> </p>
-                                <h3 className="title"><Translate>Stationary & Carft</Translate></h3>
+                                <h4 className="new_collection_title"><Translate>Stationary & Carft</Translate></h4>
                                 <Button buttonText={translate('Shop Now')} />
                             </div>
                             <div className="collection-banner">

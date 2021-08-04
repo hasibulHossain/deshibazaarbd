@@ -607,27 +607,33 @@ a .custom-button-component:hover {
 /*=====================top products==================*/
 
 .top-product-card {
-  height: 220px;
+  height: 230px;
   position: relative;
   padding: 10px;
   color: #ffffff;
   font-weight: bold;
+  border-left: 15px solid #ffff!important;
+  background-color: #172337!important;
+}
+.top-product-card .custom_bg{
+  background-color: #172337!important;
+  border: none!important;
 }
 
 .top-product-card .top-product-details {
-  position: absolute;
+  /* position: absolute;
   top: 10%;
-  left: 5%;
+  left: 5%; */
 }
 
-.top-product-card .top-product-details .title {
+.top-product-card .top-product-details .hot_deal_title {
   color: rgb(255, 174, 0);
   font-weight: bold;
 }
 
 .top-product-card .top-product-details .top-product-name {
-  font-size: 1.5em;
-  font-weight: 600;
+  font-size: 1.2em;
+  font-weight: 500;
 }
 
 .top-product-card .top-product-details .price {
@@ -639,9 +645,6 @@ a .custom-button-component:hover {
   color: rgb(255, 174, 0);
 }
 
-.top-product-card .top-product-banner img {
-  width: 100%;
-}
 
 /*=====================top products close==================*/
 
@@ -793,6 +796,7 @@ a .custom-button-component:hover {
 .home-appliance .collection-banner img,
 .stationary_carft .collection-banner img {
   width: 60%;
+  z-index: 000;
 }
 
 .new-collection-details p {
@@ -1354,7 +1358,7 @@ h6.address_book_updated_title {
 }
 
 .filter_column_3 {
-  height: 350px;
+  height: 365px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -2759,4 +2763,18 @@ img.payment_method_in_shipping {
 }
 .btn_danger{
   background-color: #f33a1e!important;
+}
+.alert_warning_bg {
+  border: solid transparent;
+  background-color: #ff3c201a;
+  /* background: #fff3e1; */
+  padding: 0.6rem;
+  margin: 0;
+  color: #f26d3e;
+  font-size: 0.8rem!important;
+  line-height: 1em;
+  letter-spacing: 1px;
+}
+.button_disabled{
+  cursor: not-allowed!important;
 }

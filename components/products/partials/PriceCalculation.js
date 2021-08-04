@@ -27,5 +27,5 @@ const PriceCalculation = ({ item }) => {
         </div>
     );
 }
- 
+
 export default PriceCalculation;

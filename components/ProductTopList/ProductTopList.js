@@ -6,6 +6,8 @@ import { getTopProductList } from './_redux/Action/ProductTopListAction';
 import { toggleProductModalAction } from "../products/_redux/Action/ProductAction";
 import { formatCurrency } from '../../services/currency';
 import Translate from '../translation/Translate';
+// import PriceCalculation from '../products/partials/PriceCalculation';
+import LoadingSkelleton from '../master/skelleton/LoadingSkelleton';
 
 const ProductTopList = () => {
     const dispatch = useDispatch();
@@ -14,29 +16,53 @@ const ProductTopList = () => {
     }, [])
 
     const topProductList = useSelector((state) => state.ProductTopListReducer.topProductList);
+    const isLoading = useSelector((state) => state.ProductTopListReducer.isLoading);
 
     return (
         <div>
+            {isLoading && (
+                <div className="card shadow-sm mt-3 p-1">
+                    <LoadingSkelleton
+                        alignment="vertical"
+                        count={2}
+                        width="100%"
+                        height={150}
+                    />
+                </div>
+            )}
             <Slider {...TopProductSlickSetting}>
                 {
                     topProductList.length > 0 && topProductList.map((item, index) => (
-                        <div key={index} className="top-product-card" onClick={() => dispatch(toggleProductModalAction(item.sku))}>
-                            <div className="top-product-details">
-                               <p className="title">
-                                   <Translate>Hot Deal Products</Translate>
-                                </p>
-                               <h5 className="top-product-name">{item.name}</h5>
-                               <p>
-                                    <Translate>Price</Translate>: 
-                                    <span className="price">
-                                        {formatCurrency(item.offer_selling_price)}
-                                    </span> <sup><del>{formatCurrency(item.default_selling_price)}</del></sup>
-                                </p>
-                            </div>
-                            <div className="top-product-banner">
-                                <img src={`${process.env.NEXT_PUBLIC_URL}images/products/${item.featured_image}`} alt={item.name} className="img-fluid" />                             
+                        <div className="top-product-card">
+                            <div key={index} className="custom_bg card pointer"
+                                onClick={() => dispatch(toggleProductModalAction(item.sku))}
+                            >
+                                <div className="row">
+                                    <div className="col-lg-5">
+                                        <div className="top-product-details">
+                                            <p className="hot_deal_title">
+                                                <Translate>Hot Deal Products</Translate>
+                                            </p>
+                                            <h6 className="top-product-name">{item.name}</h6>
+                                            <p>
+                                                <Translate>Price</Translate>:
+                                                {/* <PriceCalculation item={item} /> */}
+
+                                                <span className="price ml-2">
+                                                    {formatCurrency(item.offer_selling_price)}
+                                                </span> <sup><del>{formatCurrency(item.default_selling_price)}</del></sup>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div className="col-lg-7">
+                                        <div className="top-product-banner text-center">
+                                            <img src={`${process.env.NEXT_PUBLIC_URL}images/products/${item.featured_image}`} alt={item.name} className="img-fluid img-thumbnail" />
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+
                     ))
                 }
             </Slider>

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookF, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
@@ -9,15 +9,19 @@ import { useForm } from "react-hook-form";
 import ErrorMessage from '../../master/ErrorMessage/ErrorMessage';
 import { ChangeRegisterInputField, customerRegister, RegisterFirstStep } from '../_redux/Action/RegisterAction';
 import { Spinner } from 'react-bootstrap';
+import CountDown from '../../master/countDown/CountDown';
 
 const RegistrationComponent = () => {
-    const dispatch                                            = useDispatch()
-    const [showPassword, setShowPassword]                     = useState(false);
-    const [showConfirmPassword, setShowConfirmPassword]       = useState(false);
+
+    const dispatch = useDispatch()
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const { register, handleSubmit, errors, setValue, watch } = useForm();
-    const registerInput                                       = useSelector((state) => state.RegisterReducer.registerInput)
-    const isLoading                                           = useSelector((state) => state.RegisterReducer.isLoading);
-    const isCreating                                          = useSelector((state) => state.RegisterReducer.isCreating);
+    const registerInput = useSelector((state) => state.RegisterReducer.registerInput)
+    const isLoading = useSelector((state) => state.RegisterReducer.isLoading);
+    const getOTP = useSelector((state) => state.RegisterReducer.getOTP);
+    const isCreating = useSelector((state) => state.RegisterReducer.isCreating);
+    const [isOTP, setIsOTP] = useState(false);
 
     const password = useRef({});
     password.current = watch("password", "");
@@ -35,20 +39,27 @@ const RegistrationComponent = () => {
         dispatch(customerRegister(registerInput));
     };
 
-    // const onSucces = () => {
-    //     console.log('Swip success');
-    // }
+    useEffect(() => {
+        if (getOTP) {
+            setIsOTP(true)
+        }
+    }, [getOTP])
+
+    setTimeout(
+        () => setIsOTP(false),
+        300000
+    );
     return (
         <>
             <h5 className="account_title">New Customers</h5>
             <p className="account_sub_tite">Creating an account has many benefits : check out faster, keep more than one <br /> address, track orders and more</p>
             <div className="account_info_body">
                 <form
-                    onSubmit     = {handleSubmit(handleRegisterFirstStep)}
-                    method       = "post"
-                    autoComplete = "off"
-                    encType      = "multipart/form-data"
-                    autoSave     = "off"
+                    onSubmit={handleSubmit(handleRegisterFirstStep)}
+                    method="post"
+                    autoComplete="off"
+                    encType="multipart/form-data"
+                    autoSave="off"
                 >
                     <div className="row">
                         <div className="col-md-6">
@@ -143,12 +154,12 @@ const RegistrationComponent = () => {
                         </div>
 
 
-                        <div className="col-md-6">
+                        <div className="col-md-6 mt-3">
                             {isLoading && (
                                 <div className="mb-3 mt-4">
-                                    <button disabled={true} className="btn btn-primary mt-1">
+                                    <button disabled={true} className="btn btn-primary btn-sm mt-1">
                                         <div className="d-flex align-items-center">
-                                            <Spinner animation="border" role="status">
+                                            <Spinner animation="border" role="status" size="sm">
                                             </Spinner>
                                             <span className="ml-2"> Getting OTP...</span>
                                         </div>
@@ -157,7 +168,15 @@ const RegistrationComponent = () => {
                             )}
                             {!isLoading && (
                                 <div className="mb-3 mt-4">
-                                    <button type="submit" className="btn btn-primary mt-1">Get OTP</button>
+                                    <button type="submit"
+                                        // className="btn btn-sm btn-primary mt-1 d-flex"
+                                        className={isOTP ? "btn btn-primary btn-sm d-flex btn-get-otp button_disabled d-block" : "d-block btn btn-primary btn-sm d-flex btn-get-otp"}
+                                        disabled={isOTP ? true : false}
+                                    >
+                                        <div>
+                                            <span>GET OTP </span>
+                                        </div>
+                                    </button>
                                 </div>
                             )}
                         </div>
@@ -194,6 +213,15 @@ const RegistrationComponent = () => {
                                 }
                             </div>
                         </div>
+                        {
+                            isOTP && (
+                                <div className="col-md-12">
+                                    <div className="mb-3">
+                                        <CountDown alert_bg="alert_warning_bg" minutes={5} countDownText="Please wait! Resend OTP After" expireText="Resend OTP" />
+                                    </div>
+                                </div>
+                            )
+                        }
 
                         <div className="col-md-6">
                             <label htmlFor="password" className="form-label">Password</label>
