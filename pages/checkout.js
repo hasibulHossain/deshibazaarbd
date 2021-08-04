@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useRouter } from "next/router";
+import router, { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 // local import
 import MainLayout from "../components/layouts/MainLayout";
@@ -29,6 +29,14 @@ export default function Carts() {
 		dispatch(handleShippingCost(carts))
 		// dispatch(toggleFloatingCart(false));
 	}, []);
+
+	useEffect(() => {
+		if(!carts.length) {
+			setTimeout(() => {
+				router.push('/');
+			}, 2000);
+		}
+	}, [carts]);
 
 	const handleStoreOrder = () => {
 		dispatch(storeSells(customerInfo, carts, totalQuantity, shippingCost, totalPrice, couponData));
