@@ -30,13 +30,13 @@ export default function Carts() {
 		// dispatch(toggleFloatingCart(false));
 	}, []);
 
-	useEffect(() => {
-		if(!carts.length) {
-			setTimeout(() => {
-				router.push('/');
-			}, 2000);
-		}
-	}, [carts]);
+	// useEffect(() => {
+	// 	if(!carts.length) {
+	// 		setTimeout(() => {
+	// 			router.push('/');
+	// 		}, 2000);
+	// 	}
+	// }, [carts]);
 
 	const handleStoreOrder = () => {
 		dispatch(storeSells(customerInfo, carts, totalQuantity, shippingCost, totalPrice, couponData));

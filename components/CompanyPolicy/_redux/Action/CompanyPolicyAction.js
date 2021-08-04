@@ -23,7 +23,8 @@ export const getCompanyPolicyList = () => (dispatch) => {
         {
             title: "24/7 support",
             description: "dedicated support",
-            icon: "https://pics.freeicons.io/uploads/icons/png/2515875551582823581-512.png"
+            icon: "https://icon-library.com/images/customer-support-icon-png/customer-support-icon-png-19.jpg"
+            // icon: "https://pics.freeicons.io/uploads/icons/png/2515875551582823581-512.png"
         },
      
     ]

@@ -190,7 +190,6 @@ export const handleStoreBillingAddress = (billingAddressInput) => (dispatch) => 
 
 // get single address
 export const getSingleAddress = (id, type) => {
-    console.log('id, type :>> ', id, type);
     return {
         type: Types.GET_SINGLE_ADDRESS,
         payload : {
@@ -235,6 +234,7 @@ export const handleUpdateBillingAddress = (billingAddressInput) => (dispatch) =>
 
 //handle store billing address
 export const addAddress = (addressInput, type, closeModal) => (dispatch) => {
+    console.log('type :>> ', type);
     const responseData = {
         status         : false,
         isLoading      : true,
@@ -250,7 +250,6 @@ export const addAddress = (addressInput, type, closeModal) => (dispatch) => {
     dispatch({ type: Types.STORE_BILLING_ADDRESS, payload: responseData });
     const userStorageData = JSON.parse(localStorage.getItem("loginData"));
     addressInput['user_id'] = userStorageData.userData.id;
-
     let url;
     if (type === 'new_address') {
         url = `${process.env.NEXT_PUBLIC_API_URL}address`

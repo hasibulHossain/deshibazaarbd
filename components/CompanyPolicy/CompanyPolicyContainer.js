@@ -3,8 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getCompanyPolicyList } from './_redux/Action/CompanyPolicyAction';
 
 const CompanyPolicyContainer = () => {
-    const dispatch = useDispatch();
+
+    const dispatch   = useDispatch();
     const policyList = useSelector((state) => state.CompanyPolicyReducer.policyList);
+
     useEffect(() => {
         dispatch(getCompanyPolicyList())
     }, []);
