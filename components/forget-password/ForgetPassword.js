@@ -1,0 +1,78 @@
+import React, {useState} from 'react';
+import { useRouter } from 'next/router';
+import { useForm } from 'react-hook-form';
+import ErrorMessage from '../master/ErrorMessage/ErrorMessage';
+import SimpleBtn from '../master/SimpleBtn/SimpleBtn';
+import {useDispatch, useSelector} from 'react-redux';
+import { checkIsValidEmail } from './_redux/action/forget-password-action';
+
+
+
+function ForgetPassword() {
+    const dispatch = useDispatch();
+    const { register, handleSubmit, errors } = useForm();
+    const {isLoading, isValidEmail} = useSelector(state => state.ForgetPasswordReducer);
+    const router = useRouter();
+
+    if(isValidEmail) {
+        router.push('/user/verification')
+    }
+
+    const onSubmit = data => {
+        dispatch(checkIsValidEmail(data.email));
+    }
+    
+    return (
+        <div className="forget-password my-5">
+        <div className='container'>
+            <h4 className="pb-3">Forgot your password?</h4>
+            <div className="row">
+                <div className="col-md-12">
+                    <div className="bg-white p-4">
+                        <p>Enter your email address below and we’ll send you a link to reset your password</p>
+
+                        <form 
+                            onSubmit={handleSubmit(onSubmit)}
+                            autoComplete="off">
+                            
+                            <div className="col-md-6">
+                                <div className="mb-3">
+                                    {/* <label htmlFor="lastName" className="form-label">Email</label> */}
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        placeholder="Please enter your email"
+                                        name="email"
+                                        ref={register({
+                                            required: true,
+                                            maxLength: 50,
+                                        })}
+                                    />
+                                    {errors.email && (
+                                        <ErrorMessage errorText="Valid email is required" />
+                                    )}
+
+                                </div>
+                                <div>
+                                    <SimpleBtn type="submit" variant="success" style={{width: 'fit-content'}}>
+                                        Submit
+                                        &#8203;
+                                        {
+                                            isLoading && (
+                                                <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                            )
+                                        }
+                                    </SimpleBtn>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    )
+}
+
+export default ForgetPassword
