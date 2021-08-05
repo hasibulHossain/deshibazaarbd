@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Slider from "react-slick";
 import { getShopList } from "./_redux/Action/ShopAction";
-import SlickSlideSetting from "./SlickSlideSetting";
 import {useRouter} from 'next/router'
 
 const ShopList = () => {
@@ -20,16 +18,18 @@ const ShopList = () => {
 
   return (
     <div className="productList-body p-3">
-      <Slider {...SlickSlideSetting}>
+      <div className="row">
         {ShopList.length > 0 &&
           ShopList.map((item, index) => (
-            <div key={index} className="shop-card" onClick={() => routeHandler(item.id)}>
-              <div className="shop-logo">
-                <img src={item.image_url} alt={item.name} />
+            <div className="col-2 col-sm-6 col-md-2 col-lg-2">
+              <div key={index} className="shop-card" onClick={() => routeHandler(item.id)}>
+                <div className="shop-logo">
+                  <img src={item.image_url} alt={item.name} />
+                </div>
               </div>
             </div>
-          ))}
-      </Slider>
+        ))}
+      </div>
     </div>
   );
 };
