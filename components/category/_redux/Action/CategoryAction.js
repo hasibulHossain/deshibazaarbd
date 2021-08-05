@@ -12,7 +12,7 @@ const baseUrl = `${process.env.NEXT_PUBLIC_API_URL}`;
  * 
  * @returns void Dispatch `GET_CATEGORIES` action
  */
-export const getCategories = (parentID = null) => async (dispatch) => {
+export const getCategories = (parentID = null, limit = null) => async (dispatch) => {
   let response = {
     loading: true,
     data   : []
@@ -24,7 +24,7 @@ export const getCategories = (parentID = null) => async (dispatch) => {
     dispatch({ type: Types.GET_CATEGORIES, payload: response });
     const res        = await Axios.get(`${baseUrl}categories`);
     response.loading = false;
-    response.data    = parentID !== 'all' ? getCategoryByParentID( res.data.data, parentID ) : res.data.data;
+    response.data    = parentID !== 'all' ? getCategoryByParentID( res.data.data, parentID, limit ) : res.data.data;
     dispatch({ type: Types.GET_CATEGORIES, payload: response });
   } catch (error) {
     response.loading = false;
@@ -42,6 +42,12 @@ export const getCategories = (parentID = null) => async (dispatch) => {
  * 
  * @returns array categories after filtering
  */
-const getCategoryByParentID = ( allCategories = [], parentID = null) => {
-  return allCategories.filter(cat => cat.parent_id === parentID);
+const getCategoryByParentID = ( allCategories = [], parentID = null, limit = null) => {
+  const categories =  allCategories.filter(cat => (cat.parent_id === parentID && cat.short_code !== 'others'));
+  
+  if(typeof limit !== 'undefined' && limit !== null && ! isNaN(limit)) {
+    return categories.slice(0, parseInt(limit));
+  }
+  
+  return categories;
 }

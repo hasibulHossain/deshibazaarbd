@@ -12,7 +12,7 @@ const CategoryList = ({ parentID = null }) => {
   const router   = useRouter();
 
   useEffect(() => {
-    dispatch(getCategories(parentID));
+    dispatch(getCategories(parentID, 6)); // Get the 6 categories
   }, []);
 
   const { categories, loading } = useSelector((state) => state.CategoryReducer);
