@@ -10,7 +10,7 @@ export default function App() {
   const { register, errors, handleSubmit, watch } = useForm({});
   const dispatch = useDispatch();
   const router = useRouter();
-  const {otp, isLoading, email} = useSelector(state => state.ForgetPasswordReducer)
+  const {otp, isLoading, passwordUpdated, email} = useSelector(state => state.ForgetPasswordReducer)
   const password = useRef({});
   password.current = watch("password", "");
 
@@ -20,10 +20,10 @@ export default function App() {
     };
     
    useEffect(() => {        
-        if(!email) {
+        if(passwordUpdated) {
           router.push('/login')
         }
-   }, [])
+   }, [passwordUpdated])
 
   return (
       <>

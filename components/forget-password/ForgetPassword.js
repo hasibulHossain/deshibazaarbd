@@ -29,7 +29,7 @@ function ForgetPassword() {
             <div className="row">
                 <div className="col-md-12">
                     <div className="bg-white p-4">
-                        <p>Enter your email address below and we’ll send you a link to reset your password</p>
+                        <p>Enter your phone number or email below and we’ll send you a OTP to reset your password</p>
 
                         <form 
                             onSubmit={handleSubmit(onSubmit)}
@@ -41,7 +41,7 @@ function ForgetPassword() {
                                     <input
                                         type="text"
                                         className="form-control"
-                                        placeholder="Please enter your email"
+                                        placeholder="Please enter your email or phone number"
                                         name="email"
                                         ref={register({
                                             required: true,
@@ -49,7 +49,7 @@ function ForgetPassword() {
                                         })}
                                     />
                                     {errors.email && (
-                                        <ErrorMessage errorText="Valid email is required" />
+                                        <ErrorMessage errorText="Phone number or email is required" />
                                     )}
 
                                 </div>

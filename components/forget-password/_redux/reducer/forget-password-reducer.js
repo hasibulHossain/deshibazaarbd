@@ -5,6 +5,7 @@ const initialState = {
     otp: null,
     isValidEmail: false,
     isOtpVerified: false,
+    passwordUpdated: false,
     isLoading: false
 };
 
@@ -36,6 +37,7 @@ const forgetPasswordReducer = (state = initialState, {type, payload}) => {
     case Types.SUCCESSFULLY_RESET_PASSWORD:
       return {
         ...state,
+        passwordUpdated: payload.passwordUpdated,
         email: "",
         otp: null,
         isValidEmail: false,

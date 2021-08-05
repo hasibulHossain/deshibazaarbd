@@ -77,6 +77,7 @@ const baseUrl = `${process.env.NEXT_PUBLIC_API_URL}`;
  export const resetPassword = (otp, username, password) => async (dispatch) => {
      let response = {
          loading: true,
+         passwordUpdated: false,
      }
 
      const url = `${baseUrl}auth/forget-password/step2`;
@@ -89,10 +90,18 @@ const baseUrl = `${process.env.NEXT_PUBLIC_API_URL}`;
      try {
          dispatch({type: Types.POST_RESET_PASSWORD, payload: response});
          const res = await Axios.post(url, data);
-         console.log('reset res => ', res)
 
-         response.loading = false;
-         dispatch({type: Types.SUCCESSFULLY_RESET_PASSWORD, payload: response});
+         if(res.data.data) {
+             response.loading = false;
+             response.passwordUpdated = true;
+             dispatch({type: Types.SUCCESSFULLY_RESET_PASSWORD, payload: response});
+             showToast('success', res.data.message);
+             
+             setTimeout(() => {
+                 response.passwordUpdated = false;
+                 dispatch({type: Types.SUCCESSFULLY_RESET_PASSWORD, payload: response});
+             }, 5000);
+         }
 
      } catch (err) {
         response.loading = false;
