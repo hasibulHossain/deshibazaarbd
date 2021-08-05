@@ -23,11 +23,11 @@ function UserVerification() {
     return (
         <div className="forget-password my-5">
         <div className='container'>
-            <h4 className="pb-3">Email verification</h4>
+            <h4 className="pb-3">User verification</h4>
             <div className="row">
                 <div className="col-md-12">
                     <div className="bg-white p-4">
-                        <p>Please check your email for OTP</p>
+                        <p>Please check your email or phone number for OTP</p>
 
                         <form 
                             onSubmit={handleSubmit(onSubmit)}
@@ -35,7 +35,6 @@ function UserVerification() {
                             
                             <div style={{width: '40%'}}>
                                 <div className="mb-3">
-                                    {/* <label htmlFor="lastName" className="form-label">Email</label> */}
                                     <input
                                         disabled={true}
                                         type="text"
@@ -48,14 +47,13 @@ function UserVerification() {
                                         })}
                                     />
                                     {errors.email && errors.email.type === 'required' && (
-                                        <ErrorMessage errorText="Valid email is required" />
+                                        <ErrorMessage errorText="Valid phone number or email is required" />
                                     )}
 
                                 </div>
                             </div>
                             <div style={{width: '40%'}}>
                                 <div className="mb-3">
-                                    {/* <label htmlFor="lastName" className="form-label">Email</label> */}
                                     <input
                                         type="text"
                                         className="form-control"

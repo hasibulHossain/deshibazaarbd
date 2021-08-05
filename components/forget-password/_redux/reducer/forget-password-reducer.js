@@ -3,7 +3,7 @@ import * as Types from "../types/types";
 const initialState = {
     email: "",
     otp: null,
-    isValidEmail: false,
+    isValidUser: false,
     isOtpVerified: false,
     passwordUpdated: false,
     isLoading: false
@@ -17,7 +17,7 @@ const forgetPasswordReducer = (state = initialState, {type, payload}) => {
         ...state,
         email: payload.email,
         isLoading: payload.loading,
-        isValidEmail: payload.isValidEmail
+        isValidUser: payload.isValidUser
       };
 
     case Types.VALIDATE_OTP:
@@ -40,7 +40,7 @@ const forgetPasswordReducer = (state = initialState, {type, payload}) => {
         passwordUpdated: payload.passwordUpdated,
         email: "",
         otp: null,
-        isValidEmail: false,
+        isValidUser: false,
         isOtpVerified: false,
         isLoading: false
       };

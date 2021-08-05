@@ -4,7 +4,7 @@ import MainLayout from '../../components/layouts/MainLayout'
 
 export default function ResetPasswordPage() { 
     return (
-        <MainLayout>
+        <MainLayout pageTitle="Reset Password" >
             <ResetPassword />
         </MainLayout>
     )

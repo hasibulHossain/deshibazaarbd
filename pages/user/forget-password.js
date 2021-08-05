@@ -4,7 +4,7 @@ import MainLayout from '../../components/layouts/MainLayout'
 
 export default function ForgetPasswordPage() { 
     return (
-        <MainLayout>
+        <MainLayout pageTitle="Forget Password">
             <ForgetPassword />
         </MainLayout>
     )

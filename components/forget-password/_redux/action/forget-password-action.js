@@ -12,11 +12,11 @@ const baseUrl = `${process.env.NEXT_PUBLIC_API_URL}`;
  * @returns void Dispatch event `CHECK_EMAIL_STATUS`
  */
 
- export const checkIsValidEmail = (email) => async (dispatch) => {
+ export const checkIsValidUser = (email) => async (dispatch) => {
      let response = {
          loading: true,
          email: email,
-         isValidEmail: false
+         isValidUser: false
      }
      
      const url = `${baseUrl}auth/forget-password/step1`
@@ -31,7 +31,7 @@ const baseUrl = `${process.env.NEXT_PUBLIC_API_URL}`;
          
          if(!res.data.errors) {
              response.loading = false;
-             response.isValidEmail = res.data.data;
+             response.isValidUser = res.data.data;
              dispatch({type: Types.CHECK_EMAIL_STATUS, payload: response});
              showToast('success', res.data.message);
         }
@@ -96,7 +96,6 @@ const baseUrl = `${process.env.NEXT_PUBLIC_API_URL}`;
              response.passwordUpdated = true;
              dispatch({type: Types.SUCCESSFULLY_RESET_PASSWORD, payload: response});
              showToast('success', res.data.message);
-             
              setTimeout(() => {
                  response.passwordUpdated = false;
                  dispatch({type: Types.SUCCESSFULLY_RESET_PASSWORD, payload: response});

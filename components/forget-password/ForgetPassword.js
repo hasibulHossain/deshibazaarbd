@@ -4,22 +4,22 @@ import { useForm } from 'react-hook-form';
 import ErrorMessage from '../master/ErrorMessage/ErrorMessage';
 import SimpleBtn from '../master/SimpleBtn/SimpleBtn';
 import {useDispatch, useSelector} from 'react-redux';
-import { checkIsValidEmail } from './_redux/action/forget-password-action';
+import { checkIsValidUser } from './_redux/action/forget-password-action';
 
 
 
 function ForgetPassword() {
     const dispatch = useDispatch();
     const { register, handleSubmit, errors } = useForm();
-    const {isLoading, isValidEmail} = useSelector(state => state.ForgetPasswordReducer);
+    const {isLoading, isValidUser} = useSelector(state => state.ForgetPasswordReducer);
     const router = useRouter();
 
-    if(isValidEmail) {
+    if(isValidUser) {
         router.push('/user/verification')
     }
 
     const onSubmit = data => {
-        dispatch(checkIsValidEmail(data.email));
+        dispatch(checkIsValidUser(data.email));
     }
     
     return (

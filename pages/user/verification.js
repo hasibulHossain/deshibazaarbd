@@ -4,7 +4,7 @@ import MainLayout from '../../components/layouts/MainLayout'
 
 export default function Verification() { 
     return (
-        <MainLayout>
+        <MainLayout pageTitle="User Verification" >
             <UserVerification />
         </MainLayout>
     )

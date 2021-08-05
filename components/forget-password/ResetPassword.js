@@ -17,7 +17,7 @@ export default function App() {
   
   const onSubmit = async data => {
       dispatch(resetPassword(otp, email, data.password));
-    };
+  };
     
    useEffect(() => {        
         if(passwordUpdated) {
