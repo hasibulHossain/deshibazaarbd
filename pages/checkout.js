@@ -34,7 +34,7 @@ export default function Carts() {
 	// 	if(!carts.length) {
 	// 		setTimeout(() => {
 	// 			router.push('/');
-	// 		}, 2000);
+	// 		}, 5000);
 	// 	}
 	// }, [carts]);
 

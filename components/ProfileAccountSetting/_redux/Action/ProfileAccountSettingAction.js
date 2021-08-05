@@ -297,6 +297,7 @@ export const addAddress = (addressInput, type, closeModal) => (dispatch) => {
     dispatch({ type: Types.STORE_BILLING_ADDRESS, payload: responseData });
     const userStorageData = JSON.parse(localStorage.getItem("loginData"));
     addressInput['user_id'] = userStorageData.userData.id;
+    
     let url;
     if (type === 'new_address') {
         url = `${process.env.NEXT_PUBLIC_API_URL}address`
