@@ -2812,3 +2812,20 @@ img.payment_method_in_shipping {
 .button_disabled{
   cursor: not-allowed!important;
 }
+
+/** Order Tracking Form */
+.order-tracking-item {
+  margin: 0px;
+}
+.order-tracking-item a {
+  color: #ea3732;
+  display: block;
+  font-size: 0.8rem;
+  padding: 3px;
+  text-decoration: none;
+}
+.order-tracking-item a:hover {
+  color: #ea3732;
+  text-decoration: underline;
+}
+/** Order Tracking Form */

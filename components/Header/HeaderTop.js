@@ -1,4 +1,5 @@
 import React, { useState, useEffect, memo } from 'react';
+import { useDispatch } from 'react-redux';
 import { Dropdown } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShippingFast, faUser } from '@fortawesome/free-solid-svg-icons'
@@ -7,14 +8,11 @@ import SimpleModal from '../master/Modal/SimpleModal';
 import TrackingForm from './TrackingForm';
 import Translate from '../translation/Translate';
 import { getUserDataAction } from '../_redux/getUserData/Action/UserDataAction';
-import { useDispatch, useSelector } from 'react-redux';
-import { getUserOrderList } from '../orders/_redux/action/OrderAction';
 
 const HeaderTop = () => {
     const dispatch                    = useDispatch();
     const [currencies, setCurrencies] = useState([]);
     const [show, setShow]             = useState(false);
-    const userData                    = useSelector((state) => state.UserDataReducer.userData);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -22,8 +20,6 @@ const HeaderTop = () => {
     useEffect(() => {
         setCurrencies(getCurrencies());
         dispatch(getUserDataAction());
-        dispatch(getUserOrderList(5))
-
     }, []);
 
     const toggleActiveLanguage = (currency) => {
@@ -46,7 +42,7 @@ const HeaderTop = () => {
                         <div className="row justify-content-end">
                             <p className="heading-top-text pointer mr-3">
                                 <a
-                                    href="http://seller.deshibazaarbd.com/login"
+                                    href="https://seller.programmingshikhi.com"
                                     target="_blank"
                                     style={{ color: '#fff', textDecoration: 'none' }} >
                                     <FontAwesomeIcon className="custom-fontAwesome" icon={faUser} />
@@ -54,14 +50,19 @@ const HeaderTop = () => {
                                 </a>
                             </p>
 
-                            {
+                            {/* {
                                 typeof userData !== "undefined" && userData !== null && (
                                     <p className="heading-top-text pointer" onClick={() => handleShow()}>
                                         <FontAwesomeIcon className="custom-fontAwesome" icon={faShippingFast} />
                                         <Translate>Track My Order</Translate>
                                     </p>
                                 )
-                            }
+                            } */}
+
+                            <p className="heading-top-text pointer" onClick={() => handleShow()}>
+                                <FontAwesomeIcon className="custom-fontAwesome" icon={faShippingFast} />
+                                <Translate>Track My Order</Translate>
+                            </p>
 
                             <Dropdown className="dropdown-currency">
                                 <Dropdown.Toggle variant="default" id="dropdown-basic">

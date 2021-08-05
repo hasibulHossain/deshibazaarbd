@@ -3,13 +3,19 @@ import * as Types from "../Types/Types";
 export const getUserDataAction = () => async (dispatch) => {
   const data = getUserData();
   dispatch({ type: Types.GET_USER_STORAGE_DATA, payload: data });
-};
-//logout user    
+}
+
+/**
+ * Logout a User
+ * 
+ * @return void
+ */
 export const handleLogoutUser = () => (dispatch) => {
-  const logout = localStorage.removeItem('loginData');
-  const isLogOut = true;
-  dispatch(getUserDataAction())
-  dispatch({ type: Types.LOGOUT_USER, payload: isLogOut });
+  localStorage.removeItem('loginData');
+  localStorage.removeItem('access_token');
+
+  dispatch(getUserDataAction());
+  dispatch({ type: Types.LOGOUT_USER, payload: true });
 }
 
 //updated user data in local localStorage
