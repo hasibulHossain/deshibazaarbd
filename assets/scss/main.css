@@ -680,17 +680,21 @@ a .custom-button-component:hover {
 .fixed-cart-items {
   width: 100%;
   padding: 10px 10px 0px 10px;
+  display: -webkit-flex;
   display: flex;
+  -webkit-flex-direction: column;
   flex-direction: column;
+  -webkit-align-items: center;
   align-items: center;
-  background: #ccc;
-  color: #e9000f;
+  background: #387f34;
+  color: #f9bec2;
+  opacity: 0.9;
 }
 
 .fixed-cart-items span:first-child {
-  color: #e9000f;
-  width: 25px;
-  height: 25px;
+  color: #ffbec1;
+  width: 20px;
+  height: 20px;
   margin-bottom: 5px;
 }
 
@@ -701,8 +705,15 @@ a .custom-button-component:hover {
 
 .fixed-cart-price {
   width: 100%;
-  background-color: #e9000f;
+  background-color: #fff;
   padding: 17px 10px;
+  opacity: 0.8;
+  box-shadow: -13px 14px 40px #607d8b2e;
+}
+
+.fixed-cart-price span {
+  color: #484b4f;
+  font-weight: normal;
 }
 
 .flash-deal-section {
