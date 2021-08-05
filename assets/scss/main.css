@@ -2798,6 +2798,16 @@ img.payment_method_in_shipping {
   line-height: 1em;
   letter-spacing: 1px;
 }
+.wishlist_warning_alert {
+  border: solid transparent;
+  background-color: #ff9b8df2!important;
+  padding: 0.6rem!important;
+  z-index: 9999!important;
+  margin: 0;
+  color: #2f0e02!important;
+  font-size: 0.7rem!important;
+  width: 430px!important;
+}
 .button_disabled{
   cursor: not-allowed!important;
 }
