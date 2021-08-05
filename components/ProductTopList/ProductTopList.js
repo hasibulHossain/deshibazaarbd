@@ -33,8 +33,8 @@ const ProductTopList = () => {
             <Slider {...TopProductSlickSetting}>
                 {
                     topProductList.length > 0 && topProductList.map((item, index) => (
-                        <div className="top-product-card">
-                            <div key={index} className="custom_bg card pointer"
+                        <div className="top-product-card" key={index}>
+                            <div className="custom_bg card pointer"
                                 onClick={() => dispatch(toggleProductModalAction(item.sku))}
                             >
                                 <div className="row">
