@@ -48,8 +48,6 @@ const DeliveryInfo = () => {
         // }
     }, []);
 
-    console.log('shippingAddressInput :>> ', shippingAddressInput);
-
     return (
         <>
             <div className="card p-3 shadow-sm">
