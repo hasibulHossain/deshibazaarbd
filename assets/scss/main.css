@@ -621,12 +621,12 @@ a .custom-button-component:hover {
   padding: 10px;
   color: #ffffff;
   font-weight: bold;
-  border-left: 15px solid #ffff!important;
-  background-color: #172337!important;
+  border-left: 15px solid #ffff !important;
+  background-color: #172337 !important;
 }
-.top-product-card .custom_bg{
-  background-color: #172337!important;
-  border: none!important;
+.top-product-card .custom_bg {
+  background-color: #172337 !important;
+  border: none !important;
 }
 
 .top-product-card .top-product-details {
@@ -653,7 +653,6 @@ a .custom-button-component:hover {
 .top-product-card .top-product-details sup {
   color: rgb(255, 174, 0);
 }
-
 
 /*=====================top products close==================*/
 
@@ -2743,19 +2742,19 @@ img.payment_method_in_shipping {
   font-weight: 700 !important;
   color: #e94651 !important;
 }
-.custom_dropdown_link{
-  color: #e94651!important;
-  font-weight: 400!important;
+.custom_dropdown_link {
+  color: #e94651 !important;
+  font-weight: 400 !important;
 }
-.custom_drop_item{
-  transition: 0.5s!important;
+.custom_drop_item {
+  transition: 0.5s !important;
   padding: 5px;
-  display: inline-block!important;
+  display: inline-block !important;
   width: 90%;
 }
-.custom_drop_item:hover{
-  background-color: #e94651!important;
-  color: #fff!important;
+.custom_drop_item:hover {
+  background-color: #e94651 !important;
+  color: #fff !important;
   border-radius: 5px;
   width: 90%;
 }
@@ -2784,8 +2783,8 @@ img.payment_method_in_shipping {
   top: 25%;
   left: 20%;
 }
-.btn_danger{
-  background-color: #f33a1e!important;
+.btn_danger {
+  background-color: #f33a1e !important;
 }
 .alert_warning_bg {
   border: solid transparent;
@@ -2794,20 +2793,24 @@ img.payment_method_in_shipping {
   padding: 0.6rem;
   margin: 0;
   color: #f26d3e;
-  font-size: 0.8rem!important;
+  font-size: 0.8rem !important;
   line-height: 1em;
   letter-spacing: 1px;
 }
 .wishlist_warning_alert {
   border: solid transparent;
-  background-color: #ff9b8df2!important;
-  padding: 0.6rem!important;
-  z-index: 9999!important;
+  background-color: #ff9b8df2 !important;
+  padding: 0.6rem !important;
+  z-index: 9999 !important;
   margin: 0;
-  color: #2f0e02!important;
-  font-size: 0.7rem!important;
-  width: 430px!important;
+  color: #2f0e02 !important;
+  font-size: 0.7rem !important;
+  width: 430px !important;
 }
-.button_disabled{
-  cursor: not-allowed!important;
+.button_disabled {
+  cursor: not-allowed !important;
 }
+.checkout_delivery_free_message_title {
+  font-weight: 800;
+}
+
