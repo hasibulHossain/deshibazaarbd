@@ -20,14 +20,18 @@ const FloatingCartButton = () => {
   }, []);
 
     return (
-        <button onClick={flashDealBtnHandler} className="flashDealButton d-flex align-items-center pointer" >
-            <span className="mr-2">
-                {" "}
-                {totalQuantity} items
-                <br />
-                {formatCurrency(totalPrice)} {activeCurrency('code')}
-            </span>
-            <span> {" "} <FontAwesomeIcon className="ml-2" icon={faShoppingBag} /> </span>
+        <button onClick={flashDealBtnHandler} className="flashDealButton d-flex flex-column align-items-center pointer" >
+            <div className="fixed-cart-items">
+                <span><FontAwesomeIcon icon={faShoppingBag} /> </span>
+                <span>
+                    {totalQuantity} items
+                </span>
+            </div>
+            <div className="fixed-cart-price d-flex justify-content-center align-item-center">
+                <span>
+                    {formatCurrency(totalPrice)}
+                </span>
+            </div>
         </button>
     );
 }
