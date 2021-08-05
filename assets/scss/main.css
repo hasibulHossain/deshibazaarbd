@@ -687,12 +687,13 @@ a .custom-button-component:hover {
   -webkit-align-items: center;
   align-items: center;
   background: #387f34;
-  color: #f9bec2;
+  color: #fff; /* #ffbec1 */
   opacity: 0.9;
+  padding-bottom: 5px;
 }
 
 .fixed-cart-items span:first-child {
-  color: #ffbec1;
+  color:  #fff; /*  #ffbec1 */
   width: 20px;
   height: 20px;
   margin-bottom: 5px;
@@ -712,8 +713,8 @@ a .custom-button-component:hover {
 }
 
 .fixed-cart-price span {
-  color: #484b4f;
-  font-weight: normal;
+  color: #000000;
+  font-weight: 400;
 }
 
 .flash-deal-section {
