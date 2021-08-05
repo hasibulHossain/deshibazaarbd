@@ -108,8 +108,8 @@ const LoginComponent = () => {
                                 </label>
                             </div>
                             <p className="forget_password_link">
-                                <Link href="/">
-                                    <a>Forget your password?</a>
+                                <Link href="/user/forget-password">
+                                    <a>Forget password?</a>
                                 </Link>
                             </p>
                         </div>
