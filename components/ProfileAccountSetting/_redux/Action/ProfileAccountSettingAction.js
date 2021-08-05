@@ -198,6 +198,53 @@ export const getSingleAddress = (id, type) => {
         }
     }
 }
+// get single shipping address
+export const getSingleShippingAddress = (type) => (dispatch)=> {
+    const responseData = {
+        defaultSingleShippingAddress: [],
+        status                      : false,
+        isLoading                   : true,
+        singleShippingAddressObject : {}
+    }
+    dispatch({ type: Types.GET_SINGLE_SHIPPING_ADDRESS, payload: responseData });
+    const userStorageData = JSON.parse(localStorage.getItem("loginData"));
+    Axios.get(`${process.env.NEXT_PUBLIC_API_URL}address?user_id=${userStorageData.userData.id}&type=${type}&is_default=1`)
+        .then((res) => {
+            if (res.data.status) {
+                const data             = res.data.data;
+                const addressObject = {
+                    id                 : +data[0].id,
+                    is_default         : +data[0].is_default,
+                    type               : data[0].type,
+                    user_id            : data[0].user_id,
+                    name               : data[0].name,
+                    phone_no           : data[0].phone_no,
+                    is_default_selected: +data[0].is_default === 1 ? {label : "Yes",  value: +data[0].is_default}: {label: "No", value: +data[0].is_default},
+                    selectedCountry    : { label : data[0].country,  value: +data[0].country_id },
+                    selectedCity       : { label : data[0].city,     value: +data[0].city_id },
+                    selectedArea       : { label : data[0].area,     value: +data[0].area_id },
+                    country_id         : +data[0].country_id,
+                    country            : data[0].country,
+                    city_id            : +data[0].city_id,
+                    city               : data[0].city,
+                    area_id            : +data[0].area_id,
+                    area               : data[0].area,
+                    street1            : data[0].street1,
+                    street2            : data[0].street2,
+                    location           : data[0].location
+                }
+               responseData.isLoading                    = false;
+               responseData.status                       = true;
+               responseData.defaultSingleShippingAddress = data;
+               responseData.singleShippingAddressObject  = addressObject;
+               dispatch({type: Types.GET_SINGLE_SHIPPING_ADDRESS, payload: responseData});
+            }
+
+        }).catch((err) => {
+            responseData.isLoading = false;
+            dispatch({type: Types.GET_SINGLE_SHIPPING_ADDRESS, payload: responseData});
+        })
+}
 
 //handle change input field 
 export const handleChangeBillingAddressInput = (name, value) => (dispatch) => {
@@ -234,7 +281,7 @@ export const handleUpdateBillingAddress = (billingAddressInput) => (dispatch) =>
 
 //handle store billing address
 export const addAddress = (addressInput, type, closeModal) => (dispatch) => {
-    console.log('type :>> ', type);
+
     const responseData = {
         status         : false,
         isLoading      : true,
@@ -250,6 +297,7 @@ export const addAddress = (addressInput, type, closeModal) => (dispatch) => {
     dispatch({ type: Types.STORE_BILLING_ADDRESS, payload: responseData });
     const userStorageData = JSON.parse(localStorage.getItem("loginData"));
     addressInput['user_id'] = userStorageData.userData.id;
+    
     let url;
     if (type === 'new_address') {
         url = `${process.env.NEXT_PUBLIC_API_URL}address`

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { addAddress, getAddress, getArea, getCity, getCountry, getDefaultAddress, getSingleAddress, handleChangeBillingAddressInput, handleChangeShippingAddressInput, handleUpdateBillingAddress } from '../ProfileAccountSetting/_redux/Action/ProfileAccountSettingAction';
+import { addAddress, getAddress, getArea, getCity, getCountry, getDefaultAddress, getSingleAddress, getSingleShippingAddress, handleChangeBillingAddressInput, handleChangeShippingAddressInput, handleUpdateBillingAddress } from '../ProfileAccountSetting/_redux/Action/ProfileAccountSettingAction';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentUserDataAction } from './_redux/Action/DeliveryInfoAction';
 import AddressUpdate from './../ProfileAccountSetting/AddressUpdate';
@@ -14,18 +14,17 @@ import ErrorMessage from '../master/ErrorMessage/ErrorMessage';
 
 const DeliveryInfo = () => {
 
-    const dispatch = useDispatch();
-
+    const dispatch               = useDispatch();
     const defaultShippingAddress = useSelector((state) => state.ProfileAccountSettingReducer.defaultShippingAddress);
-    const isLoading = useSelector((state) => state.ProfileAccountSettingReducer.isLoading);
-    const countryList = useSelector((state) => state.ProfileAccountSettingReducer.countryList);
-    const cityList = useSelector((state) => state.ProfileAccountSettingReducer.cityList);
-    const areaList = useSelector((state) => state.ProfileAccountSettingReducer.areaList);
-    const isSubmitting = useSelector((state) => state.ProfileAccountSettingReducer.isSubmitting);
-    const shippingAddressInput = useSelector((state) => state.ProfileAccountSettingReducer.shippingAddressInput);
+    const isLoading              = useSelector((state) => state.ProfileAccountSettingReducer.isLoading);
+    const countryList            = useSelector((state) => state.ProfileAccountSettingReducer.countryList);
+    const cityList               = useSelector((state) => state.ProfileAccountSettingReducer.cityList);
+    const areaList               = useSelector((state) => state.ProfileAccountSettingReducer.areaList);
+    const isSubmitting           = useSelector((state) => state.ProfileAccountSettingReducer.isSubmitting);
+    const shippingAddressInput   = useSelector((state) => state.ProfileAccountSettingReducer.shippingAddressInput);
     const { register, handleSubmit, errors, setValue } = useForm();
     const [show, setShow] = useState(false);
-
+    // const [addressType, setAddressType] = useState('new_address')
     const toggleShowHandler = () => {
         setShow(preState => !preState);
     }
@@ -34,21 +33,20 @@ const DeliveryInfo = () => {
         dispatch(handleChangeShippingAddressInput(name, value))
     }
 
-    const submitUpdatedAddressHandler = () => {
-        dispatch(addAddress(shippingAddressInput, 'shipping_address', toggleShowHandler))
+    const submitUpdatedAddressHandler = (e) => {
+        let addressType = "shipping_address";
+        if(typeof shippingAddressInput.id == "undefined" || shippingAddressInput.id == "" || shippingAddressInput.id == null){
+            addressType = "new_address"
+        }
+        dispatch(addAddress(shippingAddressInput, addressType, toggleShowHandler))
     }
 
     useEffect(() => {
         dispatch(getCurrentUserDataAction());
         dispatch(getDefaultAddress('shipping_address'));
+        dispatch(getSingleShippingAddress('shipping_address'));
         dispatch(getCountry());
-        // dispatch(getAddress('shipping_address'));
-        // if (defaultShippingAddress.length > 0) {
-        //     dispatch(getSingleAddress(defaultShippingAddress[0].id, defaultShippingAddress[0].type));
-        // }
     }, []);
-
-    console.log('shippingAddressInput :>> ', shippingAddressInput);
 
     return (
         <>
