@@ -7,11 +7,12 @@ import PriceCalculation from "../products/partials/PriceCalculation.js";
 import RemoveWishlist from "./RemoveWishlist.js";
 import { Button } from '@material-ui/core';
 import Translate from "../translation/Translate.js";
+import WarningMessage from "../master/warningMessage/WarningMessage.js";
 
 const ProductWishList = () => {
 
   const dispatch = useDispatch();
-  const { wishList, isLoading, isSubmitting } = useSelector((state) => state.WishlistReducer);
+  const { wishList, isLoading } = useSelector((state) => state.WishlistReducer);
 
   useEffect(() => {
     dispatch(getWishListData());
@@ -34,8 +35,8 @@ const ProductWishList = () => {
                   </h5>
                 </div>
                 <div className="card-body">
-                  {!isLoading && wishList.map.length === 0 && (
-                    <div className="alert alert-warning p-3">No Wishlist Found !!</div>
+                  {!isLoading && wishList.length === 0 && (
+                    <WarningMessage text="Sorry! Wishlist not found..." />
                   )}
 
                   {isLoading && (

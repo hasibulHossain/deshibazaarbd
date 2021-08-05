@@ -93,46 +93,11 @@ function ProfileAccountSettingReducer(state = initialState, action) {
                 billingAddress: action.payload.data,
             }
         case Types.GET_DEFAULT_SHIPPING_ADDRESS:
-            let shippingAddress;
-            if(action.payload.data.length > 0){
-                shippingAddress = {
-                    id                 : +action.payload.data[0].id,
-                    is_default         : +action.payload.data[0].is_default,
-                    type               : action.payload[0].type,
-                    user_id            : action.payload.data[0].id && action.payload.data[0].id,
-                    name               : action.payload.data[0].name,
-                    phone_no           : action.payload.data[0].phone_no,
-                    is_default_selected: +action.payload.data[0].is_default === 1 ? {label : "Yes",  value: +action.payload.data[0].is_default}: {label: "No", value: +action.payload.data[0].is_default},
-                    selectedCountry    : { label : action.payload.data[0].country,  value: +action.payload.data[0].country_id },
-                    selectedCity       : { label : action.payload.data[0].city,     value: +action.payload.data[0].city_id },
-                    selectedArea       : { label : action.payload.data[0].area,     value: +action.payload.data[0].area_id },
-                    country_id         : +action.payload.data[0].country_id,
-                    country            : action.payload.data[0].country,
-                    city_id            : +action.payload.data[0].city_id,
-                    city               : action.payload.data[0].city,
-                    area_id            : +action.payload.data[0].area_id,
-                    area               : action.payload.data[0].area,
-                    street1            : action.payload.data[0].street1,
-                    street2            : action.payload.data[0].street2,
-                    location           : action.payload.data[0].location
-                }
-               
-            }
-
-            if (typeof shippingAddress === "undefined") {
-                return {
-                    ...state,
-                    isLoading      : action.payload.isLoading,
-                    defaultShippingAddress: action.payload.data,
-                    shippingAddressInput: initialState.shippingAddressInput,
-                }
-            }else{
-                return {
-                    ...state,
-                    isLoading      : action.payload.isLoading,
-                    defaultShippingAddress: action.payload.data,
-                    shippingAddressInput: shippingAddress,
-                }
+            return {
+                ...state,
+                isLoading      : action.payload.isLoading,
+                defaultShippingAddress: action.payload.data,
+                // shippingAddressInput: initialState.shippingAddressInput,
             }
            
         case Types.GET_DEFAULT_BILLING_ADDRESS:
@@ -259,6 +224,11 @@ function ProfileAccountSettingReducer(state = initialState, action) {
                 return {
                     ...state,
                     selectedAddress: cloneSelectedAddress
+                }
+            case Types.GET_SINGLE_SHIPPING_ADDRESS:
+                return {
+                    ...state,
+                    shippingAddressInput: action.payload.singleShippingAddressObject,
                 }
         default:
             break;
