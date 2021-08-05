@@ -19,7 +19,7 @@ export const getMenuListData = () => async (dispatch) => {
     const menuList = res.data.data;
 
     // filter menu list and remove unnecessary menu items
-    const filteredMenuList = menuList.filter( menu => menu.short_code !== 'un-categorized' )
+    const filteredMenuList = menuList.filter( menu => menu.short_code !== 'others' )
 
     dispatch({ type: Types.GET_MENU_LIST, payload: { menuList: filteredMenuList } });
   } catch (error) {
