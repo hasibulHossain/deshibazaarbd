@@ -57,7 +57,7 @@ const initialState = {
         location      : ""
     },
     shippingAddressInput: {
-        type          : "shipping_address",
+        type          : "",
         user_id       : "",
         name          : "",
         phone_no      : "",
@@ -226,10 +226,18 @@ function ProfileAccountSettingReducer(state = initialState, action) {
                     selectedAddress: cloneSelectedAddress
                 }
             case Types.GET_SINGLE_SHIPPING_ADDRESS:
-                return {
-                    ...state,
-                    shippingAddressInput: action.payload.singleShippingAddressObject,
+                if (action.payload.status === true) {
+                    return {
+                        ...state,
+                        shippingAddressInput: action.payload.singleShippingAddressObject,
+                    }
+                }else{
+                    return {
+                        ...state,
+                        shippingAddressInput: initialState.shippingAddressInput
+                    }
                 }
+              
         default:
             break;
     }

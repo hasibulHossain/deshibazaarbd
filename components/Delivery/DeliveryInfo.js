@@ -24,7 +24,7 @@ const DeliveryInfo = () => {
     const shippingAddressInput   = useSelector((state) => state.ProfileAccountSettingReducer.shippingAddressInput);
     const { register, handleSubmit, errors, setValue } = useForm();
     const [show, setShow] = useState(false);
-
+    const [addressType, setAddressType] = useState('shipping_address')
     const toggleShowHandler = () => {
         setShow(preState => !preState);
     }
@@ -34,8 +34,16 @@ const DeliveryInfo = () => {
     }
 
     const submitUpdatedAddressHandler = () => {
-        dispatch(addAddress(shippingAddressInput, 'shipping_address', toggleShowHandler))
+        dispatch(addAddress(shippingAddressInput, addressType, toggleShowHandler))
     }
+
+    useEffect(()=>{
+        if (shippingAddressInput.type === "") {
+            setAddressType("new_address")
+        }else{
+            setAddressType("shipping_address")
+        }
+    },[shippingAddressInput])
 
     useEffect(() => {
         dispatch(getCurrentUserDataAction());

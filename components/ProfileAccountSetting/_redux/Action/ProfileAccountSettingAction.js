@@ -215,7 +215,7 @@ export const getSingleShippingAddress = (type) => (dispatch)=> {
                 const addressObject = {
                     id                 : +data[0].id,
                     is_default         : +data[0].is_default,
-                    type               : type,
+                    type               : data[0].type,
                     user_id            : data[0].user_id,
                     name               : data[0].name,
                     phone_no           : data[0].phone_no,
@@ -234,6 +234,7 @@ export const getSingleShippingAddress = (type) => (dispatch)=> {
                     location           : data[0].location
                 }
                responseData.isLoading                    = false;
+               responseData.status                       = true;
                responseData.defaultSingleShippingAddress = data;
                responseData.singleShippingAddressObject  = addressObject;
                dispatch({type: Types.GET_SINGLE_SHIPPING_ADDRESS, payload: responseData});
@@ -280,7 +281,7 @@ export const handleUpdateBillingAddress = (billingAddressInput) => (dispatch) =>
 
 //handle store billing address
 export const addAddress = (addressInput, type, closeModal) => (dispatch) => {
-    console.log('type :>> ', type);
+
     const responseData = {
         status         : false,
         isLoading      : true,
