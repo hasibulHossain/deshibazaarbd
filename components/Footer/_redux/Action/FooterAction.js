@@ -1,5 +1,8 @@
 import * as Types from "../Types/Types";
-import Axios from "axios"
+import Axios from "axios";
+import { showToast } from "../../../master/Helper/ToastHelper";
+
+const baseUrl = `${process.env.NEXT_PUBLIC_API_URL}`;
 
 export const getFooterInformation = () => (dispatch) => {
     const data         = [
@@ -35,3 +38,36 @@ export const getFooterInformation = () => (dispatch) => {
     ]
     dispatch({ type: Types.GET_FOOTER_INFORMATION_DATA, payload: data })
 }
+
+/**
+ * subscribe to newsletter
+ * 
+ * since 1.0.0
+ * 
+ * @param email
+ * 
+ */
+
+export const subscribeNewsletter = email => async dispatch => {
+    let response = {
+        loading: true
+    }
+
+    const url = baseUrl + "subscriber/subscribe";
+    const data = {
+        email: email
+    }
+    
+    try {
+        dispatch({type: Types.POST_SUBSCRIBE_NEWSLETTER, payload: response})
+        response.loading = false;
+        const res = await Axios.post(url, data);
+        dispatch({type: Types.POST_SUBSCRIBE_NEWSLETTER, payload: response})
+        showToast('success', res.data.message);
+    } catch (err) {
+        response.loading = false;
+        dispatch({type: Types.POST_SUBSCRIBE_NEWSLETTER, payload: response})
+        showToast('error', 'Something went wrong!');
+    }
+}
+

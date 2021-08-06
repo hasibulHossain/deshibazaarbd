@@ -1,5 +1,4 @@
 import * as Types from "../Types/Types";
-import moment from "moment";
 const initialState = {
     isLoading   : false,
     isSubmitting: false,
@@ -7,18 +6,22 @@ const initialState = {
 };
 
 const FooterReducer = (state = initialState, action) => {
-    const newState = { ...state };
     switch (action.type) {
         case Types.GET_FOOTER_INFORMATION_DATA:
             return {
                 ...state,
                 footerInfo: action.payload,
             }
+
+        case Types.POST_SUBSCRIBE_NEWSLETTER:
+            return {
+                ...state,
+                isLoading: action.payload.loading
+            }
        
         default:
-            break;
+            return state;
     }
-    return newState;
 };
 
 export default FooterReducer;

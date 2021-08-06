@@ -7,14 +7,21 @@ import Button from '../master/Button/Button';
 import { getUserOrderList } from '../orders/_redux/action/OrderAction';
 import SimpleModal from '../master/Modal/SimpleModal';
 import TrackingForm from '../Header/TrackingForm';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import SimpleBtn from '../master/SimpleBtn/SimpleBtn';
+import { subscribeNewsletter } from './_redux/Action/FooterAction';
 
 const Footer = () => {
-    
-    const dispatch        = useDispatch();
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const {isLoading}       = useSelector(state => state.FooterReducer)
+    const dispatch          = useDispatch();
+    const [show, setShow]   = useState(false);
+    const [email, setEmail] = useState("");
+    const handleClose       = () => setShow(false);
+    const handleShow        = () => setShow(true);
+
+    const onSubmit = () => {
+        dispatch(subscribeNewsletter(email));
+    }
 
     useEffect(() => {
         dispatch(getUserOrderList(5))
@@ -88,8 +95,17 @@ const Footer = () => {
                             <div className="footer-info">
                                 <h5>Newsletter</h5>
                                 <p>Subscribe to our newsletter to get notification about discount information</p>
-                                <input type="text" className="form-control mb-3" placeholder="Enter your Email here" />
-                                <Button buttonText="Subscribe" />
+                                <input onChange={(e) => setEmail(e.target.value)} type="text" className="form-control mb-3" placeholder="Enter your Email here" />
+                                <SimpleBtn onClick={onSubmit} type="submit" variant="danger" style={{width: 'fit-content'}}>
+                                    Subscribe
+                                    &#8203;
+                                        {
+                                            isLoading && (
+                                                <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                            )
+                                        }
+                                </SimpleBtn>
+
                             </div>
                             <SocialMedia />
                         </Col>
