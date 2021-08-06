@@ -12,7 +12,7 @@ const CategoryList = ({ parentID = null }) => {
   const router   = useRouter();
 
   useEffect(() => {
-    dispatch(getCategories(parentID, 6)); // Get the 6 categories
+    dispatch(getCategories(parentID, 12)); // Get the 12 categories
   }, []);
 
   const { categories, loading } = useSelector((state) => state.CategoryReducer);
@@ -44,7 +44,7 @@ const CategoryList = ({ parentID = null }) => {
 
         {categories && categories.length > 0 &&
           categories.map((item, index) => (
-            <div key={index} className="category-card col-md-2">
+            <div key={index} className="category-card col-3 col-md-1">
               <div className="category-card-body" onClick={() => navigateCategoryList(item.id)}>
                 <div className="category-img-area">
                   <img src={item.image_url} alt={translate(item.name)} className="img-fluid" />

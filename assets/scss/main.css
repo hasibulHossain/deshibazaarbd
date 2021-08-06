@@ -413,8 +413,7 @@ a .custom-button-component:hover {
 }
 
 .category-card {
-  height: 200px;
-  border-right: 1px solid #e4e6ec;
+  height: 160px;
   padding: 15px;
   text-align: center;
   position: relative;
@@ -428,21 +427,22 @@ a .custom-button-component:hover {
 .category-card-body {
   vertical-align: middle;
   margin: auto;
-  width: 70%;
 }
 
 .category-img-area {
-  height: 140px;
+  height: 90px;
 }
 
 .category-card-body img {
-  width: 100%;
-  height: 100%;
+  width: 64px;
+  height: 64px;
 }
 
 .category-title {
   font-size: 0.8rem !important;
-  margin-top: 15px;
+  margin-top: 0px;
+  overflow: hidden;
+  height: 40px;
 }
 
 .product-card .product-purchase-section {
