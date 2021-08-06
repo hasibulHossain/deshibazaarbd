@@ -1,6 +1,10 @@
 import * as Types from "../Types/Types";
 import Axios from "axios"
 import { showToast } from "../../../master/Helper/ToastHelper";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 
 export const WishListAdded = (itemID) => (dispatch) => {
     const response = {
@@ -8,28 +12,39 @@ export const WishListAdded = (itemID) => (dispatch) => {
         status     : false,
         data       : null
     }
-   
+
     dispatch({ type: Types.WISHLIST_ADDED, payload: response });
     const postData = {
         item_id: itemID
     }
-    Axios.post(`${process.env.NEXT_PUBLIC_API_URL}wishlist`, postData)
-        .then((response) => {
-            if (response.data.status) {
+    const localStorageData = localStorage.getItem("loginData");
+    
+    if (typeof localStorageData === "undefined" || localStorageData === null || localStorageData === "") {
+        toast.error(<p><FontAwesomeIcon icon={faTimesCircle} /> You must login or register to add items to your wishlist!</p>, {
+            position : "bottom-center",
+            autoClose: 5000,
+            className: "wishlist_warning_alert",
+        });
+    } else {
+        Axios.post(`${process.env.NEXT_PUBLIC_API_URL}wishlist`, postData)
+            .then((response) => {
+                if (response.data.status) {
+                    response.isLoading = false;
+                    showToast('success', response.data.message);
+                    dispatch(getWishListData())
+                    dispatch({ type: Types.WISHLIST_ADDED, payload: responseLog });
+                }
+            }).catch((error) => {
+                const responseLog  = error.response;
                 response.isLoading = false;
-                showToast('success', response.data.message);
-                dispatch(getWishListData())
-                dispatch({ type: Types.WISHLIST_ADDED, payload: responseLog });
-            }
-        }).catch((error) => {
-            const responseLog = error.response;
-            response.isLoading = false;
-            if (typeof responseLog !== 'undefined') {
-                const { request, ...errorObject } = responseLog;
-                showToast('error', responseLog.data.message);
-                dispatch({ type: Types.WISHLIST_ADDED, payload: responseLog })
-            }
-        })
+                if (typeof responseLog !== 'undefined') {
+                    const { request, ...errorObject } = responseLog;
+                    showToast('error', responseLog.data.message);
+                    dispatch({ type: Types.WISHLIST_ADDED, payload: responseLog })
+                }
+            })
+    }
+
 }
 export const removeFromWishList = (itemID) => (dispatch) => {
     const response = {
@@ -51,7 +66,7 @@ export const removeFromWishList = (itemID) => (dispatch) => {
                 dispatch({ type: Types.REMOVE_FROM_WISHLIST, payload: responseLog });
             }
         }).catch((error) => {
-            const responseLog = error.response;
+            const responseLog  = error.response;
             response.isLoading = false;
             if (typeof responseLog !== 'undefined') {
                 // const { request, ...errorObject } = responseLog;

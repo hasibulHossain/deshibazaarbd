@@ -106,6 +106,11 @@ const OrderSummery = ({ handleClick, buttonText }) => {
                                 <p className="font-weight-bold">Total</p>
                                 <p className="font-weight-bold">{formatCurrency(totalAmount)} {activeCurrency('code')}</p>
                             </div>
+                            <div className="alert alert-info">
+                                <span className="checkout_delivery_free_message_title d-block">Delivery Charge : </span>
+                                <span className="mt-1 mb-1 d-block">Inside Dhaka Metro-60/= (+Delivery charge will increase if product is heavier)</span>
+                                <span>Outside Dhaka Metro-150/= (+Delivery charge will increase if product is heavier)</span>
+                            </div>
                             <p className="text-right border-top text-secondary pt-3 mb-1">
                                 <b>VAT</b> included, where applicable
                             </p>
