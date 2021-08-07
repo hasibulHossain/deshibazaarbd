@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import SimpleBtn from "../master/SimpleBtn/SimpleBtn";
 import AddWishList from "../Wishlist/AddWishList";
+import ViewAll from "../ViewAll/ViewAll";
 
 const DealFlash = () => {
   const dispatch = useDispatch();
@@ -35,6 +36,7 @@ const DealFlash = () => {
         <h5 className="section-heading">
           <Translate>Deals OF The Day</Translate>
         </h5>
+        <ViewAll type="deals-of-day" />
       </div>
 
       <div className="flash-deal-section">
