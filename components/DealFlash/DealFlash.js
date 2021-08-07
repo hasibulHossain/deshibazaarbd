@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getDealFlashList } from "./_redux/Action/DealFlashAction";
 import ReactStars from "react-rating-stars-component";
@@ -6,11 +6,25 @@ import CountdownTimer from "react-component-countdown-timer";
 import { toggleProductModalAction } from "../products/_redux/Action/ProductAction";
 import { formatCurrency } from "../../services/currency";
 import Translate from "../translation/Translate";
+import { addToCartAction } from "../carts/_redux/action/CartAction";
+import { showToast } from "../master/Helper/ToastHelper";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
+import SimpleBtn from "../master/SimpleBtn/SimpleBtn";
+import AddWishList from "../Wishlist/AddWishList";
+import ViewAll from "../ViewAll/ViewAll";
 
 const DealFlash = () => {
-
   const dispatch = useDispatch();
   const flashDealList = useSelector(state => state.DealFlashReducer.flashDealList);
+
+  const addToCart = (product) => {
+    if (parseInt(product.current_stock) === 0) {
+        showToast("error", "This product is out of stock!");
+    } else {
+        dispatch(addToCartAction(product));
+    }
+}
 
   useEffect(() => {
     dispatch(getDealFlashList());
@@ -22,6 +36,7 @@ const DealFlash = () => {
         <h5 className="section-heading">
           <Translate>Deals OF The Day</Translate>
         </h5>
+        <ViewAll type="deals-of-day" />
       </div>
 
       <div className="flash-deal-section">
@@ -34,7 +49,7 @@ const DealFlash = () => {
               const isOfferAvailable = offerEndCount > 1;
 
               return (
-              <div className="col-md-6" key={index + 1} onClick={() => dispatch(toggleProductModalAction(item.sku))}>
+              <div className="col-md-6" key={index + 1}>
                 <div className="flash-deal-card p-3">
                   <div className="flash-deal-img">
                     <img
@@ -44,27 +59,50 @@ const DealFlash = () => {
                     />
                   </div>
                   <div className="flash-deal-detail">
-                    <h3 className="title">{item.name}</h3>
+                    <h3 className="flash-deal-title">{item.name}</h3>
                     <ReactStars
                       value={+item.average_rating}
-                      // onChange={ratingChanged}
-                      size={24}
+                      size={20}
                       edit={false}
                       activeColor="#ffd700"
                     />
-                    <p className="price">
-                      <del>{formatCurrency(item.default_selling_price)} </del>
-                      <span className="offerPrice">{formatCurrency(item.offer_selling_price)}</span>
-                    </p>
-                    <p className="inStock">
+                      <div className="flash-deal-prices">
+                        <p className="price" style={{marginBottom: '0px'}}>
+                          <span className="offerPrice">{formatCurrency(item.offer_selling_price)}</span>
+                          <br />
+                          <del style={{marginLeft: '10px'}}>{formatCurrency(item.default_selling_price)} </del>
+                        </p>
+
+                        <div className="flash-deal-actions">
+                          <div>
+                            <SimpleBtn 
+                              variant="danger" 
+                              onClick={() => addToCart(item)} 
+                              style={
+                                {width: 'fix-content', background: 'none', border: '1px solid #ccc', color: '#333'}
+                              } >
+                              Add to Cart
+                            </SimpleBtn>
+                          </div>
+                          <div>
+                            <AddWishList product={item} />
+                          </div>
+                        </div>
+                      </div>
+                    {/* <p className="inStock">
                       <Translate>Availability</Translate> : <span>{formatCurrency(item.current_stock, ',', '')}  <Translate>in stock </Translate></span>
-                    </p>
+                    </p> */}
                     <div className="flash-count">
                       <CountdownTimer
-                        count={isOfferAvailable ? offerEndCount : 0}
                         showTitle
+                        noPoints
+                        count={isOfferAvailable ? offerEndCount : 0}
                         size={20}
-                        labelSize={18}
+                        labelSize={14}
+                        dayTitle="DAY"
+                        hourTitle="HRS"
+                        minuteTitle="MINS"
+                        secondTitle="SECS"
                       />
                     </div>
                   </div>

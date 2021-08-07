@@ -719,7 +719,7 @@ a .custom-button-component:hover {
 }
 
 .flash-deal-section {
-  padding: 10px;
+  /* padding: 10px; */
   margin-top: 20px;
 }
 
@@ -731,26 +731,43 @@ a .custom-button-component:hover {
   padding: 10px;
   display: flex;
   border-radius: 5px;
-  height: 330px;
+  /* height: 330px; */
   margin-bottom: 10px;
 }
 
 .flash-deal-img {
   width: 45%;
-  padding: 5px;
-  height: auto;
+  /* padding: 5px; */
+  /* height: auto; */
   overflow: hidden;
+  align-self: center;
 }
 
 .flash-deal-detail {
   width: 65%;
   font-size: 16px;
+  padding-left: 20px;
 }
 
-.flash-deal-detail .title {
+.flash-deal-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  white-space: nowrap;
+  margin: 5px;
+}
+
+.flash-deal-detail .flash-deal-title {
   font-size: 1.2em;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
   font-weight: 600;
+}
+
+.flash-deal-prices {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
+  margin: 15px 0px;
 }
 
 .flash-deal-detail .price,
@@ -766,6 +783,26 @@ a .custom-button-component:hover {
 
 .flash-deal-detail .inStock span {
   color: rgb(0, 119, 255) !important;
+}
+
+.flash-deal-actions {
+  display: flex;
+  align-items: center;
+}
+
+.flash-deal-actions div:last-child {
+  width: 30px;
+  height: 30px;
+  margin-left: 10px;
+}
+
+.flash-deal-actions div svg {
+  width: 100% !important;
+  height: 100%;
+}
+
+.deal-flash.quantity {
+  margin: 10px 0 0 0;
 }
 
 /*==========Flash count========*/
