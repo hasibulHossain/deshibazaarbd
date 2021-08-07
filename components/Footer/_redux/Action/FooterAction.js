@@ -65,9 +65,9 @@ export const subscribeNewsletter = email => async dispatch => {
         dispatch({type: Types.POST_SUBSCRIBE_NEWSLETTER, payload: response})
         showToast('success', res.data.message);
     } catch (err) {
+        const message = JSON.parse(err.request.response).message;
         response.loading = false;
         dispatch({type: Types.POST_SUBSCRIBE_NEWSLETTER, payload: response})
-        showToast('error', 'Something went wrong!');
+        showToast('error', message);
     }
 }
-
