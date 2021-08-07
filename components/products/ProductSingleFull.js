@@ -5,32 +5,63 @@ import ReactImageZoom from "react-image-zoom";
 import Link from "next/link";
 import PriceCalculation from "./partials/PriceCalculation";
 import ShareProduct from "./partials/ShareProduct";
-import { useDispatch } from "react-redux";
-import { addToCartAction } from "../carts/_redux/action/CartAction";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCartAction, getCartsAction, updateCartQtyAction } from "../carts/_redux/action/CartAction";
 import { showToast } from "../master/Helper/ToastHelper";
 import router from "next/router";
 import { toggleProductModalAction } from "./_redux/Action/ProductAction";
 import LoadingSpinner from "../master/LoadingSpinner/LoadingSpinner";
 
 const ProductSingleFull = ({ product }) => {
-    const dispatch = useDispatch();
-    const [quantity, setQuantity] = useState(1);
-    const [previewImg, setPreviewImg] = useState(null);
+
+    const dispatch                      = useDispatch();
+    const [quantity, setQuantity]       = useState(1);
+    const [previewImg, setPreviewImg]   = useState(null);
+    const { carts }                     = useSelector((state) => state.CartReducer)
+    const [filterCarts, setFilterCarts] = useState(null)
+    const [updatedID, setUpdatedID]     = useState(null)
+
     const zoomImg = { width: 200, height: 250, zoomWidth: 600, img: previewImg };
+
 
     useEffect(() => {
         if (product) {
             setPreviewImg(product.featured_url);
+            const newFilterCarts = carts.find((item) => item.productID == product.id);
+            setFilterCarts(newFilterCarts);
+            if (typeof newFilterCarts !== "undefined" && newFilterCarts !== null) {
+                setQuantity(newFilterCarts.quantity);
+                setUpdatedID(newFilterCarts.productID);
+            }
+
         }
-    }, [product]);
+
+    }, [product, carts]);
+
+    useEffect(() => {
+        dispatch(getCartsAction())
+    }, []);
 
     const addToCart = () => {
         if (parseInt(product.current_stock) === 0) {
             showToast("error", "This product is out of stock!");
+        }else if(typeof filterCarts !== "undefined" && filterCarts !== null ){
+            showToast("error", "This product is already added in your cart. Please update quantity!");
         } else {
-            dispatch(addToCartAction(product));
+            dispatch(addToCartAction(product, { quantity }));
         }
     }
+
+    const updateQuantity = (quantity) => {
+        if (typeof filterCarts !== "undefined" && filterCarts !== null && updatedID !== null) {
+            setQuantity(filterCarts.quantity);
+            dispatch(updateCartQtyAction(updatedID, quantity));
+        } else {
+            setQuantity(quantity);
+        }
+
+    }
+
 
     const redirectToCheckoutPage = () => {
         if (parseInt(product.current_stock) === 0) {
@@ -107,15 +138,15 @@ const ProductSingleFull = ({ product }) => {
                                     <div className="quantity">
                                         <button
                                             disabled={quantity <= 1 ? true : false}
-                                            onClick={() => setQuantity(quantity - 1)}
+                                            onClick={() => updateQuantity(quantity - 1)}
                                             className={quantity <= 1 ? `not-allowed` : `pointer`}
                                         >
                                             <FontAwesomeIcon icon={faMinus} />
                                         </button>
-                                        <input type="text" value={quantity} onChange={() => { }} />
+                                        <input type="text" value={quantity} onChange={e => updateQuantity(e.target.value)} />
                                         <button
                                             className="pointer"
-                                            onClick={() => setQuantity(quantity + 1)}
+                                            onClick={() => updateQuantity(quantity + 1)}
                                         >
                                             <FontAwesomeIcon icon={faPlus} />
                                         </button>
@@ -130,7 +161,10 @@ const ProductSingleFull = ({ product }) => {
                                     </div>
                                 </div>
                                 <div className="d-flex mt-3">
-                                    <div className="button addToCartBtn" onClick={() => addToCart()}>Add to cart</div>
+                                    <div className="button addToCartBtn"
+                                        disabled={true}
+                                        onClick={() => addToCart()}
+                                    >Add to cart</div>
                                     <div className="button buyBtn" onClick={() => redirectToCheckoutPage()}>Buy now</div>
                                 </div>
                             </div>
