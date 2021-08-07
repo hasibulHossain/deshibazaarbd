@@ -363,7 +363,7 @@ $border-bottom: 1px solid #dfdfdf;
   }
 
   &.danger {
-    background-color: #ca091b;
+    background-color: var(--color-primary);
   }
 }
 

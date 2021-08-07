@@ -13,18 +13,17 @@ export const getCompanyPolicyList = () => (dispatch) => {
         {
             title: "30 days return",
             description: "no question ask",
-            icon: "https://cdn.iconscout.com/icon/premium/png-256-thumb/product-return-1959065-1652786.png"
+            icon: "/images/policies/30-day-return.png"
         },
         {
             title: "secure payment",
             description: "100% secure payment",
-            icon: "https://img.icons8.com/ios/452/card-in-use.png"
+            icon: "/images/policies/secure-payment.png"
         },
         {
             title: "24/7 support",
             description: "dedicated support",
-            icon: "https://icon-library.com/images/customer-support-icon-png/customer-support-icon-png-19.jpg"
-            // icon: "https://pics.freeicons.io/uploads/icons/png/2515875551582823581-512.png"
+            icon: "/images/policies/24-7-support.png"
         },
      
     ]
