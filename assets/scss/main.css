@@ -238,7 +238,7 @@ a .custom-button-component:hover {
   -webkit-box-shadow: 0px 20px 20px 0px #cccccc3b;
   box-shadow: 0px 20px 20px 20px #cccccc54;
   width: 100%;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .rc-menu__item {
@@ -1446,7 +1446,7 @@ h6.address_book_updated_title {
 }
 
 .filter_column_3 {
-  height: 300px;
+  height: 320px;
   text-align: center;
   display: flex;
   flex-direction: column;
