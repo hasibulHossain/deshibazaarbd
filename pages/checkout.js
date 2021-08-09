@@ -45,7 +45,7 @@ export default function Carts() {
 
 	return (
 		<MainLayout pageTitle="Checkout">
-			<div className="container-fluid">
+			<div className="container">
 				<div className="row">
 					<div className="col-md-8">
 						<div className="delivery_info mb-3 mt-5">
