@@ -1208,6 +1208,7 @@ h6.address_book_updated_title {
 
 .footer-bottom .footer-bottom-info p {
   margin-top: 5px;
+  text-transform: initial;
 }
 
 .footer-bottom .footer-bottom-info p span {
