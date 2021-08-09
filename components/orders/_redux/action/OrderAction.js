@@ -98,32 +98,35 @@ export const handleShippingCost = (carts) => (dispatch) => {
  * @return array oderList based on user_id
  */
 export const getUserOrderList = (value = 5) => (dispatch) => {
-  const responseData = {
-    orderList: [],
-    status   : false,
-    isLoading: true,
-  }
-  dispatch({ type: Types.GET_USER_ORDER_LIST, payload: responseData });
+  const accessToken = localStorage.getItem('access_token') || null;
 
-  const end_date  = moment().format('YYYY-MM-DD');
-  let start_date = end_date;
-  let orderListURL = `${baseUrl}sales/orders/customer?paginate_no=5`;
+  if ( typeof accessToken !== 'undefined' && accessToken !== null && accessToken !== '' ) {
+    const responseData = {
+      orderList: [],
+      status   : false,
+      isLoading: true,
+    }
+    dispatch({ type: Types.GET_USER_ORDER_LIST, payload: responseData });
 
-  if (value == 15) {
-    start_date = moment().subtract(15, 'day').format('YYYY-MM-DD');
-  } else if (value == 30) {
-    start_date = moment().subtract(30, 'day').format('YYYY-MM-DD');;
-  } else if (value == 60) {
-    start_date = moment().subtract(60, 'day').format('YYYY-MM-DD');
-  }
+    const end_date  = moment().format('YYYY-MM-DD');
+    let start_date = end_date;
+    let orderListURL = `${baseUrl}sales/orders/customer?paginate_no=5`;
 
-  if (typeof value === 'undefined' || value == 5) {
-    orderListURL = `${baseUrl}sales/orders/customer?paginate_no=5`
-  } else {
-    orderListURL = `${baseUrl}sales/orders/customer?start_date=${start_date}&end_date=${end_date}`
-  }
+    if (value == 15) {
+      start_date = moment().subtract(15, 'day').format('YYYY-MM-DD');
+    } else if (value == 30) {
+      start_date = moment().subtract(30, 'day').format('YYYY-MM-DD');;
+    } else if (value == 60) {
+      start_date = moment().subtract(60, 'day').format('YYYY-MM-DD');
+    }
 
-  Axios.get(orderListURL)
+    if (typeof value === 'undefined' || value == 5) {
+      orderListURL = `${baseUrl}sales/orders/customer?paginate_no=5`
+    } else {
+      orderListURL = `${baseUrl}sales/orders/customer?start_date=${start_date}&end_date=${end_date}`
+    }
+
+    Axios.get(orderListURL)
     .then((res) => {
       responseData.orderList = res.data.data.data;
       responseData.status    = true;
@@ -137,6 +140,7 @@ export const getUserOrderList = (value = 5) => (dispatch) => {
         dispatch({ type: Types.GET_USER_ORDER_LIST, payload: responseData });
       }
     })
+  }
 }
 
 /**
