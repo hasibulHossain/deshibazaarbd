@@ -16,7 +16,7 @@ const initialState = {
     order_by: "",
     order: "",
     page: 1,
-    paginate_no: 10,
+    paginate_no: 20,
   },
   paginate: {
     pages: [],
