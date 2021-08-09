@@ -11,23 +11,24 @@ export default function ProductBySlug({ product }) {
     return (
         <>
             <MainLayout pageTitle={product.name}>
-                <>
-                    <ProductDetailInfo product={product} />
-                </>
-                {
-                    loading &&
-                    <div className="mb-5">
-                        {loading && (
-                            <LoadingSkelleton
-                                alignment = "vertical"
-                                count     = {1}
-                                width     = {730}
-                                height    = {200}
-                            />
-                        )}
-                    </div>
-                }
-
+                <div className="container">
+                    <>
+                        <ProductDetailInfo product={product} />
+                    </>
+                    {
+                        loading &&
+                        <div className="mb-5">
+                            {loading && (
+                                <LoadingSkelleton
+                                    alignment = "vertical"
+                                    count     = {1}
+                                    width     = {730}
+                                    height    = {200}
+                                />
+                            )}
+                        </div>
+                    }
+                </div>
             </MainLayout>
         </>
     );

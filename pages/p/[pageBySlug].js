@@ -29,45 +29,45 @@ export default function PageBySlug() {
 
     return (
         <MainLayout pageTitle={typeof pageData !== 'undefined' && pageData !== null ? pageData.title : ''}>
-
-            <div className="row m-3 justify-content-center">
-                {
-                    isLoading && <LoadingSpinner text="Page Loading....." />
-
-                }
-                
-                {
-                    typeof pageData !== 'undefined' && pageData !== null &&
-                    <div className="col-lg-9">
-                        <div className="card shadow rounded">
-                            <div className="card-header">
-                                <h6>{pageData.title}</h6>
-                            </div>
-                            <div className="card-body">
-                                <div>
-                                    {ReactHtmlParser(pageData.description)}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                }
-                {
-                    !isLoading && (typeof pageData === "undefined" || pageData === null) && (
+            <div className="container">
+                <div className="row m-3 justify-content-center">
+                    {
+                        isLoading && <LoadingSpinner text="Page Loading....." />
+                    }
+                    
+                    {
+                        typeof pageData !== 'undefined' && pageData !== null &&
                         <div className="col-lg-9">
                             <div className="card shadow rounded">
                                 <div className="card-header">
-                                    <h6>{pageTitle}</h6>
+                                    <h6>{pageData.title}</h6>
                                 </div>
                                 <div className="card-body">
                                     <div>
-                                        {pageTitle} page coming soon....
+                                        {ReactHtmlParser(pageData.description)}
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    )
-                }
-            </div>
+                    }
+                    {
+                        !isLoading && (typeof pageData === "undefined" || pageData === null) && (
+                            <div className="col-lg-9">
+                                <div className="card shadow rounded">
+                                    <div className="card-header">
+                                        <h6>{pageTitle}</h6>
+                                    </div>
+                                    <div className="card-body">
+                                        <div>
+                                            {pageTitle} page coming soon....
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )
+                    }
+                </div>
+            </div>    
         </MainLayout>
     );
 }

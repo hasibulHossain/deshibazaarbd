@@ -83,7 +83,6 @@ const ProductDetailInfo = (props) => {
     }
   }
 
-
   const updateQuantity = (quantity) => {
     if (typeof filterCarts !== "undefined" && filterCarts !== null && updatedID !== null) {
       setQuantity(filterCarts.quantity);
@@ -91,17 +90,16 @@ const ProductDetailInfo = (props) => {
     } else {
       setQuantity(quantity);
     }
-
   }
 
   return (
     <>
       {
         product !== null && (
-          <div className="container-fluid">
+          <div className="product-info-page">
             <Breadcrumb>
               {
-                typeof product.category != "undefined" && product.category != null &&
+                typeof product.category !== "undefined" && product.category !== null &&
                 <Link href={`/categories/${product.category.slug}`}>
                   <Breadcrumb.Item href={`/products?category=${product.category.slug}`}>
                     {product.category.name}
@@ -110,7 +108,7 @@ const ProductDetailInfo = (props) => {
               }
 
               {
-                typeof product.sub_category != "undefined" && product.sub_category != null &&
+                typeof product.sub_category !== "undefined" && product.sub_category !== null &&
                 <Link href={`/categories/${product.sub_category.slug}`}>
                   <Breadcrumb.Item href={`/products?category=${product.sub_category.slug}`}>
                     {product.sub_category.name}
@@ -119,7 +117,7 @@ const ProductDetailInfo = (props) => {
               }
 
               {
-                typeof product.sub_category2 != "undefined" && product.sub_category2 != null &&
+                typeof product.sub_category2 !== "undefined" && product.sub_category2 !== null &&
                 <Link href={`/categories/${product.sub_category2.slug}`}>
                   <Breadcrumb.Item href={`/products?category=${product.sub_category2.slug}`}>
                     {product.sub_category2.name}
@@ -131,7 +129,7 @@ const ProductDetailInfo = (props) => {
 
             {/**Product Details area****/}
             <div className="product_details_section">
-              <div className="container-fluid">
+              <div className="">
                 <div className="card shadow-md">
                   <div className="row ">
                     <div className="col-lg-9 bg-white">
@@ -247,6 +245,12 @@ const ProductDetailInfo = (props) => {
                           </div>
                         </div>
                       </div>
+                      <div className="mt-3">
+                        {
+                          typeof product.description != 'undefined' && product.description !== null &&
+                          <ProductDetailsDescription product={product} />
+                        }
+                      </div>
                     </div>
                     {/*Location Section*/}
                     <div className="col-lg-3 bg-light">
@@ -255,12 +259,7 @@ const ProductDetailInfo = (props) => {
                   </div>
                 </div>
               </div>
-              {
-                typeof product.description != 'undefined' && product.description !== null &&
-                <ProductDetailsDescription product={product} />
-              }
               <ProductRatings product={product} />
-
             </div>
           </div>
         )
