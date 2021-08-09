@@ -22,12 +22,12 @@ const ProductDetailInfo = (props) => {
   const dispatch                      = useDispatch();
   const { product }                   = props;
   const [quantity, setQuantity]       = useState(1);
-  const [previewImg, setPreviewImg]   = useState(featured_image);
   const userData                      = useSelector((state) => state.UserDataReducer.userData);
   const { carts }                     = useSelector((state) => state.CartReducer)
   const [filterCarts, setFilterCarts] = useState(null)
   const [updatedID, setUpdatedID]     = useState(null)
   const featured_image                = `${process.env.NEXT_PUBLIC_URL}images/products/${product.featured_image}`;
+  const [previewImg, setPreviewImg]   = useState(featured_image);
   
   const zoomImage = { width: 200, height: 250, zoomWidth: 600, img: previewImg };
 

@@ -115,9 +115,12 @@ const ProductSingleFull = ({ product }) => {
                     </div>
                     <div className="col-md-6">
                         <div className="product_details_section">
-                            <h3 className="product_title pointer" onClick={() => redirectToProductDetailsPage(product)}>
-                                {product.name && product.name}
-                            </h3>
+                            <div className="product_title_box">
+                                <h3 className="product_title">
+                                    {product.name && product.name}
+                                </h3>
+                                <div className="view_details pointer" onClick={() => redirectToProductDetailsPage(product)}>View details</div>
+                            </div>
                             {/* <Link href={"/products/" + product.sku}>
                                 <h3 className="product_title pointer">
                                     {product.name && product.name}

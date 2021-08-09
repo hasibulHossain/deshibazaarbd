@@ -999,9 +999,23 @@ h6.address_book_updated_title {
   height: 400px !important;
 }
 
+.product_title_box {
+  display: flex;
+}
+
+.product_title_box .view_details {
+  color: var(--color-primary);
+  font-size: 0.7rem;
+}
+
 .product_details_section .product_title {
   font-weight: 600;
   font-size: 18px;
+  flex-basis: 80%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-right: 0.5rem;
 }
 
 .product_price {
