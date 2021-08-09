@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import { createWrapper } from "next-redux-wrapper";
 import Store from "../_redux/Store";
 import "../assets/scss/variables.scss";
+import "bootstrap/scss/bootstrap.scss";
 import "../node_modules/slick-carousel/slick/slick-theme.css";
 import "../node_modules/slick-carousel/slick/slick.css";
 
@@ -15,7 +16,6 @@ import "../assets/scss/modal.scss";
 import "../assets/scss/payment.css";
 import "../assets/scss/responsive.css";
 import "../assets/scss/responsive-main.scss";
-import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../components/product-review/productListForReview.css"

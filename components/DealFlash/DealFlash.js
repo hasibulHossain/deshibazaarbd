@@ -31,7 +31,7 @@ const DealFlash = () => {
   }, []);
 
   return (
-    <section className="product-container">
+    <section className="container product-container">
       <div className="product-heading">
         <h5 className="section-heading">
           <Translate>Deals OF The Day</Translate>

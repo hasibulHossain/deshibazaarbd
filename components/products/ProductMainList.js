@@ -63,7 +63,7 @@ const ProductMainList = (props) => {
 
             <div className="row">
                 {products.length > 0 && products.map((item, index) => (
-                    <ProductSingleMini item={item} key={index} />
+                    <ProductSingleMini item={item} key={index} productKey={index+1} length={products.length} />
                 ))}
             </div>
         </div>

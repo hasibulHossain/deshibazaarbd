@@ -14,7 +14,7 @@ const NewCollection = () => {
     //     dispatch(getDealFlashList())
     // }, [])
     return (
-        <section className="product-container">
+        <section className="container product-container">
             <div className="new-collection-section">
                 <div className="row">
                     <div className="col-md-3">
