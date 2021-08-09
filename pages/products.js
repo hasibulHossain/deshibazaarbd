@@ -9,7 +9,9 @@ export default function Products() {
     <MainLayout>
       <ScrollToTop smooth />
       {/* <CategoryBanner /> */}
-      <CategoryWishProductContainer />
+      <div className="container">
+        <CategoryWishProductContainer />
+      </div>
     </MainLayout>
   );
 }
