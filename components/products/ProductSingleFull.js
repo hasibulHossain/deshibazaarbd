@@ -11,15 +11,22 @@ import { showToast } from "../master/Helper/ToastHelper";
 import router from "next/router";
 import { toggleProductModalAction } from "./_redux/Action/ProductAction";
 import LoadingSpinner from "../master/LoadingSpinner/LoadingSpinner";
+import { activeCurrency, formatCurrency } from "../../services/currency";
 
 const ProductSingleFull = ({ product }) => {
 
-    const dispatch                      = useDispatch();
-    const [quantity, setQuantity]       = useState(1);
-    const [previewImg, setPreviewImg]   = useState(null);
-    const { carts }                     = useSelector((state) => state.CartReducer)
+    const dispatch = useDispatch();
+    const [quantity, setQuantity] = useState(1);
+    const [previewImg, setPreviewImg] = useState(null);
+    const { carts } = useSelector((state) => state.CartReducer)
     const [filterCarts, setFilterCarts] = useState(null)
-    const [updatedID, setUpdatedID]     = useState(null)
+    const [updatedID, setUpdatedID] = useState(null)
+    
+    const default_price    = ( product.is_offer_enable && product.offer_selling_price !== 0 ) ? product.offer_selling_price: product.default_selling_price;
+
+    const [subTotal, setSubTotal] = useState(default_price)
+
+   
 
     const zoomImg = { width: 200, height: 250, zoomWidth: 600, img: previewImg };
 
@@ -32,6 +39,7 @@ const ProductSingleFull = ({ product }) => {
             if (typeof newFilterCarts !== "undefined" && newFilterCarts !== null) {
                 setQuantity(newFilterCarts.quantity);
                 setUpdatedID(newFilterCarts.productID);
+                setSubTotal(newFilterCarts.quantity * default_price);
             }
 
         }
@@ -45,7 +53,7 @@ const ProductSingleFull = ({ product }) => {
     const addToCart = () => {
         if (parseInt(product.current_stock) === 0) {
             showToast("error", "This product is out of stock!");
-        }else if(typeof filterCarts !== "undefined" && filterCarts !== null ){
+        } else if (typeof filterCarts !== "undefined" && filterCarts !== null) {
             showToast("error", "This product is already added in your cart. Please update quantity!");
         } else {
             dispatch(addToCartAction(product, { quantity }));
@@ -58,6 +66,7 @@ const ProductSingleFull = ({ product }) => {
             dispatch(updateCartQtyAction(updatedID, quantity));
         } else {
             setQuantity(quantity);
+            setSubTotal(quantity * default_price);
         }
 
     }
@@ -154,6 +163,11 @@ const ProductSingleFull = ({ product }) => {
                                             <FontAwesomeIcon icon={faPlus} />
                                         </button>
                                     </div>
+                                    <p className="floating-cart__product-price mt-3">
+                                        {quantity} <span>X</span>&nbsp;
+                                        {formatCurrency(default_price)} = {formatCurrency(subTotal)}&nbsp;
+                                        {activeCurrency('code')}
+                                    </p>
                                 </div>
                                 <div className="mr-3">
                                     <h6>Pick your colo</h6>

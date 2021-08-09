@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
+import LoadingSpinner from '../master/LoadingSpinner/LoadingSpinner';
 
 import SimpleModal from "../master/Modal/SimpleModal";
 import ProductSingleFull from "./ProductSingleFull";
@@ -19,7 +20,13 @@ const ProductModal = () => {
             size="xl" show={isModalOpen}
             handleClose={() => dispatch(toggleProductModalAction(''))}
         >
-            <ProductSingleFull product={product} modal={true} />
+            {
+                product ? <ProductSingleFull product={product} modal={true} /> :
+                    <div style={{ display: "flex", justifyContent: "center" }}>
+                        <LoadingSpinner text="Loading Product..." />
+                    </div>
+
+            }
         </SimpleModal>
     );
 }
