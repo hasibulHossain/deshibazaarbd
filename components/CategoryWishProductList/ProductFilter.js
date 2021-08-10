@@ -172,7 +172,7 @@ const ProductFilter = () => {
   ]);
 
   return (
-    <section className="prodcut_filter_section shadow-sm p-3 mb-5 bg-white rounded">
+    <section className="product_filter_section modal-scrollbar shadow-sm p-3 mb-5 bg-white rounded">
       <h3 className="product_filter_heading">Filter Products</h3>
 
       {/**filter by price range */}

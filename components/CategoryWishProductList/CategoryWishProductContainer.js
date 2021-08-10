@@ -27,6 +27,7 @@ const CategoryWishProductContainer = () => {
   });
 
   const paginateHandler = (direction, pageUrl) => {
+    if (!pageUrl) return;
 
     window.scrollTo({ top: 0, behavior: "smooth" });
     const page = +pageUrl.split("page=")[1];

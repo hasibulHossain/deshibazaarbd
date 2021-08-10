@@ -1379,6 +1379,11 @@ h6.address_book_updated_title {
   cursor: pointer;
 }
 
+.product_filter_section {
+  height: 100vh;
+  overflow-y: scroll;
+}
+
 .product_filter_heading {
   color: #ff3c20;
   font-size: 24px;
