@@ -298,10 +298,10 @@ a .custom-button-component:hover {
 
 .carousel-indicators {
   position: absolute;
-  top: 40% !important;
-  left: 80% !important;
+  /* top: 40% !important; */
+  /* left: 80% !important; */
   z-index: 15;
-  display: block !important;
+  /* display: block !important; */
   justify-content: center;
   padding-left: 0;
   margin-right: 15%;
