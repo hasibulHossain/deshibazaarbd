@@ -43,24 +43,10 @@ import ProtectedRoute from "../components/master/protectedRoute/ProtectedRoute";
 
 const profile = () => {
 
-    useEffect(() => {
-        if (typeof window === "undefined") {
-            global.window = {};
-        }
-    }, []);
-
     return (
-        <>
-            <Head>
-                <title>
-                    Deshi Bazaar BD || Sign In
-                </title>
-                <meta name="description" content="Meta" />
-            </Head>
-            <MainLayout>
-                <ProductProfile />
-            </MainLayout>
-        </>
+        <MainLayout pageTitle={`Profile Manage`}>
+            <ProductProfile />
+        </MainLayout>
     );
 };
 
