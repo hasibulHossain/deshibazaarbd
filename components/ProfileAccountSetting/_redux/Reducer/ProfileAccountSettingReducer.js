@@ -128,6 +128,20 @@ function ProfileAccountSettingReducer(state = initialState, action) {
                 ...state,
                 selectedAddress: selectedAddressClone
             };
+        case Types.CHANGE_USER_PROFILE_INPUT_DATA:
+            const userProfileInput = { ...state.userInputData };
+            userProfileInput[action.payload.name] = action.payload.value;
+
+            return {
+                ...state,
+                userInputData: userProfileInput
+            };
+        case Types.UPDATED_USER_DATA:
+            return {
+                ...state,
+                isSubmitting: action.payload.isLoading
+                // userInputData: userProfileInput
+            };
         case Types.CHANGE_SHIPPING_ADDRESS_INPUT:
             const shippingAddressInput = { ...state.shippingAddressInput };
             shippingAddressInput[action.payload.name] = action.payload.value
