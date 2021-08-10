@@ -101,7 +101,7 @@ const Header = () => {
 												<>
 													<Dropdown>
 														<Dropdown.Toggle variant="simple_btn_bg" className="btn-sm" id="dropdown-basic">
-															<Translate>{userData && userData.first_name + " " + userData.last_name}</Translate>
+															{userData && userData.first_name}
 														</Dropdown.Toggle>
 
 														<Dropdown.Menu>
