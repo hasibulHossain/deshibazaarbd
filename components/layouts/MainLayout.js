@@ -36,11 +36,12 @@ const MainLayout = (props) => {
       <Header />
       <main>
         {backdrop && <div className="backdrop"></div>}
-        {children}
+        <div style={{minHeight: "37vh"}}>
+          {children}
+        </div>
       </main>
 
       <Footer />
-
       <FloatingCart />
       <FloatingCartButton />
     </>

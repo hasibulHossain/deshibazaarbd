@@ -77,7 +77,7 @@ const ProductDetailInfo = (props) => {
     if (parseInt(product.current_stock) === 0) {
       showToast("error", "This product is out of stock!");
     } else if (typeof filterCarts !== "undefined" && filterCarts !== null) {
-      showToast("error", "This product is already added in your cart. Please update quantity!");
+      dispatch(updateCartQtyAction(updatedID, quantity));
     } else {
       dispatch(addToCartAction(product, { quantity }));
     }

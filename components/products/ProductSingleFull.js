@@ -21,12 +21,12 @@ const ProductSingleFull = ({ product }) => {
     const { carts } = useSelector((state) => state.CartReducer)
     const [filterCarts, setFilterCarts] = useState(null)
     const [updatedID, setUpdatedID] = useState(null)
-    
-    const default_price    = ( product.is_offer_enable && product.offer_selling_price !== 0 ) ? product.offer_selling_price: product.default_selling_price;
+
+    const default_price = (product.is_offer_enable && product.offer_selling_price !== 0) ? product.offer_selling_price : product.default_selling_price;
 
     const [subTotal, setSubTotal] = useState(default_price)
 
-   
+
 
     const zoomImg = { width: 200, height: 250, zoomWidth: 600, img: previewImg };
 
@@ -54,7 +54,7 @@ const ProductSingleFull = ({ product }) => {
         if (parseInt(product.current_stock) === 0) {
             showToast("error", "This product is out of stock!");
         } else if (typeof filterCarts !== "undefined" && filterCarts !== null) {
-            showToast("error", "This product is already added in your cart. Please update quantity!");
+            dispatch(updateCartQtyAction(updatedID, quantity));
         } else {
             dispatch(addToCartAction(product, { quantity }));
         }
