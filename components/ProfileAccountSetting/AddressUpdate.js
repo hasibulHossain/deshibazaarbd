@@ -132,7 +132,6 @@ const AddressUpdate = (props) => {
                                     value={selectedAddress.type}
                                     onChange={(option) => {
                                         handleChangeTextInput("type", option.value);
-                                        // dispatch(getCity(option.label));
                                     }}
                                     setValue={setValue}
                                 />
@@ -164,7 +163,6 @@ const AddressUpdate = (props) => {
                                     dispatch(handleChangeBillingAddressInput("street2", ""))
                                     dispatch(getLocationData('divisions', 'country', option.value));
                                 }}
-                                // setValue={dispatch(getCity(selectedAddress.label))}
                                 setValue={setValue}
 
                             />

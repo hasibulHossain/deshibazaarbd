@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { addAddress, getAddress, getArea, getCity, getCountry, getDefaultAddress, getSingleAddress, getSingleShippingAddress, handleChangeBillingAddressInput, handleChangeShippingAddressInput, handleUpdateBillingAddress } from '../ProfileAccountSetting/_redux/Action/ProfileAccountSettingAction';
+import { addAddress, getAddress, getDefaultAddress, getLocationData, getSingleAddress, getSingleShippingAddress, handleChangeBillingAddressInput, handleChangeShippingAddressInput, handleUpdateBillingAddress } from '../ProfileAccountSetting/_redux/Action/ProfileAccountSettingAction';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentUserDataAction } from './_redux/Action/DeliveryInfoAction';
 import AddressUpdate from './../ProfileAccountSetting/AddressUpdate';
@@ -45,7 +45,7 @@ const DeliveryInfo = () => {
         dispatch(getCurrentUserDataAction());
         dispatch(getDefaultAddress('shipping_address'));
         dispatch(getSingleShippingAddress('shipping_address'));
-        dispatch(getCountry());
+        dispatch(getLocationData('countries'));
     }, []);
 
     return (
@@ -132,7 +132,7 @@ const DeliveryInfo = () => {
                                                 value={shippingAddressInput.is_default_selected}
                                                 onChange={(option) => {
                                                     handleChangeTextInput("type", option.value);
-                                                    dispatch(getCity(option.label));
+                                                    dispatch(getLocationData('cities', 'division', option.value));
                                                 }}
                                                 setValue={setValue}
                                             />
@@ -161,9 +161,8 @@ const DeliveryInfo = () => {
                                                     dispatch(handleChangeBillingAddressInput("selectedArea", ""))
                                                     dispatch(handleChangeBillingAddressInput("street1", ""))
                                                     dispatch(handleChangeBillingAddressInput("street2", ""))
-                                                    dispatch(getCity(option.label));
+                                                    dispatch(getLocationData('cities', 'division', option.value));
                                                 }}
-                                                // setValue={dispatch(getCity(shippingAddressInput.label))}
                                                 setValue={setValue}
 
                                             />
@@ -187,7 +186,7 @@ const DeliveryInfo = () => {
                                                 onChange={(option) => {
                                                     handleChangeTextInput("city", option.label);
                                                     handleChangeTextInput("city_id", option.value);
-                                                    dispatch(getArea(option.value));
+                                                    dispatch(getLocationData('areas', 'city', option.value));
                                                 }}
                                                 setValue={setValue}
                                             />

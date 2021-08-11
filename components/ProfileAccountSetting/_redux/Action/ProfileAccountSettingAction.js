@@ -134,26 +134,26 @@ export const getLocationData = (locationType, onDependentLocation, val) => async
 }
 
 // get countries list
-export const getCountry = () => (dispatch) => {
-    Axios.get(`${baseurl}countries`)
-        .then((res) => {
-            dispatch({ type: Types.GET_COUNTRIES_LIST, payload: res.data.data });
-        })
-}
+// export const getCountry = () => (dispatch) => {
+//     Axios.get(`${baseurl}countries`)
+//         .then((res) => {
+//             dispatch({ type: Types.GET_COUNTRIES_LIST, payload: res.data.data });
+//         })
+// }
 // get countries list 
-export const getCity = (country) => (dispatch) => {
-    Axios.get(`${baseurl}cities?country=${country}`)
-        .then((res) => {
-            dispatch({ type: Types.GET_CITIES_LIST, payload: res.data.data });
-        })
-}
+// export const getCity = (country) => (dispatch) => {
+//     Axios.get(`${baseurl}cities?country=${country}`)
+//         .then((res) => {
+//             dispatch({ type: Types.GET_CITIES_LIST, payload: res.data.data });
+//         })
+// }
 // get countries list 
-export const getArea = (cityID) => (dispatch) => {
-    Axios.get(`${baseurl}areas?city=${cityID}`)
-        .then((res) => {
-            dispatch({ type: Types.GET_AREA_LIST, payload: res.data.data });
-        })
-}
+// export const getArea = (cityID) => (dispatch) => {
+//     Axios.get(`${baseurl}areas?city=${cityID}`)
+//         .then((res) => {
+//             dispatch({ type: Types.GET_AREA_LIST, payload: res.data.data });
+//         })
+// }
 
 //handle store shipping address
 export const handleStoreShippingAddress = (shippingAddressInput) => (dispatch) => {
