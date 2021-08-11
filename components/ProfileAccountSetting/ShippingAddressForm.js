@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { getArea, getCity, getCountry, handleChangeShippingAddressInput, getUserData, handleStoreShippingAddress } from './_redux/Action/ProfileAccountSettingAction';
+import { getArea, getCity, getCountry, handleChangeShippingAddressInput, getUserData, handleStoreShippingAddress, getLocationData } from './_redux/Action/ProfileAccountSettingAction';
 import ErrorMessage from '../master/ErrorMessage/ErrorMessage'
 import { RHFInput } from 'react-hook-form-input';
 import Select from 'react-select';
@@ -56,7 +56,7 @@ const ShippingAddressForm = () => {
                                     onChange={(option) => {
                                         handleChangeTextInput("country", option.label);
                                         handleChangeTextInput("country_id", option.value);
-                                        dispatch(getCity(option.label));
+                                        dispatch(getLocationData('divisions', 'country', option.value));
                                     }}
                                     setValue={setValue}
                                 />

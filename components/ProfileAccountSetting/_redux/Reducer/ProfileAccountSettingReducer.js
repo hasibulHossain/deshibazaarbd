@@ -47,6 +47,8 @@ const initialState = {
         transaction_id: "",
         country_id    : "", //integer
         country       : "",
+        division      : "",
+        division_id   : "",
         city_id       : "",  //integer
         city          : "",
         area_id       : "",   //integer
@@ -74,6 +76,7 @@ const initialState = {
         location      : ""
     },
     countryList         : [],
+    divisionList        : [],           
     cityList            : [],
     areaList            : [],
     userDetails         : null,
@@ -153,6 +156,11 @@ function ProfileAccountSettingReducer(state = initialState, action) {
             return {
                 ...state,
                 countryList: getCountries(action.payload),
+            };
+        case Types.GET_DIVISIONS_LIST:
+            return {
+                ...state,
+                divisionList: action.payload,
             };
         case Types.GET_CITIES_LIST:
             return {

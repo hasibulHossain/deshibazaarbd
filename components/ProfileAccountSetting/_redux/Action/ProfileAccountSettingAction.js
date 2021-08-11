@@ -3,6 +3,9 @@ import { showToast } from '../../../master/Helper/ToastHelper';
 import { getUserDataAction } from '../../../_redux/getUserData/Action/UserDataAction';
 import * as Types from "../Type/Types";
 
+// Base url
+const baseurl = process.env.NEXT_PUBLIC_API_URL;
+
 //get shipping address
 export const getShippingAddress = (addressType) => (dispatch) => {
     const responseData = {
@@ -12,7 +15,7 @@ export const getShippingAddress = (addressType) => (dispatch) => {
     }
     dispatch({ type: Types.GET_SHIPPING_ADDRESS, payload: responseData });
     const userStorageData = JSON.parse(localStorage.getItem("loginData"));
-    Axios.get(`${process.env.NEXT_PUBLIC_API_URL}address?user_id=${userStorageData.userData.id}&type=${addressType}`)
+    Axios.get(`${baseurl}address?user_id=${userStorageData.userData.id}&type=${addressType}`)
         .then((res) => {
             responseData.data = res.data.data[0];
             responseData.isLoading = false;
@@ -29,7 +32,7 @@ export const getBillingAddress = (addressType) => (dispatch) => {
     }
     dispatch({ type: Types.GET_BILLING_ADDRESS, payload: responseData });
     const userStorageData = JSON.parse(localStorage.getItem("loginData"));
-    Axios.get(`${process.env.NEXT_PUBLIC_API_URL}address?user_id=${userStorageData.userData.id}&type=${addressType}`)
+    Axios.get(`${baseurl}address?user_id=${userStorageData.userData.id}&type=${addressType}`)
         .then((res) => {
             responseData.data = res.data.data[0];
             responseData.isLoading = false;
@@ -48,7 +51,7 @@ export const getAddress = (addressType) => (dispatch) => {
     }
     dispatch({ type: Types.GET_BILLING_ADDRESS, payload: responseData });
     const userStorageData = JSON.parse(localStorage.getItem("loginData"));
-    Axios.get(`${process.env.NEXT_PUBLIC_API_URL}address?user_id=${userStorageData.userData.id}&type=${addressType}`)
+    Axios.get(`${baseurl}address?user_id=${userStorageData.userData.id}&type=${addressType}`)
 
         .then((res) => {
             responseData.data = res.data.data;
@@ -93,23 +96,60 @@ export const handleChangeShippingAddressInput = (name, value) => (dispatch) => {
     dispatch({ type: Types.CHANGE_SHIPPING_ADDRESS_INPUT, payload: addressData })
 }
 
-// get countries list 
+// get countries, divisions, cities, areas
+export const getLocationData = (locationType, onDependentLocation, val) => async (dispatch) => {
+    let url = `${baseurl}${locationType}`;
+    if(onDependentLocation) {
+        let query = "?" + onDependentLocation + "=" + val;
+        url += query;
+    }
+
+    try {
+        const res = await Axios.get(url)
+        // if(locationType === 'countries')     
+        let type = "";
+
+        switch (locationType) {
+            case 'countries':
+                type = Types.GET_COUNTRIES_LIST
+                break;
+
+            case 'divisions':
+                type = Types.GET_DIVISIONS_LIST
+                break;
+
+            case 'cities':
+                type = Types.GET_CITIES_LIST
+                break;
+
+            case 'areas':
+                type = Types.GET_AREA_LIST
+                break;
+        }
+
+        dispatch({ type: type, payload: res.data.data });
+    } catch (error) {
+        console.log('err => ', error)
+    }
+}
+
+// get countries list
 export const getCountry = () => (dispatch) => {
-    Axios.get(`${process.env.NEXT_PUBLIC_API_URL}countries`)
+    Axios.get(`${baseurl}countries`)
         .then((res) => {
             dispatch({ type: Types.GET_COUNTRIES_LIST, payload: res.data.data });
         })
 }
 // get countries list 
 export const getCity = (country) => (dispatch) => {
-    Axios.get(`${process.env.NEXT_PUBLIC_API_URL}cities?country=${country}`)
+    Axios.get(`${baseurl}cities?country=${country}`)
         .then((res) => {
             dispatch({ type: Types.GET_CITIES_LIST, payload: res.data.data });
         })
 }
 // get countries list 
 export const getArea = (cityID) => (dispatch) => {
-    Axios.get(`${process.env.NEXT_PUBLIC_API_URL}areas?city=${cityID}`)
+    Axios.get(`${baseurl}areas?city=${cityID}`)
         .then((res) => {
             dispatch({ type: Types.GET_AREA_LIST, payload: res.data.data });
         })
@@ -125,7 +165,7 @@ export const handleStoreShippingAddress = (shippingAddressInput) => (dispatch) =
     const userStorageData = JSON.parse(localStorage.getItem("loginData"));
     const submittedData = shippingAddressInput;
     submittedData.user_id = userStorageData.userData.id;
-    Axios.post(`${process.env.NEXT_PUBLIC_API_URL}address`, shippingAddressInput)
+    Axios.post(`${baseurl}address`, shippingAddressInput)
         .then((res) => {
             responseData.status = true;
             responseData.isLoading = false;
@@ -145,7 +185,7 @@ export const handleStoreBillingAddress = (billingAddressInput) => (dispatch) => 
     const userStorageData = JSON.parse(localStorage.getItem("loginData"));
     const submittedData = billingAddressInput;
     submittedData.user_id = userStorageData.userData.id;
-    Axios.post(`${process.env.NEXT_PUBLIC_API_URL}address`, submittedData)
+    Axios.post(`${baseurl}address`, submittedData)
         .then((res) => {
             responseData.status = true;
             responseData.isLoading = false;
@@ -175,7 +215,7 @@ export const getSingleShippingAddress = (type) => (dispatch) => {
     }
     dispatch({ type: Types.GET_SINGLE_SHIPPING_ADDRESS, payload: responseData });
     const userStorageData = JSON.parse(localStorage.getItem("loginData"));
-    Axios.get(`${process.env.NEXT_PUBLIC_API_URL}address?user_id=${userStorageData.userData.id}&type=${type}&is_default=1`)
+    Axios.get(`${baseurl}address?user_id=${userStorageData.userData.id}&type=${type}&is_default=1`)
         .then((res) => {
             if (res.data.status) {
                 const data = res.data.data;
@@ -234,7 +274,7 @@ export const handleUpdateBillingAddress = (billingAddressInput) => (dispatch) =>
     // const submittedData = billingAddressInput;
     // submittedData.user_id = userStorageData.userData.id;
 
-    Axios.put(`${process.env.NEXT_PUBLIC_API_URL}address`, billingAddressInput)
+    Axios.put(`${baseurl}address`, billingAddressInput)
         .then((res) => {
             responseData.status = true;
             responseData.isLoading = false;
@@ -267,9 +307,9 @@ export const addAddress = (addressInput, type, closeModal) => (dispatch) => {
 
     let url;
     if (type === 'new_address') {
-        url = `${process.env.NEXT_PUBLIC_API_URL}address`
+        url = `${baseurl}address`
     } else {
-        url = `${process.env.NEXT_PUBLIC_API_URL}address/${addressInput.id}`
+        url = `${baseurl}address/${addressInput.id}`
     }
 
     Axios({
@@ -296,7 +336,7 @@ export const addAddress = (addressInput, type, closeModal) => (dispatch) => {
             closeModal();
         })
 
-    // Axios.post(`${process.env.NEXT_PUBLIC_API_URL}address`, billingAddressInput)
+    // Axios.post(`${baseurl}address`, billingAddressInput)
 }
 
 
@@ -308,7 +348,7 @@ export const deleteAddress = (id, toggleDeleteModal) => (dispatch) => {
     }
     dispatch({ type: Types.DELETE_ADDRESS, payload: responseData });
 
-    Axios.delete(`${process.env.NEXT_PUBLIC_API_URL}address/${id}`)
+    Axios.delete(`${baseurl}address/${id}`)
         .then((res) => {
             if (res.data.status) {
                 responseData.status = true;
@@ -354,7 +394,7 @@ export const getDefaultAddress = (addressType) => (dispatch) => {
     dispatch({ type: Types.GET_DEFAULT_SHIPPING_ADDRESS, payload: responseData });
     dispatch({ type: Types.GET_DEFAULT_BILLING_ADDRESS, payload: responseData });
     const userStorageData = JSON.parse(localStorage.getItem("loginData"));
-    Axios.get(`${process.env.NEXT_PUBLIC_API_URL}address?user_id=${userStorageData.userData.id}&type=${addressType}&is_default=1`)
+    Axios.get(`${baseurl}address?user_id=${userStorageData.userData.id}&type=${addressType}&is_default=1`)
 
         .then((res) => {
             if (res.data.status) {
@@ -398,7 +438,7 @@ export const handleUpdateUserData = (userInputData, user_id) => (dispatch) => {
     }
     dispatch({ type: Types.UPDATED_USER_DATA, payload: response });
 
-    Axios.put(`${process.env.NEXT_PUBLIC_API_URL}auth/updateUserProfile`, userInputData)
+    Axios.put(`${baseurl}auth/updateUserProfile`, userInputData)
         .then((response) => {
             if (response.data.status) {
                 const responseUserData = response.data.data;
