@@ -20,6 +20,7 @@ const ProductProfile = () => {
   const isLoading = useSelector((state) => state.ProfileAccountSettingReducer.isLoading);
   const defaultShippingAddress = useSelector((state) => state.ProfileAccountSettingReducer.defaultShippingAddress);
   const defaultBillingAddress = useSelector((state) => state.ProfileAccountSettingReducer.defaultBillingAddress);
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     dispatch(getUserDataAction());
@@ -29,14 +30,7 @@ const ProductProfile = () => {
 
   const toggleShowHandler = () => {
     setShow(preState => !preState);
-  }
-
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);;
-  const [addressShow, setAddressShow] = useState(false);
-  const handleAddressShow = () => setAddressShow(true);;
-  const handleAddressClose = () => setAddressShow(false);
+  } 
 
   return (
     <>
@@ -52,7 +46,13 @@ const ProductProfile = () => {
               <div className="row mt-5">
                 <div className="col-md-6">
                   <div className="card mb-2 default_height shadow-sm p-3 mb-5 bg-white rounded">
-                    <h6> <Translate>Personal Profile</Translate> | <span className="edit_profile_link" onClick={(() => handleShow())}><Translate>EDIT</Translate></span></h6>
+                    <h6> <Translate>Personal Profile</Translate> | <span className="edit_profile_link">
+                      <Link href="/account-setting#personal-info-edit">
+                        <a className="text-decoration-none">
+                          <span className="edit_profile_link ml-2"><Translate>EDIT</Translate></span>
+                        </a>
+                      </Link>
+                    </span></h6>
                     <div className="border-top">
                       <div className="text-center mt-2">
                         {/* <div className="border rounded-circle p-1" style={{height: "90px", width: "90px"}}>
@@ -86,7 +86,7 @@ const ProductProfile = () => {
                       <h6> <Translate>Address Book</Translate> |
 
                         {
-                          (( defaultBillingAddress.length > 0) || (defaultShippingAddress.length > 0)) && (
+                          ((defaultBillingAddress.length > 0) || (defaultShippingAddress.length > 0)) && (
                             <Link href="/account-setting#address-book">
                               <a className="text-decoration-none">
                                 <span className="edit_profile_link ml-2"><Translate>EDIT</Translate></span>
@@ -177,22 +177,6 @@ const ProductProfile = () => {
           </div>
         </div>
       </div>
-
-      <SimpleModal
-        size="lg"
-        show={show}
-        handleClose={handleClose}
-      >
-        <PersonalInformationUpdate />
-      </SimpleModal>
-
-      {/* <SimpleModal
-        size="xl"
-        show={addressShow}
-        handleClose={handleAddressClose}
-      >
-        <AddressUpdate />
-      </SimpleModal> */}
 
       <SimpleModal
         size="xl"
