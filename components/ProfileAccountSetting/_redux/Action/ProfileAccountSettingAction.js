@@ -228,6 +228,7 @@ export const getSingleShippingAddress = (type) => (dispatch) => {
                     phone_no: data[0].phone_no,
                     is_default_selected: +data[0].is_default === 1 ? { label: "Yes", value: +data[0].is_default } : { label: "No", value: +data[0].is_default },
                     selectedCountry: { label: data[0].country, value: +data[0].country_id },
+                    selectedDivision: { label: data[0].division, value: +data[0].division_id },
                     selectedCity: { label: data[0].city, value: +data[0].city_id },
                     selectedArea: { label: data[0].area, value: +data[0].area_id },
                     country_id: +data[0].country_id,

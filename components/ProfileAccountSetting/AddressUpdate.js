@@ -175,7 +175,7 @@ const AddressUpdate = (props) => {
                     </div>
                     <div className="col-md-6">
                         <div className="custome_form_group">
-                            <label className="form-label" htmlFor="country">Division</label>
+                            <label className="form-label" htmlFor="division">Division</label>
                             <RHFInput
                                 as={<Select options={divisionList} />}
                                 placeholder="Select division"
