@@ -55,7 +55,7 @@ const OrderSummery = ({ handleClick, buttonText }) => {
                                 <p className="font-weight-bold">Delivery Fee</p>
                                 {
                                     !shippingCostLoading && (
-                                        <p className="font-weight-bold">{formatCurrency(50)} {activeCurrency('code')}</p>
+                                        <p className="font-weight-bold">{formatCurrency(shippingCost)} {activeCurrency('code')}</p>
                                     )
                                 }
                                 {

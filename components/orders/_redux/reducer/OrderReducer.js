@@ -20,7 +20,7 @@ const initialState = {
   },
   // Place Order Part
 
-  shippingCost: 0,
+  shippingCost: 60,
   shippingCostLoading: false,
   coupon: {
     code: "",

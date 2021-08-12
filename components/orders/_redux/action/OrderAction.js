@@ -64,9 +64,13 @@ export const handleShippingCost = (carts) => (dispatch) => {
   };
   dispatch({ type: Types.APPLY_SHIPPING_COST, payload: responseData });
 
+  const cartsData = localStorage.getItem('carts');
+  const cart      = typeof cartsData !== 'undefined' && cartsData !== null ? JSON.parse(cartsData) : [];
+  
   const shippingCost = {
-    carts: carts,
+    carts: cart,
   };
+
   Axios.post(`${baseUrl}sales/shipping-cost/by-cart`, shippingCost)
     .then((res) => {
       if (res.data.status) {
@@ -267,39 +271,57 @@ export const handleCancelOrder = (order_id, closeModal, user_id) => (dispatch) =
 }
 
 /**
- * order details
+ * Order details
  * 
  * @since 1.0.0
  * 
- * @param order_id //order id
+ * @param   int     order_id Order ID
  * 
- * @return orders details
+ * @return  object   orders details
  */
  export const getOrderDetails = (order_id) => (dispatch) => {
   const responseData = {
-    data: null,
+    data     : null,
     status   : false,
     isLoading: true
   }
   dispatch({ type: Types.GET_ORDER_DETAILS, payload: responseData });
 
   Axios.get(`${baseUrl}sales/orders/customer?id=${order_id}`)
-  // Axios.get(`${baseUrl}sales/${order_id}`)
     .then((res) => {
       if (res.data.status) {
-        responseData.data      = res.data.data.data[0];
-        responseData.status    = true;
-        responseData.isLoading = false;
-        dispatch({ type: Types.GET_ORDER_DETAILS, payload: responseData });
+        if (res.data.data.data.length > 0) {
+          responseData.status                = true;
+          responseData.isLoading             = false;
+          responseData.data                  = res.data.data.data[0];
+          responseData.data.final_total      = getValidDecimalValue(responseData.data.final_total);
+          responseData.data.shipping_charges = getValidDecimalValue(responseData.data.shipping_charges);
+          responseData.data.discount_amount  = getValidDecimalValue(responseData.data.discount_amount);
+
+          dispatch({ type: Types.GET_ORDER_DETAILS, payload: responseData });
+        }
       }
     }).catch((err) => {
       const { response }                = err;
       responseData.isLoading            = false;
       const { request, ...errorObject } = response;
-      console.log('response :>> ', response);
       dispatch({ type: Types.GET_ORDER_DETAILS, payload: responseData });
+    });
+}
 
-    })
+/**
+ * Get Valid Decimal Value from amount
+ * 
+ * @param {int} value 
+ * 
+ * @returns 
+ */
+const getValidDecimalValue = (value) => {
+  if(typeof value === 'undefined' || value === null || value === '' ) {
+    return 0;
+  }
+
+  return parseFloat( value );
 }
 
 //get order life cycle details data 

@@ -156,15 +156,15 @@ const OrderInvoice = ({ title = translate('Invoice'), id, is_invoice = false }) 
                                     <tbody>
                                         <tr>
                                             <td><Translate>Sub Total</Translate></td>
-                                            <td>{formatCurrency(orderDetails.final_total - 50)}</td>
+                                            <td>{formatCurrency((orderDetails.final_total) - (orderDetails.shipping_charges) - (orderDetails.discount_amount))}</td>
                                         </tr>
                                         <tr>
                                             <td><Translate>Shipping Cost</Translate></td>
-                                            <td>{formatCurrency(50)}</td>
+                                            <td>{formatCurrency((orderDetails.shipping_charges))}</td>
                                         </tr>
                                         <tr>
                                             <td><Translate>Discount</Translate></td>
-                                            <td>{formatCurrency(0)}</td>
+                                            <td>{formatCurrency((orderDetails.discount_amount))}</td>
                                         </tr>
                                         <tr>
                                             <td className="grand-total-text"><Translate>Grand Total</Translate></td>
