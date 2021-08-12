@@ -88,7 +88,7 @@ const CategoryWishProductContainer = () => {
               categoryBrandDetails.childs.map(item => (
                 <div className="child-logo-box">
                   <div className="child-logo">
-                    <img src={item.banner_url} alt={item.banner} />
+                    <img src={item.banner_url} alt={item.name} />
                   </div>
                   <span>category name</span>
                 </div>
