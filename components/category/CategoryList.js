@@ -12,7 +12,11 @@ const CategoryList = ({ parentID = null }) => {
   const router   = useRouter();
 
   useEffect(() => {
-    dispatch(getCategories(parentID, 12)); // Get the 12 categories
+    if (parentID === 'all') {
+      dispatch(getCategories(parentID, null, '')); // Get the all categories
+    } else {
+      dispatch(getCategories(parentID, 12, 'homepage')); // Get the 12 categories
+    }
   }, []);
 
   const { categories, loading } = useSelector((state) => state.CategoryReducer);
@@ -46,9 +50,13 @@ const CategoryList = ({ parentID = null }) => {
           categories.map((item, index) => (
             <div key={index} className="category-card col-3 col-md-1">
               <div className="category-card-body" onClick={() => navigateCategoryList(item.id)}>
-                <div className="category-img-area">
-                  <img src={item.image_url} alt={translate(item.name)} className="img-fluid" />
-                </div>
+                {
+                  item.image !== null && item.image !== '' &&
+                  <div className="category-img-area">
+                    <img src={`${process.env.NEXT_PUBLIC_URL}images/categories/${item.image}`} alt={translate(item.name)} className="img-fluid" />
+                  </div>
+                }
+                
                 <p className="category-title">
                   <Translate>{item.name}</Translate>
                 </p>
