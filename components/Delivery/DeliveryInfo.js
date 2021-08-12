@@ -145,15 +145,6 @@ const DeliveryInfo = () => {
 
                                         </div>
                                     </div>
-
-
-
-
-
-
-
-
-
                                     <div className="col-md-6">
                                         <div className="custome_form_group">
                                             <label className="form-label" htmlFor="country">Country</label>
@@ -254,99 +245,6 @@ const DeliveryInfo = () => {
                                             }
                                         </div>
                                     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    {/*<div className="col-md-6">
-                                        <div className="custome_form_group">
-                                            <label className="form-label" htmlFor="country">Country</label>
-                                            <RHFInput
-                                                as={<Select options={countryList} />}
-                                                placeholder="Select country"
-                                                rules={{ required: true }}
-                                                name="country_id"
-                                                register={register}
-                                                value={shippingAddressInput.selectedCountry}
-                                                onChange={(option) => {
-                                                    handleChangeTextInput("country", option.label);
-                                                    handleChangeTextInput("country_id", option.value);
-                                                    dispatch(handleChangeBillingAddressInput("selectedCity", ""))
-                                                    dispatch(handleChangeBillingAddressInput("selectedArea", ""))
-                                                    dispatch(handleChangeBillingAddressInput("street1", ""))
-                                                    dispatch(handleChangeBillingAddressInput("street2", ""))
-                                                    dispatch(getLocationData('cities', 'division', option.value));
-                                                }}
-                                                setValue={setValue}
-
-                                            />
-                                            {
-                                                errors.country_id && errors.country_id.type === 'required' && (
-                                                    <ErrorMessage errorText="Country can't be blank!" />
-                                                )
-                                            }
-                                        </div>
-                                    </div>
-                                    <div className="col-md-6">
-                                        <div className="custome_form_group">
-                                            <label className="form-label" htmlFor="city">City</label>
-                                            <RHFInput
-                                                as={<Select options={cityList} />}
-                                                placeholder="Select city"
-                                                rules={{ required: true }}
-                                                name="city_id"
-                                                register={register}
-                                                value={shippingAddressInput.selectedCity}
-                                                onChange={(option) => {
-                                                    handleChangeTextInput("city", option.label);
-                                                    handleChangeTextInput("city_id", option.value);
-                                                    dispatch(getLocationData('areas', 'city', option.value));
-                                                }}
-                                                setValue={setValue}
-                                            />
-                                            {
-                                                errors.city_id && errors.city_id.type === 'required' && (
-                                                    <ErrorMessage errorText="City can't be blank!" />
-                                                )
-                                            }
-                                        </div>
-                                    </div>
-                                    <div className="col-md-6">
-                                        <div className="custome_form_group">
-                                            <label className="form-label" htmlFor="area">Area</label>
-                                            <RHFInput
-                                                as={<Select options={areaList} />}
-                                                placeholder="Select area"
-                                                rules={{ required: true }}
-                                                name="area_id"
-                                                register={register}
-                                                value={shippingAddressInput.selectedArea}
-                                                onChange={(option) => {
-                                                    handleChangeTextInput("area", option.label);
-                                                    handleChangeTextInput("area_id", option.value);
-                                                }}
-                                                setValue={setValue}
-                                            />
-                                            {
-                                                errors.area_id && errors.area_id.type === 'required' && (
-                                                    <ErrorMessage errorText="Area can't be blank!" />
-                                                )
-                                            }
-                                        </div>
-                                    </div> */}
                                     <div className="col-md-6">
                                         <div className="custome_form_group">
                                             <label className="form-label" htmlFor="street-1">Street-1</label>
