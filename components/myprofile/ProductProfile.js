@@ -46,7 +46,7 @@ const ProductProfile = () => {
               <div className="row mt-5">
                 <div className="col-md-6">
                   <div className="card mb-2 default_height shadow-sm p-3 mb-5 bg-white rounded">
-                    <h6> <Translate>Personal Profile</Translate> | <span className="edit_profile_link">
+                    <h6> <Translate>Personal Profile</Translate> <span className="edit_profile_link">
                       <Link href="/account-setting#personal-info-edit">
                         <a className="text-decoration-none">
                           <span className="edit_profile_link ml-2"><Translate>EDIT</Translate></span>
