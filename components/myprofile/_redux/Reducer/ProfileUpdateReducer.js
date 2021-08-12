@@ -29,6 +29,7 @@ const initialState = {
         city: null,
         area_id: null,   //integer
         selectedCountry: null,
+        selectedDivision: null,
         selectedCity: null,
         selectedArea: null,
         area: null,
@@ -44,6 +45,7 @@ const initialState = {
         country: null,
         city_id: null,  //integer
         selectedCountry: null,
+        selectedDivision: null,
         selectedCity: null,
         selectedArea: null,
         city: null,

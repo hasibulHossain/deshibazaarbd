@@ -47,6 +47,8 @@ const initialState = {
         transaction_id: "",
         country_id    : "", //integer
         country       : "",
+        division      : "",
+        division_id   : "",
         city_id       : "",  //integer
         city          : "",
         area_id       : "",   //integer
@@ -64,6 +66,8 @@ const initialState = {
         transaction_id: "",
         country_id    : "", //integer
         country       : "",
+        division      : "",
+        division_id   : "",
         city_id       : "",  //integer
         city          : "",
         area_id       : "",   //integer
@@ -74,6 +78,7 @@ const initialState = {
         location      : ""
     },
     countryList         : [],
+    divisionList        : [],           
     cityList            : [],
     areaList            : [],
     userDetails         : null,
@@ -154,6 +159,11 @@ function ProfileAccountSettingReducer(state = initialState, action) {
                 ...state,
                 countryList: getCountries(action.payload),
             };
+        case Types.GET_DIVISIONS_LIST:
+            return {
+                ...state,
+                divisionList: action.payload,
+            };
         case Types.GET_CITIES_LIST:
             return {
                 ...state,
@@ -211,6 +221,7 @@ function ProfileAccountSettingReducer(state = initialState, action) {
                 let cloneSelectedAddress;
 
                 if (cloneAddress.length > 0) {
+                    console.log('clone address => ', cloneAddress)
                      cloneSelectedAddress = {
                         ...state.selectedAddress,
                         id                 : +cloneAddress[0].id,
@@ -221,6 +232,7 @@ function ProfileAccountSettingReducer(state = initialState, action) {
                         phone_no           : cloneAddress[0].phone_no,
                         is_default_selected: +cloneAddress[0].is_default === 1 ? {label : "Yes",  value: +cloneAddress[0].is_default}: {label: "No", value: +cloneAddress[0].is_default},
                         selectedCountry    : { label : cloneAddress[0].country,  value: +cloneAddress[0].country_id },
+                        selectedDivision    : { label : cloneAddress[0].division,  value: +cloneAddress[0].division_id },
                         selectedCity       : { label : cloneAddress[0].city,     value: +cloneAddress[0].city_id },
                         selectedArea       : { label : cloneAddress[0].area,     value: +cloneAddress[0].area_id },
                         country_id         : +cloneAddress[0].country_id,

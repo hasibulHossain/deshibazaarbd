@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { handleChangeBillingAddressInput, handleUpdateBillingAddress, getArea, getCity, addAddress, handleEmptyDispatch, getCountry } from './_redux/Action/ProfileAccountSettingAction';
+import { handleChangeBillingAddressInput, handleUpdateBillingAddress, addAddress, handleEmptyDispatch, getLocationData } from './_redux/Action/ProfileAccountSettingAction';
 import ErrorMessage from '../master/ErrorMessage/ErrorMessage'
 import { RHFInput } from 'react-hook-form-input';
 import Select from 'react-select';
@@ -12,6 +12,7 @@ import { faBriefcase, faHome } from '@fortawesome/free-solid-svg-icons';
 const AddressUpdate = (props) => {
     const dispatch = useDispatch();
     const countryList = useSelector((state) => state.ProfileAccountSettingReducer.countryList);
+    const divisionList = useSelector((state) => state.ProfileAccountSettingReducer.divisionList);
     const cityList = useSelector((state) => state.ProfileAccountSettingReducer.cityList);
     const areaList = useSelector((state) => state.ProfileAccountSettingReducer.areaList);
     const isSubmitting = useSelector((state) => state.ProfileAccountSettingReducer.isSubmitting);
@@ -36,10 +37,11 @@ const AddressUpdate = (props) => {
     }
 
     useEffect(() => {
-        dispatch(getCountry())
+        dispatch(getLocationData('countries'));
+
         if (selectedAddress.country && selectedAddress.city) {
-            dispatch(getCity(selectedAddress.country));
-            dispatch(getArea(selectedAddress.city_id));
+            dispatch(getLocationData('cities', 'division', selectedAddress.country));
+            dispatch(getLocationData('areas', 'city', selectedAddress.city_id));
         }
         if (props.type === "new_address") {
             dispatch(handleEmptyDispatch("new_address"))
@@ -130,7 +132,6 @@ const AddressUpdate = (props) => {
                                     value={selectedAddress.type}
                                     onChange={(option) => {
                                         handleChangeTextInput("type", option.value);
-                                        dispatch(getCity(option.label));
                                     }}
                                     setValue={setValue}
                                 />
@@ -160,9 +161,8 @@ const AddressUpdate = (props) => {
                                     dispatch(handleChangeBillingAddressInput("selectedArea", ""))
                                     dispatch(handleChangeBillingAddressInput("street1", ""))
                                     dispatch(handleChangeBillingAddressInput("street2", ""))
-                                    dispatch(getCity(option.label));
+                                    dispatch(getLocationData('divisions', 'country', option.value));
                                 }}
-                                // setValue={dispatch(getCity(selectedAddress.label))}
                                 setValue={setValue}
 
                             />
@@ -175,7 +175,31 @@ const AddressUpdate = (props) => {
                     </div>
                     <div className="col-md-6">
                         <div className="custome_form_group">
-                            <label className="form-label" htmlFor="city">City</label>
+                            <label className="form-label" htmlFor="division">Division</label>
+                            <RHFInput
+                                as={<Select options={divisionList} />}
+                                placeholder="Select division"
+                                rules={{ required: true }}
+                                name="division_id"
+                                register={register}
+                                value={selectedAddress.selectedCountry}
+                                onChange={(option) => {
+                                    handleChangeTextInput("division", option.label);
+                                    handleChangeTextInput("division_id", option.value);
+                                    dispatch(getLocationData('cities', 'division', option.value));
+                                }}
+                                setValue={setValue}
+                            />
+                            {
+                                errors.division_id && errors.division_id.type === 'required' && (
+                                    <ErrorMessage errorText="Division can't be blank!" />
+                                )
+                            }
+                        </div>
+                    </div>
+                    <div className="col-md-6">
+                        <div className="custome_form_group">
+                            <label className="form-label" htmlFor="city">Zilla</label>
                             <RHFInput
                                 as={<Select options={cityList} />}
                                 placeholder="Select city"
@@ -186,7 +210,7 @@ const AddressUpdate = (props) => {
                                 onChange={(option) => {
                                     handleChangeTextInput("city", option.label);
                                     handleChangeTextInput("city_id", option.value);
-                                    dispatch(getArea(option.value));
+                                    dispatch(getLocationData('areas', 'city', option.value));
                                 }}
                                 setValue={setValue}
                             />
@@ -199,7 +223,7 @@ const AddressUpdate = (props) => {
                     </div>
                     <div className="col-md-6">
                         <div className="custome_form_group">
-                            <label className="form-label" htmlFor="area">Area</label>
+                            <label className="form-label" htmlFor="area">Upazilla</label>
                             <RHFInput
                                 as={<Select options={areaList} />}
                                 placeholder="Select area"

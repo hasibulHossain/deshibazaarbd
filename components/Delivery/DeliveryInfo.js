@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { addAddress, getAddress, getArea, getCity, getCountry, getDefaultAddress, getSingleAddress, getSingleShippingAddress, handleChangeBillingAddressInput, handleChangeShippingAddressInput, handleUpdateBillingAddress } from '../ProfileAccountSetting/_redux/Action/ProfileAccountSettingAction';
+import { addAddress, getAddress, getDefaultAddress, getLocationData, getSingleAddress, getSingleShippingAddress, handleChangeBillingAddressInput, handleChangeShippingAddressInput, handleUpdateBillingAddress } from '../ProfileAccountSetting/_redux/Action/ProfileAccountSettingAction';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentUserDataAction } from './_redux/Action/DeliveryInfoAction';
 import AddressUpdate from './../ProfileAccountSetting/AddressUpdate';
@@ -17,6 +17,7 @@ const DeliveryInfo = () => {
     const dispatch               = useDispatch();
     const defaultShippingAddress = useSelector((state) => state.ProfileAccountSettingReducer.defaultShippingAddress);
     const isLoading              = useSelector((state) => state.ProfileAccountSettingReducer.isLoading);
+    const divisionList           = useSelector((state) => state.ProfileAccountSettingReducer.divisionList);
     const countryList            = useSelector((state) => state.ProfileAccountSettingReducer.countryList);
     const cityList               = useSelector((state) => state.ProfileAccountSettingReducer.cityList);
     const areaList               = useSelector((state) => state.ProfileAccountSettingReducer.areaList);
@@ -45,7 +46,7 @@ const DeliveryInfo = () => {
         dispatch(getCurrentUserDataAction());
         dispatch(getDefaultAddress('shipping_address'));
         dispatch(getSingleShippingAddress('shipping_address'));
-        dispatch(getCountry());
+        dispatch(getLocationData('countries'));
     }, []);
 
     return (
@@ -132,7 +133,7 @@ const DeliveryInfo = () => {
                                                 value={shippingAddressInput.is_default_selected}
                                                 onChange={(option) => {
                                                     handleChangeTextInput("type", option.value);
-                                                    dispatch(getCity(option.label));
+                                                    dispatch(getLocationData('cities', 'division', option.value));
                                                 }}
                                                 setValue={setValue}
                                             />
@@ -161,9 +162,8 @@ const DeliveryInfo = () => {
                                                     dispatch(handleChangeBillingAddressInput("selectedArea", ""))
                                                     dispatch(handleChangeBillingAddressInput("street1", ""))
                                                     dispatch(handleChangeBillingAddressInput("street2", ""))
-                                                    dispatch(getCity(option.label));
+                                                    dispatch(getLocationData('divisions', 'country', option.value));
                                                 }}
-                                                // setValue={dispatch(getCity(shippingAddressInput.label))}
                                                 setValue={setValue}
 
                                             />
@@ -176,7 +176,31 @@ const DeliveryInfo = () => {
                                     </div>
                                     <div className="col-md-6">
                                         <div className="custome_form_group">
-                                            <label className="form-label" htmlFor="city">City</label>
+                                            <label className="form-label" htmlFor="division">Division</label>
+                                            <RHFInput
+                                                as={<Select options={divisionList} />}
+                                                placeholder="Select division"
+                                                rules={{ required: true }}
+                                                name="division_id"
+                                                register={register}
+                                                value={shippingAddressInput.selectedDivision}
+                                                onChange={(option) => {
+                                                    handleChangeTextInput("division", option.label);
+                                                    handleChangeTextInput("division_id", option.value);
+                                                    dispatch(getLocationData('cities', 'division', option.value));
+                                                }}
+                                                setValue={setValue}
+                                            />
+                                            {
+                                                errors.division_id && errors.division_id.type === 'required' && (
+                                                    <ErrorMessage errorText="Division can't be blank!" />
+                                                )
+                                            }
+                                        </div>
+                                    </div>
+                                    <div className="col-md-6">
+                                        <div className="custome_form_group">
+                                            <label className="form-label" htmlFor="city">Zilla</label>
                                             <RHFInput
                                                 as={<Select options={cityList} />}
                                                 placeholder="Select city"
@@ -187,7 +211,7 @@ const DeliveryInfo = () => {
                                                 onChange={(option) => {
                                                     handleChangeTextInput("city", option.label);
                                                     handleChangeTextInput("city_id", option.value);
-                                                    dispatch(getArea(option.value));
+                                                    dispatch(getLocationData('areas', 'city', option.value));
                                                 }}
                                                 setValue={setValue}
                                             />
@@ -200,7 +224,7 @@ const DeliveryInfo = () => {
                                     </div>
                                     <div className="col-md-6">
                                         <div className="custome_form_group">
-                                            <label className="form-label" htmlFor="area">Area</label>
+                                            <label className="form-label" htmlFor="area">Upazilla</label>
                                             <RHFInput
                                                 as={<Select options={areaList} />}
                                                 placeholder="Select area"

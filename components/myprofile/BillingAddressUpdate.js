@@ -6,7 +6,7 @@ import ErrorMessage from '../master/ErrorMessage/ErrorMessage'
 import { RHFInput } from 'react-hook-form-input';
 import Select from 'react-select';
 import { Spinner } from 'react-bootstrap'
-import { getArea, getCity, getCountry } from '../ProfileAccountSetting/_redux/Action/ProfileAccountSettingAction';
+import { getLocationData } from '../ProfileAccountSetting/_redux/Action/ProfileAccountSettingAction';
 const BillingAddressUpdate = () => {
     const dispatch = useDispatch();
     const countryList = useSelector((state) => state.ProfileAccountSettingReducer.countryList);
@@ -23,7 +23,7 @@ const BillingAddressUpdate = () => {
 
     useEffect(() => {
         dispatch(handleSetDataIntoInputField())
-        dispatch(getCountry())
+        dispatch(getLocationData('countries'))
         dispatch(getBillingAddressForInput('billing_address'))
     }, [])
 
@@ -58,7 +58,7 @@ const BillingAddressUpdate = () => {
                                     onChange={(option) => {
                                         handleChangeTextInput("country", option.label);
                                         handleChangeTextInput("country_id", option.value);
-                                        dispatch(getCity(option.label));
+                                        dispatch(getLocationData('cities', 'division', option.value));
                                     }}
                                     setValue={setValue}
                                 />
@@ -85,7 +85,7 @@ const BillingAddressUpdate = () => {
                                     onChange={(option) => {
                                         handleChangeTextInput("city", option.label);
                                         handleChangeTextInput("city_id", option.value);
-                                        dispatch(getArea(option.value));
+                                        dispatch(getLocationData('areas', 'city', option.value));
                                     }}
                                     setValue={setValue}
                                 />
