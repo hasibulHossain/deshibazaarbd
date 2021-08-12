@@ -144,7 +144,7 @@ a .custom-button-component:hover {
   margin-left: -7px;
   -webkit-border-radius: 20px;
   border-radius: 20px;
-  top: 23%;
+  margin-top: -10px;
 }
 
 .custome-select {
