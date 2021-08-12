@@ -55,7 +55,7 @@ const PersonalInfoForm = () => {
                             />
                             {
                                 errors.first_name && errors.first_name.type === 'required' && (
-                                    <ErrorMessage errorText="First name can't be blank!" />
+                                    <ErrorMessage errorText="Please give your first name !" />
                                 )
                             }
                         </div>
@@ -70,15 +70,10 @@ const PersonalInfoForm = () => {
                                 value={userInputData.last_name}
                                 onChange={(e) => handleChangeTextInput('last_name', e.target.value)}
                                 ref={register({
-                                    required: true,
+                                    required: false,
                                     maxLength: 100,
                                 })}
                             />
-                            {
-                                errors.last_name && errors.last_name.type === 'required' && (
-                                    <ErrorMessage errorText="First name can't be blank!" />
-                                )
-                            }
                         </div>
                     </div>
                     <div className="col-md-6">
@@ -97,7 +92,7 @@ const PersonalInfoForm = () => {
                             />
                             {
                                 errors.email && errors.email.type === 'required' && (
-                                    <ErrorMessage errorText="First name can't be blank!" />
+                                    <ErrorMessage errorText="Please give a valid email address !" />
                                 )
                             }
                         </div>
@@ -118,7 +113,7 @@ const PersonalInfoForm = () => {
                             />
                             {
                                 errors.phone_no && errors.phone_no.type === 'required' && (
-                                    <ErrorMessage errorText="First name can't be blank!" />
+                                    <ErrorMessage errorText="Please give your phone number !" />
                                 )
                             }
                         </div>
@@ -128,7 +123,7 @@ const PersonalInfoForm = () => {
                 <div className="row justify-content-end">
                     {
                         !isSubmitting && (
-                            <button type="submit" className="btn btn-success mr-3">submit</button>
+                            <button type="submit" className="btn btn-success mr-3">Save</button>
                         )
                     }
                     {
@@ -137,7 +132,7 @@ const PersonalInfoForm = () => {
                                 <Spinner animation="border" role="status" size="sm">
                                     <span className="sr-only">Loading...</span>
                                 </Spinner>
-                                <span className="ml-2">Submitting...</span>
+                                <span className="ml-2">Saving...</span>
                             </button>
                         )
                     }

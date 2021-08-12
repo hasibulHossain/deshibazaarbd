@@ -68,15 +68,10 @@ const PersonalInformationUpdate = () => {
                                     value={userInputData.last_name}
                                     onChange={(e) => handleChangeTextInput('last_name', e.target.value)}
                                     ref={register({
-                                        required: true,
+                                        required: false,
                                         maxLength: 100,
                                     })}
                                 />
-                                {
-                                    errors.last_name && errors.last_name.type === 'required' && (
-                                        <ErrorMessage errorText="First name can't be blank!" />
-                                    )
-                                }
                             </div>
                         </div>
                     </div>
@@ -97,7 +92,7 @@ const PersonalInformationUpdate = () => {
                                 />
                                 {
                                     errors.email && errors.email.type === 'required' && (
-                                        <ErrorMessage errorText="First name can't be blank!" />
+                                        <ErrorMessage errorText="Email can't be blank!" />
                                     )
                                 }
                             </div>
@@ -121,7 +116,7 @@ const PersonalInformationUpdate = () => {
                             </div>
                             {
                                 errors.phone_no && errors.phone_no.type === 'required' && (
-                                    <ErrorMessage errorText="First name can't be blank!" />
+                                    <ErrorMessage errorText="Phone number can't be blank!" />
                                 )
                             }
                         </div>
@@ -136,7 +131,7 @@ const PersonalInformationUpdate = () => {
                                     <div className="spinner-border mr-3" role="status">
                                         <span className="sr-only">Loading...</span>
                                     </div>
-                                    <span>updating...</span>
+                                    <span>Updating...</span>
                                 </div>
                             </button>
                         </div>
@@ -145,7 +140,7 @@ const PersonalInformationUpdate = () => {
                 {
                     !isSubmitting && (
                         <div className="d-flex justify-content-end">
-                            <button type="submit" className="btn btn-primary">update</button>
+                            <button type="submit" className="btn btn-primary">Update</button>
                         </div>
                     )
                 }

@@ -20,7 +20,8 @@ const initialState = {
         avatar            : "",
         banner            : "",
         address           : "",
-        id                : null
+        id                : null,
+        is_default        : true,
     },
     billingAddressInput : {
         type          : "billing_address",
@@ -36,7 +37,7 @@ const initialState = {
         area          : "",
         street1       : "",
         street2       : "",
-        is_default    : "",
+        is_default    : true,
         location      : ""
     },
     selectedAddress: {
@@ -55,11 +56,11 @@ const initialState = {
         area          : "",
         street1       : "",
         street2       : "",
-        is_default    : "",
+        is_default    : true,
         location      : ""
     },
     shippingAddressInput: {
-        type          : "",
+        type          : "shipping_address",
         user_id       : "",
         name          : "",
         phone_no      : "",
@@ -74,7 +75,7 @@ const initialState = {
         area          : "",
         street1       : "",
         street2       : "",
-        is_default    : "",
+        is_default    : 1,
         location      : ""
     },
     countryList         : [],
