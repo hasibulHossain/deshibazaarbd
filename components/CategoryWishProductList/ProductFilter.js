@@ -4,6 +4,7 @@ import InputRange from "react-input-range";
 import "react-input-range/lib/css/index.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  getCategoryOrBrandDetails,
   getFilteredProducts,
   resetFilterParams,
   setFilterParams,
@@ -130,9 +131,13 @@ const ProductFilter = () => {
         cloneFilterParams[query] = [];
         if(query === 'brand') {
           cloneFilterParams[query].push(+queries[query]);
+
+          dispatch(getCategoryOrBrandDetails('brands/' + +queries[query]));
         }
         if(query === 'category') {
           cloneFilterParams[query].push(+queries[query]);
+
+          dispatch(getCategoryOrBrandDetails('categories/' + +queries[query]));
         }
       } else {
         cloneFilterParams[query] = queries[query];
