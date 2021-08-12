@@ -90,7 +90,7 @@ const CategoryWishProductContainer = () => {
                   <div className="child-logo">
                     <img src={item.banner_url} alt={item.name} />
                   </div>
-                  <span>category name</span>
+                  <span>{item.name}</span>
                 </div>
               ))
             }
