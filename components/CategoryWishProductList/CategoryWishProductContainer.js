@@ -64,7 +64,7 @@ const CategoryWishProductContainer = () => {
             </div>
         )
       }
-      {
+      {/* {
         categoryBrandDetails.childs.length > 0 && (
           <div className="childs">
             <div className="row">
@@ -80,7 +80,24 @@ const CategoryWishProductContainer = () => {
             </div>
           </div>
         )
+      } */}
+      {
+        categoryBrandDetails.childs.length > 0 && (
+          <div className="childs">
+            {
+              categoryBrandDetails.childs.map(item => (
+                <div className="child-logo-box">
+                  <div className="child-logo">
+                    <img src={item.banner_url} alt={item.banner} />
+                  </div>
+                  <span>category name</span>
+                </div>
+              ))
+            }
+          </div>
+        )
       }
+
       
       <div className="row">
         <div className="col-md-3">
@@ -88,45 +105,47 @@ const CategoryWishProductContainer = () => {
         </div>
         <div className="col-md-9 mb-5">
           <CategoryWishProductList />
+          <div className="w-100">
+            <nav className="d-flex justify-content-end" aria-label="navigation">
+              <ul className="pagination">
+                <li
+                  className={classes}
+                  onClick={() =>
+                    paginateHandler("previous", paginate.prev_page_url)
+                  }
+                >
+                  <a className="page-link">Previous</a>
+                </li>
+                {paginate.pages.map((_, i) => (
+                  <li
+                    key={i}
+                    onClick={() =>
+                      paginateHandler(
+                        "linier",
+                        `${Base_Url}get-items?page=${i + 1}`
+                      )
+                    }
+                    className="page-item"
+                  >
+                    <a className="page-link">{i + 1}</a>
+                  </li>
+                ))}
+                <li
+                  onClick={() => paginateHandler("next", paginate.next_page_url)}
+                  className={nextClasses}
+                >
+                  <a className="page-link">Next</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
         </div>
       </div>
-      <div className="row">
+      {/* <div className="row">
         <div className="col-md-3"></div>
         <div className="col-md-9">
-          <nav aria-label="navigation">
-            <ul className="pagination">
-              <li
-                className={classes}
-                onClick={() =>
-                  paginateHandler("previous", paginate.prev_page_url)
-                }
-              >
-                <a className="page-link">Previous</a>
-              </li>
-              {paginate.pages.map((_, i) => (
-                <li
-                  key={i}
-                  onClick={() =>
-                    paginateHandler(
-                      "linier",
-                      `${Base_Url}get-items?page=${i + 1}`
-                    )
-                  }
-                  className="page-item"
-                >
-                  <a className="page-link">{i + 1}</a>
-                </li>
-              ))}
-              <li
-                onClick={() => paginateHandler("next", paginate.next_page_url)}
-                className={nextClasses}
-              >
-                <a className="page-link">Next</a>
-              </li>
-            </ul>
-          </nav>
         </div>
-      </div>
+      </div> */}
     </section>
   );
 };

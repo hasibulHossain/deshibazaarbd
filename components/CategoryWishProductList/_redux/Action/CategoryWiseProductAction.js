@@ -65,7 +65,7 @@ export const getCategoryOrBrandDetails = (endPoint) => async (dispatch) => {
     const res = await Axios.get(url)
     response.loading = false;
     response.data.banner_url = res.data.data.banner_url;
-    response.data.childs = res.data.data.childs;
+    response.data.childs = res.data.data.childs.length > 5 ? res.data.data.childs.slice(0, 5) : res.data.data.childs
 
     dispatch({type: Types.GET_CATEGORY_OR_BRAND_DETAILS, payload: response})
   } catch (err) {
