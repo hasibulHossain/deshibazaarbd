@@ -100,7 +100,7 @@ const Header = () => {
 											) : (
 												<>
 													<Dropdown>
-														<Dropdown.Toggle variant="simple_btn_bg" className="btn-sm" id="dropdown-basic">
+														<Dropdown.Toggle variant="simple_btn_bg" className="btn-sm text-capitalize" id="dropdown-basic">
 															{userData && userData.first_name}
 														</Dropdown.Toggle>
 

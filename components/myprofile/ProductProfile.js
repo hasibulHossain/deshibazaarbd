@@ -60,7 +60,7 @@ const ProductProfile = () => {
                         </div> */}
                         <img className="border rounded-circle p-1 mb-2" style={{ height: "100px" }} src="https://cdn.iconscout.com/icon/free/png-256/laptop-user-1-1179329.png" alt="user image" />
                       </div>
-                      <p className="user_name"> {`${userData !== null && userData.first_name} ${userData !== null && userData.last_name}`}</p>
+                      <p className="user_name text-capitalize"> {`${userData !== null && userData.first_name} ${(userData !== null && userData.last_name !== null) ? userData.last_name : ''}`}</p>
                       <p>
                         <span className="user_icon">
                           <FontAwesomeIcon icon={faMailBulk} />
@@ -83,7 +83,7 @@ const ProductProfile = () => {
                 <div className="col-md-5">
                   <div className="card mb-2 p-3 default_height">
                     <div className="card-title">
-                      <h6> <Translate>Address Book</Translate> |
+                      <h6> <Translate>Address Book</Translate> 
 
                         {
                           ((defaultBillingAddress.length > 0) || (defaultShippingAddress.length > 0)) && (
@@ -104,7 +104,6 @@ const ProductProfile = () => {
                         {
                           !isLoading && defaultBillingAddress && defaultBillingAddress.length === 0 && defaultShippingAddress.length === 0 && (
                             <span className="edit_profile_link ml-2" onClick={toggleShowHandler}>ADD NEW</span>
-
                           )
                         }
 

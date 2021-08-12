@@ -60,9 +60,10 @@ const ShippingInfo = () => {
                         defaultBillingAddress !== null && defaultBillingAddress.length > 0 && (
                             <>
                                 <div className="d-flex justify-content-between">
-                                    <h6 className="customer_name"> <FontAwesomeIcon className="shipping_info_fontAwesome" icon={faMapMarkerAlt} />
+                                    <h6 className="customer_name text-capitalize"> <FontAwesomeIcon className="shipping_info_fontAwesome" icon={faMapMarkerAlt} />
                                         <span>
-                                            {userData && userData.first_name + " " + userData.last_name}
+                                            {userData && userData.first_name + " "}
+                                            {userData && ((userData.last_name !== null && userData.last_name !== 'null' ) ? userData.last_name : '')}
                                         </span>
                                     </h6>
                                     <p className="customer_info_edit" onClick={() => editHandler(defaultBillingAddress[0].id, defaultBillingAddress[0].type)}>
