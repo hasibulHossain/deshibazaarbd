@@ -32,7 +32,7 @@ const initialState = {
     ]
   },
   couponLoading: false,
-  couponData: {},
+  couponData: null,
   OrderLifeCycleDetails: null,
   orderList: [],
   orderDetails: [],

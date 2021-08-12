@@ -16,12 +16,12 @@ export const handleChangeDeliveryInputData = (name, value) => (dispatch) => {
 export const storeSells = (customerInfo, carts, totalQuantity, shippingCost, totalPrice, couponData) => (dispatch) => {
     
     let discountAmount = 0, discountType = 1;
-    if ( typeof couponData !== 'undefined' ) {
+
+    if ( typeof couponData !== 'undefined' && couponData !== null ) {
         discountAmount = couponData.discount_amount;
         discountType   = 2; // 2 = Coupon Discount
-    } 
+    }
 
-    shippingCost = 50;
     shippingCost = isNaN(shippingCost) ? 0 : parseFloat(shippingCost);
 
     const getUserData    = JSON.parse(localStorage.getItem('loginData'))
@@ -63,8 +63,8 @@ export const storeSells = (customerInfo, carts, totalQuantity, shippingCost, tot
         additional_notes: '',
         staff_note      : '',
         paid_total      : 0,
-        due_total       : shippingCost + totalPrice,
-        final_total     : shippingCost + totalPrice,
+        due_total       : parseFloat(shippingCost + totalPrice - discountAmount),
+        final_total     : parseFloat(shippingCost + totalPrice - discountAmount),
         sale_lines      : sale_lines,
         payment_method  : payment_method
     }

@@ -19,14 +19,14 @@ export default function Carts() {
 	// const router = useRouter();
 	const dispatch         = useDispatch();
 	const { customerInfo } = useSelector((state) => state.DeliveryInfoReducer);
-	const { couponData }   = useSelector((state) => state.OrderReducer);
+	const { couponData, shippingCost }   = useSelector((state) => state.OrderReducer);
 
-	const { carts, totalPrice, totalQuantity, shippingCost } = useSelector((state) => state.CartReducer);
+	const { carts, totalPrice, totalQuantity } = useSelector((state) => state.CartReducer);
 
 	useEffect(() => {
 		dispatch(getCartsAction());
 		dispatch(getUserDataAction());
-		dispatch(handleShippingCost(carts))
+		dispatch(handleShippingCost(carts));
 		// dispatch(toggleFloatingCart(false));
 	}, []);
 

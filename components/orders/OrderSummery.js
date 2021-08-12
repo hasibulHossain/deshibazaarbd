@@ -13,8 +13,9 @@ const OrderSummery = ({ handleClick, buttonText }) => {
     const isSubmitting = useSelector((state) => state.DeliveryInfoReducer.isSubmitting);
     const { carts, totalPrice } = useSelector((state) => state.CartReducer);
 
-    const { coupon, couponLoading, couponData, shippingCost, shippingCostLoading } = useSelector((state) => state.OrderReducer);
-
+    const { coupon, couponLoading, couponData, shippingCostLoading } = useSelector((state) => state.OrderReducer);
+    const { shippingCost } = useSelector((state) => state.OrderReducer);
+    
     useEffect(() => {
         dispatch(getCartsAction());
         dispatch(handleShippingCost(carts))
@@ -29,13 +30,12 @@ const OrderSummery = ({ handleClick, buttonText }) => {
         dispatch(handleApplyCouponCode(coupon, carts))
     };
 
-    let totalAmount;
-    const updatedShippingCost = 50;
+    let totalAmount = 0;
 
     if (couponData && couponData.discount_amount) {
-        totalAmount = parseFloat( (totalPrice + updatedShippingCost) - couponData.discount_amount );
+        totalAmount = parseFloat( (totalPrice + parseFloat(shippingCost)) - couponData.discount_amount );
     } else {
-        totalAmount = parseFloat( totalPrice + updatedShippingCost );
+        totalAmount = parseFloat( totalPrice + parseFloat(shippingCost) );
     }
 
     return (
