@@ -23,9 +23,16 @@ const ShopList = () => {
           ShopList.map((item, index) => (
             <div className="col-sm-4 col-md-2 col-lg-2" key={index}>
               <div className="shop-card" onClick={() => routeHandler(item.id)}>
-                <div className="shop-logo">
-                  <img src={item.image_url} alt={item.name} />
-                </div>
+                {
+                  (item.image !== null && item.image !== '')?
+                  <div className="shop-logo">
+                    <img src={item.image_url} alt={item.name} />
+                  </div>
+                  :
+                  <div className="shop-logo">
+                    {item.name}
+                  </div>
+                }
               </div>
             </div>
         ))}
