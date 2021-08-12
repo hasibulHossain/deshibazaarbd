@@ -49,6 +49,19 @@ function FloatingCart() {
     router.push('/carts');
   }
 
+  /**
+   * Redirect to checkout page 
+   * Toggle also the cart handler on sidebar
+   * 
+   * @since 1.0.0
+   * 
+   * return void
+   */
+  const redirectToCheckout = () => {
+    toggleCartHandler();
+    router.push('/checkout');
+  }
+
   let floatingCart = null;
  
   if (floatingCartVisible) {
@@ -100,11 +113,9 @@ function FloatingCart() {
             <SimpleBtn variant="danger">View cart</SimpleBtn>
           </div>
 
-          <Link href="/checkout">
-            <div>
-              <SimpleBtn variant="success">Checkout</SimpleBtn>
-            </div>
-          </Link>
+          <div onClick={() => redirectToCheckout()}>
+            <SimpleBtn variant="success">Checkout</SimpleBtn>
+          </div>
         </div>
       </div>
     );
