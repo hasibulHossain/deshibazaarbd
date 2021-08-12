@@ -96,7 +96,20 @@ export const handleChangeShippingAddressInput = (name, value) => (dispatch) => {
     dispatch({ type: Types.CHANGE_SHIPPING_ADDRESS_INPUT, payload: addressData })
 }
 
-// get countries, divisions, cities, areas
+/**
+ * get countries, divisions, cities, areas
+ * 
+ * Ex. getLocationData('cities', 'division', 2)
+ * This func will return cities list under selected division(which has id 2)
+ * 
+ * since v1.0.0
+ * 
+ * @param {string} locationType - location name Ex. 'divisions', 'cities'
+ * @param {string} onDependentLocation - EX. 'division', 'city', 'country'
+ * @param {string | number} val - location id
+ * @returns {void}
+ */
+
 export const getLocationData = (locationType, onDependentLocation, val) => async (dispatch) => {
     let url = `${baseurl}${locationType}`;
     if(onDependentLocation) {
@@ -106,7 +119,6 @@ export const getLocationData = (locationType, onDependentLocation, val) => async
 
     try {
         const res = await Axios.get(url)
-        // if(locationType === 'countries')     
         let type = "";
 
         switch (locationType) {
@@ -132,28 +144,6 @@ export const getLocationData = (locationType, onDependentLocation, val) => async
         console.log('err => ', error)
     }
 }
-
-// get countries list
-// export const getCountry = () => (dispatch) => {
-//     Axios.get(`${baseurl}countries`)
-//         .then((res) => {
-//             dispatch({ type: Types.GET_COUNTRIES_LIST, payload: res.data.data });
-//         })
-// }
-// get countries list 
-// export const getCity = (country) => (dispatch) => {
-//     Axios.get(`${baseurl}cities?country=${country}`)
-//         .then((res) => {
-//             dispatch({ type: Types.GET_CITIES_LIST, payload: res.data.data });
-//         })
-// }
-// get countries list 
-// export const getArea = (cityID) => (dispatch) => {
-//     Axios.get(`${baseurl}areas?city=${cityID}`)
-//         .then((res) => {
-//             dispatch({ type: Types.GET_AREA_LIST, payload: res.data.data });
-//         })
-// }
 
 //handle store shipping address
 export const handleStoreShippingAddress = (shippingAddressInput) => (dispatch) => {
