@@ -17,45 +17,30 @@ const NewCollection = () => {
         <section className="container product-container">
             <div className="new-collection-section">
                 <div className="row">
-                    <div className="col-md-3">
-                        <div className="home-appliance border-radius-5 mb-3 pointer">
-                            <div className="new-collection-details">
-                                <p><Translate>Explore New Collection Of</Translate> </p>
-                                <h4 className="new_collection_title"><Translate>Home Appliance</Translate></h4>
-                                <button className="collectionBtn">
-                                    <Translate>View Collection</Translate>
-                                </button>
-                            </div>
+                    <div className="col-lg-3 col-md-4">
+                    <a href="">
+                        <div className="home-card border-radius-5 mb-3 pointer">
                             <div className="collection-banner">
-                                <img src={"/images/collection/01 (2).png"} className="img-fluid" />
+                                <img src={"/images/collection/home-card-3.png"} className="img img-fluid" alt=""  />
                             </div>
                         </div>
+                        </a>
                     </div>
 
-                    <div className="col-md-6">
-                        <div className="new-collection-card border-radius-5 mb-3 pointer">
-                            <div className="custome-new-collection-details">
-                                <p><Translate>Only This Weak</Translate></p>
-                                <h4 className="new_collection_title"><Translate>Perfect Fit</Translate> <br /> <Translate>For Your Home</Translate></h4>
-                                <button className="collectionBtn"><Translate>View Collection</Translate></button>
-                            </div>
-                            <div className="middle-collection-banner">
-                                <img src={"/images/collection/01 (3).png"} className="img-fluid" />
-                            </div>
+                    <div className="col-lg-6 col-md-8">
+                    <a href="">
+                        <div className="home-card border-radius-5 mb-3 pointer">
+                            <img src={"/images/collection/home-card-1.png"} className="img img-fluid" alt="" />
                         </div>
+                        </a>
                     </div>
 
-                    <div className="col-md-3">
-                        <div className="stationary_carft border-radius-5 mb-3 pointer">
-                            <div className="new-collection-details">
-                                <p> <Translate>New Collection Of</Translate> </p>
-                                <h4 className="new_collection_title"><Translate>Stationary & Carft</Translate></h4>
-                                <Button buttonText={translate('Shop Now')} />
-                            </div>
-                            <div className="collection-banner">
-                                <img src={"/images/collection/01 (1).png"} className="img-fluid w-75" />
-                            </div>
+                    <div className="col-lg-3 col-md-12">
+                    <a href="">
+                        <div className="home-card border-radius-5 mb-3 pointer">
+                            <img src={"/images/collection/home-card-2.png"} className="img img-fluid" alt="" />
                         </div>
+                        </a>
                     </div>
 
                 </div>
