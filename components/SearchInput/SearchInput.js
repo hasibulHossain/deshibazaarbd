@@ -22,14 +22,15 @@ const SearchInput = () => {
   };
 
   const searchClick = (searchData) => {
+    setSearch('');
+
     if (searchData.is_item) {
       router.push(`/products/${searchData.slug}`);
     }
     if (searchData.is_category) {
-      router.push(`/products?category=${searchData.slug}`);
+      router.push(`/products?category=${searchData.id}`);
     }
   };
-
 
   return (
     <>
