@@ -5,6 +5,7 @@
 /*****************************************************************/
 :root {
   --color-primary: #e9000f;
+  --color-placeholder: #dfdfdf;
   --font-size: 12px;
 }
 
@@ -359,6 +360,30 @@ a .custom-button-component:hover {
 }
 
 /*=========Product list===========*/
+
+.product-container .banner {
+  width: 100%;
+  height: 240px;
+  background-color: var(--color-placeholder);
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.product-container .banner .banner-photo-box {
+  
+}
+
+.product-container .banner .banner-photo-box img {
+  
+}
+
+.product-container .childs {
+  width: 100%;
+  height: 110px;
+  background-color: var(--color-placeholder);
+  overflow: hidden;
+  margin-bottom: 10px;
+}
 
 .product-container {
   padding: 20px;

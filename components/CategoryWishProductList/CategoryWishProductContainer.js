@@ -12,7 +12,7 @@ const Base_Url = process.env.NEXT_PUBLIC_API_URL;
 const CategoryWishProductContainer = () => {
   const dispatch = useDispatch();
   
-  const { paginate, filterParams } = useSelector(
+  const { paginate, filterParams, categoryBrandDetails } = useSelector(
     (state) => state.CategoryWiseProductReducer
   );
 
@@ -55,6 +55,33 @@ const CategoryWishProductContainer = () => {
 
   return (
     <section className="product-container">
+      {
+        categoryBrandDetails.banner_url && (
+            <div className="banner">
+              <div className="banner-photo-box">
+                <img src={categoryBrandDetails.banner_url} alt="" />
+              </div>
+            </div>
+        )
+      }
+      {
+        categoryBrandDetails.childs.length > 0 && (
+          <div className="childs">
+            <div className="row">
+              {
+                categoryBrandDetails.childs.map(item => (
+                  <div className="col-md-2">
+                    <div className="childs-logo-box">
+                      <img src={item.banner_url} alt={item.banner} />
+                    </div>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+        )
+      }
+      
       <div className="row">
         <div className="col-md-3">
           <ProductFilter />
