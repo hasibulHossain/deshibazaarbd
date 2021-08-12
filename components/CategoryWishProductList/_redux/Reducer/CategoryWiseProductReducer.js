@@ -154,6 +154,11 @@ function CategoryWiseProductReducer(state = initialState, { type, payload }) {
           page: 1,
           paginate_no: 20,
         },
+        categoryBrandDetails: {
+          isLoading: false,
+          banner_url: "",
+          childs: []
+        }
       };
 
     default:
