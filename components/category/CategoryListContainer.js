@@ -7,7 +7,7 @@ import { translate } from '../../services/translation/translation';
 
 const CategoryListContainer = ({ parentID = null }) => {
     return (
-        <section className="product-container">
+        <section className="container product-container">
             <div className="product-heading">
                 <h5>
                     <Translate>Shop by categories</Translate>

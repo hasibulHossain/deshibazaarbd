@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import MainLayout from "../components/layouts/MainLayout";
 import ScrollToTop from "react-scroll-to-top";
 // import CategoryBanner from "../components/CategoryBanner/CategoryBanner";
@@ -9,7 +9,9 @@ export default function Products() {
     <MainLayout>
       <ScrollToTop smooth />
       {/* <CategoryBanner /> */}
-      <CategoryWishProductContainer />
+      <div className="container">
+        <CategoryWishProductContainer />
+      </div>
     </MainLayout>
   );
 }

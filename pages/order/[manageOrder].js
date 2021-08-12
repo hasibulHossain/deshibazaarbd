@@ -8,8 +8,8 @@ import axios from "axios";
 export default function ManageOrder({ order }) {
 
     return (
-        <MainLayout pageTitle="Manage-order">
-            <div className="container-fluid">
+        <MainLayout pageTitle="Manage order">
+            <div className="container">
                 <div className="row">
                     <div className="col-md-3">
                         <ProfileSideBar />

@@ -5,32 +5,72 @@ import ReactImageZoom from "react-image-zoom";
 import Link from "next/link";
 import PriceCalculation from "./partials/PriceCalculation";
 import ShareProduct from "./partials/ShareProduct";
-import { useDispatch } from "react-redux";
-import { addToCartAction } from "../carts/_redux/action/CartAction";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCartAction, getCartsAction, updateCartQtyAction } from "../carts/_redux/action/CartAction";
 import { showToast } from "../master/Helper/ToastHelper";
 import router from "next/router";
 import { toggleProductModalAction } from "./_redux/Action/ProductAction";
 import LoadingSpinner from "../master/LoadingSpinner/LoadingSpinner";
+import { activeCurrency, formatCurrency } from "../../services/currency";
 
 const ProductSingleFull = ({ product }) => {
+
     const dispatch = useDispatch();
     const [quantity, setQuantity] = useState(1);
     const [previewImg, setPreviewImg] = useState(null);
+    const { carts } = useSelector((state) => state.CartReducer)
+    const [filterCarts, setFilterCarts] = useState(null)
+    const [updatedID, setUpdatedID] = useState(null)
+
+    const default_price = (product.is_offer_enable && product.offer_selling_price !== 0) ? product.offer_selling_price : product.default_selling_price;
+
+    const [subTotal, setSubTotal] = useState(default_price)
+
+
+
     const zoomImg = { width: 200, height: 250, zoomWidth: 600, img: previewImg };
+
 
     useEffect(() => {
         if (product) {
             setPreviewImg(product.featured_url);
+            const newFilterCarts = carts.find((item) => item.productID == product.id);
+            setFilterCarts(newFilterCarts);
+            if (typeof newFilterCarts !== "undefined" && newFilterCarts !== null) {
+                setQuantity(newFilterCarts.quantity);
+                setUpdatedID(newFilterCarts.productID);
+                setSubTotal(newFilterCarts.quantity * default_price);
+            }
+
         }
-    }, [product]);
+
+    }, [product, carts]);
+
+    useEffect(() => {
+        dispatch(getCartsAction())
+    }, []);
 
     const addToCart = () => {
         if (parseInt(product.current_stock) === 0) {
             showToast("error", "This product is out of stock!");
+        } else if (typeof filterCarts !== "undefined" && filterCarts !== null) {
+            dispatch(updateCartQtyAction(updatedID, quantity));
         } else {
-            dispatch(addToCartAction(product));
+            dispatch(addToCartAction(product, { quantity }));
         }
     }
+
+    const updateQuantity = (quantity) => {
+        if (typeof filterCarts !== "undefined" && filterCarts !== null && updatedID !== null) {
+            setQuantity(filterCarts.quantity);
+            dispatch(updateCartQtyAction(updatedID, quantity));
+        } else {
+            setQuantity(quantity);
+            setSubTotal(quantity * default_price);
+        }
+
+    }
+
 
     const redirectToCheckoutPage = () => {
         if (parseInt(product.current_stock) === 0) {
@@ -84,9 +124,12 @@ const ProductSingleFull = ({ product }) => {
                     </div>
                     <div className="col-md-6">
                         <div className="product_details_section">
-                            <h3 className="product_title pointer" onClick={() => redirectToProductDetailsPage(product)}>
-                                {product.name && product.name}
-                            </h3>
+                            <div className="product_title_box">
+                                <h3 className="product_title">
+                                    {product.name && product.name}
+                                </h3>
+                                <div className="view_details pointer" onClick={() => redirectToProductDetailsPage(product)}>View details</div>
+                            </div>
                             {/* <Link href={"/products/" + product.sku}>
                                 <h3 className="product_title pointer">
                                     {product.name && product.name}
@@ -107,19 +150,24 @@ const ProductSingleFull = ({ product }) => {
                                     <div className="quantity">
                                         <button
                                             disabled={quantity <= 1 ? true : false}
-                                            onClick={() => setQuantity(quantity - 1)}
+                                            onClick={() => updateQuantity(quantity - 1)}
                                             className={quantity <= 1 ? `not-allowed` : `pointer`}
                                         >
                                             <FontAwesomeIcon icon={faMinus} />
                                         </button>
-                                        <input type="text" value={quantity} onChange={() => { }} />
+                                        <input type="text" value={quantity} onChange={e => updateQuantity(e.target.value)} />
                                         <button
                                             className="pointer"
-                                            onClick={() => setQuantity(quantity + 1)}
+                                            onClick={() => updateQuantity(quantity + 1)}
                                         >
                                             <FontAwesomeIcon icon={faPlus} />
                                         </button>
                                     </div>
+                                    <p className="floating-cart__product-price mt-3">
+                                        {quantity} <span>X</span>&nbsp;
+                                        {formatCurrency(default_price)} = {formatCurrency(subTotal)}&nbsp;
+                                        {activeCurrency('code')}
+                                    </p>
                                 </div>
                                 <div className="mr-3">
                                     <h6>Pick your colo</h6>
@@ -130,7 +178,10 @@ const ProductSingleFull = ({ product }) => {
                                     </div>
                                 </div>
                                 <div className="d-flex mt-3">
-                                    <div className="button addToCartBtn" onClick={() => addToCart()}>Add to cart</div>
+                                    <div className="button addToCartBtn"
+                                        disabled={true}
+                                        onClick={() => addToCart()}
+                                    >Add to cart</div>
                                     <div className="button buyBtn" onClick={() => redirectToCheckoutPage()}>Buy now</div>
                                 </div>
                             </div>

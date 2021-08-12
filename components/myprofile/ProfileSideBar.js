@@ -4,7 +4,7 @@ import Translate from '../translation/Translate';
 
 const ProfileSideBar = () => {
     return (
-        <div className="sidebar card">
+        <div className="sidebar card text-capitalize">
             <ul>
                 <li>
                     <ActiveLink href="/profile" activeLink="activeLink"> <Translate>My Profile</Translate> </ActiveLink>

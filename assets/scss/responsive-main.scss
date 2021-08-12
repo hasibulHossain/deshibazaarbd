@@ -12,10 +12,12 @@
   .img-fluid {
     height: 300px;
   }
-
-  // @todo: Delete in next day
-  .test-css {
-    color: '#000000'
-  }
   
+}
+
+
+@media (min-width: 1200px) {
+  .container-xl, .container-lg, .container-md, .container-sm, .container {
+      max-width: 1290px;
+  }
 }

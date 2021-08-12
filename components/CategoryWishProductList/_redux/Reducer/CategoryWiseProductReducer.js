@@ -4,6 +4,11 @@ const initialState = {
   products: [],
   filteredProducts: [],
   categories: [],
+  categoryBrandDetails: {
+    isLoading: false,
+    banner_url: "",
+    childs: []
+  },
   filterParams: {
     type: "",
     search: "",
@@ -16,7 +21,7 @@ const initialState = {
     order_by: "",
     order: "",
     page: 1,
-    paginate_no: 10,
+    paginate_no: 20,
   },
   paginate: {
     pages: [],
@@ -41,6 +46,17 @@ function CategoryWiseProductReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         isLoading: true,
+      };
+
+    case Types.GET_CATEGORY_OR_BRAND_DETAILS:
+      return {
+        ...state,
+        categoryBrandDetails: {
+          ...state.categoryBrandDetails,
+          isLoading: payload.loading,
+          banner_url: payload.data.banner_url,
+          childs: payload.data.childs
+        }
       };
 
     case Types.GET_PRODUCT_LIST:
@@ -136,7 +152,7 @@ function CategoryWiseProductReducer(state = initialState, { type, payload }) {
           order_by: "",
           order: "",
           page: 1,
-          paginate_no: 10,
+          paginate_no: 20,
         },
       };
 

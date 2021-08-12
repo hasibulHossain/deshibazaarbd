@@ -49,6 +49,19 @@ function FloatingCart() {
     router.push('/carts');
   }
 
+  /**
+   * Redirect to checkout page 
+   * Toggle also the cart handler on sidebar
+   * 
+   * @since 1.0.0
+   * 
+   * return void
+   */
+  const redirectToCheckout = () => {
+    toggleCartHandler();
+    router.push('/checkout');
+  }
+
   let floatingCart = null;
  
   if (floatingCartVisible) {
@@ -82,14 +95,14 @@ function FloatingCart() {
 
           <div className="floating-cart__payment-details">
             <span>Delivery Fee</span>
-            <span>{ formatCurrency(totalPrice > 0 ? 50 : 0) } { activeCurrency('code') }</span>
+            <span>{ formatCurrency(totalPrice > 0 ? 60 : 0) } { activeCurrency('code') }</span>
           </div>
 
           {
             totalPrice > 0 &&
             <div className="floating-cart__payment-details">
               <span>Total</span>
-              <span>{ formatCurrency(totalPrice + 50) } { activeCurrency('code') }</span>
+              <span>{ formatCurrency(totalPrice + 60) } { activeCurrency('code') }</span>
             </div>
           }
           
@@ -100,11 +113,9 @@ function FloatingCart() {
             <SimpleBtn variant="danger">View cart</SimpleBtn>
           </div>
 
-          <Link href="/checkout">
-            <div>
-              <SimpleBtn variant="success">Checkout</SimpleBtn>
-            </div>
-          </Link>
+          <div onClick={() => redirectToCheckout()}>
+            <SimpleBtn variant="success">Checkout</SimpleBtn>
+          </div>
         </div>
       </div>
     );

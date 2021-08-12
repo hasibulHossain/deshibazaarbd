@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import ProfileSideBar from '../myprofile/ProfileSideBar'
 import PersonalInfoForm from './PersonalInfoForm'
 import SingleAddress from './SingleAddress';
-import { getAddress, getCountry } from './_redux/Action/ProfileAccountSettingAction';
+import { getAddress, getLocationData } from './_redux/Action/ProfileAccountSettingAction';
 import SimpleModal from '../master/Modal/SimpleModal';
 import AddressUpdate from './AddressUpdate';
 import SimpleBtn from '../master/SimpleBtn/SimpleBtn';
@@ -22,12 +22,12 @@ const ProfileAccountSetting = () => {
     useEffect(() => {
         dispatch(getAddress('billing_address'));
         dispatch(getAddress('shipping_address'));
-        dispatch(getCountry())
+        dispatch(getLocationData('countries'))
     }, [])
 
     return (
         <>
-            <div className="container-fluid">
+            <div className="container">
                 <div className="row">
                     <div className="col-md-3">
                         <ProfileSideBar />

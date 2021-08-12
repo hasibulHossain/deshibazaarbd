@@ -25,17 +25,9 @@ import Head from "next/head";
 import ProfileAccountSetting from "../components/ProfileAccountSetting/ProfileAccountSetting";
 const accountSetting = () => {
   return (
-    <>
-      <Head>
-        <title>
-          Deshi Bazaar BD || Profile
-        </title>
-        <meta name="description" content="Meta" />
-      </Head>
       <MainLayout>
         <ProfileAccountSetting />
       </MainLayout>
-    </>
   );
 };
 

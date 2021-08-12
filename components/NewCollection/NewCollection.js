@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingBag } from '@fortawesome/free-solid-svg-icons';
-import { useDispatch, useSelector } from 'react-redux';
-import { getDealFlashList } from './_redux/Action/DealFlashAction';
+import React from 'react';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faShoppingBag } from '@fortawesome/free-solid-svg-icons';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { getDealFlashList } from './_redux/Action/DealFlashAction';
 import Button from '../master/Button/Button';
 import Translate from '../translation/Translate';
 import { translate } from '../../services/translation/translation';
@@ -14,7 +14,7 @@ const NewCollection = () => {
     //     dispatch(getDealFlashList())
     // }, [])
     return (
-        <section className="product-container">
+        <section className="container product-container">
             <div className="new-collection-section">
                 <div className="row">
                     <div className="col-md-3">

@@ -17,7 +17,7 @@ const DeliveryFeatures = ({ product }) => {
                         <FontAwesomeIcon className="product_details_font_awesome" icon={faStore} />
                     </span>
                     <span className="user_address store_name">
-                        <a href={`http://${website}`} target="_blank" rel="noopener noreferrer">
+                        <a href={`https://${website}`} target="_blank" rel="noopener noreferrer">
                             {name}
                         </a>
                     </span>
@@ -58,11 +58,9 @@ const DeliveryFeatures = ({ product }) => {
                     <div className="d-flex">
                         <FontAwesomeIcon className="product_details_font_awesome" icon={faTruck} />
                         <div className="ml-3">
-                            <p>Home Delivery</p>
-                            <small className="delivery_time">4-7 Days</small>
+                            <p>Home Delivery <small className="delivery_time">4-7 Days</small></p>
                         </div>
                     </div>
-                    <p>Tk-50</p>
                 </div>
                 <div className="d-flex">
                     <FontAwesomeIcon className="product_details_font_awesome" icon={faMoneyCheckAlt} />

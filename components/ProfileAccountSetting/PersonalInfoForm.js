@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserData } from './_redux/Action/ProfileAccountSettingAction';
+import { getUserData, handleChangeUserProfileInputData, handleUpdateUserData } from './_redux/Action/ProfileAccountSettingAction';
 import ErrorMessage from './../master/ErrorMessage/ErrorMessage'
 import Translate from '../translation/Translate';
+import { Spinner } from 'react-bootstrap';
 
 const PersonalInfoForm = () => {
     const dispatch = useDispatch();
@@ -13,13 +14,21 @@ const PersonalInfoForm = () => {
 
     useEffect(() => {
         dispatch(getUserData())
-    }, [])
-    const handleUpdatedProfile = () => {
-        // dispatch(RegisterFirstStep(registerInput))
+    }, []);
+
+    //handle change input 
+    const handleChangeTextInput = (name, value) => {
+        dispatch(handleChangeUserProfileInputData(name, value))
     }
+
+
+    const handleUpdatedProfile = () => {
+        dispatch(handleUpdateUserData(userInputData))
+    }
+
     return (
-        <div className="profile_account shadow-sm bg-white">
-            <h6><Translate>Personal Information</Translate></h6>
+        <div className="profile_account shadow-sm bg-white" id="personal-info-edit">
+            <h6 className="border-bottom pb-2"><Translate>Personal Information</Translate></h6>
 
             <form
                 onSubmit={handleSubmit(handleUpdatedProfile)}
@@ -31,93 +40,80 @@ const PersonalInfoForm = () => {
                 <div className="row">
 
                     <div className="col-md-6">
-                        <div className="custome_form_group row">
-                            <label className="col-sm-4" htmlFor="firstName">First Name</label>
-                            <div className="col-sm-8">
-                                <input type="text"
-                                    className="custom_form_input"
-                                    placeholder=""
-                                    name="first_name"
-                                    value={userInputData.first_name}
-                                    onChange={(e) => handleChangeTextInput('first_name', e.target.value)}
-                                    ref={register({
-                                        required: true,
-                                        maxLength: 100,
-                                    })}
-                                />
-                            </div>
+                        <div className="custome_form_group">
+                            <label htmlFor="firstName">First Name</label>
+                            <input type="text"
+                                className="custom_form_input"
+                                placeholder=""
+                                name="first_name"
+                                value={userInputData.first_name}
+                                onChange={(e) => handleChangeTextInput('first_name', e.target.value)}
+                                ref={register({
+                                    required: true,
+                                    maxLength: 100,
+                                })}
+                            />
                             {
                                 errors.first_name && errors.first_name.type === 'required' && (
-                                    <ErrorMessage errorText="First name can't be blank!" />
+                                    <ErrorMessage errorText="Please give your first name !" />
                                 )
                             }
                         </div>
                     </div>
                     <div className="col-md-6">
-                        <div className="custome_form_group row">
-                            <label className="col-sm-4" htmlFor="lastName">Last Name</label>
-                            <div className="col-sm-8">
-                                <input type="text"
-                                    className="custom_form_input"
-                                    placeholder=""
-                                    name="last_name"
-                                    value={userInputData.last_name}
-                                    onChange={(e) => handleChangeTextInput('last_name', e.target.value)}
-                                    ref={register({
-                                        required: true,
-                                        maxLength: 100,
-                                    })}
-                                />
-                                {
-                                    errors.last_name && errors.last_name.type === 'required' && (
-                                        <ErrorMessage errorText="First name can't be blank!" />
-                                    )
-                                }
-                            </div>
+                        <div className="custome_form_group">
+                            <label htmlFor="lastName">Last Name</label>
+                            <input type="text"
+                                className="custom_form_input"
+                                placeholder=""
+                                name="last_name"
+                                value={userInputData.last_name}
+                                onChange={(e) => handleChangeTextInput('last_name', e.target.value)}
+                                ref={register({
+                                    required: false,
+                                    maxLength: 100,
+                                })}
+                            />
                         </div>
                     </div>
                     <div className="col-md-6">
-                        <div className="custome_form_group row">
-                            <label className="col-sm-4" htmlFor="email">Email</label>
-                            <div className="col-sm-8">
-                                <input type="text"
-                                    className="custom_form_input"
-                                    placeholder=""
-                                    name="email"
-                                    value={userInputData.email}
-                                    onChange={(e) => handleChangeTextInput('email', e.target.value)}
-                                    ref={register({
-                                        required: true,
-                                        maxLength: 100,
-                                    })}
-                                />
-                                {
-                                    errors.email && errors.email.type === 'required' && (
-                                        <ErrorMessage errorText="First name can't be blank!" />
-                                    )
-                                }
-                            </div>
+                        <div className="custome_form_group">
+                            <label htmlFor="email">Email</label>
+                            <input type="text"
+                                className="custom_form_input"
+                                placeholder=""
+                                name="email"
+                                value={userInputData.email}
+                                onChange={(e) => handleChangeTextInput('email', e.target.value)}
+                                ref={register({
+                                    required: true,
+                                    maxLength: 100,
+                                })}
+                            />
+                            {
+                                errors.email && errors.email.type === 'required' && (
+                                    <ErrorMessage errorText="Please give a valid email address !" />
+                                )
+                            }
                         </div>
                     </div>
                     <div className="col-md-6">
-                        <div className="custome_form_group row">
-                            <label className="col-sm-4" htmlFor="phone">Phone</label>
-                            <div className="col-sm-8">
-                                <input type="text"
-                                    className="custom_form_input"
-                                    placeholder=""
-                                    name="phone_no"
-                                    value={userInputData.phone_no}
-                                    onChange={(e) => handleChangeTextInput('phone_no', e.target.value)}
-                                    ref={register({
-                                        required: true,
-                                        maxLength: 100,
-                                    })}
-                                />
-                            </div>
+                        <div className="custome_form_group">
+                            <label htmlFor="phone">Phone</label>
+                            <input type="text"
+                                className="custom_form_input"
+                                placeholder=""
+                                name="phone_no"
+                                value={userInputData.phone_no}
+                                onChange={(e) => handleChangeTextInput('phone_no', e.target.value)}
+                                ref={register({
+                                    required: true,
+                                    maxLength: 100,
+                                })}
+                            />
                             {
                                 errors.phone_no && errors.phone_no.type === 'required' && (
-                                    <ErrorMessage errorText="First name can't be blank!" />
+                                    <ErrorMessage errorText="Please give your phone number !" />
                                 )
                             }
                         </div>
@@ -127,16 +123,16 @@ const PersonalInfoForm = () => {
                 <div className="row justify-content-end">
                     {
                         !isSubmitting && (
-                            <button type="submit" className="btn btn-primary mr-3">submit</button>
+                            <button type="submit" className="btn btn-success mr-3">Save</button>
                         )
                     }
                     {
                         isSubmitting && (
-                            <button type="submit" disabled={true} className="btn btn-primary mr-3 d-flex align-items-center">
-                                {/* <Spinner animation="border" role="status">
+                            <button type="submit" disabled={true} className="btn btn-success mr-3 d-flex align-items-center">
+                                <Spinner animation="border" role="status" size="sm">
                                     <span className="sr-only">Loading...</span>
-                                </Spinner> */}
-                                <span className="ml-2">submitting...</span>
+                                </Spinner>
+                                <span className="ml-2">Saving...</span>
                             </button>
                         )
                     }

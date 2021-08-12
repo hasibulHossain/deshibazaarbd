@@ -4,6 +4,7 @@ import InputRange from "react-input-range";
 import "react-input-range/lib/css/index.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  getCategoryOrBrandDetails,
   getFilteredProducts,
   resetFilterParams,
   setFilterParams,
@@ -130,9 +131,13 @@ const ProductFilter = () => {
         cloneFilterParams[query] = [];
         if(query === 'brand') {
           cloneFilterParams[query].push(+queries[query]);
+
+          dispatch(getCategoryOrBrandDetails('brands/' + +queries[query]));
         }
         if(query === 'category') {
           cloneFilterParams[query].push(+queries[query]);
+
+          dispatch(getCategoryOrBrandDetails('categories/' + +queries[query]));
         }
       } else {
         cloneFilterParams[query] = queries[query];
@@ -172,7 +177,7 @@ const ProductFilter = () => {
   ]);
 
   return (
-    <section className="prodcut_filter_section shadow-sm p-3 mb-5 bg-white rounded">
+    <section className="product_filter_section modal-scrollbar shadow-sm p-3 mb-5 bg-white rounded">
       <h3 className="product_filter_heading">Filter Products</h3>
 
       {/**filter by price range */}

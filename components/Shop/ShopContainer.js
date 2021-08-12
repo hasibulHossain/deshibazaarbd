@@ -6,7 +6,7 @@ import ShopList from './ShopList';
 
 const ShopContainer = () => {
     return (
-        <section className="product-container">
+        <section className="container product-container">
             <div className="product-heading">
                 <h5>
                     <Translate>Shop by brands</Translate>

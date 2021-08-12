@@ -59,7 +59,7 @@ export default function Carts() {
       </Modal>
 
       <MainLayout pageTitle="Carts">
-        <div className="container-fluid">
+        <div className="container">
           <div className="row mt-3">
             <div className="col-md-8">
               <div className="cart_container_body">

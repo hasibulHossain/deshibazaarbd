@@ -49,6 +49,30 @@ export const getFilteredProducts = (filterParamObj, source = {token: ""}) => asy
   }
 };
 
+export const getCategoryOrBrandDetails = (endPoint) => async (dispatch) => {
+  const url = Base_Url + endPoint
+  let response = {
+    loading: true,
+    data: {
+      banner_url: "",
+      childs: []
+    }
+  }
+  
+  try {
+    dispatch({type: Types.GET_CATEGORY_OR_BRAND_DETAILS, payload: response})
+
+    const res = await Axios.get(url)
+    response.loading = false;
+    response.data.banner_url = res.data.data.banner_url;
+    response.data.childs = res.data.data.childs;
+
+    dispatch({type: Types.GET_CATEGORY_OR_BRAND_DETAILS, payload: response})
+  } catch (err) {
+    console.log('categories details err => ', err)
+  }
+}
+
 export const setFilterParams = (filterParams) => ({
   type: Types.SET_FILTER_PARAM,
   payload: filterParams,

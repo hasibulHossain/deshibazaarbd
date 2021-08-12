@@ -5,7 +5,7 @@ import ProductMainList from "../products/ProductMainList";
 
 const ProductSection = ({ title, description = null, url = '', type = '', limit = 6, page = 'home'}) => {
   return (
-    <section className="product-container">
+    <section className="container product-container">
       <div className="product-heading">
         <h5> 
           {title} 

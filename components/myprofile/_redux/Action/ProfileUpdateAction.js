@@ -20,6 +20,12 @@ export const getShippingAddressForInput = (addressType) => (dispatch) => {
                     value: loadData.country_id,
                 }
             }
+            if (loadData.division !== null && loadData.division_id !== null) {
+                loadData.selectedDivision = {
+                    label: loadData.division,
+                    value: loadData.division_id,
+                }
+            }
             if (loadData.city !== null && loadData.city_id !== null) {
                 loadData.selectedCity = {
                     label: loadData.city,
@@ -54,6 +60,12 @@ export const getBillingAddressForInput = (addressType) => (dispatch) => {
                 loadData.selectedCountry = {
                     label: loadData.country,
                     value: loadData.country_id,
+                }
+            }
+            if (loadData.division !== null && loadData.division_id !== null) {
+                loadData.selectedDivision = {
+                    label: loadData.division,
+                    value: loadData.division_id,
                 }
             }
             if (loadData.city !== null && loadData.city_id !== null) {

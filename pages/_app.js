@@ -3,6 +3,10 @@ import React from "react";
 import { Provider } from "react-redux";
 import { createWrapper } from "next-redux-wrapper";
 import Store from "../_redux/Store";
+import "@fortawesome/fontawesome-svg-core/styles.css";
+import { config } from "@fortawesome/fontawesome-svg-core";
+import "../assets/scss/variables.scss";
+import "bootstrap/scss/bootstrap.scss";
 import "../node_modules/slick-carousel/slick/slick-theme.css";
 import "../node_modules/slick-carousel/slick/slick.css";
 
@@ -14,7 +18,6 @@ import "../assets/scss/modal.scss";
 import "../assets/scss/payment.css";
 import "../assets/scss/responsive.scss";
 import "../assets/scss/responsive-main.scss";
-import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../components/product-review/productListForReview.css"
@@ -22,6 +25,9 @@ import "../components/ProfileAccountSetting/ProfileAccountSetting.scss"
 
 // For Order Pages
 import '../components/orders/scss/order-invoice.scss';
+
+// Prevent fontawesome from dynamically adding its css since we did it manually above
+config.autoAddCss = false;
 
 toast.configure();
 

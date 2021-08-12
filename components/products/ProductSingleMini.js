@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faListAlt, faShoppingBag } from "@fortawesome/free-solid-svg-icons";
+import { faShoppingBag } from "@fortawesome/free-solid-svg-icons";
 
 import PriceCalculation from "./partials/PriceCalculation";
 import ProductRating from "./partials/ProductRating";
@@ -24,9 +24,10 @@ import Translate from '../translation/Translate';
  * 
  * @return view
  */
-const ProductSingleMini = ({ item = {}, columnClassName = 'col-md-2', cardClassName = 'product-card' }) => {
+const ProductSingleMini = ({ item = {}, columnClassName = 'col-md-2', productKey = 0, length = 0, cardClassName = 'product-card' }) => {
 
     const dispatch = useDispatch();
+    const cardClass = productKey !== length ? '' : 'border-right-0';
 
     const addToCart = (item) => {
         if (parseInt(item.current_stock) === 0) {
@@ -38,7 +39,7 @@ const ProductSingleMini = ({ item = {}, columnClassName = 'col-md-2', cardClassN
 
     return (
         <div className={columnClassName}>
-                <div className={`${cardClassName} ${(columnClassName === "col-md-2" || columnClassName === "col-md-3") ? "filter_column_3" : "filter_column_10"} `}>
+                <div className={`${cardClassName} ${cardClass} ${(columnClassName === "col-md-2" || columnClassName === "col-md-3") ? "filter_column_3" : "filter_column_10"} `}>
                 <div className="product-purchase-section">
                     <button>
                         <FontAwesomeIcon className="add_to_cart" icon={faShoppingBag}
@@ -54,7 +55,7 @@ const ProductSingleMini = ({ item = {}, columnClassName = 'col-md-2', cardClassN
                     </button> */}
                 </div>
 
-                <div className="product-card-body" onClick={() => dispatch(toggleProductModalAction(item.sku))}>
+                <div className={`product-card-body`} onClick={() => dispatch(toggleProductModalAction(item.sku))}>
                     {
                         columnClassName === "col-md-2" && (
                             <>
