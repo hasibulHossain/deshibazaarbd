@@ -36,7 +36,7 @@ const DeliveryInfo = () => {
 
     const submitUpdatedAddressHandler = (e) => {
         let addressType = "shipping_address";
-        if(typeof shippingAddressInput.id == "undefined" || shippingAddressInput.id == "" || shippingAddressInput.id == null){
+        if(typeof shippingAddressInput.id === "undefined" || shippingAddressInput.id === "" || shippingAddressInput.id === null){
             addressType = "new_address"
         }
         dispatch(addAddress(shippingAddressInput, addressType, toggleShowHandler))
@@ -121,15 +121,16 @@ const DeliveryInfo = () => {
 
                                         </div>
                                     </div>
-                                    <div className="col-md-6">
+                                    <div className="col-md-4">
                                         <div className="custome_form_group">
                                             <label className="form-label" htmlFor="address_type">Address Type</label>
                                             <RHFInput
-                                                as={<Select options={[{ label: 'Shipping address', value: 'shipping_address' }, { label: 'Billing address', value: 'billing_address' }]} />}
-                                                placeholder="address type"
+                                                as={<Select isDisabled={true} options={[{ label: 'Shipping address', value: 'shipping_address' }, { label: 'Billing address', value: 'billing_address' }]} />}
+                                                placeholder="Select Address Type"
                                                 rules={{ required: true }}
                                                 name="address_type"
                                                 register={register}
+                                                defaultValue={{ label: 'Shipping address', value: 'shipping_address' }}
                                                 value={shippingAddressInput.is_default_selected}
                                                 onChange={(option) => {
                                                     handleChangeTextInput("type", option.value);
@@ -145,7 +146,7 @@ const DeliveryInfo = () => {
 
                                         </div>
                                     </div>
-                                    <div className="col-md-6">
+                                    <div className="col-md-4">
                                         <div className="custome_form_group">
                                             <label className="form-label" htmlFor="country">Country</label>
                                             <RHFInput
@@ -174,7 +175,7 @@ const DeliveryInfo = () => {
                                             }
                                         </div>
                                     </div>
-                                    <div className="col-md-6">
+                                    <div className="col-md-4">
                                         <div className="custome_form_group">
                                             <label className="form-label" htmlFor="division">Division</label>
                                             <RHFInput
@@ -198,7 +199,7 @@ const DeliveryInfo = () => {
                                             }
                                         </div>
                                     </div>
-                                    <div className="col-md-6">
+                                    <div className="col-md-4">
                                         <div className="custome_form_group">
                                             <label className="form-label" htmlFor="city">Zilla</label>
                                             <RHFInput
@@ -222,7 +223,7 @@ const DeliveryInfo = () => {
                                             }
                                         </div>
                                     </div>
-                                    <div className="col-md-6">
+                                    <div className="col-md-4">
                                         <div className="custome_form_group">
                                             <label className="form-label" htmlFor="area">Upazilla</label>
                                             <RHFInput
@@ -243,6 +244,24 @@ const DeliveryInfo = () => {
                                                     <ErrorMessage errorText="Area can't be blank!" />
                                                 )
                                             }
+                                        </div>
+                                    </div>
+
+                                    <div className="col-md-4">
+                                        <div className="custome_form_group">
+                                            <label className="form-label" htmlFor="default">Default</label>
+                                            <RHFInput
+                                                as={<Select isDisabled={true} options={[{ label: "Yes", value: "1" }, { label: "No", value: "0" }]} />}
+                                                placeholder="Default address"
+                                                register={register}
+                                                name="is_default"
+                                                defaultValue={{ label: "Yes", value: 1 }}
+                                                value={shippingAddressInput.is_default}
+                                                onChange={(option) => {
+                                                    handleChangeTextInput("is_default", option.value);
+                                                }}
+                                                setValue={setValue}
+                                            />
                                         </div>
                                     </div>
                                     <div className="col-md-6">
@@ -291,22 +310,6 @@ const DeliveryInfo = () => {
                                                     <ErrorMessage errorText="Street-2 can't be blank!" />
                                                 )
                                             }
-                                        </div>
-                                    </div>
-                                    <div className="col-md-6">
-                                        <div className="custome_form_group">
-                                            <label className="form-label" htmlFor="default">Default</label>
-                                            <RHFInput
-                                                as={<Select options={[{ label: "Yes", value: "1" }, { label: "No", value: "0" }]} />}
-                                                placeholder="Default address"
-                                                register={register}
-                                                name="is_default"
-                                                value={shippingAddressInput.is_default_selected}
-                                                onChange={(option) => {
-                                                    handleChangeTextInput("is_default", option.value);
-                                                }}
-                                                setValue={setValue}
-                                            />
                                         </div>
                                     </div>
                                 </div>
