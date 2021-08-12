@@ -2027,7 +2027,7 @@ p.text-secondary.mb-0 {
   height: auto;
   min-height: 100px;
   max-height: 300px;
-  z-index: 10;
+  z-index: 100;
   position: absolute;
   background: #eee;
   top: 100%;

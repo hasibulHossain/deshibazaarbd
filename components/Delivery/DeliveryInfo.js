@@ -47,6 +47,7 @@ const DeliveryInfo = () => {
         dispatch(getDefaultAddress('shipping_address'));
         dispatch(getSingleShippingAddress('shipping_address'));
         dispatch(getLocationData('countries'));
+        dispatch(getLocationData('divisions'));
     }, []);
 
     return (
