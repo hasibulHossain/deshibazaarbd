@@ -95,14 +95,14 @@ function FloatingCart() {
 
           <div className="floating-cart__payment-details">
             <span>Delivery Fee</span>
-            <span>{ formatCurrency(totalPrice > 0 ? 50 : 0) } { activeCurrency('code') }</span>
+            <span>{ formatCurrency(totalPrice > 0 ? 60 : 0) } { activeCurrency('code') }</span>
           </div>
 
           {
             totalPrice > 0 &&
             <div className="floating-cart__payment-details">
               <span>Total</span>
-              <span>{ formatCurrency(totalPrice + 50) } { activeCurrency('code') }</span>
+              <span>{ formatCurrency(totalPrice + 60) } { activeCurrency('code') }</span>
             </div>
           }
           
