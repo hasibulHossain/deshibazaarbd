@@ -48,7 +48,7 @@ const CategoryList = ({ parentID = null }) => {
 
         {categories && categories.length > 0 &&
           categories.map((item, index) => (
-            <div key={index} className="category-card col-3 col-md-1">
+            <div key={index} className="category-card col-3 col-md-2">
               <div className="category-card-body" onClick={() => navigateCategoryList(item.id)}>
                 {
                   item.image !== null && item.image !== '' &&
