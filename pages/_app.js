@@ -12,7 +12,7 @@ import "../assets/scss/RemoveCartItem.scss";
 import "../assets/scss/product-details-info.scss";
 import "../assets/scss/modal.scss";
 import "../assets/scss/payment.css";
-import "../assets/scss/responsive.css";
+import "../assets/scss/responsive.scss";
 import "../assets/scss/responsive-main.scss";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import { toast } from "react-toastify";
