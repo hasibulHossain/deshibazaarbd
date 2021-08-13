@@ -1,5 +1,5 @@
 
-import React, { useEffect } from "react";
+import React, { useEffect, memo } from "react";
 import Link from "next/link";
 import { faComment, faHeart, faShoppingBag, faSignOutAlt, faUser, faUserCog } from "@fortawesome/free-solid-svg-icons";
 
@@ -17,16 +17,13 @@ import { getUserDataAction, handleLogoutUser } from "../_redux/getUserData/Actio
 
 import Translate from "../translation/Translate";
 import { translate } from "../../services/translation/translation";
-import SimpleBtn from "../master/SimpleBtn/SimpleBtn";
 import ActiveLink from "../master/activeLink/ActiveLink";
-import { useRouter } from "next/router";
 
 const Header = () => {
-	const router = useRouter();
 	const dispatch = useDispatch();
 	const toggleNav = "basic-navbar-nav";
 	const { totalQuantity } = useSelector((state) => state.CartReducer);
-	const { userData, isLogOut } = useSelector((state) => state.UserDataReducer);
+	const { userData } = useSelector((state) => state.UserDataReducer);
 
 	const toggleCartHandler = () => {
 		dispatch(toggleFloatingCart());
@@ -83,25 +80,22 @@ const Header = () => {
 									<div className="d-flex">
 										{
 											!userData ? (
-												<>
-													<div>
-														<Link href="/login" className="header-nav-link">
-															<a className=""><Translate>Sign In</Translate></a>
-														</Link>
+												<div>
+													<Link href="/login" className="header-nav-link">
+														<a className=""><Translate>Sign In</Translate></a>
+													</Link>
 
-														<Link href="/register">
-															<a>
-																<Button buttonText={translate('Sign up')} />
-															</a>
-														</Link>
-													</div>
-
-												</>
+													<Link href="/register">
+														<a>
+															<Button buttonText={translate('Sign up')} />
+														</a>
+													</Link>
+												</div>
 											) : (
 												<>
 													<Dropdown>
 														<Dropdown.Toggle variant="simple_btn_bg" className="btn-sm text-capitalize" id="dropdown-basic">
-															{userData && userData.first_name}
+															{userData.first_name}
 														</Dropdown.Toggle>
 
 														<Dropdown.Menu>
@@ -202,4 +196,4 @@ const Header = () => {
 	);
 };
 
-export default Header;
+export default memo(Header);

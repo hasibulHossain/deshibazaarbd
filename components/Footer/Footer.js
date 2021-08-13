@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, memo } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import Link from 'next/link'
 import FooterBottom from './FooterBottom';
 import SocialMedia from './SocialMedia';
-import Button from '../master/Button/Button';
 import { getUserOrderList } from '../orders/_redux/action/OrderAction';
 import SimpleModal from '../master/Modal/SimpleModal';
 import TrackingForm from '../Header/TrackingForm';
@@ -125,4 +124,4 @@ const Footer = () => {
     );
 };
 
-export default Footer;
+export default memo(Footer);
