@@ -1,4 +1,5 @@
 import React from "react";
+import Link from 'next/link'
 import ProductFilter from "./ProductFilter";
 import CategoryWishProductList from "./CategoryWishProductList";
 import classNames from "classnames";
@@ -73,7 +74,11 @@ const CategoryWishProductContainer = () => {
                   <div className="child-logo">
                     <img src={item.image_url && item.image_url} alt={item.name} />
                   </div>
-                  <span>{item.name}</span>
+                  <Link href={`products?brand=${item.id}`}>
+                    <a>
+                    <span>{item.name}</span>
+                    </a>
+                  </Link>
                 </div>
               ))
             }
