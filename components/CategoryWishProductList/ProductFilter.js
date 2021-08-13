@@ -12,7 +12,6 @@ import {
 import { getShopList } from "../Shop/_redux/Action/ShopAction";
 import ReactStars from "react-rating-stars-component";
 import { activeCurrency } from "../../services/currency";
-import { getCategories } from "../category/_redux/Action/CategoryAction";
 import {useRouter} from 'next/router'
 import Axios from 'axios'
 
@@ -145,8 +144,8 @@ const ProductFilter = () => {
     }
     dispatch(setFilterParams(cloneFilterParams));
 
-    dispatch(getCategories(null));
     dispatch(getShopList());
+
   }, [brandQuery, categoryQuery, typeQuery]);
 
   useEffect(() => {
