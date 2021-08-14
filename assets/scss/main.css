@@ -402,8 +402,8 @@ a .custom-button-component:hover {
 }
 
 .product-container .childs .child-logo-box .child-logo img{
-  height: 100%;
-  width: 100%;
+  height: 80px;
+  width: 80px;
 }
 
 .product-container {

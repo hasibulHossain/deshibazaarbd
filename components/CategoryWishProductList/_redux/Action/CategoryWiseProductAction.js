@@ -3,22 +3,6 @@ import * as Types from "../Type/Types";
 
 const Base_Url = `${process.env.NEXT_PUBLIC_API_URL}`;
 
-export const getCategories = () => async (dispatch) => {
-  const responseData = {
-    data: [],
-    isLoading: true,
-  };
-  try {
-    dispatch({ type: Types.GET_CATEGORIES, payload: responseData });
-    const res = await Axios.get(`${Base_Url}categories`);
-    responseData.isLoading = false;
-    responseData.data = res.data.data;
-    dispatch({ type: Types.GET_CATEGORIES, payload: responseData });
-  } catch (error) {
-    dispatch({ type: Types.GET_CATEGORIES_FAILED });
-  }
-};
-
 export const getFilteredProducts = (filterParamObj, source = {token: ""}) => async (dispatch) => {
   const filterParamObjClone = {
     ...filterParamObj,
@@ -44,8 +28,9 @@ export const getFilteredProducts = (filterParamObj, source = {token: ""}) => asy
     dispatch({ type: Types.GET_FILTER_PRODUCT_LIST, payload: responseData });
   } catch (error) {
     if(Axios.isCancel(error)) {
+    } else {
+      dispatch({ type: Types.GET_FILTER_PRODUCT_LIST_FAILED });
     }
-    dispatch({ type: Types.GET_FILTER_PRODUCT_LIST_FAILED });
   }
 };
 
@@ -54,22 +39,26 @@ export const getCategoryOrBrandDetails = (endPoint) => async (dispatch) => {
   let response = {
     loading: true,
     data: {
+      name: "",
       banner_url: "",
       childs: []
     }
   }
-  
+
   try {
     dispatch({type: Types.GET_CATEGORY_OR_BRAND_DETAILS, payload: response})
 
-    const res = await Axios.get(url)
+    const res = await Axios.get(url);
     response.loading = false;
     response.data.banner_url = res.data.data.banner_url;
-    response.data.childs = res.data.data.childs.length > 5 ? res.data.data.childs.slice(0, 5) : res.data.data.childs
+    response.data.name = res.data.data.name;
+    if(endPoint.includes('categories')) {
+      response.data.childs = res.data.data.childs.length > 5 ? res.data.data.childs.slice(0, 5) : res.data.data.childs
+    }
 
     dispatch({type: Types.GET_CATEGORY_OR_BRAND_DETAILS, payload: response})
   } catch (err) {
-    console.log('categories details err => ', err)
+    console.log('err => ', err)
   }
 }
 
