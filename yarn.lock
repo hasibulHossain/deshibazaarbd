@@ -1686,10 +1686,10 @@
   "resolved" "https://registry.npmjs.org/@stripe/stripe-js/-/stripe-js-1.15.0.tgz"
   "version" "1.15.0"
 
-"@szhsin/react-menu@^1.10.1":
-  "integrity" "sha512-41SLi9/bbZjy4cMrDONRkXuZ4trJ/Eqvd/SXNMcus7J0ZoiNp3IEVJ0yXmrm9BhhzHc9XbuS4LGTN28NkXmBPg=="
-  "resolved" "https://registry.npmjs.org/@szhsin/react-menu/-/react-menu-1.10.1.tgz"
-  "version" "1.10.1"
+"@szhsin/react-menu@^1.11.0":
+  "integrity" "sha512-kaW/IpcokmyVwX7WGe6ijQI/xQDw5nQXUKyiioy40dm5gt45+Lo7cqGVUoy7Qj8275Q9tgN6hcazWX/DCcYUfQ=="
+  "resolved" "https://registry.npmjs.org/@szhsin/react-menu/-/react-menu-1.11.0.tgz"
+  "version" "1.11.0"
   dependencies:
     "prop-types" "^15.7.2"
 

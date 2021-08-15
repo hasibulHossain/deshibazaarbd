@@ -1,11 +1,11 @@
 import React from "react";
+import Link from "next/link";
 import { useSelector } from "react-redux";
 import ProfileSideBar from "../myprofile/ProfileSideBar";
 import PriceCalculation from "../products/partials/PriceCalculation.js";
 import RemoveWishlist from "./RemoveWishlist.js";
 import Translate from "../translation/Translate.js";
 import { productImageUrl } from '../../services/ProductService';
-import Link from "next/link";
 
 const ProductWishList = () => {
 	const { wishList } = useSelector((state) => state.WishlistReducer);
