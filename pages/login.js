@@ -15,9 +15,9 @@ export default function login(props) {
     if (typeof window === "undefined") {
       global.window = {};
     }
-    if (typeof userData !== "undefined" && userData !== null) {
-      router.push("/profile")
-    }
+    // if (typeof userData !== "undefined" && userData !== null) {
+    //   router.push("/profile")
+    // }
   }, [userData]);
 
   useEffect(() => {
