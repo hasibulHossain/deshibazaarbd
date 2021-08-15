@@ -1,8 +1,6 @@
 import Axios from "axios";
 import * as Types from "../Type/Types";
 
-const baseUrl = `${process.env.NEXT_PUBLIC_API_URL}`;
-
 /**
  * Get All Product List action
  * 
@@ -44,7 +42,7 @@ export const getProductListAction = (args = {}) => async (dispatch) => {
 export const getProductsData = async (args) => {
 
   try {
-    let url = `${baseUrl}get-items?p=1`;
+    let url = `get-items?p=1`;
 
     if ( args['type'] ) {
       url += `&type=${args['type']}`
@@ -88,7 +86,7 @@ export const getSingleProductDetailsAction = ( slug ) => async (dispatch) => {
       response.loading = true;
       dispatch({ type: Types.GET_SINGLE_PRODUCT_DETAILS, payload: response });
   
-      const res        = await Axios.get(`${baseUrl}get-item-detail/${slug}`);
+      const res        = await Axios.get(`get-item-detail/${slug}`);
       response.loading = false;
       response.data    = res.data.data;
   

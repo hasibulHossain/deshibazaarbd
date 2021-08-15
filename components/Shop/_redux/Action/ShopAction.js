@@ -2,7 +2,7 @@ import Axios from "axios";
 import * as Types from "../Type/Types";
 
 export const getShopList = () => async (dispatch) => {
-  const url = `${process.env.NEXT_PUBLIC_API_URL}brands`;
+  const url = `brands`;
 
   try {
     // initialize req

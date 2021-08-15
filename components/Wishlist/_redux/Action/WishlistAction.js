@@ -26,7 +26,7 @@ export const WishListAdded = (itemID) => (dispatch) => {
             className: "wishlist_warning_alert",
         });
     } else {
-        Axios.post(`${process.env.NEXT_PUBLIC_API_URL}wishlist`, postData)
+        Axios.post(`wishlist`, postData)
             .then((response) => {
                 if (response.data.status) {
                     response.isLoading = false;
@@ -67,7 +67,7 @@ export const removeFromWishList = (itemID) => (dispatch) => {
         item_id: itemID
     }
 
-    Axios.delete(`${process.env.NEXT_PUBLIC_API_URL}wishlist/${itemID}`, postData)
+    Axios.delete(`wishlist/${itemID}`, postData)
         .then((response) => {
             if (response.data.status) {
                 response.isLoading = false;
@@ -92,8 +92,10 @@ export const getWishListData = () => (dispatch) => {
         isLoading      : true,
         wishList       : []
     }
-    dispatch({ type: Types.LOADING_WISHLIST_DATA, payload: true });
-    Axios.get(`${process.env.NEXT_PUBLIC_API_URL}wishlist`)
+    
+    dispatch({ type: Types.GET_WISHLIST_DATA, payload: responseList });
+  
+    Axios.get(`wishlist`)
         .then((res) => {
             if (res.data.status) {
                 responseList.status    = res.data.status;

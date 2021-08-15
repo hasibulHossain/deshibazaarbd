@@ -1,7 +1,6 @@
 import Axios from "axios";
 import * as Types from "../Type/Types";
 
-const baseUrl = `${process.env.NEXT_PUBLIC_API_URL}`;
 
 /**
  * Get Categories
@@ -22,9 +21,9 @@ export const getCategories = (parentID = null, limit = null, type = null) => asy
   let url = '';
   
   if (type === 'homepage') {
-    url = `${baseUrl}frontend-categories?type=${type}&limit=${limit}`
+    url = `frontend-categories?type=${type}&limit=${limit}`
   } else {
-    url = `${baseUrl}categories`
+    url = `categories`
   }
 
   try {

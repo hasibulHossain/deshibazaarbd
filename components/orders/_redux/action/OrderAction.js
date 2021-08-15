@@ -3,8 +3,6 @@ import * as Types from "../types/Types";
 import { showToast } from "../../../master/Helper/ToastHelper";
 import moment from "moment";
 
-const baseUrl = `${process.env.NEXT_PUBLIC_API_URL}`;
-
 //  ===================================handle coupon action==================================
 export const handleChangeCouponInput = (name, value) => (dispatch) => {
   const couponData = {
@@ -30,7 +28,7 @@ export const handleApplyCouponCode = (coupon, carts) => (dispatch) => {
     carts: carts,
   };
   Axios.post(
-    `${baseUrl}coupons/check-by/code`,
+    `coupons/check-by/code`,
     newCoupon
   )
     .then((res) => {
@@ -71,7 +69,7 @@ export const handleShippingCost = (carts) => (dispatch) => {
     carts: cart,
   };
 
-  Axios.post(`${baseUrl}sales/shipping-cost/by-cart`, shippingCost)
+  Axios.post(`sales/shipping-cost/by-cart`, shippingCost)
     .then((res) => {
       if (res.data.status) {
         let data                         = res.data;
@@ -114,7 +112,7 @@ export const getUserOrderList = (value = 5) => (dispatch) => {
 
     const end_date  = moment().format('YYYY-MM-DD');
     let start_date = end_date;
-    let orderListURL = `${baseUrl}sales/orders/customer?paginate_no=5`;
+    let orderListURL = `sales/orders/customer?paginate_no=5`;
 
     if (value == 15) {
       start_date = moment().subtract(15, 'day').format('YYYY-MM-DD');
@@ -125,9 +123,9 @@ export const getUserOrderList = (value = 5) => (dispatch) => {
     }
 
     if (typeof value === 'undefined' || value == 5) {
-      orderListURL = `${baseUrl}sales/orders/customer?paginate_no=5`
+      orderListURL = `sales/orders/customer?paginate_no=5`
     } else {
-      orderListURL = `${baseUrl}sales/orders/customer?start_date=${start_date}&end_date=${end_date}`
+      orderListURL = `sales/orders/customer?start_date=${start_date}&end_date=${end_date}`
     }
 
     Axios.get(orderListURL)
@@ -182,7 +180,7 @@ export const getTrackingTimelineDate = () => async (dispatch) => {
 
   dispatch({ type: Types.GET_TRACKING_TIMELINE_DATA, payload: responseData });
 
-  await Axios.get(`${baseUrl}sales?business_id=${1}`)
+  await Axios.get(`sales?business_id=${1}`)
     .then((res) => {
       responseData.trackingTimelineList = [  // @todo this data will be change, when use real api
         {
@@ -250,7 +248,7 @@ export const handleCancelOrder = (order_id, closeModal, user_id) => (dispatch) =
   }
   dispatch({ type: Types.CANCEL_ORDER, payload: responseData });
 
-  Axios.put(`${baseUrl}sales/orders/suspend/${order_id}`)
+  Axios.put(`sales/orders/suspend/${order_id}`)
     .then((res) => {
       if (res.data.status) {
         responseData.status    = true;
@@ -287,7 +285,7 @@ export const handleCancelOrder = (order_id, closeModal, user_id) => (dispatch) =
   }
   dispatch({ type: Types.GET_ORDER_DETAILS, payload: responseData });
 
-  Axios.get(`${baseUrl}sales/orders/customer?id=${order_id}`)
+  Axios.get(`sales/orders/customer?id=${order_id}`)
     .then((res) => {
       if (res.data.status) {
         if (res.data.data.data.length > 0) {
@@ -332,7 +330,7 @@ export const getOrderLifeCycleData = (id) => (dispatch) => {
       status       : false,
   };
   dispatch({ type: Types.GET_ORDER_LIFECYCLE_DETAILS, payload: responseList });
-  Axios.get(`${baseUrl}sales/order-lifecycle/${id}`)
+  Axios.get(`sales/order-lifecycle/${id}`)
       .then((res) => {
           if (res.data.status) {
               const { data, message, status } = res.data;

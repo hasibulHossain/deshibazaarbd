@@ -2,7 +2,6 @@ import * as Types from "../Types/Types";
 import Axios from "axios";
 import { showToast } from "../../../master/Helper/ToastHelper";
 
-const baseUrl = `${process.env.NEXT_PUBLIC_API_URL}`;
 
 export const getFooterInformation = () => (dispatch) => {
     const data         = [
@@ -53,7 +52,7 @@ export const subscribeNewsletter = email => async dispatch => {
         loading: true
     }
 
-    const url = baseUrl + "subscriber/subscribe";
+    const url = "subscriber/subscribe";
     const data = {
         email: email
     }

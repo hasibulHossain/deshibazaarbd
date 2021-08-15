@@ -1,7 +1,7 @@
 import Axios from "axios";
 import * as Types from "../Type/Types";
 
-const url = `${process.env.NEXT_PUBLIC_API_URL}frontend-categories?type=navbar`;
+const url = 'frontend-categories?type=navbar';
 
 /**
  * Get Menu List

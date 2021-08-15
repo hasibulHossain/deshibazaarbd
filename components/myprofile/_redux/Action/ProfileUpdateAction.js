@@ -11,7 +11,7 @@ export const getShippingAddressForInput = (addressType) => (dispatch) => {
     }
     dispatch({ type: Types.GET_SHIPPING_ADDRESS_FOR_INPUT, payload: responseData });
     const userStorageData = JSON.parse(localStorage.getItem("loginData"));
-    Axios.get(`${process.env.NEXT_PUBLIC_API_URL}address?user_id=${userStorageData.userData.id}&type=${addressType}`)
+    Axios.get(`address?user_id=${userStorageData.userData.id}&type=${addressType}`)
         .then((res) => {
             const loadData = res.data.data[0];
             if (loadData.country !== null && loadData.country_id !== null) {
@@ -53,7 +53,7 @@ export const getBillingAddressForInput = (addressType) => (dispatch) => {
     }
     dispatch({ type: Types.GET_BILLING_ADDRESS_FOR_INPUT, payload: responseData });
     const userStorageData = JSON.parse(localStorage.getItem("loginData"));
-    Axios.get(`${process.env.NEXT_PUBLIC_API_URL}address?user_id=${userStorageData.userData.id}&type=${addressType}`)
+    Axios.get(`address?user_id=${userStorageData.userData.id}&type=${addressType}`)
         .then((res) => {
             const loadData = res.data.data[0];
             if (loadData.country !== null && loadData.country_id !== null) {
@@ -121,7 +121,7 @@ export const handleUpdateShippingAddress = (shippingAddressInput) => (dispatch) 
     const userStorageData = JSON.parse(localStorage.getItem("loginData"));
     const submittedData = shippingAddressInput;
     submittedData.user_id = userStorageData.userData.id;
-    Axios.put(`${process.env.NEXT_PUBLIC_API_URL}address`, shippingAddressInput)
+    Axios.put(`address`, shippingAddressInput)
         .then((res) => {
             responseData.status = true;
             responseData.isLoading = false;
@@ -141,7 +141,7 @@ export const handleUpdateBillingAddress = (billingAddressInput) => (dispatch) =>
     const userStorageData = JSON.parse(localStorage.getItem("loginData"));
     const submittedData = billingAddressInput;
     submittedData.user_id = userStorageData.userData.id;
-    Axios.put(`${process.env.NEXT_PUBLIC_API_URL}address`, submittedData)
+    Axios.put(`address`, submittedData)
         .then((res) => {
             responseData.status = true;
             responseData.isLoading = false;

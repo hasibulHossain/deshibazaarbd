@@ -82,7 +82,7 @@ const SpliteCardForm = ({ transaction }) => {
             payload: paymentData.token
         }
 
-        Axios.post(`${process.env.NEXT_PUBLIC_API_URL}payments`, data)
+        Axios.post(`payments`, data)
             .then(res => {
                 if (res.data.status) {
                     localStorage.removeItem('carts');

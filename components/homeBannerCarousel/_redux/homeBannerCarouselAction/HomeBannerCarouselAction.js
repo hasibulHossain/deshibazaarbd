@@ -5,7 +5,7 @@ export const getHomeCarouselData = () => async (dispatch) => {
   try {
     dispatch({ type: Types.INIT_BANNER_CAROUSEL_LIST });
     const res = await Axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL}sliders-frontend`
+      `sliders-frontend`
     );
     const data = res.data.data;
     dispatch({
@@ -13,7 +13,6 @@ export const getHomeCarouselData = () => async (dispatch) => {
       payload: { carouselList: data },
     });
   } catch (error) {
-    console.log("homebanner carousel error ", error);
     dispatch({ type: Types.FETCH_BANNER_CAROUSEL_LIST_FAILED });
   }
 };
