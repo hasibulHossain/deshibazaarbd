@@ -1,7 +1,7 @@
 import * as Types from "../Types/Types";
 import Axios from "axios"
 import { showToast } from "../../../master/Helper/ToastHelper";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
