@@ -16,7 +16,7 @@ const NewCollection = () => {
     return (
         <section className="container product-container">
             <div className="new-collection-section">
-                <div className="row">
+                <div className="row text-center">
                     <div className="col-lg-3 col-md-4">
                     <a href="">
                         <div className="home-card border-radius-5 mb-3 pointer">
