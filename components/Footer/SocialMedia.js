@@ -1,16 +1,11 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebookF, faInstagram, faLinkedin, faTwitter, faWhatsapp, faYoutube, faYoutubeSquare } from '@fortawesome/free-brands-svg-icons';
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getWebsiteInformation } from '../_redux/WebsiteInformation/Action/WebsiteInformationAction';
+import { faFacebookF, faInstagram, faLinkedin, faTwitter, faWhatsapp, faYoutube } from '@fortawesome/free-brands-svg-icons';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
 const SocialMedia = () => {
 
-    const dispatch = useDispatch();
-    const { websiteInfo, isLoading } = useSelector((state) => state.WebsiteInformationReducer);
-    useEffect(() => {
-        dispatch(getWebsiteInformation())
-    }, [])
+    const { websiteInfo } = useSelector((state) => state.WebsiteInformationReducer);
 
     return (
         <>

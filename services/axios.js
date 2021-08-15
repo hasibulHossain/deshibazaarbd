@@ -16,6 +16,7 @@ axios.interceptors.request.use(
         }
         return config;
     },
+
     error => {
         Promise.reject(error)
     });
@@ -24,5 +25,10 @@ axios.interceptors.request.use(
 axios.interceptors.response.use((response) => {
     return response
 }, function(error) {
+    if (typeof error.response !== 'undefined' &&  error.response.status === 401) {
+        localStorage.removeItem('loginData');
+        localStorage.removeItem('access_token');
+        window.location.href = "/login";
+    }
     return Promise.reject(error);
 });

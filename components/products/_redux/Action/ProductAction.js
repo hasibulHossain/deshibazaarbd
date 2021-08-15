@@ -50,6 +50,10 @@ export const getProductsData = async (args) => {
       url += `&type=${args['type']}`
     }
 
+    if ( args['category'] ) {
+      url += `&category=${args['category']}`
+    }
+
     if ( typeof args['limit'] !== 'undefined' ) {
       url += `&paginate_no=${args['limit']}`
     }

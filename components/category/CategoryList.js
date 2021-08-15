@@ -11,15 +11,17 @@ const CategoryList = ({ parentID = null }) => {
   const dispatch = useDispatch();
   const router   = useRouter();
 
+  const { categories, loading } = useSelector((state) => state.CategoryReducer);
+
   useEffect(() => {
-    if (parentID === 'all') {
-      dispatch(getCategories(parentID, null, '')); // Get the all categories
-    } else {
-      dispatch(getCategories(parentID, 12, 'homepage')); // Get the 12 categories
+    if ( ! categories.length ) {
+      if (parentID === 'all') {
+        dispatch(getCategories(parentID, null, '')); // Get the all categories
+      } else {
+        dispatch(getCategories(parentID, 12, 'homepage')); // Get the 12 categories
+      }
     }
   }, []);
-
-  const { categories, loading } = useSelector((state) => state.CategoryReducer);
 
   /**
    * Navigate to Category List page
@@ -48,7 +50,7 @@ const CategoryList = ({ parentID = null }) => {
 
         {categories && categories.length > 0 &&
           categories.map((item, index) => (
-            <div key={index} className="category-card col-3 col-md-2">
+            <div key={index} className="category-card col-3 col-md-1">
               <div className="category-card-body" onClick={() => navigateCategoryList(item.id)}>
                 {
                   item.image !== null && item.image !== '' &&

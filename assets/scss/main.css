@@ -6,6 +6,8 @@
 :root {
   --color-primary: #e9000f;
   --color-placeholder: #dfdfdf;
+  --color-green: #0c7e33;
+  --color-green-light: #16b62a;
   --font-size: 12px;
 }
 
@@ -50,14 +52,16 @@ a {
                         Global CSS Part :: End
 /*****************************************************************/
 
-.custom-button-component,
-a .custom-button-component {
+.custom-button-component, a .custom-button-component {
   background-color: var(--color-primary);
   color: #fff !important;
   border: 2px solid var(--color-primary);
-  padding: 5px 15px;
+  padding: 3px 10px;
+  -webkit-border-radius: 3px;
   border-radius: 3px;
   font-weight: 600;
+  -webkit-transition: 0.6s;
+  font-size: 12px;
   transition: 0.6s;
   text-transform: capitalize;
   text-decoration: none !important;
@@ -84,10 +88,15 @@ a .custom-button-component:hover {
 /*****************************************************************/
 
 .header-top {
-  background-color: #0c7e33;
+  background-color: var(--color-green);
   color: #fff;
   font-weight: 200;
   padding: 4px;
+}
+
+.header-top .container .row {
+  margin-right: -8px;
+  margin-left: -6px;
 }
 
 .dropdown-currency button {
@@ -124,7 +133,7 @@ a .custom-button-component:hover {
 }
 
 .cart-nav-link svg {
-  background: #ea3732;
+  background: var(--color-primary);
   color: #fff;
   padding: 5px;
   border-radius: 14px;
@@ -133,9 +142,9 @@ a .custom-button-component:hover {
   height: 20px;
 }
 
-.cart-nav-link .cart-qty {
+.cart-nav-link .cart-qty, .wishlist-nav-link .wishlist-qty {
   position: absolute;
-  background: #16b62a;
+  background: var(--color-green-light);
   color: #fff;
   font-size: 10px;
   width: 17px;
@@ -235,12 +244,10 @@ a .custom-button-component:hover {
 .menu_list {
   padding: 0px;
   padding-top: 10px;
-  padding-left: 50px;
   display: block;
   -webkit-box-shadow: 0px 20px 20px 0px #cccccc3b;
   box-shadow: 0px 20px 20px 20px #cccccc54;
   width: 100%;
-  /* overflow: hidden; */
 }
 
 .rc-menu__item {
@@ -366,27 +373,48 @@ a .custom-button-component:hover {
   height: 240px;
   background-color: var(--color-placeholder);
   overflow: hidden;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .product-container .banner .banner-photo-box {
-  
+  width: 100%;
+  height: 100%;
 }
 
 .product-container .banner .banner-photo-box img {
-  
+  height: 100%;
+  width: auto;
 }
 
 .product-container .childs {
   width: 100%;
-  height: 110px;
-  background-color: var(--color-placeholder);
+  height: 130px;
   overflow: hidden;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
+
+  display: flex;
+  justify-content: flex-start;
+}
+
+.product-container .childs .child-logo-box {
+  width: 20%;
+  height: 100%;
+  text-align: center;
+}
+
+.product-container .childs .child-logo-box .child-logo {
+  height: 100px;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.product-container .childs .child-logo-box .child-logo img{
+  height: 80px;
+  width: 80px;
 }
 
 .product-container {
-  padding: 20px;
+  padding: 20px 0px 40px 8px;
 }
 
 .product-heading {
@@ -785,8 +813,7 @@ a .custom-button-component:hover {
 }
 
 .flash-deal-detail .flash-deal-title {
-  font-size: 1.2em;
-  /* margin-bottom: 20px; */
+  font-size: 1em;
   font-weight: 600;
 }
 
@@ -1069,11 +1096,9 @@ h6.address_book_updated_title {
 .product_details_quantity_section {
   border-top: 1px solid #d6d6d6;
   border-bottom: 1px solid #d6d6d6;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  -webkit-justify-content: space-between;
   justify-content: space-between;
-  padding: 30px 10px;
+  padding: 15px 5px 15px 0px;
 }
 
 .quantity {
@@ -1133,9 +1158,9 @@ h6.address_book_updated_title {
 }
 
 .product_details_quantity_section .buyBtn {
-  background-color: #8b8b8b;
+  background-color: var(--color-green-light);
   color: #fff;
-  border: 2px solid #8b8b8b;
+  border: 2px solid var(--color-green-light);
   border-radius: 25px;
   text-align: center;
   padding: 5px 15px;
@@ -1199,7 +1224,7 @@ h6.address_book_updated_title {
 }
 
 .footer-info {
-  padding: 30px 10px;
+  padding: 30px 0px 30px 0px;
 }
 
 .footer-info h5 {
@@ -1411,17 +1436,16 @@ h6.address_book_updated_title {
 
 .product_filter_heading {
   color: var(--color-primary);
-  font-size: 24px;
-  text-align: center;
+  font-size: 18px;
 }
 
 .product_filter_heading::after {
   content: "";
   border-bottom: 5px solid #e7e7e7;
-  width: 90%;
+  width: 115%;
   display: block;
   margin-top: 15px;
-  margin-left: 15px;
+  margin-left: -18px;
 }
 
 .filter_view span {
@@ -1498,8 +1522,21 @@ h6.address_book_updated_title {
   text-align: center;
 }
 
+.filter_column_3 .product-card-body img:before {
+  content: ' ';
+  display: block;
+  height: 100px;
+  width: 100px;
+  background-image: url('/images/default/fallback-image.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100px 100px;
+  font-size: 0;
+}
+
 .filter_column_3 .product-card-body img {
   height: 105px !important;
+  font-size: 0px;
 }
 
 .filter_column_10 .product-card-body img {
@@ -1546,9 +1583,9 @@ h6.address_book_updated_title {
 }
 
 .filter_title {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: bold;
-  margin-top: 20px;
+  margin-top: 5px;
 }
 
 .filter_title::after {
@@ -1564,12 +1601,22 @@ h6.address_book_updated_title {
   color: var(--color-primary);
 }
 
+.active_category, .isNot_active_category {
+  font-size: 12px;
+  margin-bottom: -15px;
+}
+
+.category-search-title {
+  color: var(--color-primary);
+  font-size: 1.2rem !important;
+}
+
 .input-range {
   height: 3rem !important;
 }
 
 .price_range {
-  padding: 10px;
+  padding: 10px 10px 0px;
 }
 
 .input-range__label--min,
@@ -1923,10 +1970,9 @@ p.address_sub_title {
   padding: 10px;
 }
 
-.profile_account,
-.inner_product_list {
-  padding: 15px;
-  margin-bottom: 20px;
+.profile_account, .inner_product_list {
+  padding: 5px;
+  margin-bottom: 0px;
 }
 
 .custome_form_group {
@@ -1955,7 +2001,7 @@ p.address_sub_title {
 
 .wishlist_list_product_details h5.product_name {
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 13px;
 }
 
 .wishlist_wishIcon {
@@ -2006,7 +2052,7 @@ p.text-secondary.mb-0 {
   height: auto;
   min-height: 100px;
   max-height: 300px;
-  z-index: 10;
+  z-index: 100;
   position: absolute;
   background: #eee;
   top: 100%;
@@ -2597,7 +2643,7 @@ span.brand_name_in_details:hover {
 
 .stock-area.out-stock span {
   background-color: #fffab8;
-  color: red;
+  color: var(--color-primary);
 }
 
 .stock-area.icon {
@@ -2657,7 +2703,7 @@ img.multiple_preview_images {
 .product_preview_gallery .slick-prev,
 .product_preview_gallery .slick-next {
   display: block !important;
-  background-color: red;
+  background-color: var(--color-primary);
   height: 25px;
   width: 25px;
   border-radius: 5px;

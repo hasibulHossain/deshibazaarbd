@@ -5,28 +5,19 @@ import { handleChangeBillingAddressInput, handleUpdateBillingAddress, addAddress
 import ErrorMessage from '../master/ErrorMessage/ErrorMessage'
 import { RHFInput } from 'react-hook-form-input';
 import Select from 'react-select';
-import { Form, Spinner } from 'react-bootstrap'
+import { Spinner } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBriefcase, faHome } from '@fortawesome/free-solid-svg-icons';
 
 const AddressUpdate = (props) => {
     const dispatch = useDispatch();
-    const countryList = useSelector((state) => state.ProfileAccountSettingReducer.countryList);
-    const divisionList = useSelector((state) => state.ProfileAccountSettingReducer.divisionList);
-    const cityList = useSelector((state) => state.ProfileAccountSettingReducer.cityList);
-    const areaList = useSelector((state) => state.ProfileAccountSettingReducer.areaList);
-    const isSubmitting = useSelector((state) => state.ProfileAccountSettingReducer.isSubmitting);
-    const selectedAddress = useSelector((state) => state.ProfileAccountSettingReducer.selectedAddress);
+    const { countryList, divisionList, cityList, areaList, isSubmitting, selectedAddress } = useSelector((state) => state.ProfileAccountSettingReducer);
     const { register, handleSubmit, errors, setValue } = useForm();
 
     //handle change input 
     const handleChangeTextInput = (name, value) => {
         dispatch(handleChangeBillingAddressInput(name, value))
     }
-
-    useEffect(() => {
-        // dispatch(handleSetDataIntoInputField())
-    }, [])
 
     const StoreBillingAddress = () => {
         dispatch(handleUpdateBillingAddress(selectedAddress))
@@ -37,8 +28,6 @@ const AddressUpdate = (props) => {
     }
 
     useEffect(() => {
-        dispatch(getLocationData('countries'));
-
         if (selectedAddress.country && selectedAddress.city) {
             dispatch(getLocationData('cities', 'division', selectedAddress.country));
             dispatch(getLocationData('areas', 'city', selectedAddress.city_id));
@@ -48,6 +37,16 @@ const AddressUpdate = (props) => {
         }
 
     }, [])
+
+
+    useEffect(() => {
+        if (!countryList.length) {
+            dispatch(getLocationData('countries'));
+        }
+        if (!divisionList.length) {
+            dispatch(getLocationData('divisions'));
+        }
+    }, []);
 
     return (
         <>

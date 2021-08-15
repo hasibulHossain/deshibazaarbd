@@ -1,8 +1,8 @@
-import { faHeart, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { useDispatch, } from 'react-redux';
-import { removeFromWishList } from './_redux/Action/wishListAction'
+import { removeFromWishList } from './_redux/Action/WishListAction'
 
 const RemoveWishlist = ({ product }) => {
     const dispatch = useDispatch();
@@ -12,7 +12,7 @@ const RemoveWishlist = ({ product }) => {
     }
 
     return (
-        <FontAwesomeIcon onClick={() => addOrRemoveWishlist(product)} icon={faTrash} className="text-secondary pointer" />
+        <FontAwesomeIcon onClick={() => addOrRemoveWishlist(product)} icon={faTrash} className="text-danger pointer" />
     );
 };
 

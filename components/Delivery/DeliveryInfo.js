@@ -13,16 +13,13 @@ import { faBriefcase, faHome } from '@fortawesome/free-solid-svg-icons';
 import ErrorMessage from '../master/ErrorMessage/ErrorMessage';
 
 const DeliveryInfo = () => {
-
-    const dispatch               = useDispatch();
-    const defaultShippingAddress = useSelector((state) => state.ProfileAccountSettingReducer.defaultShippingAddress);
-    const isLoading              = useSelector((state) => state.ProfileAccountSettingReducer.isLoading);
-    const divisionList           = useSelector((state) => state.ProfileAccountSettingReducer.divisionList);
-    const countryList            = useSelector((state) => state.ProfileAccountSettingReducer.countryList);
-    const cityList               = useSelector((state) => state.ProfileAccountSettingReducer.cityList);
-    const areaList               = useSelector((state) => state.ProfileAccountSettingReducer.areaList);
-    const isSubmitting           = useSelector((state) => state.ProfileAccountSettingReducer.isSubmitting);
-    const shippingAddressInput   = useSelector((state) => state.ProfileAccountSettingReducer.shippingAddressInput);
+    const dispatch = useDispatch();
+    
+    const { 
+        defaultShippingAddress, isLoading, divisionList, countryList, cityList, 
+        areaList, isSubmitting, shippingAddressInput 
+    } = useSelector((state) => state.ProfileAccountSettingReducer);
+    
     const { register, handleSubmit, errors, setValue } = useForm();
     const [show, setShow] = useState(false);
     // const [addressType, setAddressType] = useState('new_address')
@@ -46,7 +43,15 @@ const DeliveryInfo = () => {
         dispatch(getCurrentUserDataAction());
         dispatch(getDefaultAddress('shipping_address'));
         dispatch(getSingleShippingAddress('shipping_address'));
-        dispatch(getLocationData('countries'));
+    }, []);
+
+    useEffect(() => {
+        if (!countryList.length) {
+            dispatch(getLocationData('countries'));
+        }
+        if (!divisionList.length) {
+            dispatch(getLocationData('divisions'));
+        }
     }, []);
 
     return (

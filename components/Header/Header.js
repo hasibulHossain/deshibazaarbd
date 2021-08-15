@@ -1,5 +1,5 @@
 
-import React, { useEffect } from "react";
+import React, { useEffect, memo } from "react";
 import Link from "next/link";
 import { faComment, faHeart, faShoppingBag, faSignOutAlt, faUser, faUserCog } from "@fortawesome/free-solid-svg-icons";
 
@@ -17,16 +17,14 @@ import { getUserDataAction, handleLogoutUser } from "../_redux/getUserData/Actio
 
 import Translate from "../translation/Translate";
 import { translate } from "../../services/translation/translation";
-import SimpleBtn from "../master/SimpleBtn/SimpleBtn";
 import ActiveLink from "../master/activeLink/ActiveLink";
-import { useRouter } from "next/router";
+import HeaderWishlist from "./HeaderWishlist";
 
 const Header = () => {
-	const router = useRouter();
 	const dispatch = useDispatch();
 	const toggleNav = "basic-navbar-nav";
 	const { totalQuantity } = useSelector((state) => state.CartReducer);
-	const { userData, isLogOut } = useSelector((state) => state.UserDataReducer);
+	const { userData } = useSelector((state) => state.UserDataReducer);
 
 	const toggleCartHandler = () => {
 		dispatch(toggleFloatingCart());
@@ -37,7 +35,7 @@ const Header = () => {
 		dispatch(getUserDataAction());
 	}, []);
 
-	const formatCartTotalQty = (totalQuantity) => {
+	const formatQtyDisplay = (totalQuantity) => {
 		if (totalQuantity <= 9) {
 			return <span style={{ paddingLeft: 2 }}> {totalQuantity} </span>;
 		} else if (totalQuantity > 9 && totalQuantity <= 99) {
@@ -57,9 +55,8 @@ const Header = () => {
 			<HeaderTop />
 			<div className="bg-light">
 				<Navbar bg="light" expand="lg">
-					{/* <Container> */}
 					<div className="header-container-section">
-						<div className="custome-navbar">
+						<div className="custome-navbar container">
 							<Link href="/">
 								<a href="">
 									<Navbar.Brand>
@@ -83,25 +80,22 @@ const Header = () => {
 									<div className="d-flex">
 										{
 											!userData ? (
-												<>
-													<div>
-														<Link href="/login" className="header-nav-link">
-															<a className=""><Translate>Sign In</Translate></a>
-														</Link>
+												<div>
+													<Link href="/login" className="header-nav-link">
+														<a className=""><Translate>Sign In</Translate></a>
+													</Link>
 
-														<Link href="/register">
-															<a>
-																<Button buttonText={translate('Sign up')} />
-															</a>
-														</Link>
-													</div>
-
-												</>
+													<Link href="/register">
+														<a>
+															<Button buttonText={translate('Sign up')} />
+														</a>
+													</Link>
+												</div>
 											) : (
 												<>
 													<Dropdown>
 														<Dropdown.Toggle variant="simple_btn_bg" className="btn-sm text-capitalize" id="dropdown-basic">
-															{userData && userData.first_name}
+															{userData.first_name}
 														</Dropdown.Toggle>
 
 														<Dropdown.Menu>
@@ -162,16 +156,7 @@ const Header = () => {
 															</ActiveLink>
 														</Dropdown.Menu>
 													</Dropdown>
-
-													<Link href="/wishlist" className="header-nav-link">
-														<a>
-															<FontAwesomeIcon
-																className="custom-fontAwesome"
-																icon={faHeart}
-															/>{" "}
-															<Translate>Wishlist</Translate>
-														</a>
-													</Link>
+													<HeaderWishlist />
 												</>
 											)
 										}
@@ -184,7 +169,7 @@ const Header = () => {
 												icon={faShoppingBag}
 											/>
 											<span className="cart-qty">
-												{formatCartTotalQty(totalQuantity)}
+												{formatQtyDisplay(totalQuantity)}
 											</span>
 											&nbsp;&nbsp; <Translate>Cart</Translate>
 										</span>
@@ -193,8 +178,7 @@ const Header = () => {
 							</Navbar.Collapse>
 						</div>
 					</div>
-
-					{/* </Container> */}
+					
 					<HeaderMenu toggleNav={toggleNav} />
 				</Navbar>
 			</div>
@@ -202,4 +186,4 @@ const Header = () => {
 	);
 };
 
-export default Header;
+export default memo(Header);

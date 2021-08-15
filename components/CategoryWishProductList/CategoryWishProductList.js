@@ -11,7 +11,7 @@ import LoadingSpinner from "../master/LoadingSpinner/LoadingSpinner";
 
 const CategoryWishProductList = () => {
   const dispatch = useDispatch();
-  const { isLoading } = useSelector(
+  const { isLoading, categoryBrandDetails, paginate } = useSelector(
     (state) => state.CategoryWiseProductReducer
   );
 
@@ -53,12 +53,17 @@ const CategoryWishProductList = () => {
     <section className="category_wise_product_list">
       <div className="row justify-content-between">
         <div className="col-md-5">
-          {/* <h5>We've got 0 products for you..</h5> */}
+          <h5 className="category-search-title">{categoryBrandDetails.name}</h5>
+          <p>
+            {
+              paginate.total + ' items found in ' + categoryBrandDetails.name 
+            }
+          </p>
         </div>
         <div className="col-md-5">
           <div className="d-flex justify-content-end">
             <div className="filter_view">
-              <span>View :</span>
+              <span>View</span>
               <FontAwesomeIcon
                 className={
                   columns == "col-md-3"
@@ -79,7 +84,7 @@ const CategoryWishProductList = () => {
               />
             </div>
             <div className="filter_view d-flex ml-3">
-              <span>Sort by :</span>
+              <span>Sort by</span>
               <Form>
                 <Form.Group controlId="exampleFormSelectCustom">
                   <Form.Control onChange={selectHandler} as="select" custom>
