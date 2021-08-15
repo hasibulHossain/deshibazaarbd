@@ -9,7 +9,7 @@ export const getPaymentMethodList = () => (dispatch) => {
         paymentMethod: []
     }
     dispatch({ type: Types.GET_PAYMENT_METHOD, payload: responseList });
-    Axios.get(`${process.env.NEXT_PUBLIC_API_URL}payments/methods/get-payment-methods`)
+    Axios.get(`payments/methods/get-payment-methods`)
         .then((res) => {
             if (res.data.status) {
                 responseList.status = res.data.status;

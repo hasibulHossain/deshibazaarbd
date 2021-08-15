@@ -21,7 +21,7 @@ export const RegisterFirstStep = (registerInput) => (dispatch) => {
     getOTP: false,
   };
   dispatch({ type: Types.REGISTER_FIRST_STEP, payload: response });
-  const URL = `${process.env.NEXT_PUBLIC_API_URL}auth/register`;
+  const URL = `auth/register`;
   try {
     axios
       .post(URL, registerInput)
@@ -88,7 +88,7 @@ export const customerRegister = (registerInput) => async (dispatch) => {
   };
   dispatch({ type: Types.AUTH_REGISTER, payload: response });
   axios
-    .post(`${process.env.NEXT_PUBLIC_API_URL}auth/register-next`, registerInput)
+    .post(`auth/register-next`, registerInput)
     .then((res) => {
       if (res.data.status) {
         response.message = res.data.message;

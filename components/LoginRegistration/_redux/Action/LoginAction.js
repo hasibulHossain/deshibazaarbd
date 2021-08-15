@@ -25,7 +25,7 @@ export const loginAction = (loginData) => (dispatch) => {
   }
   dispatch({ type: Types.AUTH_LOGIN_CHECK, payload: response })
 
-  const URL = `${process.env.NEXT_PUBLIC_API_URL}auth/login`;
+  const URL = `auth/login`;
 
   try {
     axios.post(URL, loginData)

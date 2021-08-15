@@ -12,7 +12,7 @@ export const searchProductAction = (searchKeyword) => async (dispatch) => {
 
   dispatch({ type: Types.GET_SEARCHED_PRODUCT_LIST, payload: response });
 
-  const URL = `${process.env.NEXT_PUBLIC_API_URL}get-items/search?search=${search}`;
+  const URL = `get-items/search?search=${search}`;
   const res = await axios.get(URL);
 
   response.loading = false;

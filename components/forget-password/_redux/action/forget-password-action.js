@@ -2,8 +2,6 @@ import Axios from 'axios';
 import { showToast } from '../../../master/Helper/ToastHelper';
 import * as Types from '../types/types';
 
-const baseUrl = `${process.env.NEXT_PUBLIC_API_URL}`;
-
 /**
  * this function will check if the user email exists on the database or not
  * 
@@ -19,7 +17,7 @@ const baseUrl = `${process.env.NEXT_PUBLIC_API_URL}`;
          isValidUser: false
      }
      
-     const url = `${baseUrl}auth/forget-password/step1`
+     const url = `auth/forget-password/step1`
      const data = {
         username: email
      };
@@ -80,7 +78,7 @@ const baseUrl = `${process.env.NEXT_PUBLIC_API_URL}`;
          passwordUpdated: false,
      }
 
-     const url = `${baseUrl}auth/forget-password/step2`;
+     const url = `auth/forget-password/step2`;
      const data = {
         username: username,
         otp: otp,

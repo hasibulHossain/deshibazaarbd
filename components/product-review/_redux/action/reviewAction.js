@@ -10,7 +10,7 @@ export const getItemListByUser = () => (dispatch) => {
         itemList: []
     }
     dispatch({ type: Types.GET_ITEM_LIST_BY_USER, payload: responseList });
-    Axios.get(`${process.env.NEXT_PUBLIC_API_URL}sales/sale-items/by-user`)
+    Axios.get(`sales/sale-items/by-user`)
         .then((res) => {
             if (res.data.status) {
                 responseList.status = res.data.status;
@@ -32,7 +32,7 @@ export const getReviewListByUser = (itemID, userID, status) => (dispatch) => {
         reviewList: []
     }
     dispatch({ type: Types.GET_REVIEW_LIST_BY_USER, payload: responseList });
-    Axios.get(`${process.env.NEXT_PUBLIC_API_URL}item-review/get-by-item?item_id=${itemID}&user_id=${userID}&status=${status}`)
+    Axios.get(`item-review/get-by-item?item_id=${itemID}&user_id=${userID}&status=${status}`)
         .then((res) => {
             if (res.data.status) {
                 responseList.status = res.data.status;
@@ -68,7 +68,7 @@ export const storeReviewData = (reviewStoreInput, handleClose) => (dispatch => {
     const { userData } = JSON.parse(localStorage.getItem('loginData'));
     const userID       = userData.id;
 
-    Axios.post(`${process.env.NEXT_PUBLIC_API_URL}item-review/create`, reviewStoreInput)
+    Axios.post(`item-review/create`, reviewStoreInput)
         .then((res) => {
             if (res.data.status) {
                 let data = res.data;
