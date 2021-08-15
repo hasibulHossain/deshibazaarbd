@@ -90,6 +90,11 @@ a .custom-button-component:hover {
   padding: 4px;
 }
 
+.header-top .container .row {
+  margin-right: -8px;
+  margin-left: -6px;
+}
+
 .dropdown-currency button {
   padding: 0px;
   color: #fff !important;
@@ -235,12 +240,10 @@ a .custom-button-component:hover {
 .menu_list {
   padding: 0px;
   padding-top: 10px;
-  padding-left: 50px;
   display: block;
   -webkit-box-shadow: 0px 20px 20px 0px #cccccc3b;
   box-shadow: 0px 20px 20px 20px #cccccc54;
   width: 100%;
-  /* overflow: hidden; */
 }
 
 .rc-menu__item {

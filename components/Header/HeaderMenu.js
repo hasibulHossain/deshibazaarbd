@@ -17,8 +17,8 @@ import { translate } from "../../services/translation/translation";
 const HeaderMenu = ({ toggleNav }) => {
 
   const { menuList } = useSelector((state) => state.HeaderReducer);
-  const router       = useRouter();
-  const dispatch     = useDispatch();
+  const router = useRouter();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getMenuListData());
@@ -34,85 +34,87 @@ const HeaderMenu = ({ toggleNav }) => {
    * return void
    */
 
-  const clickMenuLink = ( categorySlug ) => {
+  const clickMenuLink = (categorySlug) => {
     router.push(`/products?category=${categorySlug}`);
   }
 
   return (
     <div className="menu_list">
-      <Navbar.Collapse id={toggleNav}>
-        <Menu
-          menuButton={
-            <MenuButton className="font-weight-bold">
-              <img
-                src="/images/logos/menu.png"
-                className="menu pr-2"
-                style={{ width: 30 }}
-              />
-              <Translate>All Categories</Translate>
-            </MenuButton>
-          }
-          key={1}
-        >
-          {menuList.map((category, i) => {
-            if (category.childs.length === 0) {
-              return <MenuItem onClick={() => clickMenuLink(category.id)} key={i}><Translate>{category.name}</Translate></MenuItem>;
-            } else {
-              return (
-                <SubMenu key={i} label={translate(category.name)}>
-                  {category.childs.map((subCategory, i) => {
+      <div className="container">
+        <Navbar.Collapse id={toggleNav}>
+          <Menu
+            menuButton={
+              <MenuButton className="font-weight-bold">
+                <img
+                  src="/images/logos/menu.png"
+                  className="menu pr-2"
+                  style={{ width: 30 }}
+                />
+                <Translate>All Categories</Translate>
+              </MenuButton>
+            }
+            key={1}
+          >
+            {menuList.map((category, i) => {
+              if (category.childs.length === 0) {
+                return <MenuItem onClick={() => clickMenuLink(category.id)} key={i}><Translate>{category.name}</Translate></MenuItem>;
+              } else {
+                return (
+                  <SubMenu key={i} label={translate(category.name)}>
+                    {category.childs.map((subCategory, i) => {
+                      if (subCategory.childs.length === 0) {
+                        return <MenuItem key={i} onClick={() => clickMenuLink(subCategory.id)}><Translate>{subCategory.name}</Translate></MenuItem>;
+                      } else {
+                        return (
+                          <SubMenu key={i} label={translate(subCategory.name)} onClick={() => clickMenuLink(subCategory.id)}>
+                            {subCategory.childs.map((subCtgOne, i) => (
+                              <MenuItem key={i} onClick={() => clickMenuLink(subCtgOne.id)}>
+                                <Translate>{subCtgOne.name}</Translate>
+                              </MenuItem>
+                            ))}
+                          </SubMenu>
+                        );
+                      }
+                    })}
+                  </SubMenu>
+                );
+              }
+            })}
+          </Menu>
+
+          {menuList.length > 0 &&
+            menuList.map((category, i) => (
+              <Menu
+                menuButton={
+                  <MenuButton>
+                    {translate(category.name)}{" "}
+                    <FontAwesomeIcon
+                      className="custom-fontAwesome"
+                      icon={faCaretDown}
+                    />
+                  </MenuButton>
+                }
+                key={i}
+              >
+                {category.childs.length > 0 &&
+                  category.childs.map((subCategory, i) => {
                     if (subCategory.childs.length === 0) {
-                      return <MenuItem key={i} onClick={() => clickMenuLink(subCategory.id)}><Translate>{subCategory.name}</Translate></MenuItem>;
+                      return <MenuItem onClick={() => clickMenuLink(subCategory.id)} key={i}><Translate>{subCategory.name}</Translate></MenuItem>;
                     } else {
                       return (
-                        <SubMenu key={i} label={translate(subCategory.name)} onClick={() => clickMenuLink(subCategory.id)}>
-                          {subCategory.childs.map((subCtgOne, i) => (
-                            <MenuItem key={i} onClick={() => clickMenuLink(subCtgOne.id)}>
-                              <Translate>{subCtgOne.name}</Translate>
-                            </MenuItem>
-                          ))}
+                        <SubMenu key={i} label={translate(subCategory.name)}>
+                          {subCategory.childs.length > 0 &&
+                            subCategory.childs.map((subCtgOne, i) => (
+                              <MenuItem onClick={() => clickMenuLink(subCtgOne.id)} key={i}><Translate>{subCtgOne.name}</Translate></MenuItem>
+                            ))}
                         </SubMenu>
                       );
                     }
                   })}
-                </SubMenu>
-              );
-            }
-          })}
-        </Menu>
-
-        {menuList.length > 0 &&
-          menuList.map((category, i) => (
-            <Menu
-              menuButton={
-                <MenuButton>
-                  {translate(category.name)}{" "}
-                  <FontAwesomeIcon
-                    className="custom-fontAwesome"
-                    icon={faCaretDown}
-                  />
-                </MenuButton>
-              }
-              key={i}
-            >
-              {category.childs.length > 0 &&
-                category.childs.map((subCategory, i) => {
-                  if (subCategory.childs.length === 0) {
-                    return <MenuItem onClick={() => clickMenuLink(subCategory.id)} key={i}><Translate>{subCategory.name}</Translate></MenuItem>;
-                  } else {
-                    return (
-                      <SubMenu key={i} label={translate(subCategory.name)}>
-                        {subCategory.childs.length > 0 &&
-                          subCategory.childs.map((subCtgOne, i) => (
-                            <MenuItem onClick={() => clickMenuLink(subCtgOne.id)} key={i}><Translate>{subCtgOne.name}</Translate></MenuItem>
-                          ))}
-                      </SubMenu>
-                    );
-                  }
-                })}
-            </Menu>
-          ))}
-      </Navbar.Collapse>
+              </Menu>
+            ))}
+        </Navbar.Collapse>
+      </div>
     </div>
   );
 };

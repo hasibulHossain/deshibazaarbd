@@ -54,9 +54,8 @@ const Header = () => {
 			<HeaderTop />
 			<div className="bg-light">
 				<Navbar bg="light" expand="lg">
-					{/* <Container> */}
 					<div className="header-container-section">
-						<div className="custome-navbar">
+						<div className="custome-navbar container">
 							<Link href="/">
 								<a href="">
 									<Navbar.Brand>
@@ -187,8 +186,7 @@ const Header = () => {
 							</Navbar.Collapse>
 						</div>
 					</div>
-
-					{/* </Container> */}
+					
 					<HeaderMenu toggleNav={toggleNav} />
 				</Navbar>
 			</div>
