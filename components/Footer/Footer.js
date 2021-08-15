@@ -1,4 +1,4 @@
-import React, { useEffect, useState, memo } from 'react';
+import React, { useState, memo } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import Link from 'next/link'
 import FooterBottom from './FooterBottom';

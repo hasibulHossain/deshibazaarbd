@@ -12,11 +12,11 @@ import SimpleBtn from '../master/SimpleBtn/SimpleBtn';
 
 const ShippingInfo = () => {
 
-    const dispatch               = useDispatch();
-    const { userData }           = useSelector((state) => state.UserDataReducer);
-    const isLoading              = useSelector((state) => state.ProfileAccountSettingReducer.isLoading);
-    const defaultBillingAddress  = useSelector((state) => state.ProfileAccountSettingReducer.defaultBillingAddress);
-    const [show, setShow]        = useState(false);
+    const dispatch        = useDispatch();
+    const { userData }    = useSelector((state) => state.UserDataReducer);
+    const [show, setShow] = useState(false);
+
+    const { isLoading, defaultBillingAddress } = useSelector((state) => state.ProfileAccountSettingReducer);
 
     const toggleShowHandler = () => {
         setShow(preState => !preState);
