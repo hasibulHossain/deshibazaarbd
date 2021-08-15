@@ -10,7 +10,9 @@ const HomeBannerCarousel = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getHomeCarouselData());
+    if(!carouselList.length) {
+      dispatch(getHomeCarouselData());
+    }
   }, []);
 
   return (
