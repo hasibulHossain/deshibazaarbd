@@ -21,7 +21,9 @@ const HeaderMenu = ({ toggleNav }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getMenuListData());
+    if (!menuList.length) {
+      dispatch(getMenuListData());
+    }
   }, []);
 
   /**
