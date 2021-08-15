@@ -31,7 +31,6 @@ export const WishListAdded = (itemID) => (dispatch) => {
                 if (response.data.status) {
                     response.isLoading = false;
                     showToast('success', response.data.message);
-                    dispatch(getWishListData())
                     dispatch({ type: Types.WISHLIST_ADDED, payload: responseLog });
                 }
             }).catch((error) => {
@@ -46,6 +45,17 @@ export const WishListAdded = (itemID) => (dispatch) => {
     }
 
 }
+
+/**
+ * Change wishlist added status
+ * 
+ * @param {int} isAdded
+ * @returns 
+ */
+export const changeWishListAddedStatus = (isAdded = false) => (dispatch) => {
+    dispatch({ type: Types.WISHLIST_ADDED_CHANGE_STATUS, payload: isAdded });
+}
+
 export const removeFromWishList = (itemID) => (dispatch) => {
     const response = {
         isLoading  : true,
@@ -62,7 +72,6 @@ export const removeFromWishList = (itemID) => (dispatch) => {
             if (response.data.status) {
                 response.isLoading = false;
                 showToast('success', response.data.message);
-                dispatch(getWishListData());
                 dispatch({ type: Types.REMOVE_FROM_WISHLIST, payload: responseLog });
             }
         }).catch((error) => {
@@ -83,7 +92,7 @@ export const getWishListData = () => (dispatch) => {
         isLoading      : true,
         wishList       : []
     }
-    dispatch({ type: Types.GET_WISHLIST_DATA, payload: responseList });
+    dispatch({ type: Types.LOADING_WISHLIST_DATA, payload: true });
     Axios.get(`${process.env.NEXT_PUBLIC_API_URL}wishlist`)
         .then((res) => {
             if (res.data.status) {
