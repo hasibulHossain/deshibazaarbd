@@ -50,14 +50,16 @@ a {
                         Global CSS Part :: End
 /*****************************************************************/
 
-.custom-button-component,
-a .custom-button-component {
+.custom-button-component, a .custom-button-component {
   background-color: var(--color-primary);
   color: #fff !important;
   border: 2px solid var(--color-primary);
-  padding: 5px 15px;
+  padding: 3px 10px;
+  -webkit-border-radius: 3px;
   border-radius: 3px;
   font-weight: 600;
+  -webkit-transition: 0.6s;
+  font-size: 12px;
   transition: 0.6s;
   text-transform: capitalize;
   text-decoration: none !important;
