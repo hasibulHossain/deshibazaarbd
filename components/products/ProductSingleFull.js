@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import ReactImageZoom from "react-image-zoom";
-// import Link from "next/link";
 import PriceCalculation from "./partials/PriceCalculation";
 import ShareProduct from "./partials/ShareProduct";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,7 +14,6 @@ import SimpleBtn from "../master/SimpleBtn/SimpleBtn";
 import Translate from "../translation/Translate";
 
 const ProductSingleFull = ({ product }) => {
-
     const dispatch = useDispatch();
     const [quantity, setQuantity] = useState(1);
     const [previewImg, setPreviewImg] = useState(null);
@@ -80,8 +77,9 @@ const ProductSingleFull = ({ product }) => {
     }
 
     const redirectToProductDetailsPage = (product) => {
+        console.log('type => ', typeof product.category_id)
         dispatch(toggleProductModalAction(''));
-        router.push("/products/" + product.sku);
+        router.push("/products/" + product.sku + '?category=' + product.category_id);
     }
 
     return (

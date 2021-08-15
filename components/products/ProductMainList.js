@@ -8,7 +8,7 @@ import { getProductListAction, getProductsData } from "./_redux/Action/ProductAc
 import ProductSingleMini from "./ProductSingleMini";
 
 const ProductMainList = (props) => {
-    const { type, limit, page } = props;
+    const { type, limit, page, category = "" } = props;
 
     const dispatch                  = useDispatch();
     const [loading, setLoading]     = useState(false);
@@ -18,32 +18,34 @@ const ProductMainList = (props) => {
         const args = {
             'type' : type,
             'limit': limit,
-            'page' : page
+            'page' : page,
+            category: category
         };
 
+        /**
+         * Get Products for Home Pages
+         * No dispatch, direct axios call and get data and set to state
+         * 
+         * @since 1.0.0
+         * 
+         * @param object args 
+         * 
+         * @return void set data to local state
+         */
+        const getProducts = async (args) => {
+            setLoading( true );
+            const data = await getProductsData(args);
+            setProducts(data);
+            setLoading( false );
+        }
+        
         if ( page !== 'home' ) { // for home page only return product, no need to dispatch
             dispatch(getProductListAction(args));
         } else {
-            getProducts(args);
+            getProducts(args)
         }
     }, []);
 
-    /**
-     * Get Products for Home Pages
-     * No dispatch, direct axios call and get data and set to state
-     * 
-     * @since 1.0.0
-     * 
-     * @param object args 
-     * 
-     * @return void set data to local state
-     */
-    const getProducts = async (args) => {
-        setLoading( true );
-        const data = await getProductsData(args);
-        setProducts(data);
-        setLoading( false );
-    }
 
     const { products: allProducts, isProductListloading } = useSelector(state => state.ProductReducer);
 
@@ -73,7 +75,8 @@ const ProductMainList = (props) => {
 // Default props
 ProductMainList.defaultProps = {
     type: '',
-    page: 'home'
+    page: 'home',
+    category: ''
 };
 
 // All props
@@ -81,6 +84,7 @@ ProductMainList.propTypes = {
     type : PropTypes.string,
     limit: PropTypes.number,
     page : PropTypes.string,
+    category: PropTypes.string
 };
 
 export default memo( ProductMainList );
