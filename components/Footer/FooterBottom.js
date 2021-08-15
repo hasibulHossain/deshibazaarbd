@@ -8,8 +8,11 @@ const FooterBottom = () => {
     
     const dispatch = useDispatch();
     const { websiteInfo, isLoading } = useSelector((state) => state.WebsiteInformationReducer);
+    
     useEffect(() => {
-        dispatch(getWebsiteInformation())
+        if(websiteInfo === null) {
+            dispatch(getWebsiteInformation());
+        }
     }, [])
 
     return (
