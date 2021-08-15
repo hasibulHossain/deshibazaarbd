@@ -28,7 +28,7 @@ const FooterBottom = () => {
                         </div>
                     </div>
                     <div className="col-md-4">
-                        <img src={"/images/Payment-Icon-Buzfi.com-best-online-shopping-in-the-USA-2020-best-e-commerce-shop-in-the-United-States.png"} alt="deshi bazaar bd" className="img-fluid mb-2 mt-2 pointer" />
+                        <img src={"/images/payment-methods.png"} alt="Deshi BazaarBD" className="img-fluid mb-2 mt-2 pointer" />
                     </div>
                 </div>
             </Container>
