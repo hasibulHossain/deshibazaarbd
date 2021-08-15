@@ -13,7 +13,7 @@ const Base_Url = process.env.NEXT_PUBLIC_API_URL;
 const CategoryWishProductContainer = () => {
   const dispatch = useDispatch();
   
-  const { paginate, products, filterParams, categoryBrandDetails } = useSelector(
+  const { paginate, products, filterParams, categoryBrandDetails, isLoading } = useSelector(
     (state) => state.CategoryWiseProductReducer
   );
 
@@ -92,7 +92,7 @@ const CategoryWishProductContainer = () => {
         <div className="col-md-9 mb-5">
           <CategoryWishProductList />
           {
-            products.length > 0 && paginate.total > 20 && (
+            !isLoading && paginate.total > 20  && (
               <div className="w-100">
                 <nav className="d-flex justify-content-end" aria-label="navigation">
                   <ul className="pagination">
@@ -113,7 +113,7 @@ const CategoryWishProductContainer = () => {
                             `${Base_Url}get-items?page=${i + 1}`
                           )
                         }
-                        className="page-item"
+                        className={`page-item ${paginate.current_page == i + 1 && 'active'}`}
                       >
                         <a className="page-link">{i + 1}</a>
                       </li>
