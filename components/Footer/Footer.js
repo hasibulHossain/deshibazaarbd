@@ -3,7 +3,6 @@ import { Col, Container, Row } from 'react-bootstrap';
 import Link from 'next/link'
 import FooterBottom from './FooterBottom';
 import SocialMedia from './SocialMedia';
-import { getUserOrderList } from '../orders/_redux/action/OrderAction';
 import SimpleModal from '../master/Modal/SimpleModal';
 import TrackingForm from '../Header/TrackingForm';
 import { useDispatch, useSelector } from 'react-redux';
@@ -21,10 +20,6 @@ const Footer = () => {
     const onSubmit = () => {
         dispatch(subscribeNewsletter(email));
     }
-
-    useEffect(() => {
-        dispatch(getUserOrderList(5))
-    }, []);
 
     return (
         <>
