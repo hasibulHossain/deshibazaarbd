@@ -83,7 +83,7 @@ export const storeSells = (customerInfo, carts, totalQuantity, shippingCost, tot
         return false;
     }
 
-    Axios.post(`${process.env.NEXT_PUBLIC_API_URL}sales`, orderPostedData)
+    Axios.post(`sales`, orderPostedData)
         .then((res) => {
             if (res.data.status) {
                 response.status    = res.data.status;
@@ -135,7 +135,7 @@ export async function getLastTransactionData() {
     // if not, then return null;
     if (typeof transaction_no !== 'undefined' && transaction_no !== null) {
         transaction_no = decrypt(transaction_no);
-        await Axios.get(`${process.env.NEXT_PUBLIC_API_URL}sales/${transaction_no}`)
+        await Axios.get(`sales/${transaction_no}`)
             .then(res => {
                 transactionData = res.data.data;
             })

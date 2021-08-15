@@ -18,7 +18,7 @@ export const getWebsiteInformation = () => async (dispatch) => {
 
   dispatch({ type: Types.GET_WEBSITE_INFO, payload: responseData });
 
-  await Axios.get(`${process.env.NEXT_PUBLIC_API_URL}website/info`)  // @todo Need to change the URL soon
+  await Axios.get('website/info')  // @todo Need to change the URL soon
     .then((res) => {
       responseData.websiteInfo = res.data.data;
       responseData.status = true;
@@ -51,7 +51,7 @@ export const getWebsiteInformation = () => async (dispatch) => {
 
   dispatch({ type: Types.GET_WEBSITE_PAGE, payload: responseData });
 
-  await Axios.get(`${process.env.NEXT_PUBLIC_API_URL}website/pages/${slug}`)
+  await Axios.get(`website/pages/${slug}`)
     .then((res) => {
       responseData.data    = res.data.data;
       responseData.loading = false;

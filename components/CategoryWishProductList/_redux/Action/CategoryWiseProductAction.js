@@ -1,8 +1,6 @@
 import Axios from "axios";
 import * as Types from "../Type/Types";
 
-const Base_Url = `${process.env.NEXT_PUBLIC_API_URL}`;
-
 export const getFilteredProducts = (filterParamObj, source = {token: ""}) => async (dispatch) => {
   const filterParamObjClone = {
     ...filterParamObj,
@@ -22,7 +20,7 @@ export const getFilteredProducts = (filterParamObj, source = {token: ""}) => asy
 
   try {
     dispatch({ type: Types.INIT_FILTER_PRODUCT_LIST });
-    const res = await Axios.get(`${Base_Url}get-items?${filterParam}`, {cancelToken: source.token});
+    const res = await Axios.get(`get-items?${filterParam}`, {cancelToken: source.token});
     responseData.isLoading = false;
     responseData.data = res.data.data;
     console.log('pag epag => ', res.data.data)
@@ -36,7 +34,7 @@ export const getFilteredProducts = (filterParamObj, source = {token: ""}) => asy
 };
 
 export const getCategoryOrBrandDetails = (endPoint) => async (dispatch) => {
-  const url = Base_Url + endPoint
+  const url = endPoint
   let response = {
     loading: true,
     data: {

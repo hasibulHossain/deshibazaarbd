@@ -9,7 +9,7 @@ import axios from "axios";
  * @returns void
  */
 export const getCountries = () => (dispatch) => {
-    axios.get(`${process.env.NEXT_PUBLIC_API_URL}counties`)
+    axios.get(`counties`)
         .then((res) => {
             dispatch({ type: Types.GET_COUNTRIES, payload: res.data })
         })
@@ -26,7 +26,7 @@ export const getCountries = () => (dispatch) => {
  */
 export const getCitiesByCountry = (country = 'Bangladesh') => (dispatch) => {
     country = country.trim();
-    axios.get(`${process.env.NEXT_PUBLIC_API_URL}cities?country=${country}`)
+    axios.get(`cities?country=${country}`)
         .then((res) => {
             dispatch({ type: Types.GET_CITIES, payload: res.data })
         })
@@ -42,7 +42,7 @@ export const getCitiesByCountry = (country = 'Bangladesh') => (dispatch) => {
  * @returns void
  */
 export const getAreasByCity = (city) => (dispatch) => {
-    axios.get(`${process.env.NEXT_PUBLIC_API_URL}areas?city=${city}`)
+    axios.get(`areas?city=${city}`)
         .then((res) => {
             dispatch({ type: Types.GET_AREAS, payload: res.data })
         })

@@ -1,6 +1,7 @@
 import App from "next/app";
 import React from "react";
 import { Provider } from "react-redux";
+import axios from 'axios';
 import { createWrapper } from "next-redux-wrapper";
 import Store from "../_redux/Store";
 import "@fortawesome/fontawesome-svg-core/styles.css";
@@ -33,6 +34,9 @@ toast.configure();
 
 // Import axios.js so that it can inject token in every request
 require("../services/axios");
+
+// Base url
+axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL;
 
 class MyApp extends App {
   render() {

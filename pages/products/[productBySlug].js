@@ -36,7 +36,7 @@ export default function ProductBySlug({ product }) {
 
 export const getServerSideProps = async (context) => {
     const productBySlug = context.params.productBySlug
-    const res           = await fetch(`${process.env.NEXT_PUBLIC_API_URL}get-item-detail/${productBySlug}`)
+    const res           = await fetch(`get-item-detail/${productBySlug}`)
     const dataJSON      = await res.json();
     const data          = dataJSON.data;
     return {

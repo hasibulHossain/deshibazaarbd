@@ -3,9 +3,6 @@ import { showToast } from '../../../master/Helper/ToastHelper';
 import { getUserDataAction } from '../../../_redux/getUserData/Action/UserDataAction';
 import * as Types from "../Type/Types";
 
-// Base url
-const baseurl = process.env.NEXT_PUBLIC_API_URL;
-
 //get shipping address
 export const getShippingAddress = (addressType) => (dispatch) => {
     const responseData = {
@@ -15,7 +12,7 @@ export const getShippingAddress = (addressType) => (dispatch) => {
     }
     dispatch({ type: Types.GET_SHIPPING_ADDRESS, payload: responseData });
     const userStorageData = JSON.parse(localStorage.getItem("loginData"));
-    Axios.get(`${baseurl}address?user_id=${userStorageData.userData.id}&type=${addressType}`)
+    Axios.get(`address?user_id=${userStorageData.userData.id}&type=${addressType}`)
         .then((res) => {
             responseData.data = res.data.data[0];
             responseData.isLoading = false;
@@ -32,7 +29,7 @@ export const getBillingAddress = (addressType) => (dispatch) => {
     }
     dispatch({ type: Types.GET_BILLING_ADDRESS, payload: responseData });
     const userStorageData = JSON.parse(localStorage.getItem("loginData"));
-    Axios.get(`${baseurl}address?user_id=${userStorageData.userData.id}&type=${addressType}`)
+    Axios.get(`address?user_id=${userStorageData.userData.id}&type=${addressType}`)
         .then((res) => {
             responseData.data = res.data.data[0];
             responseData.isLoading = false;
@@ -51,7 +48,7 @@ export const getAddress = (addressType) => (dispatch) => {
     }
     dispatch({ type: Types.GET_BILLING_ADDRESS, payload: responseData });
     const userStorageData = JSON.parse(localStorage.getItem("loginData"));
-    Axios.get(`${baseurl}address?user_id=${userStorageData.userData.id}&type=${addressType}`)
+    Axios.get(`address?user_id=${userStorageData.userData.id}&type=${addressType}`)
 
         .then((res) => {
             responseData.data = res.data.data;
@@ -111,7 +108,7 @@ export const handleChangeShippingAddressInput = (name, value) => (dispatch) => {
  */
 
 export const getLocationData = (locationType, onDependentLocation, val) => async (dispatch) => {
-    let url = `${baseurl}${locationType}`;
+    let url = `${locationType}`;
     if(onDependentLocation) {
         let query = "?" + onDependentLocation + "=" + val;
         url += query;
@@ -155,7 +152,7 @@ export const handleStoreShippingAddress = (shippingAddressInput) => (dispatch) =
     const userStorageData = JSON.parse(localStorage.getItem("loginData"));
     const submittedData = shippingAddressInput;
     submittedData.user_id = userStorageData.userData.id;
-    Axios.post(`${baseurl}address`, shippingAddressInput)
+    Axios.post(`address`, shippingAddressInput)
         .then((res) => {
             responseData.status = true;
             responseData.isLoading = false;
@@ -175,7 +172,7 @@ export const handleStoreBillingAddress = (billingAddressInput) => (dispatch) => 
     const userStorageData = JSON.parse(localStorage.getItem("loginData"));
     const submittedData = billingAddressInput;
     submittedData.user_id = userStorageData.userData.id;
-    Axios.post(`${baseurl}address`, submittedData)
+    Axios.post(`address`, submittedData)
         .then((res) => {
             responseData.status = true;
             responseData.isLoading = false;
@@ -205,7 +202,7 @@ export const getSingleShippingAddress = (type) => (dispatch) => {
     }
     dispatch({ type: Types.GET_SINGLE_SHIPPING_ADDRESS, payload: responseData });
     const userStorageData = JSON.parse(localStorage.getItem("loginData"));
-    Axios.get(`${baseurl}address?user_id=${userStorageData.userData.id}&type=${type}&is_default=1`)
+    Axios.get(`address?user_id=${userStorageData.userData.id}&type=${type}&is_default=1`)
         .then((res) => {
             if (res.data.status) {
                 const data = res.data.data;
@@ -265,7 +262,7 @@ export const handleUpdateBillingAddress = (billingAddressInput) => (dispatch) =>
     // const submittedData = billingAddressInput;
     // submittedData.user_id = userStorageData.userData.id;
 
-    Axios.put(`${baseurl}address`, billingAddressInput)
+    Axios.put(`address`, billingAddressInput)
         .then((res) => {
             responseData.status = true;
             responseData.isLoading = false;
@@ -298,9 +295,9 @@ export const addAddress = (addressInput, type, closeModal) => (dispatch) => {
 
     let url;
     if (type === 'new_address') {
-        url = `${baseurl}address`
+        url = `address`
     } else {
-        url = `${baseurl}address/${addressInput.id}`
+        url = `address/${addressInput.id}`
     }
 
     Axios({
@@ -327,7 +324,7 @@ export const addAddress = (addressInput, type, closeModal) => (dispatch) => {
             closeModal();
         })
 
-    // Axios.post(`${baseurl}address`, billingAddressInput)
+    // Axios.post(`address`, billingAddressInput)
 }
 
 
@@ -339,7 +336,7 @@ export const deleteAddress = (id, toggleDeleteModal) => (dispatch) => {
     }
     dispatch({ type: Types.DELETE_ADDRESS, payload: responseData });
 
-    Axios.delete(`${baseurl}address/${id}`)
+    Axios.delete(`address/${id}`)
         .then((res) => {
             if (res.data.status) {
                 responseData.status = true;
@@ -385,7 +382,7 @@ export const getDefaultAddress = (addressType) => (dispatch) => {
     dispatch({ type: Types.GET_DEFAULT_SHIPPING_ADDRESS, payload: responseData });
     dispatch({ type: Types.GET_DEFAULT_BILLING_ADDRESS, payload: responseData });
     const userStorageData = JSON.parse(localStorage.getItem("loginData"));
-    Axios.get(`${baseurl}address?user_id=${userStorageData.userData.id}&type=${addressType}&is_default=1`)
+    Axios.get(`address?user_id=${userStorageData.userData.id}&type=${addressType}&is_default=1`)
 
         .then((res) => {
             if (res.data.status) {
@@ -429,7 +426,7 @@ export const handleUpdateUserData = (userInputData, user_id) => (dispatch) => {
     }
     dispatch({ type: Types.UPDATED_USER_DATA, payload: response });
 
-    Axios.put(`${baseurl}auth/updateUserProfile`, userInputData)
+    Axios.put(`auth/updateUserProfile`, userInputData)
         .then((response) => {
             if (response.data.status) {
                 const responseUserData = response.data.data;
