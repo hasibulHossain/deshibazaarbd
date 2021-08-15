@@ -25,7 +25,6 @@ export const getFilteredProducts = (filterParamObj, source = {token: ""}) => asy
     const res = await Axios.get(`${Base_Url}get-items?${filterParam}`, {cancelToken: source.token});
     responseData.isLoading = false;
     responseData.data = res.data.data;
-    console.log('pag epag => ', res.data.data)
     dispatch({ type: Types.GET_FILTER_PRODUCT_LIST, payload: responseData });
   } catch (error) {
     if(Axios.isCancel(error)) {

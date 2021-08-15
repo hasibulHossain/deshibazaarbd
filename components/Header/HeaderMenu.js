@@ -1,6 +1,5 @@
 import React, { useEffect, memo } from "react";
 
-// third party imports
 import { useRouter } from 'next/router';
 import { Navbar } from "react-bootstrap";
 import { Menu, MenuItem, MenuButton, SubMenu } from "@szhsin/react-menu";
@@ -9,7 +8,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 
-// local imports
 import { getMenuListData } from "./_redux/HeaderAction/HeaderAction";
 import Translate from "../translation/Translate";
 import { translate } from "../../services/translation/translation";
