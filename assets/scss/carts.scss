@@ -408,8 +408,6 @@ $border-bottom: 1px solid #dfdfdf;
 
 		#{$self}__product {
 			display: flex;
-			align-items: center;
-			justify-content: center;
 
 			#{$self}__product-left {
 				margin-right: 1rem;
@@ -473,7 +471,9 @@ $border-bottom: 1px solid #dfdfdf;
 
 				#{$self}__product-dlt-action {
 					margin-left: 1rem;
-					color: #707070;
+					color: var(--color-primary);
+					position: absolute;
+					right: 10px;
 
 					& svg {
 						font-size: 1.2rem;
