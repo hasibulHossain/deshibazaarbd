@@ -813,8 +813,7 @@ a .custom-button-component:hover {
 }
 
 .flash-deal-detail .flash-deal-title {
-  font-size: 1.2em;
-  /* margin-bottom: 20px; */
+  font-size: 1em;
   font-weight: 600;
 }
 
@@ -1225,7 +1224,7 @@ h6.address_book_updated_title {
 }
 
 .footer-info {
-  padding: 30px 10px;
+  padding: 30px 0px 30px 0px;
 }
 
 .footer-info h5 {
