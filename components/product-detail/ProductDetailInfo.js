@@ -16,6 +16,8 @@ import DeliveryFeatures from "./DeliveryFeatures";
 import Slider from "react-slick";
 import PriceCalculation from "../products/partials/PriceCalculation";
 import { showToast } from "../master/Helper/ToastHelper";
+import ProductMainList from "../products/ProductMainList";
+import {useRouter} from 'next/router'
 
 const ProductDetailInfo = (props) => {
 
@@ -30,6 +32,9 @@ const ProductDetailInfo = (props) => {
   const [previewImg, setPreviewImg]   = useState(featured_image);
   
   const zoomImage = { width: 200, height: 250, zoomWidth: 600, img: previewImg };
+
+  const router = useRouter()
+  const queries = router.query;
 
   useEffect(() => {
     dispatch(getCartsAction());
@@ -260,6 +265,10 @@ const ProductDetailInfo = (props) => {
                 </div>
               </div>
               <ProductRatings product={product} />
+              <div className="mb-5 mt-5">
+                <p className="font-weight-bold">People who viewed this item also viewed</p>
+                <ProductMainList type="" limit={6} category={queries.category} />
+              </div>
             </div>
           </div>
         )

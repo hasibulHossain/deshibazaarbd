@@ -69,8 +69,9 @@ function CategoryWiseProductReducer(state = initialState, { type, payload }) {
         error: false,
         products: payload.data.data,
         paginate: {
+          ...state.paginate,
           pages: [...new Array(totalPage_)],
-          current_page: payload.data.data.current_page,
+          current_page: payload.data.current_page,
           first_page_url: payload.data.first_page_url,
           from: payload.data.from,
           last_page: payload.data.last_page,
