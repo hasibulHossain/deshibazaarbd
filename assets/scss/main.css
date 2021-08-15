@@ -2124,7 +2124,7 @@ p.text-secondary.mb-0 {
 }
 
 .cart_item_box_top p {
-  padding: 10px 6px;
+  padding: 5px 6px;
   margin: 0px;
 }
 
@@ -2150,6 +2150,7 @@ p.text-secondary.mb-0 {
 .cart_trash {
   margin: 3px;
   font-weight: 600;
+  margin-top: 6px;
 }
 
 .cart_trash svg {
@@ -2164,12 +2165,13 @@ p.text-secondary.mb-0 {
   display: flex;
   -webkit-align-items: baseline;
   align-items: baseline;
-  margin-top: -6px;
+  margin-top: -13px;
   margin-left: 5px;
 }
 
 .cart_details_body p {
   font-size: 16px;
+  margin: 0px;
 }
 
 p.Spend {
@@ -2178,11 +2180,6 @@ p.Spend {
   font-weight: 500;
   font-size: 0.77rem;
   margin-top: -20px;
-}
-
-p.estimate {
-  font-size: 14px;
-  font-weight: 500;
 }
 
 .cart_items_details {

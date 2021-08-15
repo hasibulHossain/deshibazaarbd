@@ -34,13 +34,14 @@ const CartProduct = ({ cart }) => {
             <FontAwesomeIcon icon={faTimes} />
           </button>
           <p className="remove_title">
-            Remove from cart <br /> item will be removed from order
+            Remove from cart 
           </p>
+          <div className="mb-3">
+            Product will be removed from your Cart...
+          </div>
           <div className="d-flex justify-content-end">
-            <div>
-              <button className="custom_secondary_btn" onClick={handleClose}>CANCEL</button>
-              <button className="custom-button-component ml-3" onClick={() => handleDeleteCartProduct(cart.productID)}>REMOVE</button>
-            </div>
+              <button className="custom_secondary_btn custom-button-component" onClick={handleClose}>Cancel</button>
+              <button className="custom-button-component ml-3" style={{ padding: '5px 10px' }} onClick={() => handleDeleteCartProduct(cart.productID)}>Remove</button>
           </div>
         </Modal.Body>
       </Modal>
