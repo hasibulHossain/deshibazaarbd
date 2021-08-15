@@ -93,9 +93,9 @@ const Header = () => {
 												</div>
 											) : (
 												<>
-													<Dropdown>
+													<Dropdown className="auth-navbar-dropdown">
 														<Dropdown.Toggle variant="simple_btn_bg" className="btn-sm text-capitalize" id="dropdown-basic">
-															{userData.first_name}
+															<div className="auth-user-name">{userData.first_name}</div>
 														</Dropdown.Toggle>
 
 														<Dropdown.Menu>

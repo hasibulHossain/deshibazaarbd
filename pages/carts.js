@@ -75,7 +75,7 @@ export default function Carts() {
                     <p>Availability and promotions will be shown here</p>
                   </div>
                 </Card> */}
-                <div className="card mt-3 mb-2">
+                <div className="card mt-3 mb-5">
 
                   <div className="cart_item_box_top">
                     <p className="pointer" onClick={() => dispatch(toggleAllCartSelection(! checkedAllCarts))}>
@@ -129,7 +129,7 @@ export default function Carts() {
                     ))
                   }
 
-                  <div className="p-2">
+                  <div className="p-2 mb-4">
                     <div className="text-center" >
                       <Link href="/products">
                         <a href="/products" style={{ display: 'inline-block' }}>
