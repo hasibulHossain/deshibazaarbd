@@ -52,7 +52,8 @@ a {
                         Global CSS Part :: End
 /*****************************************************************/
 
-.custom-button-component, a .custom-button-component {
+.custom-button-component,
+a .custom-button-component {
   background-color: var(--color-primary);
   color: #fff !important;
   border: 2px solid var(--color-primary);
@@ -142,7 +143,8 @@ a .custom-button-component:hover {
   height: 20px;
 }
 
-.cart-nav-link .cart-qty, .wishlist-nav-link .wishlist-qty {
+.cart-nav-link .cart-qty,
+.wishlist-nav-link .wishlist-qty {
   position: absolute;
   background: var(--color-green-light);
   color: #fff;
@@ -408,7 +410,7 @@ a .custom-button-component:hover {
   margin: 0 auto;
 }
 
-.product-container .childs .child-logo-box .child-logo img{
+.product-container .childs .child-logo-box .child-logo img {
   height: 80px;
   width: 80px;
 }
@@ -749,7 +751,7 @@ a .custom-button-component:hover {
 }
 
 .fixed-cart-items span:first-child {
-  color:  #fff; /*  #ffbec1 */
+  color: #fff; /*  #ffbec1 */
   width: 20px;
   height: 20px;
   margin-bottom: 5px;
@@ -792,10 +794,14 @@ a .custom-button-component:hover {
 
 .flash-deal-img {
   width: 45%;
+  height: 150px;
   /* padding: 5px; */
   /* height: auto; */
   overflow: hidden;
   align-self: center;
+}
+.flash-deal-img img {
+  height: 100%;
 }
 
 .flash-deal-detail {
@@ -820,7 +826,7 @@ a .custom-button-component:hover {
 .flash-deal-prices {
   display: flex;
   justify-content: space-between;
-  align-items: center; 
+  align-items: center;
   margin: 15px 0px;
 }
 
@@ -1523,11 +1529,11 @@ h6.address_book_updated_title {
 }
 
 .filter_column_3 .product-card-body img:before {
-  content: ' ';
+  content: " ";
   display: block;
   height: 100px;
   width: 100px;
-  background-image: url('/images/default/fallback-image.png');
+  background-image: url("/images/default/fallback-image.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100px 100px;
@@ -1601,7 +1607,8 @@ h6.address_book_updated_title {
   color: var(--color-primary);
 }
 
-.active_category, .isNot_active_category {
+.active_category,
+.isNot_active_category {
   font-size: 12px;
   margin-bottom: -15px;
 }
@@ -1970,7 +1977,8 @@ p.address_sub_title {
   padding: 10px;
 }
 
-.profile_account, .inner_product_list {
+.profile_account,
+.inner_product_list {
   padding: 5px;
   margin-bottom: 0px;
 }
@@ -2942,8 +2950,8 @@ img.payment_method_in_shipping {
   letter-spacing: 1px;
 }
 
-.button_disabled{
-  cursor: not-allowed!important;
+.button_disabled {
+  cursor: not-allowed !important;
 }
 
 /** Order Tracking Form */
@@ -2979,17 +2987,16 @@ img.payment_method_in_shipping {
   font-weight: 800;
 }
 
-
 /** Product Detail Page CSS */
 .product-info-page .breadcrumb {
-  background: #fff!important;
+  background: #fff !important;
   font-size: var(--font-size);
   margin-top: 20px;
   padding: 6px;
-  border-radius: 0px!important;
+  border-radius: 0px !important;
 }
 
-.product-info-page .breadcrumb .breadcrumb-item a{
+.product-info-page .breadcrumb .breadcrumb-item a {
   color: var(--color-primary);
 }
 /** Product Detail Page CSS */
