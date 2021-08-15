@@ -142,7 +142,7 @@ a .custom-button-component:hover {
   height: 20px;
 }
 
-.cart-nav-link .cart-qty {
+.cart-nav-link .cart-qty, .wishlist-nav-link .wishlist-qty {
   position: absolute;
   background: var(--color-green-light);
   color: #fff;
@@ -1970,10 +1970,9 @@ p.address_sub_title {
   padding: 10px;
 }
 
-.profile_account,
-.inner_product_list {
-  padding: 15px;
-  margin-bottom: 20px;
+.profile_account, .inner_product_list {
+  padding: 5px;
+  margin-bottom: 0px;
 }
 
 .custome_form_group {
@@ -2002,7 +2001,7 @@ p.address_sub_title {
 
 .wishlist_list_product_details h5.product_name {
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 13px;
 }
 
 .wishlist_wishIcon {

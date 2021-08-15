@@ -12,7 +12,7 @@ const RemoveWishlist = ({ product }) => {
     }
 
     return (
-        <FontAwesomeIcon onClick={() => addOrRemoveWishlist(product)} icon={faTrash} className="text-secondary pointer" />
+        <FontAwesomeIcon onClick={() => addOrRemoveWishlist(product)} icon={faTrash} className="text-danger pointer" />
     );
 };
 

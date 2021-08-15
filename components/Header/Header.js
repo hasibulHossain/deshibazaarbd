@@ -18,6 +18,7 @@ import { getUserDataAction, handleLogoutUser } from "../_redux/getUserData/Actio
 import Translate from "../translation/Translate";
 import { translate } from "../../services/translation/translation";
 import ActiveLink from "../master/activeLink/ActiveLink";
+import HeaderWishlist from "./HeaderWishlist";
 
 const Header = () => {
 	const dispatch = useDispatch();
@@ -34,7 +35,7 @@ const Header = () => {
 		dispatch(getUserDataAction());
 	}, []);
 
-	const formatCartTotalQty = (totalQuantity) => {
+	const formatQtyDisplay = (totalQuantity) => {
 		if (totalQuantity <= 9) {
 			return <span style={{ paddingLeft: 2 }}> {totalQuantity} </span>;
 		} else if (totalQuantity > 9 && totalQuantity <= 99) {
@@ -155,16 +156,7 @@ const Header = () => {
 															</ActiveLink>
 														</Dropdown.Menu>
 													</Dropdown>
-
-													<Link href="/wishlist" className="header-nav-link">
-														<a>
-															<FontAwesomeIcon
-																className="custom-fontAwesome"
-																icon={faHeart}
-															/>{" "}
-															<Translate>Wishlist</Translate>
-														</a>
-													</Link>
+													<HeaderWishlist />
 												</>
 											)
 										}
@@ -177,7 +169,7 @@ const Header = () => {
 												icon={faShoppingBag}
 											/>
 											<span className="cart-qty">
-												{formatCartTotalQty(totalQuantity)}
+												{formatQtyDisplay(totalQuantity)}
 											</span>
 											&nbsp;&nbsp; <Translate>Cart</Translate>
 										</span>
