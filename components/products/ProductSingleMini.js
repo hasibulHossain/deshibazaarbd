@@ -37,9 +37,16 @@ const ProductSingleMini = ({ item = {}, columnClassName = 'col-md-2', productKey
         }
     }
 
+    const imageLoader = ({ src, width, quality }) => {
+        // return `https://example.com/${src}?w=${width}&q=${quality || 75}`
+        return `https://icon-library.com/images/img-icon/img-icon-0.jpg`
+    }
+
+    const imageURL = `${process.env.NEXT_PUBLIC_URL}images/products/${item.featured_image}`;
+
     return (
         <div className={columnClassName}>
-                <div className={`${cardClassName} ${cardClass} ${(columnClassName === "col-md-2" || columnClassName === "col-md-3") ? "filter_column_3" : "filter_column_10"} `}>
+            <div className={`${cardClassName} ${cardClass} ${(columnClassName === "col-md-2" || columnClassName === "col-md-3") ? "filter_column_3" : "filter_column_10"} `}>
                 <div className="product-purchase-section">
                     <button>
                         <FontAwesomeIcon className="add_to_cart" icon={faShoppingBag}
@@ -59,7 +66,7 @@ const ProductSingleMini = ({ item = {}, columnClassName = 'col-md-2', productKey
                     {
                         columnClassName === "col-md-2" && (
                             <>
-                                <img src={`${process.env.NEXT_PUBLIC_URL}images/products/${item.featured_image}`} alt={item.name} className="img-fluid" />
+                                <img src={imageURL} className="img-fluid" />
                                 <div>
                                     <p className="product-title">
                                         <Translate>{item.name}</Translate>
@@ -75,12 +82,12 @@ const ProductSingleMini = ({ item = {}, columnClassName = 'col-md-2', productKey
                             </>
                         )
                     }
-                    
+
                     {
                         (columnClassName === "col-md-3" || columnClassName === "col-md-12") &&
                         <div className="row">
                             <div className={columnClassName == "col-md-3" ? "col-md-12" : "col-5"}>
-                                <img src={`${process.env.NEXT_PUBLIC_URL}images/products/${item.featured_image}`} alt={item.name} className="img-fluid" />
+                                <img src={imageURL} alt={item.name} className="img-fluid" />
                             </div>
                             <div className={columnClassName === "col-md-3" ? "col-md-12" : "col-7"}>
                                 <div>

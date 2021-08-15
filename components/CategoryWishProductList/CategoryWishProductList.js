@@ -53,7 +53,7 @@ const CategoryWishProductList = () => {
     <section className="category_wise_product_list">
       <div className="row justify-content-between">
         <div className="col-md-5">
-          <h5>{categoryBrandDetails.name}</h5>
+          <h5 className="category-search-title">{categoryBrandDetails.name}</h5>
           <p>
             {
               paginate.total + ' items found in ' + categoryBrandDetails.name 
@@ -63,7 +63,7 @@ const CategoryWishProductList = () => {
         <div className="col-md-5">
           <div className="d-flex justify-content-end">
             <div className="filter_view">
-              <span>View :</span>
+              <span>View</span>
               <FontAwesomeIcon
                 className={
                   columns == "col-md-3"
@@ -84,7 +84,7 @@ const CategoryWishProductList = () => {
               />
             </div>
             <div className="filter_view d-flex ml-3">
-              <span>Sort by :</span>
+              <span>Sort by</span>
               <Form>
                 <Form.Group controlId="exampleFormSelectCustom">
                   <Form.Control onChange={selectHandler} as="select" custom>

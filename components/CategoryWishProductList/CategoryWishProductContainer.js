@@ -69,8 +69,8 @@ const CategoryWishProductContainer = () => {
         categoryBrandDetails.childs.length > 0 && (
           <div className="childs">
             {
-              categoryBrandDetails.childs.map(item => (
-                <div className="child-logo-box">
+              categoryBrandDetails.childs.map((item, index) => (
+                <div className="child-logo-box" key={index}>
                   <div className="child-logo">
                     <img src={item.image_url && item.image_url} alt={item.name} />
                   </div>
