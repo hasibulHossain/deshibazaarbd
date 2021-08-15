@@ -197,7 +197,7 @@ const ProductFilter = () => {
         <p className="filter_title">Filter By Rating</p>
         <div style={{display: 'flex', justifyContent: 'space-between'}}>
           <ReactStars {...reactStarProps} />
-          <span style={{cursor: 'pointer'}} onClick={resetRatingHandler}>Clear</span>
+          <span style={{cursor: 'pointer', fontSize: 12, color: 'var(--color-primary)'}} onClick={resetRatingHandler}>Clear</span>
         </div>
       </div>
 

@@ -10,6 +10,8 @@ import router from "next/router";
 import { toggleProductModalAction } from "./_redux/Action/ProductAction";
 import LoadingSpinner from "../master/LoadingSpinner/LoadingSpinner";
 import { activeCurrency, formatCurrency } from "../../services/currency";
+import SimpleBtn from "../master/SimpleBtn/SimpleBtn";
+import Translate from "../translation/Translate";
 
 const ProductSingleFull = ({ product }) => {
     const dispatch = useDispatch();
@@ -23,10 +25,7 @@ const ProductSingleFull = ({ product }) => {
 
     const [subTotal, setSubTotal] = useState(default_price)
 
-
-
-    const zoomImg = { width: 200, height: 250, zoomWidth: 600, img: previewImg };
-
+    // const zoomImg = { width: 200, height: 250, zoomWidth: 600, img: previewImg };
 
     useEffect(() => {
         if (product) {
@@ -68,14 +67,12 @@ const ProductSingleFull = ({ product }) => {
 
     }
 
-
     const redirectToCheckoutPage = () => {
         if (parseInt(product.current_stock) === 0) {
-            showToast("error", "This product is out of stock!");
+            showToast("error", "Product is out of stock!");
         } else {
             dispatch(addToCartAction(product));
             router.push("/checkout")
-
         }
     }
 
@@ -126,13 +123,10 @@ const ProductSingleFull = ({ product }) => {
                                 <h3 className="product_title">
                                     {product.name && product.name}
                                 </h3>
-                                <div className="view_details pointer" onClick={() => redirectToProductDetailsPage(product)}>View details</div>
+                                <SimpleBtn variant="danger" style={{ width: 'fit-content', padding: 0, width: 100, fontSize: 12 }} onClick={() => redirectToProductDetailsPage(product)}>
+                                    <Translate>View details</Translate>
+                                </SimpleBtn>
                             </div>
-                            {/* <Link href={"/products/" + product.sku}>
-                                <h3 className="product_title pointer">
-                                    {product.name && product.name}
-                                </h3>
-                            </Link> */}
 
                             <div className="h3 product_price">
                                 <PriceCalculation item={product} />
@@ -143,46 +137,52 @@ const ProductSingleFull = ({ product }) => {
                             </p>
 
                             <div className="product_details_quantity_section">
-                                <div>
-                                    <h6>Quantity</h6>
-                                    <div className="quantity">
-                                        <button
-                                            disabled={quantity <= 1 ? true : false}
-                                            onClick={() => updateQuantity(quantity - 1)}
-                                            className={quantity <= 1 ? `not-allowed` : `pointer`}
-                                        >
-                                            <FontAwesomeIcon icon={faMinus} />
-                                        </button>
-                                        <input type="text" value={quantity} onChange={e => updateQuantity(e.target.value)} />
-                                        <button
-                                            className="pointer"
-                                            onClick={() => updateQuantity(quantity + 1)}
-                                        >
-                                            <FontAwesomeIcon icon={faPlus} />
-                                        </button>
+                                <div className="d-flex">
+                                    <div>
+                                        {/* <h6>Quantity</h6> */}
+                                        <div className="quantity mt-0">
+                                            <button
+                                                disabled={quantity <= 1 ? true : false}
+                                                onClick={() => updateQuantity(quantity - 1)}
+                                                className={quantity <= 1 ? `not-allowed` : `pointer`}
+                                            >
+                                                <FontAwesomeIcon icon={faMinus} />
+                                            </button>
+                                            <input type="text" value={quantity} onChange={e => updateQuantity(e.target.value)} />
+                                            <button
+                                                className="pointer"
+                                                onClick={() => updateQuantity(quantity + 1)}
+                                            >
+                                                <FontAwesomeIcon icon={faPlus} />
+                                            </button>
+                                        </div>
+                                        <p className="floating-cart__product-price mt-3">
+                                            {quantity} <span>X</span>&nbsp;
+                                            {formatCurrency(default_price)} = {formatCurrency(subTotal)}&nbsp;
+                                            {activeCurrency('code')}
+                                        </p>
                                     </div>
-                                    <p className="floating-cart__product-price mt-3">
-                                        {quantity} <span>X</span>&nbsp;
-                                        {formatCurrency(default_price)} = {formatCurrency(subTotal)}&nbsp;
-                                        {activeCurrency('code')}
-                                    </p>
-                                </div>
-                                <div className="mr-3">
-                                    <h6>Pick your colo</h6>
-                                    <div className="color_picker">
+                                    <div className="mr-3">
+                                        {/* <h6>Color</h6> */}
+                                        {/* <div className="color_picker">
                                         <p className="colorBox" style={{ backgroundColor: "#2df" }}></p>
                                         <p className="colorBox" style={{ backgroundColor: "#4c3" }}></p>
                                         <p className="colorBox" style={{ backgroundColor: "#7d8" }}></p>
+                                    </div> */}
                                     </div>
                                 </div>
+
                                 <div className="d-flex mt-3">
                                     <div className="button addToCartBtn"
                                         disabled={true}
                                         onClick={() => addToCart()}
-                                    >Add to cart</div>
+                                    >
+                                        <Translate>Add to cart</Translate>
+                                    </div>
                                     <div className="button buyBtn" onClick={() => redirectToCheckoutPage()}>Buy now</div>
                                 </div>
                             </div>
+
                             <div className="product_details_bottom mt-2">
                                 <div>
                                     <div className="category_tags d-flex">

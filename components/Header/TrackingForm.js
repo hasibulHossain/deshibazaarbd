@@ -25,7 +25,13 @@ const TrackingForm = ({ show, setShow }) => {
 
     useEffect(() => {
         dispatch(getUserDataAction());
-        dispatch(getUserOrderList(5))
+
+        const prevTransaction = localStorage.getItem('tr') || null;
+
+        if (typeof prevTransaction === 'undefined' || prevTransaction === null || prevTransaction === false) {
+            localStorage.removeItem('tr');
+            dispatch(getUserOrderList(5));
+        }
     }, []);
 
     return (

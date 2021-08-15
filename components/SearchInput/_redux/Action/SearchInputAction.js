@@ -3,7 +3,7 @@ import * as Types from "../Types/Types";
 
 export const searchProductAction = (searchKeyword) => async (dispatch) => {
   const search = searchKeyword;
-  if (search.length <= 1) return;
+  // if (search.length <= 1) return;
 
   const response = {
     loading: true,

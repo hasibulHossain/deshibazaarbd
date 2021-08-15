@@ -21,7 +21,9 @@ const HeaderMenu = ({ toggleNav }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getMenuListData());
+    if (!menuList.length) {
+      dispatch(getMenuListData());
+    }
   }, []);
 
   /**
@@ -66,7 +68,7 @@ const HeaderMenu = ({ toggleNav }) => {
                         return <MenuItem key={i} onClick={() => clickMenuLink(subCategory.id)}><Translate>{subCategory.name}</Translate></MenuItem>;
                       } else {
                         return (
-                          <SubMenu key={i} label={translate(subCategory.name)} onClick={() => clickMenuLink(subCategory.id)}>
+                          <SubMenu key={i} label={translate(subCategory.name)}>
                             {subCategory.childs.map((subCtgOne, i) => (
                               <MenuItem key={i} onClick={() => clickMenuLink(subCtgOne.id)}>
                                 <Translate>{subCtgOne.name}</Translate>
@@ -104,8 +106,8 @@ const HeaderMenu = ({ toggleNav }) => {
                       return (
                         <SubMenu key={i} label={translate(subCategory.name)}>
                           {subCategory.childs.length > 0 &&
-                            subCategory.childs.map((subCtgOne, i) => (
-                              <MenuItem onClick={() => clickMenuLink(subCtgOne.id)} key={i}><Translate>{subCtgOne.name}</Translate></MenuItem>
+                            subCategory.childs.map((subCtgOne, index2) => (
+                              <MenuItem onClick={() => clickMenuLink(subCtgOne.id)} key={index2}><Translate>{subCtgOne.name}</Translate></MenuItem>
                             ))}
                         </SubMenu>
                       );

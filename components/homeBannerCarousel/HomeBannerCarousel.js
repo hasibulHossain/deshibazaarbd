@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, memo } from "react";
 import { Carousel } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingSkelleton from "../master/skelleton/LoadingSkelleton";
@@ -10,7 +10,9 @@ const HomeBannerCarousel = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getHomeCarouselData());
+    if(!carouselList.length) {
+      dispatch(getHomeCarouselData());
+    }
   }, []);
 
   return (
@@ -62,4 +64,4 @@ const HomeBannerCarousel = () => {
   );
 };
 
-export default HomeBannerCarousel;
+export default memo(HomeBannerCarousel);

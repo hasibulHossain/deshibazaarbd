@@ -11,15 +11,17 @@ const CategoryList = ({ parentID = null }) => {
   const dispatch = useDispatch();
   const router   = useRouter();
 
+  const { categories, loading } = useSelector((state) => state.CategoryReducer);
+
   useEffect(() => {
-    if (parentID === 'all') {
-      dispatch(getCategories(parentID, null, '')); // Get the all categories
-    } else {
-      dispatch(getCategories(parentID, 12, 'homepage')); // Get the 12 categories
+    if ( ! categories.length ) {
+      if (parentID === 'all') {
+        dispatch(getCategories(parentID, null, '')); // Get the all categories
+      } else {
+        dispatch(getCategories(parentID, 12, 'homepage')); // Get the 12 categories
+      }
     }
   }, []);
-
-  const { categories, loading } = useSelector((state) => state.CategoryReducer);
 
   /**
    * Navigate to Category List page

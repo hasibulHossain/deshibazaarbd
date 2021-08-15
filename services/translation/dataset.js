@@ -156,6 +156,11 @@ export default [
         'en' : 'Latest Products',
         'bn' : 'সাম্প্রতিক প্রোডাক্টস'
     },
+    {
+        'key': 'Add to cart',
+        'en' : 'Add to cart',
+        'bn' : 'কার্টে যুক্ত করুন'
+    },
 
 
 
