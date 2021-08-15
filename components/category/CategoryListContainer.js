@@ -12,14 +12,14 @@ const CategoryListContainer = ({ parentID = null }) => {
                 <h5>
                     <Translate>Shop by categories</Translate>
                 </h5>
-                {
+                {/* {
                     parentID !== 'all' && 
                     <Link href="/categories">
                         <a href="/categories">
                             <Button buttonText={translate('View all')} isFontAwesome={true} />
                         </a>
                     </Link>
-                }
+                } */}
             </div>
 
             <CategoryList parentID={parentID} />

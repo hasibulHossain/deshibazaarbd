@@ -47,13 +47,14 @@ const DealFlash = () => {
               const currentTime      = new Date().getTime();
               const offerEndCount    = (offerEndDate - currentTime) / 1000
               const isOfferAvailable = offerEndCount > 1;
+              const imageURL         = `${process.env.NEXT_PUBLIC_URL}images/products/${item.featured_image}`;
 
               return (
               <div className="col-md-6" key={index + 1}>
                 <div className="flash-deal-card p-3">
                   <div className="flash-deal-img">
                     <img
-                      src={`${process.env.NEXT_PUBLIC_URL}images/products/${item.featured_image}`}
+                      src={imageURL ? imageURL : ''}
                       alt={item.name}
                       className="img-fluid"
                     />
@@ -77,10 +78,9 @@ const DealFlash = () => {
                           <div>
                             <SimpleBtn 
                               variant="danger" 
+                              size="sm"
                               onClick={() => addToCart(item)} 
-                              style={
-                                {width: 'fix-content', background: 'none', border: '1px solid #ccc', color: '#333'}
-                              } >
+                              style={{width: 'fix-content', background: 'var(--color-primary)', border: '1px solid var(--color-primary)', color: '#fff', padding: '5px 10px' }}>
                               Add to Cart
                             </SimpleBtn>
                           </div>
@@ -99,6 +99,7 @@ const DealFlash = () => {
                         count={isOfferAvailable ? offerEndCount : 0}
                         size={20}
                         labelSize={14}
+                        color="var(--color-primary)"
                         dayTitle="DAY"
                         hourTitle="HRS"
                         minuteTitle="MINS"

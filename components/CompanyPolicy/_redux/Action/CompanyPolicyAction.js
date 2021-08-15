@@ -2,13 +2,6 @@ import Axios from 'axios';
 import * as Types from "../Type/Types";
 
 export const getCompanyPolicyList = () => (dispatch) => {
-    // const responseData = {
-    //     data: [],
-    //     status: false,
-    //     isLoading: true,
-    // }
-    // dispatch({type: Types.GET_COMPANY_POLICY_LIST, payload: responseData});
-    //this data is use for only test
     const data = [
         {
             title: "30 days return",
