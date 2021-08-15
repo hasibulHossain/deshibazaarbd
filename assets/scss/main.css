@@ -6,6 +6,8 @@
 :root {
   --color-primary: #e9000f;
   --color-placeholder: #dfdfdf;
+  --color-green: #0c7e33;
+  --color-green-light: #16b62a;
   --font-size: 12px;
 }
 
@@ -86,7 +88,7 @@ a .custom-button-component:hover {
 /*****************************************************************/
 
 .header-top {
-  background-color: #0c7e33;
+  background-color: var(--color-green);
   color: #fff;
   font-weight: 200;
   padding: 4px;
@@ -131,7 +133,7 @@ a .custom-button-component:hover {
 }
 
 .cart-nav-link svg {
-  background: #ea3732;
+  background: var(--color-primary);
   color: #fff;
   padding: 5px;
   border-radius: 14px;
@@ -142,7 +144,7 @@ a .custom-button-component:hover {
 
 .cart-nav-link .cart-qty {
   position: absolute;
-  background: #16b62a;
+  background: var(--color-green-light);
   color: #fff;
   font-size: 10px;
   width: 17px;
@@ -1095,11 +1097,9 @@ h6.address_book_updated_title {
 .product_details_quantity_section {
   border-top: 1px solid #d6d6d6;
   border-bottom: 1px solid #d6d6d6;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  -webkit-justify-content: space-between;
   justify-content: space-between;
-  padding: 30px 10px;
+  padding: 15px 5px 15px 0px;
 }
 
 .quantity {
@@ -1159,9 +1159,9 @@ h6.address_book_updated_title {
 }
 
 .product_details_quantity_section .buyBtn {
-  background-color: #8b8b8b;
+  background-color: var(--color-green-light);
   color: #fff;
-  border: 2px solid #8b8b8b;
+  border: 2px solid var(--color-green-light);
   border-radius: 25px;
   text-align: center;
   padding: 5px 15px;
@@ -2645,7 +2645,7 @@ span.brand_name_in_details:hover {
 
 .stock-area.out-stock span {
   background-color: #fffab8;
-  color: red;
+  color: var(--color-primary);
 }
 
 .stock-area.icon {
@@ -2705,7 +2705,7 @@ img.multiple_preview_images {
 .product_preview_gallery .slick-prev,
 .product_preview_gallery .slick-next {
   display: block !important;
-  background-color: red;
+  background-color: var(--color-primary);
   height: 25px;
   width: 25px;
   border-radius: 5px;
