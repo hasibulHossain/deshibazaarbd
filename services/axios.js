@@ -25,7 +25,7 @@ axios.interceptors.request.use(
 axios.interceptors.response.use((response) => {
     return response
 }, function(error) {
-    if (error.response.status === 401) {
+    if (typeof error.response !== 'undefined' &&  error.response.status === 401) {
         localStorage.removeItem('loginData');
         localStorage.removeItem('access_token');
         window.location.href = "/login";

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, memo } from "react";
 import { Carousel } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingSkelleton from "../master/skelleton/LoadingSkelleton";
@@ -62,4 +62,4 @@ const HomeBannerCarousel = () => {
   );
 };
 
-export default HomeBannerCarousel;
+export default memo(HomeBannerCarousel);
