@@ -35,7 +35,7 @@ const HeaderTop = () => {
                 <div className="row align-items-center">
                     <div className="col-md-5">
                         <p className="heading-top-text">
-                            Get Your <span className="holyday-shopping">Holiday Shopping</span> On Wholesale Pricing
+                          <span class="d-none d-lg-block">  Get Your <span className="holyday-shopping">Holiday Shopping</span> On Wholesale Pricing</span>
                         </p>
                     </div>
                     <div className="col-md-7 heading-top-right">
@@ -61,7 +61,7 @@ const HeaderTop = () => {
 
                             <p className="heading-top-text pointer" onClick={() => handleShow()}>
                                 <FontAwesomeIcon className="custom-fontAwesome" icon={faShippingFast} />
-                                <Translate>Track My Order</Translate>
+                                <Translate>Track Order</Translate>
                             </p>
 
                             <Dropdown className="dropdown-currency">
