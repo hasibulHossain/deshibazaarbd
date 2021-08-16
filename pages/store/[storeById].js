@@ -1,10 +1,11 @@
 import React from 'react'
 import MainLayout from '../../components/layouts/MainLayout'
+import StoreInfoContainer from '../../components/store-info/StoreInfoContainer';
 
 function StoreById() {
     return (
-        <MainLayout>
-            <h1>business id</h1>
+        <MainLayout pageTitle='store information'>
+            <StoreInfoContainer />
         </MainLayout>
     )
 }

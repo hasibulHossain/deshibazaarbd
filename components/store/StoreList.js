@@ -30,7 +30,7 @@ const StoreList = () => {
                             {
                                 (item.logo !== null && item.logo !== '')?
                                 <div className="shop-logo">
-                                    <img src={`${process.env.NEXT_PUBLIC_URL}/images/business/${item.logo}`} alt={item.name} />
+                                    <img src={`${process.env.NEXT_PUBLIC_URL}/images/vendors/${item.logo}`} alt={item.name} />
                                 </div>
                                 :
                                 <div className="shop-logo">
