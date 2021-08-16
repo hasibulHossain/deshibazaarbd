@@ -129,6 +129,7 @@ const ShippingInfo = () => {
                     }
                 </div>
             </div>
+            
             <SimpleModal
                 size        = "xl"
                 show        = {show}

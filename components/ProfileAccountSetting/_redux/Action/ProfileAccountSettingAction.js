@@ -1,7 +1,8 @@
 import Axios from 'axios';
-import { showToast } from '../../../master/Helper/ToastHelper';
-import { getUserDataAction } from '../../../_redux/getUserData/Action/UserDataAction';
 import * as Types from "../Type/Types";
+import { showToast } from '../../../master/Helper/ToastHelper';
+import { printErrorMessages } from '../../../../services/ServerErrorMessages';
+
 
 //get shipping address
 export const getShippingAddress = (addressType) => (dispatch) => {
@@ -168,18 +169,34 @@ export const handleStoreBillingAddress = (billingAddressInput) => (dispatch) => 
         status: false,
         isLoading: true,
     }
+
+    if (typeof billingAddressInput.type === 'undefined' || billingAddressInput.type === "") {
+        showToast('error', 'Please give address type !');
+        return;
+    }
+
     dispatch({ type: Types.STORE_BILLING_ADDRESS, payload: responseData });
     const userStorageData = JSON.parse(localStorage.getItem("loginData"));
-    const submittedData = billingAddressInput;
+    const submittedData   = billingAddressInput;
     submittedData.user_id = userStorageData.userData.id;
+
     Axios.post(`address`, submittedData)
         .then((res) => {
             responseData.status = true;
             responseData.isLoading = false;
             showToast('success', res.data.message);
             dispatch({ type: Types.STORE_BILLING_ADDRESS, payload: responseData });
-        })
+        }).catch(error => {
+            const { response } = error;
 
+            if (response.data.errors) {
+                const errorMessage = printErrorMessages(response.data.errors);
+                showToast('error', errorMessage);
+            } else {
+                showToast('error', response.data.message);
+                return;
+            }
+        })
 }
 
 // get single address
@@ -257,6 +274,12 @@ export const handleUpdateBillingAddress = (billingAddressInput) => (dispatch) =>
         status: false,
         isLoading: true,
     }
+
+    // if (typeof billingAddressInput.type === 'undefined' || billingAddressInput.type === "") {
+    //     showToast('error', 'Please give address type !');
+    //     return;
+    // }
+
     dispatch({ type: Types.STORE_BILLING_ADDRESS, payload: responseData });
     // const userStorageData = JSON.parse(localStorage.getItem("loginData"));
     // const submittedData = billingAddressInput;
@@ -269,36 +292,54 @@ export const handleUpdateBillingAddress = (billingAddressInput) => (dispatch) =>
             showToast('success', res.data.message);
             dispatch({ type: Types.STORE_BILLING_ADDRESS, payload: responseData });
         })
-        .catch(err => {
-        })
+       .catch(error => {
+            const { response } = error;
 
+            if (response.data.errors) {
+                const errorMessage = printErrorMessages(response.data.errors);
+                showToast('error', errorMessage);
+            } else {
+                showToast('error', response.data.message);
+                return;
+            }
+        })
 }
 
 //handle store billing address
 export const addAddress = (addressInput, type, closeModal) => (dispatch) => {
+    
+    if (typeof addressInput.type === 'undefined' || addressInput.type === "") {
+        addressInput.type = type;
+    }
+
+    if (typeof addressInput.type === 'undefined' || addressInput.type === "") {
+        showToast('error', 'Please give an address type !');
+        return;
+    }
 
     const responseData = {
         status: false,
         isLoading: true,
     }
 
-    let method;
+    let method, url;
     if (type === 'new_address') {
-        method = 'post'
+        method = 'post';
+        url = `address`;
     } else {
-        method = 'put'
+        method = 'put';
+
+        if (typeof addressInput.id === 'undefined' || addressInput.id === "") {
+            method = 'post';
+            url = `address`;
+        } else {
+            url = `address/${addressInput.id}`
+        }
     }
 
     dispatch({ type: Types.STORE_BILLING_ADDRESS, payload: responseData });
     const userStorageData = JSON.parse(localStorage.getItem("loginData"));
     addressInput['user_id'] = userStorageData.userData.id;
-
-    let url;
-    if (type === 'new_address') {
-        url = `address`
-    } else {
-        url = `address/${addressInput.id}`
-    }
 
     Axios({
         method: method,
@@ -318,10 +359,29 @@ export const addAddress = (addressInput, type, closeModal) => (dispatch) => {
             responseData.isLoading = false;
             dispatch({ type: Types.STORE_BILLING_ADDRESS, payload: responseData });
             const { response } = err;
-            // const { request, ...errorObject } = response;
+            
+            if (response.data.errors) {
+                const errorMessage = printErrorMessages(response.data.errors);
+                showToast('error', errorMessage);
+            } else {
+                showToast('error', response.data.message);
+                return;
+            }
+
             responseData.isLoading = false;
-            // showToast("error", response.data.message)
             closeModal();
+        })
+
+        .catch(error => {
+            const { response } = error;
+
+            if (response.data.errors) {
+                const errorMessage = printErrorMessages(response.data.errors);
+                showToast('error', errorMessage);
+            } else {
+                showToast('error', response.data.message);
+                return;
+            }
         })
 
     // Axios.post(`address`, billingAddressInput)

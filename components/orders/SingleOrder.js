@@ -58,7 +58,7 @@ const SingleOrder = ({ item, isManageable = true }) => {
                                 isManageable && (
                                     <Link href={`/order/${item.id}`}>
                                         <a>
-                                            <button class="btn btn-info btn-sm mr-2">
+                                            <button class="btn btn-info order-top-btn btn-sm mr-2">
                                                 <FontAwesomeIcon icon={faEye} /> View
                                             </button>
                                         </a>
@@ -67,21 +67,20 @@ const SingleOrder = ({ item, isManageable = true }) => {
                             }
                             <Link href={`/order/invoice/${item.id}`}>
                                 <a>
-                                    <button class="btn btn-success btn-sm">
+                                    <button class="btn btn-success order-top-btn btn-sm">
                                         <FontAwesomeIcon icon={faPrint} /> Invoice
                                     </button>
                                 </a>
                             </Link>
-                        </div>
-                        {
-                            isManageable && item.is_suspend == 0 && (
-                                <div className="float-right">
-                                    <button class="btn btn-danger btn-sm" onClick={() => toggleShowHandler(item)}>
+
+                            {
+                                isManageable && item.is_suspend == 0 && (
+                                    <button class="btn btn-danger order-top-btn btn-sm ml-2" onClick={() => toggleShowHandler(item)}>
                                         <FontAwesomeIcon icon={faTimes} /> Cancel
                                     </button>
-                                </div>
-                            )
-                        }
+                                )
+                            }
+                        </div>
                     </div>
 
                     {/* {
@@ -133,7 +132,7 @@ const SingleOrder = ({ item, isManageable = true }) => {
                                         </div>
                                         {
                                             item.is_suspend == 0 && (
-                                                <div className="col-5">
+                                                <div className="col-5 order-status-text">
                                                     <p className="text-success">Estimated Delivery By {moment(product.approx_delivery_date).format("dddd, MMMM Do YYYY")}</p>
                                                 </div>
                                             )
