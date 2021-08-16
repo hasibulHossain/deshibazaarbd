@@ -12,6 +12,7 @@ import NewCollection from "../components/NewCollection/NewCollection";
 // import OfferProducts from "../components/OfferProducts/OfferProducts";
 import ProductSection from "../components/products/ProductSection";
 import { translate } from "../services/translation/translation";
+import StoreContainer from "../components/store/StoreContainer";
 
 export default function Home() {
 
@@ -32,6 +33,7 @@ export default function Home() {
 
       {/* <ShopBanner /> */}
       <ShopContainer />
+      <StoreContainer />
       <CompanyPolicyContainer />
     </MainLayout>
   );

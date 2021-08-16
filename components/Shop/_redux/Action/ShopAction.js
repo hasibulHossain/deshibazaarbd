@@ -8,9 +8,9 @@ export const getShopList = () => async (dispatch) => {
     // initialize req
     dispatch({ type: Types.INIT_SHOP_LIST });
     const res = await Axios.get(url);
-    const fileteredData = res.data.data.filter(brand => (brand.slug !== 'un-categorized' && brand.slug !== 'others'));
+    const filteredData = res.data.data.filter(brand => (brand.slug !== 'un-categorized' && brand.slug !== 'others'));
     // successful res
-    dispatch({ type: Types.GET_SHOP_LIST, payload: { ShopList: fileteredData } });
+    dispatch({ type: Types.GET_SHOP_LIST, payload: { ShopList: filteredData } });
   } catch (error) {
     // catch error
     dispatch({ type: Types.FETCH_SHOP_LIST_FAILED, payload: { error: true } });

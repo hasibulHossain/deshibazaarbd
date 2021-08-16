@@ -9,6 +9,7 @@ import HomeBannerCarouselReducer from "../components/homeBannerCarousel/_redux/h
 import RegisterReducer from "../components/LoginRegistration/_redux/Reducer/RegisterReducer";
 import ProductTopListReducer from "../components/ProductTopList/_redux/Reducer/ProductTopListReducer";
 import ShopReducer from "../components/Shop/_redux/Reducer/ShopReducer";
+import StoreReducer from "../components/store/_redux/reducer/store-reducer";
 import CategoryReducer from "../components/category/_redux/Reducer/CategoryReducer";
 import AuthReducer from "../components/LoginRegistration/_redux/Reducer/AuthReducer";
 import UserDataReducer from "../components/_redux/getUserData/Reducer/UserDataReducer";
@@ -39,6 +40,7 @@ export default combineReducers({
   DealFlashReducer            : DealFlashReducer,
   CategoryWiseProductReducer  : CategoryWiseProductReducer,
   ShopReducer                 : ShopReducer,
+  StoreReducer                : StoreReducer,
   RegisterReducer             : RegisterReducer,
   AuthReducer                 : AuthReducer,
   UserDataReducer             : UserDataReducer,
