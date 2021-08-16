@@ -9,6 +9,7 @@ import HomeBannerCarouselReducer from "../components/homeBannerCarousel/_redux/h
 import RegisterReducer from "../components/LoginRegistration/_redux/Reducer/RegisterReducer";
 import ProductTopListReducer from "../components/ProductTopList/_redux/Reducer/ProductTopListReducer";
 import ShopReducer from "../components/Shop/_redux/Reducer/ShopReducer";
+import StoreReducer from "../components/store/_redux/reducer/store-reducer";
 import CategoryReducer from "../components/category/_redux/Reducer/CategoryReducer";
 import AuthReducer from "../components/LoginRegistration/_redux/Reducer/AuthReducer";
 import UserDataReducer from "../components/_redux/getUserData/Reducer/UserDataReducer";
@@ -28,6 +29,7 @@ import WebsitePageReducer from "../components/_redux/WebsiteInformation/Reducer/
 import FooterReducer from "../components/Footer/_redux/Reducer/FooterReducer";
 import ReviewReducer from "../components/product-review/_redux/reducer/productReviewReducer";
 import ForgetPasswordReducer from '../components/forget-password/_redux/reducer/forget-password-reducer';
+import StoreInfoReducer from '../components/store-info/_redux/reducer/store-info_reducer';
 
 export default combineReducers({
   GlobalReducer               : GlobalReducer,
@@ -39,6 +41,8 @@ export default combineReducers({
   DealFlashReducer            : DealFlashReducer,
   CategoryWiseProductReducer  : CategoryWiseProductReducer,
   ShopReducer                 : ShopReducer,
+  StoreReducer                : StoreReducer,
+  StoreInfoReducer            : StoreInfoReducer,
   RegisterReducer             : RegisterReducer,
   AuthReducer                 : AuthReducer,
   UserDataReducer             : UserDataReducer,

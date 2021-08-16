@@ -56,7 +56,6 @@ const DealFlash = () => {
                     <img
                       src={imageURL ? imageURL : ''}
                       alt={item.name}
-                      className="img-fluid"
                     />
                   </div>
                   <div className="flash-deal-detail">
