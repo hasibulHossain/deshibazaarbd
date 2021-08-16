@@ -19,11 +19,12 @@ const AddressUpdate = (props) => {
         dispatch(handleChangeBillingAddressInput(name, value))
     }
 
-    const StoreBillingAddress = () => {
-        dispatch(handleUpdateBillingAddress(selectedAddress))
-    }
+    // const StoreBillingAddress = () => {
+    //     dispatch(handleUpdateBillingAddress(selectedAddress))
+    // }
 
-    const submitUpdatedAddressHandler = () => {
+    const submitUpdatedAddressHandler = (e) => {
+        e.preventDefault();
         dispatch(addAddress(selectedAddress, props.type, props.closeModal))
     }
 
@@ -59,11 +60,10 @@ const AddressUpdate = (props) => {
                 {
                     props.type === "new_address" && "Add new address"
                 }
-
             </h6>
 
             <form
-                onSubmit={handleSubmit(StoreBillingAddress)}
+                // onSubmit={handleSubmit(StoreBillingAddress)}
                 method="post"
                 autoComplete="off"
                 encType="multipart/form-data"
