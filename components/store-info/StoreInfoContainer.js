@@ -1,11 +1,12 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {Tab, Tabs} from 'react-bootstrap';
 import {useSelector} from 'react-redux'
+import StoreProductList from './StoreProductList';
 import StoreProfile from './StoreProfile';
+import { router } from 'next/router'
 
 function StoreInfoContainer() {
     const { storeInfo } = useSelector(state => state.StoreInfoReducer);
-
     return (
         <div className="container">
             <div className="store-info-container">
@@ -20,14 +21,16 @@ function StoreInfoContainer() {
                 }
                 <div className="row">
                     <div className="col-md-12">
-                    <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example" className="mb-3">
-                        <Tab eventKey="products" title="All products">
-                            <h1>All products</h1>
-                        </Tab>
-                        <Tab eventKey="profile" title="profile">
-                            <StoreProfile />
-                        </Tab>
-                    </Tabs>
+                        <div className="store-info-container__tabs mt-2">
+                            <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example" className="mb-3">
+                                <Tab eventKey="products" title="All products">
+                                    <StoreProductList />
+                                </Tab>
+                                <Tab eventKey="profile" title="profile">
+                                    <StoreProfile />
+                                </Tab>
+                            </Tabs>
+                        </div>
                     </div>
                 </div>
             </div>
