@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { getProductsBySellerId } from '../CategoryWishProductList/_redux/Action/CategoryWiseProductAction'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import CategoryWishProductList from '../CategoryWishProductList/CategoryWishProductList';
 import {useRouter} from 'next/router';
 
@@ -14,7 +14,7 @@ function StoreProductList() {
     }, [])
 
     return (
-        <div className="row">
+        <div className="row container store-product-list">
             <CategoryWishProductList />
         </div>
     )

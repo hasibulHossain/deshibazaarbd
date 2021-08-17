@@ -650,7 +650,6 @@ a .custom-button-component:hover {
 /*=============Company policy section close==================*/
 
 /*=====================Shop by brand section==================*/
-
 .shop-card .shop-logo {
   margin: 10px;
   height: 90px;
@@ -668,9 +667,22 @@ a .custom-button-component:hover {
   cursor: pointer;
   -webkit-transition: 0.5s;
   transition: 0.5s;
+  -webkit-box-shadow: 3px 5px 16px 0px #8080801f;
   box-shadow: 3px 5px 16px 0px #8080801f;
   padding: 6px;
   overflow: hidden;
+  color: var(--color-primary);
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.shop-card .shop-logo:hover {
+  text-decoration: none;
+}
+
+.store-product-list {
+  width: 100%;
+  display: block;
 }
 
 .shop-card img {
@@ -3031,20 +3043,14 @@ img.payment_method_in_shipping {
 
 .store-info-container__banner {
   width: 100%;
-  height: 140px;
   background-color: var(--color-placeholder);
   overflow: hidden;
   margin-bottom: 20px;
 }
 
-.store-info-container__banner-box {
-  height: 100%;
-  width: 100%;
-}
-
 .store-info-container__banner-box img {
-  height: 100%;
-  width: auto;
+  height: 240px;
+  width: 100%;
 }
 
 .store-profile__info-box {

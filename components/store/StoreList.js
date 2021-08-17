@@ -9,13 +9,8 @@ const StoreList = () => {
   const dispatch = useDispatch();
   const { storeList } = useSelector((state) => state.StoreReducer);
 
-  const routeHandler = (Id) => {
-    router.push(`/products?business=${Id}`)
-  };
-
   useEffect(() => {
-    storeList.length === 0 && dispatch(getStoreList());  
-
+    ! storeList.length && dispatch(getStoreList());  
   }, []);
 
   return (
@@ -23,7 +18,7 @@ const StoreList = () => {
       <div className="row">
         {storeList.length > 0 &&
           storeList.map((item, index) => (
-            <div className="col-sm-4 col-md-2 col-lg-2" key={index}>
+            <div className="col-4 col-md-2 col-lg-2" key={index}>
                 <Link href={`/store/id=${item.id}`}>
                     <a>
                         <div className="shop-card">

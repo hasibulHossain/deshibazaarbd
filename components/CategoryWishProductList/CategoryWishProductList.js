@@ -56,7 +56,7 @@ const CategoryWishProductList = () => {
           <h5 className="category-search-title">{categoryBrandDetails.name}</h5>
           <p>
             {
-              paginate.total + ' items found in ' + categoryBrandDetails.name 
+              (paginate.total !== null ? paginate.total : '0') + ' items found in ' + categoryBrandDetails.name 
             }
           </p>
         </div>

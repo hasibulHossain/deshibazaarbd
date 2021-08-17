@@ -37,12 +37,11 @@ export const getProductsBySellerId = (id) => async dispatch => {
     data: [],
     isLoading: true,
   };
-  const url = `get-items?${id}`
+  const url = `get-items?seller_id=${id}`
   
   try {
     dispatch({ type: Types.INIT_FILTER_PRODUCT_LIST });
     const res = await Axios.get(url);
-    console.log(`res store data id: ${id}=> `, res)
     responseData.isLoading = false;
     responseData.data = res.data.data;
     dispatch({ type: Types.GET_FILTER_PRODUCT_LIST, payload: responseData });
