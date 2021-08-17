@@ -3058,4 +3058,8 @@ img.payment_method_in_shipping {
   border-right: 2px solid rgb(239, 240, 245);
 }
 
+.store-info-container__tabs .nav-tabs {
+  border: none;
+}
+
 /** Store details Page CSS */
