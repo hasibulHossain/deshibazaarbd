@@ -67,15 +67,12 @@ const CategoryWishProductContainer = () => {
       }
       {
         categoryBrandDetails.childs.length > 0 && (
-          <div className="childs">
+          <div className="childs row justify-content-center">
             {
               categoryBrandDetails.childs.map((item, index) => (
-                <div className="child-logo-box" key={index}>
-                  <div className="child-logo">
-                    <img src={item.image_url && item.image_url} alt={item.name} />
-                  </div>
-                  <Link href={`products?brand=${item.id}`}>
-                    <a>
+                <div className="col-3 col-md-2" key={index}>
+                  <Link href={`products?${item.parent_id ? 'category' : 'brand'}=${item.id}`}>
+                    <a className="child-logo-box">
                     <span>{item.name}</span>
                     </a>
                   </Link>
