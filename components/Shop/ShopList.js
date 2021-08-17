@@ -21,7 +21,7 @@ const ShopList = () => {
       <div className="row">
         {ShopList.length > 0 &&
           ShopList.map((item, index) => (
-            <div className="col-sm-4 col-md-2 col-lg-2" key={index}>
+            <div className="col-4 col-md-2 col-lg-2" key={index}>
               <div className="shop-card" onClick={() => routeHandler(item.id)}>
                 {
                   (item.image !== null && item.image !== '')?
