@@ -3,6 +3,9 @@ import { translate } from '../../services/translation/translation';
 import Button from '../master/Button/Button';
 import Translate from '../translation/Translate';
 import StoreList from './StoreList';
+import Link from 'next/link';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 const StoreContainer = () => {
     return (
@@ -11,7 +14,13 @@ const StoreContainer = () => {
                 <h5>
                     <Translate>Shop by stores</Translate>
                 </h5>
-                <Button buttonText={translate('View all')} isFontAwesome={true} />
+                {/* <Button buttonText={translate('View all')} isFontAwesome={true} /> */}
+                <Link href={{ pathname: '/stores'}}>
+                    <div className="custom-button-component pointer " >
+                        View all
+                        <FontAwesomeIcon className="ml-2" icon={faArrowRight} />
+                    </div>
+                </Link>
             </div>
             <StoreList />
         </section>
