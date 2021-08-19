@@ -83,9 +83,9 @@ const ProductReviewCreate = ({ ReviewItem, handleClose }) => {
                                         </Form.File.Label>
                                     </Form.File>
                                 </div>
-                                {/* <div class="input-group">
-                                        <label class="input-group-text" for="inputGroupFile01">Upload</label>
-                                        <input type="file" class="form-control" id="inputGroupFile01" />
+                                {/* <div className="input-group">
+                                        <label className="input-group-text" for="inputGroupFile01">Upload</label>
+                                        <input type="file" className="form-control" id="inputGroupFile01" />
                                     </div> */}
                             </div>
                         </div>

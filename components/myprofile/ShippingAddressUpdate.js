@@ -46,7 +46,7 @@ const ShippingAddressUpdate = () => {
                 <div className="row">
 
                     <div className="col-md-4">
-                        <div class="custome_form_group row">
+                        <div className="custome_form_group row">
                             <label className="col-sm-3" for="firstName">Country</label>
                             <div className="col-sm-9">
                                 <RHFInput
@@ -73,7 +73,7 @@ const ShippingAddressUpdate = () => {
                         </div>
                     </div>
                     <div className="col-md-4">
-                        <div class="custome_form_group row">
+                        <div className="custome_form_group row">
                             <label className="col-sm-3" for="firstName">City</label>
                             <div className="col-sm-9">
                                 <RHFInput
@@ -99,7 +99,7 @@ const ShippingAddressUpdate = () => {
                         </div>
                     </div>
                     <div className="col-md-4">
-                        <div class="custome_form_group row">
+                        <div className="custome_form_group row">
                             <label className="col-sm-3" for="firstName">Area</label>
                             <div className="col-sm-9">
                                 <RHFInput
@@ -124,13 +124,13 @@ const ShippingAddressUpdate = () => {
                         </div>
                     </div>
                     <div className="col-md-4">
-                        <div class="custome_form_group row">
+                        <div className="custome_form_group row">
                             <label className="col-sm-3" for="firstName">Street-1</label>
                             <div className="col-sm-9">
                                 <textarea
                                     cols="30"
                                     rows="2"
-                                    class="custom_form_input"
+                                    className="custom_form_input"
                                     placeholder="Street-1"
                                     name="street1"
                                     value={shippingAddressInput.street1}
@@ -151,13 +151,13 @@ const ShippingAddressUpdate = () => {
                         </div>
                     </div>
                     <div className="col-md-4">
-                        <div class="custome_form_group row">
+                        <div className="custome_form_group row">
                             <label className="col-sm-3" for="firstName">Street-2</label>
                             <div className="col-sm-9">
                                 <textarea
                                     cols="30"
                                     rows="2"
-                                    class="custom_form_input"
+                                    className="custom_form_input"
                                     placeholder="Street-2"
                                     name="street2"
                                     value={shippingAddressInput.street2}

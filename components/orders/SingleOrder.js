@@ -58,7 +58,7 @@ const SingleOrder = ({ item, isManageable = true }) => {
                                 isManageable && (
                                     <Link href={`/order/${item.id}`}>
                                         <a>
-                                            <button class="btn btn-info order-top-btn btn-sm mr-2">
+                                            <button className="btn btn-info order-top-btn btn-sm mr-2">
                                                 <FontAwesomeIcon icon={faEye} /> View
                                             </button>
                                         </a>
@@ -67,7 +67,7 @@ const SingleOrder = ({ item, isManageable = true }) => {
                             }
                             <Link href={`/order/invoice/${item.id}`}>
                                 <a>
-                                    <button class="btn btn-success order-top-btn btn-sm">
+                                    <button className="btn btn-success order-top-btn btn-sm">
                                         <FontAwesomeIcon icon={faPrint} /> Invoice
                                     </button>
                                 </a>
@@ -75,7 +75,7 @@ const SingleOrder = ({ item, isManageable = true }) => {
 
                             {
                                 isManageable && item.is_suspend == 0 && (
-                                    <button class="btn btn-danger order-top-btn btn-sm ml-2" onClick={() => toggleShowHandler(item)}>
+                                    <button className="btn btn-danger order-top-btn btn-sm ml-2" onClick={() => toggleShowHandler(item)}>
                                         <FontAwesomeIcon icon={faTimes} /> Cancel
                                     </button>
                                 )
