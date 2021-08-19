@@ -40,7 +40,7 @@ const DealFlash = () => {
       </div>
 
       <div className="flash-deal-section">
-        <div className="row">
+        <div className="row no-gutters">
           {flashDealList.length > 0 &&
             flashDealList.map((item, index) => {
               const offerEndDate     = new Date(item.offer_end_date).getTime();
@@ -49,8 +49,16 @@ const DealFlash = () => {
               const isOfferAvailable = offerEndCount > 1;
               const imageURL         = `${process.env.NEXT_PUBLIC_URL}images/products/${item.featured_image}`;
 
+              let padding = "";
+              if( index === 0) {
+                padding = 'pr-2';
+              }
+              if(index === 1) {
+                padding = 'pl-2';
+              }
+
               return (
-              <div className="col-md-6" key={index + 1}>
+              <div className={`col-md-6 ${padding}`} key={index + 1}>
                 <div className="flash-deal-card p-3">
                   <div className="flash-deal-img">
                     <img

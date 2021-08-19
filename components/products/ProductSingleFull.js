@@ -68,11 +68,21 @@ const ProductSingleFull = ({ product }) => {
     }
 
     const redirectToCheckoutPage = () => {
-        if (parseInt(product.current_stock) === 0) {
-            showToast("error", "Product is out of stock!");
-        } else {
-            dispatch(addToCartAction(product));
-            router.push("/checkout")
+        if (process.browser) {
+            const userData = localStorage.getItem('loginData');
+			if (typeof userData === 'undefined' || userData === null) {
+                dispatch(toggleProductModalAction())
+				showToast('error', 'Please Login to checkout');
+				router.push('/login');
+                return;
+			} 
+            
+            if (parseInt(product.current_stock) === 0) {
+                showToast("error", "Product is out of stock!");
+            } else {
+                dispatch(addToCartAction(product));
+                router.push("/checkout")
+            }
         }
     }
 

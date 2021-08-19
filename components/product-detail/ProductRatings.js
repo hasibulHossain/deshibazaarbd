@@ -20,7 +20,7 @@ const ProductRatings = ({ product }) => {
   const { reviewList, isLoading } = useSelector((state) => state.ProductReviewReducer);
 
   return (
-    <div className="row mt-3 mb-3">
+    <div className="row mt-3 mb-3 no-gutters">
       <div className="col-lg-9">
         <div className="card p-3">
           <div className="card-title">Ratings & Reviews of {product.name}</div>
@@ -47,7 +47,7 @@ const ProductRatings = ({ product }) => {
                 <ReactStars
                   count       = {5}
                   size        = {30}
-                  value       = {item.rating_value}
+                  value       = {+item.rating_value}
                   edit        = {false}
                   activeColor = "#ffab00"
                 />
