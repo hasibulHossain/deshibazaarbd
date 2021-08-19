@@ -19,26 +19,28 @@ const NewCollection = () => {
                 <div className="row text-center">
                     <div className="col-lg-3 col-md-4">
                     <a href="">
-                        <div className="home-card border-radius-5 mb-3 pointer">
+                        <div className="home-card border-radius-5 pointer">
                             <div className="collection-banner">
-                                <img src={"/images/collection/home-card-3.png"} className="img img-fluid" alt=""  />
+                                <img src={"/images/Cash-on-delivery.jpg"} className="img img-fluid" alt=""  />
                             </div>
                         </div>
                         </a>
                     </div>
 
                     <div className="col-lg-6 col-md-8">
-                    <a href="">
-                        <div className="home-card border-radius-5 mb-3 pointer">
-                            <img src={"/images/collection/home-card-1.png"} className="img img-fluid" alt="" />
-                        </div>
+                        <a href="">
+                            <div style={{height: '100%', width: '100%'}}>
+                                <div className="home-card border-radius-5 pointer">
+                                    <img src={"/images/electronics_banner.jpg"} className="img img-fluid middle" alt="banner" />
+                                </div>
+                            </div>
                         </a>
                     </div>
 
                     <div className="col-lg-3 col-md-12">
                     <a href="">
-                        <div className="home-card border-radius-5 mb-3 pointer">
-                            <img src={"/images/collection/home-card-2.png"} className="img img-fluid" alt="" />
+                        <div className="home-card border-radius-5 pointer">
+                            <img src={"/images/polli-dokan_banner.jpg"} className="img img-fluid" alt="" />
                         </div>
                         </a>
                     </div>

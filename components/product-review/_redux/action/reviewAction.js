@@ -31,8 +31,11 @@ export const getReviewListByUser = (itemID, userID, status) => (dispatch) => {
         isLoading: true,
         reviewList: []
     }
+    const url = `item-review/get-by-item?item_id=${itemID}`;
+
     dispatch({ type: Types.GET_REVIEW_LIST_BY_USER, payload: responseList });
-    Axios.get(`item-review/get-by-item?item_id=${itemID}&user_id=${userID}&status=${status}`)
+
+    Axios.get(url)
         .then((res) => {
             if (res.data.status) {
                 responseList.status = res.data.status;
@@ -42,6 +45,8 @@ export const getReviewListByUser = (itemID, userID, status) => (dispatch) => {
             }
         })
         .catch(err => {
+            responseList.isLoading = false;
+            dispatch({type: Types.GET_REVIEW_LIST_BY_USER, payload: responseList})
             console.log('err from get Review List by user', err)
         })
 }

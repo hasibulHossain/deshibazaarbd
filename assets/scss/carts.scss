@@ -410,6 +410,19 @@ p.estimate {
 		}
 	}
 
+	&__not-found {
+		padding: 1rem 0.8rem;
+
+		& p {
+			text-align: center;
+		}
+
+		#{$self}__not-found-img-box {
+			
+		}
+
+	}
+
 	&__products {
 		& > div {
 			padding: 1rem 0.8rem;
