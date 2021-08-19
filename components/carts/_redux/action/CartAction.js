@@ -221,3 +221,26 @@ export const getDeliveryDateFromTime = (approxDeliveryTime) => {
   
   return moment().add(duration.days(), 'days').format("dddd, MMMM Do YYYY");
 }
+
+/**
+ * removeAllCartItem
+ * 
+ * @since 1.0.0
+ * 
+ * @return void
+ */
+export const removeAllCartItem = () => async (dispatch) => {
+  const cart = [];
+  localStorage.setItem("carts", JSON.stringify(cart));
+  dispatch(getCartsAction())
+}
+
+
+
+
+
+
+
+
+
+

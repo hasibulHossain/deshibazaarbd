@@ -65,7 +65,7 @@ const ProductMainList = (props) => {
                 />
             )}
 
-            <div className="row">
+            <div className="row no-gutters">
                 {products.length > 0 && products.map((item, index) => (
                     <ProductSingleMini item={item} key={index} productKey={index+1} length={products.length} />
                 ))}

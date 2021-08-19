@@ -20,7 +20,7 @@ const ShopList = () => {
     <div className="productList-body p-3">
       <div className="row">
         {ShopList.length > 0 &&
-          ShopList.map((item, index) => (
+          ShopList.slice(0, 18).map((item, index) => (
             <div className="col-4 col-md-2 col-lg-2" key={index}>
               <div className="shop-card" onClick={() => routeHandler(item.id)}>
                 {

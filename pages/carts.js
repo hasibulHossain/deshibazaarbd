@@ -3,13 +3,11 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 
-import { IoIosCheckmarkCircle } from "react-icons/io";
 import { FiChevronRight } from "react-icons/fi";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingBag, faSync, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faShoppingBag } from "@fortawesome/free-solid-svg-icons";
 
 import MainLayout from "../components/layouts/MainLayout";
-import Card from "../components/Card/Card";
 import SimpleBtn from "../components/master/SimpleBtn/SimpleBtn";
 import Modal from "../components/master/Modal/Modal";
 import RemoveCartItem from "../components/RemoveCartItem/RemoveCartItem";
