@@ -235,16 +235,16 @@ const ProductDetailInfo = (props) => {
                                 </button>
                               </div>
 
-                              <div className="row">
-                                <div className="col-md-6 mt-3">
-                                  <button className="btn buy_now_btn">Buy Now</button>
-                                </div>
-                                <div className="col-md-6 mt-3">
-                                  <button className="btn add_to_cart_btn"
-                                    onClick={() => addToCart()}
-                                  >Add To Cart
-                                  </button>
-                                </div>
+                              <div className="d-flex mt-3 product-details-section">
+                                  <div className="mr-2">
+                                    <button className="btn buy_now_btn">Buy Now</button>
+                                  </div>
+                                  <div>
+                                    <button className="btn add_to_cart_btn"
+                                      onClick={() => addToCart()}
+                                    >Add To Cart
+                                    </button>
+                                  </div>
                               </div>
                             </div>
                           </div>

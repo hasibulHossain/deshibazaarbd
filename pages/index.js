@@ -30,6 +30,7 @@ export default function Home() {
       <ProductSection title={translate('Featured Products For You')} type="featured" limit={6} url='featured-products' />
       <ProductSection title={translate('Fastest Delivery')} type="fastest-delivery" limit={6} url='fastest-delivery-products' />
       <ProductSection title={translate('Latest Products')} type="" limit={6} url='latest-products' />
+      <ProductSection title={translate('DAILY ESSENTIALS')} type="" limit={6} url='latest-products' />
 
       {/* <ShopBanner /> */}
       <ShopContainer />

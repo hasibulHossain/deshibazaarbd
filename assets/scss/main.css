@@ -11,6 +11,7 @@
   --color-border-light: #e8e8e8;
   --color-border-dark: #d6d6d6;
   --font-size: 12px;
+  --shadow: 2px 6px 15px -7px rgba(166, 166, 166, 1);
 }
 
 body {
@@ -403,20 +404,20 @@ a .custom-button-component:hover {
 
 .product-container .childs .child-logo-box {
   text-align: center;
-  border: 1px solid var(--color-border-dark);
+  /* border: 1px solid var(--color-border-dark); */
   padding: 14px 10px;
-  color: var(--dark);
+  color: #fff;
   border-radius: 7px;
   text-decoration: none;
   display: block;
   font-size: 14px;
   transition: .3s;
+  background-color: var(--color-primary);
 }
 
-.product-container .childs .child-logo-box:hover {
-  background-color: var(--color-primary);
+/* .product-container .childs .child-logo-box:hover {
   color: #fff;
-}
+} */
 
 .product-container .childs .child-logo-box .child-logo {
   height: 100px;
@@ -2707,6 +2708,15 @@ h6.product_details_default_price {
   color: #616161;
 }
 
+.product-details-section {
+  width: 50%;
+  font-size: 14px;
+}
+
+.product-details-section .btn {
+  font-size: 14px !important;
+}
+
 button.btn.add_to_cart_btn {
   background-color: var(--color-primary) !important;
   color: #fff;
@@ -2714,8 +2724,8 @@ button.btn.add_to_cart_btn {
 }
 
 button.btn.buy_now_btn {
-  background-color: #8b8b8b;
-  color: #fff;
+  background-color: rgba(230,46,4,0.15);
+  color: #e62e04;
   width: 100%;
 }
 
@@ -2914,9 +2924,12 @@ img.payment_method_in_shipping {
 .search_product_no_found {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   margin-top: 20px;
+  padding: 4rem;
+  background: #fff;
+  height: 65vh;
 }
 .search_product_no_found .product_no_found_title {
   font-weight: 700;
@@ -2924,6 +2937,16 @@ img.payment_method_in_shipping {
 .search_product_no_found .product_no_found_description {
   margin-top: 20px;
   font-weight: 400;
+}
+
+.search_product_not_found_img_box {
+  width: 300px;
+  overflow: hidden;
+}
+
+.search_product_not_found_img_box img{
+  width: 100%;
+  object-fit: cover;
 }
 
 /****Next js active link or inActive link****/
@@ -3066,6 +3089,23 @@ img.payment_method_in_shipping {
 
 .store-info-container__tabs .nav-tabs {
   border: none;
+}
+
+.storeList-body {
+  padding: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.store-category-list {
+  -webkit-box-shadow: 2px 6px 15px -7px rgba(166, 166, 166, 1);
+  -moz-box-shadow: 2px 6px 15px -7px rgba(166, 166, 166, 1);
+  box-shadow: var(--shadow);
+
+  background-color: #fff;
+  padding: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 /** Store details Page CSS */

@@ -9,11 +9,13 @@ import { toggleFloatingCart } from "../../../_redux/store/action/globalAction";
 import { handleCombineCarts, getCartsAction } from "../_redux/action/CartAction";
 import { formatCurrency, activeCurrency } from '../../../services/currency';
 import router from "next/router";
+import { showToast } from "../../master/Helper/ToastHelper";
 
 function FloatingCart() {
   const dispatch                            = useDispatch()
   const { floatingCartVisible }             = useSelector((state) => state.GlobalReducer)
   const { carts, totalQuantity, totalPrice} = useSelector((state) => state.CartReducer)
+  const { isLoggedIn } = useSelector((state) => state.AuthReducer)
 
   const toggleCartHandler = () => {
     dispatch(toggleFloatingCart());
@@ -59,7 +61,12 @@ function FloatingCart() {
    */
   const redirectToCheckout = () => {
     toggleCartHandler();
-    router.push('/checkout');
+      router.push('/checkout');
+    // if(isLoggedIn) {
+    // } else {
+    //   showToast('error', 'Please sign in before checkout');
+    //   router.push('/login')
+    // }
   }
 
   let floatingCart = null;
