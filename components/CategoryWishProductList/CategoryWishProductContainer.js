@@ -67,7 +67,7 @@ const CategoryWishProductContainer = () => {
       }
       {
         categoryBrandDetails.childs.length > 0 && (
-          <div className="childs row justify-content-center">
+          <div className="childs row justify-content-start">
             {
               categoryBrandDetails.childs.map((item, index) => (
                 <div className="col-3 col-md-2" key={index}>

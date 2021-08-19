@@ -7,9 +7,9 @@ const ProductNoFound = () => {
         <div className="search_product_no_found">
             <h4 className="product_no_found_title text-danger">No product found !</h4>
             <p className="product_no_found_description">We're sorry. We cannot find any matches for your search term.</p>
-            <h1 className="display-1">
-                <FontAwesomeIcon className="product_no_found_fontAwesome" icon={faSearch} />
-            </h1>
+            <div className="search_product_not_found_img_box">
+                <img src="/images/deshibazaarbd-not-found.png" alt="error" />
+            </div>
         </div>
     );
 };
