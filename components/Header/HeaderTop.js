@@ -35,7 +35,7 @@ const HeaderTop = () => {
                 <div className="row align-items-center">
                     <div className="col-md-5">
                         <p className="heading-top-text">
-                          <span class="d-none d-lg-block">  Get Your <span className="holyday-shopping">Holiday Shopping</span> On Wholesale Pricing</span>
+                          <span className="d-none d-lg-block">  Get Your <span className="holyday-shopping">Holiday Shopping</span> On Wholesale Pricing</span>
                         </p>
                     </div>
                     <div className="col-md-7 heading-top-right">
