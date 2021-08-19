@@ -49,7 +49,9 @@ export const getAddress = (addressType) => (dispatch) => {
     }
     dispatch({ type: Types.GET_BILLING_ADDRESS, payload: responseData });
     const userStorageData = JSON.parse(localStorage.getItem("loginData"));
-    Axios.get(`address?user_id=${userStorageData.userData.id}&type=${addressType}`)
+
+    if (typeof userStorageData !== 'undefined' && userStorageData !== null) {
+        Axios.get(`address?user_id=${userStorageData.userData.id}&type=${addressType}`)
 
         .then((res) => {
             responseData.data = res.data.data;
@@ -63,6 +65,7 @@ export const getAddress = (addressType) => (dispatch) => {
                 dispatch({ type: Types.GET_SHIPPING_ADDRESS, payload: responseData });
             }
         })
+    }
 }
 
 // get user data for set input field 
@@ -219,7 +222,9 @@ export const getSingleShippingAddress = (type) => (dispatch) => {
     }
     dispatch({ type: Types.GET_SINGLE_SHIPPING_ADDRESS, payload: responseData });
     const userStorageData = JSON.parse(localStorage.getItem("loginData"));
-    Axios.get(`address?user_id=${userStorageData.userData.id}&type=${type}&is_default=1`)
+
+    if (typeof userStorageData !== 'undefined' && userStorageData !== null) {
+        Axios.get(`address?user_id=${userStorageData.userData.id}&type=${type}&is_default=1`)
         .then((res) => {
             if (res.data.status) {
                 const data = res.data.data;
@@ -256,6 +261,7 @@ export const getSingleShippingAddress = (type) => (dispatch) => {
             responseData.isLoading = false;
             dispatch({ type: Types.GET_SINGLE_SHIPPING_ADDRESS, payload: responseData });
         })
+    }
 }
 
 //handle change input field 
@@ -442,7 +448,9 @@ export const getDefaultAddress = (addressType) => (dispatch) => {
     dispatch({ type: Types.GET_DEFAULT_SHIPPING_ADDRESS, payload: responseData });
     dispatch({ type: Types.GET_DEFAULT_BILLING_ADDRESS, payload: responseData });
     const userStorageData = JSON.parse(localStorage.getItem("loginData"));
-    Axios.get(`address?user_id=${userStorageData.userData.id}&type=${addressType}&is_default=1`)
+
+    if (typeof userStorageData !== 'undefined' && userStorageData !== null) {
+        Axios.get(`address?user_id=${userStorageData.userData.id}&type=${addressType}&is_default=1`)
 
         .then((res) => {
             if (res.data.status) {
@@ -461,6 +469,7 @@ export const getDefaultAddress = (addressType) => (dispatch) => {
         }).catch((err) => {
 
         })
+    }
 }
 
 //handleChange user profile input data
