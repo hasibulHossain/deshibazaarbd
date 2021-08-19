@@ -84,46 +84,63 @@ function FloatingCart() {
           </div>
         </div>
 
-        <div className="floating-cart__products">
-          {carts.length > 0 && carts.map((item, index) => (
-            <div key={index}>
-              <FloatingCartProduct item={item} />
+        {
+          +totalQuantity <= 0 && (
+            <div className="floating-cart__not-found">
+              <p>Cart is empty</p>
+              <div className="floating-cart__not-found-img-box d-flex justify-content-center">
+                <img src="/images/db-empty-cart.png" alt="empty cart" />
+              </div>
             </div>
-          ))}
-        </div>
+          )
+        }
 
-        <div className="floating-cart__payment-info">
-          <div className="floating-cart__payment-details">
-            <span>Sub Total</span>
-            <span>
-            { formatCurrency(totalPrice) } { activeCurrency('code') }
-            </span>
-          </div>
+        {
+          +totalQuantity > 0 && (
+            <>
+              <div className="floating-cart__products">
+                {carts.length > 0 && carts.map((item, index) => (
+                  <div key={index}>
+                    <FloatingCartProduct item={item} />
+                  </div>
+                ))}
+              </div>
 
-          <div className="floating-cart__payment-details">
-            <span>Delivery Fee</span>
-            <span>{ formatCurrency(totalPrice > 0 ? 60 : 0) } { activeCurrency('code') }</span>
-          </div>
+              <div className="floating-cart__payment-info">
+                <div className="floating-cart__payment-details">
+                  <span>Sub Total</span>
+                  <span>
+                  { formatCurrency(totalPrice) } { activeCurrency('code') }
+                  </span>
+                </div>
 
-          {
-            totalPrice > 0 &&
-            <div className="floating-cart__payment-details">
-              <span>Total</span>
-              <span>{ formatCurrency(totalPrice + 60) } { activeCurrency('code') }</span>
-            </div>
-          }
-          
-        </div>
+                <div className="floating-cart__payment-details">
+                  <span>Delivery Fee</span>
+                  <span>{ formatCurrency(totalPrice > 0 ? 60 : 0) } { activeCurrency('code') }</span>
+                </div>
 
-        <div className="floating-cart__actions">
-          <div onClick={() => redirectToCart()}>
-            <SimpleBtn variant="danger">View cart</SimpleBtn>
-          </div>
+                {
+                  totalPrice > 0 &&
+                  <div className="floating-cart__payment-details">
+                    <span>Total</span>
+                    <span>{ formatCurrency(totalPrice + 60) } { activeCurrency('code') }</span>
+                  </div>
+                }
+                
+              </div>
 
-          <div onClick={() => redirectToCheckout()}>
-            <SimpleBtn variant="success">Checkout</SimpleBtn>
-          </div>
-        </div>
+              <div className="floating-cart__actions">
+                <div onClick={() => redirectToCart()}>
+                  <SimpleBtn variant="danger">View cart</SimpleBtn>
+                </div>
+
+                <div onClick={() => redirectToCheckout()}>
+                  <SimpleBtn variant="success">Checkout</SimpleBtn>
+                </div>
+              </div>
+            </>
+          )
+        }
       </div>
     );
   }
