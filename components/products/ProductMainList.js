@@ -10,9 +10,9 @@ import ProductSingleMini from "./ProductSingleMini";
 const ProductMainList = (props) => {
     const { type, limit, page, category = "" } = props;
 
-    const dispatch                  = useDispatch();
-    const [loading, setLoading]     = useState(false);
-    const [products, setProducts]   = useState([]);
+    const dispatch                = useDispatch();
+    const [loading, setLoading]   = useState(false);
+    const [products, setProducts] = useState([]);
 
     useEffect(() => {
         const args = {
@@ -35,7 +35,9 @@ const ProductMainList = (props) => {
         const getProducts = async (args) => {
             setLoading( true );
             const data = await getProductsData(args);
-            setProducts(data);
+            if (typeof data !== 'undefined' && data !== null) {
+                setProducts(data);
+            }
             setLoading( false );
         }
         

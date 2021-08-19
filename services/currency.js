@@ -63,7 +63,7 @@ export function activeCurrency ( printableLabel = '' ) {
 }
 
 export function activeLang ( printableLabel = '' ) {
-    ge
+    return en;
 }
 
 /**
@@ -80,5 +80,19 @@ export function activeLang ( printableLabel = '' ) {
 export function formatCurrency (amount, thousandSeparator = true, prefix = activeCurrency('sign')) {
     var CurrencyFormat = require('react-currency-format');
 
+    amount = isNumeric(amount) ? parseFloat(amount) : 0;
+
     return <CurrencyFormat value={amount} displayType={'text'} thousandSeparator={thousandSeparator} prefix={prefix} />;
+}
+
+/**
+ * 
+ * Check if given value is numeric or not
+ * 
+ * @param string|int|undefined|null value 
+ * 
+ * @return boolean
+ */
+function isNumeric(value) {
+    return /^-?\d+$/.test(value);
 }
