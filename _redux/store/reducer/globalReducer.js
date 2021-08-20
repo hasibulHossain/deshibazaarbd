@@ -3,7 +3,7 @@ const initialState = {
   isModalActive: false,
   floatingCartVisible: false,
   backdrop: false,
-  isMobile: true
+  isMobile: false
 };
 
 function GlobalReducer(state = initialState, { type, payload }) {

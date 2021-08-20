@@ -16,3 +16,11 @@ export const toggleModal = () => {
     type: types.TOGGLE_MODAL,
   };
 };
+
+export const checkIsMobileDevice = (isMobile) => {
+  console.log('running ..>')
+  return {
+    type: types.GET_DEVICE_INFO,
+    payload: isMobile
+  }
+}

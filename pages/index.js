@@ -13,8 +13,19 @@ import NewCollection from "../components/NewCollection/NewCollection";
 import ProductSection from "../components/products/ProductSection";
 import { translate } from "../services/translation/translation";
 import StoreContainer from "../components/store/StoreContainer";
+import { useDispatch } from "react-redux";
+import { checkIsMobileDevice } from "../_redux/store/action/globalAction";
 
 export default function Home() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if(process.browser) {
+      const isMobile = /Android|webOS|iPhone|Opera Mini/i.test(navigator.userAgent);
+      dispatch(checkIsMobileDevice(isMobile))
+    }
+  }, [])
+  
   return (
     <MainLayout>
       {/* <ScrollToTop smooth /> */}
