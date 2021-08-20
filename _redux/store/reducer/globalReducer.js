@@ -3,6 +3,7 @@ const initialState = {
   isModalActive: false,
   floatingCartVisible: false,
   backdrop: false,
+  isMobile: true
 };
 
 function GlobalReducer(state = initialState, { type, payload }) {
@@ -21,6 +22,12 @@ function GlobalReducer(state = initialState, { type, payload }) {
         ...state,
         isModalActive: !state.isModalActive,
         floatingCartVisible: false,
+      };
+
+    case types.GET_DEVICE_INFO:
+      return {
+        ...state,
+        isMobile: payload
       };
 
     default:

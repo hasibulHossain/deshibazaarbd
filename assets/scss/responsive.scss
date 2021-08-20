@@ -10,6 +10,13 @@
   border: 0px solid!important;
 }
 }
+
+@media only screen and (max-width: 600px) {
+  .flashDealButton {
+    display: none !important;
+  }
+}
+
 @media only screen and (max-width: 768px) {
   .menu_list {
     padding: 15px;
