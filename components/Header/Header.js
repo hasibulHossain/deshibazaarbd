@@ -85,112 +85,112 @@ const Header = () => {
 							</div>
 
 							<Navbar.Toggle aria-controls={toggleNav} />
-							{ (!isHidden ) && (
-							<div className="ml-auto header-nav">
-							<div className="header-nav-inner">
-								{
-									!userData ? (
-										<div>
-											<Link href="/login" className="header-nav-link">
-												<a className=""><Translate>Sign In</Translate></a>
-											</Link>
+							{(!isHidden) && (
+								<div className="ml-auto header-nav ml-5">
+									<div className="header-nav-inner">
+										{
+											!userData ? (
+												<div>
+													<Link href="/login" className="header-nav-link">
+														<a className=""><Translate>Sign In</Translate></a>
+													</Link>
 
-											<Link href="/register">
-												<a>
-													<Button buttonText={translate('Sign up')} />
-												</a>
-											</Link>
-										</div>
-									) : (
-										<>
-											<Dropdown className="auth-navbar-dropdown">
-												<Dropdown.Toggle variant="simple_btn_bg" className="btn-sm text-capitalize" id="dropdown-basic">
-													<div className="auth-user-name">{userData.first_name}</div>
-												</Dropdown.Toggle>
+													<Link href="/register">
+														<a>
+															<Button buttonText={translate('Sign up')} />
+														</a>
+													</Link>
+												</div>
+											) : (
+												<>
+													<Dropdown className="auth-navbar-dropdown">
+														<Dropdown.Toggle variant="simple_btn_bg" className="btn-sm text-capitalize" id="dropdown-basic">
+															<div className="auth-user-name">{userData.first_name}</div>
+														</Dropdown.Toggle>
 
-												<Dropdown.Menu>
-													<ActiveLink href="/profile" activeLink="custom_dropdown_link">
-														<span className="custom_drop_item">
-															<FontAwesomeIcon
-																className="mr-1"
-																icon={faUser}
-															/>{" "}
-															<Translate>My Account</Translate>
-														</span>
-													</ActiveLink>
+														<Dropdown.Menu>
+															<ActiveLink href="/profile" activeLink="custom_dropdown_link">
+																<span className="custom_drop_item">
+																	<FontAwesomeIcon
+																		className="mr-1"
+																		icon={faUser}
+																	/>{" "}
+																	<Translate>My Account</Translate>
+																</span>
+															</ActiveLink>
 
-													<ActiveLink href="/account-setting" activeLink="custom_dropdown_link">
-														<span className="custom_drop_item">
-															<FontAwesomeIcon
-																className="mr-1"
-																icon={faUserCog}
-															/>{" "}
-															<Translate>Account Setting</Translate>
-														</span>
-													</ActiveLink>
-													<ActiveLink href="/wishlist" activeLink="custom_dropdown_link">
-														<span className="custom_drop_item">
-															<FontAwesomeIcon
-																className="mr-1"
-																icon={faHeart}
-															/>{" "}
-															<Translate>My Wish list</Translate>
-														</span>
-													</ActiveLink>
-													<ActiveLink href="/order" activeLink="custom_dropdown_link">
-														<span className="custom_drop_item">
-															<FontAwesomeIcon
-																className="mr-1"
-																icon={faShoppingBag}
-															/>{" "}
-															<Translate>My Orders</Translate>
-														</span>
-													</ActiveLink>
-													<ActiveLink href="/product-review" isDropDown={true} activeLink="custom_dropdown_link">
-														<span className="custom_drop_item">
-															<FontAwesomeIcon
-																className="mr-1"
-																icon={faComment}
-															/>{" "}
-															<Translate>My Reviews</Translate>
-														</span>
-													</ActiveLink>
-													<ActiveLink href={""}>
-														<span className="custom_drop_item" onClick={() => handleLogOut()}>
-															<FontAwesomeIcon
-																className="mr-1"
-																icon={faSignOutAlt}
-															/>{" "}
-															<Translate>Logout</Translate>
-														</span>
-													</ActiveLink>
-												</Dropdown.Menu>
-											</Dropdown>
-											<HeaderWishlist />
-										</>
-									)
-								}
-								<span
-									onClick={toggleCartHandler}
-									className="header-nav-link pointer cart-nav-link"
-								>
-									<FontAwesomeIcon
-										className="custom-fontAwesome"
-										icon={faShoppingBag}
-									/>
-									<span className="cart-qty">
-										{formatQtyDisplay(totalQuantity)}
-									</span>
-									&nbsp;&nbsp; <Translate>Cart</Translate>
-								</span>
-							</div>
-							</div>
+															<ActiveLink href="/account-setting" activeLink="custom_dropdown_link">
+																<span className="custom_drop_item">
+																	<FontAwesomeIcon
+																		className="mr-1"
+																		icon={faUserCog}
+																	/>{" "}
+																	<Translate>Account Setting</Translate>
+																</span>
+															</ActiveLink>
+															<ActiveLink href="/wishlist" activeLink="custom_dropdown_link">
+																<span className="custom_drop_item">
+																	<FontAwesomeIcon
+																		className="mr-1"
+																		icon={faHeart}
+																	/>{" "}
+																	<Translate>My Wish list</Translate>
+																</span>
+															</ActiveLink>
+															<ActiveLink href="/order" activeLink="custom_dropdown_link">
+																<span className="custom_drop_item">
+																	<FontAwesomeIcon
+																		className="mr-1"
+																		icon={faShoppingBag}
+																	/>{" "}
+																	<Translate>My Orders</Translate>
+																</span>
+															</ActiveLink>
+															<ActiveLink href="/product-review" isDropDown={true} activeLink="custom_dropdown_link">
+																<span className="custom_drop_item">
+																	<FontAwesomeIcon
+																		className="mr-1"
+																		icon={faComment}
+																	/>{" "}
+																	<Translate>My Reviews</Translate>
+																</span>
+															</ActiveLink>
+															<ActiveLink href={""}>
+																<span className="custom_drop_item" onClick={() => handleLogOut()}>
+																	<FontAwesomeIcon
+																		className="mr-1"
+																		icon={faSignOutAlt}
+																	/>{" "}
+																	<Translate>Logout</Translate>
+																</span>
+															</ActiveLink>
+														</Dropdown.Menu>
+													</Dropdown>
+													<HeaderWishlist />
+												</>
+											)
+										}
+										<span
+											onClick={toggleCartHandler}
+											className="header-nav-link pointer cart-nav-link"
+										>
+											<FontAwesomeIcon
+												className="custom-fontAwesome"
+												icon={faShoppingBag}
+											/>
+											<span className="cart-qty">
+												{formatQtyDisplay(totalQuantity)}
+											</span>
+											&nbsp;&nbsp; <Translate>Cart</Translate>
+										</span>
+									</div>
+								</div>
 							)}
 							<Navbar.Collapse id={toggleNav}>
 							</Navbar.Collapse>
 						</div>
 					</div>
-					
+
 					<HeaderMenu toggleNav={toggleNav} />
 				</Navbar>
 			</div>
