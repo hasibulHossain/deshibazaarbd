@@ -715,6 +715,30 @@ a .custom-button-component:hover {
 
 /*=====================Shop by brand section close==================*/
 
+/*=====================store section==================*/
+
+.store-card {
+  width: 100%;
+  height: 100px;
+  background: white;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+.store-logo {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+}
+
+.store-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/*=====================store section close==================*/
+
 /*=====================top products==================*/
 
 .top-product-card {
@@ -3130,14 +3154,11 @@ img.payment_method_in_shipping {
 }
 
 .store-category-list {
-  -webkit-box-shadow: 2px 6px 15px -7px rgba(166, 166, 166, 1);
-  -moz-box-shadow: 2px 6px 15px -7px rgba(166, 166, 166, 1);
-  box-shadow: var(--shadow);
-
   background-color: #fff;
   padding: 10px;
   margin-top: 20px;
   margin-bottom: 20px;
+  min-height: 500px;
 }
 
 /** Store details Page CSS */
