@@ -120,7 +120,9 @@ const ProductFilter = () => {
     dispatch(setFilterParams(filterParamClone));
   }
 
-  const {brand: brandQuery = "", category: categoryQuery = "", type: typeQuery = ""} = router.query;
+  console.log('router => ', router)
+
+  const {brand: brandQuery = "", category: categoryQuery = "", type: typeQuery = "", storeById = ""} = router.query;
 
   useEffect(() => {
     const queries = router.query;
@@ -146,7 +148,7 @@ const ProductFilter = () => {
 
     dispatch(getShopList());
 
-  }, [brandQuery, categoryQuery, typeQuery]);
+  }, [brandQuery, categoryQuery, typeQuery, storeById]);
 
   useEffect(() => {
     return () => {

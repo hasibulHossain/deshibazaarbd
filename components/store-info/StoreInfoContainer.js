@@ -18,12 +18,15 @@ function StoreInfoContainer() {
                         </div>
                     )
                 }
-                <div className="row mb-5 mt-4">
+                <div className="row mb-5 mt-4 no-gutters">
                     <div className="col-md-12">
                         <div className="store-info-container__tabs mt-2">
                             <Tabs defaultActiveKey="products" id="uncontrolled-tab-example" className="mb-3" style={{ color: 'var(--dark)' }}>
                                 <Tab eventKey="products" title="Seller Products">
                                     <StoreProductList />
+                                    {/* <CategoryWishProductContainer /> */}
+                                    {/* <StoreProductContainer /> */}
+
                                 </Tab>
                                 <Tab eventKey="profile" title="Seller Profile">
                                     <StoreProfile />
