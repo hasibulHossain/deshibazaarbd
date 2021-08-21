@@ -4409,6 +4409,11 @@
   "resolved" "https://registry.npmjs.org/in-publish/-/in-publish-2.0.1.tgz"
   "version" "2.0.1"
 
+"include-media@^1.4.10":
+  "integrity" "sha512-TymQzKF7oWHbItEcEHOCponZ90lRr1I9QbYeD+qCxXy4Z0/pSpS4Ocz2bq3FMOERlXXrY9Sawsh9GjiObVQA6A=="
+  "resolved" "https://registry.npmjs.org/include-media/-/include-media-1.4.10.tgz"
+  "version" "1.4.10"
+
 "indefinite-observable@^2.0.1":
   "integrity" "sha512-G8vgmork+6H9S8lUAg1gtXEj2JxIQTo0g2PbFiYOdjkziSI0F7UYBiVwhZRuixhBCNGczAls34+5HJPyZysvxQ=="
   "resolved" "https://registry.npmjs.org/indefinite-observable/-/indefinite-observable-2.0.1.tgz"

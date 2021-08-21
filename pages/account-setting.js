@@ -21,14 +21,14 @@
 import React from 'react';
 import ProtectedRoute from '../components/master/protectedRoute/ProtectedRoute';
 import MainLayout from "../components/layouts/MainLayout";
-import Head from "next/head";
 import ProfileAccountSetting from "../components/ProfileAccountSetting/ProfileAccountSetting";
-const accountSetting = () => {
+
+const AccountSetting = () => {
   return (
-      <MainLayout>
+      <MainLayout pageTitle="Dashboard">
         <ProfileAccountSetting />
       </MainLayout>
   );
 };
 
-export default ProtectedRoute(accountSetting);
+export default ProtectedRoute(AccountSetting);
