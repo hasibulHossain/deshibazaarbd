@@ -1,18 +1,7 @@
 import React from 'react';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faShoppingBag } from '@fortawesome/free-solid-svg-icons';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { getDealFlashList } from './_redux/Action/DealFlashAction';
-import Button from '../master/Button/Button';
-import Translate from '../translation/Translate';
-import { translate } from '../../services/translation/translation';
 
 const NewCollection = () => {
-    // const dispatch = useDispatch();
-    // const flashDealList = useSelector((state) => state.DealFlashReducer.flashDealList);
-    // useEffect(() => {
-    //     dispatch(getDealFlashList())
-    // }, [])
+
     return (
         <section className="container product-container">
             <div className="new-collection-section">

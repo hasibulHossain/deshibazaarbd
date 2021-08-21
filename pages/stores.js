@@ -1,7 +1,7 @@
-import React from 'react'
-import MainLayout from '../components/layouts/MainLayout'
-import StoreFilter from '../components/store/StoreFilter'
-import StoreListFull from '../components/store/StoreListFull'
+import React from 'react';
+import MainLayout from '../components/layouts/MainLayout';
+import StoreFilter from '../components/store/StoreFilter';
+import StoreListFull from '../components/store/StoreListFull';
 
 function Stores() {
     return (
@@ -16,7 +16,6 @@ function Stores() {
                         </div>
                     </div>
                 </div>
-
             </MainLayout>
     )
 }

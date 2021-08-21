@@ -16,3 +16,7 @@ export const getHomeCarouselData = () => async (dispatch) => {
     dispatch({ type: Types.FETCH_BANNER_CAROUSEL_LIST_FAILED });
   }
 };
+
+// export const getNewCollectionSection = () => async dispatch => {
+  
+// }

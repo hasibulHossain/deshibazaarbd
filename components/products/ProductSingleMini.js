@@ -25,7 +25,6 @@ import Translate from '../translation/Translate';
  * @return view
  */
 const ProductSingleMini = ({ item = {}, columnClassName = 'col-md-2', productKey = 0, length = 0, cardClassName = 'product-card' }) => {
-
     const dispatch = useDispatch();
     const cardClass = productKey !== length ? '' : 'border-right-0';
 
@@ -75,7 +74,12 @@ const ProductSingleMini = ({ item = {}, columnClassName = 'col-md-2', productKey
                                     </p>
                                     <PriceCalculation item={item} />
                                     <div className={columnClassName === "col-md-3" || "col-md-2" ? "" : "d-flex justify-content-start"}>
-                                        <ProductRating rating={item.average_rating} />
+                                        {/* <ProductRating rating={item.average_rating} /> */}
+                                        {
+                                            item.average_rating != 0 && (
+                                                <ProductRating rating={item.average_rating} />
+                                            )
+                                        }
                                     </div>
                                 </div>
                             </>
@@ -96,7 +100,11 @@ const ProductSingleMini = ({ item = {}, columnClassName = 'col-md-2', productKey
                                     </p>
                                     <PriceCalculation item={item} />
                                     <div className={columnClassName === "col-md-3" ? "" : "d-flex justify-content-start"}>
-                                        <ProductRating rating={item.average_rating} />
+                                        {
+                                            item.average_rating != 0 && (
+                                                <ProductRating rating={item.average_rating} />
+                                            )
+                                        }
                                     </div>
                                 </div>
                             </div>

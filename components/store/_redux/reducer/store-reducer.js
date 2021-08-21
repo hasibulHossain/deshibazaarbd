@@ -6,6 +6,7 @@ const initialState = {
   error: false,
   isLoading: false,
 };
+
 function storeReducer(state = initialState, { type, payload }) {
   switch (type) {
     case types.INIT_STORE_LIST:

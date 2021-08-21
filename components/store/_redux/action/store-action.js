@@ -8,9 +8,6 @@ export const getStoreList = () => async (dispatch) => {
     // initialize req
     dispatch({ type: types.INIT_STORE_LIST });
     const res = await axios.get(url);
-    const res2 = await axios.get('business?division=1');
-    console.log('res 2 => ', res2)
-
     const data = res.data.data.slice(0, 18)
 
     // successful res
@@ -21,3 +18,26 @@ export const getStoreList = () => async (dispatch) => {
     dispatch({ type: types.FETCH_STORE_LIST_FAILED, payload: { error: true } });
   }
 };
+
+export const getFilteredStoreList = (locations) => async (dispatch) => {
+  let url = 'business?';
+
+  for (const location in locations) {
+    url = url + location + '=' + locations[location] + '&';
+  }
+  console.log('url => ', url)
+  try {
+    dispatch({type: types.INIT_STORE_LIST});
+    const res = await axios.get(url);
+    const data = res.data.data
+    console.log('res data => ', data)
+    dispatch({ type: types.GET_STORE_LIST, payload: { storeList: data } });
+
+  } catch (err) {
+    console.log('err => ', err)
+  }
+
+  return {
+    type: 'test'
+  }
+}
