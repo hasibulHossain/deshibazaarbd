@@ -141,6 +141,10 @@ a .custom-button-component:hover {
   font-size: 14px;
 }
 
+.cart-nav-link {
+  position: relative;
+}
+
 .cart-nav-link svg {
   background: var(--color-primary);
   color: #fff;
@@ -190,6 +194,10 @@ a .custom-button-component:hover {
 .navbar {
   flex-wrap: wrap !important;
   padding: 10px 0px 0rem 0px !important;
+}
+
+.custom-navbar .three-dot-box {
+  display: none;
 }
 
 .custome-navbar {
@@ -253,6 +261,10 @@ a .custom-button-component:hover {
   display: inline-block;
 }
 
+.header-nav .header-nav-inner {
+  display: flex;
+}
+
 .auth-navbar-dropdown .dropdown-toggle::after {
   display: inline-block;
   content: "";
@@ -271,7 +283,7 @@ a .custom-button-component:hover {
   -webkit-box-shadow: 0px 20px 20px 0px #cccccc3b;
   box-shadow: 0px 20px 20px 20px #cccccc54;
   width: 100%;
-  margin-left: -8px;
+  /* margin-left: -8px; */
 }
 
 .rc-menu__item {
