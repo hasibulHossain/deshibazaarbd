@@ -1501,6 +1501,7 @@ h6.address_book_updated_title {
 .product_filter_heading {
   color: var(--color-primary);
   font-size: 18px;
+  overflow: hidden;
 }
 
 .product_filter_heading::after {

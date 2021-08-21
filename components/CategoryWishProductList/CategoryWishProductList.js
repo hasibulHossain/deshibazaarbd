@@ -52,7 +52,7 @@ const CategoryWishProductList = () => {
   return (
     <section className="category_wise_product_list">
       <div className="row justify-content-between">
-        <div className="col-md-6">
+        <div className="col-lg-6">
           <h5 className="category-search-title">{categoryBrandDetails.name}</h5>
           <p>
             {
@@ -60,7 +60,7 @@ const CategoryWishProductList = () => {
             }
           </p>
         </div>
-        <div className="col-md-6">
+        <div className="col-lg-6">
           <div className="d-flex justify-content-end">
             <div className="filter_view">
               <span>View</span>
@@ -83,7 +83,7 @@ const CategoryWishProductList = () => {
                 onClick={() => setColumns("col-md-12")}
               />
             </div>
-            <div className="filter_view d-flex ml-3">
+            <div className="filter_view d-flex">
               <span>Sort by</span>
               <Form>
                 <Form.Group controlId="exampleFormSelectCustom">

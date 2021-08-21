@@ -45,7 +45,7 @@ const ProductSingleMini = ({ item = {}, columnClassName = 'col-md-2', productKey
 
     return (
         
-        <div className={`${(columnClassName === "col-md-2" || columnClassName === "col-md-3") ? columnClassName + ' col-6 col-sm-6' : "col-12"}`}>
+        <div className={`${(columnClassName === "col-md-2" || columnClassName === "col-md-3") ? columnClassName + 'col-xl-2 col-lg-3 col-md-6 col-sm-6 col-12' : "col-12"}`}>
             <div className={`${cardClassName} ${cardClass} ${(columnClassName === "col-md-2" || columnClassName === "col-md-3") ? "filter_column_3" : "filter_column_10"} `}>
                 <div className="product-purchase-section">
                     <button>
