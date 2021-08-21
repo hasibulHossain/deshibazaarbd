@@ -97,6 +97,24 @@ const ProductDetailInfo = (props) => {
     }
   }
 
+  const redirectToCheckoutPage = () => {
+    if (process.browser) {
+        const userData = localStorage.getItem('loginData');
+        if (typeof userData === 'undefined' || userData === null) {
+            showToast('error', 'Please Login to checkout');
+            router.push('/login');
+            return;
+        }
+
+        if (parseInt(product.current_stock) === 0) {
+            showToast("error", "Product is out of stock!");
+        } else {
+            dispatch(addToCartAction(product));
+            router.push("/checkout")
+        }
+    }
+}
+
   return (
     <>
       {
@@ -237,7 +255,7 @@ const ProductDetailInfo = (props) => {
 
                               <div className="d-flex mt-3 product-details-section">
                                   <div className="mr-2">
-                                    <button className="btn buy_now_btn">Buy Now</button>
+                                    <button className="btn buy_now_btn" onClick={() => redirectToCheckoutPage()}>Buy Now</button>
                                   </div>
                                   <div>
                                     <button className="btn add_to_cart_btn"

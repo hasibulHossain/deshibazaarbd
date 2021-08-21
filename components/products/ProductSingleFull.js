@@ -70,13 +70,13 @@ const ProductSingleFull = ({ product }) => {
     const redirectToCheckoutPage = () => {
         if (process.browser) {
             const userData = localStorage.getItem('loginData');
-			if (typeof userData === 'undefined' || userData === null) {
+            if (typeof userData === 'undefined' || userData === null) {
                 dispatch(toggleProductModalAction())
-				showToast('error', 'Please Login to checkout');
-				router.push('/login');
+                showToast('error', 'Please Login to checkout');
+                router.push('/login');
                 return;
-			} 
-            
+            }
+
             if (parseInt(product.current_stock) === 0) {
                 showToast("error", "Product is out of stock!");
             } else {
@@ -182,14 +182,16 @@ const ProductSingleFull = ({ product }) => {
                                     </div>
                                 </div>
 
-                                <div className="d-flex mt-3">
-                                    <div className="button addToCartBtn"
-                                        disabled={true}
-                                        onClick={() => addToCart()}
-                                    >
-                                        <Translate>Add to cart</Translate>
+                                <div className="d-flex mt-3 product-details-section">
+                                    <div className="mr-2">
+                                        <button className="btn buy_now_btn" onClick={() => redirectToCheckoutPage()}>Buy Now</button>
                                     </div>
-                                    <div className="button buyBtn" onClick={() => redirectToCheckoutPage()}>Buy now</div>
+                                    <div>
+                                        <button className="btn add_to_cart_btn"
+                                            onClick={() => addToCart()}
+                                        >Add To Cart
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
 
