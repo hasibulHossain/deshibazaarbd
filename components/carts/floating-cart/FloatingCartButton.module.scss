@@ -1,61 +1,61 @@
-@import "~include-media/dist/_include-media.scss";
+// @import "~include-media/dist/_include-media.scss";
 
 
-.fixedCart {
-    display: none;
-}
+// .fixedCart {
+//     display: none;
+// }
 
-@include media("<=600px") {
-    .fixedCart {
-        display: block;
-        position: fixed;
-        bottom: 0;
-        right: 0;
-        left: 0;
-        height: 50px;
-    }
+// @include media("<=600px") {
+//     .fixedCart {
+//         display: block;
+//         position: fixed;
+//         bottom: 0;
+//         right: 0;
+//         left: 0;
+//         height: 50px;
+//     }
     
-    .fixedCartInner {
-        height: 100%;
-        display: flex;
-        justify-content: space-between;
-    }
+//     .fixedCartInner {
+//         height: 100%;
+//         display: flex;
+//         justify-content: space-between;
+//     }
     
-    // .fixedCartLeft {
-    //     flex-basis: 20%;
-    //     background-color: blue;
-    //     height: 100%;
-    // }
+//     // .fixedCartLeft {
+//     //     flex-basis: 20%;
+//     //     background-color: blue;
+//     //     height: 100%;
+//     // }
     
-    .fixedCartMiddle {
-        flex-basis: 80%;
-        background-color: red;
-        color: white;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        opacity: 0.9;
-    }
+//     .fixedCartMiddle {
+//         flex-basis: 80%;
+//         background-color: red;
+//         color: white;
+//         height: 100%;
+//         display: flex;
+//         justify-content: center;
+//         align-items: center;
+//         opacity: 0.9;
+//     }
     
-    .fixedCartRight {
-        flex-basis: 20%;
-        background-color: var(--color-green);
-        height: 100%;
-        opacity: 0.9;
-    }
+//     .fixedCartRight {
+//         flex-basis: 20%;
+//         background-color: var(--color-green);
+//         height: 100%;
+//         opacity: 0.9;
+//     }
 
-    .fixedCartRight div span {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        font-size: 30px;
-    }
+//     .fixedCartRight div span {
+//         width: 100%;
+//         height: 100%;
+//         display: flex;
+//         justify-content: center;
+//         font-size: 30px;
+//     }
 
-    .fixedCartRight div span svg {
-        width: 100%;
-        height: 100%;
-        color: white;
-    }
-}
+//     .fixedCartRight div span svg {
+//         width: 100%;
+//         height: 100%;
+//         color: white;
+//     }
+// }
