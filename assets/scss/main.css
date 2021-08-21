@@ -255,7 +255,7 @@ a .custom-button-component:hover {
   font-size: 14px;
 }
 
-.header-nav .dropdown .auth-user-name  {
+.header-nav .dropdown .auth-user-name {
   max-width: 150px;
   overflow-x: hidden;
   display: inline-block;
@@ -429,7 +429,7 @@ a .custom-button-component:hover {
   text-decoration: none;
   display: block;
   font-size: 14px;
-  transition: .3s;
+  transition: 0.3s;
   background-color: var(--color-primary);
 }
 
@@ -2429,11 +2429,13 @@ p.delivery_info_sub_title {
 }
 
 button.order-top-btn.btn-sm {
-  padding: 2px 10px!important;
+  padding: 2px 10px !important;
   font-size: 12px;
 }
 
-.order_product_title, .order-status-text, .order_product_qty {
+.order_product_title,
+.order-status-text,
+.order_product_qty {
   font-size: 14px;
 }
 
@@ -2756,7 +2758,7 @@ button.btn.add_to_cart_btn {
 }
 
 button.btn.buy_now_btn {
-  background-color: rgba(230,46,4,0.15);
+  background-color: rgba(230, 46, 4, 0.15);
   color: #e62e04;
   width: 100%;
 }
@@ -2976,7 +2978,7 @@ img.payment_method_in_shipping {
   overflow: hidden;
 }
 
-.search_product_not_found_img_box img{
+.search_product_not_found_img_box img {
   width: 100%;
   object-fit: cover;
 }
@@ -3093,7 +3095,6 @@ img.payment_method_in_shipping {
 }
 /** Product Detail Page CSS */
 
-
 /** Store details Page CSS */
 
 .store-info-container__banner {
@@ -3140,6 +3141,26 @@ img.payment_method_in_shipping {
   margin-bottom: 20px;
 }
 
-/** Store details Page CSS */
-/* menu icon */
-
+/*Product pagination css */
+.product-page-item.active .page-link {
+  z-index: 3;
+  color: #fff;
+  background-color: #5c9558;
+  border-color: #5c9558;
+  cursor: pointer;
+}
+.product-page-item .page-link {
+  position: relative;
+  display: block;
+  padding: 0.5rem 0.75rem;
+  margin-left: -1px;
+  line-height: 1.25;
+  color: #5c9558;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  cursor: pointer;
+}
+.product-page-item:last-child .page-link {
+ color: #5c9558;
+ cursor: pointer;
+}

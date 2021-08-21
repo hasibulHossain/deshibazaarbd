@@ -44,7 +44,8 @@ const ProductSingleMini = ({ item = {}, columnClassName = 'col-md-2', productKey
     const imageURL = `${process.env.NEXT_PUBLIC_URL}images/products/${item.featured_image}`;
 
     return (
-        <div className={columnClassName + ' col-6 col-sm-6'}>
+        
+        <div className={`${(columnClassName === "col-md-2" || columnClassName === "col-md-3") ? columnClassName + ' col-6 col-sm-6' : "col-12"}`}>
             <div className={`${cardClassName} ${cardClass} ${(columnClassName === "col-md-2" || columnClassName === "col-md-3") ? "filter_column_3" : "filter_column_10"} `}>
                 <div className="product-purchase-section">
                     <button>
