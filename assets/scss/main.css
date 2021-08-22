@@ -141,9 +141,9 @@ a .custom-button-component:hover {
   font-size: 14px;
 }
 
-.cart-nav-link {
+/* .cart-nav-link {
   position: relative;
-}
+} */
 
 .cart-nav-link svg {
   background: var(--color-primary);
@@ -196,9 +196,9 @@ a .custom-button-component:hover {
   padding: 10px 0px 0rem 0px !important;
 }
 
-.custom-navbar .three-dot-box {
+/* .custom-navbar .three-dot-box {
   display: none;
-}
+} */
 
 .custome-navbar {
   display: flex;
@@ -212,7 +212,7 @@ a .custom-button-component:hover {
 .header-search-product {
   position: relative;
   display: flex;
-  width: 40%;
+  width: 50%;
   line-height: 10px;
   border-radius: 10px;
   box-shadow: 2px 4px 9px -3px rgba(57, 54, 54, 0.44);
@@ -283,7 +283,7 @@ a .custom-button-component:hover {
   -webkit-box-shadow: 0px 20px 20px 0px #cccccc3b;
   box-shadow: 0px 20px 20px 20px #cccccc54;
   width: 100%;
-  /* margin-left: -8px; */
+  margin-left: -8px;
 }
 
 .rc-menu__item {
