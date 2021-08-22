@@ -266,6 +266,19 @@
 	.floating-cart {
 		width: 100%;
 	}
+
+	.product-details-section {
+		width: 100%;
+	}
+
+	.product_title_box {
+		margin-top: 2rem;
+	}
+
+	.product_details_img_gallery {
+		display: flex;
+		overflow-x: scroll;
+	}
 }
 
 // Small devices (landscape phones, 576px and up)

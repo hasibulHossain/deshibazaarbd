@@ -43,7 +43,7 @@ const FloatingCartButton = () => {
                         Start shopping
                     </div>
                     <div className={styles.fixedCartRight}>
-                        <span style={{pointerEvents: 'none'}} className={styles.fixedCartQty}>{totalQuantity}</span>
+                        <span style={{pointerEvents: 'none'}} className={styles.fixedCartQty}>{totalQuantity > 0 && totalQuantity}</span>
                         <div onClick={flashDealBtnHandler} style={{width: '100%', height: '100%'}}>
                             <span><FontAwesomeIcon icon={faShoppingBag} /></span>
                         </div>

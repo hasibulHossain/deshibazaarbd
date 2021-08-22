@@ -133,7 +133,7 @@ const ProductSingleFull = ({ product }) => {
                                 <h3 className="product_title">
                                     {product.name && product.name}
                                 </h3>
-                                <SimpleBtn variant="danger" style={{ width: 'fit-content', padding: 0, width: 100, fontSize: 12 }} onClick={() => redirectToProductDetailsPage(product)}>
+                                <SimpleBtn variant="danger" style={{ width: 'fit-content', padding: '0px 5px', width: 100, fontSize: 12 }} onClick={() => redirectToProductDetailsPage(product)}>
                                     <Translate>View details</Translate>
                                 </SimpleBtn>
                             </div>
