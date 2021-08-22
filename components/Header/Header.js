@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState, memo } from "react";
+import React, { useEffect, memo } from "react";
 import Link from "next/link";
 import { faComment, faHeart, faShoppingBag, faSignOutAlt, faUser, faUserCog } from "@fortawesome/free-solid-svg-icons";
 
@@ -25,8 +25,6 @@ const Header = () => {
 	const toggleNav = "basic-navbar-nav";
 	const { totalQuantity } = useSelector((state) => state.CartReducer);
 	const { userData } = useSelector((state) => state.UserDataReducer);
-	const { isMobile } = useSelector(state => state.GlobalReducer);
-	const [isHidden, setIsHidden] = useState(false);
 
 	const toggleCartHandler = () => {
 		dispatch(toggleFloatingCart());
@@ -36,9 +34,6 @@ const Header = () => {
 		dispatch(getCartsAction());
 		dispatch(getUserDataAction());
 	}, []);
-
-	// useEffect(() => {
-	// }, [isHidden])
 
 	const formatQtyDisplay = (totalQuantity) => {
 		if (totalQuantity <= 9) {
@@ -63,7 +58,7 @@ const Header = () => {
 					<div className="header-container-section">
 						<div className="custome-navbar container">
 							<Link href="/">
-								<a href="" className="brand-logo-link">
+								<a href="">
 									<Navbar.Brand>
 										<img
 											src="/images/logos/logo-en.svg"
@@ -73,21 +68,16 @@ const Header = () => {
 									</Navbar.Brand>
 								</a>
 							</Link>
-							<div onClick={() => setIsHidden(preState => !preState)} className="three-dot-box">
-								<div className="three-dot">
-									<span></span>
-									<span></span>
-									<span></span>
-								</div>
-							</div>
-							<div className="header-search-product">
-								<SearchInput />
-							</div>
 
 							<Navbar.Toggle aria-controls={toggleNav} />
-							{(!isHidden) && (
-								<div className="ml-auto header-nav ml-5">
-									<div className="header-nav-inner">
+
+							<Navbar.Collapse id={toggleNav}>
+								<div className="header-search-product">
+									<SearchInput />
+								</div>
+
+								<div className="ml-auto header-nav">
+									<div className="d-flex">
 										{
 											!userData ? (
 												<div>
@@ -185,12 +175,10 @@ const Header = () => {
 										</span>
 									</div>
 								</div>
-							)}
-							<Navbar.Collapse id={toggleNav}>
 							</Navbar.Collapse>
 						</div>
 					</div>
-
+					
 					<HeaderMenu toggleNav={toggleNav} />
 				</Navbar>
 			</div>

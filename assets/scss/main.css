@@ -261,9 +261,9 @@ a .custom-button-component:hover {
   display: inline-block;
 }
 
-.header-nav .header-nav-inner {
+/* .header-nav .header-nav-inner {
   display: flex;
-}
+} */
 
 .auth-navbar-dropdown .dropdown-toggle::after {
   display: inline-block;
