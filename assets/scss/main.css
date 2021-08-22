@@ -3164,3 +3164,10 @@ img.payment_method_in_shipping {
 /** Store details Page CSS */
 /* menu icon */
 
+.product-card-body .product-single-mini-cart {
+  display: none;
+}
+
+.product-card-body-details-icon {
+  display: none;
+}
