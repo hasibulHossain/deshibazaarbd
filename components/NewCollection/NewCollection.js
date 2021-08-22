@@ -10,7 +10,7 @@ const NewCollection = () => {
                     <a href="">
                         <div className="home-card border-radius-5 pointer">
                             <div className="collection-banner">
-                                <img src={"/images/Cash-on-delivery.jpg"} className="img img-fluid" alt=""  />
+                                <img src={"/images/Cash-on-delivery.jpg"} className="img img-fluid" alt="" style={{ width: '100%' }} />
                             </div>
                         </div>
                         </a>
@@ -20,7 +20,7 @@ const NewCollection = () => {
                         <a href="">
                             <div style={{height: '100%', width: '100%'}}>
                                 <div className="home-card border-radius-5 pointer">
-                                    <img src={"/images/electronics_banner.jpg"} className="img img-fluid middle" alt="banner" />
+                                    <img src={"/images/electronics_banner.jpg"} className="img img-fluid middle" alt="banner" style={{ width: '100%' }}/>
                                 </div>
                             </div>
                         </a>
@@ -29,7 +29,7 @@ const NewCollection = () => {
                     <div className="col-lg-3 col-md-12">
                     <a href="">
                         <div className="home-card border-radius-5 pointer">
-                            <img src={"/images/polli-dokan_banner.jpg"} className="img img-fluid" alt="" />
+                            <img src={"/images/polli-dokan_banner.jpg"} className="img img-fluid" alt="" style={{ width: '100%' }}/>
                         </div>
                         </a>
                     </div>
