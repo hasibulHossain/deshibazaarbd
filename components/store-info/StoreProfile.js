@@ -1,17 +1,16 @@
 import React, {useEffect} from 'react'
 import { getStoreInfo } from './_redux/action/action';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 // import Style from './StoreProfile.module.scss';
 
 function StoreProfile() {
     const dispatch = useDispatch();
-    // const {  } = useSelector(state => state.StoreInfoReducer);
     const router = useRouter();
 
     useEffect(() => {
-        const storeId = router.query.storeById.split('=')[1];
-        dispatch(getStoreInfo(storeId));
+        const store = router.query.storeById;
+        dispatch(getStoreInfo(store));
     }, [])
 
     return (

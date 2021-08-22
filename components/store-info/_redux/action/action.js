@@ -16,8 +16,6 @@ export const getStoreInfo = (id) => async dispatch => {
         response.isLoading = false;
         response.storeInfo = res.data.data;
         dispatch({type: types.GET_STORE_INFO, payload: response});
-        
-        console.log('res store => ', res);
     } catch (err) {
         console.log('err store => ', err)
     }

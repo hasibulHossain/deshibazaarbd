@@ -4,7 +4,7 @@ import Link from 'next/link';
 function StoreSingleMini({item}) {
     return (
         <>
-            <Link href={`/store/id=${item.id}`}>
+            <Link href={`/store/${item.slug}`}>
                 <a>
                     <div className="shop-card">
                         {
