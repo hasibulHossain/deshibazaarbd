@@ -30,14 +30,14 @@ const MainLayout = (props) => {
     <>
       <PageMeta props={props} />
 
-      {
+      {/* {
         process.env.NODE_ENV === 'production' &&
         <MessengerCustomerChat
           pageId="100540491425945"
           appId="934088130725884"
           htmlRef=""
         />
-      }
+      } */}
 
       <Header />
       <main>
