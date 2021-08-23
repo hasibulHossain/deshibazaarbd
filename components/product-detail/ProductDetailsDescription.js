@@ -3,12 +3,14 @@ import Parser from 'html-react-parser';
 
 const ProductDetailsDescription = ({ product }) => {
     
+    console.log('Parser :>> ', Parser);
+    console.log('product :>> ', product);
     return (
         <div className="product_description">
             <div className="container">
                 <div className="row">
-                    <div className="col-lg-8">
-                        <p>
+                    <div className="col-lg-10">
+                        <p className="product_details_description">
                             {
                                 Parser(product.description)
                             }

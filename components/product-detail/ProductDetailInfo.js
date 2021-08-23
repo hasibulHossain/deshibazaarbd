@@ -17,21 +17,25 @@ import Slider from "react-slick";
 import PriceCalculation from "../products/partials/PriceCalculation";
 import { showToast } from "../master/Helper/ToastHelper";
 import ProductMainList from "../products/ProductMainList";
-import {useRouter} from 'next/router'
+import { useRouter } from 'next/router'
+import { formatCurrency } from "../../services/currency";
 
 const ProductDetailInfo = (props) => {
 
-  const dispatch                      = useDispatch();
-  const { product }                   = props;
-  const [quantity, setQuantity]       = useState(1);
-  const userData                      = useSelector((state) => state.UserDataReducer.userData);
-  const { carts }                     = useSelector((state) => state.CartReducer)
+  const dispatch = useDispatch();
+  const { product } = props;
+  const [quantity, setQuantity] = useState(1);
+  const userData = useSelector((state) => state.UserDataReducer.userData);
+  const { carts } = useSelector((state) => state.CartReducer)
   const [filterCarts, setFilterCarts] = useState(null)
-  const [updatedID, setUpdatedID]     = useState(null)
-  const featured_image                = `${process.env.NEXT_PUBLIC_URL}images/products/${product.featured_image}`;
-  const [previewImg, setPreviewImg]   = useState(featured_image);
-  
+  const [updatedID, setUpdatedID] = useState(null)
+  const featured_image = `${process.env.NEXT_PUBLIC_URL}images/products/${product.featured_image}`;
+  const [previewImg, setPreviewImg] = useState(featured_image);
+
   const zoomImage = { width: 200, height: 250, zoomWidth: 600, img: previewImg };
+
+  const default_price = (product.is_offer_enable && product.offer_selling_price !== 0) ? product.offer_selling_price : product.default_selling_price;
+  const [subTotal, setSubTotal] = useState(default_price)
 
   const router = useRouter()
   const queries = router.query;
@@ -45,23 +49,23 @@ const ProductDetailInfo = (props) => {
   };
 
   const cartProduct = {
-    id                   : product.id,
-    name                 : product.name,
-    quantity             : quantity,
-    isOffer              : product.is_offer_enable,
+    id: product.id,
+    name: product.name,
+    quantity: quantity,
+    isOffer: product.is_offer_enable,
     default_selling_price: product.default_selling_price,
-    offer_selling_price  : product.offer_selling_price,
-    featured_image       : product.featured_image,
-    seller_id            : product.business.id,
-    seller_name          : product.business.name,
-    sku                  : product.sku,
+    offer_selling_price: product.offer_selling_price,
+    featured_image: product.featured_image,
+    seller_id: product.business.id,
+    seller_name: product.business.name,
+    sku: product.sku,
   }
 
-  const settings  = {
-    dots          : false,
-    infinite      : true,
-    speed         : 500,
-    slidesToShow  : 3,
+  const settings = {
+    dots: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 3,
     slidesToScroll: 3
   };
 
@@ -72,11 +76,22 @@ const ProductDetailInfo = (props) => {
       if (typeof newFilterCarts !== "undefined" && newFilterCarts !== null) {
         setQuantity(newFilterCarts.quantity);
         setUpdatedID(newFilterCarts.productID);
+        setSubTotal(newFilterCarts.quantity * default_price);
       }
 
     }
 
   }, [product, carts]);
+
+  const updateQuantity = (quantity) => {
+    if (typeof filterCarts !== "undefined" && filterCarts !== null && updatedID !== null) {
+      setQuantity(filterCarts.quantity);
+      dispatch(updateCartQtyAction(updatedID, quantity));
+    } else {
+      setQuantity(quantity);
+      setSubTotal(quantity * default_price);
+    }
+  }
 
   const addToCart = () => {
     if (parseInt(product.current_stock) === 0) {
@@ -88,32 +103,25 @@ const ProductDetailInfo = (props) => {
     }
   }
 
-  const updateQuantity = (quantity) => {
-    if (typeof filterCarts !== "undefined" && filterCarts !== null && updatedID !== null) {
-      setQuantity(filterCarts.quantity);
-      dispatch(updateCartQtyAction(updatedID, quantity));
-    } else {
-      setQuantity(quantity);
-    }
-  }
+
 
   const redirectToCheckoutPage = () => {
     if (process.browser) {
-        const userData = localStorage.getItem('loginData');
-        if (typeof userData === 'undefined' || userData === null) {
-            showToast('error', 'Please Login to checkout');
-            router.push('/login');
-            return;
-        }
+      const userData = localStorage.getItem('loginData');
+      if (typeof userData === 'undefined' || userData === null) {
+        showToast('error', 'Please Login to checkout');
+        router.push('/login');
+        return;
+      }
 
-        if (parseInt(product.current_stock) === 0) {
-            showToast("error", "Product is out of stock!");
-        } else {
-            dispatch(addToCartAction(product));
-            router.push("/checkout")
-        }
+      if (parseInt(product.current_stock) === 0) {
+        showToast("error", "Product is out of stock!");
+      } else {
+        dispatch(addToCartAction(product));
+        router.push("/checkout")
+      }
     }
-}
+  }
 
   return (
     <>
@@ -159,11 +167,14 @@ const ProductDetailInfo = (props) => {
                       <div className="p-3">
                         <div className="row">
                           <div className="col-lg-4">
-                            <div className="custom_image_position">
+                            <div className=" d-none d-md-block">
                               <ReactImageZoom
                                 className="zoom-image mt-3"
                                 {...zoomImage}
                               />
+                            </div>
+                            <div className=" d-block d-md-none text-center">
+                             <img src={previewImg} alt="product preview image" style={{maxHeight: "200px"}} className="img-fluid" />
                             </div>
                             <div className="product_preview_gallery">
                               {
@@ -190,7 +201,7 @@ const ProductDetailInfo = (props) => {
                             </div>
                           </div>
                           <div className="col-lg-8">
-                            <h3 className="product_titles">{product.name}</h3>
+                            <h3 className="product_title">{product.name}</h3>
 
                             <div className="d-flex justify-content-between align-items-end">
                               <div>
@@ -230,39 +241,51 @@ const ProductDetailInfo = (props) => {
                                 </span>
                               </div>
                             </div>
+                            <div className="mt-4">
+                              <PriceCalculation item={product} />
+                            </div>
                             <hr />
 
                             <div className="product_details_price">
 
-                              <PriceCalculation item={product} />
+                              {/* <PriceCalculation item={product} /> */}
 
-                              <div className="quantity">
-                                <button
-                                  disabled={quantity <= 1 ? true : false}
-                                  onClick={() => updateQuantity(quantity - 1)}
-                                  className={quantity <= 1 ? `not-allowed` : `pointer`}
-                                >
-                                  <FontAwesomeIcon icon={faMinus} />
-                                </button>
-                                <input type="text" value={quantity} onChange={e => updateQuantity(e.target.value)} />
-                                <button
-                                  className="pointer"
-                                  onClick={() => updateQuantity(quantity + 1)}
-                                >
-                                  <FontAwesomeIcon icon={faPlus} />
-                                </button>
+                              <div className="d-flex justify-content-between align-items-center">
+                                <div className="quantity">
+                                  <button
+                                    disabled={quantity <= 1 ? true : false}
+                                    onClick={() => updateQuantity(quantity - 1)}
+                                    className={quantity <= 1 ? `not-allowed` : `pointer`}
+                                  >
+                                    <FontAwesomeIcon icon={faMinus} />
+                                  </button>
+                                  <input type="text" value={quantity} onChange={e => updateQuantity(e.target.value)} />
+                                  <button
+                                    className="pointer"
+                                    onClick={() => updateQuantity(quantity + 1)}
+                                  >
+                                    <FontAwesomeIcon icon={faPlus} />
+                                  </button>
+                                </div>
+                                <div className="badge mt-3">
+                                  <p className="floating-cart__product-price">
+                                    {quantity} <span>X</span>&nbsp;
+                                    {formatCurrency(default_price)} = {formatCurrency(subTotal)}&nbsp;
+                                  </p>
+                                </div>
+
                               </div>
 
                               <div className="d-flex mt-3 product-details-section">
-                                  <div className="mr-2">
-                                    <button className="btn buy_now_btn" onClick={() => redirectToCheckoutPage()}>Buy Now</button>
-                                  </div>
-                                  <div>
-                                    <button className="btn add_to_cart_btn"
-                                      onClick={() => addToCart()}
-                                    >Add To Cart
-                                    </button>
-                                  </div>
+                                <div className="mr-2">
+                                  <button className="btn buy_now_btn" onClick={() => redirectToCheckoutPage()}>Buy Now</button>
+                                </div>
+                                <div>
+                                  <button className="btn add_to_cart_btn"
+                                    onClick={() => addToCart()}
+                                  >Add To Cart
+                                  </button>
+                                </div>
                               </div>
                             </div>
                           </div>

@@ -169,7 +169,7 @@ const ProductSingleFull = ({ product }) => {
                                         <p className="floating-cart__product-price mt-3">
                                             {quantity} <span>X</span>&nbsp;
                                             {formatCurrency(default_price)} = {formatCurrency(subTotal)}&nbsp;
-                                            {activeCurrency('code')}
+                                            {/* {activeCurrency('code')} */}
                                         </p>
                                     </div>
                                     <div className="mr-3">

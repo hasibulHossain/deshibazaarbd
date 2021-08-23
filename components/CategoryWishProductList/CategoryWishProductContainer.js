@@ -18,12 +18,12 @@ const CategoryWishProductContainer = () => {
   );
 
   const classes = classNames({
-    "page-item": true,
+    "page-item product-page-item": true,
     disabled: !paginate.prev_page_url,
   });
 
   const nextClasses = classNames({
-    "page-item": true,
+    "page-item product-page-item": true,
     disabled: !paginate.next_page_url,
   });
 
@@ -110,7 +110,7 @@ const CategoryWishProductContainer = () => {
                             `${Base_Url}get-items?page=${i + 1}`
                           )
                         }
-                        className={`page-item ${paginate.current_page == i + 1 && 'active'}`}
+                        className={`page-item product-page-item ${paginate.current_page == i + 1 && 'active'}`}
                       >
                         <a className="page-link">{i + 1}</a>
                       </li>

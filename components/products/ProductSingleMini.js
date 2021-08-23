@@ -55,7 +55,14 @@ const ProductSingleMini = ({ item = {}, columnClassName = 'col-md-2', productKey
     }
 
     return (
-        <div className={columnClassName + ' col-6 col-sm-6'}>
+
+        <div
+            className={`
+                ${columnClassName === "col-md-2" && "col-xl-2 col-lg-3 col-md-4 col-6"} 
+                ${columnClassName === "col-md-3" && 'col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6'}
+                ${columnClassName === "col-md-12" && 'col-12'}
+        `}>
+            {/* // <div className={`${(columnClassName === "col-md-2" || columnClassName === "col-md-3") ? columnClassName + ' col-6 col-sm-6' : "col-12"}`}> */}
             <div className={`${cardClassName} ${cardClass} ${(columnClassName === "col-md-2" || columnClassName === "col-md-3") ? "filter_column_3" : "filter_column_10"} `}>
                 <div className="product-purchase-section">
                     <button>
