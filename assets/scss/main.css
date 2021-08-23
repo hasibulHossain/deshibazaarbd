@@ -231,6 +231,15 @@ a .custom-button-component:hover {
   font-size: 15px;
   font-weight: 500;
   color: #8b8b8b;
+  z-index: 100;
+}
+
+.searchbar-area-section {
+  margin-bottom: -70px;
+  margin-top: 30px;
+  margin-left: 18%;
+  z-index: 100;
+  width: 80%;
 }
 
 .header-search-product .header-custom-prepend {

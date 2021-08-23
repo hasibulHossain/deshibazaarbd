@@ -53,7 +53,12 @@ const Header = () => {
 	return (
 		<div>
 			<HeaderTop />
-			<div className="bg-light">
+			<div class="searchbar-area-section">
+				<div className="header-search-product">
+					<SearchInput />
+				</div>
+			</div>
+			<div className="bg-light" style={{ zIndex: 99 }}>
 				<Navbar bg="light" expand="lg">
 					<div className="header-container-section">
 						<div className="custome-navbar container">
@@ -72,9 +77,6 @@ const Header = () => {
 							<Navbar.Toggle aria-controls={toggleNav} />
 
 							<Navbar.Collapse id={toggleNav}>
-								<div className="header-search-product">
-									<SearchInput />
-								</div>
 
 								<div className="ml-auto header-nav">
 									<div className="d-flex">
