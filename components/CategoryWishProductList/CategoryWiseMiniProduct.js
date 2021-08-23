@@ -5,7 +5,7 @@ import ProductSingleMini from "../products/ProductSingleMini";
 
 const CategoryWiseMiniProduct = ({ columns }) => {
   const { products } = useSelector((state) => state.CategoryWiseProductReducer);
-  const [cardClassName, setCardClassName] = useState('product-card categories_wise_product_card shadow-sm p-3 mb-3 bg-white rounded');
+  const [cardClassName, setCardClassName] = useState('product-card categories_wise_product_card shadow-sm mb-sm-2 mb-md-3 bg-white rounded');
 
   // useEffect(() => {
   //   if (columns == "col-md-3") {

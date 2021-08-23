@@ -8,12 +8,15 @@ import {
   setFilterParams,
 } from "./_redux/Action/CategoryWiseProductAction";
 import LoadingSpinner from "../master/LoadingSpinner/LoadingSpinner";
+import classNames from "classnames";
 
 const CategoryWishProductList = () => {
   const dispatch = useDispatch();
   const { isLoading, categoryBrandDetails, paginate } = useSelector(
     (state) => state.CategoryWiseProductReducer
   );
+  const {isMobile} = useSelector(state => state.GlobalReducer);
+
 
   const { filterParams } = useSelector(
     (state) => state.CategoryWiseProductReducer
@@ -49,6 +52,11 @@ const CategoryWishProductList = () => {
     dispatch(setFilterParams(filterParamClone));
   }
 
+  const rowClasses = classNames({
+    'row': true,
+    'no-gutters': isMobile,
+  });
+
   return (
     <section className="category_wise_product_list">
       <div className="row justify-content-between">
@@ -63,7 +71,11 @@ const CategoryWishProductList = () => {
         <div className="col-lg-6">
           <div className="d-flex justify-content-end">
             <div className="filter_view">
-              <span>View</span>
+              {
+                !isMobile && (
+                  <span>View</span>
+                )
+              }
               <FontAwesomeIcon
                 className={
                   columns == "col-md-3"
@@ -84,7 +96,11 @@ const CategoryWishProductList = () => {
               />
             </div>
             <div className="filter_view d-flex">
-              <span>Sort by</span>
+              {
+                !isMobile && (
+                  <span>Sort by</span>
+                )
+              }
               <Form>
                 <Form.Group controlId="exampleFormSelectCustom">
                   <Form.Control onChange={selectHandler} as="select" custom>
@@ -107,7 +123,7 @@ const CategoryWishProductList = () => {
           </div>
         )
       }
-      <div className="row">
+      <div className={rowClasses}>
         {
           !isLoading && (
             <CategoryWiseMiniProduct columns={columns} />

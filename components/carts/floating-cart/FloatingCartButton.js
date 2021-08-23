@@ -6,6 +6,7 @@ import { formatCurrency, activeCurrency } from '../../../services/currency';
 import { toggleFloatingCart } from "../../../_redux/store/action/globalAction";
 import { getCartsAction } from "../_redux/action/CartAction";
 import styles from  './FloatingCartButton.module.scss';
+import Link from 'next/link';
 
 const FloatingCartButton = () => {
 
@@ -40,7 +41,11 @@ const FloatingCartButton = () => {
                 <div className={styles.fixedCartInner}>
                     {/* <div className={styles.fixedCartLeft}></div> */}
                     <div className={styles.fixedCartMiddle}>
-                        Start shopping
+                        <Link href="/">
+                            <a>
+                                Start shopping
+                            </a>
+                        </Link>
                     </div>
                     <div className={styles.fixedCartRight}>
                         <span style={{pointerEvents: 'none'}} className={styles.fixedCartQty}>{totalQuantity > 0 && totalQuantity}</span>

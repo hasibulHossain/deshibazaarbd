@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import DemoWarning from "../Demo/DemoWarning";
@@ -8,15 +8,21 @@ import FloatingCart from "../carts/floating-cart/FloatingCart";
 import PageMeta from './PageMeta';
 import FloatingCartButton from "../carts/floating-cart/FloatingCartButton";
 import MessengerCustomerChat from 'react-messenger-customer-chat';
+import { checkIsMobileDevice } from "../../_redux/store/action/globalAction";
 
 const MainLayout = (props) => {
-
+  const dispatch = useDispatch();
   const { children } = props;
   const { backdrop } = useSelector(state => state.GlobalReducer);
 
   useEffect(() => {
     if (typeof window === "undefined") {
       global.window = {};
+    }
+    
+    if(process.browser) {
+      const isMobile = /Android|webOS|iPhone|Opera Mini/i.test(navigator.userAgent);
+      dispatch(checkIsMobileDevice(isMobile))
     }
   }, [])
 

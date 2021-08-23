@@ -101,20 +101,20 @@ const CategoryWishProductContainer = () => {
                     >
                       <a className="page-link">Previous</a>
                     </li>
-                    {paginate.pages.map((_, i) => (
+                    {/* {paginate.pages.map((_, i) => ( */}
                       <li
-                        key={i}
-                        onClick={() =>
-                          paginateHandler(
-                            "linier",
-                            `${Base_Url}get-items?page=${i + 1}`
-                          )
-                        }
-                        className={`page-item product-page-item ${paginate.current_page == i + 1 && 'active'}`}
+                        // onClick={() =>
+                        //   paginateHandler(
+                        //     "linier",
+                        //     `${Base_Url}get-items?page=${i + 1}`
+                        //   )
+                        // }
+                        // className={`page-item product-page-item ${paginate.current_page == i + 1 && 'active'}`}
+                        className={`page-item product-page-item`}
                       >
-                        <a className="page-link">{i + 1}</a>
+                        <a className="page-link">{paginate.current_page}</a>
                       </li>
-                    ))}
+                    {/* ))} */}
                     <li
                       onClick={() => paginateHandler("next", paginate.next_page_url)}
                       className={nextClasses}

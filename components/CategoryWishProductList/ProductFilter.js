@@ -120,7 +120,7 @@ const ProductFilter = () => {
     dispatch(setFilterParams(filterParamClone));
   }
 
-  console.log('router => ', router)
+  // console.log('router => ', router)
 
   const {brand: brandQuery = "", category: categoryQuery = "", type: typeQuery = "", storeById = ""} = router.query;
 
@@ -178,7 +178,7 @@ const ProductFilter = () => {
   ]);
 
   return (
-    <section className="product_filter_section modal-scrollbar shadow-sm p-3 mb-5 bg-white rounded">
+    <section className="product_filter_section modal-scrollbar shadow-sm p-3 mb-md-5 mb-sm-2 bg-white rounded">
       <h3 className="product_filter_heading">Filter Products</h3>
 
       {/**filter by price range */}

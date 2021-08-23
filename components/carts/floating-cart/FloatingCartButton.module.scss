@@ -30,12 +30,17 @@
     
     .fixedCartMiddle {
         flex-basis: 80%;
-        background-color: red;
+        background-color: var(--color-primary);
         color: white;
         height: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
+
+        & a {
+            color: white;
+            text-decoration: none;
+        }
     }
     
     .fixedCartRight {
