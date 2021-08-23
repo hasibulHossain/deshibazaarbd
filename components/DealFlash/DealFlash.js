@@ -40,7 +40,7 @@ const DealFlash = () => {
       </div>
 
       <div className="flash-deal-section">
-        <div className="row no-gutters">
+        <div className="row flash-deal-row no-gutters">
           {flashDealList.length > 0 &&
             flashDealList.map((item, index) => {
               const offerEndDate     = new Date(item.offer_end_date).getTime();
@@ -51,10 +51,10 @@ const DealFlash = () => {
 
               let padding = "";
               if( index === 0) {
-                padding = 'pr-2';
+                padding = 'pr-md-2';
               }
               if(index === 1) {
-                padding = 'pl-2';
+                padding = 'pl-md-2';
               }
 
               return (

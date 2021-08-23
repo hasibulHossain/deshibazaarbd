@@ -36,6 +36,7 @@ const ProductFilter = () => {
     rating,
     paginate_no,
     order_by,
+    seller_id,
     order,
     type,
     page
@@ -140,8 +141,12 @@ const ProductFilter = () => {
 
           dispatch(getCategoryOrBrandDetails('categories/' + +queries[query]));
         }
+
       } else {
-        cloneFilterParams[query] = queries[query];
+        if(query === 'storeById') {
+          cloneFilterParams['seller_id'] = queries[query]
+        }
+        // cloneFilterParams[query] = queries[query];
       }
     }
     dispatch(setFilterParams(cloneFilterParams));
@@ -174,7 +179,8 @@ const ProductFilter = () => {
     order_by,
     order,
     type,
-    page
+    page,
+    seller_id
   ]);
 
   return (

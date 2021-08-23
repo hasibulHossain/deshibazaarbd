@@ -15,9 +15,16 @@ function StoreListFull() {
     return (
         <div className="storeList-body p-3">
             <div className="row">
+                <div className="col-md-12 mb-2">
+                    <h4>
+                        All Stores
+                    </h4>
+                </div>
+            </div>
+            <div className="row">
                 {storeList.length > 0 &&
                 storeList.map((item, index) => (
-                    <div className="col-4 col-md-2 col-lg-2" key={index}>
+                    <div className="col-4 col-sm-6 col-md-2 col-lg-2" key={index}>
                         {/* <StoreSingleMini item={item} /> */}
                         <Link href={`/store/id=${item.id}`}>
                             <a>

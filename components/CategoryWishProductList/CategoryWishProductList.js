@@ -9,8 +9,10 @@ import {
 } from "./_redux/Action/CategoryWiseProductAction";
 import LoadingSpinner from "../master/LoadingSpinner/LoadingSpinner";
 import classNames from "classnames";
+import {useRouter} from 'next/router';
 
 const CategoryWishProductList = () => {
+  const router = useRouter();
   const dispatch = useDispatch();
   const { isLoading, categoryBrandDetails, paginate } = useSelector(
     (state) => state.CategoryWiseProductReducer
@@ -57,14 +59,30 @@ const CategoryWishProductList = () => {
     'no-gutters': isMobile,
   });
 
+  let title = "";
+
+  if(categoryBrandDetails.name) {
+    title = categoryBrandDetails.name;
+  }
+
+  if(filterParams.seller_id) {
+    title = filterParams.seller_id;
+  }
+
+  const {type} = router.query;
+
+  if(type) {
+    title = type;
+  }
+
   return (
     <section className="category_wise_product_list">
       <div className="row justify-content-between">
         <div className="col-lg-6">
-          <h5 className="category-search-title">{categoryBrandDetails.name}</h5>
+          <h5 className="category-search-title">{title}</h5>
           <p>
             {
-              (paginate.total !== null ? paginate.total : '0') + ' items found in ' + categoryBrandDetails.name 
+              (paginate.total !== null ? paginate.total : '0') + ' items found in ' + title 
             }
           </p>
         </div>

@@ -115,27 +115,34 @@ const ProductSingleMini = ({ item = {}, columnClassName = 'col-md-2', productKey
 
                     {
                         (columnClassName === "col-md-3" || columnClassName === "col-md-12") &&
-                        <div className="row">
-                            <div className={columnClassName == "col-md-3" ? "col-md-12" : "col-5"}>
-                                <img src={imageURL} alt={item.name} className="img-fluid" />
-                            </div>
-                            <div className={columnClassName === "col-md-3" ? "col-md-12" : "col-7"}>
-                                <div>
-                                    <p className="product-title">{item.name}</p>
-                                    <p className={`stock-status ${parseInt(item.current_stock) > 0 ? 'stock-status-in' : 'stock-status-out'}`}>
-                                        <span>{parseInt(item.current_stock) > 0 ? 'In stock' : 'Out of stock'}</span>
-                                    </p>
-                                    <PriceCalculation item={item} />
-                                    <div className={columnClassName === "col-md-3" ? "" : "d-flex justify-content-start"}>
-                                        {
-                                            item.average_rating != 0 && (
-                                                <ProductRating rating={item.average_rating} />
-                                            )
-                                        }
+                        <>
+                            <div className="row">
+                                <div className={columnClassName == "col-md-3" ? "col-md-12" : "col-5"}>
+                                    <img src={imageURL} alt={item.name} className="img-fluid" />
+                                </div>
+                                <div className={columnClassName === "col-md-3" ? "col-md-12" : "col-7"}>
+                                    <div>
+                                        <p className="product-title">{item.name}</p>
+                                        <p className={`stock-status ${parseInt(item.current_stock) > 0 ? 'stock-status-in' : 'stock-status-out'}`}>
+                                            <span>{parseInt(item.current_stock) > 0 ? 'In stock' : 'Out of stock'}</span>
+                                        </p>
+                                        <PriceCalculation item={item} />
+                                        <div className={columnClassName === "col-md-3" ? "" : "d-flex justify-content-start"}>
+                                            {
+                                                item.average_rating != 0 && (
+                                                    <ProductRating rating={item.average_rating} />
+                                                )
+                                            }
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                            <div className="product-single-mini-cart" >
+                                <SimpleBtn variant="danger" onClick={() => addToCart(item)} style={{borderRadius: '0px'}}>
+                                    Add to cart
+                                </SimpleBtn>
+                            </div>
+                        </>
                     }
                 </div>
             </div>

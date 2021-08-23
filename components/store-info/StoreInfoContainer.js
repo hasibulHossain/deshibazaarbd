@@ -1,6 +1,7 @@
 import React from 'react'
 import {Tab, Tabs} from 'react-bootstrap';
 import {useSelector} from 'react-redux'
+import CategoryWishProductContainer from '../CategoryWishProductList/CategoryWishProductContainer';
 import StoreProductList from './StoreProductList';
 import StoreProfile from './StoreProfile';
 
@@ -23,8 +24,8 @@ function StoreInfoContainer() {
                         <div className="store-info-container__tabs mt-2">
                             <Tabs defaultActiveKey="products" id="uncontrolled-tab-example" className="mb-3" style={{ color: 'var(--dark)' }}>
                                 <Tab eventKey="products" title="Seller Products">
-                                    <StoreProductList />
-                                    {/* <CategoryWishProductContainer /> */}
+                                    {/* <StoreProductList /> */}
+                                    <CategoryWishProductContainer />
                                     {/* <StoreProductContainer /> */}
 
                                 </Tab>

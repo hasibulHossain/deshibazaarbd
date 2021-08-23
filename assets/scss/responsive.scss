@@ -236,6 +236,10 @@
 		// background-color: #f6f9fc;
 	}
 
+	.product-card .product-card-body {
+		width: 100%;
+	}
+
 	.product-card .product-card-body .product-card-body-inner {
 		width: 100%;
 		padding-left: 5px;
@@ -278,6 +282,26 @@
 	.product_details_img_gallery {
 		display: flex;
 		overflow-x: scroll;
+	}
+	
+	.search_product_no_found {
+		padding: 1rem;
+	}
+
+	.search_product_not_found_img_box {
+		width: 210px;
+	}
+
+	.flash-deal-card {
+		flex-direction: column;
+	}
+
+	.flash-deal-detail {
+		width: 100%;
+	}
+
+	.flash-deal-row {
+		padding: 10px;
 	}
 }
 

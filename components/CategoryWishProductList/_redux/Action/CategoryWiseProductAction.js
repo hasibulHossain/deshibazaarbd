@@ -20,6 +20,7 @@ export const getFilteredProducts = (filterParamObj, source = {token: ""}) => asy
 
   try {
     dispatch({ type: Types.INIT_FILTER_PRODUCT_LIST });
+    console.log('get-items?' + filterParam)
     const res = await Axios.get(`get-items?${filterParam}`, {cancelToken: source.token});
     responseData.isLoading = false;
     responseData.data = res.data.data;

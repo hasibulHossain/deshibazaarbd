@@ -19,6 +19,7 @@ const initialState = {
     attributes: null,
     rating: null,
     order_by: "",
+    seller_id: "",
     order: "",
     page: 1,
     paginate_no: 20,
@@ -118,12 +119,14 @@ function CategoryWiseProductReducer(state = initialState, { type, payload }) {
           attributes: null,
           rating: null,
           order_by: "",
+          seller_id: "",
           order: "",
           page: 1,
           paginate_no: 20,
         },
         categoryBrandDetails: {
           isLoading: false,
+          name: "",
           banner_url: "",
           childs: []
         }
