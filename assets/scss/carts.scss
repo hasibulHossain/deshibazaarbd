@@ -381,7 +381,6 @@ p.estimate {
 
 .floating-cart {
 	$self: &;
-	max-width: 24%;
 	width: 24%;
 	height: 100vh;
 	background-color: #ffff;
@@ -569,21 +568,20 @@ p.estimate {
 
 @media screen and (min-width: 300px) and (max-width: 768px) {
 	.floating-cart {
-		max-width: 70% !important;
-		width: 70% !important;
+		width: 70%;
 	}
 }
 
 @media screen and (min-width: 769px) and (max-width: 991px) {
 	.floating-cart {
-		max-width: 40% !important;
-		width: 40% !important;
+		// max-width: 40% !important;
+		width: 40%;
 	}
 }
 
 @media screen and (min-width: 992px) and (max-width: 1200px) {
 	.floating-cart {
-		max-width: 35% !important;
-		width: 35% !important;
+		// max-width: 35% !important;
+		width: 35%;
 	}
 }

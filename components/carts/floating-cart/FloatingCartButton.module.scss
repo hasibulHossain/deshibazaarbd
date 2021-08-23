@@ -13,6 +13,7 @@
         right: 0;
         left: 0;
         height: 50px;
+        z-index: 999;
     }
     
     .fixedCartInner {
@@ -35,14 +36,21 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        opacity: 0.9;
     }
     
     .fixedCartRight {
+        position: relative;
         flex-basis: 20%;
         background-color: var(--color-green);
         height: 100%;
-        opacity: 0.9;
+    }
+
+    .fixedCartQty {
+        position: absolute;
+        left: 44%;
+        top: 37%;
+        font-weight: 700;
+        font-size: 14px;
     }
 
     .fixedCartRight div span {
