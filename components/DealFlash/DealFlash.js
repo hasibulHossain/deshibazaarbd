@@ -33,7 +33,7 @@ const DealFlash = () => {
   return (
     <section className="container product-container">
       <div className="product-heading">
-        <h5 className="section-heading">
+        <h5>
           <Translate>Deals OF The Day</Translate>
         </h5>
         <ViewAll type="deals-of-day" />
