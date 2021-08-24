@@ -8,7 +8,7 @@ import ShopContainer from "../components/Shop/ShopContainer";
 // import ShopBanner from "../components/ShopBanner/ShopBanner";
 // import ProductTopListContainer from "../components/ProductTopList/ProductTopListContainer";
 import DealFlash from "../components/DealFlash/DealFlash";
-import NewCollection from "../components/NewCollection/NewCollection";
+import NewOffer from "../components/NewCollection/NewOffer";
 // import OfferProducts from "../components/OfferProducts/OfferProducts";
 import ProductSection from "../components/products/ProductSection";
 import { translate } from "../services/translation/translation";
@@ -19,7 +19,7 @@ export default function Home() {
     <MainLayout>
       {/* <ScrollToTop smooth /> */}
       <HomeBannerCarousel />
-      <NewCollection />
+      <NewOffer />
       {/* <OfferProducts /> */}
       {/* <ProductTopListContainer /> */}
       <DealFlash />
