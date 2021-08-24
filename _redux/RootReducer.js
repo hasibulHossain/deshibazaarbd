@@ -30,6 +30,7 @@ import FooterReducer from "../components/Footer/_redux/Reducer/FooterReducer";
 import ReviewReducer from "../components/product-review/_redux/reducer/productReviewReducer";
 import ForgetPasswordReducer from '../components/forget-password/_redux/reducer/forget-password-reducer';
 import StoreInfoReducer from '../components/store-info/_redux/reducer/store-info_reducer';
+import NewOfferReducer from "../components/NewCollection/_redux/Reducer/new-offer-reducer";
 
 export default combineReducers({
   GlobalReducer               : GlobalReducer,
@@ -39,6 +40,7 @@ export default combineReducers({
   CategoryReducer             : CategoryReducer,
   CompanyPolicyReducer        : CompanyPolicyReducer,
   DealFlashReducer            : DealFlashReducer,
+  NewOfferReducer            : NewOfferReducer,
   CategoryWiseProductReducer  : CategoryWiseProductReducer,
   ShopReducer                 : ShopReducer,
   StoreReducer                : StoreReducer,

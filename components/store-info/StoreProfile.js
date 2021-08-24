@@ -1,51 +1,71 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react';
+import moment from 'moment';
 import { getStoreInfo } from './_redux/action/action';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
-// import Style from './StoreProfile.module.scss';
+import SimpleBtn from '../master/SimpleBtn/SimpleBtn';
+import StoreProfileDetails from './StoreProfileDetails';
 
 function StoreProfile() {
     const dispatch = useDispatch();
+    const { storeInfo } = useSelector(state => state.StoreInfoReducer);
     const router = useRouter();
+    const [isShowing, SetIsShowing] = useState(false)
 
+    const toggleHandler = () => {
+        console.log('running')
+        SetIsShowing(preState => !preState)
+    }
     useEffect(() => {
         const store = router.query.storeById;
-        dispatch(getStoreInfo(store));
+        if(!storeInfo) {
+            dispatch(getStoreInfo(store));
+        }
     }, [])
 
     return (
         <div className="store-profile">
             <div className="store-profile__info-box">
                 <div className="row align-items-stretch">
-                    <div className="col-md-3">
+                    <div className="col-md-4 col-sm-6">
                         <div className="store-profile__info">
-                            <p>Joined</p>
-                            <div>
-                                <span style={{fontSize: '1.3rem', marginRight: '0.5rem'}}>11</span>
-                                <span>months</span>
+                            <div className="store-profile__store-logo">
+                                <img src={storeInfo && storeInfo.logo_url} alt={ storeInfo && storeInfo.name} />
                             </div>
+                            {/* <p className="store_profile__store-name" >
+                                {
+                                    storeInfo && storeInfo.name
+                                }
+                            </p> */}
                         </div>
                     </div>
-                    <div className="col-md-3">
+                    <div className="col-md-4 col-sm-6">
                         <div className="store-profile__info">
-                            <p>Shipped on time</p>
-                            <div>
-                                <span>93%</span>
-                                <span>
-                                    this is average for sellers in same category
-                                </span>
-                            </div>
+                            <p>
+                                Joined date: {moment(storeInfo && storeInfo.created_at).format('DD MMMM YYYY')}
+                            </p>
+                            <p>
+                                Main product: Electronics
+                            </p>
                         </div>
                     </div>
-                    <div className="col-md-3">
-                        <div className="store-profile__info"></div>
-                    </div>
-                    <div className="col-md-3">
-                        <div className="store-profile__info"></div>
-                        
+                    <div className="col-md-4 col-sm-6" >
+                        <div className="store-profile__info last-child">
+                            <SimpleBtn 
+                                variant="danger" 
+                                onClick={toggleHandler} 
+                                style={{backgroundColor: 'transparent',color: 'var(--color-primary)', textDecoration: 'underline'}}>
+                                View details
+                            </SimpleBtn>
+                        </div>
                     </div>
                 </div>
             </div>
+            {
+                isShowing && (
+                    <StoreProfileDetails />
+                )
+            }
         </div>
     )
 }

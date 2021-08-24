@@ -1,1 +1,0 @@
-export const GET_FLASH_DEAL_DATA = "GET_FLASH_DEAL_DATA";
