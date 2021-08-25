@@ -4,26 +4,31 @@ import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 
 import { FiChevronRight } from "react-icons/fi";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingBag } from "@fortawesome/free-solid-svg-icons";
 
 import MainLayout from "../components/layouts/MainLayout";
 import SimpleBtn from "../components/master/SimpleBtn/SimpleBtn";
 import Modal from "../components/master/Modal/Modal";
 import RemoveCartItem from "../components/RemoveCartItem/RemoveCartItem";
-import OrderSummery from '../components/orders/OrderSummery'
+import OrderSummery from "../components/orders/OrderSummery";
 import CartProduct from "../components/carts/cart-product/CartProduct";
 
 import { toggleModal } from "../_redux/store/action/globalAction";
-import { getCartsAction, toggleAllCartSelection } from "../components/carts/_redux/action/CartAction";
+import {
+  getCartsAction,
+  toggleAllCartSelection,
+} from "../components/carts/_redux/action/CartAction";
 import { getUserDataAction } from "../components/_redux/getUserData/Action/UserDataAction";
 
 export default function Carts() {
-  const router   = useRouter();
+  const router = useRouter();
   const dispatch = useDispatch();
-  
+
   const { isModalActive } = useSelector((state) => state.GlobalReducer);
-  const { supplierWiseCarts, carts, checkedAllCarts } = useSelector((state) => state.CartReducer);
+  const { supplierWiseCarts, carts, checkedAllCarts } = useSelector(
+    (state) => state.CartReducer
+  );
   const userData = useSelector((state) => state.UserDataReducer.userData);
 
   const deleteItemsHandler = () => {
@@ -37,11 +42,11 @@ export default function Carts() {
 
   const placeOrder = () => {
     if (userData !== null) {
-      router.push('/checkout')
+      router.push("/checkout").then((_) => window.scrollTo(0, 0));
     } else if (userData === null) {
-      router.push('/login')
+      router.push("/login").then((_) => window.scrollTo(0, 0));
     }
-  }
+  };
 
   return (
     <>
@@ -61,9 +66,7 @@ export default function Carts() {
           <div className="row mt-3">
             <div className="col-md-8">
               <div className="cart_container_body">
-                <p className="cart__preferred_delivery">
-                  My Carts
-                </p>
+                <p className="cart__preferred_delivery">My Carts</p>
                 {/* <Card>
                   <div className="cart__left-top">
                     <div>
@@ -74,10 +77,19 @@ export default function Carts() {
                   </div>
                 </Card> */}
                 <div className="card mt-3 mb-5">
-
                   <div className="cart_item_box_top">
-                    <p className="pointer" onClick={() => dispatch(toggleAllCartSelection(! checkedAllCarts))}>
-                      <input className="cart-checkbox" type="checkbox" checked={checkedAllCarts} onChange={() => {}} /> 
+                    <p
+                      className="pointer"
+                      onClick={() =>
+                        dispatch(toggleAllCartSelection(!checkedAllCarts))
+                      }
+                    >
+                      <input
+                        className="cart-checkbox"
+                        type="checkbox"
+                        checked={checkedAllCarts}
+                        onChange={() => {}}
+                      />
                       &nbsp; Select All ({carts.length} items)
                     </p>
                     {/* <div className="carts_delete" onClick={deleteItemsHandler}>
@@ -86,19 +98,30 @@ export default function Carts() {
                     </div> */}
                   </div>
 
-                  {
-                    supplierWiseCarts.length > 0 && supplierWiseCarts.map((item, index) => (
+                  {supplierWiseCarts.length > 0 &&
+                    supplierWiseCarts.map((item, index) => (
                       <div key={index}>
                         <div className="cart_items_by_shop" key={index}>
                           <div className="cart_item_box_top_1">
                             <div>
                               <div className="cart_shop_name d-flex">
-                                <input className="cart-checkbox" type="checkbox" checked={item.isChecked} onChange={() => dispatch(toggleAllCartSelection(! item.isChecked, null, item.sellerID))} />
+                                <input
+                                  className="cart-checkbox"
+                                  type="checkbox"
+                                  checked={item.isChecked}
+                                  onChange={() =>
+                                    dispatch(
+                                      toggleAllCartSelection(
+                                        !item.isChecked,
+                                        null,
+                                        item.sellerID
+                                      )
+                                    )
+                                  }
+                                />
                                 <div className="ml-2">
                                   <div className="cart_details_body">
-                                    <p>
-                                      {item.sellerName}
-                                    </p>
+                                    <p>{item.sellerName}</p>
                                     <div className="cart_trash">
                                       <FiChevronRight />
                                     </div>
@@ -107,7 +130,9 @@ export default function Carts() {
                               </div>
                             </div>
 
-                            <p className="estimate">Estimate time - {item.approxDeliveryDate} </p>
+                            <p className="estimate">
+                              Estimate time - {item.approxDeliveryDate}{" "}
+                            </p>
                           </div>
                           {/* <p className="Spend">
                             Spend ৳ 990 enjoy free shipping for Standard delivery option
@@ -115,24 +140,28 @@ export default function Carts() {
                         </div>
 
                         <div className="p-3">
-                          {
-                            item.data.length > 0 && item.data.map((cart, keyValue) => (
-                              <div className="cart_items_details" key={keyValue + 1}>
+                          {item.data.length > 0 &&
+                            item.data.map((cart, keyValue) => (
+                              <div
+                                className="cart_items_details"
+                                key={keyValue + 1}
+                              >
                                 <CartProduct cart={cart} />
                               </div>
-                            ))
-                          }
+                            ))}
                         </div>
                       </div>
-                    ))
-                  }
+                    ))}
 
                   <div className="p-2 mb-4">
-                    <div className="text-center" >
+                    <div className="text-center">
                       <Link href="/products">
-                        <a href="/products" style={{ display: 'inline-block' }}>
-                          <SimpleBtn variant="success" >
-                            <FontAwesomeIcon className="mr-2" icon={faShoppingBag} />
+                        <a href="/products" style={{ display: "inline-block" }}>
+                          <SimpleBtn variant="success">
+                            <FontAwesomeIcon
+                              className="mr-2"
+                              icon={faShoppingBag}
+                            />
                             CONTINUE SHOPPING
                           </SimpleBtn>
                         </a>
@@ -144,7 +173,10 @@ export default function Carts() {
             </div>
 
             <div className="col-md-4 cart_checkout_margin">
-              <OrderSummery handleClick={placeOrder} buttonText="PROCEED TO CHECKOUT" />
+              <OrderSummery
+                handleClick={placeOrder}
+                buttonText="PROCEED TO CHECKOUT"
+              />
             </div>
           </div>
         </div>

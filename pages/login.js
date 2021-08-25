@@ -6,27 +6,29 @@ import Login from "../components/LoginRegistration/Login";
 import { getUserDataAction } from "../components/_redux/getUserData/Action/UserDataAction";
 
 export default function login(props) {
-
   const dispatch = useDispatch();
-  const router   = useRouter();
+  const router = useRouter();
   const userData = useSelector((state) => state.UserDataReducer.userData);
-  
+
   useEffect(() => {
     if (typeof window === "undefined") {
       global.window = {};
     }
-    
+
     if (typeof userData !== "undefined" && userData !== null) {
-      router.push("/profile")
+      router.push("/profile").then((_) => window.scrollTo(0, 0));
     }
   }, [userData]);
 
   useEffect(() => {
     dispatch(getUserDataAction());
- }, [])
+  }, []);
 
   return (
-    <MainLayout pageTitle="Sign In" pageMetaDescription="Sign in to get all access">
+    <MainLayout
+      pageTitle="Sign In"
+      pageMetaDescription="Sign in to get all access"
+    >
       <Login />
     </MainLayout>
   );
