@@ -18,7 +18,7 @@ function ShopReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         ...payload,
-        esLoading: false,
+        isLoading: false,
         error: false,
       };
     case Types.FETCH_SHOP_LIST_FAILED:

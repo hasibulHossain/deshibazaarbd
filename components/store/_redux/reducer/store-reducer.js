@@ -19,7 +19,7 @@ function storeReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         ...payload,
-        esLoading: false,
+        isLoading: false,
         error: false,
       };
     case types.FETCH_STORE_LIST_FAILED:
