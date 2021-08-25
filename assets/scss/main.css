@@ -2277,7 +2277,7 @@ p.Spend {
 .product_cart_left {
   display: flex;
   align-items: flex-start;
-  justify-content: space-between;
+  /* justify-content: space-between; */
 }
 
 .product_cart_img {
