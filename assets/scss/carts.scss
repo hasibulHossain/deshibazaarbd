@@ -233,6 +233,7 @@ $border-bottom: 1px solid #dfdfdf;
 				height: 120px;
 				background-color: #ddd;
 				margin-left: 0.5rem;
+				
 				& img {
 				}
 			}
@@ -437,7 +438,7 @@ p.estimate {
 				#{$self}__product-photo-container {
 					width: 80px;
 					height: 80px;
-					background-color: #bbb;
+					background-color: transparent;
 				}
 			}
 

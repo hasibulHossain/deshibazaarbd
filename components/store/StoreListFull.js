@@ -24,7 +24,7 @@ function StoreListFull() {
             <div className="row">
                 {storeList.length > 0 &&
                 storeList.map((item, index) => (
-                    <div className="col-4 col-sm-6 col-md-2 col-lg-2" key={index}>
+                    <div className="col-6 col-sm-6 col-md-2 col-lg-2" key={index}>
                         {/* <StoreSingleMini item={item} /> */}
                         <Link href={`/store/id=${item.id}`}>
                             <a>

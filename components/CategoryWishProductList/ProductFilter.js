@@ -234,7 +234,7 @@ const ProductFilter = ({show}) => {
       </div>
 
       {/**filter by categories */}
-      <div className="filter_by_category">
+      <div className="filter_by_category" style={{marginTop: '40px'}}>
         <p className="filter_title">Brand</p>
         {ShopList.map((item) => (
           <Form.Group key={item.id} controlId={item.id}>
