@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import Link from 'next/link'
 import ProductFilter from "./ProductFilter";
 import CategoryWishProductList from "./CategoryWishProductList";
@@ -8,12 +8,12 @@ import {
   setFilterParams,
 } from "./_redux/Action/CategoryWiseProductAction";
 
-const Base_Url = process.env.NEXT_PUBLIC_API_URL;
 
 const CategoryWishProductContainer = () => {
   const dispatch = useDispatch();
+  const [showFilter, setShowFilter] = useState(false)
   
-  const { paginate, products, filterParams, categoryBrandDetails, isLoading } = useSelector(
+  const { paginate, filterParams, categoryBrandDetails, isLoading } = useSelector(
     (state) => state.CategoryWiseProductReducer
   );
 
@@ -70,7 +70,7 @@ const CategoryWishProductContainer = () => {
           <div className="childs row justify-content-start">
             {
               categoryBrandDetails.childs.map((item, index) => (
-                <div className="col-3 col-md-2" key={index}>
+                <div className="col-6 col-md-2 col-sm-3 mb-sm-2 mb-1" key={index}>
                   <Link href={`products?${item.parent_id ? 'category' : 'brand'}=${item.id}`}>
                     <a className="child-logo-box">
                     <span>{item.name}</span>
@@ -84,10 +84,10 @@ const CategoryWishProductContainer = () => {
       }
       <div className="row">
         <div className="col-md-3">
-          <ProductFilter />
+            <ProductFilter show={showFilter} />
         </div>
         <div className="col-md-9 mb-5">
-          <CategoryWishProductList />
+          <CategoryWishProductList showFilter={showFilter} showFilterHandler={() => setShowFilter(preState => !preState)} />
           {
             !isLoading && paginate.total > 20  && (
               <div className="w-100">

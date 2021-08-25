@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faColumns, faList } from "@fortawesome/free-solid-svg-icons";
+import { faColumns, faList, faFilter } from "@fortawesome/free-solid-svg-icons";
 import { Form } from "react-bootstrap";
 import CategoryWiseMiniProduct from "./CategoryWiseMiniProduct";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,7 +11,7 @@ import LoadingSpinner from "../master/LoadingSpinner/LoadingSpinner";
 import classNames from "classnames";
 import {useRouter} from 'next/router';
 
-const CategoryWishProductList = () => {
+const CategoryWishProductList = ({showFilter, showFilterHandler}) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const { isLoading, categoryBrandDetails, paginate } = useSelector(
@@ -59,6 +59,15 @@ const CategoryWishProductList = () => {
     'no-gutters': isMobile,
   });
 
+  const filterClasses = classNames({
+    column_active: showFilter
+  })
+
+  const filterHeadingClasses = classNames({
+    "category_wise_product_list_heading": true,
+    show: showFilter
+  })
+
   let title = "";
 
   if(categoryBrandDetails.name) {
@@ -78,15 +87,33 @@ const CategoryWishProductList = () => {
   return (
     <section className="category_wise_product_list">
       <div className="row justify-content-between">
-        <div className="col-lg-6">
-          <h5 className="category-search-title">{title}</h5>
+        <div className="col-lg-6 col-sm-12">
+          <div className={filterHeadingClasses}>
+            <h5 className="category-search-title">{title}</h5>
+            {
+              isMobile && (
+                <>
+                  <span>
+                    Filter 
+                  </span>
+                  <span>
+                    <FontAwesomeIcon
+                      className={filterClasses}
+                      icon={faFilter}
+                      onClick={showFilterHandler}
+                    />
+                  </span>
+                </>
+              )
+            }
+          </div>
           <p>
             {
               (paginate.total !== null ? paginate.total : '0') + ' items found in ' + title 
             }
           </p>
         </div>
-        <div className="col-lg-6">
+        <div className="col-lg-6 col-sm-12">
           <div className="d-flex justify-content-end">
             <div className="filter_view">
               {
@@ -94,6 +121,7 @@ const CategoryWishProductList = () => {
                   <span>View</span>
                 )
               }
+              
               <FontAwesomeIcon
                 className={
                   columns == "col-md-3"

@@ -1541,6 +1541,14 @@ h6.address_book_updated_title {
   cursor: pointer;
 }
 
+.product_filter_section {
+  display: none;
+}
+
+.product_filter_section.show {
+  display: block;
+}
+
 .product_filter_heading {
   color: var(--color-primary);
   font-size: 18px;
