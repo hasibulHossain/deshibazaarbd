@@ -59,7 +59,7 @@ export default function Carts() {
 		<MainLayout pageTitle="Checkout">
 			<div className="container">
 				<div className="row">
-					<div className="col-md-8">
+					<div className="col-lg-8">
 						<div className="delivery_info mb-3 mt-5">
 							<DeliveryInfo />
 							<div className="card mt-3 pl-3 pr-3 pt-2 shadow-sm">
@@ -81,7 +81,7 @@ export default function Carts() {
 							</div>
 						</div>
 					</div>
-					<div className="col-md-4 cart_checkout_margin">
+					<div className="col-lg-4 cart_checkout_margin">
 						<ShippingInfo />
 						<CheckoutPaymentMethod />
 						<OrderSummery handleClick={() => handleStoreOrder()} buttonText="CONFIRM PAYMENT" />
