@@ -4,10 +4,10 @@ import ProfileSideBar from "./ProfileSideBar";
 import { getUserDataAction } from "../_redux/getUserData/Action/UserDataAction";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMailBulk, faMapMarkedAlt, faPhone } from "@fortawesome/free-solid-svg-icons";
-import { getAddress, getDefaultAddress } from "../ProfileAccountSetting/_redux/Action/ProfileAccountSettingAction";
+import { getDefaultAddress } from "../ProfileAccountSetting/_redux/Action/ProfileAccountSettingAction";
 import LoadingSpinner from './../master/LoadingSpinner/LoadingSpinner'
 import SimpleModal from '../master/Modal/SimpleModal';
-import PersonalInformationUpdate from "./PersonalInformationUpdate";
+// import PersonalInformationUpdate from "./PersonalInformationUpdate";
 import AddressUpdate from "./../ProfileAccountSetting/AddressUpdate";
 import Link from 'next/link'
 import WarningMessage from "../master/warningMessage/WarningMessage";
