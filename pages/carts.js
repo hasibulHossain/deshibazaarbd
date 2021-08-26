@@ -58,7 +58,7 @@ export default function Carts() {
 
       <MainLayout pageTitle="Carts">
         <div className="container">
-          <div className="row mt-3">
+          <div className="row mt-3 mb-5">
             <div className="col-md-8">
               <div className="cart_container_body">
                 <p className="cart__preferred_delivery">
@@ -73,7 +73,7 @@ export default function Carts() {
                     <p>Availability and promotions will be shown here</p>
                   </div>
                 </Card> */}
-                <div className="card mt-3 mb-5">
+                <div className="card mt-3">
 
                   <div className="cart_item_box_top">
                     <p className="pointer" onClick={() => dispatch(toggleAllCartSelection(!checkedAllCarts))}>

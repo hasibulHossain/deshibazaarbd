@@ -31,7 +31,7 @@ const FooterBottom = () => {
                         </div>
                     </div>
                     <div className="col-md-4">
-                        <img src={"/images/payment-methods.png"} alt="Deshi BazaarBD" className="img-fluid mb-2 mt-2 pointer" />
+                        <img src={"/images/payment-methods.png"} alt="Deshi BazaarBD" className="img-fluid mb-2 mt-2 pointer" style={{ height: 50 }}/>
                     </div>
                 </div>
             </Container>
