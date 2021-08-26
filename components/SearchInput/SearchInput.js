@@ -9,12 +9,11 @@ import { translate } from "../../services/translation/translation";
 import Translate from "../translation/Translate";
 
 const SearchInput = () => {
-  
-  const dispatch            = useDispatch();
-  const router              = useRouter();
+  const dispatch = useDispatch();
+  const router = useRouter();
   const [search, setSearch] = useState("");
-  const suggestions         = useSelector((state) => state.SearchReducer.products);
-  const loading             = useSelector((state) => state.SearchReducer.loading);
+  const suggestions = useSelector((state) => state.SearchReducer.products);
+  const loading = useSelector((state) => state.SearchReducer.loading);
 
   const searchProduct = (e) => {
     setSearch(e.target.value);
@@ -22,20 +21,24 @@ const SearchInput = () => {
   };
 
   const searchClick = (searchData) => {
-    setSearch('');
+    setSearch("");
 
     if (searchData.is_item) {
-      router.push(`/products/${searchData.slug}`);
+      router
+        .push(`/products/${searchData.slug}`)
+        .then((_) => window.scrollTo(0, 0));
     }
     if (searchData.is_category) {
-      router.push(`/products?category=${searchData.id}`);
+      router
+        .push(`/products?category=${searchData.id}`)
+        .then((_) => window.scrollTo(0, 0));
     }
   };
 
   return (
     <>
       <input
-        placeholder={translate('Search for Products, Brands or more')}
+        placeholder={translate("Search for Products, Brands or more")}
         onChange={(e) => searchProduct(e)}
       />
       <div className="header-custom-prepend pointer">
@@ -50,9 +53,13 @@ const SearchInput = () => {
             className="text-danger text-center"
             style={{ margin: 0, display: "flex", flexDirection: "column" }}
           >
-            <p><Translate>Sorry, No Product found by</Translate> - {search} </p>
+            <p>
+              <Translate>Sorry, No Product found by</Translate> - {search}{" "}
+            </p>
 
-            <p><Translate>Please try with another keyword</Translate> !</p>
+            <p>
+              <Translate>Please try with another keyword</Translate> !
+            </p>
           </div>
         </div>
       )}

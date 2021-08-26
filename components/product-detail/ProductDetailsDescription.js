@@ -3,8 +3,6 @@ import Parser from 'html-react-parser';
 
 const ProductDetailsDescription = ({ product }) => {
     
-    console.log('Parser :>> ', Parser);
-    console.log('product :>> ', product);
     return (
         <div className="product_description">
             <div className="container">

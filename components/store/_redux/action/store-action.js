@@ -25,19 +25,13 @@ export const getFilteredStoreList = (locations) => async (dispatch) => {
   for (const location in locations) {
     url = url + location + '=' + locations[location] + '&';
   }
-  console.log('url => ', url)
   try {
     dispatch({type: types.INIT_STORE_LIST});
     const res = await axios.get(url);
     const data = res.data.data
-    console.log('res data => ', data)
     dispatch({ type: types.GET_STORE_LIST, payload: { storeList: data } });
 
   } catch (err) {
     console.log('err => ', err)
-  }
-
-  return {
-    type: 'test'
   }
 }

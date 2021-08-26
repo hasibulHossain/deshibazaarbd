@@ -362,6 +362,52 @@
 	.flash-deal-row {
 		padding: 10px;
 	}
+
+	.store-profile__info-box {
+		text-align: center;
+	}
+
+	.store-profile__info {
+		border: none;
+	}
+
+	.store-profile__store-logo {
+		margin-bottom: 1rem;
+	}
+
+	.store-profile-details__logo {
+		margin-bottom: 1rem;
+	}
+
+	.store-profile-details__contacts {
+		flex-direction: column;
+	}
+
+	.store-profile-details__contact-phone {
+		margin-bottom: 1rem;
+	}
+
+	
+	.category_wise_product_list_heading {
+		display: flex;
+	}
+	
+	.category_wise_product_list_heading.show {
+		margin-top: 2rem;
+	}
+
+	.category_wise_product_list_heading h5 {
+		margin-right: auto;
+	}
+
+	.product-container .product-heading h5 {
+		margin: 0;
+		font-size: 1rem;
+	}
+
+	.store-category-list {
+		min-height: auto;
+	}
 }
 
 

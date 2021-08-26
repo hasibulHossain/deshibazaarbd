@@ -13,9 +13,10 @@ import { getShopList } from "../Shop/_redux/Action/ShopAction";
 import ReactStars from "react-rating-stars-component";
 import { activeCurrency } from "../../services/currency";
 import {useRouter} from 'next/router'
+import classNames from "classnames";
 import Axios from 'axios'
 
-const ProductFilter = () => {
+const ProductFilter = ({show}) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const { filterParams } = useSelector(
@@ -23,6 +24,7 @@ const ProductFilter = () => {
   );
   const { ShopList } = useSelector((state) => state.ShopReducer);
   const { categories } = useSelector((state) => state.CategoryReducer);
+  const {isMobile} = useSelector(state => state.GlobalReducer);
 
   const [value, setValue] = useState({ min: 100, max: 90000 });
   const [isChecked, setIsChecked] = useState(false);
@@ -41,6 +43,11 @@ const ProductFilter = () => {
     type,
     page
   } = filterParams;
+
+  const classes = classNames({
+    'product_filter_section modal-scrollbar shadow-sm p-3 mb-md-5 mb-sm-2 bg-white rounded': true,
+    show: show || !isMobile,
+  });
 
   // checkbox handler
   const handleChecked = (e, category) => {
@@ -184,7 +191,7 @@ const ProductFilter = () => {
   ]);
 
   return (
-    <section className="product_filter_section modal-scrollbar shadow-sm p-3 mb-md-5 mb-sm-2 bg-white rounded">
+    <section className={classes} >
       <h3 className="product_filter_heading">Filter Products</h3>
 
       {/**filter by price range */}
@@ -227,7 +234,7 @@ const ProductFilter = () => {
       </div>
 
       {/**filter by categories */}
-      <div className="filter_by_category">
+      <div className="filter_by_category" style={{marginTop: '40px'}}>
         <p className="filter_title">Brand</p>
         {ShopList.map((item) => (
           <Form.Group key={item.id} controlId={item.id}>

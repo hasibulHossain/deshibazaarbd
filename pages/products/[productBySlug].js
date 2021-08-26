@@ -1,12 +1,16 @@
-import React from "react";
-import { useRouter } from 'next/router';
+import React, {useEffect} from "react";
 import MainLayout from "../../components/layouts/MainLayout";
 import LoadingSkelleton from "../../components/master/skelleton/LoadingSkelleton";
 import ProductDetailInfo from "../../components/product-detail/ProductDetailInfo"
 
 export default function ProductBySlug({ product }) {
-    const router  = useRouter();
+    // const router  = useRouter();
+    // const { asPath } = router;
+
     const loading = false;
+
+    // useEffect(() => {
+    // }, [asPath])
 
     return (
         <>
@@ -36,9 +40,10 @@ export default function ProductBySlug({ product }) {
 
 export const getServerSideProps = async (context) => {
     const productBySlug = context.params.productBySlug;
+    const uri =  encodeURI(`${process.env.NEXT_PUBLIC_API_URL}get-item-detail/${productBySlug}`);
 
     // Don't delete the base api_url from here.
-    const res           = await fetch(`${process.env.NEXT_PUBLIC_API_URL}get-item-detail/${productBySlug}`)
+    const res           = await fetch(uri)
     const dataJSON      = await res.json();
     const data          = dataJSON.data;
     return {

@@ -16,7 +16,7 @@ function FloatingCartProduct({ item }) {
     <div className="floating-cart__product">
       <div className="floating-cart__product-left">
         <div className="floating-cart__product-photo-container">
-          <img src={item.productImage} alt="" style={{ width: 80, height: 80 }} />
+          <img src={item.productImage} alt="" style={{ width: 80, height: 80, objectFit: 'contain' }} />
         </div>
       </div>
       <div className="floating-cart__product-right">

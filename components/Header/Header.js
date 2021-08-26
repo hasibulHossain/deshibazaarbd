@@ -53,7 +53,7 @@ const Header = () => {
 	return (
 		<div>
 			<HeaderTop />
-			<div class="searchbar-area-section">
+			<div className="searchbar-area-section">
 				<div className="header-search-product">
 					<SearchInput />
 				</div>
