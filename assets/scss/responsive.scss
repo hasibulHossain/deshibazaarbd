@@ -336,6 +336,7 @@
 
 	.product_title_box {
 		margin-top: 2rem;
+		flex-direction: column;
 	}
 
 	.product_details_img_gallery {
@@ -407,6 +408,23 @@
 
 	.store-category-list {
 		min-height: auto;
+	}
+
+	.account_info .nav-tabs .nav-link {
+		font-size: 1rem;
+	}
+	
+	#controlled-tab-example-tabpane-sign-in .account_btn_group {
+		margin-top: 0px;
+		padding-right: 15px;
+	}
+
+	.forget-password-input {
+		width: 100%;
+	}
+
+	.forget-password .forget-password-des {
+		font-size: 16px;
 	}
 }
 

@@ -149,7 +149,7 @@ const ProductSingleFull = ({ product }) => {
                   variant="danger"
                   style={{
                     width: "fit-content",
-                    padding: "0px 5px",
+                    padding: "5px 5px",
                     width: 100,
                     fontSize: 12,
                   }}

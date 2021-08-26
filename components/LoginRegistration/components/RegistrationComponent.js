@@ -154,7 +154,7 @@ const RegistrationComponent = () => {
                         </div>
 
 
-                        <div className="col-md-6 mt-3">
+                        <div className="col-md-6 mt-sm-3">
                             {isLoading && (
                                 <div className="mb-3 mt-4">
                                     <button disabled={true} className="btn btn-primary btn-sm mt-1">
@@ -167,7 +167,7 @@ const RegistrationComponent = () => {
                                 </div>
                             )}
                             {!isLoading && (
-                                <div className="mb-3 mt-4">
+                                <div className="mb-3 mt-sm-4">
                                     <button type="submit"
                                         // className="btn btn-sm btn-primary mt-1 d-flex"
                                         className={isOTP ? "btn btn-primary btn-sm d-flex btn-get-otp button_disabled d-block" : "d-block btn btn-primary btn-sm d-flex btn-get-otp"}
@@ -322,14 +322,21 @@ const RegistrationComponent = () => {
                             )
                         }
 
-                        <p className="mt-2">or Sign up with</p>
+                        {/* <p className="mt-2">or Sign up with</p>
                         <button className="btn google_btn mr-3 mt-2"><FontAwesomeIcon className="mr-2" icon={faGoogle} />Google</button>
-                        <button className="btn facebook_btn mt-2"><FontAwesomeIcon className="mr-2" icon={faFacebookF} />Google</button>
+                        <button className="btn facebook_btn mt-2"><FontAwesomeIcon className="mr-2" icon={faFacebookF} />Google</button> */}
                     </div>
                 </form>
 
-                <p className="account_info_label mt-4">By clicking Create Account, you acknowledge</p>
-                <p className="account_info_label">
+                <p className="account_info_label mt-4">By clicking Create Account, you acknowledge you have read and agreed to our
+                    <Link href="/">
+                        <a> Terms of Use </a>
+                    </Link>
+                    and
+                    <Link href="/">
+                        <a> Privacy Policy </a>
+                    </Link></p>
+                {/* <p className="account_info_label">
                     you have read and agreed to our
                     <Link href="/">
                         <a> Terms of Use </a>
@@ -338,7 +345,7 @@ const RegistrationComponent = () => {
                     <Link href="/">
                         <a> Privacy Policy </a>
                     </Link>
-                </p>
+                </p> */}
 
                 <p className="already_account">
                     Already have an account ?

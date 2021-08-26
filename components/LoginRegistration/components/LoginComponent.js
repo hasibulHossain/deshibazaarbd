@@ -118,7 +118,7 @@ const LoginComponent = () => {
               </div>
             </div>
 
-            <div className="d-flex justify-content-between">
+            <div className="d-flex justify-content-between flex-column flex-sm-row pt-2 pt-sm-0" style={{padding: '0 15px'}}>
               <div className="form-check">
                 <input
                   className="form-check-input"
@@ -140,7 +140,7 @@ const LoginComponent = () => {
               </p>
             </div>
 
-            <div className="account_btn_group">
+            <div className="account_btn_group justify-content-end justify-content-sm-start">
               {!isLoading && (
                 <button className="btn account_btn mt-2">SIGN IN</button>
               )}
@@ -159,7 +159,7 @@ const LoginComponent = () => {
                 </button>
               )}
 
-              <p className="mt-2">or Sign up with</p>
+              {/* <p className="mt-2">or Sign up with</p>
               <button className="btn google_btn mr-3 mt-2">
                 <FontAwesomeIcon className="mr-2" icon={faGoogle} />
                 Google
@@ -167,7 +167,7 @@ const LoginComponent = () => {
               <button className="btn facebook_btn mt-2">
                 <FontAwesomeIcon className="mr-2" icon={faFacebookF} />
                 Google
-              </button>
+              </button> */}
             </div>
           </form>
         )}

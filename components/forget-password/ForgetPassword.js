@@ -29,13 +29,13 @@ function ForgetPassword() {
         <div className="row">
           <div className="col-md-12">
             <div className="bg-white p-4">
-              <p>
+              <p className="forget-password-des">
                 Enter your phone number or email below and we’ll send you a OTP
                 to reset your password
               </p>
 
               <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
-                <div className="col-md-6">
+                <div className="col-md-6 px-0">
                   <div className="mb-3">
                     {/* <label htmlFor="lastName" className="form-label">Email</label> */}
                     <input
