@@ -19,9 +19,9 @@ import { getCartsAction, toggleAllCartSelection } from "../components/carts/_red
 import { getUserDataAction } from "../components/_redux/getUserData/Action/UserDataAction";
 
 export default function Carts() {
-  const router   = useRouter();
+  const router = useRouter();
   const dispatch = useDispatch();
-  
+
   const { isModalActive } = useSelector((state) => state.GlobalReducer);
   const { supplierWiseCarts, carts, checkedAllCarts } = useSelector((state) => state.CartReducer);
   const userData = useSelector((state) => state.UserDataReducer.userData);
@@ -76,8 +76,8 @@ export default function Carts() {
                 <div className="card mt-3 mb-5">
 
                   <div className="cart_item_box_top">
-                    <p className="pointer" onClick={() => dispatch(toggleAllCartSelection(! checkedAllCarts))}>
-                      <input className="cart-checkbox" type="checkbox" checked={checkedAllCarts} onChange={() => {}} /> 
+                    <p className="pointer" onClick={() => dispatch(toggleAllCartSelection(!checkedAllCarts))}>
+                      <input className="cart-checkbox" type="checkbox" checked={checkedAllCarts} onChange={() => { }} />
                       &nbsp; Select All ({carts.length} items)
                     </p>
                     {/* <div className="carts_delete" onClick={deleteItemsHandler}>
@@ -91,30 +91,34 @@ export default function Carts() {
                       <div key={index}>
                         <div className="cart_items_by_shop" key={index}>
                           <div className="cart_item_box_top_1">
-                            <div>
-                              <div className="cart_shop_name d-flex">
-                                <input className="cart-checkbox" type="checkbox" checked={item.isChecked} onChange={() => dispatch(toggleAllCartSelection(! item.isChecked, null, item.sellerID))} />
-                                <div className="ml-2">
-                                  <div className="cart_details_body">
-                                    <p>
-                                      {item.sellerName}
-                                    </p>
-                                    <div className="cart_trash">
-                                      <FiChevronRight />
+                            <div className="row justify-content-between">
+                              <div className="col-md-6">
+                                <div className="cart_shop_name d-flex">
+                                  <input className="cart-checkbox" type="checkbox" checked={item.isChecked} onChange={() => dispatch(toggleAllCartSelection(!item.isChecked, null, item.sellerID))} />
+                                  <div className="ml-2">
+                                    <div className="cart_details_body">
+                                      <p>
+                                        {item.sellerName}
+                                      </p>
+                                      <div className="cart_trash">
+                                        <FiChevronRight />
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
                               </div>
+                              <div className="col-md-6">
+                                <p className="estimate">Estimate time - {item.approxDeliveryDate} </p>
+                              </div>
                             </div>
 
-                            <p className="estimate">Estimate time - {item.approxDeliveryDate} </p>
                           </div>
                           {/* <p className="Spend">
                             Spend ৳ 990 enjoy free shipping for Standard delivery option
                           </p> */}
                         </div>
 
-                        <div className="p-3">
+                        <div className="p-2">
                           {
                             item.data.length > 0 && item.data.map((cart, keyValue) => (
                               <div className="cart_items_details" key={keyValue + 1}>

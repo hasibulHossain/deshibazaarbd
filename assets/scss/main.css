@@ -2216,10 +2216,10 @@ p.text-secondary.mb-0 {
 }
 
 .cart_item_box_top_1 {
-  display: -webkit-flex;
+  /* display: -webkit-flex;
   display: flex;
   -webkit-justify-content: space-between;
-  justify-content: space-between;
+  justify-content: space-between; */
   padding: 10px 15px;
 }
 
@@ -2287,7 +2287,7 @@ p.Spend {
 .product_cart_left {
   display: flex;
   align-items: flex-start;
-  justify-content: space-between;
+  /* justify-content: space-between; */
 }
 
 .product_cart_img {
