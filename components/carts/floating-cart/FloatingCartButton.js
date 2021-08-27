@@ -20,7 +20,7 @@ const FloatingCartButton = () => {
     };
 
     const currentRoute =  router.route && router.route.split('/')[1];
-    let style = {display: 'block'};
+    let style = {};
     if(currentRoute === 'login' || currentRoute === 'register' || currentRoute === 'user') [
         style.display = 'none'
     ]
