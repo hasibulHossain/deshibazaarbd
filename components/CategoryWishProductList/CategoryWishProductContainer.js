@@ -70,7 +70,7 @@ const CategoryWishProductContainer = () => {
           <div className="childs row justify-content-start">
             {
               categoryBrandDetails.childs.map((item, index) => (
-                <div className="col-6 col-md-2 col-sm-3 mb-sm-2 mb-1" key={index}>
+                <div className="col-6 col-md-2 col-sm-3 mb-sm-2 mb-3" key={index}>
                   <Link href={`products?${item.parent_id ? 'category' : 'brand'}=${item.id}`}>
                     <a className="child-logo-box">
                     <span>{item.name}</span>
@@ -86,7 +86,7 @@ const CategoryWishProductContainer = () => {
         <div className="col-md-3">
             <ProductFilter show={showFilter} />
         </div>
-        <div className="col-md-9 mb-5">
+        <div className="col-md-9 mb-5 px-0">
           <CategoryWishProductList showFilter={showFilter} showFilterHandler={() => setShowFilter(preState => !preState)} />
           {
             !isLoading && paginate.total > 20  && (

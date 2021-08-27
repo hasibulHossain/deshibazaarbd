@@ -114,7 +114,7 @@ const CategoryWishProductList = ({showFilter, showFilterHandler}) => {
           </p>
         </div>
         <div className="col-lg-6 col-sm-12">
-          <div className="d-flex justify-content-end">
+          <div className="d-flex justify-content-start justify-content-sm-end">
             <div className="filter_view">
               {
                 !isMobile && (

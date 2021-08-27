@@ -35,7 +35,7 @@ export default function App() {
             <div className="col-md-12">
               <div className="bg-white p-4">
                 <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
-                  <div style={{ width: "40%" }}>
+                  <div className="forget-password-input" >
                     <div className="mb-3">
                       <label className="d-block" htmlFor="password">
                         Password
@@ -60,7 +60,7 @@ export default function App() {
                     </div>
                   </div>
 
-                  <div style={{ width: "40%" }}>
+                  <div className="forget-password-input" >
                     <div className="mb-3">
                       <label className="d-block" htmlFor="password_repeat">
                         Retype password

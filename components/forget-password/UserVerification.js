@@ -32,7 +32,7 @@ function UserVerification() {
               <p>Please check your email or phone number for OTP</p>
 
               <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
-                <div style={{ width: "40%" }}>
+                <div className="forget-password-input">
                   <div className="mb-3">
                     <input
                       disabled={true}
@@ -50,7 +50,7 @@ function UserVerification() {
                     )}
                   </div>
                 </div>
-                <div style={{ width: "40%" }}>
+                <div className="forget-password-input">
                   <div className="mb-3">
                     <input
                       type="text"
