@@ -7,9 +7,10 @@ import { toggleFloatingCart } from "../../../_redux/store/action/globalAction";
 import { getCartsAction } from "../_redux/action/CartAction";
 import styles from  './FloatingCartButton.module.scss';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const FloatingCartButton = () => {
-
+    const router = useRouter();
     const dispatch                      = useDispatch();
     const { totalQuantity, totalPrice } = useSelector(state => state.CartReducer);
     // const { isMobile } = useSelector(state => state.GlobalReducer);
@@ -18,13 +19,19 @@ const FloatingCartButton = () => {
         dispatch(toggleFloatingCart());
     };
 
+    const currentRoute =  router.route && router.route.split('/')[1];
+    let style = {display: 'block'};
+    if(currentRoute === 'login' || currentRoute === 'register' || currentRoute === 'user') [
+        style.display = 'none'
+    ]
+
     useEffect(() => {
         dispatch(getCartsAction())
     }, []);
 
     let fixedCartPrice = (
         <>
-            <button onClick={flashDealBtnHandler} className="flashDealButton d-flex flex-column align-items-center pointer" >
+            <button onClick={flashDealBtnHandler} className="flashDealButton d-flex flex-column align-items-center pointer" style={style}>
                 <div className="fixed-cart-items">
                     <span><FontAwesomeIcon icon={faShoppingBag} /> </span>
                     <span className={styles.color}>
@@ -37,7 +44,7 @@ const FloatingCartButton = () => {
                     </span>
                 </div>
             </button>
-            <div className={styles.fixedCart}>
+            <div className={styles.fixedCart} style={style} >
                 <div className={styles.fixedCartInner}>
                     {/* <div className={styles.fixedCartLeft}></div> */}
                     <div className={styles.fixedCartMiddle}>

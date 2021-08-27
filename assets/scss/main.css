@@ -1833,7 +1833,7 @@ ul.social-media {
 }
 
 h5.account_title {
-  color: #16b62c;
+  color: var(--color-green);
   margin-top: 20px;
   font-weight: 700;
   font-family: system-ui;
@@ -1874,17 +1874,16 @@ p.account_sub_tite {
 }
 
 .account_btn_group .account_btn {
-  background-color: #16b62a;
-  border: 2px solid #16b62a;
+  background-color: var(--color-green);
   color: #fff;
   font-weight: 600;
   transition: all 0.5s ease;
 }
 
-.account_btn_group .account_btn:hover {
+/* .account_btn_group .account_btn:hover {
   background-color: #ffff;
   color: #16b62a;
-}
+} */
 
 .account_btn_group p {
   font-size: 15px;
@@ -3350,4 +3349,9 @@ img.payment_method_in_shipping {
 
 .forget-password-input {
   width: 40%;
+}
+
+.btn-primary-custom {
+  color: white;
+  background-color: var(--color-primary);
 }

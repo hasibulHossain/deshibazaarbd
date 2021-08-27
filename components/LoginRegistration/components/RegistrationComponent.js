@@ -170,7 +170,7 @@ const RegistrationComponent = () => {
                                 <div className="mb-3 mt-sm-4">
                                     <button type="submit"
                                         // className="btn btn-sm btn-primary mt-1 d-flex"
-                                        className={isOTP ? "btn btn-primary btn-sm d-flex btn-get-otp button_disabled d-block" : "d-block btn btn-primary btn-sm d-flex btn-get-otp"}
+                                        className={isOTP ? "btn btn-primary-custom btn-sm d-flex btn-get-otp button_disabled d-block" : "d-block btn btn-primary-custom btn-sm d-flex btn-get-otp"}
                                         disabled={isOTP ? true : false}
                                     >
                                         <div>
