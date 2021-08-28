@@ -5,10 +5,10 @@ import ProductModal from '../products/ProductModal';
 import { getWebsiteInformation } from '../_redux/WebsiteInformation/Action/WebsiteInformationAction';
 
 const FooterBottom = () => {
-    
+
     const dispatch = useDispatch();
     const { websiteInfo, isLoading } = useSelector((state) => state.WebsiteInformationReducer);
-    
+
     useEffect(() => {
         if(websiteInfo === null) {
             dispatch(getWebsiteInformation());

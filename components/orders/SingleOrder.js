@@ -38,50 +38,55 @@ const SingleOrder = ({ item, isManageable = true }) => {
     return (
         <>
             <div className="card shadow-sm mt-2 mb-2">
-                <div className="d-flex justify-content-between align-items-start order_list_filtered p-2">
-                    <div className="order_header">
-                        {
-                            isManageable && (
-                                <>
-                                    <h6 className="order">Order : <span className="text-primary">#{item.id}</span></h6>
-                                    <p className="text-secondary">Placed on {moment(item.transaction_date).format("dddd, MMMM Do YYYY")}</p>
-                                </>
-                            )
-                        }
-                        {
-                            !isManageable && <h6>{item.delivery_status && item.delivery_status == "not_delivered" ? "Not Delivered" : "Delivered"}</h6>
-                        }
-                    </div>
-                    <div>
-                        <div className="d-flex mb-2">
+                <div className="row order_list_filtered p-2">
+                    <div className="col-lg-6">
+                        <div className="order_header">
                             {
                                 isManageable && (
-                                    <Link href={`/order/${item.id}`}>
-                                        <a>
-                                            <button className="btn btn-info order-top-btn btn-sm mr-2">
-                                                <FontAwesomeIcon icon={faEye} /> View
-                                            </button>
-                                        </a>
-                                    </Link>
+                                    <>
+                                        <h6 className="order">Order : <span className="text-primary">#{item.id}</span></h6>
+                                        <p className="text-secondary">Placed on {moment(item.transaction_date).format("dddd, MMMM Do YYYY")}</p>
+                                    </>
                                 )
                             }
-                            <Link href={`/order/invoice/${item.id}`}>
-                                <a>
-                                    <button className="btn btn-success order-top-btn btn-sm">
-                                        <FontAwesomeIcon icon={faPrint} /> Invoice
-                                    </button>
-                                </a>
-                            </Link>
-
                             {
-                                isManageable && item.is_suspend == 0 && (
-                                    <button className="btn btn-danger order-top-btn btn-sm ml-2" onClick={() => toggleShowHandler(item)}>
-                                        <FontAwesomeIcon icon={faTimes} /> Cancel
-                                    </button>
-                                )
+                                !isManageable && <h6>{item.delivery_status && item.delivery_status == "not_delivered" ? "Not Delivered" : "Delivered"}</h6>
                             }
                         </div>
                     </div>
+                    <div className="col-lg-6">
+                        <div className="float-right">
+                            <div className="d-flex mb-2">
+                                {
+                                    isManageable && (
+                                        <Link href={`/order/${item.id}`}>
+                                            <a>
+                                                <button className="btn btn-info order-top-btn btn-sm mr-2">
+                                                    <FontAwesomeIcon icon={faEye} /> View
+                                                </button>
+                                            </a>
+                                        </Link>
+                                    )
+                                }
+                                <Link href={`/order/invoice/${item.id}`}>
+                                    <a>
+                                        <button className="btn btn-success order-top-btn btn-sm">
+                                            <FontAwesomeIcon icon={faPrint} /> Invoice
+                                        </button>
+                                    </a>
+                                </Link>
+
+                                {
+                                    isManageable && item.is_suspend == 0 && (
+                                        <button className="btn btn-danger order-top-btn btn-sm ml-2" onClick={() => toggleShowHandler(item)}>
+                                            <FontAwesomeIcon icon={faTimes} /> Cancel
+                                        </button>
+                                    )
+                                }
+                            </div>
+                        </div>
+                    </div>
+
 
                     {/* {
                         isManageable && (
@@ -100,30 +105,30 @@ const SingleOrder = ({ item, isManageable = true }) => {
                     } */}
 
                 </div>
-                <div className="order_product_list p-3">
+                <div className="order_product_list p-2">
                     {
                         item.items && item.items.length > 0 && item.items.map((product, indexProduct) => (
                             <div className="row mt-2" key={indexProduct}>
-                                <div className="col-md-6">
+                                <div className="col-lg-6">
                                     <div className="row align-items-center">
-                                        <div className="col-4">
-                                            <img src={`${process.env.NEXT_PUBLIC_URL}images/products/${product.featured_image}`} alt="product img" className="img-fluid img-thumbnail" />
+                                        <div className="col-sm-4 text-center">
+                                            <img style={{maxHeight: "100px"}} src={`${process.env.NEXT_PUBLIC_URL}images/products/${product.featured_image}`} alt="product img" className="img-fluid img-thumbnail" />
                                         </div>
-                                        <div className="col-8">
+                                        <div className="col-sm-8 text-center mt-2">
                                             <h5 className="order_product_title">
                                                 {product.name}
                                             </h5>
                                         </div>
                                     </div>
                                 </div>
-                                <div className="col-md-6 mt-3">
+                                <div className="col-lg-6 mt-3">
                                     <div className="row">
-                                        <div className="col-3">
+                                        <div className="col-lg-3 col-5">
                                             <p className="order_product_qty">
                                                 <span className="text-secondary">Qty : </span> {product.quantity}
                                             </p>
                                         </div>
-                                        <div className="col-4">
+                                        <div className="col-lg-4 col-7">
                                             <div className="badge badge-secondary p-1">
                                                 {
                                                     item.is_suspend == 0 ? "Processing" : "Cancel"
@@ -132,7 +137,7 @@ const SingleOrder = ({ item, isManageable = true }) => {
                                         </div>
                                         {
                                             item.is_suspend == 0 && (
-                                                <div className="col-5 order-status-text">
+                                                <div className="col-lg-5 order-status-text">
                                                     <p className="text-success">Estimated Delivery By {moment(product.approx_delivery_date).format("dddd, MMMM Do YYYY")}</p>
                                                 </div>
                                             )

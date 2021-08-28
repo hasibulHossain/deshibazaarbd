@@ -80,7 +80,7 @@ const DeliveryInfo = () => {
                                 className="mt-3"
                             >
                                 <div className="row">
-                                    <div className="col-md-6">
+                                    <div className="col-lg-6 ">
                                         <div className="custome_form_group">
                                             <label className="form-label" htmlFor="name">Name</label>
                                             <input
@@ -103,7 +103,7 @@ const DeliveryInfo = () => {
 
                                         </div>
                                     </div>
-                                    <div className="col-md-6">
+                                    <div className="col-lg-6 ">
                                         <div className="custome_form_group">
                                             <label className="form-label" htmlFor="phone_no">Phone No</label>
                                             <input
@@ -126,7 +126,7 @@ const DeliveryInfo = () => {
 
                                         </div>
                                     </div>
-                                    <div className="col-md-4">
+                                    <div className="col-lg-6">
                                         <div className="custome_form_group">
                                             <label className="form-label" htmlFor="address_type">Address Type</label>
                                             <RHFInput
@@ -151,7 +151,7 @@ const DeliveryInfo = () => {
 
                                         </div>
                                     </div>
-                                    <div className="col-md-4">
+                                    <div className="col-lg-6">
                                         <div className="custome_form_group">
                                             <label className="form-label" htmlFor="country">Country</label>
                                             <RHFInput
@@ -180,7 +180,7 @@ const DeliveryInfo = () => {
                                             }
                                         </div>
                                     </div>
-                                    <div className="col-md-4">
+                                    <div className="col-lg-6">
                                         <div className="custome_form_group">
                                             <label className="form-label" htmlFor="division">Division</label>
                                             <RHFInput
@@ -204,7 +204,7 @@ const DeliveryInfo = () => {
                                             }
                                         </div>
                                     </div>
-                                    <div className="col-md-4">
+                                    <div className="col-lg-6">
                                         <div className="custome_form_group">
                                             <label className="form-label" htmlFor="city">Zilla</label>
                                             <RHFInput
@@ -228,7 +228,7 @@ const DeliveryInfo = () => {
                                             }
                                         </div>
                                     </div>
-                                    <div className="col-md-4">
+                                    <div className="col-lg-6">
                                         <div className="custome_form_group">
                                             <label className="form-label" htmlFor="area">Upazilla</label>
                                             <RHFInput
@@ -252,7 +252,7 @@ const DeliveryInfo = () => {
                                         </div>
                                     </div>
 
-                                    <div className="col-md-4">
+                                    <div className="col-lg-6">
                                         <div className="custome_form_group">
                                             <label className="form-label" htmlFor="default">Default</label>
                                             <RHFInput
@@ -269,7 +269,7 @@ const DeliveryInfo = () => {
                                             />
                                         </div>
                                     </div>
-                                    <div className="col-md-6">
+                                    <div className="col-lg-6 ">
                                         <div className="custome_form_group">
                                             <label className="form-label" htmlFor="street-1">Street-1</label>
                                             <textarea
@@ -293,7 +293,7 @@ const DeliveryInfo = () => {
                                             }
                                         </div>
                                     </div>
-                                    <div className="col-md-6">
+                                    <div className="col-lg-6 ">
                                         <div className="custome_form_group">
                                             <label className="form-label" htmlFor="street-2">Street-2</label>
                                             <textarea
@@ -320,7 +320,7 @@ const DeliveryInfo = () => {
                                 </div>
 
                                 <div className="row">
-                                    <div className="deliver_info_footer col-md-6 mt-3">
+                                    <div className="deliver_info_footer col-lg-6  mt-3">
                                         <h6 className="select_title">
                                             Select a label for effective delivery:
                                         </h6>
@@ -335,7 +335,7 @@ const DeliveryInfo = () => {
                                         </div>
                                     </div>
 
-                                    <div className="col-md-6 mt-3 text-right mt-5 float-right">
+                                    <div className="col-lg-6  mt-3 text-right mt-5 float-right">
                                         {
                                             !isSubmitting && (
                                                 <button
