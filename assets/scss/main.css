@@ -763,6 +763,40 @@ a .custom-button-component:hover {
   object-fit: contain;
 }
 
+.brand-card {
+  width: 100%;
+  height: 100px;
+  background: white;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  padding: 10px;
+  height: 200px;
+  /* box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1),0 1px 2px 0 rgba(0,0,0,0.06); */
+}
+
+.brand-card-skeleton {
+  width: 100%;
+  height: 100px;
+  background:#f1f1f1;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  padding: 10px;
+  height: 200px;
+  /* box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1),0 1px 2px 0 rgba(0,0,0,0.06); */
+}
+
+.brand-card .brand-logo {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+}
+
+.brand-card .brand-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 /*=====================store section close==================*/
 
 /*=====================top products==================*/
@@ -1833,7 +1867,7 @@ ul.social-media {
 }
 
 h5.account_title {
-  color: #16b62c;
+  color: var(--color-green);
   margin-top: 20px;
   font-weight: 700;
   font-family: system-ui;
@@ -1874,17 +1908,16 @@ p.account_sub_tite {
 }
 
 .account_btn_group .account_btn {
-  background-color: #16b62a;
-  border: 2px solid #16b62a;
+  background-color: var(--color-green);
   color: #fff;
   font-weight: 600;
   transition: all 0.5s ease;
 }
 
-.account_btn_group .account_btn:hover {
+/* .account_btn_group .account_btn:hover {
   background-color: #ffff;
   color: #16b62a;
-}
+} */
 
 .account_btn_group p {
   font-size: 15px;
@@ -3350,4 +3383,9 @@ img.payment_method_in_shipping {
 
 .forget-password-input {
   width: 40%;
+}
+
+.btn-primary-custom {
+  color: white;
+  background-color: var(--color-primary);
 }
