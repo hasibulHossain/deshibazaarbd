@@ -180,7 +180,7 @@ const ProductDetailInfo = (props) => {
                 <div className="card shadow-md">
                   <div className="row ">
                     <div className="col-lg-9 bg-white">
-                      <div className="p-3">
+                      <div className="">
                         <div className="row">
                           <div className="col-lg-4">
                             <div className=" d-none d-md-block">
@@ -202,7 +202,7 @@ const ProductDetailInfo = (props) => {
                               <img
                                 src={previewImg}
                                 alt="product preview image"
-                                style={{ maxHeight: "200px" }}
+                                style={{ maxHeight: "180px" }}
                                 className="img-fluid"
                               />
                             </div>
@@ -248,130 +248,138 @@ const ProductDetailInfo = (props) => {
                             </div>
                           </div>
                           <div className="col-lg-8">
-                            <h3 className="product_title">{product.name}</h3>
+                            <div className="product_details_information py-2">
+                              <h3 className="product_title">{product.name}</h3>
 
-                            <div className="d-flex justify-content-between align-items-end">
-                              <div>
-                                <div className="review_rating">
-                                  <Rater
-                                    total={5}
-                                    interactive={false}
-                                    rating={parseInt(product.average_rating)}
-                                  />{" "}
-                                  <span className="rating_value_text">
-                                    {" "}
-                                    {product.total_rating} Ratings{" "}
+                              <div className="d-flex justify-content-between align-items-end">
+                                <div>
+                                  <div className="review_rating">
+                                    <Rater
+                                      total={5}
+                                      interactive={false}
+                                      rating={parseInt(product.average_rating)}
+                                    />{" "}
+                                    <span className="rating_value_text">
+                                      {" "}
+                                      {product.total_rating} Ratings{" "}
+                                    </span>
+                                  </div>
+                                  <div className="product__details__brand">
+                                    {typeof product.brand != "undefined" &&
+                                      product.brand != null && (
+                                        <Link
+                                          href={`/brand/${product.brand.slug}`}
+                                          className="LinkToBrandPage pointer"
+                                        >
+                                          <span>
+                                            {" "}
+                                            Brand Name:{" "}
+                                            <span className="brand_name_in_details">
+                                              {product.brand.name}
+                                            </span>
+                                          </span>
+                                        </Link>
+                                      )}
+                                  </div>
+
+                                  <div>
+                                    {product.current_stock > 0 &&
+                                      product.enable_stock ? (
+                                      <div className="stock-area in-stock">
+                                        <span>
+                                          In Stock - {product.current_stock}{" "}
+                                        </span>
+                                      </div>
+                                    ) : (
+                                      <div className="stock-area out-stock">
+                                        <span>Out of Stock</span>
+                                      </div>
+                                    )}
+                                  </div>
+                                </div>
+                                <div>
+                                  <span className="float-right mr-3">
+                                    <AddWishList product={product} />
                                   </span>
                                 </div>
-                                <div>
-                                  {typeof product.brand != "undefined" &&
-                                    product.brand != null && (
-                                      <Link
-                                        href={`/brand/${product.brand.slug}`}
-                                        className="LinkToBrandPage pointer"
-                                      >
-                                        <span>
-                                          {" "}
-                                          Brand Name:{" "}
-                                          <span className="brand_name_in_details">
-                                            {product.brand.name}
-                                          </span>
-                                        </span>
-                                      </Link>
-                                    )}
-                                </div>
-
-                                <div>
-                                  {product.current_stock > 0 &&
-                                  product.enable_stock ? (
-                                    <div className="stock-area in-stock">
-                                      <span>
-                                        In Stock - {product.current_stock}{" "}
-                                      </span>
-                                    </div>
-                                  ) : (
-                                    <div className="stock-area out-stock">
-                                      <span>Out of Stock</span>
-                                    </div>
-                                  )}
-                                </div>
                               </div>
-                              <div>
-                                <span className="float-right mr-3">
-                                  <AddWishList product={product} />
-                                </span>
+                              <div className="mt-4">
+                                <PriceCalculation item={product} />
                               </div>
-                            </div>
-                            <div className="mt-4">
-                              <PriceCalculation item={product} />
-                            </div>
-                            <hr />
+                              <hr />
 
-                            <div className="product_details_price">
-                              {/* <PriceCalculation item={product} /> */}
+                              <div className="product_details_price">
+                                {/* <PriceCalculation item={product} /> */}
 
-                              <div className="d-flex justify-content-between align-items-center">
-                                <div className="quantity">
-                                  <button
-                                    disabled={quantity <= 1 ? true : false}
-                                    onClick={() => updateQuantity(quantity - 1)}
-                                    className={
-                                      quantity <= 1 ? `not-allowed` : `pointer`
-                                    }
-                                  >
-                                    <FontAwesomeIcon icon={faMinus} />
-                                  </button>
-                                  <input
-                                    type="text"
-                                    value={quantity}
-                                    onChange={(e) =>
-                                      updateQuantity(e.target.value)
-                                    }
-                                  />
-                                  <button
-                                    className="pointer"
-                                    onClick={() => updateQuantity(quantity + 1)}
-                                  >
-                                    <FontAwesomeIcon icon={faPlus} />
-                                  </button>
+                                <div className="d-flex justify-content-between align-items-center">
+                                  <div className="quantity">
+                                    <button
+                                      disabled={quantity <= 1 ? true : false}
+                                      onClick={() => updateQuantity(quantity - 1)}
+                                      className={
+                                        quantity <= 1 ? `not-allowed` : `pointer`
+                                      }
+                                    >
+                                      <FontAwesomeIcon icon={faMinus} />
+                                    </button>
+                                    <input
+                                      type="text"
+                                      value={quantity}
+                                      onChange={(e) =>
+                                        updateQuantity(e.target.value)
+                                      }
+                                    />
+                                    <button
+                                      className="pointer"
+                                      onClick={() => updateQuantity(quantity + 1)}
+                                    >
+                                      <FontAwesomeIcon icon={faPlus} />
+                                    </button>
+                                  </div>
+                                  <div className="badge mt-3">
+                                    <p className="floating-cart__product-price">
+                                      {quantity} <span>X</span>&nbsp;
+                                      {formatCurrency(default_price)} ={" "}
+                                      {formatCurrency(subTotal)}&nbsp;
+                                    </p>
+                                  </div>
                                 </div>
-                                <div className="badge mt-3">
-                                  <p className="floating-cart__product-price">
-                                    {quantity} <span>X</span>&nbsp;
-                                    {formatCurrency(default_price)} ={" "}
-                                    {formatCurrency(subTotal)}&nbsp;
-                                  </p>
-                                </div>
-                              </div>
 
-                              <div className="d-flex mt-3 product-details-section">
-                                <div className="mr-2">
-                                  <button
-                                    className="btn buy_now_btn"
-                                    onClick={() => redirectToCheckoutPage()}
-                                  >
-                                    Buy Now
-                                  </button>
-                                </div>
-                                <div>
-                                  <button
-                                    className="btn add_to_cart_btn"
-                                    onClick={() => addToCart()}
-                                  >
-                                    Add To Cart
-                                  </button>
+                                <div className="d-flex mt-3 product-details-section">
+                                  <div className="mr-2">
+                                    <button
+                                      className="btn buy_now_btn"
+                                      onClick={() => redirectToCheckoutPage()}
+                                    >
+                                      Buy Now
+                                    </button>
+                                  </div>
+                                  <div>
+                                    <button
+                                      className="btn add_to_cart_btn"
+                                      onClick={() => addToCart()}
+                                    >
+                                      Add To Cart
+                                    </button>
+                                  </div>
                                 </div>
                               </div>
                             </div>
+
+
                           </div>
                         </div>
                       </div>
+
+                      {/*Product Details Information*/}
                       <div className="mt-3">
                         {typeof product.description != "undefined" &&
                           product.description !== null && (
                             <ProductDetailsDescription product={product} />
                           )}
                       </div>
+
+                      
                     </div>
                     {/*Location Section*/}
                     <div className="col-lg-3 bg-light">
@@ -380,9 +388,10 @@ const ProductDetailInfo = (props) => {
                   </div>
                 </div>
               </div>
+
               <ProductRatings product={product} />
               <div className="mb-5 mt-5">
-                <p className="font-weight-bold">
+                <p className="font-weight-bold product_details_people_viewed_title">
                   People who viewed this item also viewed
                 </p>
                 <ProductMainList
