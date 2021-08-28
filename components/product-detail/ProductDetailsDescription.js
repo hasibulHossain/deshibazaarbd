@@ -11,7 +11,7 @@ const ProductDetailsDescription = ({ product }) => {
                     <div className="col-lg-12">
                         <Tabs defaultActiveKey="description" id="uncontrolled-tab-example" className="mb-3">
                             <Tab eventKey="description" title="Description">
-                                <p className="product_title text-center">Product Description</p>
+                                <p className="product_title">Product Description</p>
                                 <p className="product_details_description">
                                     {
                                         Parser(product.description)
@@ -19,13 +19,13 @@ const ProductDetailsDescription = ({ product }) => {
                                 </p>
                             </Tab>
                             <Tab eventKey="purchase_delivery" title="Purchase Delivery">
-                                <p className="product_title text-center">Purchase Delivery</p>
+                                <p className="product_title">Purchase Delivery</p>
                             </Tab>
                             <Tab eventKey="refund_policy" title="Refund Policy">
-                                <p className="product_title text-center">Refund Policy</p>
+                                <p className="product_title">Refund Policy</p>
                             </Tab>
                             <Tab eventKey="replace_policy" title="Replace Policy">
-                                <p className="product_title text-center">Replace Policy</p>
+                                <p className="product_title">Replace Policy</p>
                             </Tab>
                         </Tabs>
                     </div>

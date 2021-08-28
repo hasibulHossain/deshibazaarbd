@@ -372,7 +372,7 @@ const ProductDetailInfo = (props) => {
                       </div>
 
                       {/*Product Details Information*/}
-                      <div className="mt-3">
+                      <div className="mt-4">
                         {typeof product.description != "undefined" &&
                           product.description !== null && (
                             <ProductDetailsDescription product={product} />

@@ -14,13 +14,15 @@ import { storeSells } from "../components/Delivery/_redux/Action/DeliveryInfoAct
 import { getCartsAction } from "../components/carts/_redux/action/CartAction";
 import { handleShippingCost } from "../components/orders/_redux/action/OrderAction";
 import { showToast } from "../components/master/Helper/ToastHelper";
+import { redirectRouter } from "../components/master/utils/RedirectRouterHelper";
+import ProtectedRoute from "../components/master/protectedRoute/ProtectedRoute";
 // import { toggleFloatingCart } from "../_redux/store/action/globalAction";
 
-export default function Carts() {
+const Checkout = ()=> {
 	// const router = useRouter();
-	const dispatch         = useDispatch();
+	const dispatch = useDispatch();
 	const { customerInfo } = useSelector((state) => state.DeliveryInfoReducer);
-	const { couponData, shippingCost }   = useSelector((state) => state.OrderReducer);
+	const { couponData, shippingCost } = useSelector((state) => state.OrderReducer);
 
 	const { carts, totalPrice, totalQuantity } = useSelector((state) => state.CartReducer);
 
@@ -39,15 +41,9 @@ export default function Carts() {
 	// 	}
 	// }, [carts]);
 
-	useEffect(() => {
-		if (process.browser) {
-            const userData = localStorage.getItem('loginData');
-			if (typeof userData === 'undefined' || userData === null) {
-				showToast('error', 'Please Login to checkout');
-				router.push('/login');
-			}
-        }
-	}, []);
+	// useEffect(() => {
+	// 	redirectRouter("checkout");
+	// }, []);
 
 
 	const handleStoreOrder = () => {
@@ -91,3 +87,4 @@ export default function Carts() {
 		</MainLayout>
 	);
 }
+export default ProtectedRoute(Checkout);

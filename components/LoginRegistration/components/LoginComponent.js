@@ -33,10 +33,10 @@ const LoginComponent = () => {
 
   const router = useRouter();
 
-  if (isLogging === true) {
-    router.push("/profile").then((_) => window.scrollTo(0, 0));
-    dispatch(emptyDispatch());
-  }
+  // if (isLogging === true) {
+  //   router.push("/profile").then((_) => window.scrollTo(0, 0));
+  //   dispatch(emptyDispatch());
+  // }
 
   const userData = useSelector((state) => state.UserDataReducer.userData);
 
