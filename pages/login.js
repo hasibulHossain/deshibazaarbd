@@ -24,7 +24,7 @@ export default function login(props) {
         router.push("/profile").then((_) => window.scrollTo(0, 0));
       }
     }
-  }, [userData]);
+  }, [userData, redirectTo]);
 
 
   useEffect(() => {
