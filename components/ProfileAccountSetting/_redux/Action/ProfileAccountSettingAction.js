@@ -242,6 +242,8 @@ export const getSingleShippingAddress = (type) => (dispatch) => {
                     selectedArea: { label: data[0].area, value: +data[0].area_id },
                     country_id: +data[0].country_id,
                     country: data[0].country,
+                    division_id: +data[0].division_id,
+                    division: data[0].division,
                     city_id: +data[0].city_id,
                     city: data[0].city,
                     area_id: +data[0].area_id,
