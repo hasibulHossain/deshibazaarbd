@@ -18,7 +18,7 @@ export default function login(props) {
     }
 
     if (typeof userData !== "undefined" && userData !== null) {
-      if (typeof redirectTo !== "undefined" && redirectTo !== null) {
+      if (typeof redirectTo !== "undefined" && redirectTo !== null && redirectTo !== "") {
         router.push(`${redirectTo}`).then((_) => window.scrollTo(0, 0));
       } else {
         router.push("/profile").then((_) => window.scrollTo(0, 0));

@@ -12,7 +12,7 @@ export const getUserDataAction = () => async (dispatch) => {
  */
 export const handleLogoutUser = () => (dispatch) => {
   // localStorage.removeItem('redirectTo');
-  localStorage.setItem("redirectTo", "");
+  localStorage.removeItem("redirectTo");
   localStorage.removeItem('loginData');
   localStorage.removeItem('access_token');
 

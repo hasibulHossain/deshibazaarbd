@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import router, { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 // local import
 import MainLayout from "../components/layouts/MainLayout";
@@ -8,22 +7,18 @@ import CheckoutPaymentMethod from "../components/ShippingInfo/CheckoutPaymentMet
 import OrderSummery from "../components/orders/OrderSummery";
 import CartProduct from "../components/carts/cart-product/CartProduct";
 import DeliveryInfo from '../components/Delivery/DeliveryInfo';
-
 import { getUserDataAction } from "../components/_redux/getUserData/Action/UserDataAction";
 import { storeSells } from "../components/Delivery/_redux/Action/DeliveryInfoAction";
 import { getCartsAction } from "../components/carts/_redux/action/CartAction";
 import { handleShippingCost } from "../components/orders/_redux/action/OrderAction";
-import { showToast } from "../components/master/Helper/ToastHelper";
-import { redirectRouter } from "../components/master/utils/RedirectRouterHelper";
 import ProtectedRoute from "../components/master/protectedRoute/ProtectedRoute";
 // import { toggleFloatingCart } from "../_redux/store/action/globalAction";
 
 const Checkout = ()=> {
-	// const router = useRouter();
-	const dispatch = useDispatch();
-	const { customerInfo } = useSelector((state) => state.DeliveryInfoReducer);
-	const { couponData, shippingCost } = useSelector((state) => state.OrderReducer);
-
+	
+	const dispatch                             = useDispatch();
+	const { customerInfo }                     = useSelector((state) => state.DeliveryInfoReducer);
+	const { couponData, shippingCost }         = useSelector((state) => state.OrderReducer);
 	const { carts, totalPrice, totalQuantity } = useSelector((state) => state.CartReducer);
 
 	useEffect(() => {
@@ -32,19 +27,6 @@ const Checkout = ()=> {
 		dispatch(handleShippingCost(carts));
 		// dispatch(toggleFloatingCart(false));
 	}, []);
-
-	// useEffect(() => {
-	// 	if(!carts.length) {
-	// 		setTimeout(() => {
-	// 			router.push('/');
-	// 		}, 5000);
-	// 	}
-	// }, [carts]);
-
-	// useEffect(() => {
-	// 	redirectRouter("checkout");
-	// }, []);
-
 
 	const handleStoreOrder = () => {
 		dispatch(storeSells(customerInfo, carts, totalQuantity, shippingCost, totalPrice, couponData));
