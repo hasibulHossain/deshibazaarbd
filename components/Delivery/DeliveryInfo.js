@@ -14,14 +14,36 @@ import ErrorMessage from '../master/ErrorMessage/ErrorMessage';
 
 const DeliveryInfo = () => {
     const dispatch = useDispatch();
-    
-    const { 
-        defaultShippingAddress, isLoading, divisionList, countryList, cityList, 
-        areaList, isSubmitting, shippingAddressInput 
+
+    const {
+        defaultShippingAddress, isLoading, divisionList, countryList, cityList,
+        areaList, isSubmitting, shippingAddressInput
     } = useSelector((state) => state.ProfileAccountSettingReducer);
-    
+
     const { register, handleSubmit, errors, setValue } = useForm();
     const [show, setShow] = useState(false);
+    const [isSameAsBilling, setIsSameAsBilling] = useState(false);
+
+    let billingAddressInput = {
+        type          : "billing_address",
+        user_id       : shippingAddressInput.user_id,
+        name          : shippingAddressInput.name,
+        phone_no      : shippingAddressInput.phone_no,
+        transaction_id: shippingAddressInput.transaction_id,
+        country_id    : shippingAddressInput.country_id, //integer
+        country       : shippingAddressInput.country,
+        division      : shippingAddressInput.division,
+        division_id   : shippingAddressInput.division_id,
+        city_id       : shippingAddressInput.city_id,  //integer
+        city          : shippingAddressInput.city,
+        area_id       : shippingAddressInput.area_id,   //integer
+        area          : shippingAddressInput.area,
+        street1       : shippingAddressInput.street1,
+        street2       : shippingAddressInput.street2,
+        is_default    : 1,
+        location      : shippingAddressInput.location
+    };
+
     // const [addressType, setAddressType] = useState('new_address')
     const toggleShowHandler = () => {
         setShow(preState => !preState);
@@ -33,10 +55,15 @@ const DeliveryInfo = () => {
 
     const submitUpdatedAddressHandler = (e) => {
         let addressType = "shipping_address";
-        if(typeof shippingAddressInput.id === "undefined" || shippingAddressInput.id === "" || shippingAddressInput.id === null){
+        if (typeof shippingAddressInput.id === "undefined" || shippingAddressInput.id === "" || shippingAddressInput.id === null) {
             addressType = "new_address"
         }
-        dispatch(addAddress(shippingAddressInput, addressType, toggleShowHandler))
+        if (isSameAsBilling === true) {
+            dispatch(addAddress(shippingAddressInput, addressType, toggleShowHandler));
+            dispatch(addAddress(billingAddressInput, "billing_address", toggleShowHandler));
+        } else {
+            dispatch(addAddress(shippingAddressInput, addressType, toggleShowHandler))
+        }
     }
 
     useEffect(() => {
@@ -53,6 +80,10 @@ const DeliveryInfo = () => {
             dispatch(getLocationData('divisions'));
         }
     }, []);
+
+    const handleChangeBillingAddressStatus = (e) => {
+        setIsSameAsBilling(e.target.checked)
+    }
 
     return (
         <>
@@ -105,7 +136,7 @@ const DeliveryInfo = () => {
                                     </div>
                                     <div className="col-lg-6 ">
                                         <div className="custome_form_group">
-                                            <label className="form-label" htmlFor="phone_no">Phone No</label>
+                                            <label className="form-label" htmlFor="phone_no">Phone No </label>
                                             <input
                                                 type="number"
                                                 className="custom_form_input"
@@ -317,6 +348,19 @@ const DeliveryInfo = () => {
                                             }
                                         </div>
                                     </div>
+
+                                    <div className="col-lg-6 ">
+                                        <div className="custome_form_group">
+                                            <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                                                <Form.Check
+                                                    type="checkbox"
+                                                    label="Bill to the same address"
+                                                    onChange={(e) => handleChangeBillingAddressStatus(e)}
+                                                />
+                                            </Form.Group>
+                                        </div>
+                                    </div>
+
                                 </div>
 
                                 <div className="row">

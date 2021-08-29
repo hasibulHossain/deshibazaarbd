@@ -359,6 +359,9 @@ export const addAddress = (addressInput, type, closeModal) => (dispatch) => {
             dispatch({ type: Types.STORE_BILLING_ADDRESS, payload: responseData });
             dispatch(getAddress('billing_address'));
             dispatch(getAddress('shipping_address'));
+            dispatch(getDefaultAddress('billing_address'));
+            dispatch(getSingleShippingAddress('shipping_address'));
+            dispatch(getSingleShippingAddress('billing_address'));
             closeModal();
         })
         .catch(err => {
