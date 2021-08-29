@@ -1,4 +1,4 @@
-import React, { useEffect, memo } from "react";
+import React, { useEffect, memo, useRef, useState } from "react";
 
 import { useRouter } from "next/router";
 import { Navbar } from "react-bootstrap";
@@ -11,17 +11,44 @@ import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { getMenuListData } from "./_redux/HeaderAction/HeaderAction";
 import Translate from "../translation/Translate";
 import { translate } from "../../services/translation/translation";
+import Link from "next/link";
+import SearchInput from "../SearchInput/SearchInput";
+import { toggleBackdrop } from "../../_redux/store/action/globalAction";
 
 const HeaderMenu = ({ toggleNav }) => {
+  const [showToolbar, setShowToolbar] = useState(false);
   const { menuList } = useSelector((state) => state.HeaderReducer);
   const router = useRouter();
   const dispatch = useDispatch();
 
+  const listItem = useRef([]);
+
   useEffect(() => {
-    if (!menuList.length) {
+    if (menuList.length === 0) {
       dispatch(getMenuListData());
     }
-  }, []);
+
+    // get html element position
+    function getOffset(el) {
+      const rect = el.getBoundingClientRect();
+      return {
+        left: rect.left + window.scrollX,
+        top: rect.top + window.scrollY,
+      };
+    }
+
+    listItem.current.forEach((el) => {
+      const isDisplace = getOffset(el).left / window.innerWidth > 0.6;
+      if (isDisplace && el.children.length > 1) {
+        el.children[1].classList.add("displace");
+      }
+    });
+  }, [listItem.current.length]);
+
+  const navigationToggleHandler = () => {
+    setShowToolbar((preState) => !preState);
+    dispatch(toggleBackdrop());
+  };
 
   /**
    * Click Menu Link & Redirect to that page
@@ -34,139 +61,219 @@ const HeaderMenu = ({ toggleNav }) => {
    */
 
   const clickMenuLink = (categorySlug) => {
+    navigationToggleHandler();
     router
       .push(`/products?category=${categorySlug}`)
       .then((_) => window.scrollTo(0, 0));
   };
 
-  return (
-    <div className="menu_list">
-      <div className="container">
-        <Navbar.Collapse id={toggleNav}>
-          <Menu
-            menuButton={
-              <MenuButton className="font-weight-bold">
-                <img
-                  src="/images/logos/menu.png"
-                  className="menu pr-2"
-                  style={{ width: 30 }}
-                />
-                <Translate>All Categories</Translate>
-              </MenuButton>
-            }
-            key={1}
-          >
-            {menuList.map((category, i) => {
-              if (category.childs.length === 0) {
-                return (
-                  <MenuItem onClick={() => clickMenuLink(category.id)} key={i}>
-                    <Translate>{category.name}</Translate>
-                  </MenuItem>
-                );
-              } else {
-                return (
-                  <SubMenu
-                    key={i}
-                    label={
-                      <div onClick={() => clickMenuLink(category.id)}>
-                        {translate(category.name)}
-                      </div>
-                    }
-                  >
-                    {category.childs.map((subCategory, i) => {
-                      if (subCategory.childs.length === 0) {
-                        return (
-                          <MenuItem
-                            key={i}
-                            onClick={() => clickMenuLink(subCategory.id)}
-                          >
-                            <Translate>{subCategory.name}</Translate>
-                          </MenuItem>
-                        );
-                      } else {
-                        return (
-                          <SubMenu
-                            key={i}
-                            label={
-                              <div
-                                onClick={() => clickMenuLink(subCategory.id)}
-                              >
-                                {translate(subCategory.name)}
-                              </div>
-                            }
-                          >
-                            {subCategory.childs.map((subCtgOne, i) => (
-                              <MenuItem
-                                key={i}
-                                onClick={() => clickMenuLink(subCtgOne.id)}
-                              >
-                                <Translate>{subCtgOne.name}</Translate>
-                              </MenuItem>
-                            ))}
-                          </SubMenu>
-                        );
-                      }
-                    })}
-                  </SubMenu>
-                );
-              }
-            })}
-          </Menu>
+  const navItemExpandHandler = (e) => {
+    e.target.parentElement.classList.toggle("open");
+  };
 
-          {menuList.length > 0 &&
-            menuList.map((category, i) => (
-              <Menu
-                menuButton={
-                  <MenuButton>
-                    {translate(category.name)}{" "}
-                    <FontAwesomeIcon
-                      className="custom-fontAwesome"
-                      icon={faCaretDown}
-                    />
-                  </MenuButton>
-                }
-                key={i}
-              >
-                {category.childs.length > 0 &&
-                  category.childs.map((subCategory, i) => {
-                    if (subCategory.childs.length === 0) {
-                      return (
-                        <MenuItem
-                          onClick={() => clickMenuLink(subCategory.id)}
-                          key={i}
-                        >
-                          <Translate>{subCategory.name}</Translate>
-                        </MenuItem>
-                      );
-                    } else {
-                      return (
-                        <SubMenu
-                          key={i}
-                          label={
-                            <div onClick={() => clickMenuLink(subCategory.id)}>
-                              {translate(subCategory.name)}
-                            </div>
-                          }
-                        >
-                          {subCategory.childs.length > 0 &&
-                            subCategory.childs.map((subCtgOne, index2) => (
-                              <MenuItem
-                                onClick={() => clickMenuLink(subCtgOne.id)}
-                                key={index2}
-                              >
-                                <Translate>{subCtgOne.name}</Translate>
-                              </MenuItem>
-                            ))}
-                        </SubMenu>
-                      );
-                    }
-                  })}
-              </Menu>
-            ))}
-        </Navbar.Collapse>
+  return (
+    <div className="container">
+      <div className="navigation__toggle-btn" onClick={navigationToggleHandler}>
+        <span className="bar"></span>
+        <span className="bar"></span>
+        <span className="bar"></span>
       </div>
+      <nav className={`navigation__navbar  ${showToolbar ? "open" : ""}`}>
+        <div className="navigation__toolbar-logo">
+          <div>
+            <div className="header__logo-box">
+              <Link href="/">
+                <a>
+                  <img src="/images/logos/logo-en.svg" alt="brand logo" />
+                </a>
+              </Link>
+            </div>
+          </div>
+          <div
+            onClick={navigationToggleHandler}
+            className="navigation__toolbar-close"
+          ></div>
+        </div>
+        <ul className="navigation__navbar-nav">
+          {menuList.map((itemLvl1, indexLvl1) => {
+            const itemLvl1HasChild = itemLvl1.childs.length > 0;
+
+            return (
+              <li
+                key={indexLvl1}
+                ref={(el) => (listItem.current[indexLvl1] = el)}
+                className={`navigation__nav-item ${
+                  itemLvl1HasChild && "has-child"
+                }`}
+              >
+                <span
+                  onClick={() => clickMenuLink(itemLvl1.id)}
+                  className="navigation__nav-link"
+                >
+                  {itemLvl1.name}
+                </span>
+
+                {itemLvl1HasChild && (
+                  <ul className={`navigation__drop-down drop-down-menu-1`}>
+                    {itemLvl1.childs.map((itemLvl2, indexLvl2) => {
+                      const itemLvl2HasChild = itemLvl2.childs.length > 0;
+
+                      return (
+                        <li
+                          key={indexLvl2}
+                          className={`navigation__nav-item ${
+                            itemLvl2HasChild && "has-child"
+                          }`}
+                        >
+                          <span
+                            onClick={() => clickMenuLink(itemLvl2.id)}
+                            className="navigation__nav-link"
+                          >
+                            {itemLvl2.name}
+                          </span>
+                          {itemLvl2HasChild && (
+                            <ul className="navigation__drop-down drop-down-menu-2">
+                              {itemLvl2.childs.map((itemLvl3, indexLvl3) => {
+                                return (
+                                  <li
+                                    key={indexLvl3}
+                                    className={`navigation__nav-item`}
+                                  >
+                                    <span
+                                      onClick={() => clickMenuLink(itemLvl3.id)}
+                                      className="navigation__nav-link"
+                                    >
+                                      {itemLvl3.name}
+                                    </span>
+                                  </li>
+                                );
+                              })}
+                            </ul>
+                          )}
+                        </li>
+                      );
+                    })}
+                  </ul>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+
+        <ul className="navigation-mobile">
+          {menuList.map((itemLvl1, indexLvl1) => {
+            const itemLvl1HasChild = itemLvl1.childs.length > 0;
+
+            return (
+              <li
+                key={indexLvl1}
+                className={`navigation-mobile__nav-item ${
+                  itemLvl1HasChild ? "has-child" : ""
+                }`}
+              >
+                {itemLvl1HasChild && (
+                  <span
+                    onClick={navItemExpandHandler}
+                    className="navigation-mobile__nav-item-expand"
+                  ></span>
+                )}
+                <span
+                  onClick={() => clickMenuLink(itemLvl1.id)}
+                  className="navigation-mobile__nav-link"
+                  href="#"
+                >
+                  {itemLvl1.name}
+                </span>
+
+                {itemLvl1HasChild && (
+                  <ul className="navigation-mobile__drop-down drop-down-menu-1">
+                    {itemLvl1.childs.map((itemLvl2, indexLvl2) => {
+                      const itemLvl2HasChild = itemLvl2.childs.length > 0;
+
+                      return (
+                        <li
+                          key={indexLvl2}
+                          className={`navigation-mobile__nav-item ${
+                            itemLvl2HasChild ? "has-child" : ""
+                          }`}
+                        >
+                          {itemLvl2HasChild && (
+                            <span
+                              onClick={navItemExpandHandler}
+                              className="navigation-mobile__nav-item-expand"
+                            ></span>
+                          )}
+                          <span
+                            onClick={() => clickMenuLink(itemLvl2.id)}
+                            className="navigation-mobile__nav-link"
+                          >
+                            {itemLvl2.name}
+                          </span>
+
+                          {itemLvl2HasChild && (
+                            <ul className="navigation-mobile__drop-down drop-down-menu-2">
+                              {itemLvl2.childs.map((itemLvl3, indexLvl3) => {
+                                const itemLvl3HasChild =
+                                  itemLvl3.childs.length > 0;
+
+                                return (
+                                  <li
+                                    key={indexLvl3}
+                                    className={`navigation-mobile__nav-item ${
+                                      itemLvl3HasChild ? "has-child" : ""
+                                    }`}
+                                  >
+                                    {itemLvl3HasChild && (
+                                      <span
+                                        onClick={navItemExpandHandler}
+                                        className="navigation-mobile__nav-item-expand"
+                                      ></span>
+                                    )}
+                                    <span
+                                      onClick={() => clickMenuLink(itemLvl3.id)}
+                                      className="navigation-mobile__nav-link"
+                                    >
+                                      {itemLvl3.name}
+                                    </span>
+
+                                    {itemLvl3HasChild && (
+                                      <ul className="navigation-mobile__drop-down drop-down-menu-3">
+                                        {itemLvl3.childs.map(
+                                          (itemLvl4, indexLvl4) => (
+                                            <li
+                                              key={indexLvl4}
+                                              className="navigation-mobile__nav-item"
+                                            >
+                                              <span
+                                                onClick={() =>
+                                                  clickMenuLink(itemLvl1.id)
+                                                }
+                                                className="navigation-mobile__nav-link"
+                                              >
+                                                {itemLvl4.name}
+                                              </span>
+                                            </li>
+                                          )
+                                        )}
+                                      </ul>
+                                    )}
+                                  </li>
+                                );
+                              })}
+                            </ul>
+                          )}
+                        </li>
+                      );
+                    })}
+                  </ul>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
     </div>
   );
 };
 
-export default memo(HeaderMenu);
+export default HeaderMenu;

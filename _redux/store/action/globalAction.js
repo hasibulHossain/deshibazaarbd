@@ -1,13 +1,13 @@
 import * as types from "../types/types";
 
 export const toggleFloatingCart = (status = null) => {
-  if (typeof status === 'undefined' || status === null) {
+  if (typeof status === "undefined" || status === null) {
     return { type: types.TOGGLE_FLOATING_CART };
   }
 
   return {
-    type   : types.TOGGLE_FLOATING_CART,
-    payload: status
+    type: types.TOGGLE_FLOATING_CART,
+    payload: status,
   };
 };
 
@@ -17,9 +17,15 @@ export const toggleModal = () => {
   };
 };
 
+export const toggleBackdrop = () => {
+  return {
+    type: types.TOGGLE_BACKDROP,
+  };
+};
+
 export const checkIsMobileDevice = (isMobile) => {
   return {
     type: types.GET_DEVICE_INFO,
-    payload: isMobile
-  }
-}
+    payload: isMobile,
+  };
+};

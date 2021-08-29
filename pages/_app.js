@@ -1,7 +1,7 @@
 import App from "next/app";
 import React from "react";
 import { Provider } from "react-redux";
-import axios from 'axios';
+import axios from "axios";
 import { createWrapper } from "next-redux-wrapper";
 import Store from "../_redux/Store";
 import "@fortawesome/fontawesome-svg-core/styles.css";
@@ -13,6 +13,7 @@ import "../node_modules/slick-carousel/slick/slick.css";
 
 import "../assets/scss/main.css";
 import "../assets/scss/carts.scss"; // For carts page
+import "../assets/scss/navigation.scss";
 import "../assets/scss/RemoveCartItem.scss";
 import "../assets/scss/product-details-info.scss";
 import "../assets/scss/modal.scss";
@@ -21,11 +22,11 @@ import "../assets/scss/responsive.scss";
 import "../assets/scss/responsive-main.scss";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "../components/product-review/productListForReview.css"
-import "../components/ProfileAccountSetting/ProfileAccountSetting.scss"
+import "../components/product-review/productListForReview.css";
+import "../components/ProfileAccountSetting/ProfileAccountSetting.scss";
 
 // For Order Pages
-import '../components/orders/scss/order-invoice.scss';
+import "../components/orders/scss/order-invoice.scss";
 
 // Prevent fontawesome from dynamically adding its css since we did it manually above
 config.autoAddCss = false;
