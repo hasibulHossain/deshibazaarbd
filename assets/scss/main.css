@@ -3388,3 +3388,12 @@ img.payment_method_in_shipping {
 .custom_delivery_charge{
   border-radius: 5px;
 }
+.shipping_billing_details_info{
+  line-break: anywhere;
+}
+p.customer_info_edit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 5px;
+}

@@ -44,7 +44,7 @@ const ShippingInfo = () => {
                         <p className="checkout_shipping_title">Shipping & Billing</p>
                     </div>
                     {
-                        !isLoading && defaultBillingAddress !== null && defaultBillingAddress.length > 0 && (
+                        !isLoading && defaultBillingAddress !== null && defaultBillingAddress.length === 0 && (
                             <div className="col-lg-12 text-right mb-1">
                                 <SimpleBtn variant="success" style={{ width: 'fit-content' }} onClick={toggleShowHandler}>
                                     Add new address
@@ -73,7 +73,7 @@ const ShippingInfo = () => {
                                         </span>
                                     </h6>
                                     <p className="customer_info_edit" onClick={() => editHandler(defaultBillingAddress[0].id, defaultBillingAddress[0].type)}>
-                                        <FontAwesomeIcon icon={faPencilAlt} /> <span>Edit</span>
+                                        <FontAwesomeIcon icon={faPencilAlt} /> <span className="ml-1">Edit</span>
                                     </p>
                                 </div>
                                 <div className="d-flex align-items-start mt-2">
@@ -110,7 +110,7 @@ const ShippingInfo = () => {
                                     <span className="bill_to_same_address">Bill to the same address</span>
                                 </p>
                                 <p className="customer_info_edit" onClick={() => editHandler(defaultBillingAddress[0].id, defaultBillingAddress[0].type)} >
-                                    <FontAwesomeIcon icon={faPencilAlt} /> <span>Edit</span>
+                                    <FontAwesomeIcon icon={faPencilAlt} /> <span className="ml-1">Edit</span>
                                 </p>
                             </div>
                             <div className="d-flex justify-content-between">
@@ -119,7 +119,7 @@ const ShippingInfo = () => {
                                     <span> {userData && userData.phone_no} </span>
                                 </p>
                                 <p className="customer_info_edit" onClick={() => editHandler(defaultBillingAddress[0].id, defaultBillingAddress[0].type)} >
-                                    <FontAwesomeIcon icon={faPencilAlt} /> <span>Edit</span>
+                                    <FontAwesomeIcon icon={faPencilAlt} /> <span className="ml-1">Edit</span>
                                 </p>
                             </div>
                             <div className="d-flex justify-content-between">
@@ -128,7 +128,7 @@ const ShippingInfo = () => {
                                     <span>{userData && userData.email}</span>
                                 </p>
                                 <p className="customer_info_edit" onClick={() => editHandler(defaultBillingAddress[0].id, defaultBillingAddress[0].type)}>
-                                    <FontAwesomeIcon icon={faPencilAlt} /> <span>Edit</span>
+                                    <FontAwesomeIcon icon={faPencilAlt} /> <span className="ml-1">Edit</span>
                                 </p>
                             </div>
                         </div>
