@@ -25,7 +25,7 @@ const ProductReview = () => {
                 </div>
                 <div className="col-md-9 mt-5 mb-2">
                     <div className="card card-middle">
-                        <div className="sidebar-card-title">
+                        <div className="sidebar-card-title order_filter_section">
                             <Tabs defaultActiveKey="waitingForReview" id="uncontrolled-tab-example">
                                 <Tab eventKey="waitingForReview" title={`To Be Reviewed (${itemList.length})`}>
                                     <ProductListForReview />

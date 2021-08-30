@@ -1,5 +1,6 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import MainLayout from "../../components/layouts/MainLayout";
+import ProductNoFound from "../../components/master/productNoFound/ProductNoFound";
 import LoadingSkelleton from "../../components/master/skelleton/LoadingSkelleton";
 import ProductDetailInfo from "../../components/product-detail/ProductDetailInfo"
 
@@ -11,23 +12,31 @@ export default function ProductBySlug({ product }) {
 
     // useEffect(() => {
     // }, [asPath])
-
+console.log('product :>> ', product);
     return (
         <>
-            <MainLayout pageTitle={product.name}>
+
+            <MainLayout pageTitle={product !== "undefined" && product !== null ? product.name : "Not found"}>
                 <div className="container">
                     <>
-                        <ProductDetailInfo product={product} />
+                        {
+                            product !== "undefined" && product !== null ?
+                                <ProductDetailInfo product={product} /> :
+                                <ProductNoFound
+                                    title="Product details no found !"
+                                    description="We're sorry. We cannot find this product details at this moment."
+                                />
+                        }
                     </>
                     {
                         loading &&
                         <div className="mb-5">
                             {loading && (
                                 <LoadingSkelleton
-                                    alignment = "vertical"
-                                    count     = {1}
-                                    width     = {730}
-                                    height    = {200}
+                                    alignment="vertical"
+                                    count={1}
+                                    width={730}
+                                    height={200}
                                 />
                             )}
                         </div>
@@ -40,12 +49,12 @@ export default function ProductBySlug({ product }) {
 
 export const getServerSideProps = async (context) => {
     const productBySlug = context.params.productBySlug;
-    const uri =  encodeURI(`${process.env.NEXT_PUBLIC_API_URL}get-item-detail/${productBySlug}`);
+    const uri = encodeURI(`${process.env.NEXT_PUBLIC_API_URL}get-item-detail/${productBySlug}`);
 
     // Don't delete the base api_url from here.
-    const res           = await fetch(uri)
-    const dataJSON      = await res.json();
-    const data          = dataJSON.data;
+    const res = await fetch(uri)
+    const dataJSON = await res.json();
+    const data = dataJSON.data;
     return {
         props: { product: data }
     }
