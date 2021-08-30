@@ -504,7 +504,10 @@
   }
 }
 // Small devices (landscape phones, 576px and up)
-@media (min-width: 576px) and (max-width: 767.98px) {
+@media (max-width: 767.98px) {
+  .header-nav .dropdown .auth-user-name {
+    max-width: 90px;
+  }
 }
 
 // Medium devices (tablets, 768px and up)
