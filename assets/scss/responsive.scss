@@ -484,7 +484,7 @@
     font-size: 0.9rem;
     padding: 0.5rem;
   }
-  h4.innser_cart_product_name{
+  h4.innser_cart_product_name {
     font-size: 13px;
   }
   .cart__right-order_details_inner {
@@ -502,6 +502,77 @@
     width: 1rem;
     height: 1rem;
     margin-right: 1rem;
+  }
+
+  /*checkout page responsive*/
+  h4.delivery_info_title {
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .address_book_updated_title {
+    font-size: 14px;
+  }
+  .custome_form_group label {
+    font-size: 13px;
+    font-weight: 500;
+    color: darkgrey;
+  }
+  .deliver_info_footer h6.select_title {
+    font-weight: 600;
+    text-transform: none;
+    font-size: 15px;
+  }
+  .office_btn,
+  .home_btn,
+  .checkout_address_save_btn {
+    font-size: 15px;
+  }
+  p.deliver_content {
+    font-size: 0.8rem;
+  }
+  p.checkout_shipping_title {
+    font-size: 16px;
+  }
+  .shipping_info_fontAwesome {
+    color: var(--color-primary);
+    font-size: 1rem;
+  }
+  .customer_name.text-capitalize,
+  .bill_to_same_address,
+  .shipping_billing_details_info {
+    font-size: 0.8rem;
+    line-break: anywhere;
+  }
+  p.customer_info_edit {
+    font-size: 0.6rem;
+    display: flex;
+    margin-left: 5px;
+  }
+  .checkout_default_billing_address {
+    font-size: 12px;
+    line-break: anywhere;
+  }
+  span.delivery_area {
+    font-size: 0.7rem;
+    padding: 3px 10px;
+  }
+  .delivery_collection .delivery_collecting_message,
+  .delivery_collection .collecting_suggesting {
+    font-size: 11px;
+    font-weight: 500;
+  }
+  .delivery_collection {
+    margin-top: 10px;
+  }
+  .shipping_info_title,
+  .checkout_payment_method_title {
+    border-bottom: 1px solid #d6d6d6;
+    font-weight: 600;
+    font-size: 13px;
+  }
+  .shipping_method_checkbox {
+    font-weight: 700;
+    font-size: 14px;
   }
 }
 @media (max-width: 414px) {
