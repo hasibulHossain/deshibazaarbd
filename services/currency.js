@@ -86,7 +86,6 @@ export function formatCurrency (amount, thousandSeparator = true, prefix = activ
 }
 
 /**
- *
  * Check if given value is numeric or not
  *
  * @param string|int|undefined|null value
@@ -94,5 +93,5 @@ export function formatCurrency (amount, thousandSeparator = true, prefix = activ
  * @return boolean
  */
 function isNumeric(value) {
-    return !isNaN(parseFloat(value)) && !isNaN(value - 0);;
+    return !isNaN(parseFloat(value)) && !isNaN(value - 0);
 }
