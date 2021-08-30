@@ -14,7 +14,7 @@ export const handleChangeDeliveryInputData = (name, value) => (dispatch) => {
 }
 
 export const storeSells = (customerInfo, carts, totalQuantity, shippingCost, totalPrice, couponData) => (dispatch) => {
-    
+
     let discountAmount = 0, discountType = 1;
 
     if ( typeof couponData !== 'undefined' && couponData !== null ) {
@@ -45,7 +45,7 @@ export const storeSells = (customerInfo, carts, totalQuantity, shippingCost, tot
         business_id     : userData.business_id,
         created_by      : 1,
         type            : "sell",
-        status          : true,
+        status          : 'pending',
         delivery_status : 'not_delivered',
         payment_status  : 'due',
         title           : 'Ecommerce Sale',
