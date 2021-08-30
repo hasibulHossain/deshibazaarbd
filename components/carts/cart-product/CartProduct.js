@@ -65,16 +65,16 @@ const CartProduct = ({ cart }) => {
               </span>
 
               <span className="offer_price">
-                {formatCurrency(cart.offerPrice !== null && cart.offerPrice !== "0" ? cart.price : 0)}
+                {cart.offerPrice !== null && cart.offerPrice !== "0" ? formatCurrency( cart.price ) : ''}
               </span>
             </div>
 
             <p className="discount_percantage">
-              {(((cart.price - cart.offerPrice) * 100) / cart.price).toFixed(0)}%
+              {cart.offerPrice !== null && cart.offerPrice !== "0" ? (((cart.price - cart.offerPrice) * 100) / cart.price).toFixed(0) + '%' : ''}
             </p>
           </div>
         </div>
-    
+
         <div className="col-lg-4 col-md-12">
           <div className="product_cart_purchase">
             <CartQuantity cart={cart} />
