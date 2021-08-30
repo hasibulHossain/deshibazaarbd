@@ -2272,15 +2272,6 @@ p.text-secondary.mb-0 {
   padding: 5px 6px;
   margin: 0px;
 }
-
-.cart_item_box_top_1 {
-  /* display: -webkit-flex;
-  display: flex;
-  -webkit-justify-content: space-between;
-  justify-content: space-between; */
-  padding: 10px 15px;
-}
-
 .cart_items_by_shop {
   border-bottom: 1px solid #0000006b;
   border-top: 1px solid #0000006b;
@@ -2328,7 +2319,6 @@ p.Spend {
 }
 
 .cart_items_details {
-  padding: 20px;
   border-bottom: 1px solid darkgrey;
 }
 .cart_items_details:last-child {
@@ -2395,6 +2385,7 @@ h4.innser_cart_product_name {
 .product_cart_purchase {
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .cart_wish_list,
@@ -3393,4 +3384,7 @@ img.payment_method_in_shipping {
   color: #fff !important;
   background-color: #172337!important;
   padding: 5px 25px !important;
+}
+.custom_delivery_charge{
+  border-radius: 5px;
 }
