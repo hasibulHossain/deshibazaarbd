@@ -1,10 +1,9 @@
-import React from "react";
+import React from 'react';
 import MainLayout from "../components/layouts/MainLayout";
+import ProtectedRoute from '../components/master/protectedRoute/ProtectedRoute';
 import ProfileSideBar from "../components/myprofile/ProfileSideBar";
 import OrderList from "../components/orders/OrderList";
-
-export default function Order() {
-
+const order = () => {
     return (
         <MainLayout pageTitle="Order">
             <div className="container">
@@ -20,4 +19,6 @@ export default function Order() {
             </div>
         </MainLayout>
     );
-}
+};
+
+export default ProtectedRoute(order);

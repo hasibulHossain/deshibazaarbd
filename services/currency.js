@@ -1,9 +1,9 @@
 
 /**
  * Get all currencies in this system
- * 
+ *
  * @since 1.0.0
- * 
+ *
  * @return array currencies as array
  */
 export function getCurrencies () {
@@ -31,11 +31,11 @@ export function getCurrencies () {
 
 /**
  * Get active currency
- * 
+ *
  * @since 1.0.0
- * 
+ *
  * @param string printableLabel the params of currencies array
- * 
+ *
  * @return string|null|object active currency data
  */
 export function activeCurrency ( printableLabel = '' ) {
@@ -58,7 +58,7 @@ export function activeCurrency ( printableLabel = '' ) {
 
         return activeCurrency[printableLabel] || '';
     }
-    
+
     return '';
 }
 
@@ -68,13 +68,13 @@ export function activeLang ( printableLabel = '' ) {
 
 /**
  * Format Currency amount to nice formatting
- * 
+ *
  * @since 1.0.0
- * 
- * @param float amount 
- * @param string thousandSeparator 
+ *
+ * @param float amount
+ * @param string thousandSeparator
  * @param string prefix by default it would be the sign of taka
- * 
+ *
  * @return string Currency format component with data
  */
 export function formatCurrency (amount, thousandSeparator = true, prefix = activeCurrency('sign')) {
@@ -86,13 +86,12 @@ export function formatCurrency (amount, thousandSeparator = true, prefix = activ
 }
 
 /**
- * 
  * Check if given value is numeric or not
- * 
- * @param string|int|undefined|null value 
- * 
+ *
+ * @param string|int|undefined|null value
+ *
  * @return boolean
  */
 function isNumeric(value) {
-    return /^-?\d+$/.test(value);
+    return !isNaN(parseFloat(value)) && !isNaN(value - 0);
 }

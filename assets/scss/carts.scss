@@ -557,6 +557,10 @@ p.estimate {
 	border-radius: 5px;
 }
 
+.backdrop.open {
+	display: block;
+}
+
 .backdrop {
 	display: none;
 	position: fixed;
@@ -568,8 +572,8 @@ p.estimate {
 	background-color: rgba(0, 0, 0, 0.5);
 }
 
-.backdrop.open {
-	display: block;
+.cart-checkbox {
+	filter: hue-rotate(150deg);
 }
 
 @media screen and (min-width: 300px) and (max-width: 768px) {

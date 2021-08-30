@@ -83,6 +83,7 @@ export const getAuthData = () => async (dispatch) => {
 
 export const logoutUserData = () => (dispatch) => {
   localStorage.setItem("loginData", "");
+  localStorage.setItem("redirectTo", "");
   dispatch({ type: Types.AUTH_POST_LOGOUT, payload: true });
 };
 

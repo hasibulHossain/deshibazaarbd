@@ -1,26 +1,19 @@
 import Link from "next/link";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFacebookF, faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
-import { useRouter } from "next/dist/client/router";
-import {
-  emptyDispatch,
-  handleLoginInput,
-  loginAction,
-} from "../_redux/Action/LoginAction";
+import { handleLoginInput, loginAction } from "../_redux/Action/LoginAction";
 import { useForm } from "react-hook-form";
 import ErrorMessage from "../../master/ErrorMessage/ErrorMessage";
-import { getUserDataAction } from "../../_redux/getUserData/Action/UserDataAction";
 
 const LoginComponent = () => {
-  const [showPassword, setShowPassword] = useState(false);
-  const dispatch = useDispatch();
-  const loginInput = useSelector((state) => state.AuthReducer.loginInput);
-  const isLoading = useSelector((state) => state.AuthReducer.isLoading);
-  const isLogging = useSelector((state) => state.AuthReducer.isLogging);
-  const { register, handleSubmit, errors, setValue } = useForm();
+
+  const [showPassword, setShowPassword]    = useState(false);
+  const dispatch                           = useDispatch();
+  const loginInput                         = useSelector((state) => state.AuthReducer.loginInput);
+  const isLoading                          = useSelector((state) => state.AuthReducer.isLoading);
+  const { register, handleSubmit, errors } = useForm();
 
   const handleLoginInputChange = (name, value) => {
     dispatch(handleLoginInput(name, value));
@@ -30,19 +23,6 @@ const LoginComponent = () => {
     dispatch(loginAction(loginInput));
     // e.preventDefault();
   };
-
-  const router = useRouter();
-
-  if (isLogging === true) {
-    router.push("/profile").then((_) => window.scrollTo(0, 0));
-    dispatch(emptyDispatch());
-  }
-
-  const userData = useSelector((state) => state.UserDataReducer.userData);
-
-  useEffect(() => {
-    dispatch(getUserDataAction());
-  }, []);
 
   return (
     <>
@@ -118,7 +98,7 @@ const LoginComponent = () => {
               </div>
             </div>
 
-            <div className="d-flex justify-content-between flex-column flex-sm-row pt-2 pt-sm-0" style={{padding: '0 15px'}}>
+            <div className="d-flex justify-content-between flex-column flex-sm-row pt-2 pt-sm-0" style={{ padding: '0 15px' }}>
               <div className="form-check">
                 <input
                   className="form-check-input"
