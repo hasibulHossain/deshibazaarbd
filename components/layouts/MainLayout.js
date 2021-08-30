@@ -8,12 +8,25 @@ import FloatingCart from "../carts/floating-cart/FloatingCart";
 import PageMeta from './PageMeta';
 import FloatingCartButton from "../carts/floating-cart/FloatingCartButton";
 import MessengerCustomerChat from 'react-messenger-customer-chat';
-import { checkIsMobileDevice } from "../../_redux/store/action/globalAction";
+import { checkIsMobileDevice, toggleBackdrop } from "../../_redux/store/action/globalAction";
 
 const MainLayout = (props) => {
   const dispatch = useDispatch();
   const { children } = props;
   const { backdrop } = useSelector(state => state.GlobalReducer);
+
+  useEffect(() => {
+    const bodyDOM = window.document.body;
+
+    // Remove scrollbar when Floating cart is open
+    if (backdrop) {
+      bodyDOM.style.height = "100vh";
+      bodyDOM.style.overflowY = "hidden";
+    } else {
+      bodyDOM.style.height = "";
+      bodyDOM.style.overflowY = "";
+    }
+  });
 
   useEffect(() => {
     if (typeof window === "undefined") {
@@ -41,7 +54,7 @@ const MainLayout = (props) => {
 
       <Header />
       <main>
-        {backdrop && <div className="backdrop"></div>}
+        <div onClick={() => toggleBackdrop()} className={`backdrop ${backdrop ? 'open' : ''}`}></div>
         <div style={{minHeight: "37vh"}}>
           {children}
         </div>

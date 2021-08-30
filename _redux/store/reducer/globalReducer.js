@@ -3,18 +3,27 @@ const initialState = {
   isModalActive: false,
   floatingCartVisible: false,
   backdrop: false,
-  isMobile: false
+  isMobile: false,
 };
 
 function GlobalReducer(state = initialState, { type, payload }) {
   switch (type) {
     case types.TOGGLE_FLOATING_CART:
-      const isModalVisible = typeof payload !== 'undefined' && typeof payload === 'boolean' ? payload : !state.floatingCartVisible;
+      const isModalVisible =
+        typeof payload !== "undefined" && typeof payload === "boolean"
+          ? payload
+          : !state.floatingCartVisible;
 
       return {
         ...state,
-        backdrop           : !state.backdrop,
+        backdrop: !state.backdrop,
         floatingCartVisible: isModalVisible,
+      };
+
+    case types.TOGGLE_BACKDROP:
+      return {
+        ...state,
+        backdrop: !state.backdrop,
       };
 
     case types.TOGGLE_MODAL:
@@ -27,7 +36,7 @@ function GlobalReducer(state = initialState, { type, payload }) {
     case types.GET_DEVICE_INFO:
       return {
         ...state,
-        isMobile: payload
+        isMobile: payload,
       };
 
     default:
