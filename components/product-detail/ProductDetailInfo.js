@@ -140,9 +140,9 @@ const ProductDetailInfo = (props) => {
           <Breadcrumb>
             {typeof product.category !== "undefined" &&
               product.category !== null && (
-                <Link href={`/categories/${product.category.slug}`}>
+                <Link href={`/products?category=${product.category.id}`}>
                   <Breadcrumb.Item
-                    href={`/products?category=${product.category.slug}`}
+                    href={`/products?category=${product.category.id}`}
                   >
                     {product.category.name}
                   </Breadcrumb.Item>
@@ -151,9 +151,9 @@ const ProductDetailInfo = (props) => {
 
             {typeof product.sub_category !== "undefined" &&
               product.sub_category !== null && (
-                <Link href={`/categories/${product.sub_category.slug}`}>
+                <Link href={`/products?category=${product.sub_category.id}`}>
                   <Breadcrumb.Item
-                    href={`/products?category=${product.sub_category.slug}`}
+                    href={`/products?category=${product.sub_category.id}`}
                   >
                     {product.sub_category.name}
                   </Breadcrumb.Item>
@@ -162,9 +162,9 @@ const ProductDetailInfo = (props) => {
 
             {typeof product.sub_category2 !== "undefined" &&
               product.sub_category2 !== null && (
-                <Link href={`/categories/${product.sub_category2.slug}`}>
+                <Link href={`/product?category=${product.sub_category2.id}`}>
                   <Breadcrumb.Item
-                    href={`/products?category=${product.sub_category2.slug}`}
+                    href={`/products?category=${product.sub_category2.id}`}
                   >
                     {product.sub_category2.name}
                   </Breadcrumb.Item>
