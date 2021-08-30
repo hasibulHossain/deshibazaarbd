@@ -1,10 +1,10 @@
 import * as Types from "../Types/Types";
 
 const initialState = {
-  userData: null,
+  userData    : null,
   access_token: null,
-  isLogOut: false,
-  isLoggedIn: false,
+  isLogOut    : false,
+  isLoggedIn  : false,
 };
 
 const UserDataReducer = (state = initialState, action) => {
@@ -12,8 +12,9 @@ const UserDataReducer = (state = initialState, action) => {
     case Types.GET_USER_STORAGE_DATA:
       return {
         ...state,
-        userData: action.payload.userData,
+        userData    : action.payload.userData,
         access_token: action.payload.access_token,
+        redirectTo  : action.payload.redirectTo,
       };
     case Types.LOGOUT_USER:
       return {

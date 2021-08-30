@@ -6,9 +6,11 @@ import Login from "../components/LoginRegistration/Login";
 import { getUserDataAction } from "../components/_redux/getUserData/Action/UserDataAction";
 
 export default function login(props) {
-  const dispatch = useDispatch();
-  const router = useRouter();
-  const userData = useSelector((state) => state.UserDataReducer.userData);
+
+  const dispatch   = useDispatch();
+  const router     = useRouter();
+  const userData   = useSelector((state) => state.UserDataReducer.userData);
+  const redirectTo = useSelector((state) => state.UserDataReducer.redirectTo);
 
   useEffect(() => {
     if (typeof window === "undefined") {
@@ -16,9 +18,14 @@ export default function login(props) {
     }
 
     if (typeof userData !== "undefined" && userData !== null) {
-      router.push("/profile").then((_) => window.scrollTo(0, 0));
+      if (typeof redirectTo !== "undefined" && redirectTo !== null && redirectTo !== "") {
+        router.push(`${redirectTo}`).then((_) => window.scrollTo(0, 0));
+      } else {
+        router.push("/profile").then((_) => window.scrollTo(0, 0));
+      }
     }
-  }, [userData]);
+  }, [userData, redirectTo]);
+
 
   useEffect(() => {
     dispatch(getUserDataAction());

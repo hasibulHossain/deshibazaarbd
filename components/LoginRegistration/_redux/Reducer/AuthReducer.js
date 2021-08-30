@@ -2,21 +2,21 @@ import * as Types from "./../Type/Types";
 
 // Initial state
 const initialState = {
-  loginInput: {
-    email: '',
-    password: '',
+  loginInput        : {
+    email           : '',
+    password        : '',
   },
-  isLoggedIn: false,
-  userData: {},
-  tokenData: "",
-  loginMessage: "",
-  registerMessage: "",
-  isLoading: false,
-  isLoadingRegister: false,
+  isLoggedIn        : false,
+  userData          : {},
+  tokenData         : "",
+  loginMessage      : "",
+  registerMessage   : "",
+  isLoading         : false,
+  isLoadingRegister : false,
   registrationStatus: false,
-  redirected_route: null,
-  loginLoading: false,
-  isLogging: false,
+  redirected_route  : null,
+  loginLoading      : false,
+  isLogging         : false,
 
 };
 
@@ -34,12 +34,12 @@ const AuthReducer = (state = initialState, action) => {
     case Types.AUTH_LOGIN_CHECK:
       return {
         ...state,
-        isLoggedIn: action.payload.isLoggedIn,
-        userData: action.payload.userData,
-        tokenData: action.payload.tokenData,
+        isLoggedIn  : action.payload.isLoggedIn,
+        userData    : action.payload.userData,
+        tokenData   : action.payload.tokenData,
         loginMessage: action.payload.loginMessage,
-        isLoading: action.payload.isLoading,
-        isLogging: action.payload.isLogging,
+        isLoading   : action.payload.isLoading,
+        isLogging   : action.payload.isLogging,
       };
     case Types.EMPTY_DISPATCH:
       return {
@@ -49,18 +49,18 @@ const AuthReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoggedIn: action.payload.isLoggedIn,
-        userData: action.payload.userData,
-        tokenData: action.payload.tokenData,
+        userData  : action.payload.userData,
+        tokenData : action.payload.tokenData,
       };
 
     case Types.AUTH_POST_LOGOUT:
       return {
         ...state,
-        isLoggedIn: false,
-        tokenData: "",
-        userData: {},
+        isLoggedIn  : false,
+        tokenData   : "",
+        userData    : {},
         loginMessage: "",
-        isLoading: false,
+        isLoading   : false,
       };
 
     default:
