@@ -558,6 +558,7 @@ p.estimate {
 }
 
 .backdrop {
+	display: none;
 	position: fixed;
 	top: 0;
 	bottom: 0;
@@ -565,6 +566,10 @@ p.estimate {
 	right: 0;
 	z-index: 900;
 	background-color: rgba(0, 0, 0, 0.5);
+}
+
+.backdrop.open {
+	display: block;
 }
 
 @media screen and (min-width: 300px) and (max-width: 768px) {

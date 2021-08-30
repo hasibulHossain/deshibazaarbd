@@ -1,4 +1,4 @@
-import React, { useEffect, memo } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import {
   faComment,
@@ -10,14 +10,14 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import { useDispatch, useSelector } from "react-redux";
-import { Dropdown, Navbar } from "react-bootstrap";
+import { Dropdown } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import HeaderTop from "./HeaderTop";
 import HeaderMenu from "./HeaderMenu";
 import Button from "../master/Button/Button";
 import SearchInput from "../SearchInput/SearchInput";
-import { toggleFloatingCart } from "../../_redux/store/action/globalAction";
+import { toggleBackdrop, toggleFloatingCart } from "../../_redux/store/action/globalAction";
 import { getCartsAction } from "../carts/_redux/action/CartAction";
 import {
   getUserDataAction,
@@ -28,10 +28,12 @@ import Translate from "../translation/Translate";
 import { translate } from "../../services/translation/translation";
 import ActiveLink from "../master/activeLink/ActiveLink";
 import HeaderWishlist from "./HeaderWishlist";
+import { useRouter } from "next/router";
 
 const Header = () => {
+  const router = useRouter();
+  const [showToolbar, setShowToolbar] = useState(false);
   const dispatch = useDispatch();
-  const toggleNav = "basic-navbar-nav";
   const { totalQuantity } = useSelector((state) => state.CartReducer);
   const { userData } = useSelector((state) => state.UserDataReducer);
   const { isMobile, backdrop } = useSelector((state) => state.GlobalReducer);
@@ -60,6 +62,11 @@ const Header = () => {
     window.location.reload();
   };
 
+  const navigationToggleHandler = () => {
+    setShowToolbar((preState) => !preState);
+    dispatch(toggleBackdrop());
+  };
+
   return (
     <div>
       <HeaderTop />
@@ -67,6 +74,11 @@ const Header = () => {
         <div className="header__container">
           <div className="container">
             <div className="header__top">
+              <div className="navigation__toggle-btn" onClick={navigationToggleHandler}>
+                <span className="bar"></span>
+                <span className="bar"></span>
+                <span className="bar"></span>
+              </div>
               <div className="header__logo">
                 <div className="header__logo-box">
                   <Link href="/">
@@ -83,21 +95,34 @@ const Header = () => {
                   </div>
                 </div>
               </div>
-              <div className="header__signupIn">
+              <div className="header__signupIn header-nav">
                 <div className="d-flex align-items-center">
                   {!userData ? (
                     <div>
-                      <Link href="/login" className="header-nav-link">
-                        <a className="">
-                          <Translate>Sign In</Translate>
-                        </a>
-                      </Link>
+                      {
+                        isMobile ? (
+                          <Link href="/login">
+                            <a>
+                              <Button buttonText={translate("Sign Up / In")} />
+                            </a>
+                          </Link>
 
-                      <Link href="/register">
-                        <a>
-                          <Button buttonText={translate("Sign up")} />
-                        </a>
-                      </Link>
+                        ) : (
+                          <>
+                            <Link href="/login" className="header-nav-link">
+                              <a className="">
+                                <Translate>Sign In</Translate>
+                              </a>
+                            </Link>
+
+                            <Link href="/register">
+                              <a>
+                                <Button buttonText={translate("Sign up")} />
+                              </a>
+                            </Link>
+                          </>
+                        )
+                      }
                     </div>
                   ) : (
                     <>
@@ -222,7 +247,7 @@ const Header = () => {
             </div>
           </div>
         )}
-        <HeaderMenu toggleNav={toggleNav} />
+        <HeaderMenu showToolbar={showToolbar} navigationToggleHandler={navigationToggleHandler} />
       </div>
     </div>
   );

@@ -1,22 +1,13 @@
-import React, { useEffect, memo, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 
 import { useRouter } from "next/router";
-import { Navbar } from "react-bootstrap";
-import { Menu, MenuItem, MenuButton, SubMenu } from "@szhsin/react-menu";
 import "@szhsin/react-menu/dist/index.css";
 import { useDispatch, useSelector } from "react-redux";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 
 import { getMenuListData } from "./_redux/HeaderAction/HeaderAction";
-import Translate from "../translation/Translate";
-import { translate } from "../../services/translation/translation";
 import Link from "next/link";
-import SearchInput from "../SearchInput/SearchInput";
-import { toggleBackdrop } from "../../_redux/store/action/globalAction";
 
-const HeaderMenu = ({ toggleNav }) => {
-  const [showToolbar, setShowToolbar] = useState(false);
+const HeaderMenu = ({ navigationToggleHandler, showToolbar }) => {
   const { menuList } = useSelector((state) => state.HeaderReducer);
   const router = useRouter();
   const dispatch = useDispatch();
@@ -45,11 +36,6 @@ const HeaderMenu = ({ toggleNav }) => {
     });
   }, [listItem.current.length]);
 
-  const navigationToggleHandler = () => {
-    setShowToolbar((preState) => !preState);
-    dispatch(toggleBackdrop());
-  };
-
   /**
    * Click Menu Link & Redirect to that page
    *
@@ -71,22 +57,18 @@ const HeaderMenu = ({ toggleNav }) => {
     e.target.parentElement.classList.toggle("open");
   };
 
+  const onLogoClickHandler = () => {
+    navigationToggleHandler();
+    router.push('/');
+  };
+
   return (
     <div className="container">
-      <div className="navigation__toggle-btn" onClick={navigationToggleHandler}>
-        <span className="bar"></span>
-        <span className="bar"></span>
-        <span className="bar"></span>
-      </div>
       <nav className={`navigation__navbar  ${showToolbar ? "open" : ""}`}>
         <div className="navigation__toolbar-logo">
           <div>
-            <div className="header__logo-box">
-              <Link href="/">
-                <a>
-                  <img src="/images/logos/logo-en.svg" alt="brand logo" />
-                </a>
-              </Link>
+            <div className="header__logo-box" onClick={onLogoClickHandler}>
+              <img src="/images/logos/logo-en.svg" alt="brand logo" />
             </div>
           </div>
           <div

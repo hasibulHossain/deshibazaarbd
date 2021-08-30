@@ -11,7 +11,7 @@
   justify-content: space-between;
   align-items: center;
 
-  padding: 5px 0;
+  padding-top: 15px;
 }
 
 .header__logo {
@@ -170,39 +170,11 @@
   left: 100%;
   white-space: nowrap;
 }
-
-// .navigation__drop-down.drop-down-menu-3 {
-//   display: none;
-//   position: absolute;
-//   background: crimson;
-//   top: 0%;
-//   left: 100%;
-//   white-space: nowrap;
-//   transition: all 1s ease-in-out;
-// }
-
-// .displace .navigation__drop-down.drop-down-menu-3 {
-//   display: none;
-//   position: absolute;
-//   background: crimson;
-//   top: 0%;
-//   left: inherit;
-//   right: 100%;
-//   white-space: nowrap;
-//   transition: all 1s ease-in-out;
-// }
-
 .drop-down-menu-1
   > .navigation__nav-item:hover
   > .navigation__drop-down.drop-down-menu-2 {
   display: block;
 }
-
-// .drop-down-menu-2
-//   > .navigation__nav-item:hover
-//   > .navigation__drop-down.drop-down-menu-3 {
-//   display: block;
-// }
 
 .navigation__drop-down {
   min-height: 500px;
@@ -215,9 +187,6 @@
 /* // toggle button */
 
 .navigation__toggle-btn {
-  position: absolute;
-  top: 14px;
-  left: 5%;
   display: none;
   flex-direction: column;
   justify-content: space-between;
@@ -236,7 +205,18 @@
   display: none;
 }
 
-@media (max-width: 600px) {
+.header__srh-box-bottom {
+  display: none;
+}
+
+.navigation__toolbar-logo {
+  display: none;
+  justify-content: space-between;
+  padding: 12px;
+}
+
+
+@media (max-width: 992px) {
   ul {
     padding: 0px;
     margin: 0px;
@@ -249,6 +229,7 @@
 
   .navigation__toggle-btn {
     display: flex;
+    margin-right: 10px;
   }
 
   .navigation__navbar-nav {
@@ -301,12 +282,6 @@
     padding-left: 60px;
   }
 
-  .navigation-mobile__drop-down.drop-down-menu-3
-    > .navigation-mobile__nav-item
-    .navigation-mobile__nav-link {
-    padding-left: 80px;
-  }
-
   /* drop down open close condition */
 
   .navigation-mobile__nav-item.has-child.open
@@ -326,16 +301,6 @@
 
   .navigation-mobile__nav-item.has-child
     > .navigation-mobile__drop-down.drop-down-menu-2 {
-    display: none;
-  }
-
-  .navigation-mobile__nav-item.has-child.open
-    > .navigation-mobile__drop-down.drop-down-menu-3 {
-    display: block;
-  }
-
-  .navigation-mobile__nav-item.has-child
-    > .navigation-mobile__drop-down.drop-down-menu-3 {
     display: none;
   }
 
@@ -382,66 +347,103 @@
   .navigation-mobile__nav-item.has-child.open::before {
     opacity: 0;
   }
-}
 
-.header__srh-box-bottom {
-  display: none;
-}
+  // 991 px
 
-@include media("<992px") {
+  .navigation__toolbar-logo {
+    display: flex;
+    box-shadow: 0 2px 2px rgb(0 0 0 / 10%);
+    align-items: center;
+  }
+  
   .navigation__navbar-nav {
     display: none;
   }
-
+  
   .header__srh-box-bottom {
     display: block;
   }
-
+  
   .header__srh-box {
     display: none;
   }
-
+  
   .header__signupIn {
     display: flex;
     justify-content: flex-end;
   }
-
+  
   .header-search-product {
     box-shadow: -1px 1px 9px -3px rgb(57 54 54 / 44%);
   }
-
+  
   .header__srh-box-container {
     width: 100%;
   }
-
+  
   .header-top {
     display: none;
   }
 }
-
 @include media("<426px") {
   .header__root {
     box-shadow: 0 2px 2px rgb(0 0 0 / 10%);
   }
 
   .header__logo {
-    margin-left: 15%;
+    // margin-left: 15%;
     flex: 2 1;
   }
 
   .header__container {
     box-shadow: 1px 1px 9px -3px rgb(57 54 54 / 44%);
   }
+
+  .navigation__toolbar-logo {
+    display: flex;
+  }
+
+  .header__logo {
+    flex: 1 1;
+  }
+
+  .header__top {
+    padding: 10px 0;
+  }
+
+  .header-nav-link.cart-nav-link {
+    display: none;
+  }
 }
 
-.navigation__toolbar-logo {
-  display: flex;
-  justify-content: space-between;
-  padding: 12px;
-}
 
 .navigation__toolbar-close {
   height: 30px;
   width: 30px;
-  background: var(--color-primary);
+  background: transparent;
+  position: relative;
+}
+
+.navigation__toolbar-close::after {
+  content: " ";
+  position: absolute;
+  top: 45%;
+  left: 0;
+  
+  width: 25px;
+  height: 2px;
+  background-color: var(--color-primary);
+  transform: rotate(45deg);
+}
+
+.navigation__toolbar-close::before {
+  content: " ";
+  position: absolute;
+  top: 45%;
+  left: 0;
+
+  width: 25px;
+  height: 2px;
+  background-color: var(--color-primary);
+  transform: rotate(135deg);
 }
