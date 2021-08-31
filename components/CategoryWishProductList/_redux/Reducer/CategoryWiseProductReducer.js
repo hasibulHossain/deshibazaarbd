@@ -2,6 +2,8 @@ import * as Types from "../Type/Types";
 
 const initialState = {
   products: [],
+  categories: [],
+  brands: [],
   categoryBrandDetails: {
     isLoading: false,
     name: "",

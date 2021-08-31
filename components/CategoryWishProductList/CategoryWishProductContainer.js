@@ -8,6 +8,7 @@ import {
   setFilterParams,
 } from "./_redux/Action/CategoryWiseProductAction";
 
+const Base_Url = process.env.NEXT_PUBLIC_API_URL;
 
 const CategoryWishProductContainer = () => {
   const dispatch = useDispatch();
@@ -37,13 +38,10 @@ const CategoryWishProductContainer = () => {
     filterParamClone.page  = page;
 
     if (direction === "previous") {
-      // dispatch(getFilteredProducts(filterParamClone));
       dispatch(setFilterParams(filterParamClone));
     } else if (direction === "linier") { 
-      // dispatch(getFilteredProducts(filterParamClone));
       dispatch(setFilterParams(filterParamClone));
     } else if (direction === "next") {
-      // dispatch(getFilteredProducts(filterParamClone));
       dispatch(setFilterParams(filterParamClone));
     }
   };
@@ -86,41 +84,93 @@ const CategoryWishProductContainer = () => {
         <div className="col-md-3">
             <ProductFilter show={showFilter} />
         </div>
-        <div className="col-md-9 mb-5 px-0">
+        <div className="col-md-9 mb-5 px-0" style={{fontSize: '14px'}}>
           <CategoryWishProductList showFilter={showFilter} showFilterHandler={() => setShowFilter(preState => !preState)} />
           {
             !isLoading && paginate.total > 20  && (
-              <div className="w-100">
+              <div className="w-100 px-0 px-sm-3 mt-3">
                 <nav className="d-flex justify-content-end" aria-label="navigation">
                   <ul className="pagination">
+                    {
+                      paginate.current_page != 1 && (
+                        <li
+                          className={classes}
+                          onClick={() =>
+                            paginateHandler("previous", paginate.prev_page_url)
+                          } >
+                          <a className="page-link">Previous</a>
+                        </li>
+                      )
+                    }
+                    {
+                      paginate.current_page > 3 && (
+                        <>
+                        <li
+                          onClick={() =>
+                            paginateHandler(
+                              "linier",
+                              `${Base_Url}get-items?page=1`
+                            )
+                          }
+                          className={`page-item product-page-item`} >
+                          <a className="page-link">1</a>
+                        </li>
+                        <li
+                          onClick={() => paginateHandler("linier", `${Base_Url}get-items?page=${paginate.current_page - 3}`)}
+                          className={nextClasses} >
+                          <a className="page-link">...</a>
+                        </li>
+                        </>
+                      )
+                    }
+
+                    {
+                      [1, 2, 3].map((_, i) => {
+                        if(paginate.last_page == paginate.current_page + i ) return;
+                        if(!((paginate.current_page + 1) >= paginate.last_page) && paginate.last_page) {
+                          return (
+                            <li
+                              key={i}
+                              onClick={() =>
+                                paginateHandler(
+                                  "linier",
+                                  `${Base_Url}get-items?page=${i + paginate.current_page}`
+                                )
+                              }
+                              className={`page-item product-page-item ${paginate.current_page == i + paginate.current_page ? 'active' : ''}`} >
+                              <a className="page-link">{i + paginate.current_page}</a>
+                            </li>
+                          )
+                        } else {
+                          return null
+                        }
+                      })
+                    }
+
+                    {
+                      !((paginate.last_page -3) < paginate.current_page) && (
+                        <li
+                          onClick={() => paginateHandler("next", `${Base_Url}get-items?page=${paginate.current_page + 3}`)}
+                          className="page-item product-page-item" >
+                          <a className="page-link">...</a>
+                        </li>
+                      )
+                    }
+
                     <li
-                      className={classes}
-                      onClick={() =>
-                        paginateHandler("previous", paginate.prev_page_url)
-                      }
-                    >
-                      <a className="page-link">Previous</a>
+                      onClick={() => paginateHandler("next", `${Base_Url}get-items?page=${paginate.last_page}`)}
+                      className={`page-item product-page-item ${paginate.current_page === paginate.last_page ? 'active' : ''}`} >
+                      <a className="page-link">{paginate.last_page}</a>
                     </li>
-                    {/* {paginate.pages.map((_, i) => ( */}
-                      <li
-                        // onClick={() =>
-                        //   paginateHandler(
-                        //     "linier",
-                        //     `${Base_Url}get-items?page=${i + 1}`
-                        //   )
-                        // }
-                        // className={`page-item product-page-item ${paginate.current_page == i + 1 && 'active'}`}
-                        className={`page-item product-page-item`}
-                      >
-                        <a className="page-link">{paginate.current_page}</a>
-                      </li>
-                    {/* ))} */}
-                    <li
-                      onClick={() => paginateHandler("next", paginate.next_page_url)}
-                      className={nextClasses}
-                    >
-                      <a className="page-link">Next</a>
-                    </li>
+                    {
+                      paginate.last_page !== paginate.current_page && (
+                        <li
+                          onClick={() => paginateHandler("next", paginate.next_page_url)}
+                          className={nextClasses} >
+                          <a className="page-link">Next</a>
+                        </li>
+                      )
+                    }
                   </ul>
                 </nav>
               </div>
@@ -128,11 +178,6 @@ const CategoryWishProductContainer = () => {
           }
         </div>
       </div>
-      {/* <div className="row">
-        <div className="col-md-3"></div>
-        <div className="col-md-9">
-        </div>
-      </div> */}
     </section>
   );
 };

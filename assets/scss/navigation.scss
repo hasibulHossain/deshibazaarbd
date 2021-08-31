@@ -312,11 +312,11 @@
   .navigation-mobile__nav-item-expand {
     display: inline-block;
     background: transparent;
-    width: 25px;
-    height: 25px;
+    width: 45px;
+    height: 100%;
     position: absolute;
-    right: 11px;
-    top: 9px;
+    right: 0;
+    top: 0;
     z-index: 2000;
   }
 
