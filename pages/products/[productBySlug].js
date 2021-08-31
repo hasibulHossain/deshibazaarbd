@@ -5,14 +5,7 @@ import LoadingSkelleton from "../../components/master/skelleton/LoadingSkelleton
 import ProductDetailInfo from "../../components/product-detail/ProductDetailInfo"
 
 export default function ProductBySlug({ product }) {
-    // const router  = useRouter();
-    // const { asPath } = router;
-
     const loading = false;
-
-    // useEffect(() => {
-    // }, [asPath])
-console.log('product :>> ', product);
     return (
         <>
 

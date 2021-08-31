@@ -88,7 +88,7 @@ a .custom-button-component:hover {
 }
 
 .nav-pills .nav-link.active,
-.nav-pills .show>.nav-link {
+.nav-pills .show > .nav-link {
   background-color: #237e33 !important;
 }
 
@@ -3332,8 +3332,8 @@ img.payment_method_in_shipping {
 .product-page-item.active .page-link {
   z-index: 3;
   color: #fff;
-  background-color: #5c9558;
-  border-color: #5c9558;
+  background-color: var(--color-primary);
+  border: none;
   cursor: pointer;
 }
 
@@ -3343,7 +3343,7 @@ img.payment_method_in_shipping {
   padding: 0.5rem 0.75rem;
   margin-left: -1px;
   line-height: 1.25;
-  color: #5c9558;
+  color: var(--color-primary);
   background-color: #fff;
   border: 1px solid #dee2e6;
   cursor: pointer;
@@ -3414,7 +3414,7 @@ img.payment_method_in_shipping {
   display: flex;
 }
 
-.store-profile-details__contacts>div {
+.store-profile-details__contacts > div {
   padding: 0 5px;
 }
 
@@ -3437,11 +3437,11 @@ img.payment_method_in_shipping {
   margin-bottom: 20px;
 }
 
-.store-profile-details__details>div {
+.store-profile-details__details > div {
   margin-bottom: 5px;
 }
 
-.store-profile-details__details>div>span:first-child {
+.store-profile-details__details > div > span:first-child {
   color: var(--color-primary);
 }
 
