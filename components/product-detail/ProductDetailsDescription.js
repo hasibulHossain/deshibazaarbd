@@ -8,7 +8,7 @@ const ProductDetailsDescription = ({ product }) => {
         <div className="product_description">
             <div className="container">
                 <div className="row">
-                    <div className="col-lg-12">
+                    <div className="col-lg-12 product_details_tab">
                         <Tabs defaultActiveKey="description" id="uncontrolled-tab-example" className="mb-3">
                             <Tab eventKey="description" title="Description">
                                 <p className="product_title">Product Description</p>

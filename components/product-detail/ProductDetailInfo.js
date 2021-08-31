@@ -132,10 +132,10 @@ const ProductDetailInfo = (props) => {
       }
     }
   };
-
+console.log('product :>> ', product);
   return (
     <>
-      {product !== null && (
+      {product !== "undefined" && product !== null && (
         <div className="product-info-page">
           <Breadcrumb>
             {typeof product.category !== "undefined" &&

@@ -47,7 +47,7 @@ const CartProduct = ({ cart }) => {
       </Modal>
 
       <div className="row justify-content-between">
-        <div className="col-lg-3 col-md-5 product_cart_left">
+        <div className="col-lg-3 col-5 product_cart_left">
           <input type="checkbox" className="cart-checkbox pointer mr-2" checked={cart.isChecked} onChange={() => dispatch(toggleAllCartSelection(!cart.isChecked, cart.productID))} />
           <img
             src={cart.productImage === null ? 'https://img.icons8.com/plasticine/2x/image.png' : cart.productImage}
@@ -55,7 +55,7 @@ const CartProduct = ({ cart }) => {
             className="img-thumbnail product_cart_img"
           />
         </div>
-        <div className="col-lg-5 col-md-7">
+        <div className="col-lg-5 col-7">
           <div className="product_cart_inner_details mt-2">
             <h4 className="innser_cart_product_name pointer" onClick={() => dispatch(toggleProductModalAction(cart.sku))}>{cart.productName}</h4>
 

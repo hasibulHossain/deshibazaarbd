@@ -87,8 +87,8 @@ const DeliveryInfo = () => {
 
     return (
         <>
-            <div className="card p-3 shadow-sm">
-                <h4 className="delivery_info_title">Delivery Information</h4>
+            <div className="card py-3 shadow-sm">
+                <h4 className="delivery_info_title px-3">Delivery Information</h4>
                 {
                     isLoading && (
                         <LoadingSpinner text="Loading Address..." />
@@ -98,7 +98,7 @@ const DeliveryInfo = () => {
                     !isLoading && shippingAddressInput && (
                         // <AddressUpdate addAddress={true} type="shipping_address" />
                         <>
-                            <h6 className="address_book_updated_title">
+                            <h6 className="address_book_updated_title px-3">
                                 Shipping address
                             </h6>
 
@@ -384,14 +384,14 @@ const DeliveryInfo = () => {
                                             !isSubmitting && (
                                                 <button
                                                     onClick={submitUpdatedAddressHandler}
-                                                    type="submit" className="btn btn-success mr-3">
+                                                    type="submit" className="btn btn-success mr-3 checkout_address_save_btn">
                                                     Save
                                                 </button>
                                             )
                                         }
                                         {
                                             isSubmitting && (
-                                                <button type="submit" disabled={true} className="btn btn-success mr-3 d-flex align-items-center float-right">
+                                                <button type="submit" disabled={true} className="btn btn-success checkout_address_save_btn mr-3 d-flex align-items-center float-right">
                                                     <Spinner animation="border" role="status" size="sm">
                                                         <span className="sr-only">Loading...</span>
                                                     </Spinner>
