@@ -25,14 +25,15 @@ const ProductSingleFull = ({ product }) => {
   const [filterCarts, setFilterCarts] = useState(null);
   const [updatedID, setUpdatedID] = useState(null);
 
-  const default_price =
-    product.is_offer_enable && product.offer_selling_price !== 0
-      ? product.offer_selling_price
-      : product.default_selling_price;
+  const getDefaultPrice = () => {
+    if (product.is_offer_enable || product.is_offer_enable === "1") {
+      return (typeof product.offer_selling_price != "undefined" && product.offer_selling_price != "0") ? product.offer_selling_price : product.default_selling_price;
+    }
 
-  const [subTotal, setSubTotal] = useState(default_price);
+    return product.default_selling_price;
+  }
 
-  // const zoomImg = { width: 200, height: 250, zoomWidth: 600, img: previewImg };
+  const [subTotal, setSubTotal] = useState(getDefaultPrice());
 
   useEffect(() => {
     if (product) {
@@ -42,7 +43,7 @@ const ProductSingleFull = ({ product }) => {
       if (typeof newFilterCarts !== "undefined" && newFilterCarts !== null) {
         setQuantity(newFilterCarts.quantity);
         setUpdatedID(newFilterCarts.productID);
-        setSubTotal(newFilterCarts.quantity * default_price);
+        setSubTotal(newFilterCarts.quantity * getDefaultPrice());
       }
     }
   }, [product, carts]);
@@ -53,7 +54,7 @@ const ProductSingleFull = ({ product }) => {
 
   const addToCart = () => {
     if (parseInt(product.current_stock) === 0) {
-      showToast("error", "This product is out of stock!");
+      showToast("error", "Product is out of stock !");
     } else if (typeof filterCarts !== "undefined" && filterCarts !== null) {
       dispatch(updateCartQtyAction(updatedID, quantity));
     } else {
@@ -71,7 +72,7 @@ const ProductSingleFull = ({ product }) => {
       dispatch(updateCartQtyAction(updatedID, quantity));
     } else {
       setQuantity(quantity);
-      setSubTotal(quantity * default_price);
+      setSubTotal(quantity * getDefaultPrice());
     }
   };
 
@@ -193,7 +194,7 @@ const ProductSingleFull = ({ product }) => {
                     </div>
                     <p className="floating-cart__product-price mt-3">
                       {quantity} <span>X</span>&nbsp;
-                      {formatCurrency(default_price)} ={" "}
+                      {formatCurrency(getDefaultPrice())} ={" "}
                       {formatCurrency(subTotal)}&nbsp;
                       {/* {activeCurrency('code')} */}
                     </p>
