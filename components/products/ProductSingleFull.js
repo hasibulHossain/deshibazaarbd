@@ -108,7 +108,7 @@ const ProductSingleFull = ({ product }) => {
     <>
       {product ? (
         <div className="row p-3">
-          <div className="col-md-1">
+          <div className="col-md-1 col-4">
             <div className="product_details_img_gallery">
               <img
                 src={product.featured_url}

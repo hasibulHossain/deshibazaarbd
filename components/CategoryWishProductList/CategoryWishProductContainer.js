@@ -98,7 +98,7 @@ const CategoryWishProductContainer = () => {
                           onClick={() =>
                             paginateHandler("previous", paginate.prev_page_url)
                           } >
-                          <a className="page-link">Previous</a>
+                          <a className="page-link">{'<'}</a>
                         </li>
                       )
                     }
@@ -167,7 +167,7 @@ const CategoryWishProductContainer = () => {
                         <li
                           onClick={() => paginateHandler("next", paginate.next_page_url)}
                           className={nextClasses} >
-                          <a className="page-link">Next</a>
+                          <a className="page-link">{'>'}</a>
                         </li>
                       )
                     }

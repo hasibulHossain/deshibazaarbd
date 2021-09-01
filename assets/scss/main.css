@@ -1,4 +1,4 @@
-/* @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@@100;300;400;500;600;700&display=swap"); */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@@100;300;400;500;600;700&display=swap");
 
 /*****************************************************************
                         Global CSS Part :: Start
@@ -496,6 +496,28 @@ a .custom-button-component:hover {
   padding: 10px;
 }
 
+.product-card.categories_wise_product_card {
+  padding: 0px;
+}
+
+.product-card.categories_wise_product_card .stock-status{
+  top: 20px;
+}
+
+.product-card.categories_wise_product_card .inactive-price .discount-percent{
+  top: 7px;
+}
+
+.product_details_section .inactive-price .discount-percent{
+  top: 11.8%;
+  left: 20%;
+}
+
+
+.product-card.categories_wise_product_card .product-card-body{
+  width: 100%;
+}
+
 .stock-status {
   font-size: 14px;
   margin-top: -10px;
@@ -503,6 +525,10 @@ a .custom-button-component:hover {
   -webkit-border-radius: 5px;
   border-radius: 5px;
   display: inline-block;
+
+  position: absolute;
+  top: 11px;
+  right: 11px;
 }
 
 .stock-status-in {
@@ -607,6 +633,7 @@ a .custom-button-component:hover {
 
 .inactive-price {
   font-size: 14px;
+  margin: 0px;
 }
 
 .inactive-price del {
@@ -614,12 +641,30 @@ a .custom-button-component:hover {
 }
 
 .inactive-price .discount-percent {
-  color: #000000;
+  color: #fff;
+  position: absolute;
+  top: 0;
+  left: 6px;
+  background: var(--color-primary);
+  padding: 2px 8px;
+  border-radius: 50px;
+}
+
+.product_details_section .price-area {
+  justify-content: flex-start;
 }
 
 .price-area {
-  margin-top: -10px;
-  height: 65px;
+  /* margin-top: -10px;
+  height: 65px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.price-area .active-price {
+  margin-right: 5px;
 }
 
 .rating {
@@ -629,6 +674,7 @@ a .custom-button-component:hover {
 
 .product-card .product-card-body .product-title {
   margin-top: 10px;
+  margin-bottom: 5px;
   font-size: 16px;
   font-weight: 500;
 
@@ -1167,13 +1213,18 @@ a .custom-button-component:hover {
   color: var(--color-primary);
 }
 
-.product_details_img_gallery img {
-  width: 80px;
-  border: 1px solid #d6d6d6;
-  padding: 5px;
+.product_details_img_gallery {
+  height: 100px;
   border-radius: 5px;
-  margin: 5px;
   cursor: pointer;
+  margin-bottom: 5px;
+}
+
+.product_details_img_gallery img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 5px;
 }
 
 h6.address_book_updated_title {
@@ -1182,7 +1233,8 @@ h6.address_book_updated_title {
 }
 
 .product_details_img_gallery .select_img {
-  border: 2px solid var(--color-primary) !important;
+  border: 1px solid var(--color-primary) !important;
+  border-radius: 5px;
 }
 
 .product_img {
@@ -1661,6 +1713,7 @@ ul.social-media {
 
 .filter_column_3 {
   /* height: 320px; */
+  position: relative;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -1693,8 +1746,15 @@ ul.social-media {
 }
 
 .filter_column_3 .product-card-body img {
-  height: 105px !important;
+  height: 200px !important;
+  width: 180px !important;
   font-size: 0px;
+  margin-top: 18px;
+  transition: transform 300ms ease 0ms
+}
+
+.filter_column_3 .product-card-body img:hover {
+  transform: scale(1.1);
 }
 
 .filter_column_10 .product-card-body img {
@@ -3340,7 +3400,7 @@ img.payment_method_in_shipping {
 .product-page-item .page-link {
   position: relative;
   display: block;
-  padding: 0.5rem 0.75rem;
+  padding: 0.5rem;
   margin-left: -1px;
   line-height: 1.25;
   color: var(--color-primary);
@@ -3366,7 +3426,7 @@ img.payment_method_in_shipping {
 }
 
 .product-card-body .product-single-mini-cart {
-  display: none;
+  /* display: none; */
 }
 
 .product-card-body-details-icon {

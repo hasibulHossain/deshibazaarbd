@@ -82,7 +82,7 @@ const ProductSingleMini = ({
             : "filter_column_10"
         } `}
       >
-        <div className="product-purchase-section">
+        {/* <div className="product-purchase-section">
           <button>
             <FontAwesomeIcon
               className="add_to_cart"
@@ -91,26 +91,23 @@ const ProductSingleMini = ({
             />
           </button>
           <button>
-            <AddWishList product={item} />
+            <AddWishList product={item} /> */}
             {/* <FontAwesomeIcon className="withlist" icon={faHeart} /> */}
-          </button>
+          {/* </button> */}
           {/* <button>
                         <FontAwesomeIcon className="details" icon={faListAlt} />
                     </button> */}
-        </div>
+        {/* </div> */}
 
-        <div
-          className={`product-card-body`}
-          onClick={() => modalHandler(false)}
-        >
+        <div className={`product-card-body`} >
           {columnClassName === "col-md-2" && (
             <>
               <div
                 onClick={() => modalHandler(true)}
-                className="product-card-body-details-icon"
-              >
+                className="product-card-body-details-icon" >
                 <FontAwesomeIcon icon={faInfoCircle} />
               </div>
+              <div onClick={() => modalHandler(false)} style={{overflow: 'hidden'}}>
               <img src={imageURL} className="img-fluid" />
               <div className="product-card-body-inner">
                 <p className="product-title">
@@ -145,11 +142,12 @@ const ProductSingleMini = ({
                                         } */}
                 </div>
               </div>
+              </div>
               <div className="product-single-mini-cart">
                 <SimpleBtn
                   variant="danger"
                   onClick={() => addToCart(item)}
-                  style={{ borderRadius: "0px" }}
+                  style={{ borderRadius: "4px" }}
                 >
                   Add to cart
                 </SimpleBtn>
@@ -161,25 +159,24 @@ const ProductSingleMini = ({
             columnClassName === "col-md-12") && (
             <>
               <div className="row">
+                {/* <div
+                  className={ columnClassName == "col-md-3" ? "col-md-12" : "col-5" } >
+                </div> */}
                 <div
-                  className={
-                    columnClassName == "col-md-3" ? "col-md-12" : "col-5"
-                  }
-                >
-                  <div
-                    onClick={() => modalHandler(true)}
-                    className="product-card-body-details-icon"
-                  >
-                    <FontAwesomeIcon icon={faInfoCircle} />
-                  </div>
-
-                  <img src={imageURL} alt={item.name} className="img-fluid" />
-                </div>
-                <div
+                  onClick={() => modalHandler(false)}
                   className={
                     columnClassName === "col-md-3" ? "col-md-12" : "col-7"
                   }
-                >
+                > 
+                  <div style={{overflow: 'hidden'}}>
+                    <div
+                      onClick={() => modalHandler(true)}
+                      className="product-card-body-details-icon" >
+                      <FontAwesomeIcon icon={faInfoCircle} />
+                    </div>
+
+                    <img src={imageURL} alt={item.name} className="img-fluid" />
+                  </div>
                   <div>
                     <p className="product-title">{item.name}</p>
                     <p

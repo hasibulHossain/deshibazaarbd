@@ -131,7 +131,7 @@ const CategoryWishProductList = ({showFilter, showFilterHandler}) => {
                 icon={faColumns}
                 onClick={() => setColumns("col-md-3")}
               />
-              <FontAwesomeIcon
+              {/* <FontAwesomeIcon
                 className={
                   columns == "col-md-12"
                     ? "filter_columns column_active"
@@ -139,7 +139,7 @@ const CategoryWishProductList = ({showFilter, showFilterHandler}) => {
                 }
                 icon={faList}
                 onClick={() => setColumns("col-md-12")}
-              />
+              /> */}
             </div>
             <div className="filter_view d-flex">
               {
