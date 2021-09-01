@@ -392,6 +392,7 @@
 
   .category_wise_product_list_heading {
     display: flex;
+    margin-bottom: 10px;
   }
 
   .category_wise_product_list_heading.show {
@@ -400,6 +401,7 @@
 
   .category_wise_product_list_heading h5 {
     margin-right: auto;
+    margin-bottom: 0px;
   }
 
   .product-container .product-heading h5 {

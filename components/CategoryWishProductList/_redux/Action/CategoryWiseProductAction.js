@@ -86,3 +86,7 @@ export const setFilterParams = (filterParams) => ({
 export const resetFilterParams = () => ({
   type: Types.RESET_FILTER_PARAM
 });
+
+export const setCategories = (allCategories) => {
+  
+};
