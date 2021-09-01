@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { getMenuListData } from "./_redux/HeaderAction/HeaderAction";
 import Link from "next/link";
+import Translate from "../translation/Translate";
 
 const HeaderMenu = ({ navigationToggleHandler, showToolbar }) => {
   const { menuList } = useSelector((state) => state.HeaderReducer);
@@ -94,7 +95,7 @@ const HeaderMenu = ({ navigationToggleHandler, showToolbar }) => {
                   onClick={() => clickMenuLink(itemLvl1.id, false)}
                   className="navigation__nav-link"
                 >
-                  {itemLvl1.name}
+                  <Translate>{itemLvl1.name}</Translate>
                 </span>
 
                 {itemLvl1HasChild && (
@@ -113,7 +114,7 @@ const HeaderMenu = ({ navigationToggleHandler, showToolbar }) => {
                             onClick={() => clickMenuLink(itemLvl2.id, false)}
                             className="navigation__nav-link"
                           >
-                            {itemLvl2.name}
+                            <Translate>{itemLvl2.name}</Translate>
                           </span>
                           {itemLvl2HasChild && (
                             <ul className="navigation__drop-down drop-down-menu-2">
@@ -127,7 +128,7 @@ const HeaderMenu = ({ navigationToggleHandler, showToolbar }) => {
                                       onClick={() => clickMenuLink(itemLvl3.id, false)}
                                       className="navigation__nav-link"
                                     >
-                                      {itemLvl3.name}
+                                      <Translate>{itemLvl3.name}</Translate>
                                     </span>
                                   </li>
                                 );
@@ -166,7 +167,7 @@ const HeaderMenu = ({ navigationToggleHandler, showToolbar }) => {
                   className="navigation-mobile__nav-link"
                   href="#"
                 >
-                  {itemLvl1.name}
+                  <Translate>{itemLvl1.name}</Translate>
                 </span>
 
                 {itemLvl1HasChild && (
@@ -191,7 +192,7 @@ const HeaderMenu = ({ navigationToggleHandler, showToolbar }) => {
                             onClick={() => clickMenuLink(itemLvl2.id, true)}
                             className="navigation-mobile__nav-link"
                           >
-                            {itemLvl2.name}
+                            <Translate>{itemLvl2.name}</Translate>
                           </span>
 
                           {itemLvl2HasChild && (
@@ -217,7 +218,7 @@ const HeaderMenu = ({ navigationToggleHandler, showToolbar }) => {
                                       onClick={() => clickMenuLink(itemLvl3.id, true)}
                                       className="navigation-mobile__nav-link"
                                     >
-                                      {itemLvl3.name}
+                                      <Translate>{itemLvl3.name}</Translate>
                                     </span>
 
                                     {itemLvl3HasChild && (
@@ -234,7 +235,7 @@ const HeaderMenu = ({ navigationToggleHandler, showToolbar }) => {
                                                 }
                                                 className="navigation-mobile__nav-link"
                                               >
-                                                {itemLvl4.name}
+                                                <Translate>{itemLvl4.name}</Translate>
                                               </span>
                                             </li>
                                           )
