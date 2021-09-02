@@ -377,16 +377,18 @@ p.estimate {
 	}
 
 	#{$self}__icon {
+		color: #636363;
 		
+		transition: all 100ms ease-in;
 	}
-
+	
 	#{$self}__txt {
 		padding-left: 5px;
 	}
 
 	&.product-btn {
 		font-size: 12px;
-		color: black;
+		color: #333;
 		background-color: transparent;
 		border-top: 1px solid #ddd;
 		transition: all 100ms ease-in;
@@ -398,6 +400,10 @@ p.estimate {
 		background-color: var(--color-primary);
 		border-bottom-left-radius: 0.25rem;
 		border-bottom-right-radius: 0.25rem;
+	}
+
+	&.product-btn:hover #{$self}__icon{
+		color: #fff;
 	}
 
 	&.homepage-product-btn {
@@ -412,6 +418,10 @@ p.estimate {
 		color: #fff;
 		background-color: var(--color-primary);
 		border: 1px solid var(--color-primary);
+	}
+
+	&.homepage-product-btn:hover #{$self}__icon{
+		color: #fff;
 	}
 
 	&.success {

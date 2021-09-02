@@ -6,12 +6,11 @@ import { createWrapper } from "next-redux-wrapper";
 import Store from "../_redux/Store";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
-import "../assets/scss/variables.scss";
-import "bootstrap/scss/bootstrap.scss";
 import "../node_modules/slick-carousel/slick/slick-theme.css";
 import "../node_modules/slick-carousel/slick/slick.css";
 
-import "../assets/scss/main.css";
+import "../assets/scss/variables.scss";
+import "bootstrap/scss/bootstrap.scss";
 import "../assets/scss/carts.scss"; // For carts page
 import "../assets/scss/navigation.scss";
 import "../assets/scss/RemoveCartItem.scss";
@@ -24,6 +23,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../components/product-review/productListForReview.css";
 import "../components/ProfileAccountSetting/ProfileAccountSetting.scss";
+import "../assets/scss/main.css";
 
 // For Order Pages
 import "../components/orders/scss/order-invoice.scss";
