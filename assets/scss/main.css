@@ -498,8 +498,7 @@ a .custom-button-component:hover {
 }
 
 .product_details_section .inactive-price .discount-percent{
-  top: 11.8%;
-  left: 20%;
+position: unset;
 }
 
 
