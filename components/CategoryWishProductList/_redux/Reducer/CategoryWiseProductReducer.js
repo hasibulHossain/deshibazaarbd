@@ -2,6 +2,7 @@ import * as Types from "../Type/Types";
 
 const initialState = {
   products: [],
+  parentCategory: null,
   categories: [],
   brands: [],
   categoryBrandDetails: {
@@ -133,6 +134,12 @@ function CategoryWiseProductReducer(state = initialState, { type, payload }) {
           childs: []
         }
       };
+
+    case Types.GET_SUB_CATEGORY:
+      return {
+        ...state,
+        categories: payload
+      }
 
     default:
       return state;
