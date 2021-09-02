@@ -439,6 +439,17 @@
     top: 24.8%;
     left: 50%;
   }
+
+  .home-banner-carousel {
+    width: 100%;
+    max-height: 150px;
+    overflow: hidden;
+  }
+
+  .home-banner-carousel img {
+    height: 100%;
+    object-fit: contain;
+  }
   
 }
 

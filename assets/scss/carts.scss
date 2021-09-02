@@ -357,6 +357,7 @@ p.estimate {
 }
 
 .simple-btn {
+	$self: &;
 	outline: none;
 	border: none;
 	border-radius: 4px;
@@ -368,6 +369,50 @@ p.estimate {
 	font-size: 0.77rem;
 	font-family: inherit;
 	text-transform: uppercase;
+
+	#{$self}__inner {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	#{$self}__icon {
+		
+	}
+
+	#{$self}__txt {
+		padding-left: 5px;
+	}
+
+	&.product-btn {
+		font-size: 12px;
+		color: black;
+		background-color: transparent;
+		border-top: 1px solid #ddd;
+		transition: all 100ms ease-in;
+		border-radius: 0px;
+	}
+
+	&.product-btn:hover {
+		color: #fff;
+		background-color: var(--color-primary);
+		border-bottom-left-radius: 0.25rem;
+		border-bottom-right-radius: 0.25rem;
+	}
+
+	&.homepage-product-btn {
+		font-size: 12px;
+		color: black;
+		background-color: transparent;
+		border: 1px solid #ddd;
+		transition: all 100ms ease-in;
+	}
+
+	&.homepage-product-btn:hover {
+		color: #fff;
+		background-color: var(--color-primary);
+		border: 1px solid var(--color-primary);
+	}
 
 	&.success {
 		background-color: #16b62a;
