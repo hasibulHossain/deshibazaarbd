@@ -87,6 +87,14 @@ export const resetFilterParams = () => ({
   type: Types.RESET_FILTER_PARAM
 });
 
-export const setCategories = (allCategories) => {
-  
+export const getSubCategories = (parentId) => async dispatch => {
+  const url = 'categories/' + parentId
+  console.log('category id => ', parentId)
+
+  try {
+    const res = await Axios.get(url);
+    dispatch({type: Types.GET_SUB_CATEGORY, payload: res.data && res.data.data && res.data.data.childs})
+  } catch (err) {
+    console.log('err => ', err)
+  }
 };

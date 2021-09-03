@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getCategoryOrBrandDetails,
   getFilteredProducts,
+  getSubCategories,
   resetFilterParams,
   setFilterParams,
 } from "./_redux/Action/CategoryWiseProductAction";
@@ -23,7 +24,7 @@ const ProductFilter = ({show}) => {
     (state) => state.CategoryWiseProductReducer
   );
   const { ShopList } = useSelector((state) => state.ShopReducer);
-  const { categories } = useSelector((state) => state.CategoryReducer);
+  const { categories } = useSelector((state) => state.CategoryWiseProductReducer);
   const {isMobile} = useSelector(state => state.GlobalReducer);
 
   const [value, setValue] = useState({ min: 100, max: 90000 });
@@ -135,6 +136,7 @@ const ProductFilter = ({show}) => {
   useEffect(() => {
     const queries = router.query;
     const cloneFilterParams = {...filterParams};
+
     for(const query in queries) {
       if(Array.isArray(cloneFilterParams[query])) {
         cloneFilterParams[query] = [];
@@ -144,7 +146,12 @@ const ProductFilter = ({show}) => {
           dispatch(getCategoryOrBrandDetails('brands/' + +queries[query]));
         }
         if(query === 'category') {
+          const cloneFilterParams = {...filterParams};
           cloneFilterParams[query].push(+queries[query]);
+
+          dispatch(getFilteredProducts(cloneFilterParams));
+
+          dispatch(getSubCategories(queries[query]))
 
           dispatch(getCategoryOrBrandDetails('categories/' + +queries[query]));
         }
@@ -153,7 +160,6 @@ const ProductFilter = ({show}) => {
         if(query === 'storeById') {
           cloneFilterParams['seller_id'] = queries[query]
         }
-        // cloneFilterParams[query] = queries[query];
       }
     }
     dispatch(setFilterParams(cloneFilterParams));
@@ -196,7 +202,7 @@ const ProductFilter = ({show}) => {
 
       {/**filter by price range */}
       <div className="filter_by_price_range">
-        <p className="filter_title">Filter By Price</p>
+        <p className="filter_title">By Price</p>
         <div className="price_range">
           <InputRange
             maxValue={99999}
@@ -209,7 +215,7 @@ const ProductFilter = ({show}) => {
       </div>
 
       <div>
-        <p className="filter_title">Filter By Rating</p>
+        <p className="filter_title">By Rating</p>
         <div style={{display: 'flex', justifyContent: 'space-between'}}>
           <ReactStars {...reactStarProps} />
           <span style={{cursor: 'pointer', fontSize: 12, color: 'var(--color-primary)'}} onClick={resetRatingHandler}>Clear</span>
@@ -218,7 +224,7 @@ const ProductFilter = ({show}) => {
 
       {/**filter by categories */}
       <div className="filter_by_category">
-        <p className="filter_title">Category</p>
+        <p className="filter_title">By Category</p>
         {categories.map((item) => (
           <Form.Group key={item.id} controlId={item.id}>
             <Form.Check
@@ -234,7 +240,7 @@ const ProductFilter = ({show}) => {
       </div>
 
       {/**filter by categories */}
-      <div className="filter_by_category" style={{marginTop: '40px'}}>
+      {/* <div className="filter_by_category" style={{marginTop: '40px'}}>
         <p className="filter_title">Brand</p>
         {ShopList.map((item) => (
           <Form.Group key={item.id} controlId={item.id}>
@@ -248,7 +254,7 @@ const ProductFilter = ({show}) => {
             />
           </Form.Group>
         ))}
-      </div>
+      </div> */}
 
     </section>
   );
