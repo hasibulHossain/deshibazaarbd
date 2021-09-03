@@ -43,7 +43,6 @@ const ProductDetailInfo = (props) => {
 
   const router = useRouter();
   const { asPath } = router;
-  const queries = router.query;
 
   useEffect(() => {
     dispatch(getCartsAction());
@@ -52,19 +51,6 @@ const ProductDetailInfo = (props) => {
   const handleChangePreviewImg = (image_url) => {
     setPreviewImg(image_url);
   };
-
-  // const cartProduct = {
-  //   id: product.id,
-  //   name: product.name,
-  //   quantity: quantity,
-  //   isOffer: product.is_offer_enable,
-  //   default_selling_price: product.default_selling_price,
-  //   offer_selling_price: product.offer_selling_price,
-  //   featured_image: product.featured_image,
-  //   seller_id: product.business.id,
-  //   seller_name: product.business.name,
-  //   sku: product.sku,
-  // }
 
   const settings = {
     dots: false,
@@ -132,7 +118,7 @@ const ProductDetailInfo = (props) => {
       }
     }
   };
-console.log('product :>> ', product);
+
   return (
     <>
       {product !== "undefined" && product !== null && (
@@ -182,7 +168,7 @@ console.log('product :>> ', product);
                     <div className="col-lg-9 bg-white">
                       <div className="">
                         <div className="row">
-                          <div className="col-lg-4">
+                          <div className="col-lg-4 mt-2">
                             <div className=" d-none d-md-block">
                               <div
                                 style={{
@@ -190,6 +176,7 @@ console.log('product :>> ', product);
                                   display: "flex",
                                   justifyContent: "center",
                                   alignItems: "center",
+                                  overflow: 'hidden'
                                 }}
                               >
                                 <ReactImageZoom
@@ -382,8 +369,12 @@ console.log('product :>> ', product);
                       
                     </div>
                     {/*Location Section*/}
-                    <div className="col-lg-3 bg-light">
-                      <DeliveryFeatures product={product} />
+                    <div className="col-lg-3" style={{background: '#f7ae9d26'}}>
+                      {
+                        product.business.location && (
+                          <DeliveryFeatures product={product} />
+                        )
+                      }
                     </div>
                   </div>
                 </div>
@@ -397,7 +388,7 @@ console.log('product :>> ', product);
                 <ProductMainList
                   type=""
                   limit={6}
-                  category={queries.category}
+                  category={product.category_id}
                 />
               </div>
             </div>

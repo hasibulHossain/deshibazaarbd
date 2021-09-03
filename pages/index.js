@@ -26,10 +26,10 @@ export default function Home() {
       <CategoryListContainer url='categories' />
 
       <ProductSection title={translate('Daily Essential')} type="daily-essentials" limit={6} url='daily-essentials' />
-      <ProductSection title={translate('Best Sold')} type="best-sold" limit={6} url='best-sold' />
-      <ProductSection title={translate('Featured Products For You')} type="featured" limit={6} url='featured' />
       <ProductSection title={translate('Fastest Delivery')} type="fastest" limit={6} url='fastest' />
       <ProductSection title={translate('Latest Products')} type="latest" limit={6} url='latest' />
+      <ProductSection title={translate('Featured Products For You')} type="featured" limit={6} url='featured' />
+      <ProductSection title={translate('Best Sold')} type="best-sold" limit={6} url='best-sold' />
 
       {/* <ShopBanner /> */}
       <ShopContainer />

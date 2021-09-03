@@ -14,6 +14,7 @@ import AddWishList from "../Wishlist/AddWishList";
 import Translate from "../translation/Translate";
 import { useSelector } from "react-redux";
 import SimpleBtn from "../master/SimpleBtn/SimpleBtn";
+import router from 'next/router'
 
 /**
  * ProductSingleMini Component
@@ -53,6 +54,15 @@ const ProductSingleMini = ({
 
   const modalHandler = () => {
     dispatch(toggleProductModalAction(item.sku));
+  };
+
+  const redirectToProductDetailsPage = (product) => {
+    console.log('category id => ', product)
+    router
+      .push("/products/" + product.sku)
+      .then((_) => {
+        window.scrollTo(0, 0);
+      });
   };
 
   return (
@@ -97,7 +107,7 @@ const ProductSingleMini = ({
         <div className={`product-card-body`} >
           {columnClassName === "col-md-2" && (
             <>
-              <div onClick={() => modalHandler()} style={{overflow: 'hidden'}}>
+              <div onClick={() => redirectToProductDetailsPage(item)} style={{overflow: 'hidden'}}>
               <img src={imageURL} className="img-fluid" />
               <div className="product-card-body-inner">
                 <p className="product-title">
@@ -154,7 +164,7 @@ const ProductSingleMini = ({
                   className={ columnClassName == "col-md-3" ? "col-md-12" : "col-5" } >
                 </div> */}
                 <div
-                  onClick={() => modalHandler()}
+                  onClick={() => redirectToProductDetailsPage(item)}
                   className={
                     columnClassName === "col-md-3" ? "col-md-12" : "col-7"
                   }

@@ -5,27 +5,27 @@ import React from 'react';
 
 const DeliveryFeatures = ({ product }) => {
 
-    const { name, website, email, mobile, landmark, zip_code, city, country, state } = product.business.location;
+    const {location} = product.business;
 
     return (
         <>
             <div className="delivery_features_section p-2">
                 <div className="d-flex justify-content-between">
-                    <small className="text-secondary font-weight-bold mb-2">Seller Information</small>
+                    <small className="delivery_features_section-heading mb-2">Seller Information</small>
                 </div>
                 {
-                    (website !== null && website !== "") || (name !== null && name !== "") && (
+                    (location.website !== null && location.website !== "") || (location.name !== null && location.name !== "") && (
                         <p>
                             <span className="user_icon">
                                 <FontAwesomeIcon className="product_details_font_awesome" icon={faStore} />
                             </span>
                             <span className="user_address store_name pointer">
                                 {
-                                    typeof website !== "undefined" && website !== null && website !== "" ? (
-                                        <a href={`https://${website}`} target="_blank" rel="noopener noreferrer">
-                                            {name}
+                                    typeof location.website !== "undefined" && location.website !== null && location.website !== "" ? (
+                                        <a href={`https://${location.website}`} target="_blank" rel="noopener noreferrer">
+                                            {location.name}
                                         </a>
-                                    ) :  name
+                                    ) :  location.name
                                 }
 
                             </span>
@@ -34,14 +34,14 @@ const DeliveryFeatures = ({ product }) => {
                 }
 
                 {
-                    typeof email !== "undefined" && email !== null && email !== "" && (
+                    typeof location.email !== "undefined" && location.email !== null && location.email !== "" && (
                         <p>
                             <span className="user_icon">
                                 <FontAwesomeIcon className="product_details_font_awesome" icon={faEnvelopeOpenText} />
                             </span>
                             <span className="user_address text-lowercase">
-                                <a href={`mailto:${email}`} target="_blank" rel="noopener noreferrer">
-                                    {email}
+                                <a href={`mailto:${location.email}`} target="_blank" rel="noopener noreferrer">
+                                    {location.email}
                                 </a>
                             </span>
                         </p>
@@ -49,14 +49,14 @@ const DeliveryFeatures = ({ product }) => {
                 }
 
                 {
-                    typeof mobile !== "undefined" && mobile !== null && mobile !== "" && (
+                    typeof location.mobile !== "undefined" && location.mobile !== null && location.mobile !== "" && (
                         <p>
                             <span className="user_icon">
                                 <FontAwesomeIcon className="product_details_font_awesome" icon={faPhoneSquare} />
                             </span>
                             <span className="user_address text-lowercase">
-                                <a href={`tel:${mobile}`}>
-                                    {mobile}
+                                <a href={`tel:${location.mobile}`}>
+                                    {location.mobile}
                                 </a>
                             </span>
                         </p>
@@ -68,8 +68,8 @@ const DeliveryFeatures = ({ product }) => {
                         <FontAwesomeIcon className="product_details_font_awesome" icon={faMapMarkedAlt} />
                     </span>
                     <span className="user_address">
-                        <a href={`http://maps.google.com/?q=${landmark !== null ? landmark + "," : ""} ${zip_code !== null ? zip_code + "," : ""} ${city !== null ? city + "," : ""} ${state !== null ? state + "," : ""} ${country !== null ? country : ""}`} target="_blank" rel="noopener noreferrer">
-                            {`${landmark !== null ? landmark + "," : ""} ${zip_code !== null ? zip_code + "," : ""} ${city !== null ? city + "," : ""} ${state !== null ? state + "," : ""} ${country !== null ? country : ""}`}
+                        <a href={`http://maps.google.com/?q=${location.landmark !== null ? location.landmark + "," : ""} ${location.zip_code !== null ? location.zip_code + "," : ""} ${location.city !== null ? location.city + "," : ""} ${location.state !== null ? location.state + "," : ""} ${location.country !== null ? location.country : ""}`} target="_blank" rel="noopener noreferrer">
+                            {`${location.landmark !== null ? location.landmark + "," : ""} ${location.zip_code !== null ? location.zip_code + "," : ""} ${location.city !== null ? location.city + "," : ""} ${location.state !== null ? location.state + "," : ""} ${location.country !== null ? location.country : ""}`}
                         </a>
                     </span>
                 </p>
@@ -79,7 +79,7 @@ const DeliveryFeatures = ({ product }) => {
                     <div className="d-flex">
                         <FontAwesomeIcon className="product_details_font_awesome" icon={faTruck} />
                         <div className="ml-3 product_details__delivery__features_info">
-                            <p>Home Delivery <br /><small className="delivery_time">4-7 Days</small></p>
+                            <p>Home Delivery <br /><small style={{color: 'var(--color-green-light)'}} className="delivery_time">4-7 Days</small></p>
                         </div>
                     </div>
                 </div>
@@ -90,13 +90,17 @@ const DeliveryFeatures = ({ product }) => {
             </div>
 
             <div className="delivery_features_section mt-3 p-2">
-                <small className="text-secondary font-weight-bold">Return & Warranty</small>
+                <small className="delivery_features_section-heading">Return & Warranty</small>
                 <div className="d-flex mt-3">
-                    <FontAwesomeIcon className="return_font_awesome" icon={faCheckSquare} />
+                    <div>
+                        <FontAwesomeIcon className="return_font_awesome" icon={faCheckSquare} />
+                    </div>
                     <p className="ml-3 return_information"> 100% Authentic</p>
                 </div>
                 <div className="d-flex">
-                    <FontAwesomeIcon className="return_font_awesome" icon={faCheckSquare} />
+                    <div>
+                        <FontAwesomeIcon className="return_font_awesome" icon={faCheckSquare} />
+                    </div>
                     <p className="ml-3 return_information"> 14 days easy return </p>
                 </div>
             </div>

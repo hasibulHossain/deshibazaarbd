@@ -96,7 +96,6 @@ const ProductSingleFull = ({ product }) => {
   };
 
   const redirectToProductDetailsPage = (product) => {
-    console.log("type => ", typeof product.category_id);
     dispatch(toggleProductModalAction(""));
     router
       .push("/products/" + product.sku + "?category=" + product.category_id)

@@ -193,7 +193,6 @@ a .custom-button-component:hover {
   display: flex;
   line-height: 10px;
   border-radius: 10px;
-  box-shadow: 2px 4px 9px -3px rgba(57, 54, 54, 0.44);
 }
 
 .header-search-product input {
@@ -207,6 +206,7 @@ a .custom-button-component:hover {
   font-weight: 500;
   color: #8b8b8b;
   z-index: 100;
+  border: 2px solid var(--color-primary);
 }
 
 .searchbar-area-section {
@@ -218,6 +218,7 @@ a .custom-button-component:hover {
 }
 
 .header-search-product .header-custom-prepend {
+  border: 2px solid var(--color-primary);
   background-color: var(--color-primary);
   padding: 10px 20px;
   color: #fff;
@@ -3010,8 +3011,15 @@ img.multiple_preview_images {
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
 }
 
-.delivery_features_section {
+.delivery_features_section:not(:last-child) {
   border-bottom: 1px solid #cdcdcd;
+}
+
+.delivery_features_section-heading {
+  font-weight: 600;
+  font-size: 1.4rem;
+  color: var(--color-primary);
+  text-transform: uppercase;
 }
 
 small.delivery_time {
@@ -3020,12 +3028,12 @@ small.delivery_time {
 }
 
 .product_details_font_awesome {
-  color: #b5b5b5;
+  color: var(--color-primary);
   margin-top: 6px;
 }
 
 .return_font_awesome {
-  color: #172337;
+  color: var(--color-green-light);
 }
 
 .shipping_info_title,

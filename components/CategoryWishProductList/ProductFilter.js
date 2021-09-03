@@ -223,21 +223,25 @@ const ProductFilter = ({show}) => {
       </div>
 
       {/**filter by categories */}
-      <div className="filter_by_category">
-        <p className="filter_title">By Category</p>
-        {categories.map((item) => (
-          <Form.Group key={item.id} controlId={item.id}>
-            <Form.Check
-              type="checkbox"
-              label={item.name}
-              className={
-                isChecked == true ? "active_category" : "isNot_active_category"
-              }
-              onChange={(e) => handleChecked(e, item.id)}
-            />
-          </Form.Group>
-        ))}
-      </div>
+      {
+        categories.length > 0 && (
+          <div className="filter_by_category">
+            <p className="filter_title">By Category</p>
+            {categories.map((item) => (
+              <Form.Group key={item.id} controlId={item.id}>
+                <Form.Check
+                  type="checkbox"
+                  label={item.name}
+                  className={
+                    isChecked == true ? "active_category" : "isNot_active_category"
+                  }
+                  onChange={(e) => handleChecked(e, item.id)}
+                />
+              </Form.Group>
+            ))}
+          </div>
+        )
+      }
 
       {/**filter by categories */}
       {/* <div className="filter_by_category" style={{marginTop: '40px'}}>
