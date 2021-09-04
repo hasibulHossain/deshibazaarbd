@@ -3,6 +3,7 @@
 .header__root {
   background-color: #fff;
   width: 100%;
+  box-shadow: -1px 2px 6px 0px #eaeaea;
 }
 
 .header__top {
@@ -42,6 +43,7 @@
 // NAVIGATION
 
 .navigation__navbar {
+  font-weight: 500;
   background-color: #fff;
   padding: 0px;
   font-size: 14px;

@@ -196,7 +196,7 @@ const ProductDetailInfo = (props) => {
                             <div className="product_preview_gallery">
                               {product.images && product.images.length > 0 && (
                                 <Slider {...settings}>
-                                  <div>
+                                  {/* <div>
                                     <img
                                       onClick={() =>
                                         handleChangePreviewImg(previewImg)
@@ -205,7 +205,7 @@ const ProductDetailInfo = (props) => {
                                       className="multiple_preview_images pointer"
                                       alt=""
                                     />
-                                  </div>
+                                  </div> */}
                                   {product.images.map((item, index) => (
                                     <div key={index + 1}>
                                       <img
@@ -369,7 +369,7 @@ const ProductDetailInfo = (props) => {
                       
                     </div>
                     {/*Location Section*/}
-                    <div className="col-lg-3" style={{background: '#f7ae9d26'}}>
+                    <div className="col-lg-3 pt-3 pt-md-0" style={{background: '#f7ae9d26'}}>
                       {
                         product.business.location && (
                           <DeliveryFeatures product={product} />

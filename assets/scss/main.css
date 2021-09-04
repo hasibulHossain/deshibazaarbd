@@ -942,6 +942,7 @@ a .custom-button-component:hover {
   border-radius: 5px;
   /* height: 330px; */
   margin-bottom: 10px;
+  position: relative;
 }
 
 .flash-deal-img {
@@ -970,7 +971,7 @@ a .custom-button-component:hover {
 .flash-deal-title {
   overflow: hidden;
   text-overflow: ellipsis;
-  width: 100%;
+  width: 80%;
   white-space: nowrap;
   margin: 5px;
 }
@@ -1008,9 +1009,15 @@ a .custom-button-component:hover {
 }
 
 .flash-deal-actions div:last-child {
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
   margin-left: 10px;
+}
+
+.flash-deal-actions__love {
+  position: absolute;
+  top: 22px;
+  right: 22px;
 }
 
 .flash-deal-actions div svg {
@@ -1083,25 +1090,15 @@ a .custom-button-component:hover {
     rgba(255, 255, 255, 0.3) 100%
   );
   transform: skewX(-25deg);
-  opacity: 0;
-  /* transition: all 1s ease-out; */
 }
 
 .home-card:hover::before {
-  /* left: 100%; */
-  /* opacity: 1; */
   animation: shine 1s;
-  animation-timing-function: ease-out;
 }
 
 @keyframes shine {
-  0% {
-    opacity: 0;
-    left: -100%;
-  }
   100% {
-    opacity: 1;
-    left: 100%;
+    left: 125%;
   }
 }
 
@@ -1941,15 +1938,18 @@ ul.social-media {
 .account_info .nav-tabs .nav-link {
   border: none !important;
   font-size: 1.5rem;
-  color: #797a87 !important;
+  /* color: #797a87 !important; */
   font-weight: 700;
   text-transform: none;
   padding: 1% 10% !important;
   width: 50%;
+  color: #333 !important;
+  /* background-color: var(--color-primary) !important; */
+  /* padding: 1% 10% !important; */
 }
 
-.account_info.nav-tabs.nav-item.show.nav-link,
-.account_info.nav-tabs.nav-link.active {
+.account_info .nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active {
   color: #fff !important;
   background-color: var(--color-primary) !important;
   padding: 1% 10% !important;
@@ -2314,41 +2314,52 @@ p.text-secondary.mb-0 {
   max-height: 300px;
   z-index: 100;
   position: absolute;
-  background: #eee;
+  background: #fff;
   top: 100%;
-  width: 90%;
-  border-radius: 0px 0px 25px 25px;
-  color: #111;
+  width: calc(100% - 65px);
+  border-radius: 0px 0px 5px 5px;
+  color: #333;
   overflow-y: auto;
-}
-
-.search-suggestion-item img {
-  width: 50px;
-}
-
-.search-suggestion-area .text-danger {
-  font-size: 13px;
-  margin-top: 20px !important;
+  box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%);
 }
 
 .search-suggestion-item {
-  border-bottom: 1px solid #ccc;
-  cursor: pointer;
-  width: 100% !important;
-  background: white;
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 1px solid var(--color-border-light);
+  cursor: context-menu;
+  transition: all 100ms ease-in-out;
+  overflow: hidden;
 }
 
-.search-suggestion-item .search-title {
-  font-size: 15px;
-  margin-top: 10px;
-  margin-left: 20px;
-  width: 300px;
+.search-suggestion-item:hover {
+  background-color: var(--color-border-light);
 }
 
-.search-suggestion-item .search-price {
-  font-size: 15px;
-  margin-top: 10px;
-  margin-left: 20px;
+.search-suggestion-item__info {
+  width: 100%;
+}
+
+.search-suggestion-item__title {
+  font-size: 1.1rem;
+}
+
+.search-suggestion-item__img-box {
+  max-height: 80px;
+  width: 80px;
+  margin-right: 0.7rem;
+}
+
+.search-suggestion-item__img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.search-suggestion-item__search-price {
+  font-weight: 600;
+  color: var(--color-primary);
 }
 
 .cart_item_box_top {
@@ -3005,7 +3016,7 @@ img.multiple_preview_images {
 
 .product_preview_gallery .slick-prev,
 .product_preview_gallery .slick-next {
-  display: block !important;
+  display: none !important;
   background-color: #5c9558;
   height: 25px;
   width: 25px;
@@ -3555,8 +3566,12 @@ img.payment_method_in_shipping {
 .product_details_tab .nav-tabs.nav-item.show.nav-link,
 .product_details_tab .nav-tabs .nav-link.active {
   color: #fff !important;
-  background-color: #172337 !important;
+  background-color: var(--color-primary) !important;
   padding: 5px 25px !important;
+}
+
+.product_details_tab .nav-tabs .nav-link {
+  color: #333 !important;
 }
 
 .custom_delivery_charge {

@@ -57,7 +57,6 @@ const ProductSingleMini = ({
   };
 
   const redirectToProductDetailsPage = (product) => {
-    console.log('category id => ', product)
     router
       .push("/products/" + product.sku)
       .then((_) => {

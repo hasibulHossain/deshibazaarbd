@@ -91,7 +91,7 @@ const DealFlash = () => {
                               Add to Cart
                             </SimpleBtn>
                           </div>
-                          <div>
+                          <div className="flash-deal-actions__love">
                             <AddWishList product={item} />
                           </div>
                         </div>

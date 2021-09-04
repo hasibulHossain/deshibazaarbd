@@ -1,22 +1,32 @@
 import axios from "axios";
 import * as Types from "../Types/Types";
 
-export const searchProductAction = (searchKeyword) => async (dispatch) => {
+export const searchProductAction = (searchKeyword, source = {token: ""}) => async (dispatch) => {
   const search = searchKeyword;
-  // if (search.length <= 1) return;
-
   const response = {
-    loading: true,
+    loading: false,
     data: [],
   };
 
-  dispatch({ type: Types.GET_SEARCHED_PRODUCT_LIST, payload: response });
+  const url = `get-items/search?search=${search}`;
 
-  const URL = `get-items/search?search=${search}`;
-  const res = await axios.get(URL);
+  try {
+    response.loading = true;
+    dispatch({ type: Types.GET_SEARCHED_PRODUCT_LIST, payload: response });
 
-  response.loading = false;
-  response.data = res.data.data;
+    const res = await axios.get(url, {cancelToken: source.token});
 
-  dispatch({ type: Types.GET_SEARCHED_PRODUCT_LIST, payload: response });
+    response.loading = false;
+    response.data = res.data.data;
+    dispatch({ type: Types.GET_SEARCHED_PRODUCT_LIST, payload: response });
+    
+  } catch (error) {
+    if(axios.isCancel(error)) {
+      console.log('from cancel token error handler')
+    } else {
+      response.loading = false;
+      dispatch({ type: Types.GET_SEARCHED_PRODUCT_LIST, payload: response });
+      console.log('from search catch handler => ', error)
+    }
+  }
 };
