@@ -68,6 +68,7 @@ const ProductDetailInfo = (props) => {
         setUpdatedID(newFilterCarts.productID);
         setSubTotal(newFilterCarts.quantity * default_price);
       } else {
+        // @todo - Manage this counting using MRP while completed in API end
         setQuantity(1);
         setSubTotal(1 * default_price);
       }
