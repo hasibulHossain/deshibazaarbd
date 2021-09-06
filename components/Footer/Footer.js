@@ -87,6 +87,10 @@ const Footer = () => {
                         </Col>
                         <Col md={4} sm={6}>
                             <div className="footer-info">
+                                <div className="footer-info__follow-us">
+                                    <h5>FOLLOW US: </h5>
+                                    <SocialMedia />
+                                </div>
                                 <h5>Newsletter</h5>
                                 <p>Subscribe to our newsletter to get notification about discount information</p>
                                 <input onChange={(e) => setEmail(e.target.value)} type="text" className="form-control mb-3" placeholder="Enter your Email here" />
@@ -99,9 +103,10 @@ const Footer = () => {
                                             )
                                         }
                                 </SimpleBtn>
-
+                                <div className="pt-3">
+                                    <img src={"/images/payment-methods.png"} alt="Deshi BazaarBD"/>
+                                </div>
                             </div>
-                            <SocialMedia />
                         </Col>
                     </Row>
                 </Container>

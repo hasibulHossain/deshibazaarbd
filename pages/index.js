@@ -22,8 +22,8 @@ export default function Home() {
       <NewOffer />
       {/* <OfferProducts /> */}
       {/* <ProductTopListContainer /> */}
-      <DealFlash />
       <CategoryListContainer url='categories' />
+      <DealFlash />
 
       <ProductSection title={translate('Daily Essential')} type="daily-essentials" limit={6} url='daily-essentials' />
       <ProductSection title={translate('Fastest Delivery')} type="fastest" limit={6} url='fastest' />
