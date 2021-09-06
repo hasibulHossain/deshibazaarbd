@@ -17,7 +17,7 @@ const NewOffer = () => {
                     <div className="row text-center">
                         <div className="col-lg-3 col-md-4">
                             <a href="">
-                                <div className="home-card border-radius-5 pointer">
+                                <div className="home-card pointer">
                                     <div className="collection-banner">
                                         <img src={newOffer[0] && newOffer[0].image} className="img img-fluid" alt="" style={{ width: '100%' }} />
                                     </div>
@@ -28,7 +28,7 @@ const NewOffer = () => {
                         <div className="col-lg-6 col-md-8">
                             <a href="">
                                 <div style={{height: '100%', width: '100%'}}>
-                                    <div className="home-card border-radius-5 pointer">
+                                    <div className="home-card pointer">
                                         <img src={newOffer[1] && newOffer[1].image} className="img img-fluid middle" alt="banner" style={{ width: '100%' }}/>
                                     </div>
                                 </div>
@@ -37,7 +37,7 @@ const NewOffer = () => {
 
                         <div className="col-lg-3 col-md-12">
                         <a href="">
-                            <div className="home-card border-radius-5 pointer">
+                            <div className="home-card pointer">
                                 <img src={newOffer[2] && newOffer[2].image} className="img img-fluid" alt="" style={{ width: '100%' }}/>
                             </div>
                             </a>
