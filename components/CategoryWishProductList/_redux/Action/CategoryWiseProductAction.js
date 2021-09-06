@@ -4,13 +4,15 @@ import * as Types from "../Type/Types";
 export const getFilteredProducts = (filterParamObj, source = {token: ""}) => async (dispatch) => {
   const filterParamObjClone = {
     ...filterParamObj,
-    category: filterParamObj.category.join(","),
+    category: filterParamObj.category.length > 1 ? filterParamObj.category.slice(1).join(",") : filterParamObj.category.join(","),
     brand: filterParamObj.brand.join(","),
   };
 
   const filterParam = Object.keys(filterParamObjClone)
     .filter((item) => filterParamObjClone[item])
-    .map((item) => `${item}=${filterParamObjClone[item]}`)
+    .map((item) =>{
+      return `${item}=${filterParamObjClone[item]}`
+    })
     .join("&");
 
   const responseData = {

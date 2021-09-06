@@ -146,10 +146,7 @@ const ProductFilter = ({show}) => {
           dispatch(getCategoryOrBrandDetails('brands/' + +queries[query]));
         }
         if(query === 'category') {
-          const cloneFilterParams = {...filterParams};
           cloneFilterParams[query].push(+queries[query]);
-
-          dispatch(getFilteredProducts(cloneFilterParams));
 
           dispatch(getSubCategories(queries[query]))
 

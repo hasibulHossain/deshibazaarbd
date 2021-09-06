@@ -2,7 +2,6 @@ import * as Types from "../Type/Types";
 
 const initialState = {
   products: [],
-  parentCategory: null,
   categories: [],
   brands: [],
   categoryBrandDetails: {
@@ -111,6 +110,7 @@ function CategoryWiseProductReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         products: [],
+        categories: [],
         filterParams: {
           ...state.filterParams,
           type: "",

@@ -127,6 +127,7 @@ const CategoryWishProductContainer = () => {
                     {
                       [1, 2, 3].map((_, i) => {
                         if(paginate.last_page == paginate.current_page + i ) return;
+
                         if(!((paginate.current_page + 1) >= paginate.last_page) && paginate.last_page) {
                           return (
                             <li
@@ -156,12 +157,13 @@ const CategoryWishProductContainer = () => {
                         </li>
                       )
                     }
-
+                 
                     <li
                       onClick={() => paginateHandler("next", `${Base_Url}get-items?page=${paginate.last_page}`)}
                       className={`page-item product-page-item ${paginate.current_page === paginate.last_page ? 'active' : ''}`} >
                       <a className="page-link">{paginate.last_page}</a>
                     </li>
+
                     {
                       paginate.last_page !== paginate.current_page && (
                         <li
