@@ -27,7 +27,6 @@ const ProductDetailInfo = (props) => {
   const dispatch = useDispatch();
   const { product } = props;
   const [quantity, setQuantity] = useState(1);
-  const userData = useSelector((state) => state.UserDataReducer.userData);
   const { carts } = useSelector((state) => state.CartReducer);
   const [filterCarts, setFilterCarts] = useState(null);
   const [updatedID, setUpdatedID] = useState(null);
@@ -63,14 +62,20 @@ const ProductDetailInfo = (props) => {
   useEffect(() => {
     if (product) {
       const newFilterCarts = carts.find((item) => item.productID == product.id);
-      setFilterCarts(newFilterCarts);
+
       if (typeof newFilterCarts !== "undefined" && newFilterCarts !== null) {
         setQuantity(newFilterCarts.quantity);
         setUpdatedID(newFilterCarts.productID);
         setSubTotal(newFilterCarts.quantity * default_price);
+      } else {
+        // @todo - Manage this counting using MRP while completed in API end
+        setQuantity(1);
+        setSubTotal(1 * default_price);
       }
+
+      setFilterCarts(newFilterCarts);
     }
-  }, [product, carts]);
+  }, [product]);
 
   useEffect(() => {
     const featured_image = `${process.env.NEXT_PUBLIC_URL}images/products/${product.featured_image}`;
@@ -148,7 +153,7 @@ const ProductDetailInfo = (props) => {
 
             {typeof product.sub_category2 !== "undefined" &&
               product.sub_category2 !== null && (
-                <Link href={`/product?category=${product.sub_category2.id}`}>
+                <Link href={`/products?category=${product.sub_category2.id}`}>
                   <Breadcrumb.Item
                     href={`/products?category=${product.sub_category2.id}`}
                   >

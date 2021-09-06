@@ -47,7 +47,7 @@ const DealFlash = () => {
               const currentTime      = new Date().getTime();
               const offerEndCount    = (offerEndDate - currentTime) / 1000
               const isOfferAvailable = offerEndCount > 1;
-              const imageURL         = `${process.env.NEXT_PUBLIC_URL}images/products/${item.featured_image}`;
+              const imageURL         = `${process.env.NEXT_PUBLIC_URL}images/products/${item.image}`;
 
               let padding = "";
               if( index === 0) {
