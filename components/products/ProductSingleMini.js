@@ -2,19 +2,17 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShoppingBag, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import { faShoppingBag } from "@fortawesome/free-solid-svg-icons";
 
 import PriceCalculation from "./partials/PriceCalculation";
-import ProductRating from "./partials/ProductRating";
 import { useDispatch } from "react-redux";
 import { toggleProductModalAction } from "./_redux/Action/ProductAction";
 import { addToCartAction } from "../carts/_redux/action/CartAction";
 import { showToast } from "../master/Helper/ToastHelper";
-import AddWishList from "../Wishlist/AddWishList";
 import Translate from "../translation/Translate";
 import { useSelector } from "react-redux";
-import SimpleBtn from "../master/SimpleBtn/SimpleBtn";
 import router from 'next/router'
+import Image from 'next/image';
 
 /**
  * ProductSingleMini Component
@@ -107,7 +105,8 @@ const ProductSingleMini = ({
           {columnClassName === "col-md-2" && (
             <>
               <div onClick={() => redirectToProductDetailsPage(item)} style={{overflow: 'hidden'}}>
-              <img src={imageURL} className="img-fluid" />
+              {/* <img src={imageURL} className="img-fluid" /> */}
+              <Image src={imageURL} alt={imageURL} width={200} height={200} />
               <div className="product-card-body-inner">
                 <p className="product-title">
                   <Translate>{item.name}</Translate>
