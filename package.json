@@ -1,6 +1,6 @@
 {
     "name": "deshibazaarbd",
-    "version": "0.4.2",
+    "version": "0.4.3",
     "private": true,
     "homepage": "https://deshi.programmingshikhi.com",
     "scripts": {
@@ -36,7 +36,7 @@
         "jquery": "^3.6.0",
         "jwt-decode": "^2.2.0",
         "moment": "^2.29.1",
-        "next": "^9.5.4",
+        "next": "^10.0.9",
         "next-images": "^1.7.0",
         "next-redux-wrapper": "^6.0.2",
         "popper.js": "^1.16.1",

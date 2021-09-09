@@ -20,11 +20,9 @@ import Axios from 'axios'
 const ProductFilter = ({show}) => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const { filterParams } = useSelector(
+  const { filterParams, categories, brands } = useSelector(
     (state) => state.CategoryWiseProductReducer
   );
-  const { ShopList } = useSelector((state) => state.ShopReducer);
-  const { categories } = useSelector((state) => state.CategoryWiseProductReducer);
   const {isMobile} = useSelector(state => state.GlobalReducer);
 
   const [value, setValue] = useState({ min: 100, max: 90000 });
@@ -241,21 +239,24 @@ const ProductFilter = ({show}) => {
       }
 
       {/**filter by categories */}
-      {/* <div className="filter_by_category" style={{marginTop: '40px'}}>
-        <p className="filter_title">Brand</p>
-        {ShopList.map((item) => (
-          <Form.Group key={item.id} controlId={item.id}>
-            <Form.Check
-              type="checkbox"
-              label={item.name}
-              className={
-                isChecked == true ? "active_category" : "isNot_active_category"
-              }
-              onChange={(e) => brandCheckboxHandler(e, item.id)}
-            />
-          </Form.Group>
-        ))}
-      </div> */}
+      {
+        brands.length > 0 &&
+        <div className="filter_by_category" style={{marginTop: '40px'}}>
+          <p className="filter_title">Brand</p>
+          {brands.map((item) => (
+            <Form.Group key={item.id} controlId={item.id}>
+              <Form.Check
+                type="checkbox"
+                label={item.name}
+                className={
+                  isChecked == true ? "active_category" : "isNot_active_category"
+                }
+                onChange={(e) => brandCheckboxHandler(e, item.id)}
+              />
+            </Form.Group>
+          ))}
+        </div>
+      }
 
     </section>
   );

@@ -111,6 +111,7 @@ function CategoryWiseProductReducer(state = initialState, { type, payload }) {
         ...state,
         products: [],
         categories: [],
+        brands: [],
         filterParams: {
           ...state.filterParams,
           type: "",
@@ -139,6 +140,12 @@ function CategoryWiseProductReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         categories: payload
+      }
+
+    case Types.GET_CATEGORY_RELATED_BRANDS:
+      return {
+        ...state,
+        brands: payload
       }
 
     default:

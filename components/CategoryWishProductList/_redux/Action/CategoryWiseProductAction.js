@@ -23,7 +23,6 @@ export const getFilteredProducts = (filterParamObj, source = {token: ""}) => asy
   try {
     dispatch({ type: Types.INIT_FILTER_PRODUCT_LIST });
     const res = await Axios.get(`get-items?${filterParam}`, {cancelToken: source.token});
-    console.log('res =-> ', res)
     responseData.isLoading = false;
     responseData.data = res.data.data;
     dispatch({ type: Types.GET_FILTER_PRODUCT_LIST, payload: responseData });
@@ -91,6 +90,8 @@ export const resetFilterParams = () => ({
 });
 
 export const getSubCategories = (parentId) => async dispatch => {
+  dispatch(getCategoryRelatedBrands(parentId));
+
   const url = 'categories/' + parentId
   try {
     const res = await Axios.get(url);
@@ -99,3 +100,14 @@ export const getSubCategories = (parentId) => async dispatch => {
     console.log('err => ', err)
   }
 };
+
+export const getCategoryRelatedBrands = (categoryId) => async dispatch => {
+  const url = `categories/${categoryId}?with_brands=1`;
+
+  try {
+    const res = await Axios.get(url)
+    dispatch({type: Types.GET_CATEGORY_RELATED_BRANDS, payload: res.data && res.data.data && res.data.data.brands});
+  } catch (error) {
+    console.log('err => ', error)
+  }
+} 
