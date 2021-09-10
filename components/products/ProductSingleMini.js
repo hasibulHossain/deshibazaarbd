@@ -10,7 +10,6 @@ import { toggleProductModalAction } from "./_redux/Action/ProductAction";
 import { addToCartAction } from "../carts/_redux/action/CartAction";
 import { showToast } from "../master/Helper/ToastHelper";
 import Translate from "../translation/Translate";
-import { useSelector } from "react-redux";
 import router from 'next/router'
 import Image from 'next/image';
 
@@ -31,8 +30,8 @@ const ProductSingleMini = ({
   productKey = 0,
   length = 0,
   cardClassName = "product-card",
+  isSliding
 }) => {
-  const { isMobile } = useSelector((state) => state.GlobalReducer);
   const dispatch = useDispatch();
   const cardClass = productKey !== length ? "" : "border-right-0";
 
@@ -50,9 +49,9 @@ const ProductSingleMini = ({
 
   const imageURL = `${process.env.NEXT_PUBLIC_URL}images/products/${item.featured_image}`;
 
-  const modalHandler = () => {
-    dispatch(toggleProductModalAction(item.sku));
-  };
+  // const modalHandler = () => {
+  //   dispatch(toggleProductModalAction(item.sku));
+  // };
 
   const redirectToProductDetailsPage = (product) => {
     router
@@ -62,7 +61,7 @@ const ProductSingleMini = ({
       });
   };
 
-  return (
+  let singleProduct = (
     <div
       className={`
                 ${
@@ -84,28 +83,11 @@ const ProductSingleMini = ({
             : "filter_column_10"
         } `}
       >
-        {/* <div className="product-purchase-section">
-          <button>
-            <FontAwesomeIcon
-              className="add_to_cart"
-              icon={faShoppingBag}
-              onClick={() => addToCart(item)}
-            />
-          </button>
-          <button>
-            <AddWishList product={item} /> */}
-            {/* <FontAwesomeIcon className="withlist" icon={faHeart} /> */}
-          {/* </button> */}
-          {/* <button>
-                        <FontAwesomeIcon className="details" icon={faListAlt} />
-                    </button> */}
-        {/* </div> */}
 
         <div className={`product-card-body`} >
           {columnClassName === "col-md-2" && (
             <>
               <div onClick={() => redirectToProductDetailsPage(item)} style={{overflow: 'hidden'}}>
-              {/* <img src={imageURL} className="img-fluid" /> */}
               <Image src={imageURL} alt={imageURL} width={200} height={200} />
               <div className="product-card-body-inner">
                 <p className="product-title">
@@ -217,7 +199,58 @@ const ProductSingleMini = ({
         </div>
       </div>
     </div>
-  );
+  )
+
+  if(isSliding) {
+    singleProduct = (
+      <div className="product-card filter_column_3">
+      <div className="product-card-body">
+        <div onClick={() => redirectToProductDetailsPage(item)} style={{overflow: 'hidden'}}>
+        <Image src={imageURL} alt={imageURL} width={200} height={200} />
+        <div className="product-card-body-inner">
+          <p className="product-title">
+            <Translate>{item.name}</Translate>
+          </p>
+          <p
+            className={`stock-status ${
+              parseInt(item.current_stock) > 0
+                ? "stock-status-in"
+                : "stock-status-out"
+            }`}
+          >
+            <span>
+              {parseInt(item.current_stock) > 0
+                ? "In stock"
+                : "Out of stock"}
+            </span>
+          </p>
+          <PriceCalculation item={item} />
+          <div
+            className={
+              columnClassName === "col-md-3" || "col-md-2"
+                ? ""
+                : "d-flex justify-content-start"
+            }
+          >
+          </div>
+        </div>
+        </div>
+        <div className="product-single-mini-cart">
+          <button type='button' onClick={() => addToCart(item)} className='simple-btn homepage-product-btn'>
+            <div className="simple-btn__inner">
+              <div className="simple-btn__icon">
+                <FontAwesomeIcon icon={faShoppingBag} />
+              </div>
+              <span className="simple-btn__txt">Add to cart</span>
+            </div>
+          </button>
+        </div>
+      </div>
+      </div>
+    )
+  }
+
+  return singleProduct;
 };
 
 ProductSingleMini.propTypes = {

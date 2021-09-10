@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ViewAll from "../ViewAll/ViewAll";
 import ProductMainList from "../products/ProductMainList";
 
-const ProductSection = ({ title, description = null, url = '', type = '', limit = 6, page = 'home'}) => {
+const ProductSection = ({ title, description = null, url = '', type = '', limit = 6, page = 'home', isSliding = false}) => {
   return (
     <section className="container product-container">
       <div className="product-heading">
@@ -16,7 +16,7 @@ const ProductSection = ({ title, description = null, url = '', type = '', limit 
         <ViewAll type={type} />
       </div>
 
-      <ProductMainList type={type} limit={limit} page={page} />
+      <ProductMainList type={type} limit={limit} page={page} isSliding={isSliding} />
     </section>
   );
 };
@@ -27,7 +27,8 @@ ProductSection.propTypes = {
     url        : PropTypes.string,
     type       : PropTypes.string,
     limit      : PropTypes.number,
-    page       : PropTypes.string
+    page       : PropTypes.string,
+    isSliding  : PropTypes.bool
 }
 
 export default ProductSection;
