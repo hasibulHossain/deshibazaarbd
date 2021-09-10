@@ -32,7 +32,7 @@ const ProductDetailInfo = (props) => {
   const [updatedID, setUpdatedID] = useState(null);
   const [previewImg, setPreviewImg] = useState("");
 
-  const zoomImage = { width: 250, zoomWidth: 600, img: previewImg };
+  const zoomImage = { width: 250, height: 250, zoomWidth: 600, img: previewImg };
 
   const default_price =
     product.is_offer_enable && product.offer_selling_price !== 0

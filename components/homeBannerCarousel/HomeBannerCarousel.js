@@ -3,6 +3,7 @@ import { Carousel } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingSkelleton from "../master/skelleton/LoadingSkelleton";
 import { getHomeCarouselData } from "./_redux/homeBannerCarouselAction/HomeBannerCarouselAction";
+import Image from 'next/image';
 
 const HomeBannerCarousel = () => {
 
@@ -52,11 +53,12 @@ const HomeBannerCarousel = () => {
                   alt       = {item.title}
                 />
             } */}
-              <img
+              {/* <img
                 className="d-block w-100"
                 src={item.image_url}
                 alt={item.title}
-              />
+              /> */}
+              <Image src={item.image_url} alt={item.title} width={1920} height={450} />
             </Carousel.Item>
           ))}
       </Carousel>

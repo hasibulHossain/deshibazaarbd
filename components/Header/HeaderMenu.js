@@ -261,4 +261,4 @@ const HeaderMenu = ({ navigationToggleHandler, showToolbar }) => {
   );
 };
 
-export default HeaderMenu;
+export default React.memo(HeaderMenu);
