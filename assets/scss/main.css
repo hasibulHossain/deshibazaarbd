@@ -3031,14 +3031,14 @@ img.multiple_preview_images {
   margin-top: -5px;
 }
 
-.slick-list {
+/* .slick-list {
   position: relative;
   display: block;
   overflow: hidden;
   margin: 0;
   padding: 0;
   margin-left: 10px;
-}
+} */
 
 .js-image-zoom__zoomed-image {
   border-radius: 6px !important;
@@ -3619,4 +3619,15 @@ p.customer_info_edit {
   width: 100%;
   height: 100%;
   object-fit: contain;
+}
+
+
+.slick-test-parent {
+  padding: 1rem;
+}
+
+.slick-test {
+  width: 100%;
+  height: 400px;
+  background-color: #990000;
 }

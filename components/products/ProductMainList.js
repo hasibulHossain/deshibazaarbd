@@ -6,9 +6,40 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { getProductListAction, getProductsData } from "./_redux/Action/ProductAction";
 import ProductSingleMini from "./ProductSingleMini";
+import Slider from "react-slick";
 
 const ProductMainList = (props) => {
-    const { type, limit, page, category = "" } = props;
+    const slickSettings = {
+        dots: false,
+        autoplay: true,
+        infinite: true,
+        // speed: 500,
+        autoPlaySpeed: 2000,
+        slidesToShow: 6,
+        slidesToScroll: 1,
+        responsive: [
+            {
+              breakpoint: 1024,
+              settings: {
+                slidesToShow: 4,
+                slidesToScroll: 2,
+                infinite: true,
+                dots: false
+              }
+            },
+            {
+              breakpoint: 600,
+              settings: {
+                slidesToShow: 3,
+                slidesToScroll: 2,
+                infinite: true,
+                dots: false
+              }
+            }
+          ]
+    };
+
+    const { type, limit, page, category = "", isSliding } = props;
 
     const dispatch                = useDispatch();
     const [loading, setLoading]   = useState(false);
@@ -49,10 +80,28 @@ const ProductMainList = (props) => {
     }, []);
 
 
-    const { products: allProducts, isProductListloading } = useSelector(state => state.ProductReducer);
+    const { isProductListloading } = useSelector(state => state.ProductReducer);
 
     useEffect(() => {
     }, [isProductListloading])
+
+    let productList = (
+        <div className="row no-gutters">
+            {products.length > 0 && products.map((item, index) => (
+                <ProductSingleMini item={item} key={index} productKey={index+1} length={products.length} isSliding={isSliding} />
+            ))}
+        </div>
+    )
+
+    if(isSliding) {
+        productList = (
+            <Slider {...slickSettings}>
+                {products.length > 0 && products.map((item, index) => (
+                    <ProductSingleMini item={item} key={index} productKey={index+1} length={products.length} isSliding={isSliding} /> 
+                ))}
+            </Slider>
+        )
+    }
 
     return (
         <div className="productList-body">
@@ -65,11 +114,9 @@ const ProductMainList = (props) => {
                 />
             )}
 
-                <div className="row no-gutters">
-                        {products.length > 0 && products.map((item, index) => (
-                            <ProductSingleMini item={item} key={index} productKey={index+1} length={products.length} />
-                        ))}
-                </div>
+            {
+                productList
+            }
         </div>
     );
 };
@@ -83,10 +130,11 @@ ProductMainList.defaultProps = {
 
 // All props
 ProductMainList.propTypes = {
-    type : PropTypes.string,
-    limit: PropTypes.number,
-    page : PropTypes.string,
-    category: PropTypes.string
+    type        : PropTypes.string,
+    limit       : PropTypes.number,
+    page        : PropTypes.string,
+    category    : PropTypes.string,
+    isSliding   : PropTypes.bool
 };
 
 export default memo( ProductMainList );
