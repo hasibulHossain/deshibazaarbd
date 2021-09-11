@@ -1,6 +1,9 @@
 import React from 'react';
 import MainLayout from '../components/layouts/MainLayout';
-import BrandListFullContainer from '../components/Shop/BrandListFullContainer';
+// import BrandListFullContainer from '../components/Shop/BrandListFullContainer';
+
+import dynamic from 'next/dynamic';
+const BrandListFullContainer = dynamic(() => import('../components/Shop/BrandListFullContainer'));
 
 function Brands() {
     return (

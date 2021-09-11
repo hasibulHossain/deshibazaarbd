@@ -27,7 +27,7 @@ export default function Home() {
       <CategoryListContainer url='categories' />
       <DealFlash />
 
-      <ProductSection title={translate('Daily Essential')} type="daily-essentials" limit={isMobile ? 6 : 7} url='daily-essentials' isSliding={isMobile ? false : true} />
+      <ProductSection title={translate('Daily Essential')} type="daily-essentials" limit={isMobile ? 6 : 10} url='daily-essentials' isSliding={isMobile ? false : true} />
       <ProductSection title={translate('Fastest Delivery')} type="fastest" limit={6} url='fastest' />
       <ProductSection title={translate('Latest Products')} type="latest" limit={6} url='latest' />
       <ProductSection title={translate('Featured Products For You')} type="featured" limit={6} url='featured' />

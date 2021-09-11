@@ -12,7 +12,7 @@ import SimpleBtn from "../components/master/SimpleBtn/SimpleBtn";
 import Modal from "../components/master/Modal/Modal";
 import RemoveCartItem from "../components/RemoveCartItem/RemoveCartItem";
 import OrderSummery from "../components/orders/OrderSummery";
-import CartProduct from "../components/carts/cart-product/CartProduct";
+// import CartProduct from "../components/carts/cart-product/CartProduct";
 
 import { toggleModal } from "../_redux/store/action/globalAction";
 import {
@@ -20,6 +20,9 @@ import {
   toggleAllCartSelection,
 } from "../components/carts/_redux/action/CartAction";
 import { getUserDataAction } from "../components/_redux/getUserData/Action/UserDataAction";
+
+import dynamic from 'next/dynamic';
+const CartProduct = dynamic(() => import('../components/carts/cart-product/CartProduct'));
 
 export default function Carts() {
   const router = useRouter();
