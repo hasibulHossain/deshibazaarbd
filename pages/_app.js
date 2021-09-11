@@ -40,6 +40,11 @@ require("../services/axios");
 // Base url
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL;
 
+
+// export function reportWebVitals(metric) {
+//   console.log(metric)
+// }
+
 class MyApp extends App {
   render() {
     const { Component, pageProps } = this.props;

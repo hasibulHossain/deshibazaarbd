@@ -53,12 +53,12 @@ const HomeBannerCarousel = () => {
                   alt       = {item.title}
                 />
             } */}
-              {/* <img
+              <img
                 className="d-block w-100"
                 src={item.image_url}
                 alt={item.title}
-              /> */}
-              <Image src={item.image_url} alt={item.title} width={1920} height={450} />
+              />
+              {/* <Image src={item.image_url} alt={item.title} width={1920} height={450} /> */}
             </Carousel.Item>
           ))}
       </Carousel>

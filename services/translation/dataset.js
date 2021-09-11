@@ -172,7 +172,7 @@ export default [
     },
     {
         'key': 'shop by stores',
-        'en' : 'shop by stores',
+        'en' : 'Shop by Stores',
         'bn' : 'দোকান অনুযায়ী দেখুন'
     },
     {
@@ -231,37 +231,37 @@ export default [
     },
     {
         'key': 'books gallery',
-        'en' : 'books gallery',
+        'en' : 'Books Gallery',
         'bn' : 'বই গ্যালারি'
     },
     {
         'key': 'automotive & motorbike',
-        'en' : 'automotive & motorbike',
+        'en' : 'Automotive & Motorbike',
         'bn' : 'স্বয়ংচালিত এবং মোটরবাইক'
     },
     {
         'key': 'motor vehicles',
-        'en' : 'motor vehicles',
+        'en' : 'Motor Vehicles',
         'bn' : 'মোটর যানবাহন'
     },
     {
         'key': 'mother & baby',
-        'en' : 'mother & baby',
+        'en' : 'Mother & Baby',
         'bn' : 'মা ও বাচ্চাদের জিনিসপত্র'
     },
     {
         'key': 'health & beauty',
-        'en' : 'health & beauty',
+        'en' : 'Health & Beauty',
         'bn' : 'স্বাস্থ্য এবং সৌন্দর্য'
     },
     {
         'key': 'sports and fitness',
-        'en' : 'sports and fitness',
+        'en' : 'Sports and Fitness',
         'bn' : 'খেলাধুলা এবং ফিটনেস'
     },
     {
         'key': 'kids fashion',
-        'en' : 'kids fashion',
+        'en' : 'kids Fashion',
         'bn' : 'বাচ্চাদের ফ্যাশন'
     },
 
@@ -293,82 +293,82 @@ export default [
     },
     {
         'key': 'home&cleaning',
-        'en' : 'home&cleaning',
+        'en' : 'Home & Cleaning',
         'bn' : 'বাসা এবং পরিষ্কারের জিনিসপত্র'
     },
     {
         'key': 'fruits & vegetables',
-        'en' : 'fruits & vegetables',
+        'en' : 'Fruits & Vegetables',
         'bn' : 'ফল এবং শাকসবজি'
     },
     {
         'key': 'beverages',
-        'en' : 'beverages',
+        'en' : 'Beverages',
         'bn' : 'পানীয়'
     },
     {
         'key': 'snacks & instant foods',
-        'en' : 'snacks & instant foods',
+        'en' : 'Snacks & Instant Foods',
         'bn' : 'জলখাবার এবং তাত্ক্ষণিক খাদ্য'
     },
     {
         'key': 'bread & bakery',
-        'en' : 'bread & bakery',
+        'en' : 'Bread & Bakery',
         'bn' : 'রুটি এবং বেকারি'
     },
     {
         'key': 'baking needs',
-        'en' : 'baking needs',
+        'en' : 'Baking Needs',
         'bn' : 'বেকিং জিনিসপত্র'
     },
     {
         'key': 'cooking items',
-        'en' : 'cooking items',
+        'en' : 'Cooking Items',
         'bn' : 'কুকিং আইটেমস'
     },
     {
         'key': 'fish & meat',
-        'en' : 'fish & meat',
+        'en' : 'Fish & Meat',
         'bn' : 'মাছ এবং মাংস'
     },
     {
         'key': 'milk & dairy',
-        'en' : 'milk & dairy',
+        'en' : 'Milk & Dairy',
         'bn' : 'দুধ ও দুগ্ধ জাতীয় খাবার'
     },
     {
         'key': 'fresh vegetables',
-        'en' : 'fresh vegetables',
+        'en' : 'Fresh Vegetables',
         'bn' : 'তাজা সবজি'
     },
     {
         'key': 'fresh fruits',
-        'en' : 'fresh fruits',
+        'en' : 'Fresh Fruits',
         'bn' : 'তাজা ফল'
     },
     {
         'key': 'tea',
-        'en' : 'tea',
+        'en' : 'Tea',
         'bn' : 'চা'
     },
     {
         'key': 'coffee',
-        'en' : 'coffee',
+        'en' : 'Coffee',
         'bn' : 'কফি'
     },
     {
         'key': 'juice',
-        'en' : 'juice',
+        'en' : 'Juice',
         'bn' : 'জুস'
     },
     {
         'key': 'soft drinks',
-        'en' : 'soft drinks',
+        'en' : 'Soft Drinks',
         'bn' : 'কোমল পানীয়'
     },
     {
         'key': 'water',
-        'en' : 'water',
+        'en' : 'Water',
         'bn' : 'পানি'
     },
 
