@@ -1,10 +1,12 @@
 import React from "react";
 import MainLayout from "../../components/layouts/MainLayout";
-import ProfileSideBar from "../../components/myprofile/ProfileSideBar";
-import OrderDetails from "../../components/orders/OrderDetails";
-import router from "next/router"
-import { useDispatch } from "react-redux";
-import axios from "axios";
+// import ProfileSideBar from "../../components/myprofile/ProfileSideBar";
+// import OrderDetails from "../../components/orders/OrderDetails";
+
+import dynamic from 'next/dynamic';
+const ProfileSideBar = dynamic(() => import('../../components/myprofile/ProfileSideBar'));
+const OrderDetails = dynamic(() => import('../../components/orders/OrderDetails'));
+
 export default function ManageOrder({ order }) {
 
     return (
