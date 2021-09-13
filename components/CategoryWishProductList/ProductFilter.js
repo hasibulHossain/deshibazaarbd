@@ -92,7 +92,7 @@ const ProductFilter = ({show}) => {
   }
 
   const debounceReturn = useCallback(
-    debounce((newValue) => {
+    debounce((newValue, filterParams) => {
       const filterParamClone = { ...filterParams };
       filterParamClone.min_price = newValue.min;
       filterParamClone.max_price = newValue.max;
@@ -102,7 +102,7 @@ const ProductFilter = ({show}) => {
   );
 
   const priceRangeHandler = (newValue) => {
-    debounceReturn(newValue);
+    debounceReturn(newValue, filterParams);
     setValue(newValue);
   };
 
@@ -126,8 +126,6 @@ const ProductFilter = ({show}) => {
 
     dispatch(setFilterParams(filterParamClone));
   }
-
-  // console.log('router => ', router)
 
   const {brand: brandQuery = "", category: categoryQuery = "", type: typeQuery = "", storeById = ""} = router.query;
 
