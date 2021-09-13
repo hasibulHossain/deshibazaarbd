@@ -38,7 +38,6 @@ const DealFlash = () => {
         </h5>
         <ViewAll type="deals-of-day" />
       </div>
-
       <div className="flash-deal-section">
         <div className="row flash-deal-row no-gutters">
           {flashDealList.length > 0 &&

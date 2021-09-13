@@ -13,6 +13,7 @@ import ProductSection from "../components/products/ProductSection";
 import { translate } from "../services/translation/translation";
 import StoreContainer from "../components/store/StoreContainer";
 import { useSelector } from "react-redux";
+import LazyLoad from "react-lazyload";
 
 export default function Home() {
   const {isMobile} = useSelector(state => state.GlobalReducer);
@@ -25,7 +26,9 @@ export default function Home() {
       {/* <OfferProducts /> */}
       {/* <ProductTopListContainer /> */}
       <CategoryListContainer url='categories' />
-      <DealFlash />
+      <LazyLoad height={280} once>
+        <DealFlash />
+      </LazyLoad>
 
       <ProductSection title={translate('Daily Essential')} type="daily-essentials" limit={isMobile ? 6 : 10} url='daily-essentials' isSliding={isMobile ? false : true} />
       <ProductSection title={translate('Fastest Delivery')} type="fastest" limit={6} url='fastest' />
@@ -34,9 +37,16 @@ export default function Home() {
       <ProductSection title={translate('Best Sold')} type="best-sold" limit={6} url='best-sold' />
 
       {/* <ShopBanner /> */}
-      <ShopContainer />
-      <StoreContainer />
-      <CompanyPolicyContainer />
+      <LazyLoad height={400} once>
+        <ShopContainer />
+      </LazyLoad>
+
+      <LazyLoad height={400} once>
+        <StoreContainer />
+      </LazyLoad>
+      <LazyLoad height={280} once>
+        <CompanyPolicyContainer />
+      </LazyLoad>
     </MainLayout>
   );
 }

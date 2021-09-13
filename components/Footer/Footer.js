@@ -28,42 +28,58 @@ const Footer = () => {
                     <Row>
                         <Col md={3} xs={6}>
                             <div className="footer-info">
-                                <h5>Information</h5>
+                                <h5>Customer Care</h5>
                                 <Link href="/p/shipping-method">
-                                    <a>Shipping Methods</a>
+                                    <a>Help Center</a>
+                                </Link>
+                                <Link href="/p/shipping-method">
+                                    <a>How To Buy</a>
+                                </Link>
+                                <Link href="/p/shipping-method">
+                                    <a>Return &amp; Refund Policy </a>
+                                </Link>
+                                <Link href="/p/shipping-method">
+                                    <a>Payment &amp; Shipping Methods</a>
                                 </Link>
 
                                 <Link href="/p/privacy-policy">
                                     <a>Privacy Policy</a>
                                 </Link>
-                                <Link href="/p/terms-&-condition">
-                                    <a>Terms & Condition</a>
+
+                                <Link href="/p/privacy-policy">
+                                    <a>Site Map</a>
                                 </Link>
                                 <Link href="/p/faq">
                                     <a>FAQ</a>
-                                </Link>
-                                <Link href="/p/how-it's-works">
-                                    <a>How It's Work</a>
                                 </Link>
                             </div>
                         </Col>
                         <Col md={3} xs={6}>
                             <div className="footer-info">
-                                <h5>customer care</h5>
+                                <h5>Information</h5>
                                 <Link href="/p/about-us">
                                     <a>About us</a>
+                                </Link>
+                                <Link href="/p/about-us">
+                                    <a>Career</a>
+                                </Link>
+                                <Link href="/p/affiliate">
+                                    <a>Affiliate</a>
+                                </Link>
+                                <Link href="/p/about-us">
+                                    <a>Whole Sale</a>
                                 </Link>
                                 <Link href="/p/contact">
                                     <a>Contact</a>
                                 </Link>
-                                <Link href="/p/shop">
-                                    <a>Shop</a>
+                                <Link href="/p/product-support">
+                                    <a>Terms &amp; Condition</a>
+                                </Link>
+                                <Link href="/p/product-support">
+                                    <a>Privacy Policy</a>
                                 </Link>
                                 <Link href="/p/blog">
                                     <a>Blog</a>
-                                </Link>
-                                <Link href="/p/product-support">
-                                    <a>Product Support</a>
                                 </Link>
                             </div>
                         </Col>
@@ -77,12 +93,6 @@ const Footer = () => {
                                 <p className="pointer" onClick={() => handleShow()}>
                                     Order Tracking
                                 </p>
-                                <Link href="/wishlist">
-                                    <a>Wishlist</a>
-                                </Link>
-                                <Link href="/p/affiliate">
-                                    <a>Affiliate</a>
-                                </Link>
                             </div>
                         </Col>
                         <Col md={4} sm={6}>
