@@ -7,7 +7,7 @@ import FloatingCart from "../carts/floating-cart/FloatingCart";
 
 import PageMeta from './PageMeta';
 import FloatingCartButton from "../carts/floating-cart/FloatingCartButton";
-import MessengerCustomerChat from 'react-messenger-customer-chat';
+// import MessengerCustomerChat from 'react-messenger-customer-chat';
 import { checkIsMobileDevice, toggleBackdrop } from "../../_redux/store/action/globalAction";
 
 const MainLayout = (props) => {

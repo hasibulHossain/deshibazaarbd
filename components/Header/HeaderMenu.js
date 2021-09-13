@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from "react";
 
 import { useRouter } from "next/router";
-import "@szhsin/react-menu/dist/index.css";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getMenuListData } from "./_redux/HeaderAction/HeaderAction";
