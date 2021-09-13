@@ -53,6 +53,29 @@ const CategoryWishProductList = ({showFilter, showFilterHandler}) => {
     }
     dispatch(setFilterParams(filterParamClone));
   }
+  const perPageHandler = (e) => {
+    let filterParamClone = { ...filterParams };
+
+    switch (e.target.value) {
+      case "20":
+        filterParamClone.paginate_no = 20
+        break;
+
+      case "40":
+        filterParamClone.paginate_no = 40
+        break;
+
+      case "60":
+        filterParamClone.paginate_no = 60
+        break;
+
+      case "100":
+        filterParamClone.paginate_no = 100
+        break;
+    }
+
+    dispatch(setFilterParams(filterParamClone));
+  }
 
   const rowClasses = classNames({
     'row': true,
@@ -115,7 +138,7 @@ const CategoryWishProductList = ({showFilter, showFilterHandler}) => {
         </div>
         <div className="col-lg-6 col-sm-12">
           <div className="d-flex justify-content-start justify-content-sm-end">
-            <div className="filter_view">
+            {/* <div className="filter_view">
               {
                 !isMobile && (
                   <span>View</span>
@@ -130,7 +153,7 @@ const CategoryWishProductList = ({showFilter, showFilterHandler}) => {
                 }
                 icon={faColumns}
                 onClick={() => setColumns("col-md-3")}
-              />
+              /> */}
               {/* <FontAwesomeIcon
                 className={
                   columns == "col-md-12"
@@ -140,8 +163,8 @@ const CategoryWishProductList = ({showFilter, showFilterHandler}) => {
                 icon={faList}
                 onClick={() => setColumns("col-md-12")}
               /> */}
-            </div>
-            <div className="filter_view d-flex">
+            {/* </div> */}
+            <div className="filter_view d-flex mr-2 align-items-center">
               {
                 !isMobile && (
                   <span>Sort by</span>
@@ -155,6 +178,23 @@ const CategoryWishProductList = ({showFilter, showFilterHandler}) => {
                     <option value="price_high_low">Price High to Low</option>
                     <option value="rating_high">Rating</option>
                     <option value="stock_high">Stock</option>
+                  </Form.Control>
+                </Form.Group>
+              </Form>
+            </div>
+            <div className="filter_view d-flex align-items-center">
+              {
+                !isMobile && (
+                  <span>Per page</span>
+                )
+              }
+              <Form>
+                <Form.Group controlId="exampleFormSelectCustom">
+                  <Form.Control onChange={perPageHandler} as="select" custom>
+                    <option value="20">20</option>
+                    <option value="40">40</option>
+                    <option value="60">60</option>
+                    <option value="100">100</option>
                   </Form.Control>
                 </Form.Group>
               </Form>

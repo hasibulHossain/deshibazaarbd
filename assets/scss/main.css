@@ -1689,6 +1689,10 @@ ul.social-media {
   margin-left: -18px;
 }
 
+.filter_view .form-group {
+  margin: 0;
+}
+
 .filter_view span {
   font-weight: 700;
   font-size: 16px;
