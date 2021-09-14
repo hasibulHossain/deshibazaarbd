@@ -76,13 +76,13 @@ const SingleOrder = ({ item, isManageable = true }) => {
                                     </a>
                                 </Link>
 
-                                {
+                                {/* {
                                     isManageable && item.is_suspend == 0 && (
                                         <button className="btn btn-danger order-top-btn btn-sm ml-2" onClick={() => toggleShowHandler(item)}>
                                             <FontAwesomeIcon icon={faTimes} /> Cancel
                                         </button>
                                     )
-                                }
+                                } */}
                             </div>
                         </div>
                     </div>

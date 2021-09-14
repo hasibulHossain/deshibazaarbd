@@ -615,6 +615,10 @@ a .custom-button-component:hover {
   width: 95%;
 }
 
+.product-card .product-card-body .product-unit {
+  font-size: 14px;
+}
+
 .product-card .product-card-body img {
   height: 100px;
   object-fit: contain;
@@ -3301,8 +3305,9 @@ img.payment_method_in_shipping {
 
 .order_lifecycle_order_ID p {
   position: absolute;
-  top: 25%;
-  left: 20%;
+  top: 34%;
+  left: 6%;
+  font-size: 11px;
 }
 
 .btn_danger {
@@ -3445,6 +3450,37 @@ img.payment_method_in_shipping {
 }
 
 /*Product pagination css */
+
+.react-pagination {
+  display: flex;
+  padding-left: 0;
+  list-style: none;
+  border-radius: 0.25rem;
+  justify-content: center;
+  border: 1px solid #dee2e6;
+  margin: 0;
+  width: fit-content;
+}
+
+.react-pagination > li > a {
+  display: inline-block;
+  padding: 4px 8px;
+  color: var(--color-primary);
+}
+
+.react-pagination > li:not(:last-child) > a {
+  border-right: 1px solid #dee2e6;
+}
+
+.react-pagination .disabled > a {
+  cursor: not-allowed;
+}
+
+.react-pagination .active {
+  background-color: var(--color-primary);
+  color: #fff;
+}
+
 .product-page-item.active .page-link {
   z-index: 3;
   color: #fff;

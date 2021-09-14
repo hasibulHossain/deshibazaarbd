@@ -93,6 +93,7 @@ const ProductSingleMini = ({
                 <p className="product-title">
                   <Translate>{item.name}</Translate>
                 </p>
+                <span className="product-unit">{item.per_unit_value} {' '} {item.unit_name && item.unit_name}</span>
                 <p
                   className={`stock-status ${
                     parseInt(item.current_stock) > 0
@@ -154,6 +155,7 @@ const ProductSingleMini = ({
                   </div>
                   <div>
                     <p className="product-title">{item.name}</p>
+                    <span className="product-unit">1 {item.unit_name && item.unit_name}</span>
                     <p
                       className={`stock-status ${
                         parseInt(item.current_stock) > 0
@@ -168,19 +170,19 @@ const ProductSingleMini = ({
                       </span>
                     </p>
                     <PriceCalculation item={item} />
-                    <div
+                    {/* <div
                       className={
                         columnClassName === "col-md-3"
                           ? ""
                           : "d-flex justify-content-start"
                       }
-                    >
+                    > */}
                       {/* {
                                                 item.average_rating != 0 && (
                                                     <ProductRating rating={item.average_rating} />
                                                 )
                                             } */}
-                    </div>
+                    {/* </div> */}
                   </div>
                 </div>
               </div>

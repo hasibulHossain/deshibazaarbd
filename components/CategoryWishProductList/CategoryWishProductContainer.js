@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   setFilterParams,
 } from "./_redux/Action/CategoryWiseProductAction";
+import ReactPaginate from "react-paginate";
 
 const Base_Url = process.env.NEXT_PUBLIC_API_URL;
 
@@ -18,39 +19,16 @@ const CategoryWishProductContainer = () => {
     (state) => state.CategoryWiseProductReducer
   );
 
-  const classes = classNames({
-    "page-item product-page-item": true,
-    disabled: !paginate.prev_page_url,
-  });
-
-  const nextClasses = classNames({
-    "page-item product-page-item": true,
-    disabled: !paginate.next_page_url,
-  });
-
-  const paginateHandler = (direction, pageUrl) => {
-    if (!pageUrl) return;
+  const paginateHandler = (page) => {
+    if (!page) return;
 
     window.scrollTo({ top: 0, behavior: "smooth" });
-    const page = +pageUrl.split("page=")[1];
 
     const filterParamClone = { ...filterParams };
-    filterParamClone.page  = page;
+    filterParamClone.page  = page.selected + 1;
 
-    if (direction === "previous") {
-      dispatch(setFilterParams(filterParamClone));
-    } else if (direction === "linier") { 
-      dispatch(setFilterParams(filterParamClone));
-    } else if (direction === "next") {
-      dispatch(setFilterParams(filterParamClone));
-    }
+    dispatch(setFilterParams(filterParamClone));
   };
-
-  // useEffect(() => {
-  //   if (!paginate.first_page_url) {
-  //     dispatch(getFilteredProducts(filterParams));
-  //   }
-  // }, [paginate.next_page_url]);
 
   return (
     <section className="product-container">
@@ -87,97 +65,26 @@ const CategoryWishProductContainer = () => {
         <div className="col-md-9 mb-5 px-0" style={{fontSize: '14px'}}>
           <CategoryWishProductList showFilter={showFilter} showFilterHandler={() => setShowFilter(preState => !preState)} />
           {
-            !isLoading && paginate.total > 20  && (
+            paginate.total > paginate.per_page  && (
               <div className="w-100 px-0 px-sm-3 mt-3">
-                <nav className="d-flex justify-content-end" aria-label="navigation">
-                  <ul className="pagination">
-                    {
-                      paginate.current_page != 1 && (
-                        <li
-                          className={classes}
-                          onClick={() =>
-                            paginateHandler("previous", paginate.prev_page_url)
-                          } >
-                          <a className="page-link">{'<'}</a>
-                        </li>
-                      )
-                    }
-                    {
-                      paginate.current_page > 3 && (
-                        <>
-                        <li
-                          onClick={() =>
-                            paginateHandler(
-                              "linier",
-                              `${Base_Url}get-items?page=1`
-                            )
-                          }
-                          className={`page-item product-page-item`} >
-                          <a className="page-link">1</a>
-                        </li>
-                        <li
-                          onClick={() => paginateHandler("linier", `${Base_Url}get-items?page=${paginate.current_page - 3}`)}
-                          className={nextClasses} >
-                          <a className="page-link">...</a>
-                        </li>
-                        </>
-                      )
-                    }
-
-                    {
-                      [1, 2, 3].map((_, i) => {
-                        if(paginate.last_page == paginate.current_page + i ) return;
-
-                        if(!((paginate.current_page + 1) >= paginate.last_page) && paginate.last_page) {
-                          return (
-                            <li
-                              key={i}
-                              onClick={() =>
-                                paginateHandler(
-                                  "linier",
-                                  `${Base_Url}get-items?page=${i + paginate.current_page}`
-                                )
-                              }
-                              className={`page-item product-page-item ${paginate.current_page == i + paginate.current_page ? 'active' : ''}`} >
-                              <a className="page-link">{i + paginate.current_page}</a>
-                            </li>
-                          )
-                        } else {
-                          return null
-                        }
-                      })
-                    }
-
-                    {
-                      !((paginate.last_page -3) < paginate.current_page) && (
-                        <li
-                          onClick={() => paginateHandler("next", `${Base_Url}get-items?page=${paginate.current_page + 3}`)}
-                          className="page-item product-page-item" >
-                          <a className="page-link">...</a>
-                        </li>
-                      )
-                    }
-                 
-                    <li
-                      onClick={() => paginateHandler("next", `${Base_Url}get-items?page=${paginate.last_page}`)}
-                      className={`page-item product-page-item ${paginate.current_page === paginate.last_page ? 'active' : ''}`} >
-                      <a className="page-link">{paginate.last_page}</a>
-                    </li>
-
-                    {
-                      paginate.last_page !== paginate.current_page && (
-                        <li
-                          onClick={() => paginateHandler("next", paginate.next_page_url)}
-                          className={nextClasses} >
-                          <a className="page-link">{'>'}</a>
-                        </li>
-                      )
-                    }
-                  </ul>
-                </nav>
+                <div style={{display: 'flex', justifyContent: 'flex-end'}}>
+                  <ReactPaginate
+                    previousLabel={'<'}
+                    nextLabel={'>'}
+                    breakLabel={'...'}
+                    breakClassName={'break-me'}
+                    pageCount={paginate.pages.length -1}
+                    marginPagesDisplayed={2}
+                    pageRangeDisplayed={3}
+                    onPageChange={paginateHandler}
+                    containerClassName={'react-pagination'}
+                    activeClassName={'active'}
+                  />
+                </div>
               </div>
             )
           }
+
         </div>
       </div>
     </section>
