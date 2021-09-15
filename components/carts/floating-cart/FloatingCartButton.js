@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingBag } from "@fortawesome/free-solid-svg-icons";
-import { formatCurrency, activeCurrency } from '../../../services/currency';
+import { formatCurrency } from '../../../services/currency';
 import { toggleFloatingCart } from "../../../_redux/store/action/globalAction";
 import { getCartsAction } from "../_redux/action/CartAction";
 import styles from  './FloatingCartButton.module.scss';
@@ -11,7 +11,7 @@ import { useRouter } from 'next/router';
 
 const FloatingCartButton = () => {
     const router = useRouter();
-    const dispatch                      = useDispatch();
+    const dispatch = useDispatch();
     const { totalQuantity, totalPrice } = useSelector(state => state.CartReducer);
     // const { isMobile } = useSelector(state => state.GlobalReducer);
 
@@ -64,10 +64,6 @@ const FloatingCartButton = () => {
             </div>
         </>
     );
-
-
-
-
 
     return fixedCartPrice;
 }
