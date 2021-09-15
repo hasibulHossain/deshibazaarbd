@@ -14,4 +14,23 @@ module.exports = {
   images: {
     domains: ['deshi.programmingshikhi.com', 'api-ecom.programmingshikhi.com'],
   },
+  webpack(config) {
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: ["@svgr/webpack"]
+    });
+
+    return config;
+  }
 }
+
+// module.exports = {
+//   webpack(config) {
+//     config.module.rules.push({
+//       test: /\.svg$/,
+//       use: ["@svgr/webpack"]
+//     });
+
+//     return config;
+//   }
+// };

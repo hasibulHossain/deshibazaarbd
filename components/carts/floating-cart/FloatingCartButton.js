@@ -6,8 +6,13 @@ import { formatCurrency } from '../../../services/currency';
 import { toggleFloatingCart } from "../../../_redux/store/action/globalAction";
 import { getCartsAction } from "../_redux/action/CartAction";
 import styles from  './FloatingCartButton.module.scss';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
+import NavLink from '../../master/NavLink/NavLink';
+
+import Cart from '../../../public/images/navigation/cart.svg';
+import Home from '../../../public/images/navigation/home.svg';
+import Nearby from '../../../public/images/navigation/nearby.svg';
+import Profile from '../../../public/images/navigation/profile.svg';
 
 const FloatingCartButton = () => {
     const router = useRouter();
@@ -44,11 +49,10 @@ const FloatingCartButton = () => {
                     </span>
                 </div>
             </button>
-            <div className={styles.fixedCart} style={style} >
+            {/* <div className={styles.fixedCart} style={style} >
                 <div className={styles.fixedCartInner}>
-                    {/* <div className={styles.fixedCartLeft}></div> */}
                     <div className={styles.fixedCartMiddle}>
-                        <Link href="/">
+                        <Link href="/" >
                             <a>
                                 Start shopping
                             </a>
@@ -57,8 +61,42 @@ const FloatingCartButton = () => {
                     <div className={styles.fixedCartRight}>
                         <span style={{pointerEvents: 'none'}} className={styles.fixedCartQty}>{totalQuantity > 0 && totalQuantity}</span>
                         <div onClick={flashDealBtnHandler} style={{width: '100%', height: '100%'}}>
-                            <span><FontAwesomeIcon icon={faShoppingBag} /></span>
+                            <span>
+                                <Cart />
+                            </span>
                         </div>
+                    </div>
+                </div>
+            </div> */}
+            <div className={styles.fixedCart} style={style} >
+                <div className={styles.fixedCartInner}>
+                    <div className={styles.fixedCartIconBox}>
+                        <NavLink className="bottom-navigation" href="/" exact>
+                            <div>
+                                <Home />
+                            </div>
+                        </NavLink>
+                    </div>
+                    <div className={styles.fixedCartIconBox}>
+                        <NavLink className="bottom-navigation" href="#" exact>
+                            <div>
+                                <Nearby />
+                            </div>                
+                        </NavLink>
+                    </div>
+                    <div className={styles.fixedCartIconBox}>
+                        <NavLink className="bottom-navigation" href="/carts" exact>
+                            <div>
+                                <Cart />
+                            </div>
+                        </NavLink>
+                    </div>
+                    <div className={styles.fixedCartIconBox}>
+                        <NavLink className="bottom-navigation" href="/profile">
+                            <div>
+                                <Profile />
+                            </div>
+                        </NavLink>
                     </div>
                 </div>
             </div>

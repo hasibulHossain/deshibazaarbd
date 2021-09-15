@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getMenuListData } from "./_redux/HeaderAction/HeaderAction";
-import Link from "next/link";
 import Translate from "../translation/Translate";
 
 const HeaderMenu = ({ navigationToggleHandler, showToolbar }) => {

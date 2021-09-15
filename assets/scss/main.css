@@ -3662,12 +3662,16 @@ p.customer_info_edit {
 }
 
 
-.slick-test-parent {
-  padding: 1rem;
+/* Bottom Navigation */
+
+.bottom-navigation {
+  color: #212121;
 }
 
-.slick-test {
-  width: 100%;
-  height: 400px;
-  background-color: #990000;
+.bottom-navigation:hover {
+  color: #212121;
+}
+
+.bottom-navigation.active {
+  color: var(--color-primary);
 }
