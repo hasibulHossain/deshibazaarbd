@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
-import DemoWarning from "../Demo/DemoWarning";
+// import DemoWarning from "../Demo/DemoWarning";
 import FloatingCart from "../carts/floating-cart/FloatingCart";
 
 import PageMeta from './PageMeta';
@@ -32,7 +32,7 @@ const MainLayout = (props) => {
     if (typeof window === "undefined") {
       global.window = {};
     }
-    
+
     if(process.browser) {
       const isMobile = /Android|webOS|iPhone|Opera Mini/i.test(navigator.userAgent);
       dispatch(checkIsMobileDevice(isMobile))
