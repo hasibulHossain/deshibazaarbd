@@ -68,6 +68,7 @@
     },
     "devDependencies": {
         "@next/bundle-analyzer": "^11.1.2",
+        "@svgr/webpack": "^5.5.0",
         "expose-loader": "^1.0.3",
         "redux-devtools-extension": "^2.13.9"
     }
