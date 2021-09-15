@@ -3,11 +3,12 @@ import { Carousel } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingSkelleton from "../master/skelleton/LoadingSkelleton";
 import { getHomeCarouselData } from "./_redux/homeBannerCarouselAction/HomeBannerCarouselAction";
-import Image from 'next/image';
+// import Image from 'next/image';
 
 const HomeBannerCarousel = () => {
 
   const { carouselList, isLoading } = useSelector((state) => state.HomeBannerCarouselReducer);
+  const { isMobile } = useSelector((state) => state.GlobalReducer);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -55,7 +56,7 @@ const HomeBannerCarousel = () => {
             } */}
               <img
                 className="d-block w-100"
-                src={item.image_url}
+                src={!isMobile ? item.image_url : item.mobile_image_url}
                 alt={item.title}
               />
               {/* <Image src={item.image_url} alt={item.title} width={1920} height={450} /> */}
