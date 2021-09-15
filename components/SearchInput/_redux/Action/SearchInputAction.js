@@ -11,9 +11,9 @@ export const searchProductAction = (searchKeyword, source = {token: ""}) => asyn
   const url = `get-items/search?search=${search}`;
 
   try {
+
     response.loading = true;
     dispatch({ type: Types.GET_SEARCHED_PRODUCT_LIST, payload: response });
-
     const res = await axios.get(url, {cancelToken: source.token});
 
     response.loading = false;
@@ -22,11 +22,11 @@ export const searchProductAction = (searchKeyword, source = {token: ""}) => asyn
     
   } catch (error) {
     if(axios.isCancel(error)) {
-      console.log('from cancel token error handler')
+      // console.log('from cancel token error handler')
     } else {
       response.loading = false;
       dispatch({ type: Types.GET_SEARCHED_PRODUCT_LIST, payload: response });
-      console.log('from search catch handler => ', error)
+      // console.log('from search catch handler => ', error)
     }
   }
 };

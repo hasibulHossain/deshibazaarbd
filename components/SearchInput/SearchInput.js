@@ -19,8 +19,13 @@ const SearchInput = () => {
 
   const searchProduct = (e) => {
     setSearch(e.target.value);
-    dispatch(searchProductAction(e.target.value));
   };
+
+  const onKeyDownHandler = (e) => {
+    if(e.key === "Enter") {
+      router.push('/products')
+    }
+  }
 
   const searchClick = (searchData) => {
     setSearch("");
@@ -54,6 +59,8 @@ const SearchInput = () => {
       <input
         placeholder={translate("Search for Products, Brands or more")}
         onChange={(e) => searchProduct(e)}
+        onKeyDown={onKeyDownHandler}
+        on
       />
       <div className="header-custom-prepend pointer">
         <FontAwesomeIcon className="custom-fontAwesome" icon={faSearch} />
