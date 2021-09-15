@@ -14,6 +14,9 @@ module.exports = {
   images: {
     domains: ['deshi.programmingshikhi.com', 'api-ecom.programmingshikhi.com'],
   },
+  future: {
+    webpack5: true
+  },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
