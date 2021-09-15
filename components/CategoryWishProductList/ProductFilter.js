@@ -135,14 +135,24 @@ const ProductFilter = ({show}) => {
 
     for(const query in queries) {
       if(Array.isArray(cloneFilterParams[query])) {
-        cloneFilterParams[query] = [];
+        // cloneFilterParams[query] = [];
+
         if(query === 'brand') {
           cloneFilterParams[query].push(+queries[query]);
 
           dispatch(getCategoryOrBrandDetails('brands/' + +queries[query]));
         }
         if(query === 'category') {
-          cloneFilterParams[query].push(+queries[query]);
+          // check if category same or not after remount
+          if(cloneFilterParams[query].length > 0 && !(cloneFilterParams[query][0] === parseInt(queries[query]))) {
+            cloneFilterParams.page = 1;
+            cloneFilterParams[query] = [];
+            cloneFilterParams[query].push(+queries[query]);
+          } else {
+
+            cloneFilterParams[query] = [];
+            cloneFilterParams[query].push(+queries[query]);
+          }
 
           dispatch(getSubCategories(queries[query]))
 
@@ -150,6 +160,10 @@ const ProductFilter = ({show}) => {
         }
 
       } else {
+        cloneFilterParams.category = [];
+        cloneFilterParams.brand = [];
+        cloneFilterParams.page = 1;
+
         if(query === 'storeById') {
           cloneFilterParams['seller_id'] = queries[query]
         }
@@ -163,7 +177,7 @@ const ProductFilter = ({show}) => {
 
   useEffect(() => {
     return () => {
-      dispatch(resetFilterParams())
+      dispatch(resetFilterParams(filterParams))
     }
   }, [])
 

@@ -85,8 +85,9 @@ export const setFilterParams = (filterParams) => ({
   payload: filterParams,
 });
 
-export const resetFilterParams = () => ({
-  type: Types.RESET_FILTER_PARAM
+export const resetFilterParams = (filterParams) => ({
+  type: Types.RESET_FILTER_PARAM,
+  payload: {filterParams: filterParams}
 });
 
 export const getSubCategories = (parentId) => async dispatch => {

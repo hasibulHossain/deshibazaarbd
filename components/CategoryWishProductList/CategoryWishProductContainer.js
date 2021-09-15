@@ -9,8 +9,6 @@ import {
 } from "./_redux/Action/CategoryWiseProductAction";
 import ReactPaginate from "react-paginate";
 
-const Base_Url = process.env.NEXT_PUBLIC_API_URL;
-
 const CategoryWishProductContainer = () => {
   const dispatch = useDispatch();
   const [showFilter, setShowFilter] = useState(false)
@@ -65,7 +63,7 @@ const CategoryWishProductContainer = () => {
         <div className="col-md-9 mb-5 px-0" style={{fontSize: '14px'}}>
           <CategoryWishProductList showFilter={showFilter} showFilterHandler={() => setShowFilter(preState => !preState)} />
           {
-            paginate.total > paginate.per_page  && (
+            !isLoading && paginate.total > paginate.per_page  && (
               <div className="w-100 px-0 px-sm-3 mt-3">
                 <div style={{display: 'flex', justifyContent: 'flex-end'}}>
                   <ReactPaginate
@@ -73,10 +71,11 @@ const CategoryWishProductContainer = () => {
                     nextLabel={'>'}
                     breakLabel={'...'}
                     breakClassName={'break-me'}
-                    pageCount={paginate.pages.length -1}
+                    pageCount={paginate.pages.length}
                     marginPagesDisplayed={2}
-                    pageRangeDisplayed={3}
+                    pageRangeDisplayed={2}
                     onPageChange={paginateHandler}
+                    initialPage={filterParams.page - 1}
                     containerClassName={'react-pagination'}
                     activeClassName={'active'}
                   />
