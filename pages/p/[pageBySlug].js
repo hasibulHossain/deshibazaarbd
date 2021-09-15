@@ -13,14 +13,6 @@ export default function PageBySlug() {
     const { pageBySlug } = router.query;
     let pageTitle = pageBySlug.replace(/-/gi, " ");
 
-    const titleCase = (str) => {
-        var splitStr = str.toLowerCase().split(' ');
-        for (var i = 0; i < splitStr.length; i++) {
-            splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
-        }
-        return splitStr.join(' ');
-    }
-
     const { pageData, isLoading } = useSelector((state) => state.WebsitePageReducer);
 
     useEffect(() => {
@@ -34,7 +26,7 @@ export default function PageBySlug() {
                     {
                         isLoading && <LoadingSpinner text="Page Loading....." />
                     }
-                    
+
                     {
                         typeof pageData !== 'undefined' && pageData !== null &&
                         <div className="col-lg-9">
@@ -67,7 +59,7 @@ export default function PageBySlug() {
                         )
                     }
                 </div>
-            </div>    
+            </div>
         </MainLayout>
     );
 }
