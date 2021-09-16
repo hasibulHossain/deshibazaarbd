@@ -3675,3 +3675,23 @@ p.customer_info_edit {
 .bottom-navigation.active {
   color: var(--color-primary);
 }
+
+.bottom-navigation__cart-qty-container {
+  position: absolute;
+  top: -7px;
+  right: -3px;
+  background: var(--color-primary);
+  min-width: 20px;
+  border-radius: 120px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bottom-navigation__cart-qty {
+  padding: 5px;
+  display: inline-block;
+  color: white;
+  font-size: 12px;
+}

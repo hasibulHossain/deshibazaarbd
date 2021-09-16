@@ -86,7 +86,10 @@ const FloatingCartButton = () => {
                     </div>
                     <div className={styles.fixedCartIconBox}>
                         <NavLink className="bottom-navigation" href="/carts" exact>
-                            <div>
+                            <div style={{position: 'relative'}}>
+                                <div className="bottom-navigation__cart-qty-container">
+                                    <span className="bottom-navigation__cart-qty">{totalQuantity}</span>
+                                </div>
                                 <Cart />
                             </div>
                         </NavLink>
