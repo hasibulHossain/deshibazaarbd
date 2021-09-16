@@ -9,6 +9,7 @@ import { translate } from "../../services/translation/translation";
 import Translate from "../translation/Translate";
 import { formatCurrency } from "../../services/currency";
 import axios from "axios";
+import { toggleBackdrop } from "../../_redux/store/action/globalAction";
 
 const SearchInput = () => {
   const dispatch = useDispatch();
@@ -23,17 +24,22 @@ const SearchInput = () => {
 
   const onKeyDownHandler = (e) => {
     if(e.key === "Enter") {
-      router.push('/products')
+      // router.push('/products')
     }
   }
 
   const searchClick = (searchData) => {
     setSearch("");
+    dispatch(toggleBackdrop())
 
     if (searchData.is_item) {
+      const uri = encodeURI(`/products/${searchData.slug}`);
       router
-        .push(`/products/${searchData.slug}`)
-        .then((_) => window.scrollTo(0, 0));
+        .push(uri)
+        .then((_) =>{
+          window.scrollTo(0, 0);
+          dispatch(toggleBackdrop())
+        });
     }
     if (searchData.is_category) {
       router

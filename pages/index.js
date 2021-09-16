@@ -20,12 +20,16 @@ export default function Home() {
 
   return (
     <MainLayout>
-      {/* <ScrollToTop smooth /> */}
       <HomeBannerCarousel />
-      <NewOffer />
+      {
+        !isMobile && (
+          <NewOffer />
+        )
+      }
       {/* <OfferProducts /> */}
       {/* <ProductTopListContainer /> */}
       <CategoryListContainer url='categories' />
+      
       <LazyLoad height={280} once>
         <DealFlash />
       </LazyLoad>

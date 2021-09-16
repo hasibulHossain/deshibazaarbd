@@ -1300,9 +1300,9 @@ h6.address_book_updated_title {
   font-weight: 600;
   font-size: 18px;
   flex-basis: 80%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  /* overflow: hidden; */
+  /* text-overflow: ellipsis; */
+  /* white-space: nowrap; */
   margin-right: 0.5rem;
 }
 

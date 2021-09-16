@@ -54,7 +54,7 @@ const MainLayout = (props) => {
 
       <Header />
       <main>
-        <div onClick={() => toggleBackdrop()} className={`backdrop ${backdrop ? 'open' : ''}`}></div>
+        <div className={`backdrop ${backdrop ? 'open' : ''}`}></div>
         <div style={{minHeight: "37vh"}}>
           {children}
         </div>

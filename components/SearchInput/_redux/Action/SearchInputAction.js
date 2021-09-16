@@ -11,11 +11,10 @@ export const searchProductAction = (searchKeyword, source = {token: ""}) => asyn
   const url = `get-items/search?search=${search}`;
 
   try {
-
     response.loading = true;
     dispatch({ type: Types.GET_SEARCHED_PRODUCT_LIST, payload: response });
     const res = await axios.get(url, {cancelToken: source.token});
-
+    
     response.loading = false;
     response.data = res.data.data;
     dispatch({ type: Types.GET_SEARCHED_PRODUCT_LIST, payload: response });
