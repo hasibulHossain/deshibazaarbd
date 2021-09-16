@@ -1,6 +1,7 @@
 import React, { useEffect, memo } from "react";
 import { Carousel } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import LoadingPlaceHolder from "../master/skelleton/LoadingPlaceholder";
 import LoadingSkelleton from "../master/skelleton/LoadingSkelleton";
 import { getHomeCarouselData } from "./_redux/homeBannerCarouselAction/HomeBannerCarouselAction";
 // import Image from 'next/image';
@@ -21,12 +22,9 @@ const HomeBannerCarousel = () => {
     <>
       {isLoading && (
         <div className="card shadow-sm mt-3 p-1">
-          <LoadingSkelleton
-            alignment="vertical"
-            count={1}
-            width="100%"
-            height={200}
-          />
+
+            <LoadingPlaceHolder className="" count={1} height={isMobile ? 180 : 445} />
+        
         </div>
       )}
 

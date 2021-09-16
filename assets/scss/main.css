@@ -474,14 +474,16 @@ a .custom-button-component:hover {
   display: none !important;
 }
 
-.productList-body,
-.category-list {
-  -webkit-box-shadow: 2px 6px 15px -7px rgba(166, 166, 166, 1);
-  -moz-box-shadow: 2px 6px 15px -7px rgba(166, 166, 166, 1);
+.productList-body {
   box-shadow: 2px 6px 15px -7px rgba(166, 166, 166, 1);
   background-color: #fff;
-  padding: 10px;
+  padding: 20px;
   margin-top: 20px;
+}
+
+.category-list {
+  padding: 20px 10px;
+  /* margin-top: 20px; */
 }
 
 .product-card {

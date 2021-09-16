@@ -2,11 +2,12 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getShopList } from "./_redux/Action/ShopAction";
 import { useRouter } from "next/router";
+import LoadingPlaceHolder from "../master/skelleton/LoadingPlaceholder";
 
 const ShopList = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const { ShopList } = useSelector((state) => state.ShopReducer);
+  const { ShopList, isLoading } = useSelector((state) => state.ShopReducer);
 
   const routeHandler = (brandId) => {
     router
@@ -21,6 +22,12 @@ const ShopList = () => {
   return (
     <div className="productList-body p-3">
       <div className="row">
+        {
+          isLoading && (
+            <LoadingPlaceHolder className="col-4 col-md-2 col-lg-2" count={18} height={90} />
+          )
+        }
+        
         {ShopList.length > 0 &&
           ShopList.slice(0, 18).map((item, index) => (
             <div className="col-4 col-md-2 col-lg-2" key={index}>
