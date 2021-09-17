@@ -38,60 +38,9 @@ const CategoryList = ({ parentID = null }) => {
       .then((_) => window.scrollTo(0, 0));
   };
 
-  let a = [
-    {url: '/images/categories/cloth-&-Accessories.jpg', title: 'Fashion'},
-    {url: '/images/categories/elektronics.jpg', title: 'Electronics'},
-    {url: "/images/categories/food.jpg", title: 'Food'},
-    {url: "/images/categories/groceries.jpg", title: 'Groceries'},
-    {url: "/images/categories/helth-&-beauty.jpg", title: 'Health & Beauty'}, 
-    {url: "/images/categories/kids-fashion.jpg", title: 'Kids Fashion'}, 
-    {url: "/images/categories/laptop.jpg", title: 'Laptop'}, 
-    {url: "/images/categories/medicine.jpg", title: 'Pharmacy'}, 
-    {url: "/images/categories/mother-&-baby-care.jpg", title: 'Baby Care'}, 
-    {url: "/images/categories/motorbycycle.jpg", title: 'Motorbike'}, 
-    {url: "/images/categories/toys-&-games.jpg", title: 'Toys & Games'}, 
-    {url: "/images/categories/sprot-&-fitness.jpg", title: 'Sports & Fitness'}
-  ]
-
   return (
     <div className="category-list">
       <div className="row">
-        {/* {loading && (
-          <>
-          <LoadingSkelleton
-            alignment="vertical"
-            count={6}
-            width={150}
-            height={150}
-          />
-          </>
-        )}
-
-        {categories &&
-          categories.length > 0 &&
-          categories.map((item, index) => (
-            <div key={index} className="category-card col-3 col-md-1">
-              <div
-                className="category-card-body"
-                onClick={() => navigateCategoryList(item.id)}
-              >
-                {item.image !== null && item.image !== "" && (
-                  <div className="category-img-area">
-                    <img
-                      src={`${process.env.NEXT_PUBLIC_URL}images/categories/${item.image}`}
-                      alt={translate(item.name)}
-                      className="img-fluid"
-                    />
-                  </div>
-                )}
-
-                <p className="category-title">
-                  <Translate>{item.name}</Translate>
-                </p>
-              </div>
-            </div>
-          ))} */}
-
           {
             loading && (
               <LoadingPlaceHolder className="col-lg-2 col-md-3 col-sm-4 col-6" count={12} height={150}  />
