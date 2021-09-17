@@ -329,11 +329,11 @@ const RegistrationComponent = () => {
                 </form>
 
                 <p className="account_info_label mt-4">By clicking Create Account, you acknowledge you have read and agreed to our
-                    <Link href="/">
+                    <Link href="/p/terms-&-condition">
                         <a> Terms of Use </a>
                     </Link>
                     and
-                    <Link href="/">
+                    <Link href="/p/terms-&-condition">
                         <a> Privacy Policy </a>
                     </Link></p>
                 {/* <p className="account_info_label">

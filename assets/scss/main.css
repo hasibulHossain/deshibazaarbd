@@ -1962,7 +1962,7 @@ ul.social-media {
 .nav-tabs .nav-link.active {
   color: #fff !important;
   background-color: var(--color-primary) !important;
-  padding: 1% 10% !important;
+  /* padding: 1% 10% !important; */
 }
 
 h5.account_title {
@@ -3689,4 +3689,11 @@ p.customer_info_edit {
   display: inline-block;
   color: white;
   font-size: 12px;
+}
+
+
+/* [pageBySlug] */
+
+.website-info-title {
+  font-weight: 600;
 }
