@@ -88,7 +88,7 @@ const ProductSingleMini = ({
           {columnClassName === "col-md-2" && (
             <>
               <div onClick={() => redirectToProductDetailsPage(item)} style={{overflow: 'hidden'}}>
-              <Image src={imageURL} alt={imageURL} width={200} height={200} />
+              <Image src={imageURL} alt={item.name} width={200} height={200} />
               <div className="product-card-body-inner">
                 <p className="product-title">
                   <Translate>{item.name}</Translate>
@@ -208,7 +208,7 @@ const ProductSingleMini = ({
       <div className="product-card filter_column_3">
       <div className="product-card-body">
         <div onClick={() => redirectToProductDetailsPage(item)} style={{overflow: 'hidden'}}>
-        <Image src={imageURL} alt={imageURL} width={200} height={200} />
+        <Image src={imageURL} alt={item.name} width={200} height={200} />
         <div className="product-card-body-inner">
           <p className="product-title">
             <Translate>{item.name}</Translate>

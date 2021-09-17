@@ -9,6 +9,7 @@ import { translate } from "../../services/translation/translation";
 import Translate from "../translation/Translate";
 import { formatCurrency } from "../../services/currency";
 import axios from "axios";
+import { toggleBackdrop } from "../../_redux/store/action/globalAction";
 
 const SearchInput = () => {
   const dispatch = useDispatch();
@@ -19,16 +20,26 @@ const SearchInput = () => {
 
   const searchProduct = (e) => {
     setSearch(e.target.value);
-    dispatch(searchProductAction(e.target.value));
   };
+
+  const onKeyDownHandler = (e) => {
+    if(e.key === "Enter") {
+      // router.push('/products')
+    }
+  }
 
   const searchClick = (searchData) => {
     setSearch("");
+    dispatch(toggleBackdrop())
 
     if (searchData.is_item) {
+      const uri = encodeURI(`/products/${searchData.slug}`);
       router
-        .push(`/products/${searchData.slug}`)
-        .then((_) => window.scrollTo(0, 0));
+        .push(uri)
+        .then((_) =>{
+          window.scrollTo(0, 0);
+          dispatch(toggleBackdrop())
+        });
     }
     if (searchData.is_category) {
       router
@@ -54,6 +65,8 @@ const SearchInput = () => {
       <input
         placeholder={translate("Search for Products, Brands or more")}
         onChange={(e) => searchProduct(e)}
+        onKeyDown={onKeyDownHandler}
+        on
       />
       <div className="header-custom-prepend pointer">
         <FontAwesomeIcon className="custom-fontAwesome" icon={faSearch} />

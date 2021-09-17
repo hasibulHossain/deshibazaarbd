@@ -398,6 +398,13 @@
     display: none;
   }
 }
+
+@include media("<=575px") {
+  .header-nav-link.cart-nav-link {
+    display: none;
+  }
+}
+
 @include media("<426px") {
   .header__root {
     box-shadow: 0 2px 2px rgb(0 0 0 / 10%);

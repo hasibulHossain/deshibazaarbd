@@ -13,10 +13,11 @@ import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import SimpleBtn from "../master/SimpleBtn/SimpleBtn";
 import AddWishList from "../Wishlist/AddWishList";
 import ViewAll from "../ViewAll/ViewAll";
+import LoadingPlaceHolder from "../master/skelleton/LoadingPlaceholder";
 
 const DealFlash = () => {
   const dispatch = useDispatch();
-  const flashDealList = useSelector(state => state.DealFlashReducer.flashDealList);
+  const {flashDealList, isLoading} = useSelector(state => state.DealFlashReducer);
 
   const addToCart = (product) => {
     if (parseInt(product.current_stock) === 0) {
@@ -40,6 +41,11 @@ const DealFlash = () => {
       </div>
       <div className="flash-deal-section">
         <div className="row flash-deal-row no-gutters">
+        {
+          isLoading && (
+            <LoadingPlaceHolder className="col-md-6 pr-md-2" count={2} height={255} />
+          )
+        }
           {flashDealList.length > 0 &&
             flashDealList.map((item, index) => {
               const offerEndDate     = new Date(item.offer_end_date).getTime();
