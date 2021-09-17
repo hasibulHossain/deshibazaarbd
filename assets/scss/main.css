@@ -474,16 +474,11 @@ a .custom-button-component:hover {
   display: none !important;
 }
 
-.productList-body {
-  box-shadow: 2px 6px 15px -7px rgba(166, 166, 166, 1);
+.productList-body, .category-list {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
   background-color: #fff;
   padding: 20px;
   margin-top: 20px;
-}
-
-.category-list {
-  padding: 20px 10px;
-  /* margin-top: 20px; */
 }
 
 .product-card {
@@ -946,9 +941,7 @@ a .custom-button-component:hover {
 }
 
 .flash-deal-card {
-  -webkit-box-shadow: 2px 6px 15px -7px rgba(166, 166, 166, 1);
-  -moz-box-shadow: 2px 6px 15px -7px rgba(166, 166, 166, 1);
-  box-shadow: 2px 6px 15px -7px rgba(166, 166, 166, 1);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
   background-color: #fff;
   padding: 10px;
   display: flex;
