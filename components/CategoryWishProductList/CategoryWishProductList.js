@@ -132,6 +132,7 @@ const CategoryWishProductList = ({showFilter, showFilterHandler}) => {
           </div>
           <p>
             {
+              !isLoading &&
               (paginate.total !== null ? paginate.total : '0') + ' items found in ' + title 
             }
           </p>

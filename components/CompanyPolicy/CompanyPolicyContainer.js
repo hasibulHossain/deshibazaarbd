@@ -8,7 +8,9 @@ const CompanyPolicyContainer = () => {
     const policyList = useSelector((state) => state.CompanyPolicyReducer.policyList);
 
     useEffect(() => {
-        dispatch(getCompanyPolicyList())
+        if(policyList.length === 0) {
+            dispatch(getCompanyPolicyList())
+        }
     }, []);
 
     return (
