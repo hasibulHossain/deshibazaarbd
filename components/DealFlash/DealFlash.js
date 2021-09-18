@@ -28,7 +28,9 @@ const DealFlash = () => {
 }
 
   useEffect(() => {
-    dispatch(getDealFlashList());
+    if(flashDealList.length === 0) {
+      dispatch(getDealFlashList());
+    }
   }, []);
 
   return (

@@ -21,11 +21,8 @@ export default function Home() {
   return (
     <MainLayout>
       <HomeBannerCarousel />
-      {
-        !isMobile && (
-          <NewOffer />
-        )
-      }
+
+      <NewOffer />
       {/* <OfferProducts /> */}
       {/* <ProductTopListContainer /> */}
       <CategoryListContainer url='categories' />

@@ -16,7 +16,9 @@ const ShopList = () => {
   };
 
   useEffect(() => {
-    dispatch(getShopList());
+    if(ShopList.length === 0) {
+      dispatch(getShopList());
+    }
   }, []);
 
   return (
