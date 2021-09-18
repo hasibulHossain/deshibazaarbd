@@ -3283,6 +3283,16 @@ img.payment_method_in_shipping {
   padding: 20px;
 }
 
+.product_preview_inner_item .inactive-price .discount-percent {
+  position: relative;
+}
+
+.product_preview_inner_item .price-area {
+  justify-content: flex-start;
+}
+
+
+
 .product_preview_title {
   font-size: 20px;
   color: #172337;

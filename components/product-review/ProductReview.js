@@ -10,34 +10,37 @@ const ProductReview = () => {
     const dispatch = useDispatch();
 
     const {itemList, reviewList} = useSelector((state) => state.ProductReviewReducer);
+    const {isMobile} = useSelector((state) => state.GlobalReducer);
 
-    useEffect(() => {
-        dispatch(getItemListByUser());
-        dispatch(getReviewListByUser());
+    // useEffect(() => {
+    //     // dispatch(getItemListByUser());
+    //     // dispatch(getReviewListByUser());
 
-    }, []);
+    // }, []);
 
     return (
-        <div className="container">
-            <div className="row">
-                <div className="col-md-3">
-                    <ProfileSideBar />
-                </div>
-                <div className="col-md-9 mt-5 mb-2">
-                    <div className="card card-middle">
-                        <div className="sidebar-card-title order_filter_section">
-                            <Tabs defaultActiveKey="waitingForReview" id="uncontrolled-tab-example">
-                                <Tab eventKey="waitingForReview" title={`To Be Reviewed (${itemList.length})`}>
-                                    <ProductListForReview />
-                                </Tab>
-                                <Tab eventKey="history" title={`Review History (${reviewList.length})`}>
-                                    <ProductReviewHistory />
-                                </Tab>
-                            </Tabs>
-                        </div>
+        <div className="row">
+            {
+                !isMobile && (
+                    <div className="col-md-3">
+                        <ProfileSideBar />
                     </div>
-
+                )
+            }
+            <div className="col-md-9 mt-3 mt-md-5 mb-3 px-0 px-md-2">
+                <div className="card card-middle">
+                    <div className="sidebar-card-title order_filter_section">
+                        <Tabs defaultActiveKey="waitingForReview" id="uncontrolled-tab-example">
+                            <Tab eventKey="waitingForReview" title={`To Be Reviewed (${itemList.length})`}>
+                                <ProductListForReview />
+                            </Tab>
+                            <Tab eventKey="history" title={`Review History (${reviewList.length})`}>
+                                <ProductReviewHistory />
+                            </Tab>
+                        </Tabs>
+                    </div>
                 </div>
+
             </div>
         </div>
     );

@@ -68,13 +68,14 @@ export const storeReviewData = (reviewStoreInput, handleClose) => (dispatch => {
         isLoading: true,
         returnData: ""
     };
-    dispatch({ type: Types.STORE_REVIEW_DATA, payload: responseData });
+    dispatch({ type: Types.STORE_REVIEW_DATA, payload: responseData });  
 
     const { userData } = JSON.parse(localStorage.getItem('loginData'));
     const userID       = userData.id;
 
+    
     Axios.post(`item-review/create`, reviewStoreInput)
-        .then((res) => {
+    .then((res) => {
             if (res.data.status) {
                 let data = res.data;
                 responseData.message = data.message;
