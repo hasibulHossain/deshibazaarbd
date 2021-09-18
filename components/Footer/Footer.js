@@ -29,13 +29,13 @@ const Footer = () => {
                         <Col md={3} xs={6}>
                             <div className="footer-info">
                                 <h5>Customer Care</h5>
-                                <Link href="/p/shipping-method">
+                                <Link href="/p/help center">
                                     <a>Help Center</a>
                                 </Link>
                                 <Link href="/p/how-to-buy">
                                     <a>How To Buy</a>
                                 </Link>
-                                <Link href="/p/shipping-method">
+                                <Link href="/p/Return and Refund Policy">
                                     <a>Return &amp; Refund Policy </a>
                                 </Link>
                                 <Link href="/p/shipping-method">
@@ -46,7 +46,7 @@ const Footer = () => {
                                     <a>Privacy Policy</a>
                                 </Link>
 
-                                <Link href="/p/privacy-policy">
+                                <Link href="/p/site map">
                                     <a>Site Map</a>
                                 </Link>
                                 <Link href="/p/faq">
@@ -60,14 +60,14 @@ const Footer = () => {
                                 <Link href="/p/about-us">
                                     <a>About us</a>
                                 </Link>
-                                <Link href="/p/about-us">
+                                <Link href="/p/career">
                                     <a>Career</a>
                                 </Link>
                                 <Link href="/p/affiliate">
                                     <a>Affiliate</a>
                                 </Link>
-                                <Link href="/p/about-us">
-                                    <a>Whole Sale</a>
+                                <Link href="/p/wholesale">
+                                    <a>Wholesale</a>
                                 </Link>
                                 <Link href="/p/contact">
                                     <a>Contact</a>
