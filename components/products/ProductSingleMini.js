@@ -155,7 +155,7 @@ const ProductSingleMini = ({
                   </div>
                   <div>
                     <p className="product-title">{item.name}</p>
-                    <span className="product-unit">1 {item.unit_name && item.unit_name}</span>
+                    <span className="product-unit">{item.per_unit_value} {' '} {item.unit_name && item.unit_name}</span>
                     <p
                       className={`stock-status ${
                         parseInt(item.current_stock) > 0
