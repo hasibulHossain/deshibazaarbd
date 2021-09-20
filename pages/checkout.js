@@ -40,7 +40,7 @@ const Checkout = ()=> {
 	}, []);
 
 	const handleStoreOrder = () => {
-		dispatch(storeSells(customerInfo, carts, totalQuantity, shippingCost, totalPrice, couponData));
+		// dispatch(storeSells(customerInfo, carts, totalQuantity, shippingCost, totalPrice, couponData));
 		// router.push('/');
 	}
 
