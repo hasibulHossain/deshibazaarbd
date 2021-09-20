@@ -66,7 +66,6 @@ const SearchInput = () => {
         placeholder={translate("Search for Products, Brands or more")}
         onChange={(e) => searchProduct(e)}
         onKeyDown={onKeyDownHandler}
-        on
       />
       <div className="header-custom-prepend pointer">
         <FontAwesomeIcon className="custom-fontAwesome" icon={faSearch} />
