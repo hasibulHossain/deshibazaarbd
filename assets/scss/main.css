@@ -1777,6 +1777,16 @@ ul.social-media {
   text-align: center;
 }
 
+.filter_column_3 .product-card-body .product-card-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.filter_column_3 .product-card-body .product-card-link {
+  color: inherit;
+  text-decoration: none;
+}
+
 .filter_column_3 .product-card-body img:before {
   content: " ";
   display: block;
