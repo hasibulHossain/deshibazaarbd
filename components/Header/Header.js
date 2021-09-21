@@ -29,6 +29,7 @@ import { translate } from "../../services/translation/translation";
 import ActiveLink from "../master/activeLink/ActiveLink";
 import HeaderWishlist from "./HeaderWishlist";
 import { useRouter } from "next/router";
+import DemoWarning from "../Demo/DemoWarning";
 
 const Header = () => {
   const router = useRouter();
@@ -69,6 +70,7 @@ const Header = () => {
 
   return (
     <div>
+      <DemoWarning />
       <HeaderTop />
       <div className="header__root">
         <div className="header__container">
