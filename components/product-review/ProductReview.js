@@ -1,22 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import ProfileSideBar from '../myprofile/ProfileSideBar';
 import ProductListForReview from './ProductListForReview';
 import ProductReviewHistory from './ProductReviewHistory';
-import { useDispatch, useSelector } from 'react-redux';
-import { getItemListByUser, getReviewListByUser } from './_redux/action/reviewAction';
-
+import { useSelector } from 'react-redux';
 const ProductReview = () => {
-    const dispatch = useDispatch();
 
     const {itemList, reviewList} = useSelector((state) => state.ProductReviewReducer);
     const {isMobile} = useSelector((state) => state.GlobalReducer);
-
-    // useEffect(() => {
-    //     // dispatch(getItemListByUser());
-    //     // dispatch(getReviewListByUser());
-
-    // }, []);
 
     return (
         <div className="row">

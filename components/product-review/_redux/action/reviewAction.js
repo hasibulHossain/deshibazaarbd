@@ -25,13 +25,13 @@ export const getItemListByUser = () => (dispatch) => {
 }
 
 //Get Review List By User
-export const getReviewListByUser = (itemID, userID, status) => (dispatch) => {
+export const getReviewListByUser = (isItem, isUser, status) => (dispatch) => {
     const responseList = {
         status: false,
         isLoading: true,
         reviewList: []
     }
-    const url = `item-review/get-by-item?item_id=${itemID}`;
+    const url = `item-review/get-by-item?item_id=${isItem}&user_id=${isUser}&status=${status}`;
 
     dispatch({ type: Types.GET_REVIEW_LIST_BY_USER, payload: responseList });
 
