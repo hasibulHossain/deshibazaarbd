@@ -974,6 +974,16 @@ a .custom-button-component:hover {
   padding-left: 20px;
 }
 
+.flash-deal-detail .flash-deal-title-link {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.flash-deal-detail .flash-deal-title-link:hover {
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+
 .flash-deal-title {
   overflow: hidden;
   text-overflow: ellipsis;
