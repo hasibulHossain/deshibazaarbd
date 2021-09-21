@@ -67,7 +67,7 @@ export default function Carts() {
       <MainLayout pageTitle="Carts">
         <div className="container">
           <div className="row mt-3 mb-5">
-            <div className="col-lg-8 col-md-7">
+            <div className="col-lg-8 col-md-7 px-0 px-sm-2">
               <div className="cart_container_body">
                 <p className="cart__preferred_delivery">My Carts</p>
                 {/* <Card>
@@ -157,7 +157,7 @@ export default function Carts() {
               </div>
             </div>
 
-            <div className="col-lg-4 col-md-5 cart_checkout_margin">
+            <div className="col-lg-4 col-md-5 px-0 px-sm-2 cart_checkout_margin">
               <OrderSummery
                 handleClick={placeOrder}
                 buttonText="PROCEED TO CHECKOUT"
