@@ -93,6 +93,13 @@ const Footer = () => {
                                 <p className="pointer" onClick={() => handleShow()}>
                                     Order Tracking
                                 </p>
+                                <div>
+                                    <Link href="https://deshibazaarbd.com" passHref={true}>
+                                        <a target="_blank">
+                                            <img src="/images/google-play-badge.png" alt="google-play-badge" />
+                                        </a>
+                                    </Link>
+                                </div>
                             </div>
                         </Col>
                         <Col md={4} sm={6}>
