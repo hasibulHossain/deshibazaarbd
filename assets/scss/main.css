@@ -2294,6 +2294,14 @@ p.address_sub_title {
   font-size: 13px;
 }
 
+.wishlist_list_product_details .price-area {
+  justify-content: flex-start;
+}
+
+.wishlist_list_product_details .discount-percent {
+  position: relative;
+}
+
 .wishlist_wishIcon {
   color: var(--color-primary);
 }

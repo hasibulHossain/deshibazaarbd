@@ -26,11 +26,11 @@ const ProductWishList = () => {
 										<Translate> My Wishlist </Translate>
 									</h5>
 								</div>
-								<div className="card-body">
+								<div className="card-body p-0">
 
 									{wishList.length > 0 && wishList.map((item, index) => (
-										<div className="border-bottom" key={index}>
-											<div className="inner_product_list">
+										<div className={wishList.length === index + 1 ? '' : 'border-bottom'} key={index}>
+											<div className="px-1 py-3">
 												<div className="row">
 
 													<div className="wishlist_product col-2">
