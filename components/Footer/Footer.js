@@ -41,9 +41,8 @@ const Footer = () => {
                                 <Link href="/p/shipping-method">
                                     <a>Payment &amp; Shipping Methods</a>
                                 </Link>
-
-                                <Link href="/p/privacy-policy">
-                                    <a>Privacy Policy</a>
+                                <Link href="/p/Same Day Delivery">
+                                    <a>Same Day Delivery</a>
                                 </Link>
 
                                 <Link href="/p/site map">
