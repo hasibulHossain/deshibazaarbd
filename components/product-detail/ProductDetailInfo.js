@@ -22,6 +22,7 @@ import { showToast } from "../master/Helper/ToastHelper";
 import ProductMainList from "../products/ProductMainList";
 import { useRouter } from "next/router";
 import { formatCurrency } from "../../services/currency";
+import LazyLoad from "react-lazyload";
 
 const ProductDetailInfo = (props) => {
   const dispatch = useDispatch();
@@ -295,6 +296,7 @@ const ProductDetailInfo = (props) => {
                                 </div>
                               </div>
                               <div className="mt-4">
+                              <span className="product-unit">{product.per_unit_value} {' '} {product.unit && product.unit.actual_name && product.unit.actual_name}</span>
                                 <PriceCalculation item={product} />
                               </div>
                               <hr />
@@ -383,17 +385,20 @@ const ProductDetailInfo = (props) => {
                   </div>
                 </div>
               </div>
-
-              <ProductRatings product={product} />
+              <LazyLoad height={200} once>
+                <ProductRatings product={product} />
+              </LazyLoad>
               <div className="mb-5 mt-5">
                 <p className="font-weight-bold product_details_people_viewed_title">
                   People who viewed this item also viewed
                 </p>
-                <ProductMainList
-                  type=""
-                  limit={6}
-                  category={product.category_id}
-                />
+                <LazyLoad height={400} once>
+                  <ProductMainList
+                    type=""
+                    limit={6}
+                    category={product.category_id}
+                  />
+                </LazyLoad>
               </div>
             </div>
           )}
