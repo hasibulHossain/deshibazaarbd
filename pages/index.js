@@ -18,6 +18,7 @@ import LazyLoad from "react-lazyload";
 export default function Home() {
   const {isMobile} = useSelector(state => state.GlobalReducer);
 
+
   return (
     <MainLayout>
       <HomeBannerCarousel />

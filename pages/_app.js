@@ -25,6 +25,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../components/product-review/productListForReview.css";
 import "../components/ProfileAccountSetting/ProfileAccountSetting.scss";
+import "../assets/scss/nprogress.css"
 
 // For Order Pages
 import "../components/orders/scss/order-invoice.scss";
@@ -44,6 +45,29 @@ axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL;
 // export function reportWebVitals(metric) {
 //   console.log(metric)
 // }
+
+
+import Router from "next/router";
+import NProgress from 'nprogress';
+
+NProgress.configure({ minimum: 0.1 });
+
+Router.onRouteChangeStart = () => {
+  // console.log('onRouteChangeStart triggered');
+  NProgress.start();
+};
+
+Router.onRouteChangeComplete = () => {
+  // console.log('onRouteChangeComplete triggered');
+  NProgress.done();
+};
+
+Router.onRouteChangeError = () => {
+  // console.log('onRouteChangeError triggered');
+  NProgress.done();
+};
+
+
 
 class MyApp extends App {
   render() {
