@@ -167,6 +167,9 @@ const ProductFilter = ({show}) => {
         if(query === 'storeById') {
           cloneFilterParams['seller_id'] = queries[query]
         }
+        if(query === 'type') {
+          cloneFilterParams['type'] = queries[query]
+        }
       }
     }
     dispatch(setFilterParams(cloneFilterParams));
