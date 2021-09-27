@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { Form } from "react-bootstrap";
 import InputRange from "react-input-range";
 import "react-input-range/lib/css/index.css";
@@ -27,6 +27,10 @@ const ProductFilter = ({show}) => {
 
   const [value, setValue] = useState({ min: 100, max: 90000 });
   const [isChecked, setIsChecked] = useState(false);
+
+  const categoryCheckboxes = useRef([]);
+
+
   const {
     search,
     category,
@@ -50,16 +54,19 @@ const ProductFilter = ({show}) => {
 
   // checkbox handler
   const handleChecked = (e, category) => {
+    // uncheck other checkbox
+    categoryCheckboxes.current.forEach(checkbox => {
+      if(checkbox.checked && +checkbox.id !== category) {
+        checkbox.checked = false
+      }
+    })
+
     const filterParamClone = { ...filterParams };
-    // conditionally insert and remove category id from category array
+
     if (e.target.checked) {
-      filterParamClone.category.push(category);
-    } else {
-      const updatedCategory = filterParamClone.category.filter(
-        (item) => item !== category
-      );
-      filterParamClone.category = updatedCategory;
+      filterParamClone.category[1] = category;
     }
+    
     dispatch(setFilterParams(filterParamClone));
   };
 
@@ -167,6 +174,9 @@ const ProductFilter = ({show}) => {
         if(query === 'storeById') {
           cloneFilterParams['seller_id'] = queries[query]
         }
+        if(query === 'type') {
+          cloneFilterParams['type'] = queries[query]
+        }
       }
     }
     dispatch(setFilterParams(cloneFilterParams));
@@ -182,6 +192,7 @@ const ProductFilter = ({show}) => {
   }, [])
 
   useEffect(() => {
+    
     const source = Axios.CancelToken.source();
     dispatch(getFilteredProducts(filterParams, source));
     return () => {
@@ -234,11 +245,13 @@ const ProductFilter = ({show}) => {
         categories.length > 0 && (
           <div className="filter_by_category">
             <p className="filter_title">By Category</p>
-            {categories.map((item) => (
+            {categories.map((item, index) => (
               <Form.Group key={item.id} controlId={item.id}>
                 <Form.Check
+                  ref={chkbox => categoryCheckboxes.current[index] = chkbox}
                   type="checkbox"
                   label={item.name}
+                  datatype={item.id}
                   className={
                     isChecked == true ? "active_category" : "isNot_active_category"
                   }
