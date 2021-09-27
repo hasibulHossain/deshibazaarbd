@@ -1328,8 +1328,59 @@ h6.address_book_updated_title {
 .product_details_section .product_description {
   font-size: 15px;
   text-align: justify;
-  color: #8b8b8b;
   margin-top: 5px;
+  color: #1F2937;
+  padding: 0 20px;
+}
+
+.product-description__head {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--color-primary);
+}
+
+.product-details__rich-text {
+  font-size: 14px;
+}
+
+.product-details__rich-text p {
+  margin-bottom: 30px;
+}
+
+.product-details__rich-text .table {
+
+}
+
+.product-details__rich-text .table table {
+  color: #6b7280;
+}
+
+.product-details__rich-text .table table tbody{
+
+}
+
+.product-details__rich-text .table table tbody tr {
+
+}
+
+.product-details__rich-text .table table tbody tr td h4 {
+  margin: 15px 0px;
+  font-size: 1.4rem;
+  color: #1F2937;
+}
+
+.product-details__rich-text .table table tbody tr td {
+  border: none;
+  padding: 0px 12px 12px 0px;
+  color: #1F2937;
+  font-weight: 600;
+}
+
+.product-details__rich-text .table table tbody tr td:first-child {
+  border: none;
+  padding: 0px 40px 12px 0px;
+  color: #6b7280;
+  font-weight: 500;
 }
 
 .product_details_quantity_section {
