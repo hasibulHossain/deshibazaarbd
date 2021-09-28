@@ -8,9 +8,9 @@ const ProductSection = ({ title, description = null, url = '', type = '', limit 
   return (
     <section className="container product-container">
         <div className="product-heading">
-          <h5> 
+          <h2> 
             {title} 
-          </h5>
+          </h2>
           {
             description !== null && <p>{ description }</p>
           }

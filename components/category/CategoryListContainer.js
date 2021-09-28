@@ -9,9 +9,9 @@ const CategoryListContainer = ({ parentID = null }) => {
     return (
         <section className="container product-container">
             <div className="product-heading">
-                <h5>
+                <h2>
                     <Translate>Shop by categories</Translate>
-                </h5>
+                </h2>
                 {/* {
                     parentID !== 'all' && 
                     <Link href="/categories">
