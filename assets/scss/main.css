@@ -453,7 +453,7 @@ a .custom-button-component:hover {
   align-items: center;
 }
 
-.product-heading h5 {
+.product-heading h2 {
   text-transform: uppercase;
   font-size: 1.2rem;
   font-weight: 600;

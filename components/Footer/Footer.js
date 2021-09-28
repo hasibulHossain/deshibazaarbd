@@ -29,71 +29,102 @@ const Footer = () => {
                         <Col md={3} xs={6}>
                             <div className="footer-info">
                                 <h5>Customer Care</h5>
-                                <Link href="/p/help center">
-                                    <a>Help Center</a>
-                                </Link>
-                                <Link href="/p/how-to-buy">
-                                    <a>How To Buy</a>
-                                </Link>
-                                <Link href="/p/Return and Refund Policy">
-                                    <a>Return &amp; Refund Policy </a>
-                                </Link>
-                                <Link href="/p/shipping-method">
-                                    <a>Payment &amp; Shipping Methods</a>
-                                </Link>
-                                <Link href="/p/Same Day Delivery">
-                                    <a>Same Day Delivery</a>
-                                </Link>
-
-                                <Link href="/p/site map">
-                                    <a>Site Map</a>
-                                </Link>
-                                <Link href="/p/faq">
-                                    <a>FAQ</a>
-                                </Link>
+                                <h3>
+                                    <Link href="/p/help center">
+                                        <a>Help Center</a>
+                                    </Link>
+                                </h3>
+                                <h3>
+                                    <Link href="/p/how-to-buy">
+                                        <a>How To Buy</a>
+                                    </Link>
+                                </h3>
+                                <h3>
+                                    <Link href="/p/Return and Refund Policy">
+                                        <a>Return &amp; Refund Policy </a>
+                                    </Link>
+                                </h3>
+                                <h3>
+                                    <Link href="/p/shipping-method">
+                                        <a>Payment &amp; Shipping Methods</a>
+                                    </Link>
+                                </h3>
+                                <h3>
+                                    <Link href="/p/Same Day Delivery">
+                                        <a>Same Day Delivery</a>
+                                    </Link>
+                                </h3>
+                                <h3>
+                                    <Link href="/p/site map">
+                                        <a>Site Map</a>
+                                    </Link>
+                                </h3>
+                                <h3>
+                                    <Link href="/p/faq">
+                                        <a>FAQ</a>
+                                    </Link>
+                                </h3>
                             </div>
                         </Col>
                         <Col md={3} xs={6}>
                             <div className="footer-info">
                                 <h5>Information</h5>
-                                <Link href="/p/about-us">
-                                    <a>About us</a>
-                                </Link>
-                                <Link href="/p/career">
-                                    <a>Career</a>
-                                </Link>
-                                <Link href="/p/affiliate">
-                                    <a>Affiliate</a>
-                                </Link>
-                                <Link href="/p/wholesale">
-                                    <a>Wholesale</a>
-                                </Link>
-                                <Link href="/p/contact">
-                                    <a>Contact</a>
-                                </Link>
-                                <Link href="/p/terms-&-condition">
-                                    <a>Terms &amp; Condition</a>
-                                </Link>
-                                <Link href="/p/privacy-policy">
-                                    <a>Privacy Policy</a>
-                                </Link>
-                                <Link href="/p/blog">
-                                    <a>Blog</a>
-                                </Link>
+                                <h3>
+                                    <Link href="/p/about-us">
+                                        <a>About us</a>
+                                    </Link>
+                                </h3>
+                                <h3>
+                                    <Link href="/p/career">
+                                        <a>Career</a>
+                                    </Link>
+                                </h3>
+                                <h3>
+                                    <Link href="/p/affiliate">
+                                        <a>Affiliate</a>
+                                    </Link>
+                                </h3>
+                                <h3>
+                                    <Link href="/p/wholesale">
+                                        <a>Wholesale</a>
+                                    </Link>
+                                </h3>
+                                <h3>
+                                    <Link href="/p/contact">
+                                        <a>Contact</a>
+                                    </Link>
+                                </h3>
+                                <h3>
+                                    <Link href="/p/terms-&-condition">
+                                        <a>Terms &amp; Condition</a>
+                                    </Link>
+                                </h3>
+                                <h3>
+                                    <Link href="/p/privacy-policy">
+                                        <a>Privacy Policy</a>
+                                    </Link>
+                                </h3>
+                                <h3>
+                                    <Link href="/p/blog">
+                                        <a>Blog</a>
+                                    </Link>
+                                </h3>
                             </div>
                         </Col>
                         <Col md={2} xs={6}>
                             <div className="footer-info">
                                 <h5>my account</h5>
-                                <Link href="/profile">
-                                    <a>My Account</a>
-                                </Link>
+                                <h3>
+                                    <Link href="/profile">
+                                        <a>My Account</a>
+                                    </Link>
+                                </h3>
 
                                 <p className="pointer" onClick={() => handleShow()}>
                                     Order Tracking
                                 </p>
                                 <div>
-                                    <Link href="https://deshibazaarbd.com" passHref={true}>
+                                    <Link href="https://play.google.com/store/apps/details?id=com.deshibazaarbd" passHref={true}>
                                         <a target="_blank">
                                             <img src="/images/google-play-badge.png" alt="google-play-badge" />
                                         </a>

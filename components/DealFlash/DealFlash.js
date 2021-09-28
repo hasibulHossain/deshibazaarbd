@@ -34,9 +34,9 @@ const DealFlash = () => {
   return (
     <section className="container product-container">
       <div className="product-heading">
-        <h5>
+        <h2>
           <Translate>Deals OF The Day</Translate>
-        </h5>
+        </h2>
         <ViewAll type="deals-of-day" />
       </div>
       <div className="flash-deal-section">

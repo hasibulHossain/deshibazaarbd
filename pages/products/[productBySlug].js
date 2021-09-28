@@ -5,7 +5,7 @@ import LoadingSkelleton from "../../components/master/skelleton/LoadingSkelleton
 // import ProductDetailInfo from "../../components/product-detail/ProductDetailInfo";
 
 import dynamic from 'next/dynamic';
-const ProductDetailInfo = dynamic(() => import('../../components/product-detail/ProductDetailInfo'));
+const ProductDetailInfo = dynamic(() => import('../../components/product-detail/ProductDetailInfo'), {ssr: false});
 
 export default function ProductBySlug({ product }) {
     const loading = false;
