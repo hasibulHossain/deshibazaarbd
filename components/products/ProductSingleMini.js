@@ -62,6 +62,8 @@ const ProductSingleMini = ({
       });
   };
 
+  const uri = encodeURI(`/products/${item.sku}`);
+
   let singleProduct = (
     <div
       className={`
@@ -88,7 +90,7 @@ const ProductSingleMini = ({
         <div className={`product-card-body`} >
           {columnClassName === "col-md-2" && (
             <>
-              <Link href={`/products/${item.sku}`}>
+              <Link href={uri}>
                 <a className="product-card-link">
                   <div style={{overflow: 'hidden'}}>
                   <Image src={imageURL} alt={item.name} width={200} height={200} />
@@ -151,7 +153,7 @@ const ProductSingleMini = ({
                     columnClassName === "col-md-3" ? "col-md-12" : "col-7"
                   }
                   > 
-                  <Link href={`/products/${item.sku}`}>
+                  <Link href={uri}>
                     <a className="product-card-link">
                   <div style={{overflow: 'hidden'}}>
                     <img src={imageURL} alt={item.name} className="img-fluid" />
@@ -212,7 +214,7 @@ const ProductSingleMini = ({
     singleProduct = (
       <div className="product-card filter_column_3">
       <div className="product-card-body">
-        <Link href={`/products/${item.sku}`}>
+        <Link href={uri}>
           <a className="product-card-link">
             <div style={{overflow: 'hidden'}}>
             <Image src={imageURL} alt={item.name} width={200} height={200} />
