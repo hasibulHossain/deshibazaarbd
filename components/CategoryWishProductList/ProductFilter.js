@@ -65,6 +65,8 @@ const ProductFilter = ({show}) => {
 
     if (e.target.checked) {
       filterParamClone.category[1] = category;
+    } else {
+      filterParamClone.category.splice(1, 1)
     }
     
     dispatch(setFilterParams(filterParamClone));
