@@ -28,7 +28,7 @@ const Footer = () => {
                     <Row>
                         <Col md={3} xs={6}>
                             <div className="footer-info">
-                                <h5>Customer Care</h5>
+                                <h3>Customer Care</h3>
                                 <h3>
                                     <Link href="/p/help center">
                                         <a>Help Center</a>
@@ -68,7 +68,7 @@ const Footer = () => {
                         </Col>
                         <Col md={3} xs={6}>
                             <div className="footer-info">
-                                <h5>Information</h5>
+                                <h3>Information</h3>
                                 <h3>
                                     <Link href="/p/about-us">
                                         <a>About us</a>
@@ -113,7 +113,7 @@ const Footer = () => {
                         </Col>
                         <Col md={2} xs={6}>
                             <div className="footer-info">
-                                <h5>my account</h5>
+                                <h3>my account</h3>
                                 <h3>
                                     <Link href="/profile">
                                         <a>My Account</a>
@@ -135,10 +135,10 @@ const Footer = () => {
                         <Col md={4} sm={6}>
                             <div className="footer-info">
                                 <div className="footer-info__follow-us">
-                                    <h5>FOLLOW US: </h5>
+                                    <h3>FOLLOW US: </h3>
                                     <SocialMedia />
                                 </div>
-                                <h5>Newsletter</h5>
+                                <h3>Newsletter</h3>
                                 <p>Subscribe to our newsletter to get notification about discount information</p>
                                 <input onChange={(e) => setEmail(e.target.value)} type="text" className="form-control mb-3" placeholder="Enter your Email here" />
                                 <SimpleBtn onClick={onSubmit} type="submit" variant="danger" style={{width: 'fit-content'}}>

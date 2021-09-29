@@ -1348,7 +1348,12 @@ h6.address_book_updated_title {
 }
 
 .product-details__rich-text .table {
+  overflow-x: scroll;
+}
 
+.product-details__rich-text .table::-webkit-scrollbar {
+  width: 0px;
+  background-color: transparent;
 }
 
 .product-details__rich-text .table table {
@@ -1517,14 +1522,15 @@ h6.address_book_updated_title {
   padding: 30px 0px 30px 0px;
 }
 
-.footer-info h5 {
+.footer-info h3 {
   text-transform: uppercase;
-  font-weight: bold;
+  font-weight: 500;
   font-size: 1em;
 }
 
-.footer-info a {
-  text-decoration: none !important;
+.footer-info h3 a {
+  font-weight: 400;
+  text-decoration: none;
   color: #fff;
   display: block;
   margin: 10px 0px;
@@ -1933,6 +1939,7 @@ ul.social-media {
 .category-search-title {
   color: var(--color-primary);
   font-size: 1.2rem !important;
+  text-transform: capitalize;
 }
 
 .category-search-title + div {

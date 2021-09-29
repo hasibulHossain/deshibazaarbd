@@ -5,8 +5,8 @@ import MainLayout from '../components/layouts/MainLayout';
 // import StoreFilter from '../components/store/StoreFilter';
 // import StoreListFull from '../components/store/StoreListFull';
 
-const StoreFilter = dynamic(() => import('../components/store/StoreFilter'))
-const StoreListFull = dynamic(() => import('../components/store/StoreListFull'))
+const StoreFilter = dynamic(() => import('../components/store/StoreFilter'), {ssr: false})
+const StoreListFull = dynamic(() => import('../components/store/StoreListFull'), {ssr: false})
 
 function Stores() {
     return (

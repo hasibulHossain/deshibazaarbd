@@ -18,7 +18,7 @@ function StoreListFull() {
         list = storeList.length > 0 && storeList.map((item, index) => (
                 <div className="col-6 col-sm-6 col-md-2 col-lg-2" key={index}>
                     {/* <StoreSingleMini item={item} /> */}
-                    <Link href={`/store/id=${item.id}`}>
+                    <Link href={`/store/${item.slug}`}>
                         <a>
                             <div className="store-card">
                                 {

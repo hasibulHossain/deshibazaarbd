@@ -112,7 +112,7 @@ const CategoryWishProductList = ({showFilter, showFilterHandler}) => {
       <div className="row justify-content-between">
         <div className="col-lg-6 col-sm-12">
           <div className={filterHeadingClasses}>
-            <h5 className="category-search-title">{title}</h5>
+            <h5 className="category-search-title">{title.replace("-", " ")}</h5>
             {
               isMobile && (
                 <div>

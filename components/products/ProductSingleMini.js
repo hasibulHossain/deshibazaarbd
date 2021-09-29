@@ -93,9 +93,9 @@ const ProductSingleMini = ({
                   <div style={{overflow: 'hidden'}}>
                   <Image src={imageURL} alt={item.name} width={200} height={200} />
                     <div className="product-card-body-inner">
-                      <p className="product-title">
+                      <h2 className="product-title">
                         <Translate>{item.name}</Translate>
-                      </p>
+                      </h2>
                       <span className="product-unit">{item.per_unit_value} {' '} {item.unit_name && item.unit_name}</span>
                       <p
                         className={`stock-status ${
@@ -157,7 +157,7 @@ const ProductSingleMini = ({
                     <img src={imageURL} alt={item.name} className="img-fluid" />
                   </div>
                   <div>
-                    <p className="product-title">{item.name}</p>
+                    <h2 className="product-title">{item.name}</h2>
                     <span className="product-unit">{item.per_unit_value} {' '} {item.unit_name && item.unit_name}</span>
                     <p
                       className={`stock-status ${
@@ -218,9 +218,9 @@ const ProductSingleMini = ({
             <Image src={imageURL} alt={item.name} width={200} height={200} />
             
               <div className="product-card-body-inner">
-                <p className="product-title">
+                <h2 className="product-title">
                   <Translate>{item.name}</Translate>
-                </p>
+                </h2>
                 <span className="product-unit">{item.per_unit_value} {' '} {item.unit_name && item.unit_name}</span>
                 <p
                   className={`stock-status ${

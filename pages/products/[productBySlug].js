@@ -2,10 +2,7 @@ import React, { useEffect } from "react";
 import MainLayout from "../../components/layouts/MainLayout";
 import ProductNoFound from "../../components/master/productNoFound/ProductNoFound";
 import LoadingSkelleton from "../../components/master/skelleton/LoadingSkelleton";
-// import ProductDetailInfo from "../../components/product-detail/ProductDetailInfo";
-
-import dynamic from 'next/dynamic';
-const ProductDetailInfo = dynamic(() => import('../../components/product-detail/ProductDetailInfo'), {ssr: false});
+import ProductDetailInfo from "../../components/product-detail/ProductDetailInfo";
 
 export default function ProductBySlug({ product }) {
     const loading = false;
@@ -46,9 +43,9 @@ export default function ProductBySlug({ product }) {
 export const getServerSideProps = async (context) => {
     const productBySlug = context.params.productBySlug;
     const uri = encodeURI(`${process.env.NEXT_PUBLIC_API_URL}get-item-detail/${productBySlug}`);
-
     // Don't delete the base api_url from here.
-    const res = await fetch(uri)
+    const res = await fetch(uri);
+
     const dataJSON = await res.json();
     const data = dataJSON.data;
     return {
