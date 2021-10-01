@@ -24,6 +24,13 @@ import { useRouter } from "next/router";
 import { formatCurrency } from "../../services/currency";
 import LazyLoad from "react-lazyload";
 
+import {
+  GlassMagnifier
+} from "react-image-magnifiers";
+
+
+
+
 const ProductDetailInfo = (props) => {
   const dispatch = useDispatch();
   const { product } = props;
@@ -32,8 +39,6 @@ const ProductDetailInfo = (props) => {
   const [filterCarts, setFilterCarts] = useState(null);
   const [updatedID, setUpdatedID] = useState(null);
   const [previewImg, setPreviewImg] = useState("");
-
-  const zoomImage = { width: 250, height: 250, zoomWidth: 600, img: previewImg };
 
   const default_price =
     product.is_offer_enable && product.offer_selling_price !== 0
@@ -174,19 +179,15 @@ const ProductDetailInfo = (props) => {
                     <div className="col-lg-9 bg-white">
                       <div className="">
                         <div className="row">
-                          <div className="col-lg-4 mt-2">
-                            <div className=" d-none d-md-block">
-                              <div
-                                style={{
-                                  height: "250px",
-                                  display: "flex",
-                                  justifyContent: "center",
-                                  alignItems: "center",
-                                }}
-                              >
-                                <ReactImageZoom
-                                  className="zoom-image mt-3"
-                                  {...zoomImage}
+                          <div className="col-lg-6 mt-2">
+                            <div className="img-magnifier d-none d-md-block">
+                              <div>
+                                <GlassMagnifier
+                                  imageSrc={previewImg}
+                                  imageAlt={previewImg}
+                                  magnifierSize="70%"
+                                  magnifierBorderSize={5}
+                                  square
                                 />
                               </div>
                             </div>
@@ -239,7 +240,7 @@ const ProductDetailInfo = (props) => {
                               )}
                             </div>
                           </div>
-                          <div className="col-lg-8">
+                          <div className="col-lg-6">
                             <div className="product_details_information py-2">
                               <h2 className="product_title">{product.name}</h2>
 
