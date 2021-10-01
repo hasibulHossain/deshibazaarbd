@@ -23,7 +23,7 @@ export default function Home() {
     <MainLayout>
       <HomeBannerCarousel />
 
-      <NewOffer />
+      {/* <NewOffer /> */}
       {/* <OfferProducts /> */}
       {/* <ProductTopListContainer /> */}
       <CategoryListContainer url='categories' />
