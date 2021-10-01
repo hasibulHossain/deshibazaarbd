@@ -794,7 +794,6 @@ a .custom-button-component:hover {
 
 .brand-card {
   width: 100%;
-  height: 100px;
   background: white;
   margin-bottom: 20px;
   border-radius: 5px;
@@ -3523,6 +3522,10 @@ img.payment_method_in_shipping {
 
 .store-info-container__tabs .nav-tabs {
   border: none;
+}
+
+.store-info-container__tabs .nav-tabs .nav-link {
+  color: #212529;
 }
 
 .storeList-body {

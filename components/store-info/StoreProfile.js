@@ -13,7 +13,6 @@ function StoreProfile() {
     const [isShowing, SetIsShowing] = useState(false)
 
     const toggleHandler = () => {
-        console.log('running')
         SetIsShowing(preState => !preState)
     }
     useEffect(() => {
