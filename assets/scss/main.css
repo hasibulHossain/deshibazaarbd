@@ -2305,11 +2305,6 @@ p.address_sub_title {
   width: 1.4rem;
 }
 
-.user_profile_setting_body {
-  /* background-color: #e1f1eb78; */
-  padding: 20px;
-}
-
 .address_book_updated {
   background-color: #e1f1eb78;
   padding: 10px;

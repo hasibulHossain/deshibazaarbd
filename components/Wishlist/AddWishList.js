@@ -10,7 +10,10 @@ const AddWishList = ({ product }) => {
     const [isWishList, setIsWishList] = useState(false)
 
     const handleAddedWishList = (product) => {
-        setIsWishList(true);
+        const localStorageData = localStorage.getItem("loginData");
+        if(localStorageData) {
+            setIsWishList(true);
+        }
         dispatch(WishListAdded(product.id))
         
     }

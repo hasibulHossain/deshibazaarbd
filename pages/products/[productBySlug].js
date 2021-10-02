@@ -5,34 +5,17 @@ import LoadingSkelleton from "../../components/master/skelleton/LoadingSkelleton
 import ProductDetailInfo from "../../components/product-detail/ProductDetailInfo";
 
 export default function ProductBySlug({ product }) {
-    const loading = false;
     return (
         <>
-
             <MainLayout pageTitle={product !== "undefined" && product !== null ? product.name : "Not found"}>
                 <div className="container">
-                    <>
-                        {
-                            product !== "undefined" && product !== null ?
-                                <ProductDetailInfo product={product} /> :
-                                <ProductNoFound
-                                    title="Product details no found !"
-                                    description="We're sorry. We cannot find this product details at this moment."
-                                />
-                        }
-                    </>
                     {
-                        loading &&
-                        <div className="mb-5">
-                            {loading && (
-                                <LoadingSkelleton
-                                    alignment="vertical"
-                                    count={1}
-                                    width={730}
-                                    height={200}
-                                />
-                            )}
-                        </div>
+                        product !== "undefined" && product !== null ?
+                            <ProductDetailInfo product={product} /> :
+                            <ProductNoFound
+                                title="Product details no found !"
+                                description="We're sorry. We cannot find this product details at this moment."
+                            />
                     }
                 </div>
             </MainLayout>

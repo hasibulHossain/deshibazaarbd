@@ -204,35 +204,6 @@ const ProductDetailInfo = (props) => {
                                 hasSpacer
                               />
                             <div className="product_preview_gallery mt-2">
-                              {/* {product.images && product.images.length > 0 && (
-                                <Slider {...settings}>
-                                  {product.images.map((item, index) => (
-                                    <div key={index + 1}>
-                                      <img
-                                        onClick={() =>
-                                          handleChangePreviewImg(item.image_url)
-                                        }
-                                        src={item.image_url}
-                                        className="multiple_preview_images pointer"
-                                        alt=""
-                                      />
-                                    </div>
-                                  ))}
-                                </Slider>
-                              )}
-                              {product.images && product.images.length === 0 && (
-                                <div>
-                                  <img
-                                    onClick={() =>
-                                      handleChangePreviewImg(previewImg)
-                                    }
-                                    src={previewImg}
-                                    className="multiple_preview_images pointer"
-                                    alt=""
-                                  />
-                                </div>
-                              )} */}
-
                               <Slider {...settings}>
                                 {product.images && product.images.length > 0 && product.images.map((item, index) => (
                                   <div key={index}>
@@ -412,16 +383,5 @@ const ProductDetailInfo = (props) => {
     </>
   );
 };
-
-function SampleNextArrow(props) {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={className}
-      style={{ ...style, display: "block", background: "red" }}
-      onClick={onClick}
-    />
-  );
-}
 
 export default ProductDetailInfo;

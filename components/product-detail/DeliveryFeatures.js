@@ -6,6 +6,8 @@ import React from 'react';
 const DeliveryFeatures = ({ product }) => {
 
     const {location} = product.business;
+    const hours = product.approx_delivery_time / 60;
+    const days = Math.floor(hours / 24);
 
     return (
         <>
@@ -79,7 +81,13 @@ const DeliveryFeatures = ({ product }) => {
                     <div className="d-flex">
                         <FontAwesomeIcon className="product_details_font_awesome" icon={faTruck} />
                         <div className="ml-3 product_details__delivery__features_info">
-                            <p>Home Delivery <br /><small style={{color: 'var(--color-green-light)'}} className="delivery_time">4-7 Days</small></p>
+                            <p>Home Delivery <br />
+                                <small style={{color: 'var(--color-green-light)'}} className="delivery_time">
+                                    {
+                                        `${days} - ${days + 1}`
+                                    } days
+                                </small>
+                            </p>
                         </div>
                     </div>
                 </div>
