@@ -8,6 +8,7 @@ import {
   setFilterParams,
 } from "./_redux/Action/CategoryWiseProductAction";
 import ReactPaginate from "react-paginate";
+import Image from 'next/image';
 
 const CategoryWishProductContainer = () => {
   const dispatch = useDispatch();
@@ -34,7 +35,8 @@ const CategoryWishProductContainer = () => {
         categoryBrandDetails.banner_url && (
             <div className="banner">
               <div className="banner-photo-box">
-                <img src={categoryBrandDetails.banner_url} alt="" />
+                <Image src={categoryBrandDetails.banner_url} width={1260} height={280} />
+                {/* <img src={categoryBrandDetails.banner_url} alt="" /> */}
               </div>
             </div>
         )
