@@ -26,6 +26,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "../components/product-review/productListForReview.css";
 import "../components/ProfileAccountSetting/ProfileAccountSetting.scss";
 import "../assets/scss/nprogress.css"
+import 'react-inner-image-zoom/lib/InnerImageZoom/styles.min.css';
 
 // For Order Pages
 import "../components/orders/scss/order-invoice.scss";

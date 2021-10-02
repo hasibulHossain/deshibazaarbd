@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import ReactImageZoom from "react-image-zoom";
 import Link from "next/link";
 import {
   addToCartAction,
@@ -23,13 +22,7 @@ import ProductMainList from "../products/ProductMainList";
 import { useRouter } from "next/router";
 import { formatCurrency } from "../../services/currency";
 import LazyLoad from "react-lazyload";
-
-import {
-  GlassMagnifier
-} from "react-image-magnifiers";
-
-
-
+import InnerImageZoom from 'react-inner-image-zoom';
 
 const ProductDetailInfo = (props) => {
   const dispatch = useDispatch();
@@ -58,11 +51,31 @@ const ProductDetailInfo = (props) => {
   };
 
   const settings = {
+    arrows: true,
     dots: false,
     infinite: false,
     speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 3,
+    draggable: true,
+    focusOnSelect: false,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+
+    responsive: [
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3
+        }
+      }
+    ]
   };
 
   useEffect(() => {
@@ -180,38 +193,19 @@ const ProductDetailInfo = (props) => {
                       <div className="">
                         <div className="row">
                           <div className="col-lg-6 mt-2">
-                            <div className="img-magnifier d-none d-md-block">
-                              <div>
-                                <GlassMagnifier
-                                  imageSrc={previewImg}
-                                  imageAlt={previewImg}
-                                  magnifierSize="70%"
-                                  magnifierBorderSize={5}
-                                  square
-                                />
-                              </div>
-                            </div>
-                            <div className=" d-block d-md-none text-center">
-                              <img
-                                src={previewImg}
-                                alt="product preview image"
-                                style={{ maxHeight: "180px" }}
-                                className="img-fluid"
+                              <InnerImageZoom 
+                                src={previewImg} 
+                                zoomSrc={previewImg}
+                                zoomType="hover"
+                                width={500}
+                                height={500}
+                                zoomScale={1.7}
+                                alt={previewImg}
+                                hasSpacer
                               />
-                            </div>
-                            <div className="product_preview_gallery">
-                              {product.images && product.images.length > 0 && (
+                            <div className="product_preview_gallery mt-2">
+                              {/* {product.images && product.images.length > 0 && (
                                 <Slider {...settings}>
-                                  {/* <div>
-                                    <img
-                                      onClick={() =>
-                                        handleChangePreviewImg(previewImg)
-                                      }
-                                      src={previewImg}
-                                      className="multiple_preview_images pointer"
-                                      alt=""
-                                    />
-                                  </div> */}
                                   {product.images.map((item, index) => (
                                     <div key={index + 1}>
                                       <img
@@ -237,7 +231,17 @@ const ProductDetailInfo = (props) => {
                                     alt=""
                                   />
                                 </div>
-                              )}
+                              )} */}
+
+                              <Slider {...settings}>
+                                {product.images && product.images.length > 0 && product.images.map((item, index) => (
+                                  <div key={index}>
+                                    <div onClick={() => handleChangePreviewImg(item.image_url) } style={{padding: '5px', width: '100%', height: '100px'}}>
+                                      <img  style={{maxWidth: '100%', objectFit: 'contain', height: '100%', border: '1px solid #ddd', padding: '5px'}} src={item.image_url} alt={item.image_url} />
+                                    </div>
+                                  </div>
+                                ))}
+                              </Slider>
                             </div>
                           </div>
                           <div className="col-lg-6">
@@ -408,5 +412,16 @@ const ProductDetailInfo = (props) => {
     </>
   );
 };
+
+function SampleNextArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{ ...style, display: "block", background: "red" }}
+      onClick={onClick}
+    />
+  );
+}
 
 export default ProductDetailInfo;

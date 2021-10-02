@@ -13,10 +13,11 @@ const ProductMainList = (props) => {
         dots: false,
         autoplay: true,
         infinite: true,
-        // speed: 500,
-        autoPlaySpeed: 2000,
+        speed: 500,
+        autoPlaySpeed: 1000,
         slidesToShow: 6,
         slidesToScroll: 1,
+        pauseOnHover: true,
         responsive: [
             {
               breakpoint: 1024,
