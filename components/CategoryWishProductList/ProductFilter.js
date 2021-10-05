@@ -23,7 +23,7 @@ const ProductFilter = ({show}) => {
   const { filterParams, categories, brands } = useSelector(
     (state) => state.CategoryWiseProductReducer
   );
-  const {isMobile} = useSelector(state => state.GlobalReducer);
+  // const {isMobile} = useSelector(state => state.GlobalReducer);
 
   const [value, setValue] = useState({ min: 100, max: 90000 });
   const [isChecked, setIsChecked] = useState(false);
@@ -47,10 +47,10 @@ const ProductFilter = ({show}) => {
     page
   } = filterParams;
 
-  const classes = classNames({
-    'product_filter_section modal-scrollbar shadow-sm p-3 mb-md-5 mb-sm-2 bg-white rounded': true,
-    show: show || !isMobile,
-  });
+  // const classes = classNames({
+  //   'product_filter_section modal-scrollbar shadow-sm p-3 mb-md-5 mb-sm-2 bg-white rounded': true,
+  //   show: show || !isMobile,
+  // });
 
   // checkbox handler
   const handleChecked = (e, category) => {
@@ -136,88 +136,88 @@ const ProductFilter = ({show}) => {
     dispatch(setFilterParams(filterParamClone));
   }
 
-  const {brand: brandQuery = "", category: categoryQuery = "", type: typeQuery = "", storeById = ""} = router.query;
+  // const {brand: brandQuery = "", category: categoryQuery = "", type: typeQuery = "", storeById = ""} = router.query;
 
-  useEffect(() => {
-    const queries = router.query;
-    const cloneFilterParams = {...filterParams};
+  // useEffect(() => {
+  //   const queries = router.query;
+  //   const cloneFilterParams = {...filterParams};
 
-    for(const query in queries) {
-      if(Array.isArray(cloneFilterParams[query])) {
-        // cloneFilterParams[query] = [];
+  //   for(const query in queries) {
+  //     if(Array.isArray(cloneFilterParams[query])) {
+  //       // cloneFilterParams[query] = [];
 
-        if(query === 'brand') {
-          cloneFilterParams[query].push(+queries[query]);
+  //       if(query === 'brand') {
+  //         cloneFilterParams[query].push(+queries[query]);
 
-          dispatch(getCategoryOrBrandDetails('brands/' + +queries[query]));
-        }
-        if(query === 'category') {
-          // check if category same or not after remount
-          if(cloneFilterParams[query].length > 0 && !(cloneFilterParams[query][0] === parseInt(queries[query]))) {
-            cloneFilterParams.page = 1;
-            cloneFilterParams[query] = [];
-            cloneFilterParams[query].push(+queries[query]);
-          } else {
+  //         dispatch(getCategoryOrBrandDetails('brands/' + +queries[query]));
+  //       }
+  //       if(query === 'category') {
+  //         // check if category same or not after remount
+  //         if(cloneFilterParams[query].length > 0 && !(cloneFilterParams[query][0] === parseInt(queries[query]))) {
+  //           cloneFilterParams.page = 1;
+  //           cloneFilterParams[query] = [];
+  //           cloneFilterParams[query].push(+queries[query]);
+  //         } else {
 
-            cloneFilterParams[query] = [];
-            cloneFilterParams[query].push(+queries[query]);
-          }
+  //           cloneFilterParams[query] = [];
+  //           cloneFilterParams[query].push(+queries[query]);
+  //         }
 
-          dispatch(getSubCategories(queries[query]))
+  //         dispatch(getSubCategories(queries[query]))
 
-          dispatch(getCategoryOrBrandDetails('categories/' + +queries[query]));
-        }
+  //         dispatch(getCategoryOrBrandDetails('categories/' + +queries[query]));
+  //       }
 
-      } else {
-        cloneFilterParams.category = [];
-        cloneFilterParams.brand = [];
-        cloneFilterParams.page = 1;
+  //     } else {
+  //       cloneFilterParams.category = [];
+  //       cloneFilterParams.brand = [];
+  //       cloneFilterParams.page = 1;
 
-        if(query === 'storeById') {
-          cloneFilterParams['seller_id'] = queries[query]
-        }
-        if(query === 'type') {
-          cloneFilterParams['type'] = queries[query]
-        }
-      }
-    }
-    dispatch(setFilterParams(cloneFilterParams));
+  //       if(query === 'storeById') {
+  //         cloneFilterParams['seller_id'] = queries[query]
+  //       }
+  //       if(query === 'type') {
+  //         cloneFilterParams['type'] = queries[query]
+  //       }
+  //     }
+  //   }
+  //   dispatch(setFilterParams(cloneFilterParams));
 
-    dispatch(getShopList());
+  //   dispatch(getShopList());
 
-  }, [brandQuery, categoryQuery, typeQuery, storeById]);
+  // }, [brandQuery, categoryQuery, typeQuery, storeById]);
 
-  useEffect(() => {
-    return () => {
-      dispatch(resetFilterParams(filterParams))
-    }
-  }, [])
+  // useEffect(() => {
+  //   return () => {
+  //     dispatch(resetFilterParams(filterParams))
+  //   }
+  // }, [])
 
-  useEffect(() => {
+  // useEffect(() => {
     
-    const source = Axios.CancelToken.source();
-    dispatch(getFilteredProducts(filterParams, source));
-    return () => {
-      source.cancel()
-    }
-  }, [
-    attributes,
-    JSON.stringify(brand),
-    JSON.stringify(category),
-    max_price,
-    min_price,
-    rating,
-    search,
-    paginate_no,
-    order_by,
-    order,
-    type,
-    page,
-    seller_id
-  ]);
+  //   const source = Axios.CancelToken.source();
+  //   dispatch(getFilteredProducts(filterParams, source));
+  //   return () => {
+  //     source.cancel()
+  //   }
+  // }, [
+  //   attributes,
+  //   JSON.stringify(brand),
+  //   JSON.stringify(category),
+  //   max_price,
+  //   min_price,
+  //   rating,
+  //   search,
+  //   paginate_no,
+  //   order_by,
+  //   order,
+  //   type,
+  //   page,
+  //   seller_id
+  // ]);
 
   return (
-    <section className={classes} >
+    <section className="w-100 product_filter_section modal-scrollbar bg-white" >
       <h3 className="product_filter_heading">Filter Products</h3>
 
       {/**filter by price range */}

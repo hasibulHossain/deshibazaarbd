@@ -10,6 +10,8 @@ import {
 import LoadingSpinner from "../master/LoadingSpinner/LoadingSpinner";
 import classNames from "classnames";
 import {useRouter} from 'next/router';
+import LoadingPlaceHolder from "../master/skelleton/LoadingPlaceholder";
+
 
 const CategoryWishProductList = ({showFilter, showFilterHandler}) => {
   const router = useRouter();
@@ -86,10 +88,10 @@ const CategoryWishProductList = ({showFilter, showFilterHandler}) => {
     column_active: showFilter
   })
 
-  const filterHeadingClasses = classNames({
-    "category_wise_product_list_heading": true,
-    show: showFilter
-  })
+  // const filterHeadingClasses = classNames({
+  //   "category_wise_product_list_heading": true,
+  //   show: showFilter
+  // })
 
   let title = "";
 
@@ -109,26 +111,10 @@ const CategoryWishProductList = ({showFilter, showFilterHandler}) => {
 
   return (
     <section className="category_wise_product_list">
-      <div className="row justify-content-between">
+      <div className="row justify-content-between my-4">
         <div className="col-lg-6 col-sm-12">
-          <div className={filterHeadingClasses}>
+          <div className="category_wise_product_list_heading">
             <h5 className="category-search-title">{title.replace("-", " ")}</h5>
-            {
-              isMobile && (
-                <div>
-                  <span style={{marginRight: '5px'}}>
-                    Filter 
-                  </span>
-                  <span>
-                    <FontAwesomeIcon
-                      className={filterClasses}
-                      icon={faSlidersH}
-                      onClick={showFilterHandler}
-                    />
-                  </span>
-                </div>
-              )
-            }
           </div>
           <p>
             {
@@ -139,32 +125,20 @@ const CategoryWishProductList = ({showFilter, showFilterHandler}) => {
         </div>
         <div className="col-lg-6 col-sm-12">
           <div className="d-flex justify-content-start justify-content-sm-end">
-            {/* <div className="filter_view">
-              {
-                !isMobile && (
-                  <span>View</span>
-                )
-              }
-              
-              <FontAwesomeIcon
-                className={
-                  columns == "col-md-3"
-                    ? "filter_columns column_active"
-                    : "filter_columns"
-                }
-                icon={faColumns}
-                onClick={() => setColumns("col-md-3")}
-              /> */}
-              {/* <FontAwesomeIcon
-                className={
-                  columns == "col-md-12"
-                    ? "filter_columns column_active"
-                    : "filter_columns"
-                }
-                icon={faList}
-                onClick={() => setColumns("col-md-12")}
-              /> */}
-            {/* </div> */}
+            <div className="filter_view mr-2 d-flex align-items-center" onClick={() => showFilterHandler()}> 
+              <div className="product-filter">
+                <span style={{marginRight: '5px'}}>
+                  Filter 
+                </span>
+                <span>
+                  <FontAwesomeIcon
+                    className={filterClasses}
+                    icon={faSlidersH}
+                    onClick={showFilterHandler}
+                  />
+                </span>
+              </div>
+            </div>
             <div className="filter_view d-flex mr-2 align-items-center">
               {
                 !isMobile && (
@@ -205,8 +179,8 @@ const CategoryWishProductList = ({showFilter, showFilterHandler}) => {
       </div>
       {
         isLoading && (
-          <div className="d-flex justify-content-center">
-            <LoadingSpinner text="Loading Products...." />
+          <div className="row">
+            <LoadingPlaceHolder className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6" count={4} height={370}  />
           </div>
         )
       }
