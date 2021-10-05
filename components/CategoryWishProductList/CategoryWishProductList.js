@@ -119,7 +119,7 @@ const CategoryWishProductList = ({showFilter, showFilterHandler}) => {
           <p>
             {
               !isLoading &&
-              (paginate.total !== null ? paginate.total : '0') + ' items found in ' + title 
+              (paginate.total !== null ? paginate.total : '0') + ` items found in ${title.replace("-", " ")}`
             }
           </p>
         </div>
