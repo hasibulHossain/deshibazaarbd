@@ -42,7 +42,7 @@ const HeaderTop = () => {
                         <div className="row justify-content-end">
                             <p className="heading-top-text pointer mr-3">
                                 <a
-                                    href="https://seller.programmingshikhi.com"
+                                    href="https://seller.deshibazaarbd.com"
                                     target="_blank"
                                     style={{ color: '#fff', textDecoration: 'none' }} >
                                     <FontAwesomeIcon className="custom-fontAwesome" icon={faUser} />

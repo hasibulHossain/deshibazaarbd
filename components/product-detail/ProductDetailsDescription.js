@@ -6,17 +6,13 @@ const ProductDetailsDescription = ({ product }) => {
 
     return (
         <div className="product_description">
-            <div className="container">
-                <div className="row">
-                    <div className="col-lg-12">
-                        <Tabs defaultActiveKey="description" id="uncontrolled-tab-example" className="mb-3">
-                            <Tab eventKey="description" title="Description">
-                                <p className="product_title">Product Description</p>
-                                <p className="product_details_description">
+                <p className="product-description__head">Description</p>
+                    <div className="product-details__rich-text">
                                     {
                                         Parser(product.description)
                                     }
-                                </p>
+                        {/* <Tabs defaultActiveKey="description" id="uncontrolled-tab-example" className="mb-3">
+                            <Tab eventKey="description" title="Description">
                             </Tab>
                             <Tab eventKey="purchase_delivery" title="Purchase Delivery">
                                 <p className="product_title">Purchase Delivery</p>
@@ -27,10 +23,8 @@ const ProductDetailsDescription = ({ product }) => {
                             <Tab eventKey="replace_policy" title="Replace Policy">
                                 <p className="product_title">Replace Policy</p>
                             </Tab>
-                        </Tabs>
+                        </Tabs> */}
                     </div>
-                </div>
-            </div>
         </div>
     );
 };

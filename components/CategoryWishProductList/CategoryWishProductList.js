@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faColumns, faList, faFilter } from "@fortawesome/free-solid-svg-icons";
+import { faColumns, faList, faFilter, faSlidersH } from "@fortawesome/free-solid-svg-icons";
 import { Form } from "react-bootstrap";
 import CategoryWiseMiniProduct from "./CategoryWiseMiniProduct";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,6 +10,8 @@ import {
 import LoadingSpinner from "../master/LoadingSpinner/LoadingSpinner";
 import classNames from "classnames";
 import {useRouter} from 'next/router';
+import LoadingPlaceHolder from "../master/skelleton/LoadingPlaceholder";
+
 
 const CategoryWishProductList = ({showFilter, showFilterHandler}) => {
   const router = useRouter();
@@ -53,6 +55,29 @@ const CategoryWishProductList = ({showFilter, showFilterHandler}) => {
     }
     dispatch(setFilterParams(filterParamClone));
   }
+  const perPageHandler = (e) => {
+    let filterParamClone = { ...filterParams };
+
+    switch (e.target.value) {
+      case "20":
+        filterParamClone.paginate_no = 20
+        break;
+
+      case "40":
+        filterParamClone.paginate_no = 40
+        break;
+
+      case "60":
+        filterParamClone.paginate_no = 60
+        break;
+
+      case "100":
+        filterParamClone.paginate_no = 100
+        break;
+    }
+
+    dispatch(setFilterParams(filterParamClone));
+  }
 
   const rowClasses = classNames({
     'row': true,
@@ -63,10 +88,10 @@ const CategoryWishProductList = ({showFilter, showFilterHandler}) => {
     column_active: showFilter
   })
 
-  const filterHeadingClasses = classNames({
-    "category_wise_product_list_heading": true,
-    show: showFilter
-  })
+  // const filterHeadingClasses = classNames({
+  //   "category_wise_product_list_heading": true,
+  //   show: showFilter
+  // })
 
   let title = "";
 
@@ -86,62 +111,35 @@ const CategoryWishProductList = ({showFilter, showFilterHandler}) => {
 
   return (
     <section className="category_wise_product_list">
-      <div className="row justify-content-between">
+      <div className="row justify-content-between my-4">
         <div className="col-lg-6 col-sm-12">
-          <div className={filterHeadingClasses}>
-            <h5 className="category-search-title">{title}</h5>
-            {
-              isMobile && (
-                <>
-                  <span>
-                    Filter 
-                  </span>
-                  <span>
-                    <FontAwesomeIcon
-                      className={filterClasses}
-                      icon={faFilter}
-                      onClick={showFilterHandler}
-                    />
-                  </span>
-                </>
-              )
-            }
+          <div className="category_wise_product_list_heading">
+            <h5 className="category-search-title">{title.replace("-", " ")}</h5>
           </div>
           <p>
             {
-              (paginate.total !== null ? paginate.total : '0') + ' items found in ' + title 
+              !isLoading &&
+              (paginate.total !== null ? paginate.total : '0') + ` items found in ${title.replace("-", " ")}`
             }
           </p>
         </div>
         <div className="col-lg-6 col-sm-12">
           <div className="d-flex justify-content-start justify-content-sm-end">
-            <div className="filter_view">
-              {
-                !isMobile && (
-                  <span>View</span>
-                )
-              }
-              
-              <FontAwesomeIcon
-                className={
-                  columns == "col-md-3"
-                    ? "filter_columns column_active"
-                    : "filter_columns"
-                }
-                icon={faColumns}
-                onClick={() => setColumns("col-md-3")}
-              />
-              <FontAwesomeIcon
-                className={
-                  columns == "col-md-12"
-                    ? "filter_columns column_active"
-                    : "filter_columns"
-                }
-                icon={faList}
-                onClick={() => setColumns("col-md-12")}
-              />
+            <div className="filter_view mr-2 d-flex align-items-center" onClick={() => showFilterHandler()}> 
+              <div className="product-filter">
+                <span style={{marginRight: '5px'}}>
+                  Filter 
+                </span>
+                <span>
+                  <FontAwesomeIcon
+                    className={filterClasses}
+                    icon={faSlidersH}
+                    onClick={showFilterHandler}
+                  />
+                </span>
+              </div>
             </div>
-            <div className="filter_view d-flex">
+            <div className="filter_view d-flex mr-2 align-items-center">
               {
                 !isMobile && (
                   <span>Sort by</span>
@@ -159,13 +157,30 @@ const CategoryWishProductList = ({showFilter, showFilterHandler}) => {
                 </Form.Group>
               </Form>
             </div>
+            <div className="filter_view d-flex align-items-center">
+              {
+                !isMobile && (
+                  <span>Per page</span>
+                )
+              }
+              <Form>
+                <Form.Group controlId="exampleFormSelectCustom">
+                  <Form.Control onChange={perPageHandler} as="select" custom>
+                    <option value="20">20</option>
+                    <option value="40">40</option>
+                    <option value="60">60</option>
+                    <option value="100">100</option>
+                  </Form.Control>
+                </Form.Group>
+              </Form>
+            </div>
           </div>
         </div>
       </div>
       {
         isLoading && (
-          <div className="d-flex justify-content-center">
-            <LoadingSpinner text="Loading Products...." />
+          <div className="row">
+            <LoadingPlaceHolder className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6" count={4} height={370}  />
           </div>
         )
       }

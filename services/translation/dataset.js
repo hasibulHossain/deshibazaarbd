@@ -65,7 +65,16 @@ export default [
         'bn' : 'অন্য কীওয়ার্ড দিয়ে চেষ্টা করুন'
     },
 
+
+
+
+    
     // Home Page
+
+
+
+
+
     {
         'key': 'Only This Weak',
         'en' : 'Only This Weak',
@@ -161,6 +170,16 @@ export default [
         'en' : 'Add to cart',
         'bn' : 'কার্টে যুক্ত করুন'
     },
+    {
+        'key': 'shop by stores',
+        'en' : 'Shop by Stores',
+        'bn' : 'দোকান অনুযায়ী দেখুন'
+    },
+    {
+        'key': 'Track Order',
+        'en' : 'Track Order',
+        'bn' : 'অর্ডার ট্র্যাক করুন'
+    },
 
 
 
@@ -168,6 +187,8 @@ export default [
 
     // Category Translations, Do this after the above translations
     // @todo Add More Categories Translation
+
+
     {
         'key': 'Electronics',
         'en' : 'Electronics',
@@ -208,8 +229,48 @@ export default [
         'en' : 'Food',
         'bn' : 'খাদ্য'
     },
+    {
+        'key': 'books gallery',
+        'en' : 'Books Gallery',
+        'bn' : 'বই গ্যালারি'
+    },
+    {
+        'key': 'automotive & motorbike',
+        'en' : 'Automotive & Motorbike',
+        'bn' : 'স্বয়ংচালিত এবং মোটরবাইক'
+    },
+    {
+        'key': 'motor vehicles',
+        'en' : 'Motor Vehicles',
+        'bn' : 'মোটর যানবাহন'
+    },
+    {
+        'key': 'mother & baby',
+        'en' : 'Mother & Baby',
+        'bn' : 'মা ও বাচ্চাদের জিনিসপত্র'
+    },
+    {
+        'key': 'health & beauty',
+        'en' : 'Health & Beauty',
+        'bn' : 'স্বাস্থ্য এবং সৌন্দর্য'
+    },
+    {
+        'key': 'sports and fitness',
+        'en' : 'Sports and Fitness',
+        'bn' : 'খেলাধুলা এবং ফিটনেস'
+    },
+    {
+        'key': 'kids fashion',
+        'en' : 'kids Fashion',
+        'bn' : 'বাচ্চাদের ফ্যাশন'
+    },
+
+
 
     // Sub Categories
+
+
+
     {
         'key': 'Laptop',
         'en' : 'Laptop',
@@ -230,8 +291,93 @@ export default [
         'en' : 'TV',
         'bn' : 'টেলিভিশন'
     },
+    {
+        'key': 'home&cleaning',
+        'en' : 'Home & Cleaning',
+        'bn' : 'বাসা এবং পরিষ্কারের জিনিসপত্র'
+    },
+    {
+        'key': 'fruits & vegetables',
+        'en' : 'Fruits & Vegetables',
+        'bn' : 'ফল এবং শাকসবজি'
+    },
+    {
+        'key': 'beverages',
+        'en' : 'Beverages',
+        'bn' : 'পানীয়'
+    },
+    {
+        'key': 'snacks & instant foods',
+        'en' : 'Snacks & Instant Foods',
+        'bn' : 'জলখাবার এবং তাত্ক্ষণিক খাদ্য'
+    },
+    {
+        'key': 'bread & bakery',
+        'en' : 'Bread & Bakery',
+        'bn' : 'রুটি এবং বেকারি'
+    },
+    {
+        'key': 'baking needs',
+        'en' : 'Baking Needs',
+        'bn' : 'বেকিং জিনিসপত্র'
+    },
+    {
+        'key': 'cooking items',
+        'en' : 'Cooking Items',
+        'bn' : 'কুকিং আইটেমস'
+    },
+    {
+        'key': 'fish & meat',
+        'en' : 'Fish & Meat',
+        'bn' : 'মাছ এবং মাংস'
+    },
+    {
+        'key': 'milk & dairy',
+        'en' : 'Milk & Dairy',
+        'bn' : 'দুধ ও দুগ্ধ জাতীয় খাবার'
+    },
+    {
+        'key': 'fresh vegetables',
+        'en' : 'Fresh Vegetables',
+        'bn' : 'তাজা সবজি'
+    },
+    {
+        'key': 'fresh fruits',
+        'en' : 'Fresh Fruits',
+        'bn' : 'তাজা ফল'
+    },
+    {
+        'key': 'tea',
+        'en' : 'Tea',
+        'bn' : 'চা'
+    },
+    {
+        'key': 'coffee',
+        'en' : 'Coffee',
+        'bn' : 'কফি'
+    },
+    {
+        'key': 'juice',
+        'en' : 'Juice',
+        'bn' : 'জুস'
+    },
+    {
+        'key': 'soft drinks',
+        'en' : 'Soft Drinks',
+        'bn' : 'কোমল পানীয়'
+    },
+    {
+        'key': 'water',
+        'en' : 'Water',
+        'bn' : 'পানি'
+    },
+
+
 
     //user profile
+
+
+
     {
         'key': 'My Profile',
         'en' : 'My Profile',
@@ -293,7 +439,11 @@ export default [
         'bn' : 'এডিট'  
     },
 
+
+
     // Product Translations
+
+
     {
         'key': 'Sony Camera',
         'en' : 'Sony Camera',

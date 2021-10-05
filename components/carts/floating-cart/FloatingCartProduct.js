@@ -24,7 +24,7 @@ function FloatingCartProduct({ item }) {
           <p className="floating-cart__product-name">{item.productName}</p>
           <p className="floating-cart__product-price">
             {item.quantity} <span>X</span>&nbsp;
-            {formatCurrency(item.offerPrice !== null && item.offerPrice !== 0 ? item.offerPrice : item.price)} {activeCurrency('code')}
+            {formatCurrency(item.offerPrice !== null && item.offerPrice !== 0 && item.offerPrice !== "0" ? item.offerPrice : item.price)} {activeCurrency('code')}
           </p>
           <CartQuantity cart={item} />
         </div>

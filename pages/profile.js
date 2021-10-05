@@ -1,17 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import MainLayout from "../components/layouts/MainLayout";
-import Head from "next/head";
-import ProductProfile from "../components/myprofile/ProductProfile";
-import { redirectRouter } from "../components/master/utils/RedirectRouterHelper";
+// import ProductProfile from "../components/myprofile/ProductProfile";
 import ProtectedRoute from "../components/master/protectedRoute/ProtectedRoute";
-// import ProtectedRoute from "../components/master/protectedRoute/ProtectedRoute";
+
+import dynamic from 'next/dynamic';
+const ProductProfile = dynamic(() => import('../components/myprofile/ProductProfile'));
 
 const profile = () => {
-
-    // useEffect(() => {
-    //     redirectRouter("profile");
-    // }, []);
-
     return (
         <MainLayout pageTitle={`Profile Manage`}>
             <ProductProfile />

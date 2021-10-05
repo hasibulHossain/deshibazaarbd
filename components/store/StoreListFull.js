@@ -16,26 +16,22 @@ function StoreListFull() {
 
     if(!isLoading) {
         list = storeList.length > 0 && storeList.map((item, index) => (
-                <div className="col-6 col-sm-6 col-md-2 col-lg-2" key={index}>
+                <div className="col-lg-3 col-md-4 col-sm-4 col-6 px-1 px-sm-2" key={index}>
                     {/* <StoreSingleMini item={item} /> */}
-                    <Link href={`/store/id=${item.id}`}>
+                    <Link href={`/store/${item.slug}`}>
                         <a>
-                            <div className="store-card">
+                            <div className="brand-card">
                                 {
-                                    (item.logo !== null && item.logo !== '')?
-                                    <div className="store-logo">
+                                    (item.logo !== null && item.logo !== '') &&
+                                    <div className="brand-logo">
                                         <img src={`${process.env.NEXT_PUBLIC_URL}/images/vendors/${item.logo}`} alt={item.name} />
-                                    </div>
-                                    :
-                                    <div className="store-logo">
-                                        {item.name}
                                     </div>
                                 }
                             </div>
                         </a>
                     </Link>   
                 </div>
-            ))
+        ))
     }
 
     if(!isLoading && storeList.length === 0) {

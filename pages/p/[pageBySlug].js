@@ -13,14 +13,6 @@ export default function PageBySlug() {
     const { pageBySlug } = router.query;
     let pageTitle = pageBySlug.replace(/-/gi, " ");
 
-    const titleCase = (str) => {
-        var splitStr = str.toLowerCase().split(' ');
-        for (var i = 0; i < splitStr.length; i++) {
-            splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
-        }
-        return splitStr.join(' ');
-    }
-
     const { pageData, isLoading } = useSelector((state) => state.WebsitePageReducer);
 
     useEffect(() => {
@@ -30,17 +22,17 @@ export default function PageBySlug() {
     return (
         <MainLayout pageTitle={typeof pageData !== 'undefined' && pageData !== null ? pageData.title : ''}>
             <div className="container">
-                <div className="row m-3 justify-content-center">
+                <div className="row my-4 justify-content-center">
                     {
                         isLoading && <LoadingSpinner text="Page Loading....." />
                     }
-                    
+
                     {
                         typeof pageData !== 'undefined' && pageData !== null &&
-                        <div className="col-lg-9">
-                            <div className="card shadow rounded">
+                        <div className="col-lg-12 px-0">
+                            <div className="card rounded">
                                 <div className="card-header">
-                                    <h6>{pageData.title}</h6>
+                                    <h1 className="website-info-title">{pageData.title}</h1>
                                 </div>
                                 <div className="card-body">
                                     <div>
@@ -52,10 +44,10 @@ export default function PageBySlug() {
                     }
                     {
                         !isLoading && (typeof pageData === "undefined" || pageData === null) && (
-                            <div className="col-lg-9">
-                                <div className="card shadow rounded">
+                            <div className="col-lg-12 px-0">
+                                <div className="card rounded">
                                     <div className="card-header">
-                                        <h6>{pageTitle}</h6>
+                                        <h1>{pageTitle}</h1>
                                     </div>
                                     <div className="card-body">
                                         <div>
@@ -67,7 +59,7 @@ export default function PageBySlug() {
                         )
                     }
                 </div>
-            </div>    
+            </div>
         </MainLayout>
     );
 }

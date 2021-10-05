@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import MainLayout from "../components/layouts/MainLayout";
-import ScrollToTop from "react-scroll-to-top";
+// import ScrollToTop from "react-scroll-to-top";
 import { Tab, Col, Nav, Row, Accordion, Card } from "react-bootstrap";
 import PageTitle from "../components/master/page-title/PageTitle";
 
@@ -91,7 +91,7 @@ export default function Faq() {
                 <PageTitle title="FAQ" description="Let's get your common questions answer from here..." />
                 <hr />
 
-                <ScrollToTop smooth />
+                {/* <ScrollToTop smooth /> */}
                 <div className="mt-5">
                     <Tab.Container id="left-tabs-example" defaultActiveKey={data[0].slug}>
                         <Row>

@@ -1,8 +1,11 @@
 import { useRouter } from "next/router";
 import React from "react";
 import MainLayout from "../../../components/layouts/MainLayout";
-import OrderInvoice from "../../../components/orders/OrderInvoice";
+// import OrderInvoice from "../../../components/orders/OrderInvoice";
 import { translate } from "../../../services/translation/translation";
+
+import dynamic from 'next/dynamic';
+const OrderInvoice = dynamic(() => import('../../../components/orders/OrderInvoice'));
 
 export default function invoice() {
     const router      = useRouter();

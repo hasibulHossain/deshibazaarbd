@@ -11,7 +11,7 @@ import { handleChangeReviewItemInput, storeReviewData } from './_redux/action/re
 const ProductReviewCreate = ({ ReviewItem, handleClose }) => {
 
     const dispatch                                  = useDispatch()
-    const [ratingValue, setRatingValue]             = React.useState(1);
+    const [ratingValue, setRatingValue]             = React.useState(4);
     const reviewSubmitting                          = useSelector((state) => state.ReviewReducer.reviewSubmitting);
     const reviewInput                               = useSelector((state) => state.ReviewReducer.reviewInput);
     const { register, handleSubmit, watch, errors } = useForm();
@@ -31,7 +31,7 @@ const ProductReviewCreate = ({ ReviewItem, handleClose }) => {
     };
 
     return (
-        <>
+        <div className="product-review-form-box">
             <h5 className="border-bottom"> Product Review</h5>
             <div className="card audienceContainer p-2">
                 <form
@@ -40,7 +40,7 @@ const ProductReviewCreate = ({ ReviewItem, handleClose }) => {
                 >
                     <div className="pool-container m-1">
                         <h6>Delivered on 24 Feb 2021</h6>
-                        <p>Rate and review purchased product:</p>
+                        {/* <p>Rate and review purchased product:</p> */}
                         <div className="row">
                             <div className="col-2">
                                 <img width="120px" src={`${process.env.NEXT_PUBLIC_URL}images/products/${ReviewItem.featured_image}`} alt={ReviewItem.item_name} className="img-thumbnail" />
@@ -92,20 +92,20 @@ const ProductReviewCreate = ({ ReviewItem, handleClose }) => {
                     </div>
                     {
                         !reviewSubmitting && (
-                            <SimpleBtn variant="simple_btn_bg" style={{ width: 'fit-content', float: "right", marginTop: "10px" }}>
+                            <SimpleBtn type="submit" variant="simple_btn_bg" style={{ width: 'fit-content', float: "right", marginTop: "10px" }}>
                                 Submit
                             </SimpleBtn>
                         )
                     }
 
                     {reviewSubmitting && (
-                        <SimpleBtn variant="simple_btn_bg" style={{ width: 'fit-content', float: "right", marginTop: "10px", cursor: "not-allowed" }}>
+                        <SimpleBtn type="submit" variant="simple_btn_bg" style={{ width: 'fit-content', float: "right", marginTop: "10px", cursor: "not-allowed" }}>
                             <span className="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span> Submitting...
                         </SimpleBtn>
                     )}
                 </form>
             </div>
-        </>
+        </div>
     );
 };
 

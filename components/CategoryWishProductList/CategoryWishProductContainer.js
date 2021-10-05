@@ -1,139 +1,215 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import Link from 'next/link'
 import ProductFilter from "./ProductFilter";
 import CategoryWishProductList from "./CategoryWishProductList";
 import classNames from "classnames";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  getCategoryOrBrandDetails,
+  getFilteredProducts,
+  getSubCategories,
+  resetFilterParams,
   setFilterParams,
 } from "./_redux/Action/CategoryWiseProductAction";
-
+import ReactPaginate from "react-paginate";
+import {useRouter} from 'next/router'
+import Image from 'next/image';
+import Modal from "../master/Modal/Modal";
+import { getShopList } from "../Shop/_redux/Action/ShopAction";
+import Axios from 'axios'
 
 const CategoryWishProductContainer = () => {
-  const dispatch = useDispatch();
-  const [showFilter, setShowFilter] = useState(false)
-  
+  const [showFilter, setShowFilter] = useState(false);
   const { paginate, filterParams, categoryBrandDetails, isLoading } = useSelector(
     (state) => state.CategoryWiseProductReducer
   );
 
-  const classes = classNames({
-    "page-item product-page-item": true,
-    disabled: !paginate.prev_page_url,
-  });
+  const dispatch = useDispatch();
 
-  const nextClasses = classNames({
-    "page-item product-page-item": true,
-    disabled: !paginate.next_page_url,
-  });
+  const router = useRouter();
+  const {brand: brandQuery = "", category: categoryQuery = "", type: typeQuery = "", storeById = ""} = router.query;
+  
+  const {
+    search,
+    category,
+    brand,
+    min_price,
+    max_price,
+    attributes,
+    rating,
+    paginate_no,
+    order_by,
+    seller_id,
+    order,
+    type,
+    page
+  } = filterParams;
 
-  const paginateHandler = (direction, pageUrl) => {
-    if (!pageUrl) return;
+
+
+
+  useEffect(() => {
+    const queries = router.query;
+    const cloneFilterParams = {...filterParams};
+
+    for(const query in queries) {
+      if(Array.isArray(cloneFilterParams[query])) {
+        // cloneFilterParams[query] = [];
+
+        if(query === 'brand') {
+          cloneFilterParams[query].push(+queries[query]);
+
+          dispatch(getCategoryOrBrandDetails('brands/' + +queries[query]));
+        }
+        if(query === 'category') {
+          // check if category same or not after remount
+          if(cloneFilterParams[query].length > 0 && !(cloneFilterParams[query][0] === parseInt(queries[query]))) {
+            cloneFilterParams.page = 1;
+            cloneFilterParams[query] = [];
+            cloneFilterParams[query].push(+queries[query]);
+          } else {
+
+            cloneFilterParams[query] = [];
+            cloneFilterParams[query].push(+queries[query]);
+          }
+
+          dispatch(getSubCategories(queries[query]))
+
+          dispatch(getCategoryOrBrandDetails('categories/' + +queries[query]));
+        }
+
+      } else {
+        cloneFilterParams.category = [];
+        cloneFilterParams.brand = [];
+        cloneFilterParams.page = 1;
+
+        if(query === 'storeById') {
+          cloneFilterParams['seller_id'] = queries[query]
+        }
+        if(query === 'type') {
+          cloneFilterParams['type'] = queries[query]
+        }
+      }
+    }
+    dispatch(setFilterParams(cloneFilterParams));
+
+    dispatch(getShopList());
+
+  }, [brandQuery, categoryQuery, typeQuery, storeById]);
+
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetFilterParams(filterParams))
+    }
+  }, [])
+
+
+  useEffect(() => {
+    
+    const source = Axios.CancelToken.source();
+    dispatch(getFilteredProducts(filterParams, source));
+    return () => {
+      source.cancel()
+    }
+  }, [
+    attributes,
+    JSON.stringify(brand),
+    JSON.stringify(category),
+    max_price,
+    min_price,
+    rating,
+    search,
+    paginate_no,
+    order_by,
+    order,
+    type,
+    page,
+    seller_id
+  ]);
+
+  const paginateHandler = (page) => {
+    if (!page) return;
 
     window.scrollTo({ top: 0, behavior: "smooth" });
-    const page = +pageUrl.split("page=")[1];
 
     const filterParamClone = { ...filterParams };
-    filterParamClone.page  = page;
+    filterParamClone.page  = page.selected + 1;
 
-    if (direction === "previous") {
-      // dispatch(getFilteredProducts(filterParamClone));
-      dispatch(setFilterParams(filterParamClone));
-    } else if (direction === "linier") { 
-      // dispatch(getFilteredProducts(filterParamClone));
-      dispatch(setFilterParams(filterParamClone));
-    } else if (direction === "next") {
-      // dispatch(getFilteredProducts(filterParamClone));
-      dispatch(setFilterParams(filterParamClone));
-    }
+    dispatch(setFilterParams(filterParamClone));
   };
 
-  // useEffect(() => {
-  //   if (!paginate.first_page_url) {
-  //     dispatch(getFilteredProducts(filterParams));
-  //   }
-  // }, [paginate.next_page_url]);
-
   return (
-    <section className="product-container">
-      {
-        categoryBrandDetails.banner_url && (
-            <div className="banner">
-              <div className="banner-photo-box">
-                <img src={categoryBrandDetails.banner_url} alt="" />
-              </div>
-            </div>
-        )
-      }
-      {
-        categoryBrandDetails.childs.length > 0 && (
-          <div className="childs row justify-content-start">
-            {
-              categoryBrandDetails.childs.map((item, index) => (
-                <div className="col-6 col-md-2 col-sm-3 mb-sm-2 mb-3" key={index}>
-                  <Link href={`products?${item.parent_id ? 'category' : 'brand'}=${item.id}`}>
-                    <a className="child-logo-box">
-                    <span>{item.name}</span>
-                    </a>
-                  </Link>
+    <>
+      <Modal 
+        visible={showFilter}
+        closeModalHandler={() => setShowFilter(preState => !preState)}
+        sideModal={true}
+      >
+        <ProductFilter show={true} />
+      </Modal>
+
+      <section className="product-container">
+        {
+          categoryBrandDetails.banner_url && (
+              <div className="banner">
+                <div className="banner-photo-box">
+                  <Image src={categoryBrandDetails.banner_url} width={1260} height={280} />
+                  {/* <img src={categoryBrandDetails.banner_url} alt="" /> */}
                 </div>
-              ))
-            }
-          </div>
-        )
-      }
-      <div className="row">
-        <div className="col-md-3">
-            <ProductFilter show={showFilter} />
-        </div>
-        <div className="col-md-9 mb-5 px-0">
-          <CategoryWishProductList showFilter={showFilter} showFilterHandler={() => setShowFilter(preState => !preState)} />
-          {
-            !isLoading && paginate.total > 20  && (
-              <div className="w-100">
-                <nav className="d-flex justify-content-end" aria-label="navigation">
-                  <ul className="pagination">
-                    <li
-                      className={classes}
-                      onClick={() =>
-                        paginateHandler("previous", paginate.prev_page_url)
-                      }
-                    >
-                      <a className="page-link">Previous</a>
-                    </li>
-                    {/* {paginate.pages.map((_, i) => ( */}
-                      <li
-                        // onClick={() =>
-                        //   paginateHandler(
-                        //     "linier",
-                        //     `${Base_Url}get-items?page=${i + 1}`
-                        //   )
-                        // }
-                        // className={`page-item product-page-item ${paginate.current_page == i + 1 && 'active'}`}
-                        className={`page-item product-page-item`}
-                      >
-                        <a className="page-link">{paginate.current_page}</a>
-                      </li>
-                    {/* ))} */}
-                    <li
-                      onClick={() => paginateHandler("next", paginate.next_page_url)}
-                      className={nextClasses}
-                    >
-                      <a className="page-link">Next</a>
-                    </li>
-                  </ul>
-                </nav>
               </div>
-            )
-          }
+          )
+        }
+
+        {/* category childs */}
+
+        {/* {
+          categoryBrandDetails.childs.length > 0 && (
+            <div className="childs row justify-content-start">
+              {
+                categoryBrandDetails.childs.map((item, index) => (
+                  <div className="col-6 col-md-2 col-sm-3 mb-sm-2 mb-3" key={index}>
+                    <Link href={`products?${item.parent_id ? 'category' : 'brand'}=${item.id}`}>
+                      <a className="child-logo-box">
+                      <span>{item.name}</span>
+                      </a>
+                    </Link>
+                  </div>
+                ))
+              }
+            </div>
+          )
+        } */}
+
+        <div className="row">
+          <div className="col-md-12 mb-5 px-0" style={{fontSize: '14px'}}>
+            <CategoryWishProductList showFilter={showFilter} showFilterHandler={() => setShowFilter(preState => !preState)} />
+            {
+              !isLoading && paginate.total > paginate.per_page  && (
+                <div className="w-100 px-0 px-sm-3 mt-3">
+                  <div style={{display: 'flex', justifyContent: 'flex-end'}}>
+                    <ReactPaginate
+                      previousLabel={'<'}
+                      nextLabel={'>'}
+                      breakLabel={'...'}
+                      breakClassName={'break-me'}
+                      pageCount={paginate.pages.length}
+                      marginPagesDisplayed={2}
+                      pageRangeDisplayed={2}
+                      onPageChange={paginateHandler}
+                      initialPage={filterParams.page - 1}
+                      containerClassName={'react-pagination'}
+                      activeClassName={'active'}
+                    />
+                  </div>
+                </div>
+              )
+            }
+
+          </div>
         </div>
-      </div>
-      {/* <div className="row">
-        <div className="col-md-3"></div>
-        <div className="col-md-9">
-        </div>
-      </div> */}
-    </section>
+      </section>
+    </>
   );
 };
 

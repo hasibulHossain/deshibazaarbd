@@ -12,7 +12,7 @@ import SimpleBtn from "../components/master/SimpleBtn/SimpleBtn";
 import Modal from "../components/master/Modal/Modal";
 import RemoveCartItem from "../components/RemoveCartItem/RemoveCartItem";
 import OrderSummery from "../components/orders/OrderSummery";
-import CartProduct from "../components/carts/cart-product/CartProduct";
+// import CartProduct from "../components/carts/cart-product/CartProduct";
 
 import { toggleModal } from "../_redux/store/action/globalAction";
 import {
@@ -20,6 +20,9 @@ import {
   toggleAllCartSelection,
 } from "../components/carts/_redux/action/CartAction";
 import { getUserDataAction } from "../components/_redux/getUserData/Action/UserDataAction";
+
+import dynamic from 'next/dynamic';
+const CartProduct = dynamic(() => import('../components/carts/cart-product/CartProduct'));
 
 export default function Carts() {
   const router = useRouter();
@@ -64,7 +67,7 @@ export default function Carts() {
       <MainLayout pageTitle="Carts">
         <div className="container">
           <div className="row mt-3 mb-5">
-            <div className="col-md-8">
+            <div className="col-lg-8 col-md-7 px-0 px-sm-2">
               <div className="cart_container_body">
                 <p className="cart__preferred_delivery">My Carts</p>
                 {/* <Card>
@@ -93,9 +96,9 @@ export default function Carts() {
                     supplierWiseCarts.map((item, index) => (
                       <div key={index}>
                         <div className="cart_items_by_shop" key={index}>
-                          <div className="cart_item_box_top_1">
+                          <div className="cart_item_box_top_1 py-3 px-1">
                             <div className="row justify-content-between">
-                              <div className="col-md-6">
+                              <div className="col-lg-6">
                                 <div className="cart_shop_name d-flex">
                                   <input className="cart-checkbox" type="checkbox" checked={item.isChecked} onChange={() => dispatch(toggleAllCartSelection(!item.isChecked, null, item.sellerID))} />
                                   <div className="ml-2">
@@ -110,7 +113,7 @@ export default function Carts() {
                                   </div>
                                 </div>
                               </div>
-                              <div className="col-md-6">
+                              <div className="col-lg-6">
                                 <p className="estimate">Estimate time - {item.approxDeliveryDate} </p>
                               </div>
                             </div>
@@ -121,11 +124,11 @@ export default function Carts() {
                           </p> */}
                         </div>
 
-                        <div className="p-3">
+                        <div className="py-3 px-1">
                           {item.data.length > 0 &&
                             item.data.map((cart, keyValue) => (
                               <div
-                                className="cart_items_details"
+                                className="cart_items_details py-2"
                                 key={keyValue + 1}
                               >
                                 <CartProduct cart={cart} />
@@ -154,7 +157,7 @@ export default function Carts() {
               </div>
             </div>
 
-            <div className="col-md-4 cart_checkout_margin">
+            <div className="col-lg-4 col-md-5 px-0 px-sm-2 cart_checkout_margin">
               <OrderSummery
                 handleClick={placeOrder}
                 buttonText="PROCEED TO CHECKOUT"

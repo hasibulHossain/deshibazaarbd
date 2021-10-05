@@ -11,9 +11,9 @@ const StoreContainer = () => {
     return (
         <section className="container product-container">
             <div className="product-heading">
-                <h5>
+                <h2>
                     <Translate>Shop by stores</Translate>
-                </h5>
+                </h2>
                 {/* <Button buttonText={translate('View all')} isFontAwesome={true} /> */}
                 <Link href={{ pathname: '/stores'}}>
                     <div className="custom-button-component pointer " >

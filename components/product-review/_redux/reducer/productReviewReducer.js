@@ -1,5 +1,5 @@
 import * as Types from "../types/types";
-import moment from "moment";
+
 const initialState = {
     isLoading: false,
     itemList: [],
@@ -39,11 +39,9 @@ const ReviewReducer = (state = initialState, action) => {
                 ...state,
                 reviewSubmitting: action.payload.isLoading,
             };
+
         default:
-            return {
-                ...state,
-            };
-            break;
+            return state;
     }
 };
 

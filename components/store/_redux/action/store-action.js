@@ -8,7 +8,7 @@ export const getStoreList = () => async (dispatch) => {
     // initialize req
     dispatch({ type: types.INIT_STORE_LIST });
     const res = await axios.get(url);
-    const data = res.data.data.slice(0, 18)
+    const data = res.data.data
 
     // successful res
     dispatch({ type: types.GET_STORE_LIST, payload: { storeList: data } });

@@ -8,7 +8,9 @@ const CompanyPolicyContainer = () => {
     const policyList = useSelector((state) => state.CompanyPolicyReducer.policyList);
 
     useEffect(() => {
-        dispatch(getCompanyPolicyList())
+        if(policyList.length === 0) {
+            dispatch(getCompanyPolicyList())
+        }
     }, []);
 
     return (
@@ -20,9 +22,9 @@ const CompanyPolicyContainer = () => {
                             <div className="col-md-4" key={index}>
                                 <div className="policy-card">
                                     <img src={item.icon} alt={item.title} />
-                                    <h5 className="policy-card-title">
+                                    <h2 className="policy-card-title">
                                         {item.title}
-                                    </h5>
+                                    </h2>
                                     <p className="policy-card-description">{item.description}</p>
                                 </div>
                             </div>

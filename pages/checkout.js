@@ -2,17 +2,28 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 // local import
 import MainLayout from "../components/layouts/MainLayout";
-import ShippingInfo from "../components/ShippingInfo/ShippingInfo";
-import CheckoutPaymentMethod from "../components/ShippingInfo/CheckoutPaymentMethod";
-import OrderSummery from "../components/orders/OrderSummery";
-import CartProduct from "../components/carts/cart-product/CartProduct";
-import DeliveryInfo from '../components/Delivery/DeliveryInfo';
+// import ShippingInfo from "../components/ShippingInfo/ShippingInfo";
+// import CheckoutPaymentMethod from "../components/ShippingInfo/CheckoutPaymentMethod";
+// import OrderSummery from "../components/orders/OrderSummery";
+// import CartProduct from "../components/carts/cart-product/CartProduct";
+// import DeliveryInfo from '../components/Delivery/DeliveryInfo';
 import { getUserDataAction } from "../components/_redux/getUserData/Action/UserDataAction";
 import { storeSells } from "../components/Delivery/_redux/Action/DeliveryInfoAction";
 import { getCartsAction } from "../components/carts/_redux/action/CartAction";
 import { handleShippingCost } from "../components/orders/_redux/action/OrderAction";
 import ProtectedRoute from "../components/master/protectedRoute/ProtectedRoute";
 // import { toggleFloatingCart } from "../_redux/store/action/globalAction";
+
+
+
+import dynamic from 'next/dynamic';
+const ShippingInfo = dynamic(() => import('../components/ShippingInfo/ShippingInfo'));
+const CheckoutPaymentMethod = dynamic(() => import('../components/ShippingInfo/CheckoutPaymentMethod'));
+const OrderSummery = dynamic(() => import('../components/orders/OrderSummery'));
+const CartProduct = dynamic(() => import('../components/carts/cart-product/CartProduct'));
+const DeliveryInfo = dynamic(() => import('../components/Delivery/DeliveryInfo'));
+
+
 
 const Checkout = ()=> {
 	
@@ -29,7 +40,7 @@ const Checkout = ()=> {
 	}, []);
 
 	const handleStoreOrder = () => {
-		dispatch(storeSells(customerInfo, carts, totalQuantity, shippingCost, totalPrice, couponData));
+		// dispatch(storeSells(customerInfo, carts, totalQuantity, shippingCost, totalPrice, couponData));
 		// router.push('/');
 	}
 
@@ -37,7 +48,7 @@ const Checkout = ()=> {
 		<MainLayout pageTitle="Checkout">
 			<div className="container">
 				<div className="row">
-					<div className="col-lg-8">
+					<div className="col-lg-8 col-md-7">
 						<div className="delivery_info mb-3 mt-5">
 							<DeliveryInfo />
 							<div className="card mt-3 pl-3 pr-3 pt-2 shadow-sm">
@@ -51,7 +62,7 @@ const Checkout = ()=> {
 							<div className="p-3 card shadow-sm">
 								{
 									carts.length > 0 && carts.map((item, index) => (
-										<div className="cart_items_details" key={index + 1}>
+										<div className="cart_items_details py-3" key={index + 1}>
 											<CartProduct cart={item} />
 										</div>
 									))
@@ -59,7 +70,7 @@ const Checkout = ()=> {
 							</div>
 						</div>
 					</div>
-					<div className="col-lg-4 cart_checkout_margin">
+					<div className="col-lg-4 col-md-5 cart_checkout_margin">
 						<ShippingInfo />
 						<CheckoutPaymentMethod />
 						<OrderSummery handleClick={() => handleStoreOrder()} buttonText="CONFIRM PAYMENT" />

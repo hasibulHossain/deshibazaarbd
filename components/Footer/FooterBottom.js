@@ -19,19 +19,16 @@ const FooterBottom = () => {
         <div className="footer-bottom">
             <Container>
                 <div className="row justify-content-between align-items-center">
-                    <div className="col-md-6">
+                    <div className="col-md-12">
                         <div className="footer-bottom-info">
                             {
-                                isLoading && <p>Loading info.....</p>
+                                isLoading && <span>Loading info.....</span>
                             }
                             {
                                 websiteInfo &&
-                                <p> {websiteInfo.footer_text} </p>
+                                <span> {websiteInfo.footer_text} </span>
                             }
                         </div>
-                    </div>
-                    <div className="col-md-4">
-                        <img src={"/images/payment-methods.png"} alt="Deshi BazaarBD" className="img-fluid mb-2 mt-2 pointer" style={{ height: 50 }}/>
                     </div>
                 </div>
             </Container>

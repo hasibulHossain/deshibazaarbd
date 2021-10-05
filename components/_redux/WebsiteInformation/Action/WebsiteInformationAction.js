@@ -51,7 +51,7 @@ export const getWebsiteInformation = () => async (dispatch) => {
 
   dispatch({ type: Types.GET_WEBSITE_PAGE, payload: responseData });
 
-  await Axios.get(`website/pages/${slug}`)
+  await Axios.get(`page/${slug}`)
     .then((res) => {
       responseData.data    = res.data.data;
       responseData.loading = false;

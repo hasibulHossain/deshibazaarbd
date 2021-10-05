@@ -2,6 +2,8 @@ import * as Types from "../Type/Types";
 
 const initialState = {
   products: [],
+  categories: [],
+  brands: [],
   categoryBrandDetails: {
     isLoading: false,
     name: "",
@@ -108,11 +110,13 @@ function CategoryWiseProductReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         products: [],
+        categories: [],
+        brands: [],
         filterParams: {
           ...state.filterParams,
           type: "",
           search: "",
-          category: [],
+          // category: [],
           brand: [],
           min_price: null,
           max_price: null,
@@ -121,7 +125,6 @@ function CategoryWiseProductReducer(state = initialState, { type, payload }) {
           order_by: "",
           seller_id: "",
           order: "",
-          page: 1,
           paginate_no: 20,
         },
         categoryBrandDetails: {
@@ -131,6 +134,18 @@ function CategoryWiseProductReducer(state = initialState, { type, payload }) {
           childs: []
         }
       };
+
+    case Types.GET_SUB_CATEGORY:
+      return {
+        ...state,
+        categories: payload
+      }
+
+    case Types.GET_CATEGORY_RELATED_BRANDS:
+      return {
+        ...state,
+        brands: payload
+      }
 
     default:
       return state;

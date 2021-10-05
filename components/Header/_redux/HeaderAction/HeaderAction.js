@@ -1,7 +1,6 @@
 import Axios from "axios";
 import * as Types from "../Type/Types";
 
-const url = 'frontend-categories?type=navbar';
 
 /**
  * Get Menu List
@@ -13,6 +12,7 @@ const url = 'frontend-categories?type=navbar';
  * @returns void
  */
 export const getMenuListData = () => async (dispatch) => {
+  const url = 'frontend-categories?type=navbar';
   try {
     dispatch({ type: Types.INIT_MENU_LIST, payload: { isLoading: true } });
     const res = await Axios.get(url);

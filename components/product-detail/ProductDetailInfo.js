@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import ReactImageZoom from "react-image-zoom";
 import Link from "next/link";
 import {
   addToCartAction,
@@ -22,18 +21,17 @@ import { showToast } from "../master/Helper/ToastHelper";
 import ProductMainList from "../products/ProductMainList";
 import { useRouter } from "next/router";
 import { formatCurrency } from "../../services/currency";
+import LazyLoad from "react-lazyload";
+import InnerImageZoom from 'react-inner-image-zoom';
 
 const ProductDetailInfo = (props) => {
   const dispatch = useDispatch();
   const { product } = props;
   const [quantity, setQuantity] = useState(1);
-  const userData = useSelector((state) => state.UserDataReducer.userData);
   const { carts } = useSelector((state) => state.CartReducer);
   const [filterCarts, setFilterCarts] = useState(null);
   const [updatedID, setUpdatedID] = useState(null);
   const [previewImg, setPreviewImg] = useState("");
-
-  const zoomImage = { width: 250, zoomWidth: 600, img: previewImg };
 
   const default_price =
     product.is_offer_enable && product.offer_selling_price !== 0
@@ -43,7 +41,6 @@ const ProductDetailInfo = (props) => {
 
   const router = useRouter();
   const { asPath } = router;
-  const queries = router.query;
 
   useEffect(() => {
     dispatch(getCartsAction());
@@ -53,38 +50,51 @@ const ProductDetailInfo = (props) => {
     setPreviewImg(image_url);
   };
 
-  // const cartProduct = {
-  //   id: product.id,
-  //   name: product.name,
-  //   quantity: quantity,
-  //   isOffer: product.is_offer_enable,
-  //   default_selling_price: product.default_selling_price,
-  //   offer_selling_price: product.offer_selling_price,
-  //   featured_image: product.featured_image,
-  //   seller_id: product.business.id,
-  //   seller_name: product.business.name,
-  //   sku: product.sku,
-  // }
-
   const settings = {
+    arrows: true,
     dots: false,
     infinite: false,
     speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 3,
+    draggable: true,
+    focusOnSelect: false,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+
+    responsive: [
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3
+        }
+      }
+    ]
   };
 
   useEffect(() => {
     if (product) {
       const newFilterCarts = carts.find((item) => item.productID == product.id);
-      setFilterCarts(newFilterCarts);
+
       if (typeof newFilterCarts !== "undefined" && newFilterCarts !== null) {
         setQuantity(newFilterCarts.quantity);
         setUpdatedID(newFilterCarts.productID);
         setSubTotal(newFilterCarts.quantity * default_price);
+      } else {
+        // @todo - Manage this counting using MRP while completed in API end
+        setQuantity(1);
+        setSubTotal(1 * default_price);
       }
+
+      setFilterCarts(newFilterCarts);
     }
-  }, [product, carts]);
+  }, [product]);
 
   useEffect(() => {
     const featured_image = `${process.env.NEXT_PUBLIC_URL}images/products/${product.featured_image}`;
@@ -135,14 +145,14 @@ const ProductDetailInfo = (props) => {
 
   return (
     <>
-      {product !== null && (
+      {product !== "undefined" && product !== null && (
         <div className="product-info-page">
           <Breadcrumb>
             {typeof product.category !== "undefined" &&
               product.category !== null && (
-                <Link href={`/categories/${product.category.slug}`}>
+                <Link href={`/products?category=${product.category.id}`}>
                   <Breadcrumb.Item
-                    href={`/products?category=${product.category.slug}`}
+                    href={`/products?category=${product.category.id}`}
                   >
                     {product.category.name}
                   </Breadcrumb.Item>
@@ -151,9 +161,9 @@ const ProductDetailInfo = (props) => {
 
             {typeof product.sub_category !== "undefined" &&
               product.sub_category !== null && (
-                <Link href={`/categories/${product.sub_category.slug}`}>
+                <Link href={`/products?category=${product.sub_category.id}`}>
                   <Breadcrumb.Item
-                    href={`/products?category=${product.sub_category.slug}`}
+                    href={`/products?category=${product.sub_category.id}`}
                   >
                     {product.sub_category.name}
                   </Breadcrumb.Item>
@@ -162,9 +172,9 @@ const ProductDetailInfo = (props) => {
 
             {typeof product.sub_category2 !== "undefined" &&
               product.sub_category2 !== null && (
-                <Link href={`/categories/${product.sub_category2.slug}`}>
+                <Link href={`/products?category=${product.sub_category2.id}`}>
                   <Breadcrumb.Item
-                    href={`/products?category=${product.sub_category2.slug}`}
+                    href={`/products?category=${product.sub_category2.id}`}
                   >
                     {product.sub_category2.name}
                   </Breadcrumb.Item>
@@ -182,74 +192,32 @@ const ProductDetailInfo = (props) => {
                     <div className="col-lg-9 bg-white">
                       <div className="">
                         <div className="row">
-                          <div className="col-lg-4">
-                            <div className=" d-none d-md-block">
-                              <div
-                                style={{
-                                  height: "250px",
-                                  display: "flex",
-                                  justifyContent: "center",
-                                  alignItems: "center",
-                                }}
-                              >
-                                <ReactImageZoom
-                                  className="zoom-image mt-3"
-                                  {...zoomImage}
-                                />
-                              </div>
-                            </div>
-                            <div className=" d-block d-md-none text-center">
-                              <img
-                                src={previewImg}
-                                alt="product preview image"
-                                style={{ maxHeight: "180px" }}
-                                className="img-fluid"
+                          <div className="col-lg-6 mt-2">
+                              <InnerImageZoom 
+                                src={previewImg} 
+                                zoomSrc={previewImg}
+                                zoomType="hover"
+                                width={500}
+                                height={500}
+                                zoomScale={1.7}
+                                alt={previewImg}
+                                hasSpacer
                               />
-                            </div>
-                            <div className="product_preview_gallery">
-                              {product.images && product.images.length > 0 && (
-                                <Slider {...settings}>
-                                  <div>
-                                    <img
-                                      onClick={() =>
-                                        handleChangePreviewImg(previewImg)
-                                      }
-                                      src={previewImg}
-                                      className="multiple_preview_images pointer"
-                                      alt=""
-                                    />
-                                  </div>
-                                  {product.images.map((item, index) => (
-                                    <div key={index + 1}>
-                                      <img
-                                        onClick={() =>
-                                          handleChangePreviewImg(item.image_url)
-                                        }
-                                        src={item.image_url}
-                                        className="multiple_preview_images pointer"
-                                        alt=""
-                                      />
+                            <div className="product_preview_gallery mt-2">
+                              <Slider {...settings}>
+                                {product.images && product.images.length > 0 && product.images.map((item, index) => (
+                                  <div key={index}>
+                                    <div onClick={() => handleChangePreviewImg(item.image_url) } style={{padding: '5px', width: '100%', height: '100px'}}>
+                                      <img  style={{maxWidth: '100%', objectFit: 'contain', height: '100%', border: '1px solid #ddd', padding: '5px'}} src={item.image_url} alt={item.image_url} />
                                     </div>
-                                  ))}
-                                </Slider>
-                              )}
-                              {product.images && product.images.length === 0 && (
-                                <div>
-                                  <img
-                                    onClick={() =>
-                                      handleChangePreviewImg(previewImg)
-                                    }
-                                    src={previewImg}
-                                    className="multiple_preview_images pointer"
-                                    alt=""
-                                  />
-                                </div>
-                              )}
+                                  </div>
+                                ))}
+                              </Slider>
                             </div>
                           </div>
-                          <div className="col-lg-8">
+                          <div className="col-lg-6">
                             <div className="product_details_information py-2">
-                              <h3 className="product_title">{product.name}</h3>
+                              <h2 className="product_title">{product.name}</h2>
 
                               <div className="d-flex justify-content-between align-items-end">
                                 <div>
@@ -304,6 +272,7 @@ const ProductDetailInfo = (props) => {
                                 </div>
                               </div>
                               <div className="mt-4">
+                              <span className="product-unit">{product.per_unit_value} {' '} {product.unit && product.unit.actual_name && product.unit.actual_name}</span>
                                 <PriceCalculation item={product} />
                               </div>
                               <hr />
@@ -382,23 +351,30 @@ const ProductDetailInfo = (props) => {
                       
                     </div>
                     {/*Location Section*/}
-                    <div className="col-lg-3 bg-light">
-                      <DeliveryFeatures product={product} />
+                    <div className="col-lg-3 pt-3 pt-md-0" style={{background: '#f7ae9d26'}}>
+                      {
+                        product.business.location && (
+                          <DeliveryFeatures product={product} />
+                        )
+                      }
                     </div>
                   </div>
                 </div>
               </div>
-
-              <ProductRatings product={product} />
+              <LazyLoad height={200} once>
+                <ProductRatings product={product} />
+              </LazyLoad>
               <div className="mb-5 mt-5">
                 <p className="font-weight-bold product_details_people_viewed_title">
                   People who viewed this item also viewed
                 </p>
-                <ProductMainList
-                  type=""
-                  limit={6}
-                  category={queries.category}
-                />
+                <LazyLoad height={400} once>
+                  <ProductMainList
+                    type=""
+                    limit={6}
+                    category={product.category_id}
+                  />
+                </LazyLoad>
               </div>
             </div>
           )}
