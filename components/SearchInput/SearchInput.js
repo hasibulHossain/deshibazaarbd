@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import SearchLoadingSkeleton from "./SearchLoadingSkeleton";
 import { searchProductAction } from "./_redux/Action/SearchInputAction";
@@ -17,6 +17,7 @@ const SearchInput = () => {
   const [search, setSearch] = useState("");
   const suggestions = useSelector((state) => state.SearchReducer.products);
   const loading = useSelector((state) => state.SearchReducer.loading);
+  const firstRenderRef = useRef(true);
 
   const searchProduct = (e) => {
     setSearch(e.target.value);
@@ -49,11 +50,13 @@ const SearchInput = () => {
   };
 
   useEffect(() => {
+    if(firstRenderRef.current) {
+      firstRenderRef.current = false
+      return
+    }
     const source = axios.CancelToken.source();
 
-    if(search) {
-      dispatch(searchProductAction(search, source));
-    }
+    dispatch(searchProductAction(search, source));
 
     return () => {
       source.cancel()

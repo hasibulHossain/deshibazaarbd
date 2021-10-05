@@ -1,17 +1,29 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
+import classNames from "classnames";
 
 function Modal(props) {
   const [modalRoot, setModalRoot] = useState(null);
-  const { children, closeModalHandler, visible, style } = props;
+  const { children, closeModalHandler, visible, style, sideModal = false } = props;
+
+  const wrapperClasses = classNames({
+    'modal__modal-wrapper': true,
+    'side-modal': sideModal,
+  });
+
+  const modalBoxClasses = classNames({
+    'modal__modal-box modal-scrollbar': true,
+    'side-modal': sideModal,
+    'active': visible
+  });
 
   let modalContent = (
-    <div className="modal__modal-wrapper">
+    <div className={wrapperClasses}>
       <div
         onClick={() => closeModalHandler()}
         className="modal__backdrop"
       ></div>
-      <div style={{ ...style }} className="modal__modal-box modal-scrollbar">
+      <div style={{ ...style }} className={modalBoxClasses} >
         <div className="modal__children">{children}</div>
       </div>
     </div>
@@ -20,6 +32,17 @@ function Modal(props) {
   useEffect(() => {
     const modalDom = window.document.getElementById("modal-root");
     setModalRoot(modalDom);
+    
+    const bodyDOM = window.document.body;
+
+    // Remove scrollbar when Floating cart is open
+    if (visible) {
+      bodyDOM.style.height = "100vh";
+      bodyDOM.style.overflowY = "hidden";
+    } else {
+      bodyDOM.style.height = "";
+      bodyDOM.style.overflowY = "";
+    }
   });
 
   if (visible && modalRoot) {

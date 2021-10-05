@@ -8,6 +8,19 @@
   bottom: 0;
   left: 0;
   right: 0;
+  z-index: 1000;
+}
+
+.modal__modal-wrapper.side-modal {
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
 }
 
 .modal__backdrop {
@@ -28,6 +41,25 @@
   background-color: #fff;
   border-radius: 8px;
 }
+
+.modal__modal-box.side-modal {
+  max-height: 100%;
+  padding: 1rem;
+  z-index: 800;
+  overflow-y: auto;
+  background-color: #fff;
+  border-radius: 0px;
+  width: 35%;
+  min-width: 200px;
+  max-width: 350px;
+  transform: translateX(-110%);
+  transition: all 1s ease;
+}
+
+.modal__modal-box.side-modal.active {
+  transform: translateX(0%);
+}
+
 .modal__children {
   display: flex;
   flex-direction: column;

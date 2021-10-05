@@ -1729,14 +1729,6 @@ ul.social-media {
   cursor: pointer;
 }
 
-.product_filter_section {
-  display: none;
-}
-
-.product_filter_section.show {
-  display: block;
-}
-
 .product_filter_heading {
   color: var(--color-primary);
   font-size: 18px;
@@ -1757,7 +1749,6 @@ ul.social-media {
 }
 
 .filter_view span {
-  font-weight: 700;
   font-size: 16px;
   margin-right: 5px;
 }
@@ -1939,11 +1930,12 @@ ul.social-media {
   text-transform: capitalize;
 }
 
-.category-search-title + div {
+.filter_view .product-filter {
   background-color: rgba(230, 46, 4, 0.15);
   padding: 0 5px;
   border-radius: 3px;
   align-self: center;
+  cursor: pointer;
 }
 
 .input-range {
