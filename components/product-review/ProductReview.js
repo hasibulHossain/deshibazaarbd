@@ -13,7 +13,7 @@ const ProductReview = () => {
         <div className="row">
             {
                 !isMobile && (
-                    <div className="col-md-3">
+                    <div className="col-md-3 d-none d-md-block">
                         <ProfileSideBar />
                     </div>
                 )

@@ -37,7 +37,7 @@ const SearchInput = () => {
       const uri = encodeURI(`/products/${searchData.slug}`);
       router
         .push(uri)
-        .then((_) =>{
+        .then((_) => {
           window.scrollTo(0, 0);
           dispatch(toggleBackdrop())
         });
@@ -45,7 +45,10 @@ const SearchInput = () => {
     if (searchData.is_category) {
       router
         .push(`/products?category=${searchData.id}`)
-        .then((_) => window.scrollTo(0, 0));
+        .then((_) => {
+          window.scrollTo(0, 0);
+          dispatch(toggleBackdrop());
+        });
     }
   };
 
@@ -75,7 +78,7 @@ const SearchInput = () => {
       </div>
 
       {
-        loading && <SearchLoadingSkeleton/>
+        search && loading && <SearchLoadingSkeleton/>
       }
       {search.length > 0 && suggestions && suggestions.length === 0 && !loading && (
         <div className="search-suggestion-area">

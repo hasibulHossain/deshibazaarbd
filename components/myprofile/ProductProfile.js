@@ -37,7 +37,7 @@ const ProductProfile = () => {
       <div className="wishbanner pb">
         <div className="container">
           <div className="row">
-            <div className="col-lg-3 col-md-5">
+            <div className="col-lg-3 col-md-5 d-none d-md-block">
               <ProfileSideBar />
             </div>
 
