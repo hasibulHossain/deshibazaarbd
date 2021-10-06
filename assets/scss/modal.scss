@@ -52,12 +52,6 @@
   width: 35%;
   min-width: 200px;
   max-width: 350px;
-  transform: translateX(-110%);
-  transition: all 1s ease;
-}
-
-.modal__modal-box.side-modal.active {
-  transform: translateX(0%);
 }
 
 .modal__children {

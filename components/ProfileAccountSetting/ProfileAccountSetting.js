@@ -29,7 +29,7 @@ const ProfileAccountSetting = () => {
         <>
             <div className="container">
                 <div className="row">
-                    <div className="col-md-3">
+                    <div className="col-md-3 d-none d-md-block">
                         <ProfileSideBar />
                     </div>
                     <div className="col-md-9 mt-3">

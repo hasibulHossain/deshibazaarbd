@@ -75,9 +75,9 @@ const ProductListForReview = () => {
                                                 REVIEW
                                             </SimpleBtn>
                                         </div>
-                                        <div className="product_preview_button_section float-bottom">
+                                        {/* <div className="product_preview_button_section float-bottom">
                                             <AddWishList product={item} />
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                             </div>
