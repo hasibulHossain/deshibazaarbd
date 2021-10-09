@@ -179,8 +179,8 @@ const CategoryWishProductList = ({showFilter, showFilterHandler}) => {
       </div>
       {
         isLoading && (
-          <div className="row">
-            <LoadingPlaceHolder className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6" count={4} height={370}  />
+          <div className="row no-gutters">
+            <LoadingPlaceHolder className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6 p-1 px-md-3 pb-2" count={4} height={isMobile ? 250 : 370}  />
           </div>
         )
       }

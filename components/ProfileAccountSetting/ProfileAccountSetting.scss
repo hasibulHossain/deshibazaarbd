@@ -69,6 +69,10 @@
        font-size: 0.7rem;
        text-transform: capitalize;
        text-align: start;
+
+       @include media("<=500px") {
+           font-size: 0.8rem;
+       }
     }
 
     &__edit {

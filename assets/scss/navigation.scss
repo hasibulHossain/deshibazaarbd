@@ -248,6 +248,7 @@
     top: 0;
     left: 0;
     overflow-y: auto;
+    transition: all 300ms ease;
   }
 
   .navigation__navbar.open {
