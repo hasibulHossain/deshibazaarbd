@@ -23,9 +23,12 @@ const SearchInput = () => {
     setSearch(e.target.value);
   };
 
-  const onKeyDownHandler = (e) => {
-    if(e.key === "Enter") {
-      // router.push('/products')
+  const onKeyDownHandler = (key) => {
+    if(key === "Enter") {
+      setSearch("");
+      router.push(`/products?search=${encodeURI(search)}`).then((_) => {
+        window.scrollTo(0, 0);
+      });
     }
   }
 
@@ -71,9 +74,9 @@ const SearchInput = () => {
       <input
         placeholder={translate("Search for Products, Brands or more")}
         onChange={(e) => searchProduct(e)}
-        onKeyDown={onKeyDownHandler}
+        onKeyDown={e => onKeyDownHandler(e.key)}
       />
-      <div className="header-custom-prepend pointer">
+      <div className="header-custom-prepend pointer" onClick={() => onKeyDownHandler('Enter')} >
         <FontAwesomeIcon className="custom-fontAwesome" icon={faSearch} />
       </div>
 

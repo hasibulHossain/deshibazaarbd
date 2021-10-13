@@ -103,10 +103,10 @@ const CategoryWishProductList = ({showFilter, showFilterHandler}) => {
     title = filterParams.seller_id;
   }
 
-  const {type} = router.query;
+  const {type, search} = router.query;
 
-  if(type) {
-    title = type;
+  if(type || search) {
+    title = type || search
   }
 
   return (
