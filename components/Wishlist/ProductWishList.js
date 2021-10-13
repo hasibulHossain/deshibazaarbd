@@ -51,7 +51,7 @@ const ProductWishList = () => {
 													</div>
 
 													<div className="wishlist_wishIcon pointer">
-														<RemoveWishlist product={item} />
+														<RemoveWishlist productId={item.item_id} />
 													</div>
 												</div>
 											</div>
