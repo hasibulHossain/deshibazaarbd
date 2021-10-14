@@ -61,12 +61,12 @@ export const addOrRemoveWishItem = (itemId, isWishItemFound) => async dispatch =
         dispatch({ type: Types.WISHLIST_ADDED, payload: postData.item_id });
 
         Axios.post(`wishlist`, postData)
-        .then((response) => {
+        .then((_) => {
             dispatch(getWishListData());
             
-            if (response.data.status) {
-                showToast('success', response.data.message);
-            }
+            // if (response.data.status) {
+            //     showToast('success', response.data.message);
+            // }
         })
         .catch((error) => {
             // console.log(error);
@@ -79,12 +79,11 @@ export const addOrRemoveWishItem = (itemId, isWishItemFound) => async dispatch =
         dispatch({ type: Types.REMOVE_FROM_WISHLIST, payload: postData.item_id });
 
         Axios.delete(`wishlist/${wishItem.id}`)
-        .then((response) => {
-            if (response.data.status) {
-                dispatch(getWishListData());
-
-                showToast('success', response.data.message);
-            }
+        .then((_) => {
+            dispatch(getWishListData());
+            // if (response.data.status) {
+            //     showToast('success', response.data.message);
+            // }
         })
         .catch((error) => {
             // console.log(error)

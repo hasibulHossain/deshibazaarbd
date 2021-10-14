@@ -1832,7 +1832,7 @@ ul.social-media {
   text-decoration: none;
 }
 
-.filter_column_3 .product-card-body img:before {
+/* .filter_column_3 .product-card-body img:before {
   content: " ";
   display: block;
   height: 100px;
@@ -1842,7 +1842,7 @@ ul.social-media {
   background-position: center;
   background-size: 100px 100px;
   font-size: 0;
-}
+} */
 
 .filter_column_3 .product-card-body img {
   height: 200px !important;
