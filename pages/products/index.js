@@ -1,8 +1,8 @@
 import React from "react";
-import MainLayout from "../components/layouts/MainLayout";
+import MainLayout from "../../components/layouts/MainLayout";
 // import ScrollToTop from "react-scroll-to-top";
 // import CategoryBanner from "../components/CategoryBanner/CategoryBanner";
-import CategoryWishProductContainer from "../components/CategoryWishProductList/CategoryWishProductContainer";
+import CategoryWishProductContainer from "../../components/CategoryWishProductList/CategoryWishProductContainer";
 // import dynamic from 'next/dynamic';
 
 // const CategoryWishProductContainer = dynamic(() => import('../components/CategoryWishProductList/CategoryWishProductContainer'));
