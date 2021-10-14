@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProductListAction, getProductsData } from "./_redux/Action/ProductAction";
 import ProductSingleMini from "./ProductSingleMini";
 import Slider from "react-slick";
+import LoadingPlaceHolder from "../master/skelleton/LoadingPlaceholder";
 
 const ProductMainList = (props) => {
     const slickSettings = {
@@ -88,6 +89,12 @@ const ProductMainList = (props) => {
 
     let productList = (
         <div className="row no-gutters">
+            {
+                loading && (
+                    <LoadingPlaceHolder className="px-2 mb-2 mb-md-0 col-xl-2 col-lg-3 col-md-4 col-6" count={6} height={300}  />
+                )
+            }
+
             {products.length > 0 && products.map((item, index) => (
                 <ProductSingleMini item={item} key={index} productKey={index+1} length={products.length} isSliding={isSliding} />
             ))}
@@ -106,14 +113,14 @@ const ProductMainList = (props) => {
 
     return (
         <div className="productList-body">
-            {loading && (
+            {/* {loading && (
                 <LoadingSkelleton
                     alignment="vertical"
                     count={3}
                     width={350}
                     height={200}
                 />
-            )}
+            )} */}
 
             {
                 productList

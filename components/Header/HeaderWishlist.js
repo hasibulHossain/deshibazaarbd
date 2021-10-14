@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import {
-  changeWishListAddedStatus,
   getWishListData,
 } from "../Wishlist/_redux/Action/WishlistAction";
 import Translate from "../translation/Translate";
@@ -22,17 +21,13 @@ const HeaderWishlist = () => {
     }
   };
 
-  const { wishList, isAdded, loadWishlistOnce } = useSelector(
-    (state) => state.WishlistReducer
-  );
+  const { wishList } = useSelector((state) => state.WishlistReducer);
+
   const { isMobile } = useSelector((state) => state.GlobalReducer);
 
   useEffect(() => {
-    if (isAdded || !loadWishlistOnce) {
-      dispatch(getWishListData());
-      dispatch(changeWishListAddedStatus(false));
-    }
-  }, [isAdded, loadWishlistOnce]);
+    dispatch(getWishListData());
+  }, []);
 
   return (
     <Link href="/wishlist" className="header-nav-link">

@@ -267,7 +267,7 @@ const ProductDetailInfo = (props) => {
                                 </div>
                                 <div>
                                   <span className="float-right mr-3">
-                                    <AddWishList product={product} />
+                                    <AddWishList productId={product.id} />
                                   </span>
                                 </div>
                               </div>
