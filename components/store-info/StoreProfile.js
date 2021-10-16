@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import moment from 'moment';
 import { getStoreInfo } from './_redux/action/action';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import SimpleBtn from '../master/SimpleBtn/SimpleBtn';
 import StoreProfileDetails from './StoreProfileDetails';
+import dayjs from 'dayjs';
 
 function StoreProfile() {
     const dispatch = useDispatch();
@@ -41,7 +41,7 @@ function StoreProfile() {
                     <div className="col-md-4 col-sm-6">
                         <div className="store-profile__info">
                             <p>
-                                Joined date: {moment(storeInfo && storeInfo.created_at).format('DD MMMM YYYY')}
+                                Joined date: { storeInfo ? dayjs(storeInfo.created_at).format('DD MMMM YYYY') : 'Unknown'}
                             </p>
                             <p>
                                 Main product: Electronics

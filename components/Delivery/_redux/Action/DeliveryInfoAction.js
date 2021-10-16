@@ -1,7 +1,7 @@
 import Axios from "axios";
 import { showToast } from "../../../master/Helper/ToastHelper";
 import * as Types from "../Type/Types";
-import moment from "moment";
+import dayjs from "dayjs";
 import { decrypt, encrypt } from "../../../master/utils/EncryptHelper";
 import { getCartsAction } from "../../../carts/_redux/action/CartAction";
 
@@ -51,7 +51,7 @@ export const storeSells = (customerInfo, carts, totalQuantity, shippingCost, tot
         title           : 'Ecommerce Sale',
         invoice_no      : null,
         ref_no          : null,
-        transaction_date: moment().format("YYYY-MM-DD"),
+        transaction_date: dayjs().format("YYYY-MM-DD"),
         total_before_tax: totalPrice,
         tax_amount      : 0,
         discount_type_id: discountType,

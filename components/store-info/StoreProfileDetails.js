@@ -1,7 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
-import moment from 'moment';
-import SimpleBtn from '../master/SimpleBtn/SimpleBtn';
+import dayjs from 'dayjs';
 
 function StoreProfileDetails() {
     const { storeInfo } = useSelector(state => state.StoreInfoReducer);
@@ -47,7 +46,13 @@ function StoreProfileDetails() {
                     <div className="store-profile-details__details">
                         <div>
                             <span>Store age: </span>
-                            <span>{moment(storeInfo && storeInfo.created_at ? storeInfo.created_at : 0 ).fromNow(true)}</span>
+                            <span>
+                                {
+                                    storeInfo ?
+                                    dayjs(storeInfo.created_at).fromNow(true) :
+                                    'Unknown'
+                                }
+                            </span>
                         </div>
                         <div>
                             <span>Industry: </span>

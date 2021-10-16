@@ -1,7 +1,7 @@
 import Axios from "axios";
 import * as Types from "../types/Types";
 import { showToast } from "../../../master/Helper/ToastHelper";
-import moment from "moment";
+import dayjs from "dayjs";
 
 //  ===================================handle coupon action==================================
 export const handleChangeCouponInput = (name, value) => (dispatch) => {
@@ -110,16 +110,16 @@ export const getUserOrderList = (value = 5) => (dispatch) => {
     }
     dispatch({ type: Types.GET_USER_ORDER_LIST, payload: responseData });
 
-    const end_date  = moment().format('YYYY-MM-DD');
+    const end_date  = dayjs().format('YYYY-MM-DD');
     let start_date = end_date;
     let orderListURL = `sales/orders/customer?paginate_no=5`;
 
     if (value == 15) {
-      start_date = moment().subtract(15, 'day').format('YYYY-MM-DD');
+      start_date = dayjs().subtract(15, 'day').format('YYYY-MM-DD');
     } else if (value == 30) {
-      start_date = moment().subtract(30, 'day').format('YYYY-MM-DD');;
+      start_date = dayjs().subtract(30, 'day').format('YYYY-MM-DD');;
     } else if (value == 60) {
-      start_date = moment().subtract(60, 'day').format('YYYY-MM-DD');
+      start_date = dayjs().subtract(60, 'day').format('YYYY-MM-DD');
     }
 
     if (typeof value === 'undefined' || value == 5) {
