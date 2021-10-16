@@ -1,6 +1,5 @@
 import { faCheckSquare, faEnvelopeOpenText, faMapMarkedAlt, faMoneyCheckAlt, faPhoneSquare, faStore, faTruck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { type } from "jquery";
 import React from 'react';
 
 const DeliveryFeatures = ({ product }) => {
