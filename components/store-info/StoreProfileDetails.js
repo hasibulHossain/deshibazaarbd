@@ -1,6 +1,8 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
 import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+dayjs.extend(relativeTime);
 
 function StoreProfileDetails() {
     const { storeInfo } = useSelector(state => state.StoreInfoReducer);

@@ -4,7 +4,7 @@ import Skeleton from 'react-loading-skeleton';
 const SearchLoadingSkeleton = () => {
     const total = [1, 2];
     return (
-        <div className="search-suggestion-area">
+        <div>
             {
                 total.map((item) => (
                     <div className="row py-2 align-items-center" key={item}>

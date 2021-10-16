@@ -15,9 +15,17 @@ const SearchInput = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const [search, setSearch] = useState("");
+  const [searchType, setSearchType] = useState("product"); // products || shops || brands
   const suggestions = useSelector((state) => state.SearchReducer.products);
   const loading = useSelector((state) => state.SearchReducer.loading);
   const firstRenderRef = useRef(true);
+
+  const searchByList = [
+    {label: 'products', id: 'product'},
+    {label: 'shops', id: 'shop'},
+    {label: 'brands', id: 'brand'},
+    {label: 'Categories', id: 'category'},
+  ];
 
   const searchProduct = (e) => {
     setSearch(e.target.value);
@@ -34,6 +42,7 @@ const SearchInput = () => {
 
   const searchClick = (searchData) => {
     setSearch("");
+    setSearchType('product');
     dispatch(toggleBackdrop())
 
     if (searchData.is_item) {
@@ -44,16 +53,33 @@ const SearchInput = () => {
           window.scrollTo(0, 0);
           dispatch(toggleBackdrop())
         });
-    }
-    if (searchData.is_category) {
+    } else if (searchData.is_category) {
       router
         .push(`/products?category=${searchData.id}`)
         .then((_) => {
           window.scrollTo(0, 0);
           dispatch(toggleBackdrop());
         });
+    } else if (searchData.is_brand) {
+      router
+        .push(`/products?brand=${searchData.id}`)
+        .then((_) => {
+          window.scrollTo(0, 0);
+          dispatch(toggleBackdrop());
+        });
+    } else if (searchData.is_shop) {
+      router
+        .push(`/store/${searchData.slug}`)
+        .then((_) => {
+          window.scrollTo(0, 0);
+          dispatch(toggleBackdrop());
+        });
     }
   };
+
+  const searchByListHandler = (id) => {
+    setSearchType(id);
+  }
 
   useEffect(() => {
     if(firstRenderRef.current) {
@@ -62,12 +88,16 @@ const SearchInput = () => {
     }
     const source = axios.CancelToken.source();
 
-    dispatch(searchProductAction(search, source));
+    dispatch(searchProductAction({search: search, type: searchType}, source));
+
+    if(!search) {
+      setSearchType('product')
+    }
 
     return () => {
       source.cancel()
     }
-  }, [search])
+  }, [search, searchType])
 
   return (
     <>
@@ -80,50 +110,49 @@ const SearchInput = () => {
         <FontAwesomeIcon className="custom-fontAwesome" icon={faSearch} />
       </div>
 
-      {
-        search && loading && <SearchLoadingSkeleton/>
-      }
-      {search.length > 0 && suggestions && suggestions.length === 0 && !loading && (
-        <div className="search-suggestion-area">
-          <div
-            className="text-danger text-center"
-            style={{ margin: 0, paddingTop: '10px', display: "flex", flexDirection: "column" }}
-          >
-            <p>
-              <Translate>Sorry, No Product found by</Translate> - {search}{" "}
-            </p>
-
-            <p>
-              <Translate>Please try with another keyword</Translate> !
-            </p>
-          </div>
-        </div>
-      )}
-
-      {search.length > 0 && suggestions && suggestions.length > 0 && (
+      {search.length > 0 && (
         <div className="search-suggestion-area modal-scrollbar">
+          <div className="p-2" style={{backgroundColor: '#f7f7f7'}}>
+              <div className="d-flex">
+                  {
+                    searchByList.map(item => (
+                      <span 
+                        className={`search-suggestion-area-search_by-item d-inline-block px-1 py-2 mr-3 ${searchType === item.id ? 'active' : ''}`}
+                        onClick={() => searchByListHandler(item.id)} >
+                        {item.label}
+                      </span>
+                    )) 
+                  }
+              </div>
+          </div>
+
+          {
+            search && loading && <SearchLoadingSkeleton/>
+          }
+
+          {
+            search && suggestions.length === 0 && !loading && (
+              <div
+                className="text-danger text-center pt-1" >
+                <p style={{lineHeight: '1.5rem', paddingTop: '10px'}}>
+                  Sorry, No Product found by "{search}" <br></br>
+                  Please try with another keyword
+                </p>
+              </div>
+            )
+          }
+
           {suggestions.map((searchItem, searchIndex) => (
             <div
               className="search-suggestion-item"
               key={searchIndex}
-              onClick={() => searchClick(searchItem, searchIndex)}
-            >
-              {searchItem.search_image_url !== null ? (
+              onClick={() => searchClick(searchItem)} >
                 <div className="search-suggestion-item__img-box">
-                  <img src={searchItem.search_image_url} alt={searchItem.name} />
+                  <img src={searchItem.search_image_url ? searchItem.search_image_url : '/images/default/fallback-image.png'} alt={searchItem.name} />
                 </div>
-              ) : (
-                <div className="search-suggestion-item__img-box">
-                  <img
-                    src="/images/default/fallback-image.png"
-                    alt="fallback image"
-                  />
-                </div>
-              )}
 
               <div className="search-suggestion-item__info">
                 <h5 className="search-suggestion-item__title">
-                  {searchItem.is_category ? "Category - " : ""}
                   {searchItem.search_name}
                 </h5>
                 {searchItem.search_price > 0 && (
