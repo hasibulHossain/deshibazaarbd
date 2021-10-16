@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faPrint, faTimes } from "@fortawesome/free-solid-svg-icons";
@@ -49,7 +49,7 @@ const OrderInvoice = ({ title = translate('Invoice'), id, is_invoice = false }) 
                                     <h4><Translate>Order No </Translate>: <span className="small">{id}</span></h4>
                                     <p><Translate>Order Placed at </Translate> : {' '}
                                     <span className="small">
-                                        {moment(orderDetails.transaction_date).format("dddd, MMMM Do YYYY")}
+                                        {dayjs(orderDetails.transaction_date).format("dddd, MMMM Do YYYY")}
                                     </span></p>
                                 </div>
                             </div>

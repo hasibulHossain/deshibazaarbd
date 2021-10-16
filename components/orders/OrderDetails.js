@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getOrderDetails } from './_redux/action/OrderAction.js';
 import LoadingSkelleton from '../master/skelleton/LoadingSkelleton.jsx';
 import SingleOrder from './SingleOrder.js';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { formatCurrency } from '../../services/currency.js';
 import OrderLifeCycle from './OrderLifeCycle.js';
 
@@ -46,7 +46,7 @@ const OrderDetails = ({ orderID }) => {
                             <div className="d-flex justify-content-between">
                                 <div className="details_heading">
                                     <div className="order_id">Order #{orderDetails.id}</div>
-                                    <small className="text-secondary">Placed on {moment(orderDetails.transaction_date).format("dddd, MMMM Do YYYY")}</small>
+                                    <small className="text-secondary">Placed on {dayjs(orderDetails.transaction_date).format("dddd, MMMM Do YYYY")}</small>
                                 </div>
                                 <div className="">
                                     <small className="order_total_price"><span className="text-secondary">Due Total</span>&nbsp; &nbsp; :  {formatCurrency(orderDetails.due_total)}</small>

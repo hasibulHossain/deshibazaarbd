@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import SimpleBtn from '../master/SimpleBtn/SimpleBtn.js';
 import Link from 'next/link'
 import { handleCancelOrder } from './_redux/action/OrderAction.js';
@@ -45,7 +45,7 @@ const SingleOrder = ({ item, isManageable = true }) => {
                                 isManageable && (
                                     <>
                                         <h6 className="order">Order : <span className="text-primary">#{item.id}</span></h6>
-                                        <p className="text-secondary">Placed on {moment(item.transaction_date).format("dddd, MMMM Do YYYY")}</p>
+                                        <p className="text-secondary">Placed on {dayjs(item.transaction_date).format("dddd, MMMM Do YYYY")}</p>
                                     </>
                                 )
                             }
@@ -138,7 +138,7 @@ const SingleOrder = ({ item, isManageable = true }) => {
                                         {
                                             item.is_suspend == 0 && (
                                                 <div className="col-lg-5 order-status-text">
-                                                    <p className="text-success">Estimated Delivery By {moment(product.approx_delivery_date).format("dddd, MMMM Do YYYY")}</p>
+                                                    <p className="text-success">Estimated Delivery By {dayjs(product.approx_delivery_date).format("dddd, MMMM Do YYYY")}</p>
                                                 </div>
                                             )
                                         }
