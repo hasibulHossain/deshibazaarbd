@@ -1,14 +1,16 @@
 import axios from "axios";
 import * as Types from "../Types/Types";
 
-export const searchProductAction = (searchKeyword, source = {token: ""}) => async (dispatch) => {
-  const search = searchKeyword;
+export const searchProductAction = (searchData, source = {token: ""}) => async (dispatch) => {
+  const {search, type} = searchData;
   const response = {
     loading: false,
     data: [],
   };
 
-  const url = `get-items/search?search=${search}`;
+  const url = `get-items/search?search=${search}&type=${type}`;
+
+  if(!search) return;
 
   try {
     response.loading = true;
