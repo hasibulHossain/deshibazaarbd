@@ -6,8 +6,8 @@
     "scripts": {
         "dev": "next dev",
         "dev2": "next dev -p 3001",
-        "build": "next build && next export",
-        "start": "NODE_ENV=production node server.js"
+        "build": "next build",
+        "start": "next start"
     },
     "dependencies": {
         "@babel/plugin-proposal-class-properties": "^7.14.5",

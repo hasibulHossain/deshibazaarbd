@@ -15,21 +15,21 @@ import StoreContainer from "../components/store/StoreContainer";
 import { useSelector } from "react-redux";
 import LazyLoad from "react-lazyload";
 
-export default function Home() {
+export default function Home(props) {
   const {isMobile} = useSelector(state => state.GlobalReducer);
 
 
   return (
     <MainLayout>
-      <HomeBannerCarousel />
+      <HomeBannerCarousel homeBanner={props.homeBanner} />
 
       {/* <NewOffer /> */}
       {/* <OfferProducts /> */}
       {/* <ProductTopListContainer /> */}
-      <CategoryListContainer url='categories' />
+      <CategoryListContainer homeCategory={props.homeCategory} />
       
       <LazyLoad height={280} once>
-        <DealFlash />
+        <DealFlash dealFlashList={props.dealFlash} />
       </LazyLoad>
 
       <ProductSection title={translate('Daily Essential')} type="daily-essentials" limit={isMobile ? 6 : 10} url='daily-essentials' isSliding={isMobile ? false : true} />
@@ -51,4 +51,24 @@ export default function Home() {
       </LazyLoad>
     </MainLayout>
   );
+}
+
+export async function getStaticProps() {
+  const homeBannerSliderRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}sliders-frontend`);
+  const homeBannerSlider = await homeBannerSliderRes.json();
+
+  const homeCategoryRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}frontend-categories?type=homepage&limit=12`);
+  const homeCategory = await homeCategoryRes.json();
+
+  const dealFlashRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}get-items?type=deals-of-day&paginate_no=2`);
+  const dealFlash = await dealFlashRes.json();
+
+  return {
+    props: {
+      homeBanner: homeBannerSlider.data,
+      homeCategory: homeCategory.data,
+      dealFlash: dealFlash.data.data
+    },
+    revalidate: 1800
+  }
 }

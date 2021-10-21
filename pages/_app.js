@@ -1,5 +1,6 @@
-import App from "next/app";
 import React from "react";
+import App from "next/app";
+import Head from 'next/head';
 import { Provider } from "react-redux";
 import axios from "axios";
 import { createWrapper } from "next-redux-wrapper";
@@ -75,6 +76,9 @@ class MyApp extends App {
     const { Component, pageProps } = this.props;
     return (
       <Provider store={Store}>
+        <Head>
+          <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        </Head>
         <Component {...pageProps}></Component>
       </Provider>
     );
