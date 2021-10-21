@@ -109,7 +109,8 @@ const ProductMainList = (props) => {
                 ))}
             </Slider>
         )
-    } else {
+    }
+    if(isSliding && loading) {
         productList = (
             <div className="row no-gutters">
                 <LoadingPlaceHolder className="px-2 mb-2 mb-md-0 col-xl-2 col-lg-3 col-md-4 col-6" count={6} height={300}  />

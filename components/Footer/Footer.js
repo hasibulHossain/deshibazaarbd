@@ -30,7 +30,7 @@ const Footer = () => {
                             <div className="footer-info">
                                 <h3>Customer Care</h3>
                                 <h3>
-                                    <Link href="/p/help center">
+                                    <Link href="/p/help-center">
                                         <a>Help Center</a>
                                     </Link>
                                 </h3>
@@ -40,7 +40,7 @@ const Footer = () => {
                                     </Link>
                                 </h3>
                                 <h3>
-                                    <Link href="/p/Return and Refund Policy">
+                                    <Link href="/p/return-and-refund-policy">
                                         <a>Return &amp; Refund Policy </a>
                                     </Link>
                                 </h3>
@@ -50,12 +50,12 @@ const Footer = () => {
                                     </Link>
                                 </h3>
                                 <h3>
-                                    <Link href="/p/Same Day Delivery">
+                                    <Link href="/p/same-day-delivery">
                                         <a>Same Day Delivery</a>
                                     </Link>
                                 </h3>
                                 <h3>
-                                    <Link href="/p/site map">
+                                    <Link href="/p/site-map">
                                         <a>Site Map</a>
                                     </Link>
                                 </h3>

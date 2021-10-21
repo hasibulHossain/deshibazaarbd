@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import MainLayout from "../components/layouts/MainLayout";
 import Login from "../components/LoginRegistration/Login";
 import { getUserDataAction } from "../components/_redux/getUserData/Action/UserDataAction";
 
@@ -32,11 +31,6 @@ export default function login(props) {
   }, []);
 
   return (
-    <MainLayout
-      pageTitle="Sign In"
-      pageMetaDescription="Sign in to get all access"
-    >
-      <Login />
-    </MainLayout>
+    <Login />
   );
 }

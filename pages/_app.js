@@ -51,6 +51,7 @@ axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL;
 
 import Router from "next/router";
 import NProgress from 'nprogress';
+import MainLayout from "../components/layouts/MainLayout";
 
 NProgress.configure({ minimum: 0.1 });
 
@@ -79,7 +80,9 @@ class MyApp extends App {
         <Head>
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         </Head>
-        <Component {...pageProps}></Component>
+        <MainLayout>
+          <Component {...pageProps}></Component>
+        </MainLayout>
       </Provider>
     );
   }

@@ -1,5 +1,4 @@
 import React from "react";
-import MainLayout from "../components/layouts/MainLayout";
 import HomeBannerCarousel from "../components/homeBannerCarousel/HomeBannerCarousel";
 import CategoryListContainer from "../components/category/CategoryListContainer";
 import CompanyPolicyContainer from '../components/CompanyPolicy/CompanyPolicyContainer'
@@ -14,13 +13,17 @@ import { translate } from "../services/translation/translation";
 import StoreContainer from "../components/store/StoreContainer";
 import { useSelector } from "react-redux";
 import LazyLoad from "react-lazyload";
+import PageMeta from "../components/layouts/PageMeta";
 
 export default function Home(props) {
   const {isMobile} = useSelector(state => state.GlobalReducer);
 
-
   return (
-    <MainLayout>
+    <>
+      <PageMeta 
+        title="Deshi Bazaar BD" 
+        description="Deshi Bazaar BD is a multivendor e-commerce business solution in Bangladesh"
+        keywords="deshibazaar,deshibazaarbd,deshibazar,deshibazarbd,daraz" />
       <HomeBannerCarousel homeBanner={props.homeBanner} />
 
       {/* <NewOffer /> */}
@@ -49,7 +52,7 @@ export default function Home(props) {
       <LazyLoad height={280} once>
         <CompanyPolicyContainer />
       </LazyLoad>
-    </MainLayout>
+    </>
   );
 }
 

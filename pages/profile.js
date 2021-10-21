@@ -1,5 +1,4 @@
 import React from "react";
-import MainLayout from "../components/layouts/MainLayout";
 // import ProductProfile from "../components/myprofile/ProductProfile";
 import ProtectedRoute from "../components/master/protectedRoute/ProtectedRoute";
 
@@ -8,9 +7,7 @@ const ProductProfile = dynamic(() => import('../components/myprofile/ProductProf
 
 const profile = () => {
     return (
-        <MainLayout pageTitle={`Profile Manage`}>
-            <ProductProfile />
-        </MainLayout>
+        <ProductProfile />
     );
 };
 
