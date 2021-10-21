@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import MainLayout from "../components/layouts/MainLayout";
 // import ScrollToTop from "react-scroll-to-top";
 import { Tab, Col, Nav, Row, Accordion, Card } from "react-bootstrap";
 import PageTitle from "../components/master/page-title/PageTitle";
@@ -86,8 +85,6 @@ export default function Faq() {
     ]
 
     return (
-        <MainLayout>
-            <p>Faq page coming soon...</p>
-        </MainLayout>
+        <p>Faq page coming soon...</p>
     );
 }

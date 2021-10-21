@@ -1,5 +1,4 @@
 import React from "react";
-import MainLayout from "../../components/layouts/MainLayout";
 // import ProfileSideBar from "../../components/myprofile/ProfileSideBar";
 // import OrderDetails from "../../components/orders/OrderDetails";
 
@@ -7,36 +6,18 @@ import dynamic from 'next/dynamic';
 const ProfileSideBar = dynamic(() => import('../../components/myprofile/ProfileSideBar'));
 const OrderDetails = dynamic(() => import('../../components/orders/OrderDetails'));
 
-export default function ManageOrder({ order }) {
+export default function ManageOrder() {
 
     return (
-        <MainLayout pageTitle="Manage order">
-            <div className="container">
-                <div className="row">
-                    <div className="col-md-3">
-                        <ProfileSideBar />
-                    </div>
-                    <div className="col-md-9">
-                        <OrderDetails />
-                    </div>
+        <div className="container">
+            <div className="row">
+                <div className="col-md-3">
+                    <ProfileSideBar />
+                </div>
+                <div className="col-md-9">
+                    <OrderDetails />
                 </div>
             </div>
-        </MainLayout>
+        </div>
     );
-}
-
-export const getServerSideProps = async (context) => {
-    const orderID = context.params.manageOrder;
-    let data = {};
-    // if (process.browser) {
-    //     const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}sales/${orderID}`);
-    //     const dataJSON = await res.json();
-    //     data = dataJSON.data;
-    // }
-
-    return {
-        props: {
-            order: data,
-        }
-    }
 }

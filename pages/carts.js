@@ -7,7 +7,6 @@ import { FiChevronRight } from "react-icons/fi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingBag } from "@fortawesome/free-solid-svg-icons";
 
-import MainLayout from "../components/layouts/MainLayout";
 import SimpleBtn from "../components/master/SimpleBtn/SimpleBtn";
 import Modal from "../components/master/Modal/Modal";
 import RemoveCartItem from "../components/RemoveCartItem/RemoveCartItem";
@@ -53,18 +52,6 @@ export default function Carts() {
 
   return (
     <>
-      <Modal
-        visible={isModalActive}
-        closeModalHandler={() => console.log("modal close handler")}
-      >
-        <div style={{ width: "27rem" }}>
-          <RemoveCartItem>
-            Remove from cart item will be removed from order
-          </RemoveCartItem>
-        </div>
-      </Modal>
-
-      <MainLayout pageTitle="Carts">
         <div className="container">
           <div className="row mt-3 mb-5">
             <div className="col-lg-8 col-md-7 px-0 px-sm-2">
@@ -165,7 +152,17 @@ export default function Carts() {
             </div>
           </div>
         </div>
-      </MainLayout>
+
+      <Modal
+        visible={isModalActive}
+        closeModalHandler={() => console.log("modal close handler")}
+      >
+        <div style={{ width: "27rem" }}>
+          <RemoveCartItem>
+            Remove from cart item will be removed from order
+          </RemoveCartItem>
+        </div>
+      </Modal>
     </>
   );
 }

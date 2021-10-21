@@ -1,5 +1,4 @@
 import React from 'react';
-import MainLayout from '../../components/layouts/MainLayout';
 // import ResetPassword from '../../components/forget-password/ResetPassword';
 
 
@@ -8,8 +7,6 @@ const ResetPassword = dynamic(() => import('../../components/forget-password/Res
 
 export default function ResetPasswordPage() { 
     return (
-        <MainLayout pageTitle="Reset Password" >
-            <ResetPassword />
-        </MainLayout>
+        <ResetPassword />
     )
 }
