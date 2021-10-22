@@ -9,6 +9,7 @@ import PageMeta from './PageMeta';
 import FloatingCartButton from "../carts/floating-cart/FloatingCartButton";
 // import MessengerCustomerChat from 'react-messenger-customer-chat';
 import { checkIsMobileDevice, toggleBackdrop } from "../../_redux/store/action/globalAction";
+import { LazyMotion, domAnimation } from "framer-motion"
 
 const MainLayout = ({children}) => {
   const dispatch = useDispatch();
@@ -51,10 +52,12 @@ const MainLayout = ({children}) => {
 
       <Header />
       <main>
-        <div className={`backdrop ${backdrop ? 'open' : ''}`}></div>
-        <div style={{minHeight: "37vh"}}>
-          {children}
-        </div>
+        <LazyMotion features={domAnimation} strict >
+          <div className={`backdrop ${backdrop ? 'open' : ''}`}></div>
+          <div style={{minHeight: "37vh"}}>
+            {children}
+          </div>
+        </LazyMotion>
       </main>
 
       <Footer />

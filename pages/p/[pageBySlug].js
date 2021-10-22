@@ -1,9 +1,16 @@
-import React from "react";
-import ReactHtmlParser from 'react-html-parser';
+import React, {useEffect, useState} from "react";
 import LoadingSpinner from "../../components/master/LoadingSpinner/LoadingSpinner";
+import DOMPurify from 'dompurify';
 
 export default function PageBySlug(props) {
+    const [parsedHtml, setParsedHtml] = useState();
     const { pageData } = props;
+
+    useEffect(() => {
+        const parsedHtml = DOMPurify.sanitize(pageData.description, {USE_PROFILES: {html: true}})
+        setParsedHtml(parsedHtml)
+    }, [parsedHtml])
+
 
     return (
         <div className="container">
@@ -20,8 +27,7 @@ export default function PageBySlug(props) {
                                 <h1 className="website-info-title">{pageData.title}</h1>
                             </div>
                             <div className="card-body">
-                                <div>
-                                    {ReactHtmlParser(pageData.description)}
+                                <div dangerouslySetInnerHTML={{__html: parsedHtml}}>
                                 </div>
                             </div>
                         </div>
@@ -36,8 +42,6 @@ export async function getStaticProps(context) {
     const { pageBySlug } = context.params;
     const pageDataRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}page/${pageBySlug}`);
     const pageData = await pageDataRes.json();
-
-    console.log('page date => ', pageData)
 
     if(!pageData.data) {
         return {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import ReactDOM from "react-dom";
+import {createPortal} from "react-dom";
 import classNames from "classnames";
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 
 function Modal(props) {
   const [modalRoot, setModalRoot] = useState(null);
@@ -24,9 +24,9 @@ function Modal(props) {
         className="modal__backdrop"
       ></div>
       <AnimatePresence>
-        <motion.div initial={{x: -300}} animate={{x: 0}} exit={{x: -100}} transition={{duration: 0.3}} style={{ ...style }} className={modalBoxClasses} >
+        <m.div initial={{x: -300}} animate={{x: 0}} exit={{x: -100}} transition={{duration: 0.3}} style={{ ...style }} className={modalBoxClasses} >
           <div className="modal__children">{children}</div>
-        </motion.div>
+        </m.div>
       </AnimatePresence>
     </div>
   );
@@ -48,7 +48,7 @@ function Modal(props) {
   });
 
   if (visible && modalRoot) {
-    return ReactDOM.createPortal(modalContent, modalRoot);
+    return createPortal(modalContent, modalRoot);
   } else {
     return null;
   }
