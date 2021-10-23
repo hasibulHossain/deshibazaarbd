@@ -6,8 +6,6 @@ import axios from "axios";
 import { createWrapper } from "next-redux-wrapper";
 import Store from "../_redux/Store";
 
-import "@fortawesome/fontawesome-svg-core/styles.css";
-import { config } from "@fortawesome/fontawesome-svg-core";
 import "../assets/scss/variables.scss";
 import "bootstrap/scss/bootstrap.scss";
 import "../node_modules/slick-carousel/slick/slick-theme.css";
@@ -31,9 +29,6 @@ import 'react-inner-image-zoom/lib/InnerImageZoom/styles.min.css';
 
 // For Order Pages
 import "../components/orders/scss/order-invoice.scss";
-
-// Prevent fontawesome from dynamically adding its css since we did it manually above
-config.autoAddCss = false;
 
 toast.configure();
 
