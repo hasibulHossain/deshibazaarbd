@@ -8,34 +8,31 @@ function Modal(props) {
   const { children, closeModalHandler, visible, style, sideModal = false } = props;
 
   let variants;
-
-  if(sideModal) {
-    variants = {
-      initial: {
-         x: -300
-      },
-      animate: {
-         x: 0
-      },
-      exit: {
-        x: -100
-      }
-   }
-  } else {
-    variants = {
-      initial: {
-         opacity: 0
-      },
-      animate: {
-         opacity: 1
-      },
-      exit: {
-        opacity: 0
-      }
-   }
-  }
- 
- const motionTransition = {type: 'tween', ease: 'linear', duration: 0.2}
+    if(sideModal) {
+      variants = {
+        initial: {
+           x: -300
+        },
+        animate: {
+           x: 0
+        },
+        exit: {
+          x: -100
+        }
+     }
+    } else {
+      variants = {
+        initial: {
+           opacity: 0
+        },
+        animate: {
+           opacity: 1
+        },
+        exit: {
+          opacity: 0
+        }
+     }
+    }
 
   const wrapperClasses = classNames({
     'modal__modal-wrapper': true,
@@ -54,7 +51,7 @@ function Modal(props) {
         className="modal__backdrop"
       ></div>
       <AnimatePresence>
-        <m.div initial="initial" animate="animate" exit="exit" variants={variants} transition={motionTransition} style={{ ...style }} className={modalBoxClasses} >
+        <m.div initial="initial" animate="animate" exit="exit" variants={variants} transition={{duration: 0.3}} style={{ ...style }} className={modalBoxClasses} >
           <div className="modal__children">{children}</div>
         </m.div>
       </AnimatePresence>
@@ -62,6 +59,7 @@ function Modal(props) {
   );
 
   useEffect(() => {
+    console.log(props)
     const modalDom = window.document.getElementById("modal-root");
     setModalRoot(modalDom);
     
@@ -71,11 +69,12 @@ function Modal(props) {
     if (visible) {
       bodyDOM.style.height = "100vh";
       bodyDOM.style.overflowY = "hidden";
+      console.log(bodyDOM.style)
     } else {
       bodyDOM.style.height = "";
       bodyDOM.style.overflowY = "";
     }
-  });
+  }, [visible]);
 
   if (visible && modalRoot) {
     return createPortal(modalContent, modalRoot);

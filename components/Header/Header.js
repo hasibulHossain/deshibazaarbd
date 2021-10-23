@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { Dropdown } from "react-bootstrap";
 
+import DemoWarning from "../Demo/DemoWarning";
 import HeaderTop from "./HeaderTop";
 import HeaderMenu from "./HeaderMenu";
 import Button from "../master/Button/Button";
@@ -19,7 +20,7 @@ import Translate from "../translation/Translate";
 import { translate } from "../../services/translation/translation";
 import ActiveLink from "../master/activeLink/ActiveLink";
 import HeaderWishlist from "./HeaderWishlist";
-import DemoWarning from "../Demo/DemoWarning";
+// import { m } from 'framer-motion';
 
 const Header = () => {
   const [showToolbar, setShowToolbar] = useState(false);

@@ -6,9 +6,9 @@ const CategoryListContainer = (props) => {
     return (
         <section className="container product-container">
             <div className="product-heading">
-                <h2>
+                <h1>
                     <Translate>Shop by categories</Translate>
-                </h2>
+                </h1>
                 {/* {
                     parentID !== 'all' && 
                     <Link href="/categories">

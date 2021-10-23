@@ -96,9 +96,8 @@ a .custom-button-component:hover {
   margin-left: -6px;
 }
 
-.dropdown-currency button {
-  padding: 0px;
-  color: #fff !important;
+.dropdown-currency span {
+  cursor: pointer;
 }
 
 .heading-top-right div,
@@ -452,6 +451,17 @@ a .custom-button-component:hover {
 }
 
 .product-heading h2 {
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  font-weight: 600;
+
+  width: 70%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.product-heading h1 {
   text-transform: uppercase;
   font-size: 1.2rem;
   font-weight: 600;
@@ -950,6 +960,7 @@ a .custom-button-component:hover {
 
 .flash-deal-img {
   width: 45%;
+  max-height: 250px;
   padding: 5px;
   overflow: hidden;
   align-self: center;
@@ -969,6 +980,10 @@ a .custom-button-component:hover {
   width: 65%;
   font-size: 16px;
   padding-left: 20px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .flash-deal-detail .flash-deal-title-link {

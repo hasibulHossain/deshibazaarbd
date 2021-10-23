@@ -1,8 +1,7 @@
-import React, { useState, useEffect, memo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Dropdown } from 'react-bootstrap';
-import { getCurrencies, activeCurrency } from '../../services/currency';
-import SimpleModal from '../master/Modal/SimpleModal';
+import { getCurrencies } from '../../services/currency';
+import Modal from '../master/Modal/Modal';
 import TrackingForm from './TrackingForm';
 import Translate from '../translation/Translate';
 import { getUserDataAction } from '../_redux/getUserData/Action/UserDataAction';
@@ -54,35 +53,40 @@ const HeaderTop = () => {
                                 {' '}
                                 <Translate>Track Order</Translate>
                             </p>
-
-                            <Dropdown className="dropdown-currency">
-                                <Dropdown.Toggle variant="default" id="dropdown-basic">
-                                    <img src={activeCurrency('flag_link')} width={30} /> {activeCurrency('lang')}
-                                </Dropdown.Toggle>
-
-                                <Dropdown.Menu>
-                                    {
-                                        currencies.length > 0 && currencies.map((currency, index) => (
-                                            <Dropdown.Item href="#" key={index} className={activeCurrency('code') === currency.code ? 'bg-light' : ''} onClick={() => toggleActiveLanguage(currency)}>
-                                                <img src={currency.flag_link} width={30} />  {currency.lang}
-                                            </Dropdown.Item>
-                                        ))
-                                    }
-                                </Dropdown.Menu>
-                            </Dropdown>
+                            <div className="dropdown-currency">
+                                {
+                                    currencies.length > 0 && currencies.map((currency, index) => {
+                                        if(index === 0) {
+                                            return (
+                                                <span onClick={() => toggleActiveLanguage(currency)} key={index}>
+                                                    {currency.slug.toUpperCase()}
+                                                    {' '}
+                                                    &#124;
+                                                    {' '}
+                                                </span>
+                                            )
+                                        } else {
+                                            return (
+                                                <span onClick={() => toggleActiveLanguage(currency)} key={index}>
+                                                    {currency.slug.toUpperCase()}
+                                                </span>
+                                            )
+                                        }
+                                    })
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <SimpleModal
-                handleClose={handleClose}
-                size={"md"}
-                show={show}
+            <Modal
+                closeModalHandler={handleClose}
+                visible={show}
             >
                 <TrackingForm show={show} setShow={setShow} />
-            </SimpleModal>
+            </Modal>
         </section>
     );
 };
 
-export default memo(HeaderTop);
+export default HeaderTop;

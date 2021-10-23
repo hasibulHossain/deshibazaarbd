@@ -66,17 +66,18 @@ const DealFlash = (props) => {
                         />
                       </div>
                       <div className="flash-deal-detail">
-                        <Link href={`/products/${item.sku}`}>
-                          <a className="flash-deal-title-link">
-                            <h3 className="flash-deal-title">{item.name}</h3>
-                          </a>
-                        </Link>
-                        <ReactStars
-                          value={+item.average_rating}
-                          size={20}
-                          edit={false}
-                          activeColor="#ffd700"
-                        />
+                        <div>
+                          <Link href={`/products/${item.sku}`}>
+                            <a className="flash-deal-title-link">
+                              <h3 className="flash-deal-title">{item.name}</h3>
+                            </a>
+                          </Link>
+                          <ReactStars
+                            value={+item.average_rating}
+                            size={20}
+                            edit={false}
+                            activeColor="#ffd700"
+                          />
                           <div className="flash-deal-prices">
                             <p className="price" style={{marginBottom: '0px'}}>
                               <span className="offerPrice">{formatCurrency(item.offer_selling_price)}</span>
@@ -99,6 +100,7 @@ const DealFlash = (props) => {
                               </div>
                             </div>
                           </div>
+                        </div>
                         {/* <p className="inStock">
                           <Translate>Availability</Translate> : <span>{formatCurrency(item.current_stock, ',', '')}  <Translate>in stock </Translate></span>
                         </p> */}

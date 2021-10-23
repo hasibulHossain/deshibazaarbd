@@ -39,14 +39,10 @@ require("../services/axios");
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL;
 
 
-// export function reportWebVitals(metric) {
-//   console.log(metric)
-// }
-
-
 import Router from "next/router";
 import NProgress from 'nprogress';
 import MainLayout from "../components/layouts/MainLayout";
+import { LazyMotion, domAnimation } from "framer-motion"
 
 NProgress.configure({ minimum: 0.1 });
 
@@ -76,9 +72,11 @@ class MyApp extends App {
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
         </Head>
-        <MainLayout>
-          <Component {...pageProps}></Component>
-        </MainLayout>
+        <LazyMotion features={domAnimation} strict >
+          <MainLayout>
+            <Component {...pageProps}></Component>
+          </MainLayout>
+        </LazyMotion>
       </Provider>
     );
   }
