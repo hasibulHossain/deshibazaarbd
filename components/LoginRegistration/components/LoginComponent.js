@@ -1,7 +1,5 @@
 import Link from "next/link";
 import React, { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { handleLoginInput, loginAction } from "../_redux/Action/LoginAction";
 import { useForm } from "react-hook-form";
@@ -21,7 +19,6 @@ const LoginComponent = () => {
 
   const handleLogin = (e) => {
     dispatch(loginAction(loginInput));
-    // e.preventDefault();
   };
 
   return (
@@ -89,9 +86,13 @@ const LoginComponent = () => {
                     onClick={() => setShowPassword(!showPassword)}
                   >
                     {showPassword === true ? (
-                      <FontAwesomeIcon icon={faEyeSlash} />
+                      <span>
+                        <i className="far fa-eye-slash"></i>
+                      </span>
                     ) : (
-                      <FontAwesomeIcon icon={faEye} />
+                      <span>
+                        <i className="far fa-eye"></i>
+                      </span>
                     )}
                   </div>
                 </div>
@@ -138,16 +139,6 @@ const LoginComponent = () => {
                   Signing in...
                 </button>
               )}
-
-              {/* <p className="mt-2">or Sign up with</p>
-              <button className="btn google_btn mr-3 mt-2">
-                <FontAwesomeIcon className="mr-2" icon={faGoogle} />
-                Google
-              </button>
-              <button className="btn facebook_btn mt-2">
-                <FontAwesomeIcon className="mr-2" icon={faFacebookF} />
-                Google
-              </button> */}
             </div>
           </form>
         )}

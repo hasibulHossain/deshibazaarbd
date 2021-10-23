@@ -1,7 +1,5 @@
 import React from 'react';
 import Modal from 'react-bootstrap/Modal';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 const SimpleModal = (props) => {
 
@@ -17,7 +15,9 @@ const SimpleModal = (props) => {
         >
             <Modal.Body>
                 <div className="modal_close_btn">
-                    <FontAwesomeIcon icon={faTimes} onClick={() => handleClose()} />
+                    <span onClick={() => handleClose()} >
+                        <i className="fas fa-times"></i>
+                    </span>
                 </div>
                 {props.children}
             </Modal.Body>

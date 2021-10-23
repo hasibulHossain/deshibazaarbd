@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { IoMdCloseCircle } from "react-icons/io";
 import { Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -8,8 +7,6 @@ import FloatingCartProduct from "./FloatingCartProduct";
 import { toggleFloatingCart } from "../../../_redux/store/action/globalAction";
 import { getCartsAction, removeAllCartItem } from "../_redux/action/CartAction";
 import { formatCurrency, activeCurrency } from "../../../services/currency";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import router from "next/router";
 
 function FloatingCart() {
@@ -119,7 +116,7 @@ function FloatingCart() {
               onClick={toggleCartHandler}
               className="floating-cart__close-icon"
             >
-              <IoMdCloseCircle />
+              <i className="fas fa-times"></i>
             </div>
           </div>
 

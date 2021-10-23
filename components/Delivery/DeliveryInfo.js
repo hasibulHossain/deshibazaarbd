@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { addAddress, getAddress, getDefaultAddress, getLocationData, getSingleAddress, getSingleShippingAddress, handleChangeBillingAddressInput, handleChangeShippingAddressInput, handleUpdateBillingAddress } from '../ProfileAccountSetting/_redux/Action/ProfileAccountSettingAction';
+import { addAddress, getDefaultAddress, getLocationData, getSingleAddress, getSingleShippingAddress, handleChangeBillingAddressInput, handleChangeShippingAddressInput, handleUpdateBillingAddress } from '../ProfileAccountSetting/_redux/Action/ProfileAccountSettingAction';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentUserDataAction } from './_redux/Action/DeliveryInfoAction';
-import AddressUpdate from './../ProfileAccountSetting/AddressUpdate';
 import LoadingSpinner from '../master/LoadingSpinner/LoadingSpinner';
 import { useForm } from 'react-hook-form';
 import { RHFInput } from 'react-hook-form-input';
 import Select from 'react-select';
 import { Form, Spinner } from 'react-bootstrap'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBriefcase, faHome } from '@fortawesome/free-solid-svg-icons';
 import ErrorMessage from '../master/ErrorMessage/ErrorMessage';
 
 const DeliveryInfo = () => {
@@ -370,11 +367,15 @@ const DeliveryInfo = () => {
                                         </h6>
                                         <div className="d-flex mt-3">
                                             <p className={`btn home_btn mr-3 pointer ${shippingAddressInput.location === "home" ? "active_delivery_label" : ""}`} onClick={() => handleChangeTextInput("location", "home")}>
-                                                <FontAwesomeIcon icon={faHome} className="mr-1" /> Home
+                                                <i className="fas fa-home"></i>
+                                                {' '}
+                                                 Home
                                             </p>
 
                                             <p className={`btn office_btn pointer ${shippingAddressInput.location === "office" ? "active_delivery_label" : ""}`} onClick={() => handleChangeTextInput("location", "office")}>
-                                                <FontAwesomeIcon icon={faBriefcase} className="mr-1" /> Office
+                                                <i className="fas fa-briefcase"></i>
+                                                {' '}
+                                                 Office
                                             </p>
                                         </div>
                                     </div>

@@ -1,5 +1,4 @@
 import React from "react";
-import { MdDelete } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { deleteCartItemAction } from "../_redux/action/CartAction";
 import { formatCurrency, activeCurrency } from '../../../services/currency';
@@ -29,7 +28,7 @@ function FloatingCartProduct({ item }) {
           <CartQuantity cart={item} />
         </div>
         <div className="floating-cart__product-dlt-action pointer" onClick={() => handleDeleteCartProduct(item.productID)}>
-          <MdDelete />
+          <i className="fas fa-trash"></i>
         </div>
       </div>
     </div>

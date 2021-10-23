@@ -1,17 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import {
-  faComment,
-  faHeart,
-  faShoppingBag,
-  faSignOutAlt,
-  faUser,
-  faUserCog,
-} from "@fortawesome/free-solid-svg-icons";
 
 import { useDispatch, useSelector } from "react-redux";
 import { Dropdown } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import HeaderTop from "./HeaderTop";
 import HeaderMenu from "./HeaderMenu";
@@ -28,11 +19,9 @@ import Translate from "../translation/Translate";
 import { translate } from "../../services/translation/translation";
 import ActiveLink from "../master/activeLink/ActiveLink";
 import HeaderWishlist from "./HeaderWishlist";
-import { useRouter } from "next/router";
 import DemoWarning from "../Demo/DemoWarning";
 
 const Header = () => {
-  const router = useRouter();
   const [showToolbar, setShowToolbar] = useState(false);
   const dispatch = useDispatch();
   const { totalQuantity } = useSelector((state) => state.CartReducer);
@@ -145,7 +134,8 @@ const Header = () => {
                             activeLink="custom_dropdown_link"
                           >
                             <span className="custom_drop_item">
-                              <FontAwesomeIcon className="mr-1" icon={faUser} />{" "}
+                              <i className="fas fa-user"></i>
+                              {" "}
                               <Translate>My Account</Translate>
                             </span>
                           </ActiveLink>
@@ -155,10 +145,8 @@ const Header = () => {
                             activeLink="custom_dropdown_link"
                           >
                             <span className="custom_drop_item">
-                              <FontAwesomeIcon
-                                className="mr-1"
-                                icon={faUserCog}
-                              />{" "}
+                            <i className="fas fa-user-cog"></i>
+                              {" "}
                               <Translate>Account Setting</Translate>
                             </span>
                           </ActiveLink>
@@ -167,10 +155,8 @@ const Header = () => {
                             activeLink="custom_dropdown_link"
                           >
                             <span className="custom_drop_item">
-                              <FontAwesomeIcon
-                                className="mr-1"
-                                icon={faHeart}
-                              />{" "}
+                            <i className="fas fa-heart"></i>
+                              {" "}
                               <Translate>My Wish list</Translate>
                             </span>
                           </ActiveLink>
@@ -179,10 +165,8 @@ const Header = () => {
                             activeLink="custom_dropdown_link"
                           >
                             <span className="custom_drop_item">
-                              <FontAwesomeIcon
-                                className="mr-1"
-                                icon={faShoppingBag}
-                              />{" "}
+                            <i className="fas fa-shopping-bag"></i>
+                              {" "}
                               <Translate>My Orders</Translate>
                             </span>
                           </ActiveLink>
@@ -192,10 +176,8 @@ const Header = () => {
                             activeLink="custom_dropdown_link"
                           >
                             <span className="custom_drop_item">
-                              <FontAwesomeIcon
-                                className="mr-1"
-                                icon={faComment}
-                              />{" "}
+                            <i className="fas fa-comment"></i>
+                              {" "}
                               <Translate>My Reviews</Translate>
                             </span>
                           </ActiveLink>
@@ -204,10 +186,8 @@ const Header = () => {
                               className="custom_drop_item"
                               onClick={() => handleLogOut()}
                             >
-                              <FontAwesomeIcon
-                                className="mr-1"
-                                icon={faSignOutAlt}
-                              />{" "}
+                              <i className="fas fa-sign-out-alt"></i>
+                              {" "}
                               <Translate>Logout</Translate>
                             </span>
                           </ActiveLink>
@@ -220,10 +200,8 @@ const Header = () => {
                     onClick={toggleCartHandler}
                     className="header-nav-link pointer cart-nav-link"
                   >
-                    <FontAwesomeIcon
-                      className="custom-fontAwesome"
-                      icon={faShoppingBag}
-                    />
+                    <i className="fas fa-shopping-bag"></i>
+
                     <span className="cart-qty">
                       {formatQtyDisplay(totalQuantity)}
                     </span>

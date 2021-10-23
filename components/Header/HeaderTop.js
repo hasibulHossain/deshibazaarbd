@@ -1,8 +1,6 @@
 import React, { useState, useEffect, memo } from 'react';
 import { useDispatch } from 'react-redux';
 import { Dropdown } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faShippingFast, faUser } from '@fortawesome/free-solid-svg-icons'
 import { getCurrencies, activeCurrency } from '../../services/currency';
 import SimpleModal from '../master/Modal/SimpleModal';
 import TrackingForm from './TrackingForm';
@@ -45,22 +43,15 @@ const HeaderTop = () => {
                                     href="https://seller.deshibazaarbd.com"
                                     target="_blank"
                                     style={{ color: '#fff', textDecoration: 'none' }} >
-                                    <FontAwesomeIcon className="custom-fontAwesome" icon={faUser} />
+                                    <i className="fas fa-user"></i>
+                                    {' '}
                                     <Translate>Become a Seller</Translate>
                                 </a>
                             </p>
 
-                            {/* {
-                                typeof userData !== "undefined" && userData !== null && (
-                                    <p className="heading-top-text pointer" onClick={() => handleShow()}>
-                                        <FontAwesomeIcon className="custom-fontAwesome" icon={faShippingFast} />
-                                        <Translate>Track My Order</Translate>
-                                    </p>
-                                )
-                            } */}
-
                             <p className="heading-top-text pointer" onClick={() => handleShow()}>
-                                <FontAwesomeIcon className="custom-fontAwesome" icon={faShippingFast} />
+                                <i className="fas fa-shipping-fast"></i>
+                                {' '}
                                 <Translate>Track Order</Translate>
                             </p>
 

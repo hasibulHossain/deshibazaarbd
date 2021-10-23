@@ -79,6 +79,7 @@ class MyApp extends App {
       <Provider store={Store}>
         <Head>
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
         </Head>
         <MainLayout>
           <Component {...pageProps}></Component>

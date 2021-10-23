@@ -7,6 +7,36 @@ function Modal(props) {
   const [modalRoot, setModalRoot] = useState(null);
   const { children, closeModalHandler, visible, style, sideModal = false } = props;
 
+  let variants;
+
+  if(sideModal) {
+    variants = {
+      initial: {
+         x: -300
+      },
+      animate: {
+         x: 0
+      },
+      exit: {
+        x: -100
+      }
+   }
+  } else {
+    variants = {
+      initial: {
+         opacity: 0
+      },
+      animate: {
+         opacity: 1
+      },
+      exit: {
+        opacity: 0
+      }
+   }
+  }
+ 
+ const motionTransition = {type: 'tween', ease: 'linear', duration: 0.2}
+
   const wrapperClasses = classNames({
     'modal__modal-wrapper': true,
     'side-modal': sideModal,
@@ -24,7 +54,7 @@ function Modal(props) {
         className="modal__backdrop"
       ></div>
       <AnimatePresence>
-        <m.div initial={{x: -300}} animate={{x: 0}} exit={{x: -100}} transition={{duration: 0.3}} style={{ ...style }} className={modalBoxClasses} >
+        <m.div initial="initial" animate="animate" exit="exit" variants={variants} transition={motionTransition} style={{ ...style }} className={modalBoxClasses} >
           <div className="modal__children">{children}</div>
         </m.div>
       </AnimatePresence>

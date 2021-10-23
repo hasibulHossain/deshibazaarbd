@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PriceCalculation from "./partials/PriceCalculation";
 import ShareProduct from "./partials/ShareProduct";
 import { useDispatch, useSelector } from "react-redux";
@@ -177,7 +175,7 @@ const ProductSingleFull = ({ product }) => {
                         onClick={() => updateQuantity(quantity - 1)}
                         className={quantity <= 1 ? `not-allowed` : `pointer`}
                       >
-                        <FontAwesomeIcon icon={faMinus} />
+                        <i className="fas fa-minus"></i>
                       </button>
                       <input
                         type="text"
@@ -188,23 +186,16 @@ const ProductSingleFull = ({ product }) => {
                         className="pointer"
                         onClick={() => updateQuantity(quantity + 1)}
                       >
-                        <FontAwesomeIcon icon={faPlus} />
+                        <i className="fas fa-plus"></i>
                       </button>
                     </div>
                     <p className="floating-cart__product-price mt-3">
                       {quantity} <span>X</span>&nbsp;
                       {formatCurrency(getDefaultPrice())} ={" "}
                       {formatCurrency(subTotal)}&nbsp;
-                      {/* {activeCurrency('code')} */}
                     </p>
                   </div>
                   <div className="mr-3">
-                    {/* <h6>Color</h6> */}
-                    {/* <div className="color_picker">
-                                        <p className="colorBox" style={{ backgroundColor: "#2df" }}></p>
-                                        <p className="colorBox" style={{ backgroundColor: "#4c3" }}></p>
-                                        <p className="colorBox" style={{ backgroundColor: "#7d8" }}></p>
-                                    </div> */}
                   </div>
                 </div>
 

@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faColumns, faList, faFilter, faSlidersH } from "@fortawesome/free-solid-svg-icons";
 import { Form } from "react-bootstrap";
 import CategoryWiseMiniProduct from "./CategoryWiseMiniProduct";
 import { useDispatch, useSelector } from "react-redux";
@@ -131,11 +129,7 @@ const CategoryWishProductList = ({showFilter, showFilterHandler}) => {
                   Filter 
                 </span>
                 <span>
-                  <FontAwesomeIcon
-                    className={filterClasses}
-                    icon={faSlidersH}
-                    onClick={showFilterHandler}
-                  />
+                <i className="fas fa-sliders-h"></i>
                 </span>
               </div>
             </div>

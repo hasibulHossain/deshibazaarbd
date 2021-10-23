@@ -1,5 +1,3 @@
-import { faCheckSquare, faEnvelopeOpenText, faMapMarkedAlt, faMoneyCheckAlt, faPhoneSquare, faStore, faTruck } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 
 const DeliveryFeatures = ({ product }) => {
@@ -18,7 +16,7 @@ const DeliveryFeatures = ({ product }) => {
                     (location.website !== null && location.website !== "") || (location.name !== null && location.name !== "") && (
                         <p>
                             <span className="user_icon">
-                                <FontAwesomeIcon className="product_details_font_awesome" icon={faStore} />
+                                <i className="fas fa-store"></i>
                             </span>
                             <span className="user_address store_name pointer">
                                 {
@@ -38,7 +36,7 @@ const DeliveryFeatures = ({ product }) => {
                     typeof location.email !== "undefined" && location.email !== null && location.email !== "" && (
                         <p>
                             <span className="user_icon">
-                                <FontAwesomeIcon className="product_details_font_awesome" icon={faEnvelopeOpenText} />
+                                <i className="fas fa-envelope-open-text"></i>
                             </span>
                             <span className="user_address text-lowercase">
                                 <a href={`mailto:${location.email}`} target="_blank" rel="noopener noreferrer">
@@ -53,7 +51,7 @@ const DeliveryFeatures = ({ product }) => {
                     typeof location.mobile !== "undefined" && location.mobile !== null && location.mobile !== "" && (
                         <p>
                             <span className="user_icon">
-                                <FontAwesomeIcon className="product_details_font_awesome" icon={faPhoneSquare} />
+                                <i className="fas fa-phone-square-alt"></i>
                             </span>
                             <span className="user_address text-lowercase">
                                 <a href={`tel:${location.mobile}`}>
@@ -66,7 +64,7 @@ const DeliveryFeatures = ({ product }) => {
 
                 <p>
                     <span className="user_icon">
-                        <FontAwesomeIcon className="product_details_font_awesome" icon={faMapMarkedAlt} />
+                        <i className="fas fa-map-marked-alt"></i>
                     </span>
                     <span className="user_address">
                         <a href={`http://maps.google.com/?q=${location.landmark !== null ? location.landmark + "," : ""} ${location.zip_code !== null ? location.zip_code + "," : ""} ${location.city !== null ? location.city + "," : ""} ${location.state !== null ? location.state + "," : ""} ${location.country !== null ? location.country : ""}`} target="_blank" rel="noopener noreferrer">
@@ -78,7 +76,7 @@ const DeliveryFeatures = ({ product }) => {
             <div className="delivery_fee delivery_features_section mt-3 p-2">
                 <div className="d-flex justify-content-between align-items-end">
                     <div className="d-flex">
-                        <FontAwesomeIcon className="product_details_font_awesome" icon={faTruck} />
+                        <i className="fas fa-truck"></i>
                         <div className="ml-3 product_details__delivery__features_info">
                             <p>Home Delivery <br />
                                 <small style={{color: 'var(--color-green-light)'}} className="delivery_time">
@@ -91,7 +89,9 @@ const DeliveryFeatures = ({ product }) => {
                     </div>
                 </div>
                 <div className="d-flex">
-                    <FontAwesomeIcon className="product_details_font_awesome" icon={faMoneyCheckAlt} />
+                    <span>
+                        <i className="fas fa-money-check-alt"></i>
+                    </span>
                     <p className="ml-3 product_details__delivery__features_info">Cash on Delivery Available</p>
                 </div>
             </div>
@@ -100,13 +100,13 @@ const DeliveryFeatures = ({ product }) => {
                 <small className="delivery_features_section-heading">Return & Warranty</small>
                 <div className="d-flex mt-3">
                     <div>
-                        <FontAwesomeIcon className="return_font_awesome" icon={faCheckSquare} />
+                        <i className="fas fa-check-square"></i>
                     </div>
                     <p className="ml-3 return_information"> 100% Authentic</p>
                 </div>
                 <div className="d-flex">
                     <div>
-                        <FontAwesomeIcon className="return_font_awesome" icon={faCheckSquare} />
+                        <i className="fas fa-check-square"></i>
                     </div>
                     <p className="ml-3 return_information"> 14 days easy return </p>
                 </div>

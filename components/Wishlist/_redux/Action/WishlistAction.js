@@ -1,10 +1,7 @@
 import * as Types from "../Types/Types";
 import Axios from "axios"
-import { showToast } from "../../../master/Helper/ToastHelper";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 import store from '../../../../_redux/Store';
 
 
@@ -45,7 +42,7 @@ export const addOrRemoveWishItem = (itemId, isWishItemFound) => async dispatch =
     const localStorageData = localStorage.getItem("loginData");
 
     if (!localStorageData) {
-        toast.error(<p><FontAwesomeIcon icon={faTimesCircle} /> You must login to add items to your wishlist!</p>, {
+        toast.error(<p><i className="fas fa-times-circle"></i> You must login to add items to your wishlist!</p>, {
             position : "bottom-center",
             autoClose: 3000,
             className: "wishlist_warning_alert",
@@ -63,10 +60,6 @@ export const addOrRemoveWishItem = (itemId, isWishItemFound) => async dispatch =
         Axios.post(`wishlist`, postData)
         .then((_) => {
             dispatch(getWishListData());
-            
-            // if (response.data.status) {
-            //     showToast('success', response.data.message);
-            // }
         })
         .catch((error) => {
             // console.log(error);
@@ -81,9 +74,6 @@ export const addOrRemoveWishItem = (itemId, isWishItemFound) => async dispatch =
         Axios.delete(`wishlist/${wishItem.id}`)
         .then((_) => {
             dispatch(getWishListData());
-            // if (response.data.status) {
-            //     showToast('success', response.data.message);
-            // }
         })
         .catch((error) => {
             // console.log(error)

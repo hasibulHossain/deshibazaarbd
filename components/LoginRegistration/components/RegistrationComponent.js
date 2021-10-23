@@ -1,10 +1,6 @@
 import Link from 'next/link';
 import React, { useRef, useState, useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebookF, faGoogle } from '@fortawesome/free-brands-svg-icons';
-import { faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
-// import ReactSwipeButton from 'react-swipe-button'
 import { useForm } from "react-hook-form";
 import ErrorMessage from '../../master/ErrorMessage/ErrorMessage';
 import { ChangeRegisterInputField, customerRegister, RegisterFirstStep } from '../_redux/Action/RegisterAction';
@@ -250,7 +246,15 @@ const RegistrationComponent = () => {
 
                                 <div className="account_input_group_prepend" onClick={() => setShowPassword(!showPassword)}>
                                     {
-                                        showPassword === true ? <FontAwesomeIcon icon={faEyeSlash} /> : <FontAwesomeIcon icon={faEye} />
+                                        showPassword === true ? (
+                                            <span>
+                                                <i className="far fa-eye"></i>
+                                            </span>
+                                        ) : (
+                                            <span>
+                                                <i className="far fa-eye-slash"></i>
+                                            </span>
+                                        )
                                     }
                                 </div>
                             </div>
@@ -279,7 +283,15 @@ const RegistrationComponent = () => {
 
                                 <div className="account_input_group_prepend" onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
                                     {
-                                        showConfirmPassword === true ? <FontAwesomeIcon icon={faEyeSlash} /> : <FontAwesomeIcon icon={faEye} />
+                                        showConfirmPassword === true ? (
+                                            <span>
+                                                <i className="far fa-eye"></i>
+                                            </span>
+                                        ) : (
+                                            <span>
+                                                <i className="far fa-eye-slash"></i>
+                                            </span>
+                                        ) 
                                     }
                                 </div>
                             </div>
@@ -321,10 +333,6 @@ const RegistrationComponent = () => {
                                 </button>
                             )
                         }
-
-                        {/* <p className="mt-2">or Sign up with</p>
-                        <button className="btn google_btn mr-3 mt-2"><FontAwesomeIcon className="mr-2" icon={faGoogle} />Google</button>
-                        <button className="btn facebook_btn mt-2"><FontAwesomeIcon className="mr-2" icon={faFacebookF} />Google</button> */}
                     </div>
                 </form>
 
@@ -336,16 +344,6 @@ const RegistrationComponent = () => {
                     <Link href="/p/terms-&-condition">
                         <a> Privacy Policy </a>
                     </Link></p>
-                {/* <p className="account_info_label">
-                    you have read and agreed to our
-                    <Link href="/">
-                        <a> Terms of Use </a>
-                    </Link>
-                    and
-                    <Link href="/">
-                        <a> Privacy Policy </a>
-                    </Link>
-                </p> */}
 
                 <p className="already_account">
                     Already have an account ?

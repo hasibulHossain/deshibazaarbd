@@ -1,5 +1,3 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebookF, faInstagram, faLinkedin, faTwitter, faWhatsapp, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import React from 'react';
 import { useSelector } from 'react-redux';
 
@@ -14,32 +12,32 @@ const SocialMedia = () => {
                     <ul className="social-media">
                         <li className="social-facebook">
                             <a href={"https://www.facebook.com/Deshibazaarbd21"} target="_blank" rel="noopener noreferrer">
-                                <FontAwesomeIcon className="custom-fontAwesome" icon={faFacebookF} />
+                                <i className="fab fa-facebook-f"></i>
                             </a>
                         </li>
                         <li className="social-youtube">
                             <a href="https://www.youtube.com/channel/UCRQDLHqRMH4efiE7u89kVIg" target="_blank" rel="noopener noreferrer">
-                                <FontAwesomeIcon className="custom-fontAwesome" icon={faYoutube} />
+                                <i className="fab fa-youtube"></i>
                             </a>
                         </li>
                         <li className="social-twitter">
                             <a href="https://twitter.com/DeshibazaarbdC" target="_blank" rel="noopener noreferrer">
-                                <FontAwesomeIcon className="custom-fontAwesome" icon={faTwitter} />
+                                <i className="fab fa-twitter"></i>
                             </a>
                         </li>
                         <li className="social-linkedIn">
                             <a href="https://www.linkedin.com/in/deshi-bazaar-bd-com-64ab2620b/" target="_blank" rel="noopener noreferrer">
-                                <FontAwesomeIcon className="custom-fontAwesome" icon={faLinkedin} />
+                                <i className="fab fa-linkedin"></i>
                             </a>
                         </li>
                         <li className="social-whatsApp">
                             <a href="#" target="_blank" rel="noopener noreferrer">
-                                <FontAwesomeIcon className="custom-fontAwesome" icon={faWhatsapp} />
+                                <i className="fab fa-whatsapp"></i>
                             </a>
                         </li>
                         <li className="social-instagram">
                             <a href="#" target="_blank" rel="noopener noreferrer">
-                                <FontAwesomeIcon className="custom-fontAwesome" icon={faInstagram} />
+                                <i className="fab fa-instagram"></i>
                             </a>
                         </li>
                     </ul>

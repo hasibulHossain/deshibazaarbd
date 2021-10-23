@@ -1,5 +1,3 @@
-import { faHeart } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {addOrRemoveWishItem} from './_redux/Action/WishlistAction'
@@ -15,7 +13,9 @@ const AddWishList = ({ productId }) => {
     }
 
     return (
-        <FontAwesomeIcon onClick={() => handleAddedWishList(productId)} icon={faHeart} className={`pointer ${isWishItemFound ? 'text-danger' : "text-secondary"}`} />
+        <span className={`pointer ${isWishItemFound ? 'text-danger' : "text-secondary"}`} onClick={() => handleAddedWishList(productId)}>
+            <i className="fas fa-heart"></i>
+        </span>
     );
 };
 

@@ -2,14 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ProfileSideBar from "./ProfileSideBar";
 import { getUserDataAction } from "../_redux/getUserData/Action/UserDataAction";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMailBulk, faMapMarkedAlt, faPhone } from "@fortawesome/free-solid-svg-icons";
 import { getDefaultAddress } from "../ProfileAccountSetting/_redux/Action/ProfileAccountSettingAction";
 import LoadingSpinner from './../master/LoadingSpinner/LoadingSpinner'
 import SimpleModal from '../master/Modal/SimpleModal';
-// import PersonalInformationUpdate from "./PersonalInformationUpdate";
 import AddressUpdate from "./../ProfileAccountSetting/AddressUpdate";
-import Link from 'next/link'
+import Link from 'next/link';
 import WarningMessage from "../master/warningMessage/WarningMessage";
 import Translate from "../translation/Translate";
 
@@ -60,7 +57,7 @@ const ProductProfile = () => {
                     <p className="user_name text-capitalize"> {`${userData !== null && userData.first_name} ${(userData !== null && userData.last_name !== null) ? userData.last_name : ''}`}</p>
                     <p>
                       <span className="user_icon">
-                        <FontAwesomeIcon icon={faMailBulk} />
+                        <i className="fas fa-mail-bulk"></i>
                       </span>
                       <span className="user_email">
                         {userData !== null && userData.email}
@@ -68,7 +65,7 @@ const ProductProfile = () => {
                     </p>
                     <p>
                       <span className="user_icon">
-                        <FontAwesomeIcon icon={faPhone} />
+                        <i className="fas fa-phone"></i>
                       </span>
                       <span className="user_phone">
                         {userData !== null && userData.phone_no}
@@ -118,7 +115,7 @@ const ProductProfile = () => {
                           <>
                             <p>
                               <span className="user_icon">
-                                <FontAwesomeIcon icon={faMapMarkedAlt} />
+                                <i className="fas fa-map-marked-alt"></i>
                               </span>
                               <span className="user_address">
                                 {defaultShippingAddress[0].area}, {defaultShippingAddress[0].street1}, {defaultShippingAddress[0].city} <br />
@@ -146,7 +143,7 @@ const ProductProfile = () => {
                           <>
                             <p>
                               <span className="user_icon">
-                                <FontAwesomeIcon icon={faMapMarkedAlt} />
+                                <i className="fas fa-map-marked-alt"></i>
                               </span>
                               <span className="user_address">
                                 {defaultBillingAddress[0].area}, {defaultBillingAddress[0].street1}, {defaultBillingAddress[0].city} <br />

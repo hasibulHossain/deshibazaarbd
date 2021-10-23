@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
 import Rater from "react-rater";
-import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -289,7 +287,7 @@ const ProductDetailInfo = (props) => {
                                         quantity <= 1 ? `not-allowed` : `pointer`
                                       }
                                     >
-                                      <FontAwesomeIcon icon={faMinus} />
+                                      <i className="fas fa-minus"></i>
                                     </button>
                                     <input
                                       type="text"
@@ -302,7 +300,7 @@ const ProductDetailInfo = (props) => {
                                       className="pointer"
                                       onClick={() => updateQuantity(quantity + 1)}
                                     >
-                                      <FontAwesomeIcon icon={faPlus} />
+                                      <i className="fas fa-plus"></i>
                                     </button>
                                   </div>
                                   <div className="badge mt-3">

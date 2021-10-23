@@ -1,8 +1,6 @@
 import React, { memo, useEffect } from "react";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import {
   getWishListData,
 } from "../Wishlist/_redux/Action/WishlistAction";
@@ -32,7 +30,8 @@ const HeaderWishlist = () => {
   return (
     <Link href="/wishlist" className="header-nav-link">
       <a className="pointer wishlist-nav-link">
-        <FontAwesomeIcon className="custom-fontAwesome" icon={faHeart} />{" "}
+        <i className="fas fa-heart"></i>
+        {" "}
         <span className="wishlist-qty">
           {formatQtyDisplay(wishList.length)}
         </span>
