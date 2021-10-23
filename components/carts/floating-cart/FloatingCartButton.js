@@ -37,7 +37,7 @@ const FloatingCartButton = () => {
             <button onClick={flashDealBtnHandler} className="flashDealButton d-flex flex-column align-items-center pointer" style={style}>
                 <div className="fixed-cart-items">
                     <span>
-                        <i style={{fontSize: '18px'}} class="fas fa-shopping-bag"></i>
+                        <i style={{fontSize: '18px'}} className="fas fa-shopping-bag"></i>
                     </span>
                     <span className={styles.color}>
                         {totalQuantity} items
