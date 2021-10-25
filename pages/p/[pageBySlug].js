@@ -9,8 +9,7 @@ export default function PageBySlug(props) {
     useEffect(() => {
         const parsedHtml = DOMPurify.sanitize(pageData.description, {USE_PROFILES: {html: true}})
         setParsedHtml(parsedHtml)
-    }, [parsedHtml])
-
+    }, [pageData])
 
     return (
         <div className="container">

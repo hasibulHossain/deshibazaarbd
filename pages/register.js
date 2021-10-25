@@ -1,10 +1,5 @@
 import React, { useEffect } from "react";
-import Head from "next/head";
-// import Registration from "../components/LoginRegistration/Registration";
-
-import dynamic from 'next/dynamic'
-
-const Registration = dynamic(() => import('../components/LoginRegistration/Registration'))
+import Registration from "../components/LoginRegistration/Registration";
 
 export default function register() {
   useEffect(() => {
@@ -14,8 +9,12 @@ export default function register() {
   }, []);
 
   return (
-    <>
       <Registration />
-    </>
   );
+}
+
+export async function getStaticProps() {
+  return {
+    props: {}
+  }
 }

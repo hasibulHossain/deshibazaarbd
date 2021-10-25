@@ -15,7 +15,7 @@ const DeliveryFeatures = ({ product }) => {
                 {
                     (location.website !== null && location.website !== "") || (location.name !== null && location.name !== "") && (
                         <p>
-                            <span className="user_icon">
+                            <span className="user_icon color-main">
                                 <i className="fas fa-store"></i>
                             </span>
                             <span className="user_address store_name pointer">
@@ -35,7 +35,7 @@ const DeliveryFeatures = ({ product }) => {
                 {
                     typeof location.email !== "undefined" && location.email !== null && location.email !== "" && (
                         <p>
-                            <span className="user_icon">
+                            <span className="user_icon color-main">
                                 <i className="fas fa-envelope-open-text"></i>
                             </span>
                             <span className="user_address text-lowercase">
@@ -50,7 +50,7 @@ const DeliveryFeatures = ({ product }) => {
                 {
                     typeof location.mobile !== "undefined" && location.mobile !== null && location.mobile !== "" && (
                         <p>
-                            <span className="user_icon">
+                            <span className="user_icon color-main">
                                 <i className="fas fa-phone-square-alt"></i>
                             </span>
                             <span className="user_address text-lowercase">
@@ -63,7 +63,7 @@ const DeliveryFeatures = ({ product }) => {
                 }
 
                 <p>
-                    <span className="user_icon">
+                    <span className="user_icon color-main">
                         <i className="fas fa-map-marked-alt"></i>
                     </span>
                     <span className="user_address">
@@ -76,7 +76,9 @@ const DeliveryFeatures = ({ product }) => {
             <div className="delivery_fee delivery_features_section mt-3 p-2">
                 <div className="d-flex justify-content-between align-items-end">
                     <div className="d-flex">
-                        <i className="fas fa-truck"></i>
+                        <span className="color-main">
+                            <i className="fas fa-truck"></i>
+                        </span>
                         <div className="ml-3 product_details__delivery__features_info">
                             <p>Home Delivery <br />
                                 <small style={{color: 'var(--color-green-light)'}} className="delivery_time">
@@ -89,7 +91,7 @@ const DeliveryFeatures = ({ product }) => {
                     </div>
                 </div>
                 <div className="d-flex">
-                    <span>
+                    <span className="color-main">
                         <i className="fas fa-money-check-alt"></i>
                     </span>
                     <p className="ml-3 product_details__delivery__features_info">Cash on Delivery Available</p>
@@ -99,13 +101,13 @@ const DeliveryFeatures = ({ product }) => {
             <div className="delivery_features_section mt-3 p-2">
                 <small className="delivery_features_section-heading">Return & Warranty</small>
                 <div className="d-flex mt-3">
-                    <div>
+                    <div className="color-main">
                         <i className="fas fa-check-square"></i>
                     </div>
                     <p className="ml-3 return_information"> 100% Authentic</p>
                 </div>
                 <div className="d-flex">
-                    <div>
+                    <div className="color-main">
                         <i className="fas fa-check-square"></i>
                     </div>
                     <p className="ml-3 return_information"> 14 days easy return </p>

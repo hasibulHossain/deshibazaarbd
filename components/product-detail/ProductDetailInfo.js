@@ -13,11 +13,9 @@ import ProductDetailsDescription from "./ProductDetailsDescription";
 import AddWishList from "../Wishlist/AddWishList";
 import ProductRatings from "./ProductRatings";
 import DeliveryFeatures from "./DeliveryFeatures";
-import Slider from "react-slick";
 import PriceCalculation from "../products/partials/PriceCalculation";
 import { showToast } from "../master/Helper/ToastHelper";
 import ProductMainList from "../products/ProductMainList";
-import { useRouter } from "next/router";
 import { formatCurrency } from "../../services/currency";
 import LazyLoad from "react-lazyload";
 import InnerImageZoom from 'react-inner-image-zoom';
@@ -25,6 +23,7 @@ import InnerImageZoom from 'react-inner-image-zoom';
 const ProductDetailInfo = (props) => {
   const dispatch = useDispatch();
   const { product } = props;
+  const { id: productId } = product;
   const [quantity, setQuantity] = useState(1);
   const { carts } = useSelector((state) => state.CartReducer);
   const [filterCarts, setFilterCarts] = useState(null);
@@ -36,9 +35,6 @@ const ProductDetailInfo = (props) => {
       ? product.offer_selling_price
       : product.default_selling_price;
   const [subTotal, setSubTotal] = useState("");
-
-  const router = useRouter();
-  const { asPath } = router;
 
   useEffect(() => {
     dispatch(getCartsAction());
@@ -78,6 +74,9 @@ const ProductDetailInfo = (props) => {
 
   useEffect(() => {
     if (product) {
+      const featured_image = `${process.env.NEXT_PUBLIC_URL}images/products/${product.featured_image}`;
+      setPreviewImg(featured_image);
+
       const newFilterCarts = carts.find((item) => item.productID == product.id);
 
       if (typeof newFilterCarts !== "undefined" && newFilterCarts !== null) {
@@ -92,12 +91,7 @@ const ProductDetailInfo = (props) => {
 
       setFilterCarts(newFilterCarts);
     }
-  }, [product]);
-
-  useEffect(() => {
-    const featured_image = `${process.env.NEXT_PUBLIC_URL}images/products/${product.featured_image}`;
-    setPreviewImg(featured_image);
-  }, [asPath]);
+  }, [productId]);
 
   const updateQuantity = (quantity) => {
     if (
@@ -202,7 +196,7 @@ const ProductDetailInfo = (props) => {
                                 hasSpacer
                               />
                             <div className="product_preview_gallery mt-2">
-                              <Slider {...settings}>
+                              {/* <Slider {...settings}> */}
                                 {product.images && product.images.length > 0 && product.images.map((item, index) => (
                                   <div key={index}>
                                     <div onClick={() => handleChangePreviewImg(item.image_url) } style={{padding: '5px', width: '100%', height: '100px'}}>
@@ -210,7 +204,7 @@ const ProductDetailInfo = (props) => {
                                     </div>
                                   </div>
                                 ))}
-                              </Slider>
+                              {/* </Slider> */}
                             </div>
                           </div>
                           <div className="col-lg-6">

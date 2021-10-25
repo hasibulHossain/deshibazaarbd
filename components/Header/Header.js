@@ -20,7 +20,6 @@ import Translate from "../translation/Translate";
 import { translate } from "../../services/translation/translation";
 import ActiveLink from "../master/activeLink/ActiveLink";
 import HeaderWishlist from "./HeaderWishlist";
-// import { m } from 'framer-motion';
 
 const Header = () => {
   const [showToolbar, setShowToolbar] = useState(false);
@@ -194,24 +193,31 @@ const Header = () => {
                           </ActiveLink>
                         </Dropdown.Menu>
                       </Dropdown>
-                      <HeaderWishlist />
+                      <Link href="/wishlist">
+                        <a>
+                          <HeaderWishlist />
+                        </a>
+                      </Link>
                     </>
                   )}
-                  <span
-                    onClick={toggleCartHandler}
-                    className="header-nav-link pointer cart-nav-link"
-                  >
-                    <i className="fas fa-shopping-bag"></i>
+                  <Link href="/checkout">
+                    <a>
+                      <span
+                        className="header-nav-link pointer cart-nav-link"
+                      >
+                        <i className="fas fa-shopping-bag"></i>
 
-                    <span className="cart-qty">
-                      {formatQtyDisplay(totalQuantity)}
-                    </span>
-                    {!isMobile && (
-                      <>
-                        &nbsp;&nbsp; <Translate>Cart</Translate>
-                      </>
-                    )}
-                  </span>
+                        <span className="cart-qty">
+                          {formatQtyDisplay(totalQuantity)}
+                        </span>
+                        {/* {!isMobile && (
+                          <>
+                            &nbsp;&nbsp; <Translate>Cart</Translate>
+                          </>
+                        )} */}
+                      </span>
+                    </a>
+                  </Link>
                 </div>
               </div>
             </div>

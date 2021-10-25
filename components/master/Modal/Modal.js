@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {createPortal} from "react-dom";
 import classNames from "classnames";
-import { m, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 function Modal(props) {
   const [modalRoot, setModalRoot] = useState(null);
@@ -51,15 +51,14 @@ function Modal(props) {
         className="modal__backdrop"
       ></div>
       <AnimatePresence>
-        <m.div initial="initial" animate="animate" exit="exit" variants={variants} transition={{duration: 0.3}} style={{ ...style }} className={modalBoxClasses} >
+        <motion.div initial="initial" animate="animate" exit="exit" variants={variants} transition={{duration: 0.3}} style={{ ...style }} className={modalBoxClasses} >
           <div className="modal__children">{children}</div>
-        </m.div>
+        </motion.div>
       </AnimatePresence>
     </div>
   );
 
   useEffect(() => {
-    console.log(props)
     const modalDom = window.document.getElementById("modal-root");
     setModalRoot(modalDom);
     
@@ -69,7 +68,6 @@ function Modal(props) {
     if (visible) {
       bodyDOM.style.height = "100vh";
       bodyDOM.style.overflowY = "hidden";
-      console.log(bodyDOM.style)
     } else {
       bodyDOM.style.height = "";
       bodyDOM.style.overflowY = "";

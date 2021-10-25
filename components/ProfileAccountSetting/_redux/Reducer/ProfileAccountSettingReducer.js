@@ -222,7 +222,6 @@ function ProfileAccountSettingReducer(state = initialState, action) {
                 let cloneSelectedAddress;
 
                 if (cloneAddress.length > 0) {
-                    console.log('clone address => ', cloneAddress)
                      cloneSelectedAddress = {
                         ...state.selectedAddress,
                         id                 : +cloneAddress[0].id,
