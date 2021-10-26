@@ -26,7 +26,7 @@ export default function PageBySlug(props) {
                                 <h1 className="website-info-title">{pageData.title}</h1>
                             </div>
                             <div className="card-body">
-                                <div dangerouslySetInnerHTML={{__html: parsedHtml}}>
+                                <div className="website-info-content" dangerouslySetInnerHTML={{__html: parsedHtml}}>
                                 </div>
                             </div>
                         </div>

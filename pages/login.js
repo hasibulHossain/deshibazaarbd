@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Login from "../components/LoginRegistration/Login";
 import { getUserDataAction } from "../components/_redux/getUserData/Action/UserDataAction";
 
-export default function login(props) {
+export default function login() {
 
   const dispatch   = useDispatch();
   const router     = useRouter();

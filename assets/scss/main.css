@@ -3823,3 +3823,35 @@ p.customer_info_edit {
 .color-main {
   color: var(--color-primary);
 }
+
+.website-info-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.website-info-content .table {
+  margin: 0;
+}
+
+.website-info-content .table table {
+  /* margin: 0 auto; */
+}
+
+.website-info-content .table table h3 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+
+.website-info-content .table table td {
+  border: none;
+}
+
+.website-info-content .table table td p {
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  padding-left: 0.5rem;
+}
+
+.website-info-content .table table a {
+  color: #1F2937;
+}
