@@ -4,9 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { handleLoginInput, loginAction } from "../_redux/Action/LoginAction";
 import { useForm } from "react-hook-form";
 import ErrorMessage from "../../master/ErrorMessage/ErrorMessage";
+import { signIn, useSession } from 'next-auth/client'
 
 const LoginComponent = () => {
-
+  const [session, loading] = useSession();
   const [showPassword, setShowPassword]    = useState(false);
   const dispatch                           = useDispatch();
   const loginInput                         = useSelector((state) => state.AuthReducer.loginInput);
@@ -17,10 +18,25 @@ const LoginComponent = () => {
     dispatch(handleLoginInput(name, value));
   };
 
-  const handleLogin = (e) => {
-    dispatch(loginAction(loginInput));
+
+  console.log(loading);
+  console.log(session);
+
+  const handleLogin = async (e) => {
+    console.log(loginInput)
+    // dispatch(loginAction(loginInput));
+
+    const res = await signIn('credentials', {
+      email: loginInput.email,
+      password: loginInput.password,
+      redirect: false
+    })
+    console.log(res)
   };
 
+  const testLogin = async ()  => {
+  };
+  
   return (
     <>
       <div className="account_info_body mt-5">
