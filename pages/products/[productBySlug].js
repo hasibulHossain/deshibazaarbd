@@ -3,7 +3,6 @@ import ProductNoFound from "../../components/master/productNoFound/ProductNoFoun
 import ProductDetailInfo from "../../components/product-detail/ProductDetailInfo";
 
 export default function ProductBySlug({ product }) {
-    console.log('product [pagebyslug] => ', product)
     return (
         <div className="container">
             {

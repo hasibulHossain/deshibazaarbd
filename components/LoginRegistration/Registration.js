@@ -1,6 +1,12 @@
 import React from 'react';
 import RegistrationComponent from './components/RegistrationComponent'
+import { useSession } from 'next-auth/client'
 const Registration = () => {
+    const [session, loading] = useSession();
+    if(session && !loading || loading) {
+        return null;
+    }
+
     return (
         <div className="container">
             <div className="row justify-content-center align-items-center my-3">

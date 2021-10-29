@@ -5,9 +5,12 @@ import { handleLoginInput, loginAction } from "../_redux/Action/LoginAction";
 import { useForm } from "react-hook-form";
 import ErrorMessage from "../../master/ErrorMessage/ErrorMessage";
 import { signIn, useSession } from 'next-auth/client'
+import { isSignedIn } from "../../_redux/getUserData/Action/UserDataAction";
+import { useRouter } from 'next/router';
 
 const LoginComponent = () => {
-  const [session, loading] = useSession();
+  const router = useRouter();
+  const [session] = useSession();
   const [showPassword, setShowPassword]    = useState(false);
   const dispatch                           = useDispatch();
   const loginInput                         = useSelector((state) => state.AuthReducer.loginInput);
@@ -18,24 +21,25 @@ const LoginComponent = () => {
     dispatch(handleLoginInput(name, value));
   };
 
-
-  console.log(loading);
-  console.log(session);
-
   const handleLogin = async (e) => {
-    console.log(loginInput)
-    // dispatch(loginAction(loginInput));
-
     const res = await signIn('credentials', {
       email: loginInput.email,
       password: loginInput.password,
-      redirect: false
+      redirect: false,
     })
-    console.log(res)
+
+    if(res || !res) {
+      dispatch(isSignedIn())
+    }
+
+    if(!res.error) {
+      router.replace('/')
+    }
   };
 
-  const testLogin = async ()  => {
-  };
+  if(session) {
+    return null
+  }
   
   return (
     <>

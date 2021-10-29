@@ -10,12 +10,11 @@ import { getUserDataAction } from "../components/_redux/getUserData/Action/UserD
 import { storeSells } from "../components/Delivery/_redux/Action/DeliveryInfoAction";
 import { getCartsAction } from "../components/carts/_redux/action/CartAction";
 import { handleShippingCost } from "../components/orders/_redux/action/OrderAction";
-import ProtectedRoute from "../components/master/protectedRoute/ProtectedRoute";
+// import ProtectedRoute from "../components/master/protectedRoute/ProtectedRoute";
 // import { toggleFloatingCart } from "../_redux/store/action/globalAction";
-
-
-
 import dynamic from 'next/dynamic';
+import withProtectedRoute from "../components/master/hoc/withProtectedRoute";
+
 const ShippingInfo = dynamic(() => import('../components/ShippingInfo/ShippingInfo'));
 const CheckoutPaymentMethod = dynamic(() => import('../components/ShippingInfo/CheckoutPaymentMethod'));
 const OrderSummery = dynamic(() => import('../components/orders/OrderSummery'));
@@ -77,4 +76,5 @@ const Checkout = ()=> {
 			</div>
 	);
 }
-export default ProtectedRoute(Checkout);
+// export default ProtectedRoute(Checkout);
+export default withProtectedRoute(Checkout);

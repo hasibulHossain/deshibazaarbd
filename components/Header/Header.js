@@ -20,12 +20,13 @@ import Translate from "../translation/Translate";
 import { translate } from "../../services/translation/translation";
 import ActiveLink from "../master/activeLink/ActiveLink";
 import HeaderWishlist from "./HeaderWishlist";
+import { signOut } from 'next-auth/client';
 
 const Header = () => {
   const [showToolbar, setShowToolbar] = useState(false);
   const dispatch = useDispatch();
   const { totalQuantity } = useSelector((state) => state.CartReducer);
-  const { userData } = useSelector((state) => state.UserDataReducer);
+  const { isSignedIn } = useSelector((state) => state.UserDataReducer);
   const { isMobile, backdrop } = useSelector((state) => state.GlobalReducer);
 
   const toggleCartHandler = () => {
@@ -49,7 +50,7 @@ const Header = () => {
 
   const handleLogOut = () => {
     dispatch(handleLogoutUser());
-    window.location.reload();
+    signOut()
   };
 
   const navigationToggleHandler = () => {
@@ -88,7 +89,7 @@ const Header = () => {
               </div>
               <div className="header__signupIn header-nav">
                 <div className="d-flex align-items-center">
-                  {!userData ? (
+                  {!isSignedIn ? (
                     <div>
                       {
                         isMobile ? (
@@ -124,7 +125,8 @@ const Header = () => {
                           id="dropdown-basic"
                         >
                           <div className="auth-user-name">
-                            {userData.first_name}
+                            {/* {userData.first_name} */}
+                            User
                           </div>
                         </Dropdown.Toggle>
 

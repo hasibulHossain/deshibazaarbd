@@ -262,7 +262,6 @@ export const handleCancelOrder = (order_id, closeModal, user_id) => (dispatch) =
       const { response }     = err;
       responseData.isLoading = false;
       const { request, ...errorObject } = response;
-      console.log('response :>> ', response);
       dispatch({ type: Types.CANCEL_ORDER, payload: responseData });
 
     })
@@ -342,7 +341,6 @@ export const getOrderLifeCycleData = (id) => (dispatch) => {
           }
       }).catch((err) => {
           responseList.isLoading = false;
-          console.log('err order lifecycle :>> ', err);
           dispatch({ type: Types.GET_ORDER_LIFECYCLE_DETAILS, payload: responseList });
       })
 }

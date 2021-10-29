@@ -2,7 +2,8 @@ import React from "react";
 import App from "next/app";
 import Head from 'next/head';
 import { Provider } from "react-redux";
-import axios from "axios";
+import Router from "next/router";
+import NProgress from 'nprogress';
 import { createWrapper } from "next-redux-wrapper";
 import Store from "../_redux/Store";
 
@@ -29,19 +30,15 @@ import 'react-inner-image-zoom/lib/InnerImageZoom/styles.min.css';
 
 // For Order Pages
 import "../components/orders/scss/order-invoice.scss";
+import MainLayout from "../components/layouts/MainLayout";
+import axiosDefault from "../services/axios-default";
+import axios from 'axios';
 
+axiosDefault();
 toast.configure();
 
-// Import axios.js so that it can inject token in every request
-require("../services/axios");
-
 // Base url
-axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL;
 
-
-import Router from "next/router";
-import NProgress from 'nprogress';
-import MainLayout from "../components/layouts/MainLayout";
 
 NProgress.configure({ minimum: 0.1 });
 
@@ -59,7 +56,6 @@ Router.onRouteChangeError = () => {
   // console.log('onRouteChangeError triggered');
   NProgress.done();
 };
-
 
 
 class MyApp extends App {

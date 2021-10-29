@@ -7,6 +7,7 @@ import FloatingCart from "../carts/floating-cart/FloatingCart";
 import FloatingCartButton from "../carts/floating-cart/FloatingCartButton";
 
 import { checkIsMobileDevice } from "../../_redux/store/action/globalAction";
+import { isSignedIn } from "../_redux/getUserData/Action/UserDataAction";
 
 // import DemoWarning from "../Demo/DemoWarning";
 // import MessengerCustomerChat from 'react-messenger-customer-chat';
@@ -29,6 +30,7 @@ const MainLayout = ({children}) => {
   });
 
   useEffect(() => {
+    dispatch(isSignedIn())
     if (typeof window === "undefined") {
       global.window = {};
     }
@@ -53,7 +55,7 @@ const MainLayout = ({children}) => {
       <Header />
       <main>
           <div className={`backdrop ${backdrop ? 'open' : ''}`}></div>
-          <div style={{minHeight: "37vh"}}>
+          <div style={{minHeight: "40vh"}}>
             {children}
           </div>
       </main>
