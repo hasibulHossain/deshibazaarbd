@@ -1,5 +1,4 @@
 import React from "react";
-import MainLayout from "../components/layouts/MainLayout";
 import HomeBannerCarousel from "../components/homeBannerCarousel/HomeBannerCarousel";
 import CategoryListContainer from "../components/category/CategoryListContainer";
 import CompanyPolicyContainer from '../components/CompanyPolicy/CompanyPolicyContainer'
@@ -14,22 +13,26 @@ import { translate } from "../services/translation/translation";
 import StoreContainer from "../components/store/StoreContainer";
 import { useSelector } from "react-redux";
 import LazyLoad from "react-lazyload";
+import PageMeta from "../components/layouts/PageMeta";
 
-export default function Home() {
+export default function Home(props) {
   const {isMobile} = useSelector(state => state.GlobalReducer);
 
-
   return (
-    <MainLayout>
-      <HomeBannerCarousel />
+    <>
+      <PageMeta 
+        title="Deshi Bazaar BD" 
+        description="Deshi Bazaar BD is a multivendor e-commerce business solution in Bangladesh"
+        keywords="deshibazaar,deshibazaarbd,deshibazar,deshibazarbd,daraz" />
+      <HomeBannerCarousel homeBanner={props.homeBanner} />
 
       {/* <NewOffer /> */}
       {/* <OfferProducts /> */}
       {/* <ProductTopListContainer /> */}
-      <CategoryListContainer url='categories' />
+      <CategoryListContainer homeCategory={props.homeCategory} />
       
       <LazyLoad height={280} once>
-        <DealFlash />
+        <DealFlash dealFlashList={props.dealFlash} />
       </LazyLoad>
 
       <ProductSection title={translate('Daily Essential')} type="daily-essentials" limit={isMobile ? 6 : 10} url='daily-essentials' isSliding={isMobile ? false : true} />
@@ -49,6 +52,26 @@ export default function Home() {
       <LazyLoad height={280} once>
         <CompanyPolicyContainer />
       </LazyLoad>
-    </MainLayout>
+    </>
   );
+}
+
+export async function getStaticProps() {
+  const homeBannerSliderRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}sliders-frontend`);
+  const homeBannerSlider = await homeBannerSliderRes.json();
+
+  const homeCategoryRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}frontend-categories?type=homepage&limit=12`);
+  const homeCategory = await homeCategoryRes.json();
+
+  const dealFlashRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}get-items?type=deals-of-day&paginate_no=2`);
+  const dealFlash = await dealFlashRes.json();
+
+  return {
+    props: {
+      homeBanner: homeBannerSlider.data,
+      homeCategory: homeCategory.data,
+      dealFlash: dealFlash.data.data
+    },
+    revalidate: 1800
+  }
 }

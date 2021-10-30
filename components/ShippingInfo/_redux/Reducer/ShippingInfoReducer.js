@@ -1,5 +1,4 @@
 import * as Types from "../Types/Types";
-import moment from "moment";
 const initialState = {
     paymentMethods: [],
 };

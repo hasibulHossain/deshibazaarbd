@@ -19,20 +19,7 @@ const OrderList = () => {
         <section className="order_section">
             <PageTitle title={<Translate>My Orders</Translate>} />
             <div className="order_filter_section">
-                <Tabs defaultActiveKey="all" id="uncontrolled-tab-example">
-                    <Tab eventKey="all" title="All">
-                        <FilterOrderList orderList={orderList} isLoading={isLoading} />
-                    </Tab>
-                    {/* <Tab eventKey="to_pay" title={`To Pay(${orderList.length})`}>
-                        <FilterOrderList orderList={orderList} isLoading={isLoading} />
-                    </Tab>
-                    <Tab eventKey="to_ship" title={`To Ship(${orderList.length})`}>
-                        <FilterOrderList orderList={orderList} isLoading={isLoading} />
-                    </Tab>
-                    <Tab eventKey="to_receive" title={`To Receive(${orderList.length})`}>
-                        <FilterOrderList orderList={orderList} isLoading={isLoading} />
-                    </Tab> */}
-                </Tabs>
+                <FilterOrderList orderList={orderList} isLoading={isLoading} />
             </div>
         </section>
     );

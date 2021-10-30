@@ -1,11 +1,8 @@
 import React from 'react';
-import Link from 'next/link';
-import Button from '../master/Button/Button';
 import CategoryList from './CategoryList';
 import Translate from '../translation/Translate';
-import { translate } from '../../services/translation/translation';
 
-const CategoryListContainer = ({ parentID = null }) => {
+const CategoryListContainer = (props) => {
     return (
         <section className="container product-container">
             <div className="product-heading">
@@ -22,7 +19,7 @@ const CategoryListContainer = ({ parentID = null }) => {
                 } */}
             </div>
 
-            <CategoryList parentID={parentID} />
+            <CategoryList homeCategory={props.homeCategory} />
         </section>
     );
 };

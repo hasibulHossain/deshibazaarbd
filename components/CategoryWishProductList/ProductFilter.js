@@ -1,56 +1,26 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, { useState, useCallback, useRef, useEffect } from "react";
 import { Form } from "react-bootstrap";
 import InputRange from "react-input-range";
 import "react-input-range/lib/css/index.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getCategoryOrBrandDetails,
-  getFilteredProducts,
-  getSubCategories,
-  resetFilterParams,
   setFilterParams,
 } from "./_redux/Action/CategoryWiseProductAction";
-import { getShopList } from "../Shop/_redux/Action/ShopAction";
 import ReactStars from "react-rating-stars-component";
 import { activeCurrency } from "../../services/currency";
-import {useRouter} from 'next/router'
-import classNames from "classnames";
-import Axios from 'axios'
 
-const ProductFilter = ({show}) => {
-  const router = useRouter();
+const ProductFilter = () => {
   const dispatch = useDispatch();
   const { filterParams, categories, brands } = useSelector(
     (state) => state.CategoryWiseProductReducer
   );
-  // const {isMobile} = useSelector(state => state.GlobalReducer);
 
   const [value, setValue] = useState({ min: 100, max: 90000 });
   const [isChecked, setIsChecked] = useState(false);
 
   const categoryCheckboxes = useRef([]);
+  const brandCheckboxes = useRef([]);
 
-
-  const {
-    search,
-    category,
-    brand,
-    min_price,
-    max_price,
-    attributes,
-    rating,
-    paginate_no,
-    order_by,
-    seller_id,
-    order,
-    type,
-    page
-  } = filterParams;
-
-  // const classes = classNames({
-  //   'product_filter_section modal-scrollbar shadow-sm p-3 mb-md-5 mb-sm-2 bg-white rounded': true,
-  //   show: show || !isMobile,
-  // });
 
   // checkbox handler
   const handleChecked = (e, category) => {
@@ -136,85 +106,20 @@ const ProductFilter = ({show}) => {
     dispatch(setFilterParams(filterParamClone));
   }
 
-  // const {brand: brandQuery = "", category: categoryQuery = "", type: typeQuery = "", storeById = ""} = router.query;
+  useEffect(() => {
+    brandCheckboxes.current.forEach(brand => {
+      if(filterParams.brand.includes(brand.id)) {
+        brand.checked = true
+      }
+    });
 
-  // useEffect(() => {
-  //   const queries = router.query;
-  //   const cloneFilterParams = {...filterParams};
-
-  //   for(const query in queries) {
-  //     if(Array.isArray(cloneFilterParams[query])) {
-  //       // cloneFilterParams[query] = [];
-
-  //       if(query === 'brand') {
-  //         cloneFilterParams[query].push(+queries[query]);
-
-  //         dispatch(getCategoryOrBrandDetails('brands/' + +queries[query]));
-  //       }
-  //       if(query === 'category') {
-  //         // check if category same or not after remount
-  //         if(cloneFilterParams[query].length > 0 && !(cloneFilterParams[query][0] === parseInt(queries[query]))) {
-  //           cloneFilterParams.page = 1;
-  //           cloneFilterParams[query] = [];
-  //           cloneFilterParams[query].push(+queries[query]);
-  //         } else {
-
-  //           cloneFilterParams[query] = [];
-  //           cloneFilterParams[query].push(+queries[query]);
-  //         }
-
-  //         dispatch(getSubCategories(queries[query]))
-
-  //         dispatch(getCategoryOrBrandDetails('categories/' + +queries[query]));
-  //       }
-
-  //     } else {
-  //       cloneFilterParams.category = [];
-  //       cloneFilterParams.brand = [];
-  //       cloneFilterParams.page = 1;
-
-  //       if(query === 'storeById') {
-  //         cloneFilterParams['seller_id'] = queries[query]
-  //       }
-  //       if(query === 'type') {
-  //         cloneFilterParams['type'] = queries[query]
-  //       }
-  //     }
-  //   }
-  //   dispatch(setFilterParams(cloneFilterParams));
-
-  //   dispatch(getShopList());
-
-  // }, [brandQuery, categoryQuery, typeQuery, storeById]);
-
-  // useEffect(() => {
-  //   return () => {
-  //     dispatch(resetFilterParams(filterParams))
-  //   }
-  // }, [])
-
-  // useEffect(() => {
-    
-  //   const source = Axios.CancelToken.source();
-  //   dispatch(getFilteredProducts(filterParams, source));
-  //   return () => {
-  //     source.cancel()
-  //   }
-  // }, [
-  //   attributes,
-  //   JSON.stringify(brand),
-  //   JSON.stringify(category),
-  //   max_price,
-  //   min_price,
-  //   rating,
-  //   search,
-  //   paginate_no,
-  //   order_by,
-  //   order,
-  //   type,
-  //   page,
-  //   seller_id
-  // ]);
+    for (let index = 0; index < categoryCheckboxes.current.length; index++) {
+      if(filterParams.category.length > 1 && filterParams.category[1] == categoryCheckboxes.current[index].id) {
+        categoryCheckboxes.current[index].checked = true;
+        break;
+      }
+    }
+  }, [])
 
   return (
     <section className="w-100 product_filter_section modal-scrollbar bg-white" >
@@ -270,9 +175,10 @@ const ProductFilter = ({show}) => {
         brands.length > 0 &&
         <div className="filter_by_category" style={{marginTop: '40px'}}>
           <p className="filter_title">Brand</p>
-          {brands.map((item) => (
+          {brands.map((item, index) => (
             <Form.Group key={item.id} controlId={item.id}>
               <Form.Check
+                ref={checkbox => brandCheckboxes.current[index] = checkbox}
                 type="checkbox"
                 label={item.name}
                 className={

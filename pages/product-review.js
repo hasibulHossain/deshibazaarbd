@@ -1,5 +1,4 @@
 import React from "react";
-import MainLayout from "../components/layouts/MainLayout";
 import ProtectedRoute from "../components/master/protectedRoute/ProtectedRoute";
 // import ProductReview from '../components/product-review/ProductReview';
 
@@ -9,11 +8,9 @@ const ProductReview = dynamic(() => import('../components/product-review/Product
 
 function productReview() {
     return (
-        <MainLayout pageTitle="Product Review">
-            <div className="container">
-                <ProductReview />
-            </div>
-        </MainLayout>
+        <div className="container">
+            <ProductReview />
+        </div>
     );
 }
 

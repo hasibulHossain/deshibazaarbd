@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 // local import
-import MainLayout from "../components/layouts/MainLayout";
 // import ShippingInfo from "../components/ShippingInfo/ShippingInfo";
 // import CheckoutPaymentMethod from "../components/ShippingInfo/CheckoutPaymentMethod";
 // import OrderSummery from "../components/orders/OrderSummery";
@@ -45,7 +44,6 @@ const Checkout = ()=> {
 	}
 
 	return (
-		<MainLayout pageTitle="Checkout">
 			<div className="container">
 				<div className="row">
 					<div className="col-lg-8 col-md-7">
@@ -77,7 +75,6 @@ const Checkout = ()=> {
 					</div>
 				</div>
 			</div>
-		</MainLayout>
 	);
 }
 export default ProtectedRoute(Checkout);

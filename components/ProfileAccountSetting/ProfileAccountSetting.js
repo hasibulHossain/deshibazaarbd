@@ -29,13 +29,13 @@ const ProfileAccountSetting = () => {
         <>
             <div className="container">
                 <div className="row">
-                    <div className="col-md-3">
+                    <div className="col-md-3 d-none d-md-block">
                         <ProfileSideBar />
                     </div>
                     <div className="col-md-9 mt-3">
                         <div className="user_profile_setting_body">
                             <PersonalInfoForm />
-                            <div className="profile_account shadow-sm bg-white" id="address-book">
+                            <div className="profile_account shadow-sm bg-white mb-4" id="address-book">
                                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
                                     <h6><Translate>Address Book</Translate></h6>
                                     <SimpleBtn variant="success" style={{ width: 'fit-content' }} onClick={toggleShowHandler}>

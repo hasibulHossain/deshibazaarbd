@@ -13,32 +13,32 @@ const SocialMedia = () => {
                 websiteInfo && (
                     <ul className="social-media">
                         <li className="social-facebook">
-                            <a href={websiteInfo.facebook_link !== null ? websiteInfo.facebook_link : "https://www.facebook.com/"} target="_blank" rel="noopener noreferrer">
+                            <a href={"https://www.facebook.com/Deshibazaarbd21"} target="_blank" rel="noopener noreferrer">
                                 <FontAwesomeIcon className="custom-fontAwesome" icon={faFacebookF} />
                             </a>
                         </li>
                         <li className="social-youtube">
-                            <a href={websiteInfo.youtube_link !== null ? websiteInfo.youtube_link : "https://www.youtube.com/"} target="_blank" rel="noopener noreferrer">
+                            <a href="https://www.youtube.com/channel/UCRQDLHqRMH4efiE7u89kVIg" target="_blank" rel="noopener noreferrer">
                                 <FontAwesomeIcon className="custom-fontAwesome" icon={faYoutube} />
                             </a>
                         </li>
                         <li className="social-twitter">
-                            <a href={websiteInfo.twitter_link !== null ? websiteInfo.twitter_link : "https://twitter.com/"} target="_blank" rel="noopener noreferrer">
+                            <a href="https://twitter.com/DeshibazaarbdC" target="_blank" rel="noopener noreferrer">
                                 <FontAwesomeIcon className="custom-fontAwesome" icon={faTwitter} />
                             </a>
                         </li>
                         <li className="social-linkedIn">
-                            <a href={websiteInfo.linkedin_link !== null ? websiteInfo.linkedin_link : "http://linkedin.com/"} target="_blank" rel="noopener noreferrer">
+                            <a href="https://www.linkedin.com/in/deshi-bazaar-bd-com-64ab2620b/" target="_blank" rel="noopener noreferrer">
                                 <FontAwesomeIcon className="custom-fontAwesome" icon={faLinkedin} />
                             </a>
                         </li>
                         <li className="social-whatsApp">
-                            <a href={websiteInfo.whatsapp_link !==null ? websiteInfo.whatsapp_link : "https://web.whatsapp.com/"} target="_blank" rel="noopener noreferrer">
+                            <a href="#" target="_blank" rel="noopener noreferrer">
                                 <FontAwesomeIcon className="custom-fontAwesome" icon={faWhatsapp} />
                             </a>
                         </li>
                         <li className="social-instagram">
-                            <a href={websiteInfo.instagram_link !== null ? websiteInfo.instagram_link : "https://www.instagram.com/"} target="_blank" rel="noopener noreferrer">
+                            <a href="#" target="_blank" rel="noopener noreferrer">
                                 <FontAwesomeIcon className="custom-fontAwesome" icon={faInstagram} />
                             </a>
                         </li>

@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import ErrorMessage from "../master/ErrorMessage/ErrorMessage";
 import { getUserOrderList } from "../orders/_redux/action/OrderAction";
-import moment from "moment";
+import dayjs from "dayjs";
 import Link from "next/link";
 import { activeCurrency, formatCurrency } from "../../services/currency";
 import LoadingSpinner from "../master/LoadingSpinner/LoadingSpinner";
@@ -60,7 +60,7 @@ const TrackingForm = ({ show, setShow }) => {
                 <p key={index} className="order-tracking-item">
                   <Link href={`/order/${item.id}`}>
                     <a>
-                      {moment(item.transaction_date).format("DD/MM/YYYY")} - #
+                      {dayjs(item.transaction_date).format("DD/MM/YYYY")} - #
                       {item.id} - {formatCurrency(item.final_total)}{" "}
                       {activeCurrency("code")}
                     </a>

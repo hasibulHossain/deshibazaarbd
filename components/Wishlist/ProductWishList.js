@@ -6,15 +6,21 @@ import PriceCalculation from "../products/partials/PriceCalculation.js";
 import RemoveWishlist from "./RemoveWishlist.js";
 import Translate from "../translation/Translate.js";
 import { productImageUrl } from '../../services/ProductService';
+import classNames from 'classnames';
 
 const ProductWishList = () => {
 	const { wishList } = useSelector((state) => state.WishlistReducer);
+	const classes = classNames({
+		'card-body': true,
+		'p-0': wishList.length > 1,
+		'p-2': wishList.length === 0
+	})
 
 	return (
 		<>
 			<div className="container ">
 				<div className="row">
-					<div className="col-md-3">
+					<div className="col-md-3 d-none d-md-block">
 						<ProfileSideBar />
 					</div>
 
@@ -26,7 +32,7 @@ const ProductWishList = () => {
 										<Translate> My Wishlist </Translate>
 									</h5>
 								</div>
-								<div className="card-body p-0">
+								<div className={classes}>
 
 									{wishList.length > 0 && wishList.map((item, index) => (
 										<div className={wishList.length === index + 1 ? '' : 'border-bottom'} key={index}>
@@ -45,7 +51,7 @@ const ProductWishList = () => {
 													</div>
 
 													<div className="wishlist_wishIcon pointer">
-														<RemoveWishlist product={item} />
+														<RemoveWishlist productId={item.item_id} />
 													</div>
 												</div>
 											</div>

@@ -5,103 +5,88 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
+import store from '../../../../_redux/Store';
 
-export const WishListAdded = (itemID) => (dispatch) => {
-    const response = {
-        isLoading  : true,
-        status     : false,
-        data       : null
-    }
-
-    dispatch({ type: Types.WISHLIST_ADDED, payload: response });
-    const postData = {
-        item_id: itemID
-    }
-    const localStorageData = localStorage.getItem("loginData");
-    
-    if (typeof localStorageData === "undefined" || localStorageData === null || localStorageData === "") {
-        toast.error(<p><FontAwesomeIcon icon={faTimesCircle} /> You must login or register to add items to your wishlist!</p>, {
-            position : "bottom-center",
-            autoClose: 5000,
-            className: "wishlist_warning_alert",
-        });
-    } else {
-        Axios.post(`wishlist`, postData)
-            .then((response) => {
-                if (response.data.status) {
-                    response.isLoading = false;
-                    showToast('success', response.data.message);
-                    dispatch({ type: Types.WISHLIST_ADDED, payload: responseLog });
-                }
-            }).catch((error) => {
-                const responseLog  = error.response;
-                response.isLoading = false;
-                if (typeof responseLog !== 'undefined') {
-                    const { request, ...errorObject } = responseLog;
-                    showToast('error', responseLog.data.message);
-                    dispatch({ type: Types.WISHLIST_ADDED, payload: responseLog })
-                }
-            })
-    }
-
-}
-
-/**
- * Change wishlist added status
- * 
- * @param {int} isAdded
- * @returns 
- */
-export const changeWishListAddedStatus = (isAdded = false) => (dispatch) => {
-    dispatch({ type: Types.WISHLIST_ADDED_CHANGE_STATUS, payload: isAdded });
-}
-
-export const removeFromWishList = (itemID) => (dispatch) => {
-    const response = {
-        isLoading  : true,
-        status     : false,
-        data       : null
-    }
-    dispatch({ type: Types.REMOVE_FROM_WISHLIST, payload: response });
-    const postData = {
-        item_id: itemID
-    }
-
-    Axios.delete(`wishlist/${itemID}`, postData)
-        .then((response) => {
-            if (response.data.status) {
-                response.isLoading = false;
-                showToast('success', response.data.message);
-                dispatch({ type: Types.REMOVE_FROM_WISHLIST, payload: responseLog });
-            }
-        }).catch((error) => {
-            const responseLog  = error.response;
-            response.isLoading = false;
-            if (typeof responseLog !== 'undefined') {
-                // const { request, ...errorObject } = responseLog;
-                showToast('error', responseLog.data.message);
-                dispatch({ type: Types.REMOVE_FROM_WISHLIST, payload: responseLog })
-            }
-        })
-}
 
 //get wish list
 export const getWishListData = () => (dispatch) => {
-    const responseList = {
+    const response = {
         status         : false,
         isLoading      : true,
         wishList       : []
     }
     
-    dispatch({ type: Types.GET_WISHLIST_DATA, payload: responseList });
+    // dispatch({ type: Types.GET_WISHLIST_DATA, payload: response });
   
-    Axios.get(`wishlist`)
+    Axios.get('wishlist')
         .then((res) => {
             if (res.data.status) {
-                responseList.status    = res.data.status;
-                responseList.wishList  = res.data.data;
-                responseList.isLoading = false;
-                dispatch({ type: Types.GET_WISHLIST_DATA, payload: responseList })
+                response.status    = res.data.status;
+                response.wishList  = res.data.data;
+                response.isLoading = false;
+                dispatch({ type: Types.GET_WISHLIST_DATA, payload: response })
             }
         })
+        .catch(_ => {
+            response.isLoading = false;
+            // dispatch({ type: Types.GET_WISHLIST_DATA, payload: response })
+        })
+}
+
+/**
+ * This function will add wishItem or remove wishItem from wish list. and toggle wish btn color immediately.
+ * @param {String | Number} itemId 
+ * @param {Boolean} isWishItemFound 
+ * @returns {void}
+ */
+export const addOrRemoveWishItem = (itemId, isWishItemFound) => async dispatch => {
+    const wishList = store.getState() && store.getState().WishlistReducer && store.getState().WishlistReducer.wishList;
+    
+    const localStorageData = localStorage.getItem("loginData");
+
+    if (!localStorageData) {
+        toast.error(<p><FontAwesomeIcon icon={faTimesCircle} /> You must login to add items to your wishlist!</p>, {
+            position : "bottom-center",
+            autoClose: 3000,
+            className: "wishlist_warning_alert",
+        });
+        return;
+    }
+
+    const postData = {
+        item_id: itemId.toString()
+    }
+
+    if(!isWishItemFound) {
+        dispatch({ type: Types.WISHLIST_ADDED, payload: postData.item_id });
+
+        Axios.post(`wishlist`, postData)
+        .then((_) => {
+            dispatch(getWishListData());
+            
+            // if (response.data.status) {
+            //     showToast('success', response.data.message);
+            // }
+        })
+        .catch((error) => {
+            // console.log(error);
+        })
+    } else {
+        const wishItem = wishList.find(item => item.item_id === postData.item_id );
+
+        if(!wishItem) return;
+
+        dispatch({ type: Types.REMOVE_FROM_WISHLIST, payload: postData.item_id });
+
+        Axios.delete(`wishlist/${wishItem.id}`)
+        .then((_) => {
+            dispatch(getWishListData());
+            // if (response.data.status) {
+            //     showToast('success', response.data.message);
+            // }
+        })
+        .catch((error) => {
+            // console.log(error)
+        })
+    }
 }

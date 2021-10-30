@@ -10,9 +10,8 @@ import FloatingCartButton from "../carts/floating-cart/FloatingCartButton";
 // import MessengerCustomerChat from 'react-messenger-customer-chat';
 import { checkIsMobileDevice, toggleBackdrop } from "../../_redux/store/action/globalAction";
 
-const MainLayout = (props) => {
+const MainLayout = ({children}) => {
   const dispatch = useDispatch();
-  const { children } = props;
   const { backdrop } = useSelector(state => state.GlobalReducer);
 
   useEffect(() => {
@@ -41,8 +40,6 @@ const MainLayout = (props) => {
 
   return (
     <>
-      <PageMeta props={props} />
-
       {/* {
         process.env.NODE_ENV === 'production' &&
         <MessengerCustomerChat

@@ -950,7 +950,7 @@ a .custom-button-component:hover {
 
 .flash-deal-img {
   width: 45%;
-  height: 150px;
+  padding: 5px;
   overflow: hidden;
   align-self: center;
 }
@@ -1832,7 +1832,7 @@ ul.social-media {
   text-decoration: none;
 }
 
-.filter_column_3 .product-card-body img:before {
+/* .filter_column_3 .product-card-body img:before {
   content: " ";
   display: block;
   height: 100px;
@@ -1842,7 +1842,7 @@ ul.social-media {
   background-position: center;
   background-size: 100px 100px;
   font-size: 0;
-}
+} */
 
 .filter_column_3 .product-card-body img {
   height: 200px !important;
@@ -1918,10 +1918,17 @@ ul.social-media {
   color: var(--color-primary);
 }
 
+.filter_by_category .form-group {
+  margin-bottom: 5px;
+}
+
+.filter_by_category .form-group .form-check-label {
+  padding-top: 3px;
+}
+
 .active_category,
 .isNot_active_category {
   font-size: 12px;
-  margin-bottom: -15px;
 }
 
 .category-search-title {
@@ -2303,7 +2310,7 @@ p.address_sub_title {
 
 .profile_account,
 .inner_product_list {
-  padding: 5px;
+  padding: 10px;
   margin-bottom: 0px;
 }
 
@@ -2403,6 +2410,19 @@ p.text-secondary.mb-0 {
   box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%);
 }
 
+.search-suggestion-area-search_by-item {
+  font-size: 13px;
+  border-bottom: 1px solid transparent;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 200ms ease;
+}
+
+.search-suggestion-area-search_by-item.active {
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
 .search-suggestion-item {
   display: flex;
   align-items: center;
@@ -2411,6 +2431,7 @@ p.text-secondary.mb-0 {
   cursor: context-menu;
   transition: all 100ms ease-in-out;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .search-suggestion-item:hover {
@@ -2422,13 +2443,19 @@ p.text-secondary.mb-0 {
 }
 
 .search-suggestion-item__title {
-  font-size: 1.1rem;
+  font-size: 15px;
 }
 
 .search-suggestion-item__img-box {
-  max-height: 80px;
-  width: 80px;
+  max-height: 60px;
+  min-height: 60px;
+  width: 60px;
   margin-right: 0.7rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
 }
 
 .search-suggestion-item__img-box img {

@@ -1,13 +1,13 @@
 {
     "name": "deshibazaarbd",
-    "version": "0.6.5",
+    "version": "1.1.0",
     "private": true,
     "homepage": "https://deshi.programmingshikhi.com",
     "scripts": {
         "dev": "next dev",
         "dev2": "next dev -p 3001",
-        "build": "next build && next export",
-        "start": "NODE_ENV=production node server.js"
+        "build": "next build",
+        "start": "next start"
     },
     "dependencies": {
         "@babel/plugin-proposal-class-properties": "^7.14.5",
@@ -26,14 +26,14 @@
         "bootstrap": "^4.6.0",
         "classnames": "^2.3.1",
         "css-loader": "^5.2.6",
+        "dayjs": "^1.10.7",
         "dotenv": "^8.6.0",
         "dotenv-webpack": "^5.1.0",
         "font-awesome": "^4.7.0",
+        "framer-motion": "^4.1.17",
         "html-react-parser": "^1.2.6",
         "include-media": "^1.4.10",
-        "jquery": "^3.6.0",
         "jwt-decode": "^2.2.0",
-        "moment": "^2.29.1",
         "next": "^10.0.9",
         "next-redux-wrapper": "^6.0.2",
         "nprogress": "^0.2.0",

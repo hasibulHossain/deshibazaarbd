@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getDealFlashList } from "./_redux/Action/DealFlashAction";
+import React from "react";
+import { useDispatch } from "react-redux";
 import ReactStars from "react-rating-stars-component";
 import CountdownTimer from "react-component-countdown-timer";
 import { formatCurrency } from "../../services/currency";
@@ -13,9 +12,10 @@ import ViewAll from "../ViewAll/ViewAll";
 import LoadingPlaceHolder from "../master/skelleton/LoadingPlaceholder";
 import Link from 'next/link';
 
-const DealFlash = () => {
+const DealFlash = (props) => {
+  const { dealFlashList: flashDealList } = props;
+
   const dispatch = useDispatch();
-  const {flashDealList, isLoading} = useSelector(state => state.DealFlashReducer);
 
   const addToCart = (product) => {
     if (parseInt(product.current_stock) === 0) {
@@ -23,13 +23,7 @@ const DealFlash = () => {
     } else {
         dispatch(addToCartAction(product));
     }
-}
-
-  useEffect(() => {
-    if(flashDealList.length === 0) {
-      dispatch(getDealFlashList());
-    }
-  }, []);
+  }
 
   return (
     <section className="container product-container">
@@ -42,11 +36,11 @@ const DealFlash = () => {
       <div className="flash-deal-section">
         <div className="row flash-deal-row no-gutters">
         {
-          isLoading && (
+          !flashDealList && (
             <LoadingPlaceHolder className="col-md-6 pr-md-2" count={2} height={255} />
           )
         }
-          {flashDealList.length > 0 &&
+          {flashDealList && flashDealList.length > 0 &&
             flashDealList.map((item, index) => {
               const offerEndDate     = new Date(item.offer_end_date).getTime();
               const currentTime      = new Date().getTime();
@@ -101,7 +95,7 @@ const DealFlash = () => {
                                 </SimpleBtn>
                               </div>
                               <div className="flash-deal-actions__love">
-                                <AddWishList product={item} />
+                                <AddWishList productId={item.id} />
                               </div>
                             </div>
                           </div>

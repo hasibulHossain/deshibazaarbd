@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import MainLayout from "../components/layouts/MainLayout";
 // import ScrollToTop from "react-scroll-to-top";
 import { Tab, Col, Nav, Row, Accordion, Card } from "react-bootstrap";
 import PageTitle from "../components/master/page-title/PageTitle";
@@ -86,60 +85,6 @@ export default function Faq() {
     ]
 
     return (
-        <MainLayout>
-            <div className="container mb-5">
-                <PageTitle title="FAQ" description="Let's get your common questions answer from here..." />
-                <hr />
-
-                {/* <ScrollToTop smooth /> */}
-                <div className="mt-5">
-                    <Tab.Container id="left-tabs-example" defaultActiveKey={data[0].slug}>
-                        <Row>
-                            <Col sm={3}>
-                                <Nav variant="pills" className="flex-column">
-                                    {
-                                        data.map((item, i) => (
-                                            <React.Fragment key={i}>
-                                                <Nav.Item>
-                                                    <Nav.Link eventKey={item.slug}>{item.slug}</Nav.Link>
-                                                </Nav.Item>
-                                            </React.Fragment>
-                                        ))
-                                    }
-                                </Nav>
-                            </Col>
-                            <Col sm={9}>
-                                <Tab.Content>
-                                    {
-                                        data.map((item, i) => (
-                                            <Tab.Pane key={i} eventKey={item.slug} >
-                                                <Accordion>
-                                                    <Card>
-                                                        {
-                                                            item.faqs.map((faq, i) => (
-                                                                <React.Fragment key={i}>
-                                                                    <Accordion.Toggle as={Card.Header} eventKey={i}>
-                                                                        {`${faq.question}`}
-                                                                    </Accordion.Toggle>
-                                                                    <Accordion.Collapse eventKey={i}>
-                                                                        <Card.Body>
-                                                                            {faq.answer}
-                                                                        </Card.Body>
-                                                                    </Accordion.Collapse>
-                                                                </React.Fragment>
-                                                            ))
-                                                        }
-                                                    </Card>
-                                                </Accordion>
-                                            </Tab.Pane>
-                                        ))
-                                    }
-                                </Tab.Content>
-                            </Col>
-                        </Row>
-                    </Tab.Container>
-                </div>
-            </div>
-        </MainLayout>
+        <p>Faq page coming soon...</p>
     );
 }

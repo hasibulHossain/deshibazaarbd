@@ -1,5 +1,4 @@
 import React from "react";
-import MainLayout from "../components/layouts/MainLayout";
 import ProtectedRoute from "../components/master/protectedRoute/ProtectedRoute";
 // import { redirectRouter } from "../components/master/utils/RedirectRouterHelper";
 // import ProductWishList from "";
@@ -15,9 +14,7 @@ const wishlist = () => {
     // }, []);
 
     return (
-        <MainLayout pageTitle="Wish List">
-            <ProductWishList />
-        </MainLayout>
+        <ProductWishList />
     );
 }
 

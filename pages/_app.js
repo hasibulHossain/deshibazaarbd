@@ -1,5 +1,6 @@
-import App from "next/app";
 import React from "react";
+import App from "next/app";
+import Head from 'next/head';
 import { Provider } from "react-redux";
 import axios from "axios";
 import { createWrapper } from "next-redux-wrapper";
@@ -50,6 +51,7 @@ axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL;
 
 import Router from "next/router";
 import NProgress from 'nprogress';
+import MainLayout from "../components/layouts/MainLayout";
 
 NProgress.configure({ minimum: 0.1 });
 
@@ -75,7 +77,12 @@ class MyApp extends App {
     const { Component, pageProps } = this.props;
     return (
       <Provider store={Store}>
-        <Component {...pageProps}></Component>
+        <Head>
+          <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        </Head>
+        <MainLayout>
+          <Component {...pageProps}></Component>
+        </MainLayout>
       </Provider>
     );
   }

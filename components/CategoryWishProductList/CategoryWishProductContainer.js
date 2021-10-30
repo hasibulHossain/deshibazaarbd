@@ -27,7 +27,7 @@ const CategoryWishProductContainer = () => {
   const dispatch = useDispatch();
 
   const router = useRouter();
-  const {brand: brandQuery = "", category: categoryQuery = "", type: typeQuery = "", storeById = ""} = router.query;
+  const {brand: brandQuery = "", category: categoryQuery = "", type: typeQuery = "", storeById = "", search: searchQuery = ""} = router.query;
   
   const {
     search,
@@ -87,7 +87,10 @@ const CategoryWishProductContainer = () => {
           cloneFilterParams['seller_id'] = queries[query]
         }
         if(query === 'type') {
-          cloneFilterParams['type'] = queries[query]
+          cloneFilterParams[query] = queries[query]
+        }
+        if(query === 'search') {
+          cloneFilterParams[query] = queries[query]
         }
       }
     }
@@ -95,7 +98,7 @@ const CategoryWishProductContainer = () => {
 
     dispatch(getShopList());
 
-  }, [brandQuery, categoryQuery, typeQuery, storeById]);
+  }, [brandQuery, categoryQuery, typeQuery, storeById, searchQuery]);
 
 
   useEffect(() => {
@@ -155,7 +158,6 @@ const CategoryWishProductContainer = () => {
               <div className="banner">
                 <div className="banner-photo-box">
                   <Image src={categoryBrandDetails.banner_url} width={1260} height={280} />
-                  {/* <img src={categoryBrandDetails.banner_url} alt="" /> */}
                 </div>
               </div>
           )

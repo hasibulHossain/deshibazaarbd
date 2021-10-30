@@ -1,6 +1,8 @@
-import moment from 'moment';
 import * as Types from "../types/Types";
 import { showToast } from "../../../master/Helper/ToastHelper";
+import dayjs from 'dayjs';
+// import * as LocalizedFormat from 'dayjs/plugin/localizedFormat';
+// dayjs.extend(LocalizedFormat);
 
 /**
  * Get all cart items Action
@@ -217,9 +219,9 @@ const getCartData = () => {
  * @return string approxDeliveryDate
  */
 export const getDeliveryDateFromTime = (approxDeliveryTime) => {
-  const duration = moment.duration(approxDeliveryTime, 'minutes');
-  
-  return moment().add(duration.days(), 'days').format("dddd, MMMM Do YYYY");
+  const duration = (approxDeliveryTime * 60 * 1000) + new Date().getTime();
+  const estimatedDate = new Date(duration).toLocaleDateString('en-us');
+  return dayjs(estimatedDate).format('DD MMMM, YYYY');
 }
 
 /**

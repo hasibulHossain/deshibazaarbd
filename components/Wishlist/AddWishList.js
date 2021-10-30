@@ -1,25 +1,21 @@
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import {WishListAdded} from './_redux/Action/WishlistAction'
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {addOrRemoveWishItem} from './_redux/Action/WishlistAction'
 
-const AddWishList = ({ product }) => {
-   
-    const dispatch                    = useDispatch()
-    const [isWishList, setIsWishList] = useState(false)
+const AddWishList = ({ productId }) => {
+    const { wishListItemsId }         = useSelector(state => state.WishlistReducer);
+    const dispatch                    = useDispatch();
 
-    const handleAddedWishList = (product) => {
-        const localStorageData = localStorage.getItem("loginData");
-        if(localStorageData) {
-            setIsWishList(true);
-        }
-        dispatch(WishListAdded(product.id))
-        
+    const isWishItemFound = wishListItemsId[productId.toString()] == productId.toString();
+
+    const handleAddedWishList = (productId) => {
+        dispatch(addOrRemoveWishItem(productId, isWishItemFound))
     }
 
     return (
-        <FontAwesomeIcon onClick={() => handleAddedWishList(product)} icon={faHeart} className={`pointer ${isWishList === true ? 'text-danger' : "text-secondary"}`} />
+        <FontAwesomeIcon onClick={() => handleAddedWishList(productId)} icon={faHeart} className={`pointer ${isWishItemFound ? 'text-danger' : "text-secondary"}`} />
     );
 };
 

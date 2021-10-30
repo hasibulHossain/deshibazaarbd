@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import classNames from "classnames";
+import { motion, AnimatePresence } from 'framer-motion';
 
 function Modal(props) {
   const [modalRoot, setModalRoot] = useState(null);
@@ -13,8 +14,7 @@ function Modal(props) {
 
   const modalBoxClasses = classNames({
     'modal__modal-box modal-scrollbar': true,
-    'side-modal': sideModal,
-    'active': visible
+    'side-modal': sideModal
   });
 
   let modalContent = (
@@ -23,9 +23,11 @@ function Modal(props) {
         onClick={() => closeModalHandler()}
         className="modal__backdrop"
       ></div>
-      <div style={{ ...style }} className={modalBoxClasses} >
-        <div className="modal__children">{children}</div>
-      </div>
+      <AnimatePresence>
+        <motion.div initial={{x: -300}} animate={{x: 0}} exit={{x: -100}} transition={{duration: 0.3}} style={{ ...style }} className={modalBoxClasses} >
+          <div className="modal__children">{children}</div>
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 
