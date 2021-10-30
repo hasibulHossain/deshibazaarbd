@@ -26,7 +26,7 @@ const Header = () => {
   const [showToolbar, setShowToolbar] = useState(false);
   const dispatch = useDispatch();
   const { totalQuantity } = useSelector((state) => state.CartReducer);
-  const { isSignedIn } = useSelector((state) => state.UserDataReducer);
+  const { isSignedIn } = useSelector((state) => state.GlobalReducer);
   const { isMobile, backdrop } = useSelector((state) => state.GlobalReducer);
 
   const toggleCartHandler = () => {

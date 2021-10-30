@@ -1,14 +1,4 @@
-import { getSession } from 'next-auth/client'
 import * as Types from "../Types/Types";
-
-export const isSignedIn = () => async (dispatch) => {
-  const session = await getSession();
-  if(session && session.accessToken) {
-    dispatch({type: Types.IS_SIGNED_IN, payload: true})
-  } else {
-    dispatch({type: Types.IS_SIGNED_IN, payload: false})
-  }
-};
 
 export const getUserDataAction = () => async (dispatch) => {
   const data = getUserData();

@@ -1,7 +1,6 @@
 import * as Types from "../Types/Types";
 
 const initialState = {
-  isSignedIn  : false,
   userData    : null,
   access_token: null,
   isLogOut    : false,
@@ -21,12 +20,6 @@ const UserDataReducer = (state = initialState, action) => {
       return {
         ...state,
         isLogOut: action.payload,
-      };
-
-    case Types.IS_SIGNED_IN:
-      return {
-        ...state,
-        isSignedIn: action.payload,
       };
 
     default:

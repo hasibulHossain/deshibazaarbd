@@ -5,7 +5,7 @@ import { handleLoginInput, loginAction } from "../_redux/Action/LoginAction";
 import { useForm } from "react-hook-form";
 import ErrorMessage from "../../master/ErrorMessage/ErrorMessage";
 import { signIn, useSession } from 'next-auth/client'
-import { isSignedIn } from "../../_redux/getUserData/Action/UserDataAction";
+import { isSignedIn } from "../../../_redux/store/action/globalAction";
 import { useRouter } from 'next/router';
 
 const LoginComponent = () => {

@@ -6,8 +6,7 @@ import Header from "../Header/Header";
 import FloatingCart from "../carts/floating-cart/FloatingCart";
 import FloatingCartButton from "../carts/floating-cart/FloatingCartButton";
 
-import { checkIsMobileDevice } from "../../_redux/store/action/globalAction";
-import { isSignedIn } from "../_redux/getUserData/Action/UserDataAction";
+import { checkIsMobileDevice, isSignedIn } from "../../_redux/store/action/globalAction";
 
 // import DemoWarning from "../Demo/DemoWarning";
 // import MessengerCustomerChat from 'react-messenger-customer-chat';

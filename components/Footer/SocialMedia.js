@@ -3,8 +3,6 @@ import React from 'react';
 
 const SocialMedia = () => {
 
-    // const { websiteInfo } = useSelector((state) => state.WebsiteInformationReducer);
-
     return (
         <ul className="social-media">
             <li className="social-facebook">
