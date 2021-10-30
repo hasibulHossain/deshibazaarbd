@@ -25,10 +25,9 @@ const DeliveryInfo = dynamic(() => import('../components/Delivery/DeliveryInfo')
 
 
 const Checkout = ()=> {
-	
 	const dispatch                             = useDispatch();
 	const { customerInfo }                     = useSelector((state) => state.DeliveryInfoReducer);
-	const { couponData, shippingCost }         = useSelector((state) => state.OrderReducer);
+	const { couponData, shippingCost, coupon }         = useSelector((state) => state.OrderReducer);
 	const { carts, totalPrice, totalQuantity } = useSelector((state) => state.CartReducer);
 
 	useEffect(() => {
@@ -39,6 +38,7 @@ const Checkout = ()=> {
 	}, []);
 
 	const handleStoreOrder = () => {
+		couponData.code = coupon.code; // Append code in couponData for backend processing
 		// dispatch(storeSells(customerInfo, carts, totalQuantity, shippingCost, totalPrice, couponData));
 		// router.push('/');
 	}
