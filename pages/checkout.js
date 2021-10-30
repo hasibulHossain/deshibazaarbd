@@ -27,7 +27,7 @@ const DeliveryInfo = dynamic(() => import('../components/Delivery/DeliveryInfo')
 const Checkout = ()=> {
 	const dispatch                             = useDispatch();
 	const { customerInfo }                     = useSelector((state) => state.DeliveryInfoReducer);
-	const { couponData, shippingCost, coupon }         = useSelector((state) => state.OrderReducer);
+	const { couponData, shippingCost, coupon } = useSelector((state) => state.OrderReducer);
 	const { carts, totalPrice, totalQuantity } = useSelector((state) => state.CartReducer);
 
 	useEffect(() => {
