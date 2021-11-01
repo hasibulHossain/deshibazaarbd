@@ -44,7 +44,14 @@ const Header = () => {
   };
 
   const handleLogOut = () => {
-    signOut()
+    (async () => {
+      const data = await signOut({redirect: false});
+
+      if(data) {
+        window.location.replace('/');
+      }
+    })();
+    
     localStorage.removeItem('user-info');
   };
 

@@ -8,6 +8,7 @@ import { signIn, useSession } from 'next-auth/client'
 import { isSignedIn } from "../../../_redux/store/action/globalAction";
 import { useRouter } from 'next/router';
 import { getUserDataAction } from "../../_redux/getUserData/Action/UserDataAction";
+import { showToast } from "../../master/Helper/ToastHelper";
 
 const LoginComponent = () => {
   const router = useRouter();
@@ -29,6 +30,10 @@ const LoginComponent = () => {
       password: loginInput.password,
       redirect: false,
     })
+
+    if(res.error) {
+      showToast('error', res.error)
+    }
     
     if(res) {
       dispatch(isSignedIn())
@@ -37,6 +42,7 @@ const LoginComponent = () => {
     
     if(!res.error) {
       router.replace('/')
+      setIsLoading(false);
       dispatch(getUserDataAction());
     }
   };
@@ -109,7 +115,7 @@ const LoginComponent = () => {
                     className="account_input_group_prepend"
                     onClick={() => setShowPassword(!showPassword)}
                   >
-                    {showPassword === true ? (
+                    {showPassword === false ? (
                       <span>
                         <i className="far fa-eye-slash"></i>
                       </span>

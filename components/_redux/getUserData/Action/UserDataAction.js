@@ -18,7 +18,6 @@ export const getUserDataAction = () => async (dispatch) => {
 
   try {
     const res = await axios.get('auth/getUserProfile');
-    console.log('res user-profile => ', res)
     data.userData = res.data.data;
     localStorage.setItem('user-info', JSON.stringify(res.data.data));
     dispatch({ type: Types.GET_USER_STORAGE_DATA, payload: data });
