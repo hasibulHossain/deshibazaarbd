@@ -9,7 +9,6 @@ import Link from "next/link";
 import { activeCurrency, formatCurrency } from "../../services/currency";
 import LoadingSpinner from "../master/LoadingSpinner/LoadingSpinner";
 import WarningMessage from "../master/warningMessage/WarningMessage";
-import { getUserDataAction } from "../_redux/getUserData/Action/UserDataAction";
 
 const TrackingForm = ({ show, setShow }) => {
   const router = useRouter();
@@ -28,8 +27,6 @@ const TrackingForm = ({ show, setShow }) => {
   };
 
   useEffect(() => {
-    dispatch(getUserDataAction());
-
     const prevTransaction = localStorage.getItem("tr") || null;
 
     if (

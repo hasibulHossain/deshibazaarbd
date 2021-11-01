@@ -10,6 +10,7 @@ import { Spinner } from 'react-bootstrap'
 const AddressUpdate = (props) => {
     const dispatch = useDispatch();
     const { countryList, divisionList, cityList, areaList, isSubmitting, selectedAddress } = useSelector((state) => state.ProfileAccountSettingReducer);
+    const {userData} = useSelector(state => state.UserDataReducer);
     const { register, handleSubmit, errors, setValue } = useForm();
 
     //handle change input 
@@ -19,7 +20,7 @@ const AddressUpdate = (props) => {
 
     const submitUpdatedAddressHandler = (e) => {
         e.preventDefault();
-        dispatch(addAddress(selectedAddress, props.type, props.closeModal))
+        dispatch(addAddress(selectedAddress, props.type, props.closeModal, userData.id))
     }
 
     useEffect(() => {

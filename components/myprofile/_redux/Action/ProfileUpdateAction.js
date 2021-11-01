@@ -3,15 +3,15 @@ import { showToast } from '../../../master/Helper/ToastHelper';
 import * as Types from "../Type/Types";
 
 //get shipping address
-export const getShippingAddressForInput = (addressType) => (dispatch) => {
+export const getShippingAddressForInput = (addressType, userId) => (dispatch) => {
     const responseData = {
         data: null,
         status: false,
         isLoading: true
     }
     dispatch({ type: Types.GET_SHIPPING_ADDRESS_FOR_INPUT, payload: responseData });
-    const userStorageData = JSON.parse(localStorage.getItem("loginData"));
-    Axios.get(`address?user_id=${userStorageData.userData.id}&type=${addressType}`)
+
+    Axios.get(`address?user_id=${userId}&type=${addressType}`)
         .then((res) => {
             const loadData = res.data.data[0];
             if (loadData.country !== null && loadData.country_id !== null) {
@@ -45,15 +45,15 @@ export const getShippingAddressForInput = (addressType) => (dispatch) => {
         })
 }
 //get billing address
-export const getBillingAddressForInput = (addressType) => (dispatch) => {
+export const getBillingAddressForInput = (addressType, userId) => (dispatch) => {
     const responseData = {
         data: null,
         status: false,
         isLoading: true
     }
     dispatch({ type: Types.GET_BILLING_ADDRESS_FOR_INPUT, payload: responseData });
-    const userStorageData = JSON.parse(localStorage.getItem("loginData"));
-    Axios.get(`address?user_id=${userStorageData.userData.id}&type=${addressType}`)
+
+    Axios.get(`address?user_id=${userId}&type=${addressType}`)
         .then((res) => {
             const loadData = res.data.data[0];
             if (loadData.country !== null && loadData.country_id !== null) {
@@ -87,10 +87,8 @@ export const getBillingAddressForInput = (addressType) => (dispatch) => {
         })
 }
 // get user data for set input field 
-export const handleSetDataIntoInputField = () => (dispatch) => {
-    const userStorageData = JSON.parse(localStorage.getItem("loginData"));
-    dispatch({ type: Types.GET_USER_UPDATED_DATA, payload: userStorageData.userData })
-
+export const handleSetDataIntoInputField = (userData) => (dispatch) => {
+    dispatch({ type: Types.GET_USER_UPDATED_DATA, payload: userData })
 }
 
 //handle change input field 
@@ -112,15 +110,14 @@ export const handleChangeShippingAddressInput = (name, value) => (dispatch) => {
 
 
 //handle update shipping address
-export const handleUpdateShippingAddress = (shippingAddressInput) => (dispatch) => {
+export const handleUpdateShippingAddress = (shippingAddressInput, userId) => (dispatch) => {
     const responseData = {
         status: false,
         isLoading: true,
     }
     dispatch({ type: Types.STORE_SHIPPING_ADDRESS, payload: responseData });
-    const userStorageData = JSON.parse(localStorage.getItem("loginData"));
     const submittedData = shippingAddressInput;
-    submittedData.user_id = userStorageData.userData.id;
+    submittedData.user_id = userId;
     Axios.put(`address`, shippingAddressInput)
         .then((res) => {
             responseData.status = true;
@@ -132,15 +129,14 @@ export const handleUpdateShippingAddress = (shippingAddressInput) => (dispatch) 
 }
 
 //handle store billing address
-export const handleUpdateBillingAddress = (billingAddressInput) => (dispatch) => {
+export const handleUpdateBillingAddress = (billingAddressInput, userId) => (dispatch) => {
     const responseData = {
         status: false,
         isLoading: true,
     }
     dispatch({ type: Types.STORE_BILLING_ADDRESS, payload: responseData });
-    const userStorageData = JSON.parse(localStorage.getItem("loginData"));
     const submittedData = billingAddressInput;
-    submittedData.user_id = userStorageData.userData.id;
+    submittedData.user_id = userId;
     Axios.put(`address`, submittedData)
         .then((res) => {
             responseData.status = true;

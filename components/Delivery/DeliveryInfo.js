@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { addAddress, getDefaultAddress, getLocationData, getSingleAddress, getSingleShippingAddress, handleChangeBillingAddressInput, handleChangeShippingAddressInput, handleUpdateBillingAddress } from '../ProfileAccountSetting/_redux/Action/ProfileAccountSettingAction';
+import { addAddress, getDefaultAddress, getLocationData, getSingleAddress, getSingleShippingAddress, handleChangeBillingAddressInput, handleChangeShippingAddressInput } from '../ProfileAccountSetting/_redux/Action/ProfileAccountSettingAction';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentUserDataAction } from './_redux/Action/DeliveryInfoAction';
 import LoadingSpinner from '../master/LoadingSpinner/LoadingSpinner';
@@ -16,6 +16,8 @@ const DeliveryInfo = () => {
         defaultShippingAddress, isLoading, divisionList, countryList, cityList,
         areaList, isSubmitting, shippingAddressInput
     } = useSelector((state) => state.ProfileAccountSettingReducer);
+
+    const { userData } = useSelector(state => state.UserDataReducer)
 
     const { register, handleSubmit, errors, setValue } = useForm();
     const [show, setShow] = useState(false);
@@ -56,17 +58,17 @@ const DeliveryInfo = () => {
             addressType = "new_address"
         }
         if (isSameAsBilling === true) {
-            dispatch(addAddress(shippingAddressInput, addressType, toggleShowHandler));
-            dispatch(addAddress(billingAddressInput, "billing_address", toggleShowHandler));
+            dispatch(addAddress(shippingAddressInput, addressType, toggleShowHandler, userData.id));
+            dispatch(addAddress(billingAddressInput, "billing_address", toggleShowHandler, userData.id));
         } else {
-            dispatch(addAddress(shippingAddressInput, addressType, toggleShowHandler))
+            dispatch(addAddress(shippingAddressInput, addressType, toggleShowHandler, userData.id))
         }
     }
 
     useEffect(() => {
-        dispatch(getCurrentUserDataAction());
+        dispatch(getCurrentUserDataAction(userData));
         dispatch(getDefaultAddress('shipping_address'));
-        dispatch(getSingleShippingAddress('shipping_address'));
+        dispatch(getSingleShippingAddress('shipping_address', userData.id));
     }, []);
 
     useEffect(() => {

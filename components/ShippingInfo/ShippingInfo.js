@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserDataAction } from '../_redux/getUserData/Action/UserDataAction';
 import { getAddress, getDefaultAddress, getSingleAddress } from '../ProfileAccountSetting/_redux/Action/ProfileAccountSettingAction';
 import LoadingSpinner from '../master/LoadingSpinner/LoadingSpinner';
 import SimpleModal from '../master/Modal/SimpleModal';
@@ -26,11 +25,10 @@ const ShippingInfo = () => {
         setShow(preState => !preState);
     }
 
-    useEffect(() => {   
-        dispatch(getUserDataAction());
+    useEffect(() => {
         dispatch(getDefaultAddress('shipping_address'))
         dispatch(getDefaultAddress('billing_address'))
-        dispatch(getAddress('billing_address'));
+        dispatch(getAddress('billing_address', userData.id));
 
     }, [])
 

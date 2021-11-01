@@ -1,12 +1,13 @@
 import React from 'react';
-import { useDispatch, } from 'react-redux';
+import { useDispatch, useSelector} from 'react-redux';
 import { addOrRemoveWishItem } from './_redux/Action/WishlistAction'
 
 const RemoveWishlist = ({ productId }) => {
     const dispatch = useDispatch();
+    const {isSignedIn} = useSelector(state => state.GlobalReducer);
     
     const addOrRemoveWishlist = (productId) => {
-        dispatch(addOrRemoveWishItem(productId, true));
+        dispatch(addOrRemoveWishItem(productId, true, isSignedIn));
     }
 
     return (

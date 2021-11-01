@@ -36,12 +36,10 @@ export const getWishListData = () => (dispatch) => {
  * @param {Boolean} isWishItemFound 
  * @returns {void}
  */
-export const addOrRemoveWishItem = (itemId, isWishItemFound) => async dispatch => {
+export const addOrRemoveWishItem = (itemId, isWishItemFound, isSignedIn) => async dispatch => {
     const wishList = store.getState() && store.getState().WishlistReducer && store.getState().WishlistReducer.wishList;
-    
-    const localStorageData = localStorage.getItem("loginData");
 
-    if (!localStorageData) {
+    if (!isSignedIn) {
         toast.error(<p><i className="fas fa-times-circle"></i> You must login to add items to your wishlist!</p>, {
             position : "bottom-center",
             autoClose: 3000,

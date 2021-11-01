@@ -20,6 +20,7 @@ const ProductSingleFull = ({ product }) => {
   const [quantity, setQuantity] = useState(1);
   const [previewImg, setPreviewImg] = useState(null);
   const { carts } = useSelector((state) => state.CartReducer);
+  const {isSignedIn} = useSelector(state => state.GlobalReducer)
   const [filterCarts, setFilterCarts] = useState(null);
   const [updatedID, setUpdatedID] = useState(null);
 
@@ -76,8 +77,7 @@ const ProductSingleFull = ({ product }) => {
 
   const redirectToCheckoutPage = () => {
     if (process.browser) {
-      const userData = localStorage.getItem("loginData");
-      if (typeof userData === "undefined" || userData === null) {
+      if (!isSignedIn) {
         dispatch(toggleProductModalAction());
         showToast("error", "Please Login to checkout");
         router.push("/login").then((_) => window.scrollTo(0, 0));

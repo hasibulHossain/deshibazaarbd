@@ -5,15 +5,15 @@ import { printErrorMessages } from '../../../../services/ServerErrorMessages';
 
 
 //get shipping address
-export const getShippingAddress = (addressType) => (dispatch) => {
+export const getShippingAddress = (addressType, id) => (dispatch) => {
     const responseData = {
         data: null,
         status: false,
         isLoading: true
     }
     dispatch({ type: Types.GET_SHIPPING_ADDRESS, payload: responseData });
-    const userStorageData = JSON.parse(localStorage.getItem("loginData"));
-    Axios.get(`address?user_id=${userStorageData.userData.id}&type=${addressType}`)
+
+    Axios.get(`address?user_id=${id}&type=${addressType}`)
         .then((res) => {
             responseData.data = res.data.data[0];
             responseData.isLoading = false;
@@ -22,15 +22,15 @@ export const getShippingAddress = (addressType) => (dispatch) => {
         })
 }
 //get billing address
-export const getBillingAddress = (addressType) => (dispatch) => {
+export const getBillingAddress = (addressType, id) => (dispatch) => {
     const responseData = {
         data: null,
         status: false,
         isLoading: true
     }
     dispatch({ type: Types.GET_BILLING_ADDRESS, payload: responseData });
-    const userStorageData = JSON.parse(localStorage.getItem("loginData"));
-    Axios.get(`address?user_id=${userStorageData.userData.id}&type=${addressType}`)
+
+    Axios.get(`address?user_id=${id}&type=${addressType}`)
         .then((res) => {
             responseData.data = res.data.data[0];
             responseData.isLoading = false;
@@ -41,40 +41,32 @@ export const getBillingAddress = (addressType) => (dispatch) => {
 
 
 //get billing address
-export const getAddress = (addressType) => (dispatch) => {
+export const getAddress = (addressType, id) => (dispatch) => {
     const responseData = {
         data: null,
         status: false,
         isLoading: true
     }
     dispatch({ type: Types.GET_BILLING_ADDRESS, payload: responseData });
-    const userStorageData = JSON.parse(localStorage.getItem("loginData"));
 
-    if (typeof userStorageData !== 'undefined' && userStorageData !== null) {
-        Axios.get(`address?user_id=${userStorageData.userData.id}&type=${addressType}`)
+    Axios.get(`address?user_id=${id}&type=${addressType}`)
 
-        .then((res) => {
-            responseData.data = res.data.data;
-            responseData.isLoading = false;
-            responseData.status = true;
-            if (addressType === 'billing_address') {
-                dispatch({ type: Types.GET_BILLING_ADDRESS, payload: responseData });
-            }
+    .then((res) => {
+        responseData.data = res.data.data;
+        responseData.isLoading = false;
+        responseData.status = true;
+        if (addressType === 'billing_address') {
+            dispatch({ type: Types.GET_BILLING_ADDRESS, payload: responseData });
+        }
 
-            if (addressType === 'shipping_address') {
-                dispatch({ type: Types.GET_SHIPPING_ADDRESS, payload: responseData });
-            }
-        })
-    }
+        if (addressType === 'shipping_address') {
+            dispatch({ type: Types.GET_SHIPPING_ADDRESS, payload: responseData });
+        }
+    })
 }
 
 // get user data for set input field 
-export const getUserData = () => (dispatch) => {
-    const userStorageData = JSON.parse(localStorage.getItem("loginData"));
-    let userData = null;
-    if (typeof userStorageData !== "undefined" && userStorageData !== null) {
-        userData = userStorageData.userData;
-    }
+export const getUserData = (userData) => (dispatch) => {
     dispatch({ type: Types.GET_USER_UPDATED_DATA, payload: userData })
 
 }
@@ -147,15 +139,15 @@ export const getLocationData = (locationType, onDependentLocation, val) => async
 }
 
 //handle store shipping address
-export const handleStoreShippingAddress = (shippingAddressInput) => (dispatch) => {
+export const handleStoreShippingAddress = (shippingAddressInput, userId) => (dispatch) => {
     const responseData = {
         status: false,
         isLoading: true,
     }
     dispatch({ type: Types.STORE_SHIPPING_ADDRESS, payload: responseData });
-    const userStorageData = JSON.parse(localStorage.getItem("loginData"));
+
     const submittedData = shippingAddressInput;
-    submittedData.user_id = userStorageData.userData.id;
+    submittedData.user_id = userId;
     Axios.post(`address`, shippingAddressInput)
         .then((res) => {
             responseData.status = true;
@@ -167,7 +159,7 @@ export const handleStoreShippingAddress = (shippingAddressInput) => (dispatch) =
 }
 
 //handle store billing address
-export const handleStoreBillingAddress = (billingAddressInput) => (dispatch) => {
+export const handleStoreBillingAddress = (billingAddressInput, userId) => (dispatch) => {
     const responseData = {
         status: false,
         isLoading: true,
@@ -179,9 +171,9 @@ export const handleStoreBillingAddress = (billingAddressInput) => (dispatch) => 
     }
 
     dispatch({ type: Types.STORE_BILLING_ADDRESS, payload: responseData });
-    const userStorageData = JSON.parse(localStorage.getItem("loginData"));
+
     const submittedData   = billingAddressInput;
-    submittedData.user_id = userStorageData.userData.id;
+    submittedData.user_id = userId;
 
     Axios.post(`address`, submittedData)
         .then((res) => {
@@ -213,7 +205,7 @@ export const getSingleAddress = (id, type) => {
     }
 }
 // get single shipping address
-export const getSingleShippingAddress = (type) => (dispatch) => {
+export const getSingleShippingAddress = (type, userId) => (dispatch) => {
     const responseData = {
         defaultSingleShippingAddress: [],
         status: false,
@@ -221,10 +213,8 @@ export const getSingleShippingAddress = (type) => (dispatch) => {
         singleShippingAddressObject: {}
     }
     dispatch({ type: Types.GET_SINGLE_SHIPPING_ADDRESS, payload: responseData });
-    const userStorageData = JSON.parse(localStorage.getItem("loginData"));
 
-    if (typeof userStorageData !== 'undefined' && userStorageData !== null) {
-        Axios.get(`address?user_id=${userStorageData.userData.id}&type=${type}&is_default=1`)
+        Axios.get(`address?user_id=${userId}&type=${type}&is_default=1`)
         .then((res) => {
             if (res.data.status) {
                 const data = res.data.data;
@@ -263,7 +253,6 @@ export const getSingleShippingAddress = (type) => (dispatch) => {
             responseData.isLoading = false;
             dispatch({ type: Types.GET_SINGLE_SHIPPING_ADDRESS, payload: responseData });
         })
-    }
 }
 
 //handle change input field 
@@ -277,21 +266,13 @@ export const handleChangeBillingAddressInput = (name, value) => (dispatch) => {
 
 
 //handle store billing address
-export const handleUpdateBillingAddress = (billingAddressInput) => (dispatch) => {
+export const handleUpdateBillingAddress = (billingAddressInput, userId) => (dispatch) => {
     const responseData = {
         status: false,
         isLoading: true,
     }
 
-    // if (typeof billingAddressInput.type === 'undefined' || billingAddressInput.type === "") {
-    //     showToast('error', 'Please give address type !');
-    //     return;
-    // }
-
     dispatch({ type: Types.STORE_BILLING_ADDRESS, payload: responseData });
-    // const userStorageData = JSON.parse(localStorage.getItem("loginData"));
-    // const submittedData = billingAddressInput;
-    // submittedData.user_id = userStorageData.userData.id;
 
     Axios.put(`address`, billingAddressInput)
         .then((res) => {
@@ -314,7 +295,7 @@ export const handleUpdateBillingAddress = (billingAddressInput) => (dispatch) =>
 }
 
 //handle store billing address
-export const addAddress = (addressInput, type, closeModal) => (dispatch) => {
+export const addAddress = (addressInput, type, closeModal, userId) => (dispatch) => {
     
     if (typeof addressInput.type === 'undefined' || addressInput.type === "") {
         addressInput.type = type;
@@ -346,8 +327,8 @@ export const addAddress = (addressInput, type, closeModal) => (dispatch) => {
     }
 
     dispatch({ type: Types.STORE_BILLING_ADDRESS, payload: responseData });
-    const userStorageData = JSON.parse(localStorage.getItem("loginData"));
-    addressInput['user_id'] = userStorageData.userData.id;
+
+    addressInput['user_id'] = userId;
 
     Axios({
         method: method,
@@ -359,11 +340,11 @@ export const addAddress = (addressInput, type, closeModal) => (dispatch) => {
             responseData.isLoading = false;
             showToast('success', res.data.message);
             dispatch({ type: Types.STORE_BILLING_ADDRESS, payload: responseData });
-            dispatch(getAddress('billing_address'));
-            dispatch(getAddress('shipping_address'));
+            dispatch(getAddress('billing_address', userId));
+            dispatch(getAddress('shipping_address', userId));
             dispatch(getDefaultAddress('billing_address'));
-            dispatch(getSingleShippingAddress('shipping_address'));
-            dispatch(getSingleShippingAddress('billing_address'));
+            dispatch(getSingleShippingAddress('shipping_address', userId));
+            dispatch(getSingleShippingAddress('billing_address', userId));
             closeModal();
         })
         .catch(err => {
@@ -400,7 +381,7 @@ export const addAddress = (addressInput, type, closeModal) => (dispatch) => {
 
 
 //handle store billing address
-export const deleteAddress = (id, toggleDeleteModal) => (dispatch) => {
+export const deleteAddress = (id, toggleDeleteModal, userId) => (dispatch) => {
     const responseData = {
         status: false,
         isLoading: true,
@@ -413,8 +394,8 @@ export const deleteAddress = (id, toggleDeleteModal) => (dispatch) => {
                 responseData.status = true;
                 responseData.isLoading = false;
                 showToast('success', res.data.message);
-                dispatch(getAddress('billing_address'));
-                dispatch(getAddress('shipping_address'));
+                dispatch(getAddress('billing_address', userId));
+                dispatch(getAddress('shipping_address', userId));
                 dispatch({ type: Types.DELETE_ADDRESS, payload: responseData });
                 toggleDeleteModal();
             }
@@ -444,7 +425,7 @@ export const handleEmptyDispatch = (type) => (dispatch) => {
  * 
  * return default address
  */
-export const getDefaultAddress = (addressType) => (dispatch) => {
+export const getDefaultAddress = (addressType, id) => (dispatch) => {
     const responseData = {
         data: [],
         status: false,
@@ -452,29 +433,26 @@ export const getDefaultAddress = (addressType) => (dispatch) => {
     }
     dispatch({ type: Types.GET_DEFAULT_SHIPPING_ADDRESS, payload: responseData });
     dispatch({ type: Types.GET_DEFAULT_BILLING_ADDRESS, payload: responseData });
-    const userStorageData = JSON.parse(localStorage.getItem("loginData"));
 
-    if (typeof userStorageData !== 'undefined' && userStorageData !== null) {
-        Axios.get(`address?user_id=${userStorageData.userData.id}&type=${addressType}&is_default=1`)
+    Axios.get(`address?user_id=${id}&type=${addressType}&is_default=1`)
 
-        .then((res) => {
-            if (res.data.status) {
-                responseData.data = res.data.data;
-                responseData.isLoading = false;
-                responseData.status = true;
-                if (addressType === 'billing_address') {
-                    dispatch({ type: Types.GET_DEFAULT_BILLING_ADDRESS, payload: responseData });
-                }
-
-                if (addressType === 'shipping_address') {
-                    dispatch({ type: Types.GET_DEFAULT_SHIPPING_ADDRESS, payload: responseData });
-                }
+    .then((res) => {
+        if (res.data.status) {
+            responseData.data = res.data.data;
+            responseData.isLoading = false;
+            responseData.status = true;
+            if (addressType === 'billing_address') {
+                dispatch({ type: Types.GET_DEFAULT_BILLING_ADDRESS, payload: responseData });
             }
 
-        }).catch((err) => {
+            if (addressType === 'shipping_address') {
+                dispatch({ type: Types.GET_DEFAULT_SHIPPING_ADDRESS, payload: responseData });
+            }
+        }
 
-        })
-    }
+    }).catch((err) => {
+
+    })
 }
 
 //handleChange user profile input data
@@ -492,7 +470,7 @@ export const handleChangeUserProfileInputData = (name, value) => (dispatch) => {
  * @returns handleUpdateUserData
  */
 
-export const handleUpdateUserData = (userInputData, user_id) => (dispatch) => {
+export const handleUpdateUserData = (userInputData, userData) => (dispatch) => {
     const response = {
         isLoading  : true,
         status     : false,
@@ -503,17 +481,10 @@ export const handleUpdateUserData = (userInputData, user_id) => (dispatch) => {
     Axios.put(`auth/updateUserProfile`, userInputData)
         .then((response) => {
             if (response.data.status) {
-                const responseUserData = response.data.data;
-                let getUserData = localStorage.getItem('loginData');
-                if (typeof getUserData !== "undefined" && getUserData !== null && getUserData !== '') {
-                    getUserData = JSON.parse(getUserData) || {};
-                    getUserData.userData = responseUserData;
-                    localStorage.setItem("loginData", JSON.stringify(getUserData));
-                }
                 response.isLoading = false;
                 showToast('success', response.data.message);
                 dispatch({ type: Types.UPDATED_USER_DATA, payload: response });
-                dispatch(getUserData());
+                dispatch(getUserData(userData));
             }
         }).catch((error) => {
             const responseLog = error.response;

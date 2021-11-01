@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import { getCurrencies } from '../../services/currency';
 import Modal from '../master/Modal/Modal';
 import TrackingForm from './TrackingForm';
 import Translate from '../translation/Translate';
-import { getUserDataAction } from '../_redux/getUserData/Action/UserDataAction';
 
 const HeaderTop = () => {
-    const dispatch                    = useDispatch();
     const [currencies, setCurrencies] = useState([]);
     const [show, setShow]             = useState(false);
 
@@ -16,7 +13,6 @@ const HeaderTop = () => {
 
     useEffect(() => {
         setCurrencies(getCurrencies());
-        dispatch(getUserDataAction());
     }, []);
 
     const toggleActiveLanguage = (currency) => {

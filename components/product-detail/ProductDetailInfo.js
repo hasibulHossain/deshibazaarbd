@@ -26,6 +26,7 @@ const ProductDetailInfo = (props) => {
   const { id: productId } = product;
   const [quantity, setQuantity] = useState(1);
   const { carts } = useSelector((state) => state.CartReducer);
+  const { isSignedIn } = useSelector(state => state.GlobalReducer)
   const [filterCarts, setFilterCarts] = useState(null);
   const [updatedID, setUpdatedID] = useState(null);
   const [previewImg, setPreviewImg] = useState("");
@@ -119,8 +120,7 @@ const ProductDetailInfo = (props) => {
 
   const redirectToCheckoutPage = () => {
     if (process.browser) {
-      const userData = localStorage.getItem("loginData");
-      if (typeof userData === "undefined" || userData === null) {
+      if (!isSignedIn) {
         showToast("error", "Please Login to checkout");
         router.push("/login").then((_) => window.scrollTo(0, 0));
         return;

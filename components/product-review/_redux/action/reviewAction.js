@@ -61,7 +61,7 @@ export const handleChangeReviewItemInput = (name, value) => (dispatch) => {
 }
 
 // store review 
-export const storeReviewData = (reviewStoreInput, handleClose) => (dispatch => {
+export const storeReviewData = (reviewStoreInput, handleClose, userId) => (dispatch => {
     let responseData = {
         status: false,
         message: "",
@@ -69,10 +69,6 @@ export const storeReviewData = (reviewStoreInput, handleClose) => (dispatch => {
         returnData: ""
     };
     dispatch({ type: Types.STORE_REVIEW_DATA, payload: responseData });  
-
-    const { userData } = JSON.parse(localStorage.getItem('loginData'));
-    const userID       = userData.id;
-
     
     Axios.post(`item-review/create`, reviewStoreInput)
     .then((res) => {
@@ -84,7 +80,7 @@ export const storeReviewData = (reviewStoreInput, handleClose) => (dispatch => {
                 showToast('success', responseData.message);
                 dispatch({ type: Types.STORE_REVIEW_DATA, payload: responseData });
                 dispatch(getItemListByUser());
-                dispatch(getReviewListByUser(reviewStoreInput.item_id, userID));
+                dispatch(getReviewListByUser(reviewStoreInput.item_id, userId));
                 handleClose();
             }
         })

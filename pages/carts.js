@@ -13,7 +13,6 @@ import {
   getCartsAction,
   toggleAllCartSelection,
 } from "../components/carts/_redux/action/CartAction";
-import { getUserDataAction } from "../components/_redux/getUserData/Action/UserDataAction";
 
 import dynamic from 'next/dynamic';
 const CartProduct = dynamic(() => import('../components/carts/cart-product/CartProduct'));
@@ -34,7 +33,6 @@ export default function Carts() {
 
   useEffect(() => {
     dispatch(getCartsAction());
-    dispatch(getUserDataAction());
   }, []);
 
   const placeOrder = () => {

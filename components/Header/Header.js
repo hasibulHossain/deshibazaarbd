@@ -11,10 +11,6 @@ import Button from "../master/Button/Button";
 import SearchInput from "../SearchInput/SearchInput";
 import { toggleBackdrop, toggleFloatingCart } from "../../_redux/store/action/globalAction";
 import { getCartsAction } from "../carts/_redux/action/CartAction";
-import {
-  getUserDataAction,
-  handleLogoutUser,
-} from "../_redux/getUserData/Action/UserDataAction";
 
 import Translate from "../translation/Translate";
 import { translate } from "../../services/translation/translation";
@@ -35,7 +31,6 @@ const Header = () => {
 
   useEffect(() => {
     dispatch(getCartsAction());
-    dispatch(getUserDataAction());
   }, []);
 
   const formatQtyDisplay = (totalQuantity) => {
@@ -49,8 +44,9 @@ const Header = () => {
   };
 
   const handleLogOut = () => {
-    dispatch(handleLogoutUser());
     signOut()
+    localStorage.removeItem('user-info');
+    window.location.reload();
   };
 
   const navigationToggleHandler = () => {

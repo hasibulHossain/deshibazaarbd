@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import dayjs from 'dayjs';
 import Link from 'next/link'
 import { handleCancelOrder } from './_redux/action/OrderAction.js';
-import { getUserDataAction } from '../_redux/getUserData/Action/UserDataAction.js';
 import { useDispatch, useSelector } from 'react-redux';
 import SimpleModal from '../master/Modal/SimpleModal.js';
 import SimpleConfirmComponent from '../master/Modal/SimpleConfirmComponent.js';
@@ -28,7 +27,6 @@ const SingleOrder = ({ item, isManageable = true }) => {
     }
 
     useEffect(() => {
-        dispatch(getUserDataAction());
     }, [])
 
     return (

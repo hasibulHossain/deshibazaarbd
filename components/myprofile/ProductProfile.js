@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ProfileSideBar from "./ProfileSideBar";
-import { getUserDataAction } from "../_redux/getUserData/Action/UserDataAction";
 import { getDefaultAddress } from "../ProfileAccountSetting/_redux/Action/ProfileAccountSettingAction";
 import LoadingSpinner from './../master/LoadingSpinner/LoadingSpinner'
 import SimpleModal from '../master/Modal/SimpleModal';
@@ -13,17 +12,19 @@ import Translate from "../translation/Translate";
 const ProductProfile = () => {
 
   const dispatch = useDispatch()
-  const userData = useSelector((state) => state.UserDataReducer.userData);
+  const { userData, access_token } = useSelector((state) => state.UserDataReducer);
   const isLoading = useSelector((state) => state.ProfileAccountSettingReducer.isLoading);
   const defaultShippingAddress = useSelector((state) => state.ProfileAccountSettingReducer.defaultShippingAddress);
   const defaultBillingAddress = useSelector((state) => state.ProfileAccountSettingReducer.defaultBillingAddress);
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    dispatch(getUserDataAction());
-    dispatch(getDefaultAddress('shipping_address'))
-    dispatch(getDefaultAddress('billing_address'))
-  }, [])
+    console.log('userdata from product profile => ', userData)
+    if(userData) {
+      dispatch(getDefaultAddress('shipping_address', userData.id))
+      dispatch(getDefaultAddress('billing_address', userData.id))
+    }
+  }, [access_token])
 
   const toggleShowHandler = () => {
     setShow(preState => !preState);

@@ -1,12 +1,13 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { handleLoginInput, loginAction } from "../_redux/Action/LoginAction";
+import { handleLoginInput } from "../_redux/Action/LoginAction";
 import { useForm } from "react-hook-form";
 import ErrorMessage from "../../master/ErrorMessage/ErrorMessage";
 import { signIn, useSession } from 'next-auth/client'
 import { isSignedIn } from "../../../_redux/store/action/globalAction";
 import { useRouter } from 'next/router';
+import { getUserDataAction } from "../../_redux/getUserData/Action/UserDataAction";
 
 const LoginComponent = () => {
   const router = useRouter();
@@ -27,13 +28,14 @@ const LoginComponent = () => {
       password: loginInput.password,
       redirect: false,
     })
-
-    if(res || !res) {
+    
+    if(res) {
       dispatch(isSignedIn())
     }
-
+    
     if(!res.error) {
       router.replace('/')
+      dispatch(getUserDataAction());
     }
   };
 

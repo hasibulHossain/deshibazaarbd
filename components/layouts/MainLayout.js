@@ -13,7 +13,7 @@ import { checkIsMobileDevice, isSignedIn } from "../../_redux/store/action/globa
 
 const MainLayout = ({children}) => {
   const dispatch = useDispatch();
-  const { backdrop } = useSelector(state => state.GlobalReducer);
+  const { backdrop, isSignedIn: alreadySignedIn } = useSelector(state => state.GlobalReducer);
 
   useEffect(() => {
     const bodyDOM = window.document.body;
@@ -29,7 +29,7 @@ const MainLayout = ({children}) => {
   });
 
   useEffect(() => {
-    dispatch(isSignedIn())
+    dispatch(isSignedIn(alreadySignedIn))
     if (typeof window === "undefined") {
       global.window = {};
     }
