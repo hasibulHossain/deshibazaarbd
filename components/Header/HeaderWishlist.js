@@ -1,12 +1,8 @@
 import React, { memo, useEffect } from "react";
-import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import {
   getWishListData,
 } from "../Wishlist/_redux/Action/WishlistAction";
-import Translate from "../translation/Translate";
 
 const HeaderWishlist = () => {
   const dispatch = useDispatch();
@@ -23,26 +19,18 @@ const HeaderWishlist = () => {
 
   const { wishList } = useSelector((state) => state.WishlistReducer);
 
-  const { isMobile } = useSelector((state) => state.GlobalReducer);
-
   useEffect(() => {
     dispatch(getWishListData());
   }, []);
 
   return (
-    <Link href="/wishlist" className="header-nav-link">
-      <a className="pointer wishlist-nav-link">
-        <FontAwesomeIcon className="custom-fontAwesome" icon={faHeart} />{" "}
-        <span className="wishlist-qty">
+    <div className="cart-nav-link">
+        <i className="fas fa-heart"></i>
+        {" "}
+        <span className="cart-qty">
           {formatQtyDisplay(wishList.length)}
         </span>
-        {!isMobile && (
-          <>
-            &nbsp;&nbsp; <Translate>Wishlist</Translate>
-          </>
-        )}
-      </a>
-    </Link>
+    </div>
   );
 };
 

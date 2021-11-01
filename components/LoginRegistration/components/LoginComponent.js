@@ -1,14 +1,17 @@
 import Link from "next/link";
 import React, { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
-import { handleLoginInput, loginAction } from "../_redux/Action/LoginAction";
+import { handleLoginInput } from "../_redux/Action/LoginAction";
 import { useForm } from "react-hook-form";
 import ErrorMessage from "../../master/ErrorMessage/ErrorMessage";
+import { signIn, useSession } from 'next-auth/client'
+import { isSignedIn } from "../../../_redux/store/action/globalAction";
+import { useRouter } from 'next/router';
+import { getUserDataAction } from "../../_redux/getUserData/Action/UserDataAction";
 
 const LoginComponent = () => {
-
+  const router = useRouter();
+  const [session] = useSession();
   const [showPassword, setShowPassword]    = useState(false);
   const dispatch                           = useDispatch();
   const loginInput                         = useSelector((state) => state.AuthReducer.loginInput);
@@ -19,11 +22,27 @@ const LoginComponent = () => {
     dispatch(handleLoginInput(name, value));
   };
 
-  const handleLogin = (e) => {
-    dispatch(loginAction(loginInput));
-    // e.preventDefault();
+  const handleLogin = async (e) => {
+    const res = await signIn('credentials', {
+      email: loginInput.email,
+      password: loginInput.password,
+      redirect: false,
+    })
+    
+    if(res) {
+      dispatch(isSignedIn())
+    }
+    
+    if(!res.error) {
+      router.replace('/')
+      dispatch(getUserDataAction());
+    }
   };
 
+  if(session) {
+    return null
+  }
+  
   return (
     <>
       <div className="account_info_body mt-5">
@@ -89,9 +108,13 @@ const LoginComponent = () => {
                     onClick={() => setShowPassword(!showPassword)}
                   >
                     {showPassword === true ? (
-                      <FontAwesomeIcon icon={faEyeSlash} />
+                      <span>
+                        <i className="far fa-eye-slash"></i>
+                      </span>
                     ) : (
-                      <FontAwesomeIcon icon={faEye} />
+                      <span>
+                        <i className="far fa-eye"></i>
+                      </span>
                     )}
                   </div>
                 </div>
@@ -138,16 +161,6 @@ const LoginComponent = () => {
                   Signing in...
                 </button>
               )}
-
-              {/* <p className="mt-2">or Sign up with</p>
-              <button className="btn google_btn mr-3 mt-2">
-                <FontAwesomeIcon className="mr-2" icon={faGoogle} />
-                Google
-              </button>
-              <button className="btn facebook_btn mt-2">
-                <FontAwesomeIcon className="mr-2" icon={faFacebookF} />
-                Google
-              </button> */}
             </div>
           </form>
         )}

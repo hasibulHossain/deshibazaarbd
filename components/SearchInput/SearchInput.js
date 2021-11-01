@@ -3,10 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import SearchLoadingSkeleton from "./SearchLoadingSkeleton";
 import { searchProductAction } from "./_redux/Action/SearchInputAction";
 import { useRouter } from "next/router";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { translate } from "../../services/translation/translation";
-import Translate from "../translation/Translate";
 import { formatCurrency } from "../../services/currency";
 import axios from "axios";
 import { toggleBackdrop } from "../../_redux/store/action/globalAction";
@@ -107,7 +104,7 @@ const SearchInput = () => {
         onKeyDown={e => onKeyDownHandler(e.key)}
       />
       <div className="header-custom-prepend pointer" onClick={() => onKeyDownHandler('Enter')} >
-        <FontAwesomeIcon className="custom-fontAwesome" icon={faSearch} />
+        <i className="fas fa-search"></i>
       </div>
 
       {search.length > 0 && (

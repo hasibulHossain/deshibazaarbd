@@ -1,7 +1,6 @@
 import React from "react";
 
 // third party imports
-import { IoMdCloseCircle } from "react-icons/io";
 import { useDispatch } from "react-redux";
 
 // local imports
@@ -17,7 +16,6 @@ function RemoveCartItem(props) {
   };
 
   const removeHandler = () => {
-    console.log("item removed | RemoveCartItem.js @removeHandler");
   };
 
   return (
@@ -25,7 +23,6 @@ function RemoveCartItem(props) {
       <div className="remove-cart-item__details">
         <div className="remove-cart-item__name">{children}</div>
         <div onClick={cancelHandler} className="remove-cart-item__close">
-          <IoMdCloseCircle />
         </div>
       </div>
 

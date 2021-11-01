@@ -1,13 +1,14 @@
 import React, { useState, memo } from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
+import dynamic from 'next/dynamic';
 import Link from 'next/link'
+import { useDispatch, useSelector } from 'react-redux';
+
 import FooterBottom from './FooterBottom';
 import SocialMedia from './SocialMedia';
 import SimpleModal from '../master/Modal/SimpleModal';
-import TrackingForm from '../Header/TrackingForm';
-import { useDispatch, useSelector } from 'react-redux';
 import SimpleBtn from '../master/SimpleBtn/SimpleBtn';
 import { subscribeNewsletter } from './_redux/Action/FooterAction';
+const TrackingForm = dynamic(() => import('../Header/TrackingForm'));
 
 const Footer = () => {
     const {isLoading}       = useSelector(state => state.FooterReducer)
@@ -24,9 +25,9 @@ const Footer = () => {
     return (
         <>
             <section className="footer-section">
-                <Container>
-                    <Row>
-                        <Col md={3} xs={6}>
+                <div className="container">
+                    <div className="row">
+                        <div className="col-md-3 col-xs-6 ">
                             <div className="footer-info">
                                 <h3>Customer Care</h3>
                                 <h3>
@@ -65,8 +66,8 @@ const Footer = () => {
                                     </Link>
                                 </h3>
                             </div>
-                        </Col>
-                        <Col md={3} xs={6}>
+                        </div>
+                        <div className="col-md-3 col-xs-6">
                             <div className="footer-info">
                                 <h3>Information</h3>
                                 <h3>
@@ -110,8 +111,8 @@ const Footer = () => {
                                     </Link>
                                 </h3>
                             </div>
-                        </Col>
-                        <Col md={2} xs={6}>
+                        </div>
+                        <div className="col-md-2 col-xs-6">
                             <div className="footer-info">
                                 <h3>my account</h3>
                                 <h3>
@@ -131,8 +132,8 @@ const Footer = () => {
                                     </Link>
                                 </div>
                             </div>
-                        </Col>
-                        <Col md={4} sm={6}>
+                        </div>
+                        <div className="col-md-4 col-sm-6">
                             <div className="footer-info">
                                 <div className="footer-info__follow-us">
                                     <h3>FOLLOW US: </h3>
@@ -154,9 +155,9 @@ const Footer = () => {
                                     <img src={"/images/payment-methods.png"} alt="Deshi BazaarBD"/>
                                 </div>
                             </div>
-                        </Col>
-                    </Row>
-                </Container>
+                        </div>
+                    </div>
+                </div>
                 <FooterBottom />
             </section>
 

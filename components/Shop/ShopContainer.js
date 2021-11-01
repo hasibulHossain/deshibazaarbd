@@ -1,11 +1,7 @@
 import React from 'react';
-import { translate } from '../../services/translation/translation';
-import Button from '../master/Button/Button';
 import Translate from '../translation/Translate';
 import ShopList from './ShopList';
 import Link from 'next/link';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 const ShopContainer = () => {
     return (
@@ -18,7 +14,10 @@ const ShopContainer = () => {
                 <Link href={{ pathname: '/brands'}}>
                     <div className="custom-button-component pointer" >
                         View all
-                        <FontAwesomeIcon className="ml-2" icon={faArrowRight} />
+                        {' '}
+                        <span>
+                            <i className="fas fa-arrow-right"></i>
+                        </span>
                     </div>
                 </Link>
             </div>

@@ -15,6 +15,7 @@ const ShippingAddressUpdate = () => {
     const isSubmitting = useSelector((state) => state.ProfileAccountSettingReducer.isSubmitting);
     // const shippingAddressInput = useSelector((state) => state.ProfileAccountSettingReducer.shippingAddressInput);
     const shippingAddressInput = useSelector((state) => state.ProfileUpdateReducer.shippingAddressInput);
+    const { userData } = useSelector(state => state.UserDataReducer)
     const { register, handleSubmit, errors, setValue } = useForm();
 
     //handle change input 
@@ -23,13 +24,13 @@ const ShippingAddressUpdate = () => {
     }
 
     useEffect(() => {
-        dispatch(handleSetDataIntoInputField())
+        dispatch(handleSetDataIntoInputField(userData))
         dispatch(getLocationData('countries'))
-        dispatch(getShippingAddressForInput('shipping_address'))
+        dispatch(getShippingAddressForInput('shipping_address', userData.id))
     }, [])
 
     const updateShippingAddress = () => {
-        dispatch(handleUpdateShippingAddress(shippingAddressInput))
+        dispatch(handleUpdateShippingAddress(shippingAddressInput, userData.id))
     }
 
     return (

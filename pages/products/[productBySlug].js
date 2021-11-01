@@ -1,13 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import ProductNoFound from "../../components/master/productNoFound/ProductNoFound";
-import LoadingSkelleton from "../../components/master/skelleton/LoadingSkelleton";
 import ProductDetailInfo from "../../components/product-detail/ProductDetailInfo";
 
 export default function ProductBySlug({ product }) {
     return (
         <div className="container">
             {
-                product !== "undefined" && product !== null ?
+                product ?
                     <ProductDetailInfo product={product} /> :
                     <ProductNoFound
                         title="Product details no found !"
@@ -26,6 +25,12 @@ export const getServerSideProps = async (context) => {
 
     const dataJSON = await res.json();
     const data = dataJSON.data;
+
+    if(!data) {
+        return {
+            notFound: true
+        }
+    }
     return {
         props: { product: data }
     }

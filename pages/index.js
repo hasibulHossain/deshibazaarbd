@@ -20,8 +20,8 @@ export default function Home(props) {
 
   return (
     <>
-      <PageMeta 
-        title="Deshi Bazaar BD" 
+      <PageMeta
+        title="Deshibazaarbd.com | Choose Order Enjoy | Best E-commerce"
         description="Deshi Bazaar BD is a multivendor e-commerce business solution in Bangladesh"
         keywords="deshibazaar,deshibazaarbd,deshibazar,deshibazarbd,daraz" />
       <HomeBannerCarousel homeBanner={props.homeBanner} />

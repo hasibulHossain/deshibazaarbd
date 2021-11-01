@@ -1,17 +1,16 @@
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { handleChangeBillingAddressInput, handleUpdateBillingAddress, addAddress, handleEmptyDispatch, getLocationData } from './_redux/Action/ProfileAccountSettingAction';
+import { handleChangeBillingAddressInput, addAddress, handleEmptyDispatch, getLocationData } from './_redux/Action/ProfileAccountSettingAction';
 import ErrorMessage from '../master/ErrorMessage/ErrorMessage'
 import { RHFInput } from 'react-hook-form-input';
 import Select from 'react-select';
 import { Spinner } from 'react-bootstrap'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBriefcase, faHome } from '@fortawesome/free-solid-svg-icons';
 
 const AddressUpdate = (props) => {
     const dispatch = useDispatch();
     const { countryList, divisionList, cityList, areaList, isSubmitting, selectedAddress } = useSelector((state) => state.ProfileAccountSettingReducer);
+    const {userData} = useSelector(state => state.UserDataReducer);
     const { register, handleSubmit, errors, setValue } = useForm();
 
     //handle change input 
@@ -19,13 +18,9 @@ const AddressUpdate = (props) => {
         dispatch(handleChangeBillingAddressInput(name, value))
     }
 
-    // const StoreBillingAddress = () => {
-    //     dispatch(handleUpdateBillingAddress(selectedAddress))
-    // }
-
     const submitUpdatedAddressHandler = (e) => {
         e.preventDefault();
-        dispatch(addAddress(selectedAddress, props.type, props.closeModal))
+        dispatch(addAddress(selectedAddress, props.type, props.closeModal, userData.id))
     }
 
     useEffect(() => {
@@ -316,11 +311,15 @@ const AddressUpdate = (props) => {
                         </h6>
                         <div className="d-flex mt-3">
                             <p className={`btn home_btn mr-3 pointer ${selectedAddress.location === "home" ? "active_delivery_label" : ""}`} onClick={() => handleChangeTextInput("location", "home")}>
-                                <FontAwesomeIcon icon={faHome} className="mr-1" /> Home
+                                <i className="fas fa-home"></i>
+                                {' '}
+                                Home
                             </p>
 
                             <p className={`btn office_btn pointer ${selectedAddress.location === "office" ? "active_delivery_label" : ""}`} onClick={() => handleChangeTextInput("location", "office")}>
-                                <FontAwesomeIcon icon={faBriefcase} className="mr-1" /> Office
+                                <i className="fas fa-briefcase"></i>
+                                {' '}
+                                Office
                             </p>
                         </div>
                     </div>

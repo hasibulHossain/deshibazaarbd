@@ -3,22 +3,16 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 
-import { FiChevronRight } from "react-icons/fi";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShoppingBag } from "@fortawesome/free-solid-svg-icons";
-
 import SimpleBtn from "../components/master/SimpleBtn/SimpleBtn";
 import Modal from "../components/master/Modal/Modal";
 import RemoveCartItem from "../components/RemoveCartItem/RemoveCartItem";
 import OrderSummery from "../components/orders/OrderSummery";
-// import CartProduct from "../components/carts/cart-product/CartProduct";
 
 import { toggleModal } from "../_redux/store/action/globalAction";
 import {
   getCartsAction,
   toggleAllCartSelection,
 } from "../components/carts/_redux/action/CartAction";
-import { getUserDataAction } from "../components/_redux/getUserData/Action/UserDataAction";
 
 import dynamic from 'next/dynamic';
 const CartProduct = dynamic(() => import('../components/carts/cart-product/CartProduct'));
@@ -39,7 +33,6 @@ export default function Carts() {
 
   useEffect(() => {
     dispatch(getCartsAction());
-    dispatch(getUserDataAction());
   }, []);
 
   const placeOrder = () => {
@@ -73,10 +66,6 @@ export default function Carts() {
                       <input className="cart-checkbox" type="checkbox" checked={checkedAllCarts} onChange={() => { }} />
                       &nbsp; Select All ({carts.length} items)
                     </p>
-                    {/* <div className="carts_delete" onClick={deleteItemsHandler}>
-                      <FontAwesomeIcon className="cart_trash" icon={faTrash} />
-                      <p>Delete</p>
-                    </div> */}
                   </div>
 
                   {supplierWiseCarts.length > 0 &&
@@ -94,7 +83,7 @@ export default function Carts() {
                                         {item.sellerName}
                                       </p>
                                       <div className="cart_trash">
-                                        <FiChevronRight />
+                                        <i className="fas fa-chevron-right"></i>
                                       </div>
                                     </div>
                                   </div>
@@ -130,10 +119,8 @@ export default function Carts() {
                       <Link href="/products">
                         <a href="/products" style={{ display: "inline-block" }}>
                           <SimpleBtn variant="success">
-                            <FontAwesomeIcon
-                              className="mr-2"
-                              icon={faShoppingBag}
-                            />
+                            <i className="fas fa-shopping-bag"></i>
+                            {' '}
                             CONTINUE SHOPPING
                           </SimpleBtn>
                         </a>

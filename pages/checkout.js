@@ -6,16 +6,14 @@ import { useSelector, useDispatch } from "react-redux";
 // import OrderSummery from "../components/orders/OrderSummery";
 // import CartProduct from "../components/carts/cart-product/CartProduct";
 // import DeliveryInfo from '../components/Delivery/DeliveryInfo';
-import { getUserDataAction } from "../components/_redux/getUserData/Action/UserDataAction";
 import { storeSells } from "../components/Delivery/_redux/Action/DeliveryInfoAction";
 import { getCartsAction } from "../components/carts/_redux/action/CartAction";
 import { handleShippingCost } from "../components/orders/_redux/action/OrderAction";
-import ProtectedRoute from "../components/master/protectedRoute/ProtectedRoute";
+// import ProtectedRoute from "../components/master/protectedRoute/ProtectedRoute";
 // import { toggleFloatingCart } from "../_redux/store/action/globalAction";
-
-
-
 import dynamic from 'next/dynamic';
+import withProtectedRoute from "../components/master/hoc/withProtectedRoute";
+
 const ShippingInfo = dynamic(() => import('../components/ShippingInfo/ShippingInfo'));
 const CheckoutPaymentMethod = dynamic(() => import('../components/ShippingInfo/CheckoutPaymentMethod'));
 const OrderSummery = dynamic(() => import('../components/orders/OrderSummery'));
@@ -30,16 +28,16 @@ const Checkout = ()=> {
 	const { customerInfo }                     = useSelector((state) => state.DeliveryInfoReducer);
 	const { couponData, shippingCost }         = useSelector((state) => state.OrderReducer);
 	const { carts, totalPrice, totalQuantity } = useSelector((state) => state.CartReducer);
+	const { userData } = useSelector((state) => state.UserDataReducer);
 
 	useEffect(() => {
 		dispatch(getCartsAction());
-		dispatch(getUserDataAction());
 		dispatch(handleShippingCost(carts));
 		// dispatch(toggleFloatingCart(false));
 	}, []);
 
 	const handleStoreOrder = () => {
-		// dispatch(storeSells(customerInfo, carts, totalQuantity, shippingCost, totalPrice, couponData));
+		// dispatch(storeSells(customerInfo, carts, totalQuantity, shippingCost, totalPrice, couponData, userData));
 		// router.push('/');
 	}
 
@@ -77,4 +75,5 @@ const Checkout = ()=> {
 			</div>
 	);
 }
-export default ProtectedRoute(Checkout);
+// export default ProtectedRoute(Checkout);
+export default withProtectedRoute(Checkout);

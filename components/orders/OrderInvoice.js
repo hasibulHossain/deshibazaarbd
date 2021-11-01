@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
 import dayjs from 'dayjs';
 import { useDispatch, useSelector } from 'react-redux';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faPrint, faTimes } from "@fortawesome/free-solid-svg-icons";
 import Translate from '../translation/Translate';
 import { formatCurrency } from '../../services/currency';
 import { getOrderDetails } from './_redux/action/OrderAction';
@@ -71,8 +69,9 @@ const OrderInvoice = ({ title = translate('Invoice'), id, is_invoice = false }) 
                                             orderDetails.payment_status === 'due' &&
                                             <p>
                                                 <span className="bg-warning border-radius-5 p-1">
-                                                    <FontAwesomeIcon className="custom-fontAwesome" icon={faTimes} />
-                                                    {' '} <Translate>Not Paid</Translate>
+                                                    <i className="fas fa-times"></i>
+                                                    {' '}
+                                                    <Translate>Not Paid</Translate>
                                                 </span>
                                             </p>
                                         }
@@ -81,8 +80,9 @@ const OrderInvoice = ({ title = translate('Invoice'), id, is_invoice = false }) 
                                             orderDetails.payment_status === 'paid' &&
                                             <p>
                                                 <span className="bg-success border-radius-5 p-1">
-                                                    <FontAwesomeIcon className="custom-fontAwesome" icon={faCheck} />
-                                                    {' '} <Translate>Paid</Translate>
+                                                    <i className="fas fa-check"></i>
+                                                    {' '}
+                                                    <Translate>Paid</Translate>
                                                 </span>
                                             </p>
                                         }
@@ -123,7 +123,9 @@ const OrderInvoice = ({ title = translate('Invoice'), id, is_invoice = false }) 
                     <div className="col-md-5">
                         <div className="card card-body order-success-right">
                             <button className="btn btn-success btn-sm btn-print non-printable" onClick={() => printDiv('printable-invoice-area')}> 
-                                <FontAwesomeIcon className="custom-fontAwesome" icon={faPrint} />
+                                <span>
+                                    <i className="fas fa-print"></i>
+                                </span>
                                 {' '} <Translate>Print</Translate>
                             </button>
                             <h3><Translate>Order Summary</Translate></h3>

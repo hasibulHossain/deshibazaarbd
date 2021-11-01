@@ -8,10 +8,11 @@ import LoadingSpinner from '../master/LoadingSpinner/LoadingSpinner';
 const PersonalInformationUpdate = () => {
     const dispatch = useDispatch();
     const { userInputData, userDetails, isSubmitting } = useSelector((state) => state.ProfileAccountSettingReducer);
+    const { userData } = useSelector(state => state.UserDataReducer)
     const { register, handleSubmit, errors } = useForm();
 
     useEffect(() => {
-        dispatch(getUserData())
+        dispatch(getUserData(userData))
     }, [])
 
     const handleChangeTextInput = (name, value) => {
@@ -19,7 +20,7 @@ const PersonalInformationUpdate = () => {
     }
 
     const handleUpdatedProfile = () => {
-        dispatch(handleUpdateUserData(userInputData, userDetails.id))
+        dispatch(handleUpdateUserData(userInputData, userData))
     }
     return (
         <div className="">

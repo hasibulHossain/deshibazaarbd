@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShoppingBag } from "@fortawesome/free-solid-svg-icons";
 import { formatCurrency } from '../../../services/currency';
 import { toggleFloatingCart } from "../../../_redux/store/action/globalAction";
 import { getCartsAction } from "../_redux/action/CartAction";
@@ -38,7 +36,9 @@ const FloatingCartButton = () => {
         <>
             <button onClick={flashDealBtnHandler} className="flashDealButton d-flex flex-column align-items-center pointer" style={style}>
                 <div className="fixed-cart-items">
-                    <span><FontAwesomeIcon icon={faShoppingBag} /> </span>
+                    <span>
+                        <i style={{fontSize: '18px'}} className="fas fa-shopping-bag"></i>
+                    </span>
                     <span className={styles.color}>
                         {totalQuantity} items
                     </span>
@@ -49,25 +49,6 @@ const FloatingCartButton = () => {
                     </span>
                 </div>
             </button>
-            {/* <div className={styles.fixedCart} style={style} >
-                <div className={styles.fixedCartInner}>
-                    <div className={styles.fixedCartMiddle}>
-                        <Link href="/" >
-                            <a>
-                                Start shopping
-                            </a>
-                        </Link>
-                    </div>
-                    <div className={styles.fixedCartRight}>
-                        <span style={{pointerEvents: 'none'}} className={styles.fixedCartQty}>{totalQuantity > 0 && totalQuantity}</span>
-                        <div onClick={flashDealBtnHandler} style={{width: '100%', height: '100%'}}>
-                            <span>
-                                <Cart />
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div> */}
             <div className={styles.fixedCart} style={style} >
                 <div className={styles.fixedCartInner}>
                     <div className={styles.fixedCartIconBox}>

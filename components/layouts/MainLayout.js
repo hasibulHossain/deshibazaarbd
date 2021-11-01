@@ -1,18 +1,19 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
-// import DemoWarning from "../Demo/DemoWarning";
 import FloatingCart from "../carts/floating-cart/FloatingCart";
-
-import PageMeta from './PageMeta';
 import FloatingCartButton from "../carts/floating-cart/FloatingCartButton";
+
+import { checkIsMobileDevice, isSignedIn } from "../../_redux/store/action/globalAction";
+
+// import DemoWarning from "../Demo/DemoWarning";
 // import MessengerCustomerChat from 'react-messenger-customer-chat';
-import { checkIsMobileDevice, toggleBackdrop } from "../../_redux/store/action/globalAction";
 
 const MainLayout = ({children}) => {
   const dispatch = useDispatch();
-  const { backdrop } = useSelector(state => state.GlobalReducer);
+  const { backdrop, isSignedIn: alreadySignedIn } = useSelector(state => state.GlobalReducer);
 
   useEffect(() => {
     const bodyDOM = window.document.body;
@@ -28,6 +29,7 @@ const MainLayout = ({children}) => {
   });
 
   useEffect(() => {
+    dispatch(isSignedIn(alreadySignedIn))
     if (typeof window === "undefined") {
       global.window = {};
     }
@@ -51,10 +53,10 @@ const MainLayout = ({children}) => {
 
       <Header />
       <main>
-        <div className={`backdrop ${backdrop ? 'open' : ''}`}></div>
-        <div style={{minHeight: "37vh"}}>
-          {children}
-        </div>
+          <div className={`backdrop ${backdrop ? 'open' : ''}`}></div>
+          <div style={{minHeight: "40vh"}}>
+            {children}
+          </div>
       </main>
 
       <Footer />

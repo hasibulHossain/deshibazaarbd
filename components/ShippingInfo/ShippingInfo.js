@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { faEnvelopeOpen, faHome, faMapMarkerAlt, faMobileAlt, faPencilAlt, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserDataAction } from '../_redux/getUserData/Action/UserDataAction';
 import { getAddress, getDefaultAddress, getSingleAddress } from '../ProfileAccountSetting/_redux/Action/ProfileAccountSettingAction';
 import LoadingSpinner from '../master/LoadingSpinner/LoadingSpinner';
 import SimpleModal from '../master/Modal/SimpleModal';
@@ -29,10 +26,9 @@ const ShippingInfo = () => {
     }
 
     useEffect(() => {
-        dispatch(getUserDataAction());
         dispatch(getDefaultAddress('shipping_address'))
         dispatch(getDefaultAddress('billing_address'))
-        dispatch(getAddress('billing_address'));
+        dispatch(getAddress('billing_address', userData.id));
 
     }, [])
 
@@ -66,14 +62,19 @@ const ShippingInfo = () => {
                         defaultBillingAddress !== null && defaultBillingAddress.length > 0 && (
                             <>
                                 <div className="d-flex justify-content-between">
-                                    <h6 className="customer_name text-capitalize"> <FontAwesomeIcon className="shipping_info_fontAwesome" icon={faMapMarkerAlt} />
+                                    <h6 className="customer_name text-capitalize"> 
+                                        <i className="fas fa-map-marker-alt shipping_info_fontAwesome"></i>
                                         <span>
                                             {userData && userData.first_name + " "}
                                             {userData && ((userData.last_name !== null && userData.last_name !== 'null') ? userData.last_name : '')}
                                         </span>
                                     </h6>
                                     <p className="customer_info_edit" onClick={() => editHandler(defaultBillingAddress[0].id, defaultBillingAddress[0].type)}>
-                                        <FontAwesomeIcon icon={faPencilAlt} /> <span className="ml-1">Edit</span>
+                                        <i className="fas fa-pencil-alt"></i>
+                                        <span className="ml-1">
+                                            {' '}
+                                            Edit
+                                        </span>
                                     </p>
                                 </div>
                                 <div className="d-flex align-items-start mt-2">
@@ -98,7 +99,9 @@ const ShippingInfo = () => {
                         <p className="delivery_collecting_message">Free Delivery on collecting your order from Deshibazaarbd Pick-up point</p>
                         <div className="d-flex justify-content-between">
                             <p className="collecting_suggesting">14 Suggested collection points nearby</p>
-                            <p> <FontAwesomeIcon className="collection_suggesting_fontAwesome" icon={faQuestionCircle} /> </p>
+                            <p>
+                                <i className="fas fa-question-circle collection_suggesting_fontAwesome"></i>
+                            </p>
                         </div>
                     </div>
 
@@ -106,29 +109,31 @@ const ShippingInfo = () => {
                         <div className="mt-4">
                             <div className="d-flex justify-content-between">
                                 <p className="shipping_billing_details_info">
-                                    <FontAwesomeIcon className="shipping_billing_info_fontAwesome shipping_info_fontAwesome mr-1" icon={faHome} />
+                                    <i className="fas fa-home"></i>
                                     <span className="bill_to_same_address">Bill to the same address</span>
                                 </p>
                                 <p className="customer_info_edit" onClick={() => editHandler(defaultBillingAddress[0].id, defaultBillingAddress[0].type)} >
-                                    <FontAwesomeIcon icon={faPencilAlt} /> <span className="ml-1">Edit</span>
+                                    <i className="fas fa-pencil-alt"></i>
                                 </p>
                             </div>
                             <div className="d-flex justify-content-between">
                                 <p className="shipping_billing_details_info">
-                                    <FontAwesomeIcon className="shipping_billing_info_fontAwesome shipping_info_fontAwesome ml-1" icon={faMobileAlt} />
+                                    <i className="fas fa-mobile-alt"></i>
+                                    {' '}
                                     <span> {userData && userData.phone_no} </span>
                                 </p>
                                 <p className="customer_info_edit" onClick={() => editHandler(defaultBillingAddress[0].id, defaultBillingAddress[0].type)} >
-                                    <FontAwesomeIcon icon={faPencilAlt} /> <span className="ml-1">Edit</span>
+                                <i className="fas fa-pencil-alt"></i>
                                 </p>
                             </div>
                             <div className="d-flex justify-content-between">
                                 <p className="shipping_billing_details_info">
-                                    <FontAwesomeIcon className="shipping_billing_info_fontAwesome shipping_info_fontAwesome mr-1" icon={faEnvelopeOpen} />
-                                    <span>{userData && userData.email}</span>
+                                <i className="fas fa-envelope-open"></i>
+                                {' '}
+                                <span>{userData && userData.email}</span>
                                 </p>
                                 <p className="customer_info_edit" onClick={() => editHandler(defaultBillingAddress[0].id, defaultBillingAddress[0].type)}>
-                                    <FontAwesomeIcon icon={faPencilAlt} /> <span className="ml-1">Edit</span>
+                                <i className="fas fa-pencil-alt"></i>
                                 </p>
                             </div>
                         </div>
