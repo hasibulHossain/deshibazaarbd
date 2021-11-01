@@ -46,7 +46,6 @@ const Header = () => {
   const handleLogOut = () => {
     signOut()
     localStorage.removeItem('user-info');
-    window.location.reload();
   };
 
   const navigationToggleHandler = () => {

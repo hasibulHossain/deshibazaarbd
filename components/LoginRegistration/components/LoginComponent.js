@@ -15,7 +15,7 @@ const LoginComponent = () => {
   const [showPassword, setShowPassword]    = useState(false);
   const dispatch                           = useDispatch();
   const loginInput                         = useSelector((state) => state.AuthReducer.loginInput);
-  const isLoading                          = useSelector((state) => state.AuthReducer.isLoading);
+  const [isLoading, setIsLoading]                          = useState(false);
   const { register, handleSubmit, errors } = useForm();
 
   const handleLoginInputChange = (name, value) => {
@@ -23,6 +23,7 @@ const LoginComponent = () => {
   };
 
   const handleLogin = async (e) => {
+    setIsLoading(true);
     const res = await signIn('credentials', {
       email: loginInput.email,
       password: loginInput.password,
@@ -31,6 +32,7 @@ const LoginComponent = () => {
     
     if(res) {
       dispatch(isSignedIn())
+      setIsLoading(false);
     }
     
     if(!res.error) {
