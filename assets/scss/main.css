@@ -3040,6 +3040,11 @@ span.rating_value_text {
   display: flex;
 }
 
+.product_preview_gallery > div {
+  max-width: 100px;
+  overflow: hidden;
+}
+
 span.brand_name_in_details {
   color: #03a53a;
   cursor: pointer;
