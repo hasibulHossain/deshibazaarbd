@@ -341,7 +341,7 @@ const RegistrationComponent = () => {
                         <a> Terms of Use </a>
                     </Link>
                     and
-                    <Link href="/p/terms-&-condition">
+                    <Link href="/p/privacy-policy">
                         <a> Privacy Policy </a>
                     </Link></p>
 

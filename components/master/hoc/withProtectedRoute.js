@@ -6,11 +6,11 @@ import { getSession } from 'next-auth/client'
  * @param {} WrappedComponent 
  * @returns - 
  */
-const withProtectedRoute = (WrappedComponent) => {
+const withProtectedRoute = (WrappedComponent, isSignedIn = false) => {
     return function WithProtectedRoute(props) {
         const [session, setSession] = useState(false)
         const [loading, setLoading] = useState(true)
-
+        
         useEffect(() => {
             (async () => {
                 const session = await getSession();
@@ -26,6 +26,15 @@ const withProtectedRoute = (WrappedComponent) => {
         if(!session && loading) {
             return null
         }
+
+        if(session && isSignedIn && !loading) {
+            return window.location.replace('/');
+        }
+
+        if(!session && !loading && isSignedIn) {
+            return <WrappedComponent {...props} />
+        }
+
 
         if(session) {
             return (

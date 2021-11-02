@@ -9,10 +9,10 @@ import { isSignedIn } from "../../../_redux/store/action/globalAction";
 import { useRouter } from 'next/router';
 import { getUserDataAction } from "../../_redux/getUserData/Action/UserDataAction";
 import { showToast } from "../../master/Helper/ToastHelper";
+import withProtectedRoute from "../../master/hoc/withProtectedRoute";
 
 const LoginComponent = () => {
   const router = useRouter();
-  const [session] = useSession();
   const [showPassword, setShowPassword]    = useState(false);
   const dispatch                           = useDispatch();
   const loginInput                         = useSelector((state) => state.AuthReducer.loginInput);
@@ -46,10 +46,6 @@ const LoginComponent = () => {
       dispatch(getUserDataAction());
     }
   };
-
-  if(session) {
-    return null
-  }
   
   return (
     <>
@@ -184,4 +180,4 @@ const LoginComponent = () => {
   );
 };
 
-export default LoginComponent;
+export default withProtectedRoute(LoginComponent, true);

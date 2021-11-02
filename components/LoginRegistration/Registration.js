@@ -1,12 +1,7 @@
 import React from 'react';
 import RegistrationComponent from './components/RegistrationComponent'
-import { useSession } from 'next-auth/client'
+import withProtectedRoute from '../master/hoc/withProtectedRoute';
 const Registration = () => {
-    const [session, loading] = useSession();
-    if(session && !loading || loading) {
-        return null;
-    }
-
     return (
         <div className="container">
             <div className="row justify-content-center align-items-center my-3">
@@ -21,4 +16,4 @@ const Registration = () => {
     );
 };
 
-export default Registration;
+export default withProtectedRoute(Registration, true)
