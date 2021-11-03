@@ -1,24 +1,25 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 // local import
-// import ShippingInfo from "../components/ShippingInfo/ShippingInfo";
-// import CheckoutPaymentMethod from "../components/ShippingInfo/CheckoutPaymentMethod";
-// import OrderSummery from "../components/orders/OrderSummery";
-// import CartProduct from "../components/carts/cart-product/CartProduct";
-// import DeliveryInfo from '../components/Delivery/DeliveryInfo';
+import ShippingInfo from "../components/ShippingInfo/ShippingInfo";
+import CheckoutPaymentMethod from "../components/ShippingInfo/CheckoutPaymentMethod";
+import OrderSummery from "../components/orders/OrderSummery";
+import CartProduct from "../components/carts/cart-product/CartProduct";
+import DeliveryInfo from '../components/Delivery/DeliveryInfo';
 import { storeSells } from "../components/Delivery/_redux/Action/DeliveryInfoAction";
 import { getCartsAction } from "../components/carts/_redux/action/CartAction";
 import { handleShippingCost } from "../components/orders/_redux/action/OrderAction";
 // import ProtectedRoute from "../components/master/protectedRoute/ProtectedRoute";
 // import { toggleFloatingCart } from "../_redux/store/action/globalAction";
-import dynamic from 'next/dynamic';
 import withProtectedRoute from "../components/master/hoc/withProtectedRoute";
 
-const ShippingInfo = dynamic(() => import('../components/ShippingInfo/ShippingInfo'));
-const CheckoutPaymentMethod = dynamic(() => import('../components/ShippingInfo/CheckoutPaymentMethod'));
-const OrderSummery = dynamic(() => import('../components/orders/OrderSummery'));
-const CartProduct = dynamic(() => import('../components/carts/cart-product/CartProduct'));
-const DeliveryInfo = dynamic(() => import('../components/Delivery/DeliveryInfo'));
+// import dynamic from 'next/dynamic';
+
+// const ShippingInfo = dynamic(() => import('../components/ShippingInfo/ShippingInfo'));
+// const CheckoutPaymentMethod = dynamic(() => import('../components/ShippingInfo/CheckoutPaymentMethod'));
+// const OrderSummery = dynamic(() => import('../components/orders/OrderSummery'));
+// const CartProduct = dynamic(() => import('../components/carts/cart-product/CartProduct'));
+// const DeliveryInfo = dynamic(() => import('../components/Delivery/DeliveryInfo'));
 
 
 

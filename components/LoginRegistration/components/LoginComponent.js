@@ -9,14 +9,13 @@ import { isSignedIn } from "../../../_redux/store/action/globalAction";
 import { useRouter } from 'next/router';
 import { getUserDataAction } from "../../_redux/getUserData/Action/UserDataAction";
 import { showToast } from "../../master/Helper/ToastHelper";
-import withProtectedRoute from "../../master/hoc/withProtectedRoute";
 
 const LoginComponent = () => {
   const router = useRouter();
   const [showPassword, setShowPassword]    = useState(false);
   const dispatch                           = useDispatch();
   const loginInput                         = useSelector((state) => state.AuthReducer.loginInput);
-  const [isLoading, setIsLoading]                          = useState(false);
+  const [isLoading, setIsLoading]          = useState(false);
   const { register, handleSubmit, errors } = useForm();
 
   const handleLoginInputChange = (name, value) => {
@@ -180,4 +179,4 @@ const LoginComponent = () => {
   );
 };
 
-export default withProtectedRoute(LoginComponent, true);
+export default LoginComponent;

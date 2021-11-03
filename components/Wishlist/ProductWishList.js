@@ -26,9 +26,9 @@ const ProductWishList = () => {
 
 					<div className="col-md-8 mt-3">
 						<div className="user_profile_setting_body">
-							<div className="card">
+							<div className="card mb-4">
 								<div className="card-header bg-white">
-									<h5 className="card-title">
+									<h5 className="card-title m-0">
 										<Translate> My Wishlist </Translate>
 									</h5>
 								</div>
@@ -38,20 +38,20 @@ const ProductWishList = () => {
 										<div className={wishList.length === index + 1 ? '' : 'border-bottom'} key={index}>
 											<div className="px-1 py-3">
 												<div className="row">
-
-													<div className="wishlist_product col-2">
+													<div className="wishlist_product col-md-3 col-12 text-center">
 														<img className="img-fluid p-2" style={{ maxHeight: 100 }} src={productImageUrl(item.featured_image)} />
 													</div>
 
-													<div className="wishlist_list_product_details col-9">
-														<h5 className="product_name">{item.name}</h5>
-														<div className="h3 product_price">
-															<PriceCalculation item={item} />
+													<div className="wishlist_list_product_details col-md-8 col-12 d-flex align-items-center justify-content-center justify-content-md-start" >
+														<div>
+															<h5 className="product_name">{item.name}</h5>
+															<div className="h3 product_price">
+																<PriceCalculation item={item} />
+															</div>
 														</div>
-													</div>
-
-													<div className="wishlist_wishIcon pointer">
-														<RemoveWishlist productId={item.item_id} />
+														<div className="wishlist_wishIcon pointer mt-3 ml-4 align-self-start">
+															<RemoveWishlist productId={item.item_id} />
+														</div>
 													</div>
 												</div>
 											</div>

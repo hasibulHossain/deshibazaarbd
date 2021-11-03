@@ -91,6 +91,11 @@ a .custom-button-component:hover {
   padding: 4px;
 }
 
+.container {
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+}
+
 .header-top .container .row {
   margin-right: -8px;
   margin-left: -6px;
