@@ -2097,7 +2097,6 @@ p.account_sub_tite {
 .account_btn_group {
   display: flex;
   flex-direction: row;
-  margin-top: 25px;
   flex-wrap: wrap;
 }
 
@@ -3864,4 +3863,11 @@ p.customer_info_edit {
 
 .website-info-content .table table a {
   color: #1F2937;
+}
+
+.required::after {
+  content: '*';
+  color: #e02b27;
+  font-size: 1rem;
+  margin: 0 0 0 5px;
 }
