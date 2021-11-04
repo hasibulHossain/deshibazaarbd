@@ -47,7 +47,6 @@ const LoginComponent = () => {
   }
 
   const onSubmit = (values) => {
-    console.log(values)
     loginPost(values)
   };
 
