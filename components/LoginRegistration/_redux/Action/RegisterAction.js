@@ -66,21 +66,17 @@ export const RegisterFirstStep = (registerInput) => (dispatch) => {
 };
 
 // customer register step two / final
-export const customerRegister = (registerInput) => async () => {
-  axios
-  .post(`auth/register-next`, registerInput)
-  .then((res) => {
-    if (res.data.status) {
-      response.message = res.data.message;
-      response.data = null;
-      response.isCreating = false;
-      showToast("success", response.message);
-    }
-  })
-  .catch((err) => {
-    const { response } = err;
-      const { request, ...errorObject } = response;
-      response.isCreating = false;
-      showToast("error", response.data.message);
-  });
+export const customerRegister = async (registerInput) => {
+  try {
+    const res = await axios.post(`auth/register-next`, registerInput);
+    return res;
+    
+  } catch (error) {
+    console.log(error)
+    // console.log(error)
+    // throw new Error(error);
+      const { response } = err;
+      console.log('response =>', response);
+      return Promise.reject(false)
+  }
 };

@@ -69,14 +69,24 @@ const RegistrationComponent = () => {
             .required('Required')
             .min(6, 'Input 6 digit OTP')
             .max(6, 'Input 6 digit OTP')
-            .test('otp-code', 'otp is invalid test', async (value, context) => {
+            .test('otp-code', 'Please input a valid OTP', async (value, context) => {
                 if(value && !IS_VALID_OTP && value.length === 6) {
-                    const data = await myPromise();
-    
-                    if(data === value) {
-                        IS_VALID_OTP = true;
-                        return Promise.resolve(true);
-                    }else {
+                    try {
+                        const otpBody = {
+                            otp: context.parent.otp,
+                            phone_no: context.parent.phone_no 
+                        }
+
+                        const res = await axios.post('auth/check-otp', otpBody);
+                        
+                        if(res.data.status) {
+                            IS_VALID_OTP = true;
+                            return Promise.resolve(true);
+                        }else {
+                            return Promise.resolve(false);
+                        }
+
+                    } catch (error) {
                         return Promise.resolve(false)
                     }
                 }
@@ -126,12 +136,22 @@ const RegistrationComponent = () => {
                     first_name: values.first_name,
                     last_name: values.last_name,
                     phone_no: values.phone_no,
-                    opt: values.otp,
+                    opt: +values.otp,
                     password: values.password,
                     password_confirmation: values.password_confirmation
                 }
 
-                dispatch(customerRegister(formData));
+                customerRegister(formData).then(data => {
+                    // console.log(data);
+                    
+                }).catch(_ => {
+                    setIsLoading(false);
+                    actions.setTouched({});
+                    actions.setSubmitting(false);
+                    // console.log('err from componenet => ', _)
+                    setIsLoading(false);
+                })
+
             }
 
         } catch (error) {
