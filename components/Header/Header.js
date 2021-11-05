@@ -35,11 +35,11 @@ const Header = () => {
 
   const formatQtyDisplay = (totalQuantity) => {
     if (totalQuantity <= 9) {
-      return <span style={{ paddingLeft: 2 }}> {totalQuantity} </span>;
+      return <span> {totalQuantity} </span>;
     } else if (totalQuantity > 9 && totalQuantity <= 99) {
       return totalQuantity;
     } else {
-      return <span style={{ fontSize: 8 }}> {totalQuantity} </span>;
+      return <span> {totalQuantity} </span>;
     }
   };
 
@@ -128,7 +128,7 @@ const Header = () => {
                         >
                           <div className="auth-user-name">
                             {/* {userData.first_name} */}
-                            User
+                            My account
                           </div>
                         </Dropdown.Toggle>
 
@@ -204,7 +204,7 @@ const Header = () => {
                       </Link>
                     </>
                   )}
-                  <Link href="/checkout">
+                  <Link href="/carts">
                     <a>
                       <span
                         className="header-nav-link pointer cart-nav-link"

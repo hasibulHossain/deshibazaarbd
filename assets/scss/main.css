@@ -157,10 +157,10 @@ a .custom-button-component:hover {
   font-size: 10px;
   width: 17px;
   height: 17px;
-  padding: 1px 0px 7px 3px;
   border-radius: 20px;
   top: -7px;
   right: -3px;
+  text-align: center;
 }
 
 .custome-select {
@@ -211,7 +211,7 @@ a .custom-button-component:hover {
   font-weight: 500;
   color: #8b8b8b;
   z-index: 100;
-  border: 2px solid var(--color-primary);
+  border: 1px solid var(--color-primary);
 }
 
 .searchbar-area-section {
@@ -223,13 +223,17 @@ a .custom-button-component:hover {
 }
 
 .header-search-product .header-custom-prepend {
-  border: 2px solid var(--color-primary);
+  border: 1px solid var(--color-primary);
   background-color: var(--color-primary);
-  padding: 10px 20px;
+  padding: 0px 20px;
   color: #fff;
   font-size: 1.3em;
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .brand-logo {
@@ -1581,11 +1585,16 @@ h6.address_book_updated_title {
 
 /*======Social Media======*/
 ul.social-media {
+  display: flex;
   padding-left: 0px;
   margin-left: 0px;
 }
 
 .social-media li {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+
   list-style-type: none;
   display: inline-block;
   margin: 10px 5px;
@@ -1604,7 +1613,7 @@ ul.social-media {
 .social-media li a {
   color: #fff;
   transition: 0.5s;
-  margin: 5px 0;
+  font-size: 18px;
 }
 
 .social-media .social-facebook {
