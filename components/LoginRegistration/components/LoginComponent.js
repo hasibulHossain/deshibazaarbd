@@ -9,6 +9,7 @@ import { showToast } from "../../master/Helper/ToastHelper";
 
 import * as yup from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import SimpleBtn from "../../master/SimpleBtn/SimpleBtn";
 
 const LoginComponent = () => {
   const router                             = useRouter();
@@ -69,7 +70,7 @@ const LoginComponent = () => {
   });
 
   return (
-    <div className="account_info_body mt-5">
+    <div className="account_info_body mt-3 mt-md-5">
       <Formik
         initialValues={ initialValues }
         onSubmit={ onSubmit }
@@ -79,7 +80,7 @@ const LoginComponent = () => {
         return (
           <Form>
             <div className="row">
-              <div className="col-md-6">
+              <div className="col-12 px-0 px-lg-5">
                 <div className="mb-3">
                   <div className="input-box">
                     <label htmlFor="email" className="form-label required">Email / Phone</label>
@@ -89,46 +90,53 @@ const LoginComponent = () => {
                 </div>
               </div>
 
-              <div className="col-md-6">
-                <label htmlFor="password" className="form-label required">password</label>
-                <div className="account_input_group">
-                    <Field class="form-control" type={showPassword ? 'text' : 'password'} id="password" name="password" />
-                    <div
-                      className="account_input_group_prepend"
-                      onClick={() => setShowPassword(!showPassword)} >
-                      {showPassword === false ? (
-                        <span>
-                          <i className="far fa-eye-slash"></i>
-                        </span>
-                      ) : (
-                        <span>
-                          <i className="far fa-eye"></i>
-                        </span>
-                      )}
-                    </div>
-                    <ErrorMessage name="password" component={ ValidationError } />
+              <div className="col-12 px-0 px-lg-5">
+                <div className="mb-3">
+                  <label htmlFor="password" className="form-label required">password</label>
+                  <div className="account_input_group">
+                      <Field class="form-control" type={showPassword ? 'text' : 'password'} id="password" name="password" />
+                      <div
+                        className="account_input_group_prepend"
+                        onClick={() => setShowPassword(!showPassword)} >
+                        {showPassword === false ? (
+                          <span>
+                            <i className="far fa-eye-slash"></i>
+                          </span>
+                        ) : (
+                          <span>
+                            <i className="far fa-eye"></i>
+                          </span>
+                        )}
+                      </div>
+                  </div>
+                  <ErrorMessage name="password" component={ ValidationError } />
                 </div>
               </div>
 
-              <div className="col-md-6">
-                  <div>
+              <div className="col-6 mt-lg-0 mt-3 px-0 px-lg-5">
+                  <div className="d-flex align-items-center">
                     <Field type="checkbox" id="remember" name="remember" />
-                    <label htmlFor="remember" className="form-label pl-2">Remember me</label>
+                    <label htmlFor="remember" className="form-label pl-2 m-0">Remember me</label>
                   </div>
               </div>
 
-              <div className="col-md-6">
+              <div className="col-6 mt-lg-0 mt-3 px-0 px-lg-5">
                 <p className="forget_password_link text-right m-0">
                   <Link href="/user/forget-password">
                     <a>Forgot password?</a>
                   </Link>
                 </p>
               </div>
-              <div className="col-md-6">
-                <div className="account_btn_group justify-content-end justify-content-sm-start">
+              <div className="col-12 justify-content-center px-0 px-lg-5">
+                {/* <div className="account_btn_group justify-content-end justify-content-sm-start">
                   <button type="submit" className="btn account_btn mt-2" disabled={isLoading}>
                     Login
                   </button>
+                </div> */}
+                <div className="mt-3" style={{width: '50%'}}>
+                  <SimpleBtn variant="success" type="submit" style={{backgroundColor: 'var(--color-green)'}}>
+                    Login
+                  </SimpleBtn>
                 </div>
               </div>
 
@@ -138,12 +146,14 @@ const LoginComponent = () => {
         );
       } }
       </Formik>
-      <p className="already_account">
-        Don't have an account?
-        <Link href="/register">
-          <a> Sign up </a>
-        </Link>
-      </p>
+      <div>
+        <p className="already_account m-0 pt-3 pt-lg-5">
+          Don't have an account?
+          <Link href="/register">
+            <a> Sign up </a>
+          </Link>
+        </p>
+      </div>
     </div>
   )
 };

@@ -7,7 +7,7 @@ import React from "react";
 function SimpleBtn(props) {
   const { children, variant, style = {}, onClick, type } = props;
   return (
-    <button type={type ? type : 'button'} onClick={onClick} className={`simple-btn ${variant}`} style={{ ...style }}>
+    <button type={type ? type : 'button'} onClick={onClick && onClick} className={`simple-btn ${variant}`} style={{ ...style }}>
       {children}
     </button>
   );

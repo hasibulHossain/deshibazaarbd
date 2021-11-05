@@ -2146,9 +2146,9 @@ h5.account_title {
 
 .already_account {
   text-align: center;
-  margin-top: 30px;
-  font-size: 17px;
-  font-weight: 500;
+  /* margin-top: 30px; */
+  /* font-size: 17px;
+  font-weight: 500; */
 }
 
 .account_input_group {

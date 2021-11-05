@@ -205,7 +205,7 @@ const RegistrationComponent = () => {
                                                 <div className="col-md-12">
                                                     <div className="pb-3">
                                                         <div className="d-flex">
-                                                            <div className="mr-2">
+                                                            <div className="mr-2" style={{marginTop: '2px'}}>
                                                                 <Field type="checkbox" id="offer" name="offer" class="pointer" />
                                                             </div>
                                                             <label className="account_info_label pointer" htmlFor="offer">
@@ -221,7 +221,7 @@ const RegistrationComponent = () => {
                                                 <div className="col-md-12">
                                                     <div className="pb-3">
                                                         <div className="d-flex">
-                                                            <div className="mr-2">
+                                                            <div className="mr-2" style={{marginTop: '2px'}}>
                                                                 <Field type="checkbox" id="policy" name="policy" class="pointer" />
                                                             </div>
                                                             <div>
@@ -315,13 +315,14 @@ const RegistrationComponent = () => {
 
                                 </div>
                             </Form>
-
-                            <p className="already_account">
-                                Already have an account ?
-                                <Link href="/login">
-                                    <a> Sign In </a>
-                                </Link>
-                            </p>
+                            <div>
+                                <p className="already_account m-0 pt-3 pt-lg-5">
+                                    Already have an account ?
+                                    <Link href="/login">
+                                        <a> Sign In </a>
+                                    </Link>
+                                </p>
+                            </div>
                         </div>
                     </div>
                 )
