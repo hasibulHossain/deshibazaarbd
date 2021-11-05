@@ -29,8 +29,8 @@ const withProtectedRoute = (WrappedComponent, isSignedIn = false) => {
         if(!session && loading) {
             return (
                 <div className="text-center py-5">
-                    <div class="spinner-border text-secondary" style={{width: '50px', height: '50px', fontSize: '15px'}} role="status">
-                        <span class="sr-only">Loading...</span>
+                    <div className="spinner-border text-secondary" style={{width: '50px', height: '50px', fontSize: '15px'}} role="status">
+                        <span className="sr-only">Loading...</span>
                     </div>
                 </div>
             )

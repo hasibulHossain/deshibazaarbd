@@ -1,8 +1,6 @@
 import Link from 'next/link';
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { ChangeRegisterInputField, customerRegister, RegisterFirstStep } from '../_redux/Action/RegisterAction';
-import { Spinner } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { customerRegister } from '../_redux/Action/RegisterAction';
 import CountDown from '../../master/countDown/CountDown';
 import axios from 'axios';
 
@@ -14,27 +12,13 @@ import { showToast } from '../../master/Helper/ToastHelper';
 const LOWERCASEREGEX = /(?=.*[a-z])/;
 const UPPERCASEREGEX = /(?=.*[A-Z])/;
 const NUMERICREGEX = /(?=.*[0-9])/;
-
 let IS_VALID_OTP = false;
 
-const myPromise = () => new Promise((resolve) => {
-    setTimeout(() => {
-      resolve('123456');
-    }, 300);
-});
-  
-
 const RegistrationComponent = () => {
-    const dispatch = useDispatch()
-    const [showPassword, setShowPassword] = useState(false);
+    const [showPassword, setShowPassword]               = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-    const [validationStep, setValidationStep] = useState(0);
-    const [isLoading, setIsLoading] = useState(false);
-
-    // final customer register
-    // const handleRegister = async (e) => {
-    //     dispatch(customerRegister(registerInput));
-    // };
+    const [validationStep, setValidationStep]           = useState(0);
+    const [isLoading, setIsLoading]                     = useState(false);
 
     const initialFormVal = {
         first_name            : "",
@@ -136,19 +120,21 @@ const RegistrationComponent = () => {
                     first_name: values.first_name,
                     last_name: values.last_name,
                     phone_no: values.phone_no,
-                    opt: +values.otp,
+                    otp: values.otp,
                     password: values.password,
                     password_confirmation: values.password_confirmation
                 }
 
                 customerRegister(formData).then(data => {
-                    // console.log(data);
-                    
+                    if(data.data.status) {
+                        showToast('success', 'Registration successful')
+                        window.location.replace('/login');
+                    };
                 }).catch(_ => {
                     setIsLoading(false);
                     actions.setTouched({});
                     actions.setSubmitting(false);
-                    // console.log('err from componenet => ', _)
+
                     setIsLoading(false);
                 })
 
@@ -192,7 +178,7 @@ const RegistrationComponent = () => {
                                                 <div className="col-12 col-md-6">
                                                     <div className="pb-3">
                                                         <label htmlFor="first_name" className="form-label required">First Name</label>
-                                                        <Field class="form-control form-input" type="text" id="first_name" name="first_name" placeholder="John" />
+                                                        <Field className="form-control form-input" type="text" id="first_name" name="first_name" placeholder="John" />
                                                         <ErrorMessage name="first_name" component={ ValidationError } />
                                                     </div>
                                                 </div>
@@ -201,7 +187,7 @@ const RegistrationComponent = () => {
                                                 <div className="col-12 col-md-6">
                                                     <div className="pb-3">
                                                         <label htmlFor="lastName" className="form-label required">Last Name</label>
-                                                        <Field class="form-control form-input" type="text" id="last_name" name="last_name" placeholder="Doe" />
+                                                        <Field className="form-control form-input" type="text" id="last_name" name="last_name" placeholder="Doe" />
                                                         <ErrorMessage name="last_name" component={ ValidationError } />
                                                     </div>
                                                 </div>
@@ -209,7 +195,7 @@ const RegistrationComponent = () => {
                                                 <div className="col-md-12">
                                                     <div className="pb-3">
                                                         <label htmlFor="phone_no" className="form-label required">Phone</label>
-                                                        <Field class="form-control form-input" type="text" id="phone_no" name="phone_no" placeholder="01234567899" />
+                                                        <Field className="form-control form-input" type="text" id="phone_no" name="phone_no" placeholder="01234567899" />
                                                         <ErrorMessage name="phone_no" component={ ValidationError } />
                                                     </div>
                                                 </div>
@@ -217,7 +203,7 @@ const RegistrationComponent = () => {
                                                 <div className="col-md-12">
                                                     <div className="pb-3">
                                                         <label htmlFor="email" className="form-label">Email</label>
-                                                        <Field class="form-control form-input" type="text" id="email" name="email" placeholder="e-mail" />
+                                                        <Field className="form-control form-input" type="text" id="email" name="email" placeholder="e-mail" />
                                                         <ErrorMessage name="email" component={ ValidationError } />
                                                     </div>
                                                 </div>
@@ -226,7 +212,7 @@ const RegistrationComponent = () => {
                                                     <div className="pb-3">
                                                         <div className="d-flex">
                                                             <div className="mr-2" style={{marginTop: '2px'}}>
-                                                                <Field type="checkbox" id="offer" name="offer" class="pointer" />
+                                                                <Field type="checkbox" id="offer" name="offer" className="pointer" />
                                                             </div>
                                                             <label className="account_info_label pointer" htmlFor="offer">
                                                                 I want to receive exclusive offers and promotions from
@@ -242,7 +228,7 @@ const RegistrationComponent = () => {
                                                     <div className="pb-3">
                                                         <div className="d-flex">
                                                             <div className="mr-2" style={{marginTop: '2px'}}>
-                                                                <Field type="checkbox" id="policy" name="policy" class="pointer" />
+                                                                <Field type="checkbox" id="policy" name="policy" className="pointer" />
                                                             </div>
                                                             <div>
                                                                 <label className="account_info_label pointer" htmlFor="policy">
@@ -258,20 +244,33 @@ const RegistrationComponent = () => {
                                             </>
                                         ) : (
                                             <>
-                                                <div className="col-md-12">
+                                                <div className="col-8">
                                                     <div className="pb-3">
                                                         <label htmlFor="otp" className="form-label required">Otp</label>
-                                                        <Field class="form-control form-input" type="text" id="otp" name="otp" placeholder="123456" />
+                                                        <Field className="form-control form-input" type="text" id="otp" name="otp" placeholder="123456" />
                                                         <ErrorMessage name="otp" component={ ValidationError } />
                                                     </div>
                                                 </div>
+
+                                                <div className="col-4">
+                                                    <div className="pb-3 text-right">
+                                                        <label htmlFor="" style={{opacity: 0}} className="form-label d-block">Resend</label>
+                                                        <button className="btn" style={{backgroundColor: 'var(--color-primary)', color: '#fff'}} >
+                                                            Resend
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                                {/* <div className="col-12">
+                                                    <CountDown minutes={4} alert_bg="red" />
+                                                </div> */}
 
                                                 <div className="col-md-12">
                                                     <div className="pb-3">
                                                         <label htmlFor="password" className="form-label required m-0">Password</label>
                                                         <small className="mb-1 d-block" style={{fontWeight: '500'}}>Password should have at least one numeric, lowercase and uppercase value</small>
                                                         <div className="account_input_group">
-                                                            <Field class="form-control form-input" type={showPassword ? "text" : "password"} id="password" name="password" placeholder="" />
+                                                            <Field className="form-control form-input" type={showPassword ? "text" : "password"} id="password" name="password" placeholder="" />
                                                             <div className="account_input_group_prepend" onClick={() => setShowPassword(!showPassword)}>
                                                                 {
                                                                     showPassword === true ? (
@@ -294,7 +293,7 @@ const RegistrationComponent = () => {
                                                     <div className="pb-3">
                                                         <label htmlFor="password_confirmation" className="form-label required">Confirm password</label>
                                                         <div className="account_input_group">
-                                                            <Field class="form-control form-input" type={showConfirmPassword ? "text" : "password" } id="password_confirmation" name="password_confirmation" placeholder="" />
+                                                            <Field className="form-control form-input" type={showConfirmPassword ? "text" : "password" } id="password_confirmation" name="password_confirmation" placeholder="" />
                                                             <div className="account_input_group_prepend" onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
                                                                 {
                                                                     showConfirmPassword === true ? (
@@ -318,14 +317,21 @@ const RegistrationComponent = () => {
 
                                     <div className="col-md-12">
                                         <div className="account_btn_group">
+                                            {
+                                                validationStep === 1 && (
+                                                    <button onClick={() => setValidationStep(0)} type="button" style={{backgroundColor: 'var(--color-border-dark)'}} disabled={validationStep === 0 ? true : false} className="btn account_btn mt-2 mr-2">
+                                                        Back
+                                                    </button>
+                                                )
+                                            }
                                             <button type="submit" disabled={isLoading ? true : false} className="btn account_btn mt-2">
                                                 {
                                                     validationStep === 0 ? 'Continue ' : 'Register '
                                                 }
                                                 {
                                                     isLoading && (
-                                                        <div class="spinner-border" style={{color: '#fff', fontSize: '10px', width: '20px', height: '20px'}} role="status">
-                                                            <span class="sr-only">Loading...</span>
+                                                        <div className="spinner-border" style={{color: '#fff', fontSize: '10px', width: '20px', height: '20px'}} role="status">
+                                                            <span className="sr-only">Loading...</span>
                                                         </div>
                                                     )
                                                 }

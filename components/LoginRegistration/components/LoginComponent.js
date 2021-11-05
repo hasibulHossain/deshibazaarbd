@@ -15,7 +15,7 @@ const LoginComponent = () => {
   const router                             = useRouter();
   const dispatch                           = useDispatch();
   const [showPassword, setShowPassword]    = useState(false);
-  const [isLoading, setIsLoading]    = useState(false);
+  const [isLoading, setIsLoading]          = useState(false);
 
   const initialValues = {
     email: "",
