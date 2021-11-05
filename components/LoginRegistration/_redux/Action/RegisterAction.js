@@ -1,5 +1,4 @@
 import * as Types from "./../Type/Types";
-import * as JwtDecode from "jwt-decode";
 import axios from "axios";
 import { showToast } from "../../../master/Helper/ToastHelper";
 
@@ -67,43 +66,21 @@ export const RegisterFirstStep = (registerInput) => (dispatch) => {
 };
 
 // customer register step two / final
-export const customerRegister = (registerInput) => async (dispatch) => {
-  if (registerInput.otp.length === 0) {
-    showToast("error", "OTP can't be blank!");
-    return false;
-  }
-  if (registerInput.password.length === 0) {
-    showToast("error", "Password can't be blank!");
-    return false;
-  }
-  if (registerInput.password_confirmation.length === 0) {
-    showToast("error", "Confirm password can't be blank!");
-    return false;
-  }
-  let response = {
-    message: null,
-    status: false,
-    data: null,
-    isCreating: true,
-  };
-  dispatch({ type: Types.AUTH_REGISTER, payload: response });
+export const customerRegister = (registerInput) => async () => {
   axios
-    .post(`auth/register-next`, registerInput)
-    .then((res) => {
-      if (res.data.status) {
-        response.message = res.data.message;
-        response.data = null;
-        response.isCreating = false;
-        showToast("success", response.message);
-        dispatch({ type: Types.AUTH_REGISTER, payload: response });
-      }
-    })
-    .catch((err) => {
-      const { response } = err;
+  .post(`auth/register-next`, registerInput)
+  .then((res) => {
+    if (res.data.status) {
+      response.message = res.data.message;
+      response.data = null;
+      response.isCreating = false;
+      showToast("success", response.message);
+    }
+  })
+  .catch((err) => {
+    const { response } = err;
       const { request, ...errorObject } = response;
       response.isCreating = false;
-      dispatch({ type: Types.AUTH_REGISTER, payload: response });
       showToast("error", response.data.message);
-    });
-  dispatch({ type: Types.AUTH_REGISTER, payload: response });
+  });
 };
