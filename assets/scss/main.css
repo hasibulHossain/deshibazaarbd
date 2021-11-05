@@ -2036,6 +2036,10 @@ ul.social-media {
   min-width: 50px !important;
 }
 
+.account_info {
+  font-size: 14px;
+}
+
 .account_info .nav-tabs {
   border-bottom: 1px solid var(--color-primary);
 }
@@ -2067,14 +2071,9 @@ h5.account_title {
   font-family: system-ui;
 }
 
-p.account_sub_tite {
-  font-size: initial;
-}
-
 .account_info_label {
   margin-bottom: 0;
-  font-size: 15px;
-  font-weight: 700;
+  font-weight: 500;
 
   /* text-align: justify;
   word-break: break-all;
@@ -2084,7 +2083,6 @@ p.account_sub_tite {
 .account_info_label a,
 .already_account a {
   color: var(--color-primary);
-  margin-left: 10px;
   transition: 0.5s;
 }
 
@@ -2150,7 +2148,7 @@ p.account_sub_tite {
   text-align: center;
   margin-top: 30px;
   font-size: 17px;
-  font-weight: 700;
+  font-weight: 500;
 }
 
 .account_input_group {
@@ -2160,7 +2158,7 @@ p.account_sub_tite {
 .account_input_group_prepend {
   position: absolute;
   right: 10px;
-  top: 6px;
+  top: 9px;
   cursor: pointer;
 }
 
@@ -3868,6 +3866,17 @@ p.customer_info_edit {
 .required::after {
   content: '*';
   color: #e02b27;
-  font-size: 1rem;
+  font-size: 14px;
   margin: 0 0 0 5px;
+}
+
+.form-input::placeholder {
+  color: #d3d3d3;
+  font-size: 14px;
+}
+
+.err-mss {
+  position: absolute;
+  bottom: 0;
+  font-weight: 500;
 }
