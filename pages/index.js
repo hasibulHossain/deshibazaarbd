@@ -23,7 +23,10 @@ export default function Home(props) {
       <PageMeta
         title="Deshibazaarbd.com | Choose Order Enjoy | Best E-commerce"
         description="Deshi Bazaar BD is a multivendor e-commerce business solution in Bangladesh"
-        keywords="deshibazaar,deshibazaarbd,deshibazar,deshibazarbd,daraz" />
+        keywords="deshibazaar,deshibazaarbd,deshibazar,deshibazarbd,daraz"
+        ogpEnabled={true}
+        pageSocialMetaUrl="https://deshibazaarbd.com"
+        pageSocialMetaImage="https://www.deshibazaarbd.com/images/logos/logo-en.svg" />
       <HomeBannerCarousel homeBanner={props.homeBanner} />
 
       {/* <NewOffer /> */}
