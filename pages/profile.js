@@ -1,10 +1,10 @@
 import React from "react";
-// import ProductProfile from "../components/myprofile/ProductProfile";
+import ProductProfile from "../components/myprofile/ProductProfile";
+import withProtectedRoute from "../components/master/hoc/withProtectedRoute";
 // import ProtectedRoute from "../components/master/protectedRoute/ProtectedRoute";
 
-import dynamic from 'next/dynamic';
-import withProtectedRoute from "../components/master/hoc/withProtectedRoute";
-const ProductProfile = dynamic(() => import('../components/myprofile/ProductProfile'));
+// import dynamic from 'next/dynamic';
+// const ProductProfile = dynamic(() => import('../components/myprofile/ProductProfile'));
 
 const profile = () => {
     return (
@@ -12,5 +12,4 @@ const profile = () => {
     );
 };
 
-// export default ProtectedRoute(profile);
 export default withProtectedRoute(profile);

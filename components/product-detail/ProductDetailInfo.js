@@ -200,7 +200,7 @@ const ProductDetailInfo = (props) => {
                                 {product.images && product.images.length > 0 && product.images.map((item, index) => (
                                   <div key={index}>
                                     <div onClick={() => handleChangePreviewImg(item.image_url) } style={{padding: '5px', width: '100%', height: '100px'}}>
-                                      <img  style={{maxWidth: '100%', objectFit: 'contain', height: '100%', border: '1px solid #ddd', padding: '5px'}} src={item.image_url} alt={item.image_url} />
+                                      <img  style={{maxWidth: '100%', objectFit: 'contain', height: '100%', border: '1px solid #ddd', padding: '5px'}} src={item.image_url} alt={product.name} />
                                     </div>
                                   </div>
                                 ))}

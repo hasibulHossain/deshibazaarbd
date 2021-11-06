@@ -11,7 +11,7 @@ import React, { useEffect, useState } from 'react';
  * @returns CountDown;
  */
 
-const CountDown = ({ hours = 0, minutes = 0, seconds = 0, countDownText = "",  expireText = "", alert_bg }) => {
+const CountDown = ({ hours = 0, minutes = 0, seconds = 0, countDownText = "",  expireText = "", alert_bg, countdownEnd }) => {
 
     const [[h, m, s], setTime] = useState([hours, minutes, seconds]);
     const [over, setOver] = useState(false);
@@ -36,6 +36,9 @@ const CountDown = ({ hours = 0, minutes = 0, seconds = 0, countDownText = "",  e
     };
 
     useEffect(() => {
+        if(over) {
+            countdownEnd(over);
+        }
         const timerID = setInterval(() => tick(), 1000);
         return () => clearInterval(timerID);
     });
