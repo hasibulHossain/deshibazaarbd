@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { customerRegister } from '../_redux/Action/RegisterAction';
 import CountDown from '../../master/countDown/CountDown';
 import axios from 'axios';
@@ -19,6 +19,9 @@ const RegistrationComponent = () => {
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [validationStep, setValidationStep]           = useState(0);
     const [isLoading, setIsLoading]                     = useState(false);
+    const [resendOtp, setResendOtp]                     = useState(false);
+    const [stepOneFormData, setStepOneFormData]         = useState(null);
+    const currentTime = new Date().getTime();
 
     const initialFormVal = {
         first_name            : "",
@@ -93,8 +96,27 @@ const RegistrationComponent = () => {
         })
     ];
 
+    let getRegisterInfo = {};
+
+    if(window !== undefined) {
+        const registerInfo = localStorage.getItem('register-info');
+        getRegisterInfo = JSON.parse(registerInfo);
+    }
+
+    const resendOtpApi = () => {
+        axios.post('auth/register', stepOneFormData).then(data => {
+            if (data.data.status) {
+                showToast('success', 'OTP is sent to your phone number')
+            }
+        }).catch(_ => {
+            showToast('error', 'Something went wrong. Please refresh browser')
+        })
+    }
+
+
     const onSubmit = async (values, actions) => {
         setIsLoading(true);
+
         try {
             if(validationStep === 0) {
                 const formData = {
@@ -104,10 +126,28 @@ const RegistrationComponent = () => {
                     phone_no: values.phone_no
                 }
 
-                const data = await axios.post('auth/register', formData);
-                if (data.data.status) {
+                setStepOneFormData(formData)
+
+                if(getRegisterInfo && getRegisterInfo.otpExpireTimestamp > currentTime && getRegisterInfo.phone === values.phone_no) {
                     setIsLoading(false);
-                    
+                    setValidationStep(1);
+                    actions.setTouched({});
+                    actions.setSubmitting(false);
+                    return;
+                }
+
+                const data = await axios.post('auth/register', formData);
+
+                if (data.data.status) {
+                    showToast('success', 'OTP is sent to your phone number')
+                    const registerInfo = {
+                        otpExpireTimestamp: currentTime + 180000, // 180000 - 3 minutes in millisecond
+                        phone: values.phone_no
+                    }
+
+                    localStorage.setItem('register-info', JSON.stringify(registerInfo));
+
+                    setIsLoading(false);
                     setValidationStep(1);
                     actions.setTouched({});
                     actions.setSubmitting(false);
@@ -255,15 +295,17 @@ const RegistrationComponent = () => {
                                                 <div className="col-4">
                                                     <div className="pb-3 text-right">
                                                         <label htmlFor="" style={{opacity: 0}} className="form-label d-block">Resend</label>
-                                                        <button className="btn" style={{backgroundColor: 'var(--color-primary)', color: '#fff'}} >
+                                                        <button type="button" onClick={resendOtpApi} disabled={resendOtp ? false : true} className="btn pointer" style={{backgroundColor: 'var(--color-primary)', color: '#fff'}} >
                                                             Resend
                                                         </button>
                                                     </div>
                                                 </div>
 
-                                                {/* <div className="col-12">
-                                                    <CountDown minutes={4} alert_bg="red" />
-                                                </div> */}
+                                                <div className="col-12">
+                                                    <div className="my-2">
+                                                        <CountDown countdownEnd={(value) => setResendOtp(value)} alert_bg="alert_warning_bg" seconds={getRegisterInfo && getRegisterInfo.otpExpireTimestamp > currentTime && Math.floor((getRegisterInfo.otpExpireTimestamp - currentTime ) / 1000)} countDownText="Resend OTP after 3 minutes" expireText="Didn't receive OTP? Resend OTP" />
+                                                    </div>
+                                                </div>
 
                                                 <div className="col-md-12">
                                                     <div className="pb-3">
