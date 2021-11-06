@@ -53,6 +53,7 @@ const Header = () => {
     })();
     
     localStorage.removeItem('user-info');
+    localStorage.removeItem('carts');
   };
 
   const navigationToggleHandler = () => {
