@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import { getSession } from 'next-auth/client'
-import Link from "next/link";
+// import Link from "next/link";
+import { useRouter } from 'next/router';
 
 /**
  * 
@@ -9,6 +10,7 @@ import Link from "next/link";
  */
 const withProtectedRoute = (WrappedComponent, isSignedIn = false) => {
     return function WithProtectedRoute(props) {
+        const router = useRouter();
         const [session, setSession] = useState(false)
         const [loading, setLoading] = useState(true)
         
@@ -25,7 +27,13 @@ const withProtectedRoute = (WrappedComponent, isSignedIn = false) => {
         }, [session, loading]);
 
         if(!session && loading) {
-            return null
+            return (
+                <div className="text-center py-5">
+                    <div className="spinner-border text-secondary" style={{width: '50px', height: '50px', fontSize: '15px'}} role="status">
+                        <span className="sr-only">Loading...</span>
+                    </div>
+                </div>
+            )
         }
 
         if(session && isSignedIn && !loading) {
@@ -44,22 +52,24 @@ const withProtectedRoute = (WrappedComponent, isSignedIn = false) => {
         }
         
         if(!session && !loading) {
-            return (
-                <div style={{textAlign: 'center', padding: '30px 0'}}>
-                    <h1 className="mb-5">
-                        You must be signed in to view this page!
-                    </h1>
-                    <h3 className="text-center">
-                        <span className="mr-1">Please</span> 
-                        <Link href="/login">
-                            <a>
-                                sign in
-                            </a>
-                        </Link>
-                        <span className="ml-1">to view this page.</span>
-                    </h3>
-                </div>
-            )
+            router.replace('/login');
+            return null
+            // return (
+            //     <div style={{textAlign: 'center', padding: '30px 0'}}>
+            //         <h1 className="mb-5">
+            //             You must be signed in to view this page!
+            //         </h1>
+            //         <h3 className="text-center">
+            //             <span className="mr-1">Please</span> 
+            //             <Link href="/login">
+            //                 <a>
+            //                     sign in
+            //                 </a>
+            //             </Link>
+            //             <span className="ml-1">to view this page.</span>
+            //         </h3>
+            //     </div>
+            // )
         }
 
     }

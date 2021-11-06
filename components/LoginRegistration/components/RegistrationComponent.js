@@ -1,359 +1,406 @@
 import Link from 'next/link';
-import React, { useRef, useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useForm } from "react-hook-form";
-import ErrorMessage from '../../master/ErrorMessage/ErrorMessage';
-import { ChangeRegisterInputField, customerRegister, RegisterFirstStep } from '../_redux/Action/RegisterAction';
-import { Spinner } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { customerRegister } from '../_redux/Action/RegisterAction';
 import CountDown from '../../master/countDown/CountDown';
+import axios from 'axios';
+
+import * as yup from "yup";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import { showToast } from '../../master/Helper/ToastHelper';
+
+
+const LOWERCASEREGEX = /(?=.*[a-z])/;
+const UPPERCASEREGEX = /(?=.*[A-Z])/;
+const NUMERICREGEX = /(?=.*[0-9])/;
+let IS_VALID_OTP = false;
 
 const RegistrationComponent = () => {
-
-    const dispatch = useDispatch()
-    const [showPassword, setShowPassword] = useState(false);
+    const [showPassword, setShowPassword]               = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-    const { register, handleSubmit, errors, setValue, watch } = useForm();
-    const registerInput = useSelector((state) => state.RegisterReducer.registerInput)
-    const isLoading = useSelector((state) => state.RegisterReducer.isLoading);
-    const getOTP = useSelector((state) => state.RegisterReducer.getOTP);
-    const isCreating = useSelector((state) => state.RegisterReducer.isCreating);
-    const [isOTP, setIsOTP] = useState(false);
+    const [validationStep, setValidationStep]           = useState(0);
+    const [isLoading, setIsLoading]                     = useState(false);
+    const [resendOtp, setResendOtp]                     = useState(false);
+    const [stepOneFormData, setStepOneFormData]         = useState(null);
+    const currentTime = new Date().getTime();
 
-    const password = useRef({});
-    password.current = watch("password", "");
-    //handle change input 
-    const handleChangeTextInput = (name, value) => {
-        dispatch(ChangeRegisterInputField(name, value))
+    const initialFormVal = {
+        first_name            : "",
+        last_name             : "",
+        phone_no              : "",
+        email                 : "",
+        password              : "",
+        password_confirmation : "",
+        otp                   : "",
+        offer                 : false,
+        policy                : false
     }
-    //get otp by first step register
-    const handleRegisterFirstStep = () => {
-        dispatch(RegisterFirstStep(registerInput))
-    }
-
-    // final customer register
-    const handleRegister = async (e) => {
-        dispatch(customerRegister(registerInput));
-    };
-
-    useEffect(() => {
-        if (getOTP) {
-            setIsOTP(true)
-        }
-    }, [getOTP])
-
-    setTimeout(
-        () => setIsOTP(false),
-        300000
-    );
-    return (
-        <>
-            <h5 className="account_title">New Customers</h5>
-            <p className="account_sub_tite">Creating an account has many benefits : check out faster, keep more than one <br /> address, track orders and more</p>
-            <div className="account_info_body">
-                <form
-                    onSubmit={handleSubmit(handleRegisterFirstStep)}
-                    method="post"
-                    autoComplete="off"
-                    encType="multipart/form-data"
-                    autoSave="off"
-                >
-                    <div className="row">
-                        <div className="col-md-6">
-                            <div className="mb-3">
-                                <label htmlFor="firstName" className="form-label">First Name</label>
-                                <input type="text"
-                                    className="form-control"
-                                    placeholder=""
-                                    name="first_name"
-                                    value={registerInput.first_name}
-                                    onChange={(e) => handleChangeTextInput('first_name', e.target.value)}
-                                    ref={register({
-                                        required: true,
-                                        maxLength: 100,
-                                    })}
-                                />
-                                {
-                                    errors.first_name && errors.first_name.type === 'required' && (
-                                        <ErrorMessage errorText="First name can't be blank!" />
-                                    )
-                                }
-                            </div>
-                        </div>
-
-                        <div className="col-md-6">
-                            <div className="mb-3">
-                                <label htmlFor="lastName" className="form-label">Last Name</label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    placeholder=""
-                                    name="last_name"
-                                    value={registerInput.last_name}
-                                    onChange={(e) => handleChangeTextInput('last_name', e.target.value)}
-                                    ref={register({
-                                        required: true,
-                                        maxLength: 100,
-                                    })}
-                                />
-                                {
-                                    errors.last_name && errors.last_name.type === 'required' && (
-                                        <ErrorMessage errorText="Last name can't be blank!" />
-                                    )
-                                }
-                            </div>
-                        </div>
-
-                        <div className="col-md-6">
-                            <div className="mb-3">
-                                <label htmlFor="lastName" className="form-label">Phone Number</label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    placeholder=""
-                                    name="phone_no"
-                                    value={registerInput.phone_no}
-                                    onChange={(e) => handleChangeTextInput('phone_no', e.target.value)}
-                                    ref={register({
-                                        required: true,
-                                        maxLength: 100,
-                                    })}
-                                />
-                                {
-                                    errors.phone_no && errors.phone_no.type === 'required' && (
-                                        <ErrorMessage errorText="Phone number can't be blank!" />
-                                    )
-                                }
-                            </div>
-                        </div>
-
-                        <div className="col-md-6">
-                            <div className="mb-3">
-                                <label htmlFor="lastName" className="form-label">Email Address</label>
-                                <input
-                                    type="email"
-                                    className="form-control"
-                                    placeholder=""
-                                    name="email"
-                                    value={registerInput.email}
-                                    onChange={(e) => handleChangeTextInput('email', e.target.value)}
-                                    ref={register({
-                                        required: true,
-                                        maxLength: 100,
-                                    })}
-                                />
-                                {
-                                    errors.email && errors.email.type === 'required' && (
-                                        <ErrorMessage errorText="Email address can't be blank!" />
-                                    )
-                                }
-                            </div>
-                        </div>
 
 
-                        <div className="col-md-6 mt-sm-3">
-                            {isLoading && (
-                                <div className="mb-3 mt-4">
-                                    <button disabled={true} className="btn btn-primary btn-sm mt-1">
-                                        <div className="d-flex align-items-center">
-                                            <Spinner animation="border" role="status" size="sm">
-                                            </Spinner>
-                                            <span className="ml-2"> Getting OTP...</span>
-                                        </div>
-                                    </button>
-                                </div>
-                            )}
-                            {!isLoading && (
-                                <div className="mb-3 mt-sm-4">
-                                    <button type="submit"
-                                        // className="btn btn-sm btn-primary mt-1 d-flex"
-                                        className={isOTP ? "btn btn-primary-custom btn-sm d-flex btn-get-otp button_disabled d-block" : "d-block btn btn-primary-custom btn-sm d-flex btn-get-otp"}
-                                        disabled={isOTP ? true : false}
-                                    >
-                                        <div>
-                                            <span>GET OTP </span>
-                                        </div>
-                                    </button>
-                                </div>
-                            )}
-                        </div>
-
-                        {/* <div className="col-md-6">
-                            <div className="mb-3">
-                                <ReactSwipeButton
-                                    text='Slide to get SMS Code'
-                                    color='#f00'
-                                    onSuccess={onSucces}
-                                />
-                            </div>
-                        </div> */}
-
-                        <div className="col-md-6">
-                            <div className="mb-3">
-                                <label htmlFor="lastName" className="form-label">OTP</label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    placeholder=""
-                                    name="otp"
-                                    value={registerInput.otp}
-                                    onChange={(e) => handleChangeTextInput('otp', e.target.value)}
-                                    ref={register({
-                                        required: false,
-                                        maxLength: 100,
-                                    })}
-                                />
-                                {
-                                    errors.otp && errors.otp.type === 'required' && (
-                                        <ErrorMessage errorText="Please enter your one time password!" />
-                                    )
-                                }
-                            </div>
-                        </div>
-                        {
-                            isOTP && (
-                                <div className="col-md-12">
-                                    <div className="mb-3">
-                                        <CountDown alert_bg="alert_warning_bg" minutes={5} countDownText="Please wait! Resend OTP After" expireText="Resend OTP" />
-                                    </div>
-                                </div>
-                            )
+    const validationSchema = [
+        yup.object().shape({
+            first_name: yup.string().required('Required').min(2, "Name should be at least 2 characters").max(40, "Up to 40 characters"),
+            last_name: yup.string().required('Required').min(2, "Name should be at least 2 characters").max(40, "Up to 40 characters"),
+            phone_no:  yup.string().required('Required').test('phone_no', "Please input a valid phone number", (value) => {
+                const phoneRegex = /^[0][1-9]\d{9}$|^[1-9]\d{9}$/;
+    
+                let isValidPhone = phoneRegex.test(value);
+                
+                if(!isValidPhone) return false
+                return true
+            }),
+            email: yup.string().email('Please Input a valid email'),
+            policy: yup.boolean().oneOf([true], "You must accept the terms and condition.")
+        }),
+        yup.object().shape({
+            otp: yup.string()
+            .required('Required')
+            .min(6, 'Input 6 digit OTP')
+            .max(6, 'Input 6 digit OTP')
+            .test('otp-code', 'Please input a valid OTP', async (value, context) => {
+                if(value && !IS_VALID_OTP && value.length === 6) {
+                    try {
+                        const otpBody = {
+                            otp: context.parent.otp,
+                            phone_no: context.parent.phone_no 
                         }
 
-                        <div className="col-md-6">
-                            <label htmlFor="password" className="form-label">Password</label>
-                            <div className="account_input_group">
-                                <input
-                                    type={showPassword === true ? "text" : "password"}
-                                    className="form-control" id="inlineFormInputGroup"
-                                    placeholder=""
-                                    name="password"
-                                    value={registerInput.password}
-                                    onChange={(e) => handleChangeTextInput("password", e.target.value)}
-                                // ref={register({
-                                //     required: "⚠ You must specify a password",
-                                //     minLength: {
-                                //         value: 8,
-                                //         message: "Password must have at least 8 characters"
-                                //     }
-                                // })}
-                                />
-                                {
-                                    errors.password && (
-                                        <ErrorMessage errorText={errors.password.message} />
-                                    )
-                                }
+                        const res = await axios.post('auth/check-otp', otpBody);
+                        
+                        if(res.data.status) {
+                            IS_VALID_OTP = true;
+                            return Promise.resolve(true);
+                        }else {
+                            return Promise.resolve(false);
+                        }
+
+                    } catch (error) {
+                        return Promise.resolve(false)
+                    }
+                }
+
+                if(value && value.length < 6) {
+                    IS_VALID_OTP = false;
+                }
+                
+                return Promise.resolve(true);
+            }),
+            password: yup.string()
+                .required('Required')
+                .matches(LOWERCASEREGEX, 'At least one lowercase character required')
+                .matches(UPPERCASEREGEX, 'At least one uppercase character required')
+                .matches(NUMERICREGEX, 'At least one numeric value required')
+                .min(8, 'Minimum 8 characters required'),
+            password_confirmation: yup.string()
+                .oneOf([yup.ref('password'), null], 'Password confirmation does not match password!')
+                .required('Required')
+        })
+    ];
+
+    let getRegisterInfo = {};
+
+    if(window !== undefined) {
+        const registerInfo = localStorage.getItem('register-info');
+        getRegisterInfo = JSON.parse(registerInfo);
+    }
+
+    const resendOtpApi = () => {
+        axios.post('auth/register', stepOneFormData).then(data => {
+            if (data.data.status) {
+                showToast('success', 'OTP is sent to your phone number')
+            }
+        }).catch(_ => {
+            showToast('error', 'Something went wrong. Please refresh browser')
+        })
+    }
 
 
-                                <div className="account_input_group_prepend" onClick={() => setShowPassword(!showPassword)}>
+    const onSubmit = async (values, actions) => {
+        setIsLoading(true);
+
+        try {
+            if(validationStep === 0) {
+                const formData = {
+                    email: values.email,
+                    first_name: values.first_name,
+                    last_name: values.last_name,
+                    phone_no: values.phone_no
+                }
+
+                setStepOneFormData(formData)
+
+                if(getRegisterInfo && getRegisterInfo.otpExpireTimestamp > currentTime && getRegisterInfo.phone === values.phone_no) {
+                    setIsLoading(false);
+                    setValidationStep(1);
+                    actions.setTouched({});
+                    actions.setSubmitting(false);
+                    return;
+                }
+
+                const data = await axios.post('auth/register', formData);
+
+                if (data.data.status) {
+                    showToast('success', 'OTP is sent to your phone number')
+                    const registerInfo = {
+                        otpExpireTimestamp: currentTime + 180000, // 180000 - 3 minutes in millisecond
+                        phone: values.phone_no
+                    }
+
+                    localStorage.setItem('register-info', JSON.stringify(registerInfo));
+
+                    setIsLoading(false);
+                    setValidationStep(1);
+                    actions.setTouched({});
+                    actions.setSubmitting(false);
+                }
+            }
+
+            if(validationStep === 1) {
+                const formData = {
+                    email: values.email,
+                    first_name: values.first_name,
+                    last_name: values.last_name,
+                    phone_no: values.phone_no,
+                    otp: values.otp,
+                    password: values.password,
+                    password_confirmation: values.password_confirmation
+                }
+
+                customerRegister(formData).then(data => {
+                    if(data.data.status) {
+                        showToast('success', 'Registration successful')
+                        window.location.replace('/login');
+                    };
+                }).catch(_ => {
+                    setIsLoading(false);
+                    actions.setTouched({});
+                    actions.setSubmitting(false);
+
+                    setIsLoading(false);
+                })
+
+            }
+
+        } catch (error) {
+            const { response } = error;
+            setIsLoading(false);
+             
+            const errors = Object.keys(response.data.errors);
+            if(errors.length > 1) {
+                showToast('error', "Email and phone number already used.")
+            } else {
+                showToast('error', `${errors[0] === "email" ? "email" : "Phone number"} is already used.`)
+            }
+        }
+    }
+
+    return (
+        <Formik
+        initialValues={ initialFormVal }
+        onSubmit={ onSubmit }
+        validationSchema={ validationSchema[validationStep] }
+        // validateOnChange={false}
+        validateOnMount >
+            {() => {
+                return (
+                    <div>
+                        <div className="row">
+                            <div className="col-12">
+                                <h5 className="account_title">Register Account</h5>
+                                <p className="account_sub_tite">Creating an account has many benefits. Check out faster, keep more than one address, track orders and more</p>
+                            </div>
+                        </div>
+                        <div className="account_info_body">
+                            <Form autoComplete="off">
+                                <div className="row">
                                     {
-                                        showPassword === true ? (
-                                            <span>
-                                                <i className="far fa-eye"></i>
-                                            </span>
+                                        validationStep === 0 ? (
+                                            <>
+                                                <div className="col-12 col-md-6">
+                                                    <div className="pb-3">
+                                                        <label htmlFor="first_name" className="form-label required">First Name</label>
+                                                        <Field className="form-control form-input" type="text" id="first_name" name="first_name" placeholder="John" />
+                                                        <ErrorMessage name="first_name" component={ ValidationError } />
+                                                    </div>
+                                                </div>
+
+
+                                                <div className="col-12 col-md-6">
+                                                    <div className="pb-3">
+                                                        <label htmlFor="lastName" className="form-label required">Last Name</label>
+                                                        <Field className="form-control form-input" type="text" id="last_name" name="last_name" placeholder="Doe" />
+                                                        <ErrorMessage name="last_name" component={ ValidationError } />
+                                                    </div>
+                                                </div>
+
+                                                <div className="col-md-12">
+                                                    <div className="pb-3">
+                                                        <label htmlFor="phone_no" className="form-label required">Phone</label>
+                                                        <Field className="form-control form-input" type="text" id="phone_no" name="phone_no" placeholder="01234567899" />
+                                                        <ErrorMessage name="phone_no" component={ ValidationError } />
+                                                    </div>
+                                                </div>
+
+                                                <div className="col-md-12">
+                                                    <div className="pb-3">
+                                                        <label htmlFor="email" className="form-label">Email</label>
+                                                        <Field className="form-control form-input" type="text" id="email" name="email" placeholder="e-mail" />
+                                                        <ErrorMessage name="email" component={ ValidationError } />
+                                                    </div>
+                                                </div>
+
+                                                <div className="col-md-12">
+                                                    <div className="pb-3">
+                                                        <div className="d-flex">
+                                                            <div className="mr-2" style={{marginTop: '2px'}}>
+                                                                <Field type="checkbox" id="offer" name="offer" className="pointer" />
+                                                            </div>
+                                                            <label className="account_info_label pointer" htmlFor="offer">
+                                                                I want to receive exclusive offers and promotions from
+                                                                <Link href="/">
+                                                                    <a> Deshibazaarbd</a>
+                                                                </Link>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div className="col-md-12">
+                                                    <div className="pb-3">
+                                                        <div className="d-flex">
+                                                            <div className="mr-2" style={{marginTop: '2px'}}>
+                                                                <Field type="checkbox" id="policy" name="policy" className="pointer" />
+                                                            </div>
+                                                            <div>
+                                                                <label className="account_info_label pointer" htmlFor="policy">
+                                                                        By clicking Create Account, you acknowledge you have read and agreed to our
+                                                                        <Link href="/p/terms-&-condition"><a> Terms of Use </a></Link> and
+                                                                        <Link href="/p/privacy-policy"><a> Privacy Policy </a></Link>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <ErrorMessage name="policy" component={ ValidationError } />
+                                                    </div>
+                                                </div>
+                                            </>
                                         ) : (
-                                            <span>
-                                                <i className="far fa-eye-slash"></i>
-                                            </span>
+                                            <>
+                                                <div className="col-8">
+                                                    <div className="pb-3">
+                                                        <label htmlFor="otp" className="form-label required">Otp</label>
+                                                        <Field className="form-control form-input" type="text" id="otp" name="otp" placeholder="123456" />
+                                                        <ErrorMessage name="otp" component={ ValidationError } />
+                                                    </div>
+                                                </div>
+
+                                                <div className="col-4">
+                                                    <div className="pb-3 text-right">
+                                                        <label htmlFor="" style={{opacity: 0}} className="form-label d-block">Resend</label>
+                                                        <button type="button" onClick={resendOtpApi} disabled={resendOtp ? false : true} className="btn pointer" style={{backgroundColor: 'var(--color-primary)', color: '#fff'}} >
+                                                            Resend
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                                <div className="col-12">
+                                                    <div className="my-2">
+                                                        <CountDown countdownEnd={(value) => setResendOtp(value)} alert_bg="alert_warning_bg" seconds={getRegisterInfo && getRegisterInfo.otpExpireTimestamp > currentTime && Math.floor((getRegisterInfo.otpExpireTimestamp - currentTime ) / 1000)} countDownText="Resend OTP after 3 minutes" expireText="Didn't receive OTP? Resend OTP" />
+                                                    </div>
+                                                </div>
+
+                                                <div className="col-md-12">
+                                                    <div className="pb-3">
+                                                        <label htmlFor="password" className="form-label required m-0">Password</label>
+                                                        <small className="mb-1 d-block" style={{fontWeight: '500'}}>Password should have at least one numeric, lowercase and uppercase value</small>
+                                                        <div className="account_input_group">
+                                                            <Field className="form-control form-input" type={showPassword ? "text" : "password"} id="password" name="password" placeholder="" />
+                                                            <div className="account_input_group_prepend" onClick={() => setShowPassword(!showPassword)}>
+                                                                {
+                                                                    showPassword === true ? (
+                                                                        <span>
+                                                                            <i className="far fa-eye"></i>
+                                                                        </span>
+                                                                    ) : (
+                                                                        <span>
+                                                                            <i className="far fa-eye-slash"></i>
+                                                                        </span>
+                                                                    ) 
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                        <ErrorMessage name="password" component={ ValidationError } />
+                                                    </div>
+                                                </div>
+
+                                                <div className="col-md-12">
+                                                    <div className="pb-3">
+                                                        <label htmlFor="password_confirmation" className="form-label required">Confirm password</label>
+                                                        <div className="account_input_group">
+                                                            <Field className="form-control form-input" type={showConfirmPassword ? "text" : "password" } id="password_confirmation" name="password_confirmation" placeholder="" />
+                                                            <div className="account_input_group_prepend" onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
+                                                                {
+                                                                    showConfirmPassword === true ? (
+                                                                        <span>
+                                                                            <i className="far fa-eye"></i>
+                                                                        </span>
+                                                                    ) : (
+                                                                        <span>
+                                                                            <i className="far fa-eye-slash"></i>
+                                                                        </span>
+                                                                    ) 
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                        <ErrorMessage name="password_confirmation" component={ ValidationError } />
+                                                    </div>
+                                                </div>
+                                            </>
                                         )
                                     }
+
+                                    <div className="col-md-12">
+                                        <div className="account_btn_group">
+                                            {
+                                                validationStep === 1 && (
+                                                    <button onClick={() => setValidationStep(0)} type="button" style={{backgroundColor: 'var(--color-border-dark)'}} disabled={validationStep === 0 ? true : false} className="btn account_btn mt-2 mr-2">
+                                                        Back
+                                                    </button>
+                                                )
+                                            }
+                                            <button type="submit" disabled={isLoading ? true : false} className="btn account_btn mt-2">
+                                                {
+                                                    validationStep === 0 ? 'Continue ' : 'Register '
+                                                }
+                                                {
+                                                    isLoading && (
+                                                        <div className="spinner-border" style={{color: '#fff', fontSize: '10px', width: '20px', height: '20px'}} role="status">
+                                                            <span className="sr-only">Loading...</span>
+                                                        </div>
+                                                    )
+                                                }
+                                            </button>
+                                        </div>
+                                    </div>
+
                                 </div>
+                            </Form>
+                            <div>
+                                <p className="already_account m-0 pt-3 pt-lg-5">
+                                    Already have an account ?
+                                    <Link href="/login">
+                                        <a> Sign In </a>
+                                    </Link>
+                                </p>
                             </div>
                         </div>
-                        <div className="col-md-6">
-                            <label htmlFor="Confirm_password" className="form-label">Confirm Password</label>
-                            <div className="account_input_group">
-                                <input
-                                    type={showConfirmPassword === true ? "text" : "password"}
-                                    className="form-control" id="inlineFormInputGroup"
-                                    placeholder=""
-                                    name="password_confirmation"
-                                    value={registerInput.password_confirmation}
-                                    onChange={(e) =>
-                                        handleChangeTextInput("password_confirmation", e.target.value)
-                                    }
-                                // ref={register({
-                                //     validate: (value) =>
-                                //         value === password.current || "The passwords do not match",
-                                // })}
-                                />
-                                {errors.password_confirmation && (
-                                    <ErrorMessage errorText={errors.password_confirmation.message} />
-                                )}
-
-
-                                <div className="account_input_group_prepend" onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
-                                    {
-                                        showConfirmPassword === true ? (
-                                            <span>
-                                                <i className="far fa-eye"></i>
-                                            </span>
-                                        ) : (
-                                            <span>
-                                                <i className="far fa-eye-slash"></i>
-                                            </span>
-                                        ) 
-                                    }
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
-
-                    <div className="form-check custome_form_checkbox mt-3">
-                        <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                        <label className="account_info_label pointer" htmlFor="flexCheckDefault">
-                            I want to receive exclusive offers and promotions from
-                            <Link href="/">
-                                <a>
-                                    Deshibazaarbd
-                                </a>
-                            </Link>
-                        </label>
-                    </div>
-
-                    <div className="account_btn_group">
-                        {/* <button className="btn account_btn mt-2">Create an account</button> */}
-
-
-                        {isCreating === true && (
-                            <>
-                                <button disabled={true} className="btn account_btn mt-2">
-                                    <Spinner animation="border" role="status">
-                                        {" "}
-                                    </Spinner>{" "}
-                                    Creating account...
-                                </button>
-                            </>
-                        )}
-
-                        {
-                            !isCreating && (
-                                <button type="submit" className="btn account_btn mt-2" onClick={handleSubmit(handleRegister)} >
-                                    Create an account
-                                </button>
-                            )
-                        }
-                    </div>
-                </form>
-
-                <p className="account_info_label mt-4">By clicking Create Account, you acknowledge you have read and agreed to our
-                    <Link href="/p/terms-&-condition">
-                        <a> Terms of Use </a>
-                    </Link>
-                    and
-                    <Link href="/p/privacy-policy">
-                        <a> Privacy Policy </a>
-                    </Link></p>
-
-                <p className="already_account">
-                    Already have an account ?
-                    <Link href="/login">
-                        <a> Sign In </a>
-                    </Link>
-                </p>
-            </div>
-        </>
+                )
+            }}
+      </Formik>
     );
 };
+
+function ValidationError(props) {
+    return <small className="err-mss color-main" >{props.children}</small>;
+}
 
 export default RegistrationComponent;

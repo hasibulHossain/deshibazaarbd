@@ -809,6 +809,11 @@ export default [
         'en' : 'EDIT',
         'bn' : 'এডিট'  
     },
+    {
+        'key': 'One lowercase required',
+        'en' : 'One lowercase required',
+        'bn' : 'অন্তত একটি অক্ষর ছোট হাতের হতে হবে'  
+    },
 
 
 
