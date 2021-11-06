@@ -27,7 +27,7 @@ const Checkout = ()=> {
 	
 	const dispatch                             = useDispatch();
 	const { customerInfo }                     = useSelector((state) => state.DeliveryInfoReducer);
-	const { couponData, shippingCost }         = useSelector((state) => state.OrderReducer);
+	const { couponData, shippingCost, coupon }         = useSelector((state) => state.OrderReducer);
 	const { carts, totalPrice, totalQuantity } = useSelector((state) => state.CartReducer);
 	const { userData } = useSelector((state) => state.UserDataReducer);
 
@@ -38,8 +38,8 @@ const Checkout = ()=> {
 	}, []);
 
 	const handleStoreOrder = () => {
-		// dispatch(storeSells(customerInfo, carts, totalQuantity, shippingCost, totalPrice, couponData, userData));
-		// router.push('/');
+		// couponData.code = coupon.code; // Append code in couponData for backend processing
+		dispatch(storeSells(customerInfo, carts, totalQuantity, shippingCost, totalPrice, couponData, userData));
 	}
 
 	return (
