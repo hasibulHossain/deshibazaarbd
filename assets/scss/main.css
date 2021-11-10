@@ -3893,3 +3893,7 @@ p.customer_info_edit {
   bottom: 0;
   font-weight: 500;
 }
+
+.search-input:focus {
+  border: 2px solid var(--color-primary);
+}

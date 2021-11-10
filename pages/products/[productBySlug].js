@@ -20,7 +20,8 @@ export default function ProductBySlug({ product }) {
                         keywords={product.name}
                         description={product.short_description}
                         pageSocialMetaUrl={productUrl}
-                        pageSocialMetaImage={product.featured_url} />
+                        pageSocialMetaImage={product.featured_url}
+                        type="product" />
                 )
             }
 

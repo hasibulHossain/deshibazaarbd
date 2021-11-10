@@ -99,6 +99,7 @@ const SearchInput = () => {
   return (
     <>
       <input
+        className="search-input"
         placeholder={translate("Search for Products, Brands or more")}
         onChange={(e) => searchProduct(e)}
         onKeyDown={e => onKeyDownHandler(e.key)}
