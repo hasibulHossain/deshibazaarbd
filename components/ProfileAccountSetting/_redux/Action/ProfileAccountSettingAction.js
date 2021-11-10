@@ -134,7 +134,7 @@ export const getLocationData = (locationType, onDependentLocation, val) => async
 
         dispatch({ type: type, payload: res.data.data });
     } catch (error) {
-        console.log('err => ', error)
+        // console.log('err => ', error)
     }
 }
 

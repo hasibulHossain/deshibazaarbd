@@ -22,8 +22,8 @@ const Header = () => {
   const [showToolbar, setShowToolbar] = useState(false);
   const dispatch = useDispatch();
   const { totalQuantity } = useSelector((state) => state.CartReducer);
-  const { isSignedIn } = useSelector((state) => state.GlobalReducer);
-  const { isMobile, backdrop } = useSelector((state) => state.GlobalReducer);
+  const { isSignedIn, isMobile, backdrop } = useSelector((state) => state.GlobalReducer);
+  const { userData } = useSelector((state) => state.UserDataReducer);
 
   const toggleCartHandler = () => {
     dispatch(toggleFloatingCart());
@@ -129,7 +129,7 @@ const Header = () => {
                         >
                           <div className="auth-user-name">
                             {/* {userData.first_name} */}
-                            My account
+                            {userData.first_name && userData.first_name}
                           </div>
                         </Dropdown.Toggle>
 

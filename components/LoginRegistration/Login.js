@@ -1,4 +1,5 @@
 import React from 'react';
+import withProtectedRoute from '../master/hoc/withProtectedRoute';
 import LoginComponent from './components/LoginComponent';
 const Login = () => {
     return (
@@ -17,4 +18,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default withProtectedRoute(Login, true);

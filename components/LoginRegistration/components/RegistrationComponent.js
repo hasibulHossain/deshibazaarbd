@@ -32,7 +32,7 @@ const RegistrationComponent = () => {
         password_confirmation : "",
         otp                   : "",
         offer                 : false,
-        policy                : false
+        policy                : true
     }
 
 
@@ -167,7 +167,8 @@ const RegistrationComponent = () => {
 
                 customerRegister(formData).then(data => {
                     if(data.data.status) {
-                        showToast('success', 'Registration successful')
+                        localStorage.removeItem('register-info');
+                        showToast('success', 'Registration successful');
                         window.location.replace('/login');
                     };
                 }).catch(_ => {
@@ -235,7 +236,7 @@ const RegistrationComponent = () => {
                                                 <div className="col-md-12">
                                                     <div className="pb-3">
                                                         <label htmlFor="phone_no" className="form-label required">Phone</label>
-                                                        <Field className="form-control form-input" type="text" id="phone_no" name="phone_no" placeholder="01234567899" />
+                                                        <Field className="form-control form-input" type="number" id="phone_no" name="phone_no" placeholder="01234567899" />
                                                         <ErrorMessage name="phone_no" component={ ValidationError } />
                                                     </div>
                                                 </div>

@@ -499,6 +499,10 @@ a .custom-button-component:hover {
   margin-top: 20px;
 }
 
+.category-list .category:hover {
+  color: var(--color-primary);
+}
+
 .product-card {
   border-right: 1px solid #e4e6ec;
   position: relative;

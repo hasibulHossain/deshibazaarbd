@@ -17,6 +17,6 @@ export const getStoreInfo = (id) => async dispatch => {
         response.storeInfo = res.data.data;
         dispatch({type: types.GET_STORE_INFO, payload: response});
     } catch (err) {
-        console.log('err store => ', err)
+        // console.log('err store => ', err)
     }
 }

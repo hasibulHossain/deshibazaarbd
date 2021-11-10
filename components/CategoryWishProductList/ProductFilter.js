@@ -25,8 +25,9 @@ const ProductFilter = () => {
   // checkbox handler
   const handleChecked = (e, category) => {
     // uncheck other checkbox
+
     categoryCheckboxes.current.forEach(checkbox => {
-      if(checkbox.checked && +checkbox.id !== category) {
+      if(checkbox.checked && checkbox.id !== category.short_code) {
         checkbox.checked = false
       }
     })
@@ -34,11 +35,10 @@ const ProductFilter = () => {
     const filterParamClone = { ...filterParams };
 
     if (e.target.checked) {
-      filterParamClone.category[1] = category;
+      filterParamClone.category[1] = category.short_code;
     } else {
       filterParamClone.category.splice(1, 1)
     }
-    
     dispatch(setFilterParams(filterParamClone));
   };
 
@@ -46,11 +46,12 @@ const ProductFilter = () => {
   const brandCheckboxHandler = (e, brand) => {
     const filterParamClone = { ...filterParams };
     // conditionally insert and remove brand id from brand array
+
     if (e.target.checked) {
-      filterParamClone.brand.push(brand);
+      filterParamClone.brand.push(brand.slug);
     } else {
       const updatedCategory = filterParamClone.brand.filter(
-        (item) => item !== brand
+        (item) => item !== brand.slug
       );
       filterParamClone.brand = updatedCategory;
     }
@@ -153,16 +154,17 @@ const ProductFilter = () => {
           <div className="filter_by_category">
             <p className="filter_title">By Category</p>
             {categories.map((item, index) => (
-              <Form.Group key={item.id} controlId={item.id}>
+              <Form.Group key={item.id} controlId={item.short_code}>
                 <Form.Check
-                  ref={chkbox => categoryCheckboxes.current[index] = chkbox}
+                  ref={checkbox => categoryCheckboxes.current[index] = checkbox}
                   type="checkbox"
+                  className="pointer"
                   label={item.name}
-                  datatype={item.id}
+                  datatype={item.short_code}
                   className={
                     isChecked == true ? "active_category" : "isNot_active_category"
                   }
-                  onChange={(e) => handleChecked(e, item.id)}
+                  onChange={(e) => handleChecked(e, item)}
                 />
               </Form.Group>
             ))}
@@ -184,7 +186,7 @@ const ProductFilter = () => {
                 className={
                   isChecked == true ? "active_category" : "isNot_active_category"
                 }
-                onChange={(e) => brandCheckboxHandler(e, item.id)}
+                onChange={(e) => brandCheckboxHandler(e, item)}
               />
             </Form.Group>
           ))}
