@@ -2505,7 +2505,7 @@ p.text-secondary.mb-0 {
   display: flex;
   -webkit-justify-content: space-between;
   justify-content: space-between;
-  padding: 5px 10px;
+  padding: 10px 10px;
   border-bottom: 1px solid var(-);
 }
 

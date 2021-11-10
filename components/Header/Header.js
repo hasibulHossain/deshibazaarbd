@@ -112,7 +112,7 @@ const Header = () => {
 
                             <Link href="/register">
                               <a>
-                                <Button buttonText={translate("Sign up")} />
+                                <Button buttonText={translate("Sign Up")} />
                               </a>
                             </Link>
                           </>
