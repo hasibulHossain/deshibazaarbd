@@ -40,24 +40,26 @@ const CartReducer = (state = initialState, action) => {
  * @return object cart calculation response
  */
 const calculateTotalQtyAndPrices = (carts) => {
-
   const response = {
     totalQuantity: 0,
     totalPrice   : 0
   }
 
-  for (let i = 0; i < carts.length; i++) {
-    response.totalQuantity += parseInt( carts[i].quantity );
+  carts.forEach(cartItem => {
+    if(cartItem.isChecked) {
+      if(!cartItem.quantity) {
+        response.totalQuantity += 1;
+      } else {
+        response.totalQuantity += parseInt(cartItem.quantity);
+      }
 
-    if (carts[i].isOffer !== '0' && carts[i].isOffer !== false && carts[i].isOffer !== '') {
-      response.totalPrice += parseFloat(carts[i].offerPrice);
-    } else {
-      response.totalPrice += parseFloat(carts[i].price);
+      if(cartItem.isOffer && cartItem.offerPrice > 0) {
+        response.totalPrice += cartItem.offerPrice * cartItem.quantity;
+      } else {
+        response.totalPrice += cartItem.price * cartItem.quantity;
+      }
     }
-
-    response.totalPrice = response.totalPrice * parseFloat(carts[i].quantity);
-  }
-
+  })
   return response;
 };
 
