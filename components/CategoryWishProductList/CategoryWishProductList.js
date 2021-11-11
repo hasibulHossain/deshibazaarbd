@@ -112,12 +112,12 @@ const CategoryWishProductList = ({showFilter, showFilterHandler}) => {
       <div className="row justify-content-between my-4">
         <div className="col-lg-6 col-sm-12">
           <div className="category_wise_product_list_heading">
-            <h5 className="category-search-title">{title.replace("-", " ")}</h5>
+            <h5 className="category-search-title">{title.replace(/-/g, " ")}</h5>
           </div>
           <p>
             {
               !isLoading &&
-              (paginate.total !== null ? paginate.total : '0') + ` items found in ${title.replace("-", " ")}`
+              (paginate.total !== null ? paginate.total : '0') + ` items found in ${title.replace(/-/g, " ")}`
             }
           </p>
         </div>

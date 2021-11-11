@@ -113,8 +113,9 @@ const SearchInput = () => {
           <div className="p-2" style={{backgroundColor: '#f7f7f7'}}>
               <div className="d-flex">
                   {
-                    searchByList.map(item => (
-                      <span 
+                    searchByList.map((item, index) => (
+                      <span
+                        key={index}
                         className={`search-suggestion-area-search_by-item d-inline-block px-1 py-2 mr-3 ${searchType === item.id ? 'active' : ''}`}
                         onClick={() => searchByListHandler(item.id)} >
                         {item.label}

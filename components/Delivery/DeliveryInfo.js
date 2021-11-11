@@ -66,9 +66,11 @@ const DeliveryInfo = () => {
     }
 
     useEffect(() => {
-        dispatch(getCurrentUserDataAction(userData));
-        dispatch(getDefaultAddress('shipping_address'));
-        dispatch(getSingleShippingAddress('shipping_address', userData.id));
+        if(userData) {
+            dispatch(getCurrentUserDataAction(userData));
+            dispatch(getDefaultAddress('shipping_address'));
+            dispatch(getSingleShippingAddress('shipping_address', userData.id));
+        }
     }, []);
 
     useEffect(() => {
@@ -368,16 +370,32 @@ const DeliveryInfo = () => {
                                             Select a label for effective delivery:
                                         </h6>
                                         <div className="d-flex mt-3">
-                                            <p className={`btn home_btn mr-3 pointer ${shippingAddressInput.location === "home" ? "active_delivery_label" : ""}`} onClick={() => handleChangeTextInput("location", "home")}>
-                                                <i className="fas fa-home"></i>
+                                            <p className={`btn home_btn mr-3 pointer`} onClick={() => handleChangeTextInput("location", "home")}>
+                                                 <i className="fas fa-home"></i>
                                                 {' '}
                                                  Home
+                                                 {
+                                                    shippingAddressInput.location === "home" && (
+                                                        <>
+                                                            {' '}
+                                                            <i class="fas fa-check"></i>
+                                                        </>
+                                                    )
+                                                 }
                                             </p>
 
-                                            <p className={`btn office_btn pointer ${shippingAddressInput.location === "office" ? "active_delivery_label" : ""}`} onClick={() => handleChangeTextInput("location", "office")}>
+                                            <p className={`btn office_btn pointer`} onClick={() => handleChangeTextInput("location", "office")}>
                                                 <i className="fas fa-briefcase"></i>
                                                 {' '}
                                                  Office
+                                                 {
+                                                    !(shippingAddressInput.location === "home") && (
+                                                        <>
+                                                            {' '}
+                                                            <i class="fas fa-check"></i>
+                                                        </>
+                                                    )
+                                                 }
                                             </p>
                                         </div>
                                     </div>

@@ -30,13 +30,16 @@ export const storeSells = (customerInfo, carts, totalQuantity, shippingCost, tot
     carts.forEach((item) => {
         const singleItem = {
             item_id           : item.productID,
-            quantity          : item.quantity,
-            unit_price        : item.price,
-            unit_price_inc_tax: item.price,
+            quantity          : parseInt(item.quantity),
+            unit_price        : item.offerPrice > 0 ? item.offerPrice : item.price,
+            unit_price_inc_tax: item.offerPrice > 0 ? item.offerPrice : item.price,
             discount_amount   : 0,
             item_tax          : 0
         }
-        sale_lines.push(singleItem)
+
+        if(item.isChecked) {
+            sale_lines.push(singleItem)
+        }
     });
 
     const orderPostedData = {

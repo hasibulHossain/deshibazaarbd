@@ -48,15 +48,15 @@ const Checkout = ()=> {
 					<div className="col-lg-8 col-md-7">
 						<div className="delivery_info mb-3 mt-5">
 							<DeliveryInfo />
-							<div className="card mt-3 pl-3 pr-3 pt-2 shadow-sm">
+							{/* <div className="card mt-3 pl-3 pr-3 pt-2 shadow-sm">
 								<div className="d-flex justify-content-between align-items-center">
 									<p className="deliver_content">{carts.length} Items</p>
 									<p className="deliver_content">Price</p>
 									<p className="deliver_content">Quantity</p>
 								</div>
-							</div>
+							</div> */}
 
-							<div className="p-3 card shadow-sm">
+							<div className="p-3 mt-3 card shadow-sm">
 								{
 									carts.length > 0 && carts.map((item, index) => (
 										<div className="cart_items_details py-3" key={index + 1}>
