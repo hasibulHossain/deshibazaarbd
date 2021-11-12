@@ -42,6 +42,7 @@ export const storeSells = (customerInfo, carts, totalQuantity, shippingCost, tot
         }
     });
 
+    const totalPayableAmount = parseFloat(shippingCost + totalPrice - discountAmount);
     const orderPostedData = {
         business_id     : userData.business_id,
         created_by      : 1,
@@ -64,10 +65,11 @@ export const storeSells = (customerInfo, carts, totalQuantity, shippingCost, tot
         additional_notes: '',
         staff_note      : '',
         paid_total      : 0,
-        due_total       : parseFloat(shippingCost + totalPrice - discountAmount),
-        final_total     : parseFloat(shippingCost + totalPrice - discountAmount),
+        due_total       : totalPayableAmount,
+        final_total     : totalPayableAmount,
         sale_lines      : sale_lines,
-        payment_method  : payment_method
+        payment_method  : payment_method,
+        coupon          : couponData.code
     }
 
     let response = {

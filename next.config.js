@@ -9,10 +9,9 @@
 //   webpack5: true
 // })
 
-  
 module.exports = {
   images: {
-    domains: ['deshi.programmingshikhi.com', 'api-ecom.programmingshikhi.com'],
+    domains: ['deshi.programmingshikhi.com', 'api-ecom.programmingshikhi.com', 'api.deshibazaarbd.com', 'api-ecom.deshibazaarbd.com', 'localhost:8000'],
   },
   future: {
     webpack5: true
