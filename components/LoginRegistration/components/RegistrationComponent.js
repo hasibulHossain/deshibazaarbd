@@ -1,18 +1,18 @@
 import Link from 'next/link';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { customerRegister } from '../_redux/Action/RegisterAction';
-import CountDown from '../../master/countDown/CountDown';
 import axios from 'axios';
 
 import * as yup from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { showToast } from '../../master/Helper/ToastHelper';
+import Timer from '../../master/timer/Timer';
 
 
 const LOWERCASEREGEX = /(?=.*[a-z])/;
 const UPPERCASEREGEX = /(?=.*[A-Z])/;
-const NUMERICREGEX = /(?=.*[0-9])/;
-let IS_VALID_OTP = false;
+const NUMERICREGEX   = /(?=.*[0-9])/;
+let IS_VALID_OTP     = false;
 
 const RegistrationComponent = () => {
     const [showPassword, setShowPassword]               = useState(false);
@@ -21,7 +21,7 @@ const RegistrationComponent = () => {
     const [isLoading, setIsLoading]                     = useState(false);
     const [resendOtp, setResendOtp]                     = useState(false);
     const [stepOneFormData, setStepOneFormData]         = useState(null);
-    const currentTime = new Date().getTime();
+    const [otpExpireTime, setOtpExpireTime]             = useState(0);
 
     const initialFormVal = {
         first_name            : "",
@@ -34,7 +34,6 @@ const RegistrationComponent = () => {
         offer                 : false,
         policy                : true
     }
-
 
     const validationSchema = [
         yup.object().shape({
@@ -96,19 +95,23 @@ const RegistrationComponent = () => {
         })
     ];
 
-    let getRegisterInfo = {};
-
-    if(window !== undefined) {
-        const registerInfo = localStorage.getItem('register-info');
-        getRegisterInfo = JSON.parse(registerInfo);
-    }
-
     const resendOtpApi = () => {
-        axios.post('auth/register', stepOneFormData).then(data => {
+        setResendOtp(false);
+        axios.post('auth/register', stepOneFormData)
+        .then(data => {
             if (data.data.status) {
                 showToast('success', 'OTP is sent to your phone number')
+                setOtpExpireTime(data.data.data)
             }
-        }).catch(_ => {
+        })
+        .catch(err => {
+            const { response } = err;
+            if(!response.data.errors) {
+                showToast('success', response.data.message);
+                setOtpExpireTime(response.data.data);
+                return;
+            }
+
             showToast('error', 'Something went wrong. Please refresh browser')
         })
     }
@@ -128,25 +131,11 @@ const RegistrationComponent = () => {
 
                 setStepOneFormData(formData)
 
-                if(getRegisterInfo && getRegisterInfo.otpExpireTimestamp > currentTime && getRegisterInfo.phone === values.phone_no) {
-                    setIsLoading(false);
-                    setValidationStep(1);
-                    actions.setTouched({});
-                    actions.setSubmitting(false);
-                    return;
-                }
-
                 const data = await axios.post('auth/register', formData);
 
                 if (data.data.status) {
                     showToast('success', 'OTP is sent to your phone number')
-                    const registerInfo = {
-                        otpExpireTimestamp: currentTime + 180000, // 180000 - 3 minutes in millisecond
-                        phone: values.phone_no
-                    }
-
-                    localStorage.setItem('register-info', JSON.stringify(registerInfo));
-
+                    setOtpExpireTime(data.data.data)
                     setIsLoading(false);
                     setValidationStep(1);
                     actions.setTouched({});
@@ -165,27 +154,38 @@ const RegistrationComponent = () => {
                     password_confirmation: values.password_confirmation
                 }
 
-                customerRegister(formData).then(data => {
-                    if(data.data.status) {
-                        localStorage.removeItem('register-info');
-                        showToast('success', 'Registration successful');
-                        window.location.replace('/login');
-                    };
-                }).catch(_ => {
-                    setIsLoading(false);
-                    actions.setTouched({});
-                    actions.setSubmitting(false);
+                customerRegister(formData)
+                    .then(data => {
+                        if(data.data.status) {
+                            showToast('success', 'Registration successful');
+                            window.location.replace('/login');
+                        };
+                    })
+                    .catch(_ => {
+                        setIsLoading(false);
+                        actions.setTouched({});
+                        actions.setSubmitting(false);
 
-                    setIsLoading(false);
-                })
+                        setIsLoading(false);
+                    })
 
             }
 
         } catch (error) {
             const { response } = error;
             setIsLoading(false);
-             
+
+            if(!response.data.errors) {
+                showToast('success', response.data.message);
+                setValidationStep(1);
+                setOtpExpireTime(response.data.data);
+                actions.setTouched({});
+                actions.setSubmitting(false);
+                return;
+            }
+
             const errors = Object.keys(response.data.errors);
+
             if(errors.length > 1) {
                 showToast('error', "Email and phone number already used.")
             } else {
@@ -288,7 +288,7 @@ const RegistrationComponent = () => {
                                                 <div className="col-8">
                                                     <div className="pb-3">
                                                         <label htmlFor="otp" className="form-label required">Otp</label>
-                                                        <Field className="form-control form-input" type="text" id="otp" name="otp" placeholder="123456" />
+                                                        <Field className="form-control form-input" type="number" id="otp" name="otp" placeholder="123456" />
                                                         <ErrorMessage name="otp" component={ ValidationError } />
                                                     </div>
                                                 </div>
@@ -304,7 +304,7 @@ const RegistrationComponent = () => {
 
                                                 <div className="col-12">
                                                     <div className="my-2">
-                                                        <CountDown countdownEnd={(value) => setResendOtp(value)} alert_bg="alert_warning_bg" seconds={getRegisterInfo && getRegisterInfo.otpExpireTimestamp > currentTime && Math.floor((getRegisterInfo.otpExpireTimestamp - currentTime ) / 1000)} countDownText="Resend OTP after 3 minutes" expireText="Didn't receive OTP? Resend OTP" />
+                                                        <Timer endDate={otpExpireTime} cb={() => setResendOtp(true)} />
                                                     </div>
                                                 </div>
 
