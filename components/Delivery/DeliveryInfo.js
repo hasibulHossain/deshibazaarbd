@@ -183,17 +183,18 @@ const DeliveryInfo = () => {
 
                                         </div>
                                     </div>
-                                    <div className="col-lg-6">
+                                    {/* <div className="col-lg-6">
                                         <div className="custome_form_group">
                                             <label className="form-label" htmlFor="country">Country</label>
                                             <RHFInput
-                                                as={<Select options={countryList} />}
+                                                as={<Select options={countryList} default />}
                                                 placeholder="Select country"
                                                 rules={{ required: true }}
                                                 name="country_id"
                                                 register={register}
                                                 value={shippingAddressInput.selectedCountry}
                                                 onChange={(option) => {
+                                                    console.log(option)
                                                     handleChangeTextInput("country", option.label);
                                                     handleChangeTextInput("country_id", option.value);
                                                     dispatch(handleChangeBillingAddressInput("selectedCity", ""))
@@ -211,7 +212,7 @@ const DeliveryInfo = () => {
                                                 )
                                             }
                                         </div>
-                                    </div>
+                                    </div> */}
                                     <div className="col-lg-6">
                                         <div className="custome_form_group">
                                             <label className="form-label" htmlFor="division">Division</label>

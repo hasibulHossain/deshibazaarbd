@@ -138,7 +138,7 @@ const AddressUpdate = (props) => {
                             </div>
                         </div>
                     }
-                    <div className="col-md-6">
+                    {/* <div className="col-md-6">
                         <div className="custome_form_group">
                             <label className="form-label" htmlFor="country">Country</label>
                             <RHFInput
@@ -166,7 +166,7 @@ const AddressUpdate = (props) => {
                                 )
                             }
                         </div>
-                    </div>
+                    </div> */}
                     <div className="col-md-6">
                         <div className="custome_form_group">
                             <label className="form-label" htmlFor="division">Division</label>
@@ -305,7 +305,7 @@ const AddressUpdate = (props) => {
                 </div>
 
                 <div className="row">
-                    <div className="deliver_info_footer col-md-6 mt-3">
+                    {/* <div className="deliver_info_footer col-md-6 mt-3">
                         <h6 className="select_title">
                             Select a label for effective delivery:
                         </h6>
@@ -322,9 +322,38 @@ const AddressUpdate = (props) => {
                                 Office
                             </p>
                         </div>
+                    </div> */}
+                    <div className="d-flex mt-3 align-items-center">
+                        <p className="btn home_btn mr-3 pointer m-0" onClick={() => handleChangeTextInput("location", "home")}>
+                            <i className="fas fa-home"></i>
+                            {' '}
+                            Home
+                            {
+                                selectedAddress.location === "home" && (
+                                    <>
+                                        {' '}
+                                        <i class="fas fa-check"></i>
+                                    </>
+                                )
+                            }
+                        </p>
+
+                        <p className="btn office_btn pointer m-0" onClick={() => handleChangeTextInput("location", "office")}>
+                            <i className="fas fa-briefcase"></i>
+                            {' '}
+                                Office
+                                {
+                                !(selectedAddress.location === "home") && (
+                                    <>
+                                        {' '}
+                                        <i class="fas fa-check"></i>
+                                    </>
+                                )
+                                }
+                        </p>
                     </div>
 
-                    <div className="col-md-6 mt-3 text-right mt-5 float-right">
+                    <div className="col-md-6 mt-3 text-right float-right">
                         {
                             !isSubmitting && (
                                 <button onClick={submitUpdatedAddressHandler} type="submit" className="btn btn-success mr-3">
