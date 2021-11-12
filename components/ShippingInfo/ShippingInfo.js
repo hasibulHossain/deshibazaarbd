@@ -26,9 +26,11 @@ const ShippingInfo = () => {
     }
 
     useEffect(() => {
-        dispatch(getDefaultAddress('shipping_address'))
-        dispatch(getDefaultAddress('billing_address'))
-        dispatch(getAddress('billing_address', userData.id));
+        if(userData) {
+            dispatch(getDefaultAddress('shipping_address'))
+            dispatch(getDefaultAddress('billing_address'))
+            dispatch(getAddress('billing_address', userData.id));
+        }
 
     }, [])
 

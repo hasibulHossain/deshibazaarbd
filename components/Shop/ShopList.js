@@ -9,9 +9,9 @@ const ShopList = () => {
   const dispatch = useDispatch();
   const { ShopList, isLoading } = useSelector((state) => state.ShopReducer);
 
-  const routeHandler = (brandId) => {
+  const routeHandler = (brandSlug) => {
     router
-      .push(`/products?brand=${brandId}`)
+      .push(`/products?brand=${brandSlug}`)
       .then((_) => window.scrollTo(0, 0));
   };
 
@@ -33,7 +33,7 @@ const ShopList = () => {
         {ShopList.length > 0 &&
           ShopList.slice(0, 18).map((item, index) => (
             <div className="col-4 col-md-2 col-lg-2" key={index}>
-              <div className="shop-card" onClick={() => routeHandler(item.id)}>
+              <div className="shop-card" onClick={() => routeHandler(item.slug)}>
                 {item.image !== null && item.image !== "" ? (
                   <div className="shop-logo">
                     <img src={item.image_url} alt={item.name} />

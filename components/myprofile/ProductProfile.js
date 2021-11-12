@@ -19,7 +19,6 @@ const ProductProfile = () => {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    console.log('userdata from product profile => ', userData)
     if(userData) {
       dispatch(getDefaultAddress('shipping_address', userData.id))
       dispatch(getDefaultAddress('billing_address', userData.id))

@@ -29,8 +29,8 @@ const initialState = {
         name          : "",
         phone_no      : "",
         transaction_id: "",
-        country_id    : "", //integer
-        country       : "",
+        country_id    : 19, //integer
+        country       : "Bangladesh (বাংলাদেশ)",
         city_id       : "",  //integer
         city          : "",
         area_id       : "",   //integer
@@ -46,8 +46,8 @@ const initialState = {
         name          : "",
         phone_no      : "",
         transaction_id: "",
-        country_id    : "", //integer
-        country       : "",
+        country_id    : 19, //integer
+        country       : "Bangladesh (বাংলাদেশ)",
         division      : "",
         division_id   : "",
         city_id       : "",  //integer
@@ -65,8 +65,8 @@ const initialState = {
         name          : "",
         phone_no      : "",
         transaction_id: "",
-        country_id    : "", //integer
-        country       : "",
+        country_id    : 19, //integer
+        country       : "Bangladesh (বাংলাদেশ)",
         division      : "",
         division_id   : "",
         city_id       : "",  //integer

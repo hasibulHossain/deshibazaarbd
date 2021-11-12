@@ -50,7 +50,7 @@ const HeaderMenu = ({ navigationToggleHandler, showToolbar }) => {
       navigationToggleHandler();
     }
     router
-      .push(`/products?category=${categorySlug}`)
+      .push(`/products?category=${encodeURI(categorySlug)}`)
       .then((_) => window.scrollTo(0, 0));
   };
 
@@ -90,7 +90,7 @@ const HeaderMenu = ({ navigationToggleHandler, showToolbar }) => {
                 }`}
               >
                 <span
-                  onClick={() => clickMenuLink(itemLvl1.id, false)}
+                  onClick={() => clickMenuLink(itemLvl1.short_code, false)}
                   className="navigation__nav-link"
                 >
                   <Translate>{itemLvl1.name}</Translate>
@@ -109,7 +109,7 @@ const HeaderMenu = ({ navigationToggleHandler, showToolbar }) => {
                           }`}
                         >
                           <span
-                            onClick={() => clickMenuLink(itemLvl2.id, false)}
+                            onClick={() => clickMenuLink(itemLvl2.short_code, false)}
                             className="navigation__nav-link"
                           >
                             <Translate>{itemLvl2.name}</Translate>
@@ -123,7 +123,7 @@ const HeaderMenu = ({ navigationToggleHandler, showToolbar }) => {
                                     className={`navigation__nav-item`}
                                   >
                                     <span
-                                      onClick={() => clickMenuLink(itemLvl3.id, false)}
+                                      onClick={() => clickMenuLink(itemLvl3.short_code, false)}
                                       className="navigation__nav-link"
                                     >
                                       <Translate>{itemLvl3.name}</Translate>
@@ -161,7 +161,7 @@ const HeaderMenu = ({ navigationToggleHandler, showToolbar }) => {
                   ></span>
                 )}
                 <span
-                  onClick={() => clickMenuLink(itemLvl1.id, true)}
+                  onClick={() => clickMenuLink(itemLvl1.short_code, true)}
                   className="navigation-mobile__nav-link"
                   href="#"
                 >
@@ -187,7 +187,7 @@ const HeaderMenu = ({ navigationToggleHandler, showToolbar }) => {
                             ></span>
                           )}
                           <span
-                            onClick={() => clickMenuLink(itemLvl2.id, true)}
+                            onClick={() => clickMenuLink(itemLvl2.short_code, true)}
                             className="navigation-mobile__nav-link"
                           >
                             <Translate>{itemLvl2.name}</Translate>
@@ -213,7 +213,7 @@ const HeaderMenu = ({ navigationToggleHandler, showToolbar }) => {
                                       ></span>
                                     )}
                                     <span
-                                      onClick={() => clickMenuLink(itemLvl3.id, true)}
+                                      onClick={() => clickMenuLink(itemLvl3.short_code, true)}
                                       className="navigation-mobile__nav-link"
                                     >
                                       <Translate>{itemLvl3.name}</Translate>
@@ -229,7 +229,7 @@ const HeaderMenu = ({ navigationToggleHandler, showToolbar }) => {
                                             >
                                               <span
                                                 onClick={() =>
-                                                  clickMenuLink(itemLvl1.id, true)
+                                                  clickMenuLink(itemLvl1.short_code, true)
                                                 }
                                                 className="navigation-mobile__nav-link"
                                               >

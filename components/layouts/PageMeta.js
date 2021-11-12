@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const PageMeta = (props) => {
     const { title = '', description = '', keywords = '', pageSocialMetaUrl, pageSocialMetaImage, pageSocialMetaAltImage,
-        websiteName="Deshi Bazaar BD", facebookAppID, twitterSiteUsername, ogpEnabled } = props;
+        websiteName="Deshi Bazaar BD", facebookAppID, twitterSiteUsername, ogpEnabled, type = '' } = props;
 
     // OGP -> Open Graph Protocol
     // Social meta tags
@@ -27,6 +27,7 @@ const PageMeta = (props) => {
                         <meta property="og:description" content={description} />
                         <meta property="og:url" content={pageSocialMetaUrl} />
                         <meta property="og:image" content={pageSocialMetaImage} />
+                        <meta property="og:type" content={type} />
                         {
                             pageSocialMetaImage && <meta name="twitter:card" content={pageSocialMetaImage} />
                         }

@@ -22,8 +22,8 @@ const Header = () => {
   const [showToolbar, setShowToolbar] = useState(false);
   const dispatch = useDispatch();
   const { totalQuantity } = useSelector((state) => state.CartReducer);
-  const { isSignedIn } = useSelector((state) => state.GlobalReducer);
-  const { isMobile, backdrop } = useSelector((state) => state.GlobalReducer);
+  const { isSignedIn, isMobile, backdrop } = useSelector((state) => state.GlobalReducer);
+  const { userData } = useSelector((state) => state.UserDataReducer);
 
   const toggleCartHandler = () => {
     dispatch(toggleFloatingCart());
@@ -53,6 +53,7 @@ const Header = () => {
     })();
     
     localStorage.removeItem('user-info');
+    localStorage.removeItem('carts');
   };
 
   const navigationToggleHandler = () => {
@@ -111,7 +112,7 @@ const Header = () => {
 
                             <Link href="/register">
                               <a>
-                                <Button buttonText={translate("Sign up")} />
+                                <Button buttonText={translate("Sign Up")} />
                               </a>
                             </Link>
                           </>
@@ -128,7 +129,7 @@ const Header = () => {
                         >
                           <div className="auth-user-name">
                             {/* {userData.first_name} */}
-                            My account
+                            {userData && userData.first_name && userData.first_name}
                           </div>
                         </Dropdown.Toggle>
 

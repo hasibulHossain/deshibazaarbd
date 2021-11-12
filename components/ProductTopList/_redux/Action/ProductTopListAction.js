@@ -17,7 +17,7 @@ export const getTopProductList = () => (dispatch) => {
         dispatch({type: Types.GET_TOP_PRODUCTS_LIST, payload: responseData});
     })
     .catch(err => {
-        console.log('hot deals err => ', err)
+        // console.log('hot deals err => ', err)
     })
 
 }

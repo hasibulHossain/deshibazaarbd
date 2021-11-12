@@ -20,7 +20,7 @@ export const getItemListByUser = () => (dispatch) => {
             }
         })
         .catch(err => {
-            console.log('err from getItemListByUser', err)
+            // console.log('err from getItemListByUser', err)
         })
 }
 
@@ -47,7 +47,7 @@ export const getReviewListByUser = (isItem, isUser, status) => (dispatch) => {
         .catch(err => {
             responseList.isLoading = false;
             dispatch({type: Types.GET_REVIEW_LIST_BY_USER, payload: responseList})
-            console.log('err from get Review List by user', err)
+            // console.log('err from get Review List by user', err)
         })
 }
 

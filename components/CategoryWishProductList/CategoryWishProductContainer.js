@@ -1,8 +1,6 @@
 import React, {useState, useEffect} from "react";
-import Link from 'next/link'
 import ProductFilter from "./ProductFilter";
 import CategoryWishProductList from "./CategoryWishProductList";
-import classNames from "classnames";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getCategoryOrBrandDetails,
@@ -51,31 +49,30 @@ const CategoryWishProductContainer = () => {
   useEffect(() => {
     const queries = router.query;
     const cloneFilterParams = {...filterParams};
-
     for(const query in queries) {
       if(Array.isArray(cloneFilterParams[query])) {
         // cloneFilterParams[query] = [];
 
         if(query === 'brand') {
-          cloneFilterParams[query].push(+queries[query]);
+          cloneFilterParams[query].push(queries[query]);
 
-          dispatch(getCategoryOrBrandDetails('brands/' + +queries[query]));
+          dispatch(getCategoryOrBrandDetails('brands/' + queries[query]));
         }
         if(query === 'category') {
           // check if category same or not after remount
-          if(cloneFilterParams[query].length > 0 && !(cloneFilterParams[query][0] === parseInt(queries[query]))) {
+          if(cloneFilterParams[query].length > 0 && !(cloneFilterParams[query][0] === queries[query])) {
             cloneFilterParams.page = 1;
             cloneFilterParams[query] = [];
-            cloneFilterParams[query].push(+queries[query]);
+            cloneFilterParams[query].push(queries[query]);
           } else {
 
             cloneFilterParams[query] = [];
-            cloneFilterParams[query].push(+queries[query]);
+            cloneFilterParams[query].push(queries[query]);
           }
 
           dispatch(getSubCategories(queries[query]))
 
-          dispatch(getCategoryOrBrandDetails('categories/' + +queries[query]));
+          dispatch(getCategoryOrBrandDetails('categories/' + queries[query]));
         }
 
       } else {

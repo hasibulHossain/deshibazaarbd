@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Rater from "react-rater";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
+import { useRouter } from 'next/router';
 import {
   addToCartAction,
   getCartsAction,
@@ -19,8 +19,10 @@ import ProductMainList from "../products/ProductMainList";
 import { formatCurrency } from "../../services/currency";
 import LazyLoad from "react-lazyload";
 import InnerImageZoom from 'react-inner-image-zoom';
+import Overlay from '../master/Modal/Overlay';
 
 const ProductDetailInfo = (props) => {
+  const router = useRouter();
   const dispatch = useDispatch();
   const { product } = props;
   const { id: productId } = product;
@@ -36,6 +38,7 @@ const ProductDetailInfo = (props) => {
       ? product.offer_selling_price
       : product.default_selling_price;
   const [subTotal, setSubTotal] = useState("");
+  const [overlayVisible, setOverlayVisible] = useState(false);
 
   useEffect(() => {
     dispatch(getCartsAction());
@@ -257,10 +260,39 @@ const ProductDetailInfo = (props) => {
                                     )}
                                   </div>
                                 </div>
-                                <div>
-                                  <span className="float-right mr-3">
-                                    <AddWishList productId={product.id} />
-                                  </span>
+                                <div className="d-flex" >
+                                  <div>
+                                    <span className="mr-3">
+                                      <AddWishList productId={product.id} />
+                                    </span>
+                                  </div>
+                                  <div className="position-relative">
+                                    <span className={`pointer ${overlayVisible ? 'color-main' : 'text-secondary'}`} onClick={() => setOverlayVisible(true)} >
+                                      <i className="fas fa-share"></i>
+                                    </span>
+                                    <Overlay visible={overlayVisible} closeModalHandler={() => setOverlayVisible(false)}>
+                                      <div className="d-flex justify-content-center align-items-center">
+                                        <div>Share: </div>
+                                        <div>
+                                          <ul className="social-media m-0">
+                                              <li className="social-facebook m-0 ml-2" >
+                                                <Link  href={`https://www.facebook.com/sharer/sharer.php?u=https://www.deshibazaarbd.com${router.asPath}`}>
+                                                  <a target="_blank">
+                                                    <i className="fab fa-facebook-f"></i>
+                                                  </a>
+                                                </Link>
+                                              </li>
+                                              <li className="social-whatsApp m-0 ml-2" >
+                                                <i className="fab fa-whatsapp"></i>
+                                              </li>
+                                              <li className="social-instagram m-0 ml-2" >
+                                                <i className="fab fa-instagram"></i>
+                                              </li>
+                                          </ul>
+                                        </div>
+                                      </div>
+                                    </Overlay>
+                                  </div>
                                 </div>
                               </div>
                               <div className="mt-4">

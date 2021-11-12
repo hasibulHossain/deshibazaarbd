@@ -27,7 +27,7 @@ const Checkout = ()=> {
 	
 	const dispatch                             = useDispatch();
 	const { customerInfo }                     = useSelector((state) => state.DeliveryInfoReducer);
-	const { couponData, shippingCost }         = useSelector((state) => state.OrderReducer);
+	const { couponData, shippingCost, coupon }         = useSelector((state) => state.OrderReducer);
 	const { carts, totalPrice, totalQuantity } = useSelector((state) => state.CartReducer);
 	const { userData } = useSelector((state) => state.UserDataReducer);
 
@@ -38,8 +38,8 @@ const Checkout = ()=> {
 	}, []);
 
 	const handleStoreOrder = () => {
-		// dispatch(storeSells(customerInfo, carts, totalQuantity, shippingCost, totalPrice, couponData, userData));
-		// router.push('/');
+		// couponData.code = coupon.code; // Append code in couponData for backend processing
+		dispatch(storeSells(customerInfo, carts, totalQuantity, shippingCost, totalPrice, couponData, userData));
 	}
 
 	return (
@@ -48,15 +48,15 @@ const Checkout = ()=> {
 					<div className="col-lg-8 col-md-7">
 						<div className="delivery_info mb-3 mt-5">
 							<DeliveryInfo />
-							<div className="card mt-3 pl-3 pr-3 pt-2 shadow-sm">
+							{/* <div className="card mt-3 pl-3 pr-3 pt-2 shadow-sm">
 								<div className="d-flex justify-content-between align-items-center">
 									<p className="deliver_content">{carts.length} Items</p>
 									<p className="deliver_content">Price</p>
 									<p className="deliver_content">Quantity</p>
 								</div>
-							</div>
+							</div> */}
 
-							<div className="p-3 card shadow-sm">
+							<div className="p-3 mt-3 card shadow-sm">
 								{
 									carts.length > 0 && carts.map((item, index) => (
 										<div className="cart_items_details py-3" key={index + 1}>
