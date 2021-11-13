@@ -65,7 +65,7 @@ const LoginComponent = () => {
       return true
     }),
     password: yup.string()
-    .min(8, 'Minimum 8 characters required')
+    .min(6, 'Minimum 6 characters required')
     .required('Required')
   });
 

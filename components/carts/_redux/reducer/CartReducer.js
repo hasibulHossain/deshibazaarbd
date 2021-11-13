@@ -1,26 +1,26 @@
+import { productHasOffer } from "../../../../services/ProductService";
 import { getSupplierWiseCartsData } from "../action/CartAction";
 import * as Types from "../types/Types";
 
 const initialState = {
-  carts            : [],
+  carts: [],
   supplierWiseCarts: [],
-  totalQuantity    : 0,
-  totalPrice       : 0,
+  totalQuantity: 0,
+  totalPrice: 0,
 
-  checkedAllCarts  : false
+  checkedAllCarts: false,
 };
 
 const CartReducer = (state = initialState, action) => {
   switch (action.type) {
-
     case Types.GET_CARTS:
       return {
         ...state,
         supplierWiseCarts: getSupplierWiseCartsData(action.payload),
-        carts            : action.payload,
-        totalQuantity    : calculateTotalQtyAndPrices(action.payload).totalQuantity,
-        totalPrice       : calculateTotalQtyAndPrices(action.payload).totalPrice,
-        checkedAllCarts  : checkedAllCartsSelectedOrNot(action.payload)
+        carts: action.payload,
+        totalQuantity: calculateTotalQtyAndPrices(action.payload).totalQuantity,
+        totalPrice: calculateTotalQtyAndPrices(action.payload).totalPrice,
+        checkedAllCarts: checkedAllCartsSelectedOrNot(action.payload),
       };
 
     default:
@@ -31,40 +31,37 @@ const CartReducer = (state = initialState, action) => {
 };
 
 /**
- * Calculate Total Qty And Prices
- * 
+ * Calculate Total Qty And Prices.
+ *
  * @since 1.0.0
- * 
- * @param array carts 
- * 
+ *
+ * @param array carts
+ *
  * @return object cart calculation response
  */
 const calculateTotalQtyAndPrices = (carts) => {
-  const response = {
+  let response = {
     totalQuantity: 0,
-    totalPrice   : 0
-  }
+    totalPrice: 0,
+  };
 
-  carts.forEach(cartItem => {
-    if(cartItem.isChecked) {
-      if(!cartItem.quantity) {
-        response.totalQuantity += 1;
-      } else {
-        response.totalQuantity += parseInt(cartItem.quantity);
-      }
+  carts.forEach((cartItem) => {
+    const qty = parseInt(cartItem.quantity);
+    const price = parseFloat(cartItem.price);
+    const offerPrice = parseFloat(cartItem.offerPrice);
+    const hasOffer = productHasOffer(price, offerPrice);
 
-      if(cartItem.isOffer && cartItem.offerPrice > 0) {
-        response.totalPrice += cartItem.offerPrice * cartItem.quantity;
-      } else {
-        response.totalPrice += cartItem.price * cartItem.quantity;
-      }
+    if (cartItem.isChecked) {
+      response.totalQuantity += !qty ? 1 : qty; // By default 1 if quantity is not available, else quantity
+      response.totalPrice += (!hasOffer ? price : offerPrice) * (!qty ? 1 : qty); // If has offer price then use offer price * quantity else use price * quantity
     }
-  })
+  });
+
   return response;
 };
 
 const checkedAllCartsSelectedOrNot = (carts) => {
-  return carts.every( cart => cart.isChecked === true );
-}
+  return carts.every((cart) => cart.isChecked === true);
+};
 
 export default CartReducer;
