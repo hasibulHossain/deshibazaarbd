@@ -4,14 +4,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import Translate from '../translation/Translate';
 import { formatCurrency } from '../../services/currency';
 import { getOrderDetails } from './_redux/action/OrderAction';
+import { productImageUrl } from '../../services/ProductService';
 
 /**
- * Order Invoice component
- * 
+ * Order Invoice component.
+ *
  * Responsible for Order Invoice Format & Status
- * 
+ *
  * @param {int} order ID
- * 
+ *
  * @return
  */
 const OrderInvoice = ({ title = translate('Invoice'), id, is_invoice = false }) => {
@@ -64,7 +65,7 @@ const OrderInvoice = ({ title = translate('Invoice'), id, is_invoice = false }) 
                                         {/* <p>VISA *******************35</p>
                                         <p>Exp: 05/25</p> */}
                                         {/* <p>Cash In Delivery</p> */}
-                                        
+
                                         {
                                             orderDetails.payment_status === 'due' &&
                                             <p>
@@ -75,7 +76,6 @@ const OrderInvoice = ({ title = translate('Invoice'), id, is_invoice = false }) 
                                                 </span>
                                             </p>
                                         }
-                                       
                                         {
                                             orderDetails.payment_status === 'paid' &&
                                             <p>
@@ -128,13 +128,13 @@ const OrderInvoice = ({ title = translate('Invoice'), id, is_invoice = false }) 
                                 </span>
                                 {' '} <Translate>Print</Translate>
                             </button>
+
                             <h3><Translate>Order Summary</Translate></h3>
-                            
                             {orderDetails.items && orderDetails.items.length > 0 && orderDetails.items.map((product, indexProduct) => (
                                 <div className="order-product-item" key={indexProduct}>
                                     <div className="row">
                                         <div className="col-2">
-                                            <img src={`${process.env.NEXT_PUBLIC_URL}images/products/${product.featured_image}`} width={50} />
+                                            <img src={productImageUrl(product.featured_image)} width={50} />
                                         </div>
                                         <div className="col-6">
                                             <h4>{product.name}</h4>
@@ -152,7 +152,7 @@ const OrderInvoice = ({ title = translate('Invoice'), id, is_invoice = false }) 
                                     </div>
                                 </div>
                             ))}
-                            
+
                             <div className="mt-2">
                                 <table className="table table-borderless order-calculation-table">
                                     <tbody>
@@ -186,7 +186,6 @@ const OrderInvoice = ({ title = translate('Invoice'), id, is_invoice = false }) 
                      <h5>Loading Order Information for <span className="text-success">Invoice #{id}</span>...</h5>
                  </div>
             }
-            
         </div>
     );
 }

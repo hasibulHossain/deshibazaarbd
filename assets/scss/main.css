@@ -2447,6 +2447,7 @@ p.text-secondary.mb-0 {
   cursor: pointer;
   font-weight: 500;
   transition: all 200ms ease;
+  text-transform: capitalize;
 }
 
 .search-suggestion-area-search_by-item.active {
