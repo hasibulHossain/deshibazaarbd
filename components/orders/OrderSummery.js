@@ -15,7 +15,7 @@ const OrderSummery = ({ handleClick, buttonText }) => {
 
     const { coupon, couponLoading, couponData, shippingCostLoading } = useSelector((state) => state.OrderReducer);
     const { shippingCost } = useSelector((state) => state.OrderReducer);
-    
+
     useEffect(() => {
         dispatch(getCartsAction());
         dispatch(handleShippingCost(carts))
@@ -68,7 +68,7 @@ const OrderSummery = ({ handleClick, buttonText }) => {
                             </div>
 
                             <div className="cart__right-order_details_item">
-                                <p className="font-weight-bold"> Discount</p>
+                                <p className="font-weight-bold">Discount</p>
                                 <p className="font-weight-bold">{formatCurrency(couponData && couponData.discount_amount ? couponData.discount_amount : 0)} {activeCurrency('code')} </p>
                             </div>
 
@@ -83,8 +83,8 @@ const OrderSummery = ({ handleClick, buttonText }) => {
                                         placeholder="Discount Code"
                                         value={coupon.code && coupon.code}
                                         onChange={(e) => handleChangeCouponCode("code", e.target.value)}
-                                        ref={register({ required: true })} 
-                                    /> 
+                                        ref={register({ required: true })}
+                                    />
                                     <br />
                                     <button disabled={couponLoading ? true : false} className="btn btn-success ml-2 btn-coupon-apply" type="submit">
                                         { couponLoading ? 'Checking...' : 'APPLY' }

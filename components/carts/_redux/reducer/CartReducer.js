@@ -1,3 +1,4 @@
+import { productHasOffer } from "../../../../services/ProductService";
 import { getSupplierWiseCartsData } from "../action/CartAction";
 import * as Types from "../types/Types";
 
@@ -48,7 +49,7 @@ const calculateTotalQtyAndPrices = (carts) => {
     const qty = parseInt(cartItem.quantity);
     const price = parseFloat(cartItem.price);
     const offerPrice = parseFloat(cartItem.offerPrice);
-    const hasOffer = offerPrice > 0 && offerPrice < price;
+    const hasOffer = productHasOffer(price, offerPrice);
 
     if (cartItem.isChecked) {
       response.totalQuantity += !qty ? 1 : qty; // By default 1 if quantity is not available, else quantity
