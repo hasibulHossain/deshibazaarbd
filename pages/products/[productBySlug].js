@@ -4,6 +4,7 @@ import ProductDetailInfo from "../../components/product-detail/ProductDetailInfo
 import PageMeta from "../../components/layouts/PageMeta";
 
 export default function ProductBySlug({ product }) {
+    console.log('product => ', product)
     let productUrl;
 
     if(product) {
@@ -40,7 +41,7 @@ export default function ProductBySlug({ product }) {
 }
 
 export const getServerSideProps = async (context) => {
-    const productBySlug = context.params.productBySlug;
+    const productBySlug = encodeURIComponent(context.params.productBySlug);
     const uri = encodeURI(`${process.env.NEXT_PUBLIC_API_URL}get-item-detail/${productBySlug}`);
     // Don't delete the base api_url from here.
     const res = await fetch(uri);
