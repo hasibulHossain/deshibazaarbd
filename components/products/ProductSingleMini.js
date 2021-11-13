@@ -7,7 +7,7 @@ import { addToCartAction } from "../carts/_redux/action/CartAction";
 import { showToast } from "../master/Helper/ToastHelper";
 import Translate from "../translation/Translate";
 import router from 'next/router'
-import Image from 'next/image';
+// import Image from 'next/image';
 import Link from 'next/link';
 
 /**
@@ -89,7 +89,10 @@ const ProductSingleMini = ({
               <Link href={uri}>
                 <a className="product-card-link">
                   <div style={{overflow: 'hidden'}}>
-                  <Image src={imageURL} alt={item.name} width={200} height={200} />
+                    <div>
+                      {/* <Image src={imageURL} alt={item.name} width={200} height={200} /> */}
+                      <img src={imageURL} alt={item.name} className="test" />
+                    </div>
                     <div className="product-card-body-inner">
                       <h2 className="product-title">
                         <Translate>{item.name}</Translate>
@@ -147,8 +150,8 @@ const ProductSingleMini = ({
                   <Link href={uri}>
                     <a className="product-card-link">
                   <div style={{overflow: 'hidden', marginTop: '1rem'}}>
-                    {/* <img src={imageURL} alt={item.name} className="img-fluid" /> */}
-                    <Image src={imageURL} alt={item.name} width={220} height={220} />
+                    <img src={imageURL} alt={item.name} className="img-fluid" />
+                    {/* <Image src={imageURL} alt={item.name} width={220} height={220} /> */}
                   </div>
                   <div>
                     <h2 className="product-title px-3">{item.name}</h2>
@@ -208,7 +211,10 @@ const ProductSingleMini = ({
         <Link href={uri}>
           <a className="product-card-link">
             <div style={{overflow: 'hidden'}}>
-            <Image src={imageURL} alt={item.name} width={200} height={200} />
+              <div>
+                {/* <Image src={imageURL} alt={item.name} width={200} height={200} /> */}
+                <img src={imageURL} alt={item.name} />
+              </div>
             
               <div className="product-card-body-inner">
                 <h2 className="product-title">
