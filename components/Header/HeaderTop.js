@@ -1,16 +1,10 @@
-import React, { useState, useEffect, memo } from 'react';
-import { useDispatch } from 'react-redux';
-import { Dropdown } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faShippingFast, faUser } from '@fortawesome/free-solid-svg-icons'
-import { getCurrencies, activeCurrency } from '../../services/currency';
-import SimpleModal from '../master/Modal/SimpleModal';
+import React, { useState, useEffect } from 'react';
+import { getCurrencies } from '../../services/currency';
+import Modal from '../master/Modal/Modal';
 import TrackingForm from './TrackingForm';
 import Translate from '../translation/Translate';
-import { getUserDataAction } from '../_redux/getUserData/Action/UserDataAction';
 
 const HeaderTop = () => {
-    const dispatch                    = useDispatch();
     const [currencies, setCurrencies] = useState([]);
     const [show, setShow]             = useState(false);
 
@@ -19,7 +13,6 @@ const HeaderTop = () => {
 
     useEffect(() => {
         setCurrencies(getCurrencies());
-        dispatch(getUserDataAction());
     }, []);
 
     const toggleActiveLanguage = (currency) => {
@@ -45,53 +38,51 @@ const HeaderTop = () => {
                                     href="https://seller.deshibazaarbd.com"
                                     target="_blank"
                                     style={{ color: '#fff', textDecoration: 'none' }} >
-                                    <FontAwesomeIcon className="custom-fontAwesome" icon={faUser} />
+                                    <i className="fas fa-user"></i>
+                                    {' '}
                                     <Translate>Become a Seller</Translate>
                                 </a>
                             </p>
 
-                            {/* {
-                                typeof userData !== "undefined" && userData !== null && (
-                                    <p className="heading-top-text pointer" onClick={() => handleShow()}>
-                                        <FontAwesomeIcon className="custom-fontAwesome" icon={faShippingFast} />
-                                        <Translate>Track My Order</Translate>
-                                    </p>
-                                )
-                            } */}
-
                             <p className="heading-top-text pointer" onClick={() => handleShow()}>
-                                <FontAwesomeIcon className="custom-fontAwesome" icon={faShippingFast} />
+                                <i className="fas fa-shipping-fast"></i>
+                                {' '}
                                 <Translate>Track Order</Translate>
                             </p>
-
-                            <Dropdown className="dropdown-currency">
-                                <Dropdown.Toggle variant="default" id="dropdown-basic">
-                                    <img src={activeCurrency('flag_link')} width={30} /> {activeCurrency('lang')}
-                                </Dropdown.Toggle>
-
-                                <Dropdown.Menu>
-                                    {
-                                        currencies.length > 0 && currencies.map((currency, index) => (
-                                            <Dropdown.Item href="#" key={index} className={activeCurrency('code') === currency.code ? 'bg-light' : ''} onClick={() => toggleActiveLanguage(currency)}>
-                                                <img src={currency.flag_link} width={30} />  {currency.lang}
-                                            </Dropdown.Item>
-                                        ))
-                                    }
-                                </Dropdown.Menu>
-                            </Dropdown>
+                            <div className="dropdown-currency">
+                                {
+                                    currencies.length > 0 && currencies.map((currency, index) => {
+                                        if(index === 0) {
+                                            return (
+                                                <span onClick={() => toggleActiveLanguage(currency)} key={index}>
+                                                    {currency.slug.toUpperCase()}
+                                                    {' '}
+                                                    &#124;
+                                                    {' '}
+                                                </span>
+                                            )
+                                        } else {
+                                            return (
+                                                <span onClick={() => toggleActiveLanguage(currency)} key={index}>
+                                                    {currency.slug.toUpperCase()}
+                                                </span>
+                                            )
+                                        }
+                                    })
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <SimpleModal
-                handleClose={handleClose}
-                size={"md"}
-                show={show}
+            <Modal
+                closeModalHandler={handleClose}
+                visible={show}
             >
                 <TrackingForm show={show} setShow={setShow} />
-            </SimpleModal>
+            </Modal>
         </section>
     );
 };
 
-export default memo(HeaderTop);
+export default HeaderTop;

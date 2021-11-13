@@ -1,32 +1,28 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
-
-import { FiChevronRight } from "react-icons/fi";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShoppingBag } from "@fortawesome/free-solid-svg-icons";
 
 import SimpleBtn from "../components/master/SimpleBtn/SimpleBtn";
 import Modal from "../components/master/Modal/Modal";
 import RemoveCartItem from "../components/RemoveCartItem/RemoveCartItem";
 import OrderSummery from "../components/orders/OrderSummery";
-// import CartProduct from "../components/carts/cart-product/CartProduct";
 
 import { toggleModal } from "../_redux/store/action/globalAction";
 import {
   getCartsAction,
+  removeAllCartItem,
   toggleAllCartSelection,
 } from "../components/carts/_redux/action/CartAction";
-import { getUserDataAction } from "../components/_redux/getUserData/Action/UserDataAction";
 
 import dynamic from 'next/dynamic';
+
 const CartProduct = dynamic(() => import('../components/carts/cart-product/CartProduct'));
 
 export default function Carts() {
   const router = useRouter();
   const dispatch = useDispatch();
-
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const { isModalActive } = useSelector((state) => state.GlobalReducer);
   const { supplierWiseCarts, carts, checkedAllCarts } = useSelector(
     (state) => state.CartReducer
@@ -39,7 +35,6 @@ export default function Carts() {
 
   useEffect(() => {
     dispatch(getCartsAction());
-    dispatch(getUserDataAction());
   }, []);
 
   const placeOrder = () => {
@@ -50,8 +45,34 @@ export default function Carts() {
     }
   };
 
+  const toggleModalHandler = () => {
+    setIsModalVisible(visible => !visible);
+  }
+
+  const clearAllItem = () => {
+    dispatch(removeAllCartItem());
+    toggleModalHandler()
+  };
+
   return (
     <>
+        <Modal closeModalHandler={toggleModalHandler} visible={isModalVisible}>
+          <p className="remove_title">Cart item</p>
+          <div className="mb-3">All products will be removed</div>
+          <div className="d-flex justify-content-end">
+            <button
+              className="custom_secondary_btn custom-button-component"
+              onClick={toggleModalHandler} >
+              Cancel
+            </button>
+            <button
+              className="custom-button-component ml-3"
+              style={{ padding: "5px 10px" }}
+              onClick={clearAllItem} >
+              Remove all
+            </button>
+          </div>
+        </Modal>
         <div className="container">
           <div className="row mt-3 mb-5">
             <div className="col-lg-8 col-md-7 px-0 px-sm-2">
@@ -69,14 +90,17 @@ export default function Carts() {
                 <div className="card mt-3">
 
                   <div className="cart_item_box_top">
-                    <p className="pointer" onClick={() => dispatch(toggleAllCartSelection(!checkedAllCarts))}>
+                    <div className="pointer d-flex align-items-center" onClick={() => dispatch(toggleAllCartSelection(!checkedAllCarts))}>
                       <input className="cart-checkbox" type="checkbox" checked={checkedAllCarts} onChange={() => { }} />
                       &nbsp; Select All ({carts.length} items)
-                    </p>
-                    {/* <div className="carts_delete" onClick={deleteItemsHandler}>
-                      <FontAwesomeIcon className="cart_trash" icon={faTrash} />
-                      <p>Delete</p>
-                    </div> */}
+                    </div>
+                    {
+                      carts.length > 0 && (
+                        <div>
+                          <span onClick={toggleModalHandler} className="pointer">Clear all</span>
+                        </div>
+                      )
+                    }
                   </div>
 
                   {supplierWiseCarts.length > 0 &&
@@ -94,14 +118,14 @@ export default function Carts() {
                                         {item.sellerName}
                                       </p>
                                       <div className="cart_trash">
-                                        <FiChevronRight />
+                                        <i className="fas fa-chevron-right"></i>
                                       </div>
                                     </div>
                                   </div>
                                 </div>
                               </div>
                               <div className="col-lg-6">
-                                <p className="estimate">Estimate time - {item.approxDeliveryDate} </p>
+                                <p className="estimate text-right">Estimate time - {item.approxDeliveryDate} </p>
                               </div>
                             </div>
 
@@ -127,13 +151,11 @@ export default function Carts() {
 
                   <div className="p-2 mb-4">
                     <div className="text-center">
-                      <Link href="/products">
-                        <a href="/products" style={{ display: "inline-block" }}>
+                      <Link href="/">
+                        <a style={{ display: "inline-block" }}>
                           <SimpleBtn variant="success">
-                            <FontAwesomeIcon
-                              className="mr-2"
-                              icon={faShoppingBag}
-                            />
+                            <i className="fas fa-shopping-bag"></i>
+                            {' '}
                             CONTINUE SHOPPING
                           </SimpleBtn>
                         </a>

@@ -29,8 +29,8 @@ const initialState = {
         name          : "",
         phone_no      : "",
         transaction_id: "",
-        country_id    : "", //integer
-        country       : "",
+        country_id    : 19, //integer
+        country       : "Bangladesh (বাংলাদেশ)",
         city_id       : "",  //integer
         city          : "",
         area_id       : "",   //integer
@@ -46,8 +46,8 @@ const initialState = {
         name          : "",
         phone_no      : "",
         transaction_id: "",
-        country_id    : "", //integer
-        country       : "",
+        country_id    : 19, //integer
+        country       : "Bangladesh (বাংলাদেশ)",
         division      : "",
         division_id   : "",
         city_id       : "",  //integer
@@ -65,8 +65,8 @@ const initialState = {
         name          : "",
         phone_no      : "",
         transaction_id: "",
-        country_id    : "", //integer
-        country       : "",
+        country_id    : 19, //integer
+        country       : "Bangladesh (বাংলাদেশ)",
         division      : "",
         division_id   : "",
         city_id       : "",  //integer
@@ -222,7 +222,6 @@ function ProfileAccountSettingReducer(state = initialState, action) {
                 let cloneSelectedAddress;
 
                 if (cloneAddress.length > 0) {
-                    console.log('clone address => ', cloneAddress)
                      cloneSelectedAddress = {
                         ...state.selectedAddress,
                         id                 : +cloneAddress[0].id,

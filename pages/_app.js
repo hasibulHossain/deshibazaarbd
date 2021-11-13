@@ -2,12 +2,11 @@ import React from "react";
 import App from "next/app";
 import Head from 'next/head';
 import { Provider } from "react-redux";
-import axios from "axios";
+import Router from "next/router";
+import NProgress from 'nprogress';
 import { createWrapper } from "next-redux-wrapper";
 import Store from "../_redux/Store";
 
-import "@fortawesome/fontawesome-svg-core/styles.css";
-import { config } from "@fortawesome/fontawesome-svg-core";
 import "../assets/scss/variables.scss";
 import "bootstrap/scss/bootstrap.scss";
 import "../node_modules/slick-carousel/slick/slick-theme.css";
@@ -31,27 +30,15 @@ import 'react-inner-image-zoom/lib/InnerImageZoom/styles.min.css';
 
 // For Order Pages
 import "../components/orders/scss/order-invoice.scss";
+import MainLayout from "../components/layouts/MainLayout";
+import axiosDefault from "../services/axios-default";
+import axios from 'axios';
 
-// Prevent fontawesome from dynamically adding its css since we did it manually above
-config.autoAddCss = false;
-
+axiosDefault();
 toast.configure();
 
-// Import axios.js so that it can inject token in every request
-require("../services/axios");
-
 // Base url
-axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL;
 
-
-// export function reportWebVitals(metric) {
-//   console.log(metric)
-// }
-
-
-import Router from "next/router";
-import NProgress from 'nprogress';
-import MainLayout from "../components/layouts/MainLayout";
 
 NProgress.configure({ minimum: 0.1 });
 
@@ -71,7 +58,6 @@ Router.onRouteChangeError = () => {
 };
 
 
-
 class MyApp extends App {
   render() {
     const { Component, pageProps } = this.props;
@@ -79,10 +65,11 @@ class MyApp extends App {
       <Provider store={Store}>
         <Head>
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
         </Head>
-        <MainLayout>
-          <Component {...pageProps}></Component>
-        </MainLayout>
+          <MainLayout>
+            <Component {...pageProps}></Component>
+          </MainLayout>
       </Provider>
     );
   }

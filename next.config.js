@@ -11,7 +11,7 @@
 
 module.exports = {
   images: {
-    domains: ['deshi.programmingshikhi.com', 'api-ecom.programmingshikhi.com', 'api.deshibazaarbd.com', 'api-ecom.deshibazaarbd.com', 'localhost:8000'],
+    domains: ['deshi.programmingshikhi.com', 'api-ecom.programmingshikhi.com', 'api.deshibazaarbd.com', 'api-ecom.deshibazaarbd.com', 'localhost'],
   },
   future: {
     webpack5: true
@@ -25,14 +25,3 @@ module.exports = {
     return config;
   }
 }
-
-// module.exports = {
-//   webpack(config) {
-//     config.module.rules.push({
-//       test: /\.svg$/,
-//       use: ["@svgr/webpack"]
-//     });
-
-//     return config;
-//   }
-// };

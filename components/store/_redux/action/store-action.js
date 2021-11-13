@@ -32,6 +32,6 @@ export const getFilteredStoreList = (locations) => async (dispatch) => {
     dispatch({ type: types.GET_STORE_LIST, payload: { storeList: data } });
 
   } catch (err) {
-    console.log('err => ', err)
+    // console.log('err => ', err)
   }
 }

@@ -1,166 +1,173 @@
 import Link from "next/link";
 import React, { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
-import { useDispatch, useSelector } from "react-redux";
-import { handleLoginInput, loginAction } from "../_redux/Action/LoginAction";
-import { useForm } from "react-hook-form";
-import ErrorMessage from "../../master/ErrorMessage/ErrorMessage";
+import { useDispatch } from "react-redux";
+import { signIn } from 'next-auth/client'
+import { isSignedIn } from "../../../_redux/store/action/globalAction";
+import { useRouter } from 'next/router';
+import { getUserDataAction } from "../../_redux/getUserData/Action/UserDataAction";
+import { showToast } from "../../master/Helper/ToastHelper";
+
+import * as yup from "yup";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import SimpleBtn from "../../master/SimpleBtn/SimpleBtn";
 
 const LoginComponent = () => {
-
-  const [showPassword, setShowPassword]    = useState(false);
+  const router                             = useRouter();
   const dispatch                           = useDispatch();
-  const loginInput                         = useSelector((state) => state.AuthReducer.loginInput);
-  const isLoading                          = useSelector((state) => state.AuthReducer.isLoading);
-  const { register, handleSubmit, errors } = useForm();
+  const [showPassword, setShowPassword]    = useState(false);
+  const [isLoading, setIsLoading]          = useState(false);
 
-  const handleLoginInputChange = (name, value) => {
-    dispatch(handleLoginInput(name, value));
+  const initialValues = {
+    email: "",
+    password: "",
+    remember: false
   };
 
-  const handleLogin = (e) => {
-    dispatch(loginAction(loginInput));
-    // e.preventDefault();
+  const loginPost = async (values) => {
+    setIsLoading(true);
+    const res = await signIn('credentials', {
+        email: values.email,
+        password: values.password,
+        redirect: false,
+    })
+
+    if(res.error) {
+      showToast('error', res.error)
+    }
+    
+    if(res) {
+      dispatch(isSignedIn())
+      setIsLoading(false);
+    }
+    
+    if(!res.error) {
+      router.replace('/')
+      setIsLoading(false);
+      dispatch(getUserDataAction());
+    }
+  }
+
+  const onSubmit = (values) => {
+    loginPost(values)
   };
+
+  const validationSchema = yup.object().shape({
+    email: yup.string()
+    .required("Required")
+    .test('email&pass', 'Enter a valid phone number or email address', value => {
+      const emailRegex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+      const phoneRegex = /^[0][1-9]\d{9}$|^[1-9]\d{9}$/; // Change this regex based on requirement
+
+      let isValidEmail = emailRegex.test(value);
+      let isValidPhone = phoneRegex.test(value);
+      
+      if(!isValidEmail && !isValidPhone) return false
+      return true
+    }),
+    password: yup.string()
+    .min(8, 'Minimum 8 characters required')
+    .required('Required')
+  });
 
   return (
-    <>
-      <div className="account_info_body mt-5">
-        {typeof loginInput !== "undefined" && (
-          <form
-            onSubmit={handleSubmit(handleLogin)}
-            method="post"
-            autoComplete="off"
-            encType="multipart/form-data"
-          >
+    <div className="account_info_body mt-3 mt-md-5">
+      <Formik
+        initialValues={ initialValues }
+        onSubmit={ onSubmit }
+        validationSchema={ validationSchema }
+        validateOnMount >
+      {() => {
+        return (
+          <Form>
             <div className="row">
-              <div className="col-md-6">
+              <div className="col-12 px-0 px-lg-5">
                 <div className="mb-3">
-                  <label htmlFor="lastName" className="form-label">
-                    Email Or Phone Number
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder=""
-                    name="email"
-                    value={loginInput.email}
-                    onChange={(e) =>
-                      handleLoginInputChange("email", e.target.value)
-                    }
-                    ref={register({
-                      required: true,
-                      maxLength: 100,
-                    })}
-                  />
-                  {errors.email && errors.email.type === "required" && (
-                    <ErrorMessage errorText="Email or Phone can't be blank!" />
-                  )}
-                </div>
-              </div>
-
-              <div className="col-md-6">
-                <label htmlFor="password" className="form-label">
-                  Password
-                </label>
-                <div className="account_input_group">
-                  <input
-                    type={showPassword === true ? "text" : "password"}
-                    className="form-control"
-                    id="inlineFormInputGroup"
-                    placeholder=""
-                    name="password"
-                    value={loginInput.password}
-                    onChange={(e) =>
-                      handleLoginInputChange("password", e.target.value)
-                    }
-                    ref={register({
-                      required: true,
-                      maxLength: 100,
-                    })}
-                  />
-                  {errors.password && errors.password.type === "required" && (
-                    <ErrorMessage errorText="Password can't be blank!" />
-                  )}
-
-                  <div
-                    className="account_input_group_prepend"
-                    onClick={() => setShowPassword(!showPassword)}
-                  >
-                    {showPassword === true ? (
-                      <FontAwesomeIcon icon={faEyeSlash} />
-                    ) : (
-                      <FontAwesomeIcon icon={faEye} />
-                    )}
+                  <div className="input-box">
+                    <label htmlFor="email" className="form-label required">Email / Phone</label>
+                    <Field class="form-control" type="text" id="email" name="email" />
+                    <ErrorMessage name="email" component={ ValidationError } />
                   </div>
                 </div>
               </div>
-            </div>
 
-            <div className="d-flex justify-content-between flex-column flex-sm-row pt-2 pt-sm-0" style={{ padding: '0 15px' }}>
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  value=""
-                  id="loginRememberMe"
-                />
-                <label
-                  className="account_info_label pointer"
-                  htmlFor="loginRememberMe"
-                >
-                  Remember me
-                </label>
+              <div className="col-12 px-0 px-lg-5">
+                <div className="mb-3">
+                  <label htmlFor="password" className="form-label required">password</label>
+                  <div className="account_input_group">
+                      <Field class="form-control" type={showPassword ? 'text' : 'password'} id="password" name="password" />
+                      <div
+                        className="account_input_group_prepend"
+                        onClick={() => setShowPassword(!showPassword)} >
+                        {showPassword === false ? (
+                          <span>
+                            <i className="far fa-eye-slash"></i>
+                          </span>
+                        ) : (
+                          <span>
+                            <i className="far fa-eye"></i>
+                          </span>
+                        )}
+                      </div>
+                  </div>
+                  <ErrorMessage name="password" component={ ValidationError } />
+                </div>
               </div>
-              <p className="forget_password_link">
-                <Link href="/user/forget-password">
-                  <a>Forget password?</a>
-                </Link>
-              </p>
+
+              <div className="col-6 mt-lg-0 mt-3 px-0 px-lg-5">
+                  <div className="d-flex align-items-center">
+                    <Field type="checkbox" id="remember" name="remember" />
+                    <label htmlFor="remember" className="form-label pl-2 m-0">Remember me</label>
+                  </div>
+              </div>
+
+              <div className="col-6 mt-lg-0 mt-3 px-0 px-lg-5">
+                <p className="forget_password_link text-right m-0">
+                  <Link href="/user/forget-password">
+                    <a>Forgot password?</a>
+                  </Link>
+                </p>
+              </div>
+              <div className="col-12 justify-content-center px-0 px-lg-5">
+                {/* <div className="account_btn_group justify-content-end justify-content-sm-start">
+                  <button type="submit" className="btn account_btn mt-2" disabled={isLoading}>
+                    Login
+                  </button>
+                </div> */}
+                <div className="mt-3" style={{width: '50%'}}>
+                  <SimpleBtn disabled={isLoading} variant="success" type="submit" style={{backgroundColor: 'var(--color-green)'}}>
+                    Login &nbsp;
+                    {
+                      isLoading && (
+                          <div className="spinner-border" style={{color: '#fff', fontSize: '10px', width: '20px', height: '20px'}} role="status">
+                              <span className="sr-only">Loading...</span>
+                          </div>
+                      )
+                    }
+                  </SimpleBtn>
+                </div>
+              </div>
+
             </div>
 
-            <div className="account_btn_group justify-content-end justify-content-sm-start">
-              {!isLoading && (
-                <button className="btn account_btn mt-2">SIGN IN</button>
-              )}
-              {isLoading && (
-                <button
-                  disabled={true}
-                  type="submit"
-                  className="btn account_btn mt-2"
-                >
-                  <span
-                    className="spinner-border spinner-border-sm"
-                    role="status"
-                    aria-hidden="true"
-                  ></span>{" "}
-                  Signing in...
-                </button>
-              )}
-
-              {/* <p className="mt-2">or Sign up with</p>
-              <button className="btn google_btn mr-3 mt-2">
-                <FontAwesomeIcon className="mr-2" icon={faGoogle} />
-                Google
-              </button>
-              <button className="btn facebook_btn mt-2">
-                <FontAwesomeIcon className="mr-2" icon={faFacebookF} />
-                Google
-              </button> */}
-            </div>
-          </form>
-        )}
-
-        <p className="already_account">
+          </Form>
+        );
+      } }
+      </Formik>
+      <div>
+        <p className="already_account m-0 pt-3 pt-lg-5">
           Don't have an account?
           <Link href="/register">
             <a> Sign up </a>
           </Link>
         </p>
       </div>
-    </>
-  );
+    </div>
+  )
 };
+
+function ValidationError(props) {
+  return <small className="err-mss color-main" >{props.children}</small>;
+}
+
 
 export default LoginComponent;

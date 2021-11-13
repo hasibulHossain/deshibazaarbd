@@ -23,10 +23,7 @@ const UserDataReducer = (state = initialState, action) => {
       };
 
     default:
-      return {
-        ...state,
-      };
-      break;
+      return state
   }
 };
 

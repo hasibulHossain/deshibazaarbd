@@ -1,12 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShoppingBag } from "@fortawesome/free-solid-svg-icons";
-
 import PriceCalculation from "./partials/PriceCalculation";
 import { useDispatch } from "react-redux";
-// import { toggleProductModalAction } from "./_redux/Action/ProductAction";
 import { addToCartAction } from "../carts/_redux/action/CartAction";
 import { showToast } from "../master/Helper/ToastHelper";
 import Translate from "../translation/Translate";
@@ -135,7 +131,7 @@ const ProductSingleMini = ({
                 <button type='button' onClick={() => addToCart(item)} className='simple-btn homepage-product-btn'>
                   <div className="simple-btn__inner">
                     <div className="simple-btn__icon">
-                      <FontAwesomeIcon icon={faShoppingBag} />
+                      <i className="fas fa-shopping-bag"></i>
                     </div>
                     <span className="simple-btn__txt">Add to cart</span>
                   </div>
@@ -192,7 +188,7 @@ const ProductSingleMini = ({
               <button type='button' onClick={() => addToCart(item)} className='simple-btn product-btn'>
                 <div className="simple-btn__inner">
                   <div className="simple-btn__icon">
-                    <FontAwesomeIcon icon={faShoppingBag} />
+                    <i className="fas fa-shopping-bag"></i>
                   </div>
                   <span className="simple-btn__txt">Add to cart</span>
                 </div>
@@ -249,7 +245,7 @@ const ProductSingleMini = ({
           <button type='button' onClick={() => addToCart(item)} className='simple-btn homepage-product-btn'>
             <div className="simple-btn__inner">
               <div className="simple-btn__icon">
-                <FontAwesomeIcon icon={faShoppingBag} />
+                <i className="fas fa-shopping-bag"></i>
               </div>
               <span className="simple-btn__txt">Add to cart</span>
             </div>

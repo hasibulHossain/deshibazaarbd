@@ -1,20 +1,41 @@
-import React, { useEffect } from "react";
+import React from "react";
 import ProductNoFound from "../../components/master/productNoFound/ProductNoFound";
-import LoadingSkelleton from "../../components/master/skelleton/LoadingSkelleton";
 import ProductDetailInfo from "../../components/product-detail/ProductDetailInfo";
+import PageMeta from "../../components/layouts/PageMeta";
 
 export default function ProductBySlug({ product }) {
+    let productUrl;
+
+    if(product) {
+       productUrl = encodeURI(`https://deshibazaarbd.com/products/${product.sku}`);
+    }
+
     return (
-        <div className="container">
+        <>
             {
-                product !== "undefined" && product !== null ?
-                    <ProductDetailInfo product={product} /> :
-                    <ProductNoFound
-                        title="Product details no found !"
-                        description="We're sorry. We cannot find this product details at this moment."
-                    />
+                product && (
+                    <PageMeta 
+                        ogpEnabled={true}
+                        title={product.name}
+                        keywords={product.name}
+                        description={product.short_description}
+                        pageSocialMetaUrl={productUrl}
+                        pageSocialMetaImage={product.featured_url}
+                        type="product" />
+                )
             }
-        </div>
+
+            <div className="container">
+                {
+                    product ?
+                        <ProductDetailInfo product={product} /> :
+                        <ProductNoFound
+                            title="Product details no found !"
+                            description="We're sorry. We cannot find this product details at this moment."
+                        />
+                }
+            </div>
+        </>
     );
 }
 
@@ -26,6 +47,12 @@ export const getServerSideProps = async (context) => {
 
     const dataJSON = await res.json();
     const data = dataJSON.data;
+
+    if(!data) {
+        return {
+            notFound: true
+        }
+    }
     return {
         props: { product: data }
     }

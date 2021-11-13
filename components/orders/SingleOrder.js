@@ -1,15 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import dayjs from 'dayjs';
-import SimpleBtn from '../master/SimpleBtn/SimpleBtn.js';
 import Link from 'next/link'
 import { handleCancelOrder } from './_redux/action/OrderAction.js';
-import { getUserDataAction } from '../_redux/getUserData/Action/UserDataAction.js';
 import { useDispatch, useSelector } from 'react-redux';
 import SimpleModal from '../master/Modal/SimpleModal.js';
 import SimpleConfirmComponent from '../master/Modal/SimpleConfirmComponent.js';
-
-import { faEye, faPrint, faTimes } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const SingleOrder = ({ item, isManageable = true }) => {
 
@@ -32,7 +27,6 @@ const SingleOrder = ({ item, isManageable = true }) => {
     }
 
     useEffect(() => {
-        dispatch(getUserDataAction());
     }, [])
 
     return (
@@ -62,7 +56,9 @@ const SingleOrder = ({ item, isManageable = true }) => {
                                         <Link href={`/order/${item.id}`}>
                                             <a>
                                                 <button className="btn btn-info order-top-btn btn-sm mr-2">
-                                                    <FontAwesomeIcon icon={faEye} /> View
+                                                    <i className="far fa-eye"></i>
+                                                    {' '}
+                                                    View
                                                 </button>
                                             </a>
                                         </Link>
@@ -71,39 +67,15 @@ const SingleOrder = ({ item, isManageable = true }) => {
                                 <Link href={`/order/invoice/${item.id}`}>
                                     <a>
                                         <button className="btn btn-success order-top-btn btn-sm">
-                                            <FontAwesomeIcon icon={faPrint} /> Invoice
+                                            <i className="fas fa-print"></i>
+                                            {' '}
+                                            Invoice
                                         </button>
                                     </a>
                                 </Link>
-
-                                {/* {
-                                    isManageable && item.is_suspend == 0 && (
-                                        <button className="btn btn-danger order-top-btn btn-sm ml-2" onClick={() => toggleShowHandler(item)}>
-                                            <FontAwesomeIcon icon={faTimes} /> Cancel
-                                        </button>
-                                    )
-                                } */}
                             </div>
                         </div>
                     </div>
-
-
-                    {/* {
-                        isManageable && (
-                            <div>
-                                {
-                                    item.is_suspend == 0 && (
-                                        <div className="d-block">
-                                            <SimpleBtn variant="simple_btn_bg" style={{ width: 'fit-content' }} onClick={() => toggleShowHandler(item)}>
-                                                Cancel
-                                            </SimpleBtn>
-                                        </div>
-                                    )
-                                }
-                            </div>
-                        )
-                    } */}
-
                 </div>
                 <div className="order_product_list p-2">
                     {

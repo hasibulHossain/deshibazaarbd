@@ -1,28 +1,14 @@
-import React, { useState } from 'react';
-import { Tab, Tabs } from 'react-bootstrap';
-import LoginComponent from './components/LoginComponent';
+import React from 'react';
 import RegistrationComponent from './components/RegistrationComponent'
+import withProtectedRoute from '../master/hoc/withProtectedRoute';
 const Registration = () => {
-    const [key, setKey] = useState('sign-up');
     return (
-        <div>
-            <div className="container">
-                <div className="row justify-content-center align-items-center my-3">
-                    <div className="col-md-8 p-sm-3 px-0">
-                        <div className="account_info bg-white  rounded shadow-sm p-lg-5 p-2">
-                            <Tabs
-                                id="controlled-tab-example"
-                                activeKey={key}
-                                onSelect={(k) => setKey(k)}
-                            >
-                                <Tab eventKey="sign-up" title="Sign up">
-                                    <RegistrationComponent />
-                                </Tab>
-                                <Tab eventKey="sign-in" title="Sign in">
-                                    <LoginComponent />
-                                </Tab>
-                            </Tabs>
-                        </div>
+        <div className="container">
+            <div className="row justify-content-center align-items-center my-3">
+                <div className="col-md-9 col-lg-7 p-sm-3 px-0">
+                    <div className="account_info bg-white rounded shadow-sm p-lg-5 py-4 px-3">
+                        <h1 className="text-center color-main">SIGN UP</h1>
+                        <RegistrationComponent />
                     </div>
                 </div>
             </div>
@@ -30,4 +16,4 @@ const Registration = () => {
     );
 };
 
-export default Registration;
+export default withProtectedRoute(Registration, true);

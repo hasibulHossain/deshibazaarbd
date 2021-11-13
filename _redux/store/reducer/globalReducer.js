@@ -4,6 +4,7 @@ const initialState = {
   floatingCartVisible: false,
   backdrop: false,
   isMobile: false,
+  isSignedIn  : false,
 };
 
 function GlobalReducer(state = initialState, { type, payload }) {
@@ -37,6 +38,12 @@ function GlobalReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         isMobile: payload,
+      };
+      
+    case types.IS_SIGNED_IN:
+      return {
+        ...state,
+        isSignedIn: payload,
       };
 
     default:

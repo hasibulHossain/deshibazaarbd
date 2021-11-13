@@ -3,10 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import SearchLoadingSkeleton from "./SearchLoadingSkeleton";
 import { searchProductAction } from "./_redux/Action/SearchInputAction";
 import { useRouter } from "next/router";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { translate } from "../../services/translation/translation";
-import Translate from "../translation/Translate";
 import { formatCurrency } from "../../services/currency";
 import axios from "axios";
 import { toggleBackdrop } from "../../_redux/store/action/globalAction";
@@ -102,12 +99,13 @@ const SearchInput = () => {
   return (
     <>
       <input
+        className="search-input"
         placeholder={translate("Search for Products, Brands or more")}
         onChange={(e) => searchProduct(e)}
         onKeyDown={e => onKeyDownHandler(e.key)}
       />
       <div className="header-custom-prepend pointer" onClick={() => onKeyDownHandler('Enter')} >
-        <FontAwesomeIcon className="custom-fontAwesome" icon={faSearch} />
+        <i className="fas fa-search"></i>
       </div>
 
       {search.length > 0 && (
@@ -115,8 +113,9 @@ const SearchInput = () => {
           <div className="p-2" style={{backgroundColor: '#f7f7f7'}}>
               <div className="d-flex">
                   {
-                    searchByList.map(item => (
-                      <span 
+                    searchByList.map((item, index) => (
+                      <span
+                        key={index}
                         className={`search-suggestion-area-search_by-item d-inline-block px-1 py-2 mr-3 ${searchType === item.id ? 'active' : ''}`}
                         onClick={() => searchByListHandler(item.id)} >
                         {item.label}

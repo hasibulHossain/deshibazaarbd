@@ -22,7 +22,7 @@ export const getFilteredProducts = (filterParamObj, source = {token: ""}) => asy
 
   try {
     dispatch({ type: Types.INIT_FILTER_PRODUCT_LIST });
-    const res = await Axios.get(`get-items?${filterParam}`, {cancelToken: source.token});
+    const res = await Axios.get(`get-items?${encodeURI(filterParam)}`, {cancelToken: source.token});
     responseData.isLoading = false;
     responseData.data = res.data.data;
     dispatch({ type: Types.GET_FILTER_PRODUCT_LIST, payload: responseData });
@@ -76,7 +76,7 @@ export const getCategoryOrBrandDetails = (endPoint) => async (dispatch) => {
 
     dispatch({type: Types.GET_CATEGORY_OR_BRAND_DETAILS, payload: response})
   } catch (err) {
-    console.log('err => ', err)
+    // console.log('err => ', err)
   }
 }
 
@@ -91,6 +91,7 @@ export const resetFilterParams = (filterParams) => ({
 });
 
 export const getSubCategories = (parentId) => async dispatch => {
+
   dispatch(getCategoryRelatedBrands(parentId));
 
   const url = 'categories/' + parentId
@@ -98,17 +99,16 @@ export const getSubCategories = (parentId) => async dispatch => {
     const res = await Axios.get(url);
     dispatch({type: Types.GET_SUB_CATEGORY, payload: res.data && res.data.data && res.data.data.childs})
   } catch (err) {
-    console.log('err => ', err)
+    // console.log('err => ', err)
   }
 };
 
 export const getCategoryRelatedBrands = (categoryId) => async dispatch => {
   const url = `categories/${categoryId}?with_brands=1`;
-
   try {
     const res = await Axios.get(url)
     dispatch({type: Types.GET_CATEGORY_RELATED_BRANDS, payload: res.data && res.data.data && res.data.data.brands});
   } catch (error) {
-    console.log('err => ', error)
+    // console.log('err => ', error)
   }
 } 

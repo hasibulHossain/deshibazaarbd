@@ -13,6 +13,7 @@ import Translate from '../translation/Translate';
 
 const ProfileAccountSetting = () => {
     const dispatch = useDispatch();
+    const { userData } = useSelector(state => state.UserDataReducer)
     const { billingAddress, shippingAddress, userInputData, isLoading } = useSelector(state => state.ProfileAccountSettingReducer)
     const [show, setShow] = useState(false);
     const toggleShowHandler = () => {
@@ -20,8 +21,8 @@ const ProfileAccountSetting = () => {
     }
 
     useEffect(() => {
-        dispatch(getAddress('billing_address'));
-        dispatch(getAddress('shipping_address'));
+        dispatch(getAddress('billing_address', userData.id));
+        dispatch(getAddress('shipping_address', userData.id));
         dispatch(getLocationData('countries'))
     }, [])
 

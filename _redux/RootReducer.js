@@ -6,7 +6,6 @@ import CompanyPolicyReducer from "../components/CompanyPolicy/_redux/Reducer/Com
 import DealFlashReducer from "../components/DealFlash/_redux/Reducer/DealFlashReducer";
 import HeaderReducer from "../components/Header/_redux/HeaderReducer/HeaderReducer";
 import HomeBannerCarouselReducer from "../components/homeBannerCarousel/_redux/homeBannerCarouselReducer/HomeBannerCarouselReducer";
-import RegisterReducer from "../components/LoginRegistration/_redux/Reducer/RegisterReducer";
 import ProductTopListReducer from "../components/ProductTopList/_redux/Reducer/ProductTopListReducer";
 import ShopReducer from "../components/Shop/_redux/Reducer/ShopReducer";
 import StoreReducer from "../components/store/_redux/reducer/store-reducer";
@@ -24,8 +23,6 @@ import ProductReducer from "../components/products/_redux/Reducer/ProductReducer
 import OrderReducer from "../components/orders/_redux/reducer/OrderReducer";
 import ProductReviewReducer from "../components/product-review/_redux/reducer/productReviewReducer";
 import ShippingInfoReducer from "../components/ShippingInfo/_redux/Reducer/ShippingInfoReducer";
-import WebsiteInformationReducer from "../components/_redux/WebsiteInformation/Reducer/WebsiteInformationReducer";
-import WebsitePageReducer from "../components/_redux/WebsiteInformation/Reducer/WebsitePageReducer";
 import FooterReducer from "../components/Footer/_redux/Reducer/FooterReducer";
 import ReviewReducer from "../components/product-review/_redux/reducer/productReviewReducer";
 import ForgetPasswordReducer from '../components/forget-password/_redux/reducer/forget-password-reducer';
@@ -45,7 +42,6 @@ export default combineReducers({
   ShopReducer                 : ShopReducer,
   StoreReducer                : StoreReducer,
   StoreInfoReducer            : StoreInfoReducer,
-  RegisterReducer             : RegisterReducer,
   AuthReducer                 : AuthReducer,
   UserDataReducer             : UserDataReducer,
   ProfileAccountSettingReducer: ProfileAccountSettingReducer,
@@ -59,9 +55,7 @@ export default combineReducers({
   OrderReducer                : OrderReducer,
   ProductReviewReducer        : ProductReviewReducer,
   ShippingInfoReducer         : ShippingInfoReducer,
-  WebsiteInformationReducer   : WebsiteInformationReducer,
   FooterReducer               : FooterReducer,
   ReviewReducer               : ReviewReducer,
-  WebsitePageReducer          : WebsitePageReducer,
   ForgetPasswordReducer       : ForgetPasswordReducer
 });

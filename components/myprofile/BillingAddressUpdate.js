@@ -14,6 +14,7 @@ const BillingAddressUpdate = () => {
     const areaList = useSelector((state) => state.ProfileAccountSettingReducer.areaList);
     const isSubmitting = useSelector((state) => state.ProfileAccountSettingReducer.isSubmitting);
     const billingAddressInput = useSelector((state) => state.ProfileUpdateReducer.billingAddressInput);
+    const {userData} = useSelector(state => state.UserDataReducer)
     const { register, handleSubmit, errors, setValue } = useForm();
 
     //handle change input 
@@ -22,13 +23,13 @@ const BillingAddressUpdate = () => {
     }
 
     useEffect(() => {
-        dispatch(handleSetDataIntoInputField())
+        dispatch(handleSetDataIntoInputField(userData))
         dispatch(getLocationData('countries'))
-        dispatch(getBillingAddressForInput('billing_address'))
+        dispatch(getBillingAddressForInput('billing_address', userData.id))
     }, [])
 
     const StoreBillingAddress = () => {
-        dispatch(handleUpdateBillingAddress(billingAddressInput))
+        dispatch(handleUpdateBillingAddress(billingAddressInput, userData.id))
     }
 
     return (

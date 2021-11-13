@@ -1,11 +1,8 @@
-import React, { Component, useEffect } from "react";
+import React, { useEffect } from "react";
 import ReactStars from "react-rating-stars-component";
 import Rater from "react-rater";
-// import { getReviewListByUser } from "./_redux/Action/ReviewAction";
 import { useDispatch, useSelector } from "react-redux";
 import { getReviewListByUser } from "../product-review/_redux/action/reviewAction";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShieldAlt } from "@fortawesome/free-solid-svg-icons";
 import LoadingSkelleton from "../master/skelleton/LoadingSkelleton";
 
 const ProductRatings = ({ product }) => {
@@ -14,7 +11,6 @@ const ProductRatings = ({ product }) => {
 
   useEffect(() => {
     dispatch(getReviewListByUser(product.id));
-    // dispatch(getReviewListByUser(product.id, 0, 1));
   }, []);
 
   const { reviewList, isLoading } = useSelector((state) => state.ProductReviewReducer);
@@ -51,7 +47,12 @@ const ProductRatings = ({ product }) => {
                   edit        = {false}
                   activeColor = "#ffab00"
                 />
-                <p className="rating_by">By {item.rating_by} <span className="text-success verify_review"> <FontAwesomeIcon icon={faShieldAlt} /> Verified Purchase</span></p>
+                <p className="rating_by">
+                  By {item.rating_by} 
+                  <span className="text-success verify_review">
+                    <i className="fas fa-shield-alt"></i>
+                  </span>
+                </p>
                 <p> {item.comment ? item.comment : "----"}</p>
               </div>
             ))

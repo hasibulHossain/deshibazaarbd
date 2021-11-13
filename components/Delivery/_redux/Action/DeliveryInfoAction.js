@@ -13,7 +13,7 @@ export const handleChangeDeliveryInputData = (name, value) => (dispatch) => {
     dispatch({ type: Types.DELIVER_CUSTOMER_INPUT_CHANGE, payload: addressData })
 }
 
-export const storeSells = (customerInfo, carts, totalQuantity, shippingCost, totalPrice, couponData) => (dispatch) => {
+export const storeSells = (customerInfo, carts, totalQuantity, shippingCost, totalPrice, couponData, userData) => (dispatch) => {
 
     let discountAmount = 0, discountType = 1;
 
@@ -24,21 +24,22 @@ export const storeSells = (customerInfo, carts, totalQuantity, shippingCost, tot
 
     shippingCost = isNaN(shippingCost) ? 0 : parseFloat(shippingCost);
 
-    const getUserData    = JSON.parse(localStorage.getItem('loginData'))
-    const { userData }   = getUserData;
     const payment_method = localStorage.getItem('payment_method') || 'cash';
     let sale_lines       = [];
 
     carts.forEach((item) => {
         const singleItem = {
             item_id           : item.productID,
-            quantity          : item.quantity,
-            unit_price        : item.price,
-            unit_price_inc_tax: item.price,
+            quantity          : parseInt(item.quantity),
+            unit_price        : item.offerPrice > 0 ? item.offerPrice : item.price,
+            unit_price_inc_tax: item.offerPrice > 0 ? item.offerPrice : item.price,
             discount_amount   : 0,
             item_tax          : 0
         }
-        sale_lines.push(singleItem)
+
+        if(item.isChecked) {
+            sale_lines.push(singleItem)
+        }
     });
 
     const totalPayableAmount = parseFloat(shippingCost + totalPrice - discountAmount);
@@ -149,14 +150,6 @@ export async function getLastTransactionData() {
     return transactionData;
 }
 
-export const getCurrentUserDataAction = () => (dispatch) => {
-    const loginData = localStorage.getItem("loginData") || '';
-
-    if (typeof loginData !== "undefined" && loginData !== null && loginData !== '' ) {
-        const data = JSON.parse(loginData) || null;
-
-        if ( typeof data.userData !== 'undefined' && data.userData !== null ) {
-            dispatch({ type: Types.SET_CUSTOMER_DELIVERY_INFO, payload: data.userData });
-        }
-    }
+export const getCurrentUserDataAction = (userData) => (dispatch) => {
+    dispatch({ type: Types.SET_CUSTOMER_DELIVERY_INFO, payload: userData });
 }

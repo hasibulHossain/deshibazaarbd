@@ -18,6 +18,6 @@ export const getDealFlashList = () => (dispatch) => {
             dispatch({type: Types.GET_FLASH_DEAL_DATA, payload: responseData});
         })
         .catch(err => {
-            console.log('deals of the day err => ', err);
+            // console.log('deals of the day err => ', err);
         })
 }

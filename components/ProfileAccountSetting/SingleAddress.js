@@ -9,6 +9,7 @@ function SingleAddress(props) {
     const dispatch = useDispatch();
     const { id, type, name, phone_no, location, userName, city, area, street1, street2, is_default } = props;
     const isLoading = useSelector((state)=> state.ProfileAccountSettingReducer.isLoading);
+    const {userData} = useSelector(state => state.UserDataReducer)
     const [show, setShow] = useState(false);
     const [deleteShow, setDeleteShow] = useState(false);
 
@@ -26,7 +27,7 @@ function SingleAddress(props) {
     }
 
     const handleDeleteAddress = () => {
-        dispatch(deleteAddress(id, toggleDeleteModal));
+        dispatch(deleteAddress(id, toggleDeleteModal, userData.id));
         setDeleteShow(preState => !preState);
     }
 

@@ -3,8 +3,8 @@ import Head from "next/head";
 import PropTypes from 'prop-types';
 
 const PageMeta = (props) => {
-    const { title = '', description = '', keywords = '', pageSocialMetaDescription, pageSocialMetaUrl, pageSocialMetaImage, pageSocialMetaAltImage,
-        websiteName, facebookAppID, twitterSiteUsername, ogpEnabled } = props;
+    const { title = '', description = '', keywords = '', pageSocialMetaUrl, pageSocialMetaImage, pageSocialMetaAltImage,
+        websiteName="Deshi Bazaar BD", facebookAppID, twitterSiteUsername, ogpEnabled, type = '' } = props;
 
     // OGP -> Open Graph Protocol
     // Social meta tags
@@ -12,7 +12,9 @@ const PageMeta = (props) => {
         <Head>
             <title>{title}</title>
             <meta name="description" content={description} />
-            <meta name="keywords" content={keywords} />
+            {
+                keywords && <meta name="keywords" content={keywords} /> 
+            }
 
             {
                 ogpEnabled && (
@@ -20,16 +22,22 @@ const PageMeta = (props) => {
                         {/* Social Meta tags */}
             
                         {/* Facebook, whatsapp, instagram, twitter and other popular social media */}
+                        <meta property="og:site_name" content={websiteName} />
                         <meta property="og:title" content={title} />
-                        <meta property="og:description" content={pageSocialMetaDescription} />
-                        <meta property="og:image" content={pageSocialMetaImage} />
+                        <meta property="og:description" content={description} />
                         <meta property="og:url" content={pageSocialMetaUrl} />
-                        <meta name="twitter:card" content={pageSocialMetaImage} />
+                        <meta property="og:image" content={pageSocialMetaImage} />
+                        <meta property="og:type" content={type} />
+                        {
+                            pageSocialMetaImage && <meta name="twitter:card" content={pageSocialMetaImage} />
+                        }
+                        
             
                         {/* Some Non-essential but recommended */}
-                        <meta property="og:site_name" content={websiteName} />
-                        <meta name="twitter:image:alt" content={pageSocialMetaAltImage} />
-            
+                        {
+                            pageSocialMetaAltImage && <meta name="twitter:image:alt" content={pageSocialMetaAltImage} />
+                        }
+                        
                         {/* If has need analytics for facebook and twitter */}
                         { typeof facebookAppID !== 'undefined' && <meta property="fb:app_id" content={facebookAppID} /> } 
                         { typeof twitterSiteUsername !== 'undefined' && <meta property="twitter:site" content={`@${twitterSiteUsername}`} /> } 

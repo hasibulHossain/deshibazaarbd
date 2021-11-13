@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { IoMdCloseCircle } from "react-icons/io";
-import { Modal } from "react-bootstrap";
+import router from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 
+import { formatCurrency, activeCurrency } from "../../../services/currency";
+import Modal from "../../master/Modal/Modal";
 import SimpleBtn from "../../master/SimpleBtn/SimpleBtn";
 import FloatingCartProduct from "./FloatingCartProduct";
+
 import { toggleFloatingCart } from "../../../_redux/store/action/globalAction";
 import { getCartsAction, removeAllCartItem } from "../_redux/action/CartAction";
-import { formatCurrency, activeCurrency } from "../../../services/currency";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import router from "next/router";
 
 function FloatingCart() {
   const dispatch = useDispatch();
@@ -83,15 +81,7 @@ function FloatingCart() {
   if (floatingCartVisible) {
     floatingCart = (
       <>
-        <Modal
-          // {...props}
-          show={show}
-          onHide={handleClose}
-          size="md"
-          aria-labelledby="contained-modal-title-vcenter"
-          centered
-        >
-          <Modal.Body>
+        <Modal closeModalHandler={handleClose} visible={show}>
             <p className="remove_title">Cart item</p>
             <div className="mb-3">All products will be removed</div>
             <div className="d-flex justify-content-end">
@@ -109,9 +99,7 @@ function FloatingCart() {
                 Remove all
               </button>
             </div>
-          </Modal.Body>
         </Modal>
-
         <div className="floating-cart modal-scrollbar">
           <div className="floating-cart__header">
             <p>There are {totalQuantity} Products</p>
@@ -119,7 +107,7 @@ function FloatingCart() {
               onClick={toggleCartHandler}
               className="floating-cart__close-icon"
             >
-              <IoMdCloseCircle />
+              <i className="fas fa-times"></i>
             </div>
           </div>
 

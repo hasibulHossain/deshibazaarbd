@@ -1,6 +1,4 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 /**
  *
  * button component
@@ -14,7 +12,13 @@ const Button = ({ buttonText, isFontAwesome }) => {
         <button className="custom-button-component">
             {buttonText}
             {
-                isFontAwesome && <FontAwesomeIcon className="ml-2" icon={faArrowRight} />
+                isFontAwesome && (
+                    <>
+                        {' '}
+                        <i className="fas fa-arrow-right"></i>
+                        {' '}
+                    </>
+                ) 
 
             }
         </button>

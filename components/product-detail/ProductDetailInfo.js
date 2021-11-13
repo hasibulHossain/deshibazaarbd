@@ -1,11 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Rater from "react-rater";
-import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
+import { useRouter } from 'next/router';
 import {
   addToCartAction,
   getCartsAction,
@@ -15,20 +13,22 @@ import ProductDetailsDescription from "./ProductDetailsDescription";
 import AddWishList from "../Wishlist/AddWishList";
 import ProductRatings from "./ProductRatings";
 import DeliveryFeatures from "./DeliveryFeatures";
-import Slider from "react-slick";
 import PriceCalculation from "../products/partials/PriceCalculation";
 import { showToast } from "../master/Helper/ToastHelper";
 import ProductMainList from "../products/ProductMainList";
-import { useRouter } from "next/router";
 import { formatCurrency } from "../../services/currency";
 import LazyLoad from "react-lazyload";
 import InnerImageZoom from 'react-inner-image-zoom';
+import Overlay from '../master/Modal/Overlay';
 
 const ProductDetailInfo = (props) => {
+  const router = useRouter();
   const dispatch = useDispatch();
   const { product } = props;
+  const { id: productId } = product;
   const [quantity, setQuantity] = useState(1);
   const { carts } = useSelector((state) => state.CartReducer);
+  const { isSignedIn } = useSelector(state => state.GlobalReducer)
   const [filterCarts, setFilterCarts] = useState(null);
   const [updatedID, setUpdatedID] = useState(null);
   const [previewImg, setPreviewImg] = useState("");
@@ -38,9 +38,7 @@ const ProductDetailInfo = (props) => {
       ? product.offer_selling_price
       : product.default_selling_price;
   const [subTotal, setSubTotal] = useState("");
-
-  const router = useRouter();
-  const { asPath } = router;
+  const [overlayVisible, setOverlayVisible] = useState(false);
 
   useEffect(() => {
     dispatch(getCartsAction());
@@ -80,6 +78,9 @@ const ProductDetailInfo = (props) => {
 
   useEffect(() => {
     if (product) {
+      const featured_image = `${process.env.NEXT_PUBLIC_URL}images/products/${product.featured_image}`;
+      setPreviewImg(featured_image);
+
       const newFilterCarts = carts.find((item) => item.productID == product.id);
 
       if (typeof newFilterCarts !== "undefined" && newFilterCarts !== null) {
@@ -94,12 +95,7 @@ const ProductDetailInfo = (props) => {
 
       setFilterCarts(newFilterCarts);
     }
-  }, [product]);
-
-  useEffect(() => {
-    const featured_image = `${process.env.NEXT_PUBLIC_URL}images/products/${product.featured_image}`;
-    setPreviewImg(featured_image);
-  }, [asPath]);
+  }, [productId]);
 
   const updateQuantity = (quantity) => {
     if (
@@ -127,8 +123,7 @@ const ProductDetailInfo = (props) => {
 
   const redirectToCheckoutPage = () => {
     if (process.browser) {
-      const userData = localStorage.getItem("loginData");
-      if (typeof userData === "undefined" || userData === null) {
+      if (!isSignedIn) {
         showToast("error", "Please Login to checkout");
         router.push("/login").then((_) => window.scrollTo(0, 0));
         return;
@@ -204,15 +199,15 @@ const ProductDetailInfo = (props) => {
                                 hasSpacer
                               />
                             <div className="product_preview_gallery mt-2">
-                              <Slider {...settings}>
+                              {/* <Slider {...settings}> */}
                                 {product.images && product.images.length > 0 && product.images.map((item, index) => (
                                   <div key={index}>
                                     <div onClick={() => handleChangePreviewImg(item.image_url) } style={{padding: '5px', width: '100%', height: '100px'}}>
-                                      <img  style={{maxWidth: '100%', objectFit: 'contain', height: '100%', border: '1px solid #ddd', padding: '5px'}} src={item.image_url} alt={item.image_url} />
+                                      <img  style={{maxWidth: '100%', objectFit: 'contain', height: '100%', border: '1px solid #ddd', padding: '5px'}} src={item.image_url} alt={product.name} />
                                     </div>
                                   </div>
                                 ))}
-                              </Slider>
+                              {/* </Slider> */}
                             </div>
                           </div>
                           <div className="col-lg-6">
@@ -265,10 +260,39 @@ const ProductDetailInfo = (props) => {
                                     )}
                                   </div>
                                 </div>
-                                <div>
-                                  <span className="float-right mr-3">
-                                    <AddWishList productId={product.id} />
-                                  </span>
+                                <div className="d-flex" >
+                                  <div>
+                                    <span className="mr-3">
+                                      <AddWishList productId={product.id} />
+                                    </span>
+                                  </div>
+                                  <div className="position-relative">
+                                    <span className={`pointer ${overlayVisible ? 'color-main' : 'text-secondary'}`} onClick={() => setOverlayVisible(true)} >
+                                      <i className="fas fa-share"></i>
+                                    </span>
+                                    <Overlay visible={overlayVisible} closeModalHandler={() => setOverlayVisible(false)}>
+                                      <div className="d-flex justify-content-center align-items-center">
+                                        <div>Share: </div>
+                                        <div>
+                                          <ul className="social-media m-0">
+                                              <li className="social-facebook m-0 ml-2" >
+                                                <Link  href={`https://www.facebook.com/sharer/sharer.php?u=https://www.deshibazaarbd.com${router.asPath}`}>
+                                                  <a target="_blank">
+                                                    <i className="fab fa-facebook-f"></i>
+                                                  </a>
+                                                </Link>
+                                              </li>
+                                              <li className="social-whatsApp m-0 ml-2" >
+                                                <i className="fab fa-whatsapp"></i>
+                                              </li>
+                                              <li className="social-instagram m-0 ml-2" >
+                                                <i className="fab fa-instagram"></i>
+                                              </li>
+                                          </ul>
+                                        </div>
+                                      </div>
+                                    </Overlay>
+                                  </div>
                                 </div>
                               </div>
                               <div className="mt-4">
@@ -289,7 +313,7 @@ const ProductDetailInfo = (props) => {
                                         quantity <= 1 ? `not-allowed` : `pointer`
                                       }
                                     >
-                                      <FontAwesomeIcon icon={faMinus} />
+                                      <i className="fas fa-minus"></i>
                                     </button>
                                     <input
                                       type="text"
@@ -302,7 +326,7 @@ const ProductDetailInfo = (props) => {
                                       className="pointer"
                                       onClick={() => updateQuantity(quantity + 1)}
                                     >
-                                      <FontAwesomeIcon icon={faPlus} />
+                                      <i className="fas fa-plus"></i>
                                     </button>
                                   </div>
                                   <div className="badge mt-3">
