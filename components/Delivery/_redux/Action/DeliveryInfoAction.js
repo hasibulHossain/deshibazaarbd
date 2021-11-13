@@ -49,10 +49,10 @@ export const storeSells = (customerInfo, carts, totalQuantity, shippingCost, tot
         type            : "sell",
         status          : 'pending',
         delivery_status : 'not_delivered',
-        payment_status  : 'due',
-        title           : 'Ecommerce Sale',
-        invoice_no      : null,
-        ref_no          : null,
+        payment_status  : 'due', // @todo No needs
+        title           : 'Ecommerce Sale', // @todo No needs
+        invoice_no      : null, // @todo No needs
+        ref_no          : null, // @todo No needs
         transaction_date: dayjs().format("YYYY-MM-DD"),
         total_before_tax: totalPrice,
         tax_amount      : 0,
@@ -69,7 +69,7 @@ export const storeSells = (customerInfo, carts, totalQuantity, shippingCost, tot
         final_total     : totalPayableAmount,
         sale_lines      : sale_lines,
         payment_method  : payment_method,
-        coupon          : couponData.code
+        coupon          : couponData !== null ? couponData.code : null
     }
 
     let response = {

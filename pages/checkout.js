@@ -37,9 +37,12 @@ const Checkout = ()=> {
 	}, []);
 
 	const handleStoreOrder = () => {
-		couponData.code = coupon.code; // Append code in couponData for backend processing
+		if (couponData !== null) {
+			couponData.code = coupon.code; // Append code in couponData for backend processing
+		}
+
 		dispatch(storeSells(customerInfo, carts, totalQuantity, shippingCost, totalPrice, couponData, userData));
-		router.push('/');
+		// router.push('/');
 	}
 
 	return (
