@@ -18,9 +18,9 @@ export function productImageUrl(imageFileName) {
  *
  * @return boolean
  */
-export function productHasOffer(default_selling_price, offer_selling_price) {
+export function productHasOffer(default_selling_price, offer_selling_price, isOfferEnable) {
   // if item's offer_selling_price = 0, then it's not an offer
-  if (offer_selling_price === 0) {
+  if (!isOfferEnable || offer_selling_price === 0) {
     return false;
   }
 

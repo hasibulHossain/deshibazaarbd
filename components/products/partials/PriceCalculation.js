@@ -3,9 +3,9 @@ import { formatCurrency } from '../../../services/currency';
 import { productHasOffer } from '../../../services/ProductService';
 
 const PriceCalculation = ({ item }) => {
-    const { offer_selling_price, default_selling_price } = item;
+    const { is_offer_enable: isOfferEnable, offer_selling_price, default_selling_price } = item;
 
-    const is_offer_enable  = productHasOffer(default_selling_price, offer_selling_price);
+    const is_offer_enable  = productHasOffer(default_selling_price, offer_selling_price, isOfferEnable);
     const selling_price    = ( typeof default_selling_price !== 'undefined' && default_selling_price !== null ) ? default_selling_price : 0;
     const default_price    = ( is_offer_enable && offer_selling_price != 0 && offer_selling_price !== null ) ? offer_selling_price: selling_price;
     const offer_price      = ( is_offer_enable && offer_selling_price != 0 && offer_selling_price !== null) ? offer_selling_price: 0;
