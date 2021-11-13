@@ -5,11 +5,14 @@ import { productHasOffer } from '../../../services/ProductService';
 const PriceCalculation = ({ item }) => {
     const { is_offer_enable: isOfferEnable, offer_selling_price, default_selling_price } = item;
 
-    const is_offer_enable  = productHasOffer(default_selling_price, offer_selling_price, isOfferEnable);
-    const selling_price    = ( typeof default_selling_price !== 'undefined' && default_selling_price !== null ) ? default_selling_price : 0;
-    const default_price    = ( is_offer_enable && offer_selling_price != 0 && offer_selling_price !== null ) ? offer_selling_price: selling_price;
-    const offer_price      = ( is_offer_enable && offer_selling_price != 0 && offer_selling_price !== null) ? offer_selling_price: 0;
-    const discount_percent = parseInt( ( ( selling_price - offer_price ) * 100 ) / selling_price );
+    const sellingPrice = parseInt(default_selling_price);
+    const offerPrice = parseInt(offer_selling_price);
+
+    const is_offer_enable  = productHasOffer(sellingPrice, offerPrice, isOfferEnable);
+    const selling_price    = ( typeof sellingPrice !== 'undefined' && sellingPrice !== null ) ? sellingPrice : 0;
+    const default_price    = ( is_offer_enable && offerPrice != 0 && offerPrice !== null ) ? offerPrice: selling_price;
+    const offer_price      = ( is_offer_enable && offerPrice != 0 && offerPrice !== null) ? offerPrice: 0;
+    const discount_percent = ( ( selling_price - offer_price ) * 100 ) / selling_price;
 
     return (
         <div className="price-area">
@@ -23,7 +26,7 @@ const PriceCalculation = ({ item }) => {
                     <del>{ formatCurrency(selling_price) } </del>
                     &nbsp;
                     <span className="discount-percent">
-                        {discount_percent}%
+                        {discount_percent.toFixed(1)}%
                     </span>
                 </p>
             }
