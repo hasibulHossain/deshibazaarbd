@@ -200,6 +200,11 @@
   .website-info-title {
     font-size: 1.7rem;
   }
+
+  .filter_column_3 .product-card-body img {
+    height: 150px !important;
+    width: 140px !important;
+  }
 }
 @media (max-width: 425px) {
   // .header-search-product {
