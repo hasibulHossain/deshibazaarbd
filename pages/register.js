@@ -12,9 +12,3 @@ export default function register() {
       <Registration />
   );
 }
-
-export async function getStaticProps() {
-  return {
-    props: {}
-  }
-}

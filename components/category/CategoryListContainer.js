@@ -2,7 +2,7 @@ import React from 'react';
 import CategoryList from './CategoryList';
 import Translate from '../translation/Translate';
 
-const CategoryListContainer = (props) => {
+const CategoryListContainer = ({ parentID = null }) => {
     return (
         <section className="container product-container">
             <div className="product-heading">
@@ -19,7 +19,7 @@ const CategoryListContainer = (props) => {
                 } */}
             </div>
 
-            <CategoryList homeCategory={props.homeCategory} />
+            <CategoryList parentID={parentID} />
         </section>
     );
 };
