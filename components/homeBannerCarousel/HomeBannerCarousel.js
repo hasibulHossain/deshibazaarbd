@@ -1,14 +1,24 @@
-import React, { memo } from "react";
+import React, { useEffect } from "react";
 import { Carousel } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import LoadingPlaceHolder from "../master/skelleton/LoadingPlaceholder";
-const HomeBannerCarousel = (props) => {
-  const { homeBanner: carouselList } = props;
+import { getHomeCarouselData } from "./_redux/homeBannerCarouselAction/HomeBannerCarouselAction";
+
+const HomeBannerCarousel = () => {
+  const { carouselList, isLoading } = useSelector((state) => state.HomeBannerCarouselReducer);
+
   const { isMobile } = useSelector((state) => state.GlobalReducer);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if(!carouselList.length) {
+      dispatch(getHomeCarouselData());
+    }
+  }, []);
 
   return (
     <>
-      {!carouselList && (
+      {isLoading && (
         <div className="card shadow-sm mt-3 p-1">
             <LoadingPlaceHolder className="" count={1} height={isMobile ? 180 : 445} />
         </div>
@@ -31,4 +41,4 @@ const HomeBannerCarousel = (props) => {
   );
 };
 
-export default memo(HomeBannerCarousel);
+export default HomeBannerCarousel;

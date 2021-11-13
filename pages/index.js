@@ -3,19 +3,19 @@ import HomeBannerCarousel from "../components/homeBannerCarousel/HomeBannerCarou
 import CategoryListContainer from "../components/category/CategoryListContainer";
 import CompanyPolicyContainer from '../components/CompanyPolicy/CompanyPolicyContainer'
 import ShopContainer from "../components/Shop/ShopContainer";
-// import ShopBanner from "../components/ShopBanner/ShopBanner";
-// import ProductTopListContainer from "../components/ProductTopList/ProductTopListContainer";
 import DealFlash from "../components/DealFlash/DealFlash";
-import NewOffer from "../components/NewCollection/NewOffer";
-// import OfferProducts from "../components/OfferProducts/OfferProducts";
 import ProductSection from "../components/products/ProductSection";
 import { translate } from "../services/translation/translation";
 import StoreContainer from "../components/store/StoreContainer";
 import { useSelector } from "react-redux";
 import LazyLoad from "react-lazyload";
 import PageMeta from "../components/layouts/PageMeta";
+// import ShopBanner from "../components/ShopBanner/ShopBanner";
+// import ProductTopListContainer from "../components/ProductTopList/ProductTopListContainer";
+// import NewOffer from "../components/NewCollection/NewOffer";
+// import OfferProducts from "../components/OfferProducts/OfferProducts";
 
-export default function Home(props) {
+export default function Home() {
   const {isMobile} = useSelector(state => state.GlobalReducer);
 
   return (
@@ -27,15 +27,15 @@ export default function Home(props) {
         ogpEnabled={true}
         pageSocialMetaUrl="https://deshibazaarbd.com"
         pageSocialMetaImage="https://www.deshibazaarbd.com/images/logos/logo-en.svg" />
-      <HomeBannerCarousel homeBanner={props.homeBanner} />
+      <HomeBannerCarousel />
 
       {/* <NewOffer /> */}
       {/* <OfferProducts /> */}
       {/* <ProductTopListContainer /> */}
-      <CategoryListContainer homeCategory={props.homeCategory} />
+      <CategoryListContainer />
       
       <LazyLoad height={280} once>
-        <DealFlash dealFlashList={props.dealFlash} />
+        <DealFlash />
       </LazyLoad>
 
       <ProductSection title={translate('Daily Essential')} type="daily-essentials" limit={isMobile ? 6 : 10} url='daily-essentials' isSliding={isMobile ? false : true} />
@@ -57,24 +57,4 @@ export default function Home(props) {
       </LazyLoad>
     </>
   );
-}
-
-export async function getStaticProps() {
-  const homeBannerSliderRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}sliders-frontend`);
-  const homeBannerSlider = await homeBannerSliderRes.json();
-
-  const homeCategoryRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}frontend-categories?type=homepage&limit=12`);
-  const homeCategory = await homeCategoryRes.json();
-
-  const dealFlashRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}get-items?type=deals-of-day&paginate_no=2`);
-  const dealFlash = await dealFlashRes.json();
-
-  return {
-    props: {
-      homeBanner: homeBannerSlider.data,
-      homeCategory: homeCategory.data,
-      dealFlash: dealFlash.data.data
-    },
-    revalidate: 1800
-  }
 }

@@ -6,9 +6,3 @@ export default function login() {
     <Login />
   );
 }
-
-export async function getStaticProps() {
-  return {
-    props: {}
-  }
-}

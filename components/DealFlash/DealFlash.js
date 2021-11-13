@@ -1,5 +1,6 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getDealFlashList } from "./_redux/Action/DealFlashAction";
 import ReactStars from "react-rating-stars-component";
 import CountdownTimer from "react-component-countdown-timer";
 import { formatCurrency } from "../../services/currency";
@@ -12,10 +13,9 @@ import ViewAll from "../ViewAll/ViewAll";
 import LoadingPlaceHolder from "../master/skelleton/LoadingPlaceholder";
 import Link from 'next/link';
 
-const DealFlash = (props) => {
-  const { dealFlashList: flashDealList } = props;
-
+const DealFlash = () => {
   const dispatch = useDispatch();
+  const {flashDealList, isLoading} = useSelector(state => state.DealFlashReducer);
 
   const addToCart = (product) => {
     if (parseInt(product.current_stock) === 0) {
@@ -24,6 +24,12 @@ const DealFlash = (props) => {
         dispatch(addToCartAction(product));
     }
   }
+
+  useEffect(() => {
+    if(flashDealList.length === 0) {
+      dispatch(getDealFlashList());
+    }
+  }, []);
 
   return (
     <section className="container product-container">
@@ -36,7 +42,7 @@ const DealFlash = (props) => {
       <div className="flash-deal-section">
         <div className="row flash-deal-row no-gutters">
         {
-          !flashDealList && (
+          isLoading && (
             <LoadingPlaceHolder className="col-md-6 pr-md-2" count={2} height={255} />
           )
         }

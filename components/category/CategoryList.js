@@ -1,12 +1,27 @@
-import React, { memo } from "react";
+import React, { memo, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getCategories } from "./_redux/Action/CategoryAction";
 import { useRouter } from "next/router";
 import Translate from "../translation/Translate";
 import LoadingPlaceHolder from "../master/skelleton/LoadingPlaceholder";
 import Image from 'next/image';
 
-const CategoryList = (props) => {
-  const { homeCategory: categories } = props;
+const CategoryList = ({ parentID = null }) => {
+  const dispatch = useDispatch();
+
   const router = useRouter();
+
+  const { categories, loading } = useSelector((state) => state.CategoryReducer);
+
+  useEffect(() => {
+    if (!categories.length) {
+      if (parentID === "all") {
+        dispatch(getCategories(parentID, null, "")); // Get the all categories
+      } else {
+        dispatch(getCategories(parentID, 12, "homepage")); // Get the 12 categories
+      }
+    }
+  }, []);
 
   /**
    * Navigate to Category List page
@@ -27,7 +42,7 @@ const CategoryList = (props) => {
     <div className="category-list">
       <div className="row">
           {
-            !categories && (
+            loading && (
               <LoadingPlaceHolder className="col-lg-2 col-md-3 col-sm-4 col-6" count={12} height={150}  />
             )
           }
