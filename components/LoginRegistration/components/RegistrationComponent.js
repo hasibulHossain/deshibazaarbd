@@ -63,7 +63,11 @@ const RegistrationComponent = () => {
                             phone_no: context.parent.phone_no 
                         }
 
+                        console.log('otp body => ', otpBody);
+
                         const res = await axios.post('auth/check-otp', otpBody);
+
+                        console.log('res => ', res)
                         
                         if(res.data.status) {
                             IS_VALID_OTP = true;
@@ -73,7 +77,8 @@ const RegistrationComponent = () => {
                         }
 
                     } catch (error) {
-                        return Promise.resolve(false)
+                        console.log('error => ', error)
+                        return Promise.resolve(false);
                     }
                 }
 
@@ -128,6 +133,8 @@ const RegistrationComponent = () => {
                     last_name: values.last_name,
                     phone_no: values.phone_no
                 }
+
+                console.log('form data => ', formData)
 
                 setStepOneFormData(formData)
 
@@ -236,7 +243,7 @@ const RegistrationComponent = () => {
                                                 <div className="col-md-12">
                                                     <div className="pb-3">
                                                         <label htmlFor="phone_no" className="form-label required">Phone</label>
-                                                        <Field className="form-control form-input" type="number" id="phone_no" name="phone_no" placeholder="01234567899" />
+                                                        <Field className="form-control form-input" type="text" id="phone_no" name="phone_no" placeholder="01234567899" />
                                                         <ErrorMessage name="phone_no" component={ ValidationError } />
                                                     </div>
                                                 </div>
@@ -288,7 +295,7 @@ const RegistrationComponent = () => {
                                                 <div className="col-8">
                                                     <div className="pb-3">
                                                         <label htmlFor="otp" className="form-label required">Otp</label>
-                                                        <Field className="form-control form-input" type="number" id="otp" name="otp" placeholder="123456" />
+                                                        <Field className="form-control form-input" type="text" id="otp" name="otp" placeholder="123456" />
                                                         <ErrorMessage name="otp" component={ ValidationError } />
                                                     </div>
                                                 </div>
