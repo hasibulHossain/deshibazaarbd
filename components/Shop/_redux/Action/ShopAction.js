@@ -1,16 +1,15 @@
 import Axios from "axios";
 import * as Types from "../Type/Types";
 
-export const getShopList = () => async (dispatch) => {
-  const url = `brands`;
+export const getShopList = (page) => async (dispatch) => {
+  const url = `brands?isPaginated=1&paginateNo=24&page=${page}`;
 
   try {
     // initialize req
     dispatch({ type: Types.INIT_SHOP_LIST });
     const res = await Axios.get(url);
-    const filteredData = res.data.data.filter(brand => (brand.slug !== 'un-categorized' && brand.slug !== 'others'));
     // successful res
-    dispatch({ type: Types.GET_SHOP_LIST, payload: { ShopList: filteredData } });
+    dispatch({ type: Types.GET_SHOP_LIST, payload: res.data.data });
   } catch (error) {
     // catch error
     dispatch({ type: Types.FETCH_SHOP_LIST_FAILED, payload: { error: true } });

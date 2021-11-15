@@ -10,6 +10,7 @@ import StoreContainer from "../components/store/StoreContainer";
 import { useSelector } from "react-redux";
 import LazyLoad from "react-lazyload";
 import PageMeta from "../components/layouts/PageMeta";
+import CampaignContainer from "../components/campaign/CampaignContainer";
 // import ShopBanner from "../components/ShopBanner/ShopBanner";
 // import ProductTopListContainer from "../components/ProductTopList/ProductTopListContainer";
 // import NewOffer from "../components/NewCollection/NewOffer";
@@ -32,6 +33,7 @@ export default function Home() {
       {/* <NewOffer /> */}
       {/* <OfferProducts /> */}
       {/* <ProductTopListContainer /> */}
+      <CampaignContainer />
       <CategoryListContainer />
       
       <LazyLoad height={280} once>
