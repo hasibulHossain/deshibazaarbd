@@ -15,6 +15,7 @@ import Image from 'next/image';
 import Modal from "../master/Modal/Modal";
 import { getShopList } from "../Shop/_redux/Action/ShopAction";
 import Axios from 'axios'
+import Paginate from "../master/paginate/Paginate";
 
 const CategoryWishProductContainer = () => {
   const [showFilter, setShowFilter] = useState(false);
@@ -185,23 +186,32 @@ const CategoryWishProductContainer = () => {
             <CategoryWishProductList showFilter={showFilter} showFilterHandler={() => setShowFilter(preState => !preState)} />
             {
               !isLoading && paginate.total > paginate.per_page  && (
-                <div className="w-100 px-0 px-sm-3 mt-3">
-                  <div style={{display: 'flex', justifyContent: 'flex-end'}}>
-                    <ReactPaginate
-                      previousLabel={'<'}
-                      nextLabel={'>'}
-                      breakLabel={'...'}
-                      breakClassName={'break-me'}
-                      pageCount={paginate.pages.length}
-                      marginPagesDisplayed={2}
-                      pageRangeDisplayed={2}
-                      onPageChange={paginateHandler}
-                      initialPage={filterParams.page - 1}
-                      containerClassName={'react-pagination'}
-                      activeClassName={'active'}
-                    />
-                  </div>
-                </div>
+                <>
+                  <Paginate
+                    pageCount={paginate.pages.length}
+                    onPageChange={paginateHandler}
+                    currentPage={filterParams.page}
+                    perPage={paginate.per_page}
+                    totalItemCount={paginate.total}
+                  />
+                  {/* <div className="w-100 px-0 px-sm-3 mt-3">
+                    <div style={{display: 'flex', justifyContent: 'flex-end'}}>
+                      <ReactPaginate
+                        previousLabel={'<'}
+                        nextLabel={'>'}
+                        breakLabel={'...'}
+                        breakClassName={'break-me'}
+                        pageCount={paginate.pages.length}
+                        marginPagesDisplayed={2}
+                        pageRangeDisplayed={2}
+                        onPageChange={paginateHandler}
+                        initialPage={filterParams.page - 1}
+                        containerClassName={'react-pagination'}
+                        activeClassName={'active'}
+                      />
+                    </div>
+                  </div> */}
+                </>
               )
             }
 
