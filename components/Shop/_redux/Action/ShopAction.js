@@ -2,7 +2,7 @@ import Axios from "axios";
 import * as Types from "../Type/Types";
 
 export const getShopList = (page) => async (dispatch) => {
-  const url = `brands?isPaginated=1&paginateNo=24&page=${page}`;
+  const url = `brands?isPaginated=1&paginateNo=30&page=${page}`;
 
   try {
     // initialize req
