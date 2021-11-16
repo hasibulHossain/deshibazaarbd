@@ -14,8 +14,8 @@ function BrandListFull() {
     
     const onPageChangeHandler = (page) => {
         if(!page) return;
-
-        console.log('paginate.page => ', page)
+        
+        window.scrollTo({ top: 0, behavior: "smooth" });
         dispatch(getShopList(page.selected + 1));
     }
 
