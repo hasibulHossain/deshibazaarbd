@@ -40,10 +40,12 @@ const SearchInput = () => {
   const searchClick = (searchData) => {
     setSearch("");
     setSearchType('product');
-    dispatch(toggleBackdrop())
+    dispatch(toggleBackdrop());
+
+    const uriEncodedSlug = encodeURIComponent(searchData.slug);
 
     if (searchData.is_item) {
-      const uri = encodeURI(`/products/${searchData.slug}`);
+      const uri = encodeURI(`/products/${uriEncodedSlug}`);
       router
         .push(uri)
         .then((_) => {
@@ -52,21 +54,21 @@ const SearchInput = () => {
         });
     } else if (searchData.is_category) {
       router
-        .push(`/products?category=${searchData.id}`)
-        .then((_) => {
-          window.scrollTo(0, 0);
-          dispatch(toggleBackdrop());
-        });
+      .push(`/products?category=${uriEncodedSlug}`)
+      .then((_) => {
+        window.scrollTo(0, 0);
+        dispatch(toggleBackdrop());
+      });
     } else if (searchData.is_brand) {
       router
-        .push(`/products?brand=${searchData.id}`)
+      .push(`/products?brand=${uriEncodedSlug}`)
         .then((_) => {
           window.scrollTo(0, 0);
           dispatch(toggleBackdrop());
         });
     } else if (searchData.is_shop) {
       router
-        .push(`/store/${searchData.slug}`)
+        .push(`/store/${uriEncodedSlug}`)
         .then((_) => {
           window.scrollTo(0, 0);
           dispatch(toggleBackdrop());
