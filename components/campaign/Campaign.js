@@ -8,7 +8,9 @@ function Campaign() {
                 <div className="pointer text-center">
                     <Link href="/products?type=flash-sale">
                         <a>
-                            <img width={400} height={200} className="img-responsive" src="/images/flash-sale.jpg" alt="flash sale" />
+                            <div>
+                                <img width={400} height={200} className="img-responsive" src="/images/campaign/flash-sale.jpg" alt="flash sale" />
+                            </div>
                         </a>
                     </Link>
                 </div>
@@ -18,7 +20,9 @@ function Campaign() {
                 <div className="pointer text-center">
                     <Link href="/products?type=hatt-bazaar">
                         <a>
-                            <img width={400} height={200} className="img-responsive" src="/images/hatbazaar.jpg" alt="Hatt bazaar"/>
+                            <div>
+                                <img width={400} height={200} className="img-responsive" src="/images/campaign/hatbazaar.jpg" alt="Hatt bazaar"/>
+                            </div>
                         </a>
                     </Link>
                 </div>
@@ -28,7 +32,9 @@ function Campaign() {
                 <div className="pointer text-center">
                     <Link href="/products?type=super-sale">
                         <a>
-                            <img width={400} height={200} className="img-responsive" src="/images/mega-deals.jpg" alt="Mega deals" />
+                            <div>
+                                <img width={400} height={200} className="img-responsive" src="/images/campaign/mega-deals.jpg" alt="Mega deals" />
+                            </div>
                         </a>
                     </Link>
                 </div>
