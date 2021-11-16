@@ -19,8 +19,8 @@ export const getStoreList = () => async (dispatch) => {
   }
 };
 
-export const getFilteredStoreList = (locations) => async (dispatch) => {
-  let url = 'business?';
+export const getFilteredStoreList = (locations, page) => async (dispatch) => {
+  let url = `business?isPaginated=1&paginateNo=20&page=${page}&`
 
   for (const location in locations) {
     url = url + location + '=' + locations[location] + '&';
@@ -29,9 +29,18 @@ export const getFilteredStoreList = (locations) => async (dispatch) => {
     dispatch({type: types.INIT_STORE_LIST});
     const res = await axios.get(url);
     const data = res.data.data
-    dispatch({ type: types.GET_STORE_LIST, payload: { storeList: data } });
+    dispatch({ type: types.GET_STORE_LIST, payload: data });
 
   } catch (err) {
     // console.log('err => ', err)
   }
 }
+
+export const locationChanged = (locations) => ({
+  type: types.STORE_LOCATION_CHANGED,
+  payload: locations
+})
+
+export const clearLocation = () => ({
+  type: types.STORE_LOCATION_CLEARED
+})

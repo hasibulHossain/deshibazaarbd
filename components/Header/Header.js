@@ -129,7 +129,7 @@ const Header = () => {
                         >
                           <div className="auth-user-name">
                             {/* {userData.first_name} */}
-                            {userData && userData.first_name && userData.first_name}
+                            {userData && userData.first_name && userData.first_name ? userData.first_name : 'My account'}
                           </div>
                         </Dropdown.Toggle>
 

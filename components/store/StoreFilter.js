@@ -1,37 +1,41 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import { getLocationData, handleChangeBillingAddressInput } from '../ProfileAccountSetting/_redux/Action/ProfileAccountSettingAction';
+import { getLocationData, resetCityAndArea } from '../ProfileAccountSetting/_redux/Action/ProfileAccountSettingAction';
 import Select from 'react-select';
 import { RHFInput } from 'react-hook-form-input';
-import { getFilteredStoreList } from './_redux/action/store-action';
+import { clearLocation, locationChanged } from './_redux/action/store-action';
 
 function StoreFilter() {
     const dispatch = useDispatch();
     const { divisionList, cityList, areaList, selectedAddress } = useSelector((state) => state.ProfileAccountSettingReducer);
+    const { selectedLocation } = useSelector((state) => state.StoreReducer);
+
     const { register, setValue } = useForm();
-    const [selectedLocation, setSelectedLocation] = useState({});
 
     const handleChangeTextInput = (name, value) => {
-        dispatch(handleChangeBillingAddressInput(name, value));
+        // dispatch(handleChangeBillingAddressInput(name, value));
         const cloneVal = {...selectedLocation, [name]: value};
+        dispatch(locationChanged(cloneVal));
+    }
 
-        setSelectedLocation(cloneVal);
+    const onClearHandler = () => {
+        dispatch(clearLocation())
+        dispatch(resetCityAndArea())
     }
 
     useEffect(() => {
         if(divisionList.length <= 0) {
             dispatch(getLocationData('divisions', 'country', 19))
         }
-
-        if(Object.keys(selectedLocation).length !== 0) {
-            dispatch(getFilteredStoreList(selectedLocation))
-        }
-    }, [JSON.stringify(selectedLocation)])
+    }, []);
 
     return (
         <div className='store-category-list shadow-sm p-3 mb-5 bg-white rounded'>
-            <p>Filter Store by</p>
+            <div className="d-flex justify-content-between"> 
+                <p>Filter Store by</p>
+                <p className="pointer color-main" onClick={onClearHandler}>clear</p>
+            </div>
             <div>
                 <form
                     autoComplete="off"

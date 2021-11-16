@@ -89,6 +89,10 @@ export const handleChangeShippingAddressInput = (name, value) => (dispatch) => {
     dispatch({ type: Types.CHANGE_SHIPPING_ADDRESS_INPUT, payload: addressData })
 }
 
+export const resetCityAndArea = () => ({
+    type: Types.RESET_PROFILE_ACCOUNT_CITY_AREA
+})
+
 /**
  * get countries, divisions, cities, areas
  * 

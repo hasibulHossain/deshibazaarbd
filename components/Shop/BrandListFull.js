@@ -30,7 +30,7 @@ function BrandListFull() {
                     </div>
                 ))
             }
-            <div className="col-12">
+            <div className="col-12 px-0">
                 {
                     !isLoading && (
                         <Paginate 
