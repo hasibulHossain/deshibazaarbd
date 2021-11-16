@@ -3,6 +3,7 @@ import { useDispatch, useSelector} from 'react-redux';
 import BrandSingleMini from './BrandSingleMini';
 import { getShopList } from './_redux/Action/ShopAction';
 import Paginate from '../master/paginate/Paginate';
+import { onPageChangeHandler } from '../../helper/paginate-onchange/onchange-handler';
 
 function BrandListFull() {
     const dispatch = useDispatch();
@@ -12,13 +13,6 @@ function BrandListFull() {
         dispatch(getShopList(paginate.currentPage));
     }, []);
     
-    const onPageChangeHandler = (page) => {
-        if(!page) return;
-        
-        window.scrollTo({ top: 0, behavior: "smooth" });
-        dispatch(getShopList(page.selected + 1));
-    }
-
     return (
         <div className="row mb-3">
             {
@@ -41,7 +35,7 @@ function BrandListFull() {
                     !isLoading && (
                         <Paginate 
                             pageCount={paginate.pageCount.length}
-                            onPageChange={onPageChangeHandler}
+                            onPageChange={(page) => onPageChangeHandler({page: page, dispatch: dispatch, fn: getShopList})}
                             currentPage={paginate.currentPage}
                             perPage={paginate.perPage}
                             totalItemCount={paginate.totalCount}
