@@ -7,7 +7,7 @@ function Paginate(props) {
 
     if( totalItemCount > perPage ) {
         return (
-            <div className="w-100 px-0 px-sm-3 mt-3">
+            <div className="w-100 px-3 px-sm-2 mt-3">
                 <div style={{display: 'flex', justifyContent: 'flex-end'}}>
                     <ReactPaginate
                         pageCount={pageCount}
