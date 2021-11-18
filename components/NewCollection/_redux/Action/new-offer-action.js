@@ -12,7 +12,7 @@ export const getNewOfferList = () => async (dispatch) => {
         dispatch({type: types.GET_NEW_OFFER_DATA, payload: responseData});
 
         const res = await axios({
-            url: 'https://api-ecom.programmingshikhi.com/public/api/v1/website/offer-section',
+            url: 'https://api.deshibazaarbd.com/public/api/v1/website/offer-section',
             method: 'GET'
         });
 
