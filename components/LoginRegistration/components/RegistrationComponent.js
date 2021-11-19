@@ -63,11 +63,7 @@ const RegistrationComponent = () => {
                             phone_no: context.parent.phone_no 
                         }
 
-                        console.log('otp body => ', otpBody);
-
                         const res = await axios.post('auth/check-otp', otpBody);
-
-                        console.log('res => ', res)
                         
                         if(res.data.status) {
                             IS_VALID_OTP = true;
@@ -77,7 +73,6 @@ const RegistrationComponent = () => {
                         }
 
                     } catch (error) {
-                        console.log('error => ', error)
                         return Promise.resolve(false);
                     }
                 }
@@ -133,8 +128,6 @@ const RegistrationComponent = () => {
                     last_name: values.last_name,
                     phone_no: values.phone_no
                 }
-
-                console.log('form data => ', formData)
 
                 setStepOneFormData(formData)
 
