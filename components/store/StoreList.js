@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getStoreList } from "./_redux/action/store-action";
+import { getFilteredStoreList } from "./_redux/action/store-action";
 import StoreSingleMini from "./StoreSingleMini";
 import LoadingPlaceHolder from "../master/skelleton/LoadingPlaceholder";
 
@@ -9,7 +9,7 @@ const StoreList = () => {
   const { storeList, isLoading } = useSelector((state) => state.StoreReducer);
 
   useEffect(() => {
-    ! storeList.length && dispatch(getStoreList());  
+    storeList.length === 0 && dispatch(getFilteredStoreList({}, 1));
   }, []);
 
   return (
