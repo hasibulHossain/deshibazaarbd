@@ -50,7 +50,7 @@ const HeaderMenu = ({ navigationToggleHandler, showToolbar }) => {
       navigationToggleHandler();
     }
     router
-      .push(`/products?category=${encodeURI(categorySlug)}`)
+      .push(`/products?category=${encodeURIComponent(categorySlug)}`)
       .then((_) => window.scrollTo(0, 0));
   };
 

@@ -58,7 +58,9 @@ const ProductSingleMini = ({
       });
   };
 
-  const uri = encodeURI(`/products/${item.sku}`);
+  const productSku = encodeURIComponent(item.sku)
+
+  const uri = (`/products/${productSku}`);
 
   let singleProduct = (
     <div
