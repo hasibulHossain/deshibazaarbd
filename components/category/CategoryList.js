@@ -34,7 +34,7 @@ const CategoryList = ({ parentID = null }) => {
    */
   const navigateCategoryList = (categorySlug) => {
     router
-      .push(`/products?category=${categorySlug}`)
+      .push(`/products?category=${encodeURIComponent(categorySlug)}`)
       .then((_) => window.scrollTo(0, 0));
   };
 
@@ -43,7 +43,7 @@ const CategoryList = ({ parentID = null }) => {
       <div className="row">
           {
             loading && (
-              <LoadingPlaceHolder className="col-lg-2 col-md-3 col-sm-4 col-6" count={12} height={150}  />
+              <LoadingPlaceHolder className="col-lg-2 col-md-3 col-sm-4 col-6" count={12} height={150} />
             )
           }
 
