@@ -4,6 +4,7 @@ import InputRange from "react-input-range";
 import "react-input-range/lib/css/index.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  getCategoryRelatedBrands,
   setFilterParams,
 } from "./_redux/Action/CategoryWiseProductAction";
 import ReactStars from "react-rating-stars-component";
@@ -33,6 +34,14 @@ const ProductFilter = () => {
     })
 
     const filterParamClone = { ...filterParams };
+
+    if(filterParamClone.type || filterParamClone.search) {
+      filterParamClone.category.push(category.short_code);
+      filterParamClone.brand = [];
+      dispatch(setFilterParams(filterParamClone));
+      dispatch(getCategoryRelatedBrands(category.short_code));
+      return;
+    }
 
     if (e.target.checked) {
       filterParamClone.category[1] = category.short_code;
@@ -108,17 +117,26 @@ const ProductFilter = () => {
   }
 
   useEffect(() => {
-    brandCheckboxes.current.forEach(brand => {
+    brandCheckboxes.current.forEach((brand, index) => {
       if(filterParams.brand.includes(brand.id)) {
-        brand.checked = true
+        // brand.checked = true;
+        brandCheckboxes.current[index].checked = true;
       }
     });
 
     for (let index = 0; index < categoryCheckboxes.current.length; index++) {
-      if(filterParams.category.length > 1 && filterParams.category[1] == categoryCheckboxes.current[index].id) {
-        categoryCheckboxes.current[index].checked = true;
-        break;
+      if(filterParams.type || filterParams.search) {
+        if(filterParams.category[filterParams.category.length - 1] == categoryCheckboxes.current[index].id) {
+          categoryCheckboxes.current[index].checked = true;
+          break;
+        }
+      } else {
+        if(filterParams.category.length > 1 && filterParams.category[1] == categoryCheckboxes.current[index].id) {
+          categoryCheckboxes.current[index].checked = true;
+          break;
+        }
       }
+
     }
   }, [])
 
@@ -158,11 +176,10 @@ const ProductFilter = () => {
                 <Form.Check
                   ref={checkbox => categoryCheckboxes.current[index] = checkbox}
                   type="checkbox"
-                  className="pointer"
                   label={item.name}
                   datatype={item.short_code}
                   className={
-                    isChecked == true ? "active_category" : "isNot_active_category"
+                    isChecked == true ? "active_category pointer" : "isNot_active_category pointer"
                   }
                   onChange={(e) => handleChecked(e, item)}
                 />
@@ -178,13 +195,14 @@ const ProductFilter = () => {
         <div className="filter_by_category" style={{marginTop: '40px'}}>
           <p className="filter_title">Brand</p>
           {brands.map((item, index) => (
-            <Form.Group key={item.id} controlId={item.id}>
+            <Form.Group key={item.slug} controlId={item.slug}>
               <Form.Check
                 ref={checkbox => brandCheckboxes.current[index] = checkbox}
                 type="checkbox"
                 label={item.name}
+                datatype={item.slug}
                 className={
-                  isChecked == true ? "active_category" : "isNot_active_category"
+                  isChecked == true ? "active_category pointer" : "isNot_active_category pointer"
                 }
                 onChange={(e) => brandCheckboxHandler(e, item)}
               />
