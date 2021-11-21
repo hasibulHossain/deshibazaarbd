@@ -31,6 +31,10 @@ const DealFlash = () => {
     }
   }, []);
 
+  if(flashDealList.length === 0) {
+    return null
+  }
+
   return (
     <section className="container product-container">
       <div className="product-heading">
@@ -67,6 +71,8 @@ const DealFlash = () => {
                     <div className="flash-deal-card p-3">
                       <div className="flash-deal-img">
                         <img
+                          width={233}
+                          height={233}
                           src={imageURL ? imageURL : ''}
                           alt={item.name}
                         />
