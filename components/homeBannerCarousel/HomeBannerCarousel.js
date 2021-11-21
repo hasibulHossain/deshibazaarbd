@@ -30,6 +30,8 @@ const HomeBannerCarousel = () => {
             <Carousel.Item className="home-banner-carousel pointer" key={index + 1}>
               <img
                 className="d-block"
+                width={!isMobile ? 1920 : 1440}
+                height={!isMobile ? 450 : 944}
                 src={!isMobile ? item.image_url : item.mobile_image_url}
                 alt={item.title}
               />
