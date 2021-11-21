@@ -11,7 +11,7 @@
 
 module.exports = {
   images: {
-    domains: ['deshibazaarbd.com', 'api.deshibazaarbd.com'],
+    domains: ['deshi.programmingshikhi.com', 'api-ecom.programmingshikhi.com', 'api.deshibazaarbd.com', 'api-ecom.deshibazaarbd.com', 'localhost'],
   },
   future: {
     webpack5: true

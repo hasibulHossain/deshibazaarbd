@@ -6,7 +6,7 @@ export default NextAuth({
         Providers.Credentials({
             async authorize(credentials) {
                 try {
-                    const res = await fetch('https://api.deshibazaarbd.com/public/api/v1/auth/login', {
+                    const res = await fetch('https://api-ecom.programmingshikhi.com/public/api/v1/auth/login', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
