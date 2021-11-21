@@ -17,9 +17,7 @@ function StoreProfile() {
     }
     useEffect(() => {
         const store = router.query.storeById;
-        if(!storeInfo) {
-            dispatch(getStoreInfo(store));
-        }
+        dispatch(getStoreInfo(store));
     }, [])
 
     return (
