@@ -138,6 +138,8 @@ const ProductDetailInfo = (props) => {
     }
   };
 
+  console.log('product => ', product)
+
   return (
     <>
       {product !== "undefined" && product !== null && (
@@ -145,9 +147,9 @@ const ProductDetailInfo = (props) => {
           <Breadcrumb>
             {typeof product.category !== "undefined" &&
               product.category !== null && (
-                <Link href={`/products?category=${product.category.id}`}>
+                <Link href={`/products?category=${product.category.slug}`}>
                   <Breadcrumb.Item
-                    href={`/products?category=${product.category.id}`}
+                    href={`/products?category=${product.category.slug}`}
                   >
                     {product.category.name}
                   </Breadcrumb.Item>
@@ -156,9 +158,9 @@ const ProductDetailInfo = (props) => {
 
             {typeof product.sub_category !== "undefined" &&
               product.sub_category !== null && (
-                <Link href={`/products?category=${product.sub_category.id}`}>
+                <Link href={`/products?category=${product.sub_category.slug}`}>
                   <Breadcrumb.Item
-                    href={`/products?category=${product.sub_category.id}`}
+                    href={`/products?category=${product.sub_category.slug}`}
                   >
                     {product.sub_category.name}
                   </Breadcrumb.Item>
@@ -167,9 +169,9 @@ const ProductDetailInfo = (props) => {
 
             {typeof product.sub_category2 !== "undefined" &&
               product.sub_category2 !== null && (
-                <Link href={`/products?category=${product.sub_category2.id}`}>
+                <Link href={`/products?category=${product.sub_category2.slug}`}>
                   <Breadcrumb.Item
-                    href={`/products?category=${product.sub_category2.id}`}
+                    href={`/products?category=${product.sub_category2.slug}`}
                   >
                     {product.sub_category2.name}
                   </Breadcrumb.Item>
