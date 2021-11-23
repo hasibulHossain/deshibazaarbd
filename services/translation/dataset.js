@@ -188,7 +188,7 @@ export default [
     // Category Translations, Do this after the above translations
     // @todo Add More Categories Translation
 
-    {"key":"GROCERIES","en":"GROCERIES","bn":"মুদি"},
+    {"key":"GROCERIES","en":"Groceries","bn":"মুদি"},
     {"key":"HOME&CLEANING","en":"HOME & CLEANING","bn":"বাড়ি এবং পরিষ্কার করা"},
     {"key":"OFFICE PRODUCTS","en":"OFFICE PRODUCTS","bn":"অফিস পণ্য"},
     {"key":"FRUITS & VEGETABLES","en":"FRUITS & VEGETABLES","bn":"ফল ও সবজি"},
@@ -714,7 +714,7 @@ export default [
     {"key":"BLOOD PRESSURE KIT","en":"BLOOD PRESSURE KIT","bn":"ব্লাড প্রেসার কিট"},
     {"key":"EYE CARE","en":"EYE CARE","bn":"চোখের যত্ন"},
     {"key":"GLUCOSE METER","en":"GLUCOSE METER","bn":"গ্লুকোজ মিটার"},
-    {"key":"HEALTH & BEAUTY","en":"HEALTH & BEAUTY","bn":"স্বাস্থ্য এবং সৌন্দর্য"},
+    {"key":"HEALTH & BEAUTY","en":"Health & Beauty","bn":"স্বাস্থ্য এবং সৌন্দর্য"},
     {"key":"PRESCRIPTION MEDICINES","en":"PRESCRIPTION MEDICINES","bn":"প্রেসক্রিপশন ওষুধ"},
     {"key":"MEDICAL DEVICES","en":"MEDICAL DEVICES","bn":"চিকিত্সা সংক্রান্ত যন্ত্রপাতি"},
     {"key":"REHABILITATION AIDS","en":"REHABILITATION AIDS","bn":"পুনর্বাসন এইডস"},
