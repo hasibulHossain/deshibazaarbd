@@ -138,8 +138,6 @@ const ProductDetailInfo = (props) => {
     }
   };
 
-  console.log('product => ', product)
-
   return (
     <>
       {product !== "undefined" && product !== null && (
