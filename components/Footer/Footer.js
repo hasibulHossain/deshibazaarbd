@@ -151,15 +151,31 @@ const Footer = () => {
                                             )
                                         }
                                 </SimpleBtn>
-                                <div className="pt-3">
+                                {/* <div className="pt-3">
                                     <img src={"/images/payment-methods.png"} alt="Deshi BazaarBD"/>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>
                 </div>
-                <FooterBottom />
             </section>
+            <div className="bg-white">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-12 pt-4">
+                            <div className="mt-3 mb-2">
+                                <img className="img-responsive" src="/images/footer/shurjoPay.png" alt="shurjoPay" width={1240} height={188} />
+                            </div>
+                            <div className="my-5">
+                                <img className="img-responsive" src="/images/footer/payment-line.png" alt="payment-line" width={1240} height={45} />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="footer-section">
+                <FooterBottom />
+            </div>
 
             <SimpleModal
                 handleClose={handleClose}
