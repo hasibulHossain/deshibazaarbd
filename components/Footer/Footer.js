@@ -110,20 +110,34 @@ const Footer = () => {
                                         <a>Blog</a>
                                     </Link>
                                 </h3>
-                            </div>
-                        </div>
-                        <div className="col-md-2 col-xs-6">
-                            <div className="footer-info">
-                                <h3>my account</h3>
-                                <h3>
+                                {/* <h3>
                                     <Link href="/profile">
                                         <a>My Account</a>
                                     </Link>
                                 </h3>
-
+                                
                                 <p className="pointer" onClick={() => handleShow()}>
                                     Order Tracking
-                                </p>
+                                </p> */}
+                            </div>
+                        </div>
+                        <div className="col-md-3 col-xs-6">
+                            <div className="footer-info">
+                                <h3>Contact info</h3>
+                                <div className="mb-2">
+                                    <div>Address</div>
+                                    <div style={{fontSize: '14px'}}>Sumi Tower 12th Floor, 66/1  Zoo Road, Mirpur-2, Dhaka-1216</div>
+                                </div>
+
+                                <div className="mb-2">
+                                    <div>Phone</div>
+                                    <div style={{fontSize: '14px'}}>+880 9696 848858</div>
+                                </div>
+
+                                <div className="mb-2">
+                                    <div>Email</div>
+                                    <div style={{fontSize: '14px'}}>info@deshibazaarbd.com</div>
+                                </div>
                                 <div>
                                     <Link href="https://play.google.com/store/apps/details?id=com.deshibazaarbd" passHref={true}>
                                         <a target="_blank">
@@ -133,7 +147,7 @@ const Footer = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-md-4 col-sm-6">
+                        <div className="col-md-3 col-sm-6">
                             <div className="footer-info">
                                 <div className="footer-info__follow-us">
                                     <h3>FOLLOW US: </h3>
