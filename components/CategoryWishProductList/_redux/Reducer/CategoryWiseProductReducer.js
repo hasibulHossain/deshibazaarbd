@@ -117,6 +117,7 @@ function CategoryWiseProductReducer(state = initialState, { type, payload }) {
           type: "",
           search: "",
           category: state.filterParams.type || state.filterParams.search ? [] : state.filterParams.category,
+          // category: [],
           brand: [],
           min_price: null,
           max_price: null,

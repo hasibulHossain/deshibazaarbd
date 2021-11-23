@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from "react";
+import React, {useState, useEffect} from "react";
 import ProductFilter from "./ProductFilter";
 import CategoryWishProductList from "./CategoryWishProductList";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,7 +22,7 @@ const CategoryWishProductContainer = () => {
   const { paginate, filterParams, categoryBrandDetails, isLoading } = useSelector(
     (state) => state.CategoryWiseProductReducer
   );
-  const firstRenderRef = useRef(true);
+  // const firstRenderRef = useRef(true);
 
   const dispatch = useDispatch();
 
@@ -56,6 +56,8 @@ const CategoryWishProductContainer = () => {
         // cloneFilterParams[query] = [];
 
         if(query === 'brand') {
+          cloneFilterParams.category = [];
+          cloneFilterParams.page = 1;
           cloneFilterParams[query].push(queries[query]);
 
           dispatch(getCategoryOrBrandDetails('brands/' + queries[query]));
@@ -110,10 +112,10 @@ const CategoryWishProductContainer = () => {
 
 
   useEffect(() => {
-    if(firstRenderRef.current) {
-      firstRenderRef.current = false
-      return
-    }
+    // if(firstRenderRef.current) {
+    //   firstRenderRef.current = false
+    //   return
+    // }
     const source = Axios.CancelToken.source();
     dispatch(getFilteredProducts(filterParams, source));
     return () => {

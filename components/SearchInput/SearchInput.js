@@ -16,6 +16,7 @@ const SearchInput = () => {
   const suggestions = useSelector((state) => state.SearchReducer.products);
   const loading = useSelector((state) => state.SearchReducer.loading);
   const firstRenderRef = useRef(true);
+  const searchRef = useRef();
 
   const searchByList = [
     {label: 'products', id: 'product'},
@@ -29,7 +30,9 @@ const SearchInput = () => {
   };
 
   const onKeyDownHandler = (key) => {
+    if(!search) return;
     if(key === "Enter") {
+      searchRef.current.value = ""
       setSearch("");
       router.push(`/products?search=${encodeURI(search)}`).then((_) => {
         window.scrollTo(0, 0);
@@ -38,6 +41,9 @@ const SearchInput = () => {
   }
 
   const searchClick = (searchData) => {
+    if(!search) return;
+    searchRef.current.value = ""
+
     setSearch("");
     setSearchType('product');
     dispatch(toggleBackdrop());
@@ -101,6 +107,7 @@ const SearchInput = () => {
   return (
     <>
       <input
+        ref={el => searchRef.current = el}
         className="search-input"
         placeholder={translate("Search for Products, Brands or more")}
         onChange={(e) => searchProduct(e)}
