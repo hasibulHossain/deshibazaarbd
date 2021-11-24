@@ -15,6 +15,7 @@ import CampaignContainer from "../components/campaign/CampaignContainer";
 // import ProductTopListContainer from "../components/ProductTopList/ProductTopListContainer";
 // import NewOffer from "../components/NewCollection/NewOffer";
 // import OfferProducts from "../components/OfferProducts/OfferProducts";
+import content from '../content.json';
 
 export default function Home(props) {
   const {isMobile} = useSelector(state => state.GlobalReducer);
@@ -22,12 +23,12 @@ export default function Home(props) {
   return (
     <>
       <PageMeta
-        title="Deshibazaarbd.com | Choose Order Enjoy | Best E-commerce"
-        description="Deshi Bazaar BD is a multivendor e-commerce business solution in Bangladesh"
-        keywords="deshibazaar,deshibazaarbd,deshibazar,deshibazarbd,daraz"
+        title={content.meta_title}
+        description={content.meta_description}
+        keywords={content.meta_keywords}
         ogpEnabled={true}
-        pageSocialMetaUrl="https://deshibazaarbd.com"
-        pageSocialMetaImage="https://www.deshibazaarbd.com/images/logos/logo-en.svg" />
+        pageSocialMetaUrl={content.main_url}
+        pageSocialMetaImage={content.logo} />
       <HomeBannerCarousel slider={props.slider} />
 
       {/* <NewOffer /> */}
@@ -35,7 +36,7 @@ export default function Home(props) {
       {/* <ProductTopListContainer /> */}
       <CampaignContainer />
       <CategoryListContainer homepageCategories={props.homepageCategories} />
-      
+
       <LazyLoad height={280} once>
         <DealFlash />
       </LazyLoad>
@@ -68,14 +69,14 @@ export const getServerSideProps = async () => {
   ]);
 
   const [sliderObj, homepageCategoriesObj] = await Promise.all([
-    sliderRes.json(), 
+    sliderRes.json(),
     categoryRes.json()
   ]);
 
-  let slider              = sliderObj.status ? sliderObj.data : [];
-  let homepageCategories  = homepageCategoriesObj.status ? homepageCategoriesObj.data : [];
+  const slider              = sliderObj.status ? sliderObj.data : [];
+  const homepageCategories  = homepageCategoriesObj.status ? homepageCategoriesObj.data : [];
 
   return {
-      props: { slider: slider, homepageCategories: homepageCategories }
+      props: { slider, homepageCategories }
   }
 }

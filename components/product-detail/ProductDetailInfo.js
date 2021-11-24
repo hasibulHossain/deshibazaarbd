@@ -20,6 +20,7 @@ import { formatCurrency } from "../../services/currency";
 import LazyLoad from "react-lazyload";
 import InnerImageZoom from 'react-inner-image-zoom';
 import Overlay from '../master/Modal/Overlay';
+import content from '../../content.json';
 
 const ProductDetailInfo = (props) => {
   const router = useRouter();
@@ -276,7 +277,7 @@ const ProductDetailInfo = (props) => {
                                         <div>
                                           <ul className="social-media m-0">
                                               <li className="social-facebook m-0 ml-2" >
-                                                <Link  href={`https://www.facebook.com/sharer/sharer.php?u=https://www.deshibazaarbd.com${router.asPath}`}>
+                                                <Link  href={`https://www.facebook.com/sharer/sharer.php?u=${content.main_url}${router.asPath}`}>
                                                   <a target="_blank">
                                                     <i className="fab fa-facebook-f"></i>
                                                   </a>

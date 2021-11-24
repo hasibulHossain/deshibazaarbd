@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import content from '../../content.json';
 dayjs.extend(relativeTime);
 
 function StoreProfileDetails() {
@@ -17,7 +18,7 @@ function StoreProfileDetails() {
                 </div>
                 <div className="col-md-9 col-sm-12">
                     <div className="store-profile-details__heading">
-                        <h4>Deshibazaar</h4>
+                        <h4>{content.short_name}</h4>
                         <div className="store-profile-details__contacts">
                             <div className="store-profile-details__contact-phone">
                                 <div>Phone: </div>

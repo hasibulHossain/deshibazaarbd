@@ -6,6 +6,7 @@ import SimpleModal from '../master/Modal/SimpleModal';
 import AddressUpdate from '../ProfileAccountSetting/AddressUpdate';
 import WarningMessage from '../master/warningMessage/WarningMessage';
 import SimpleBtn from '../master/SimpleBtn/SimpleBtn';
+import content from '../../content.json';
 
 const ShippingInfo = () => {
 
@@ -98,7 +99,7 @@ const ShippingInfo = () => {
                     }
 
                     <div className="delivery_collection">
-                        <p className="delivery_collecting_message">Free Delivery on collecting your order from Deshibazaarbd Pick-up point</p>
+                        <p className="delivery_collecting_message">{content.delivery_collecting_message}</p>
                         <div className="d-flex justify-content-between">
                             <p className="collecting_suggesting">14 Suggested collection points nearby</p>
                             <p>
