@@ -6,7 +6,7 @@ export default NextAuth({
         Providers.Credentials({
             async authorize(credentials) {
                 try {
-                    const res = await fetch('https://api.deshibazaarbd.com/public/api/v1/auth/login', {
+                    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}auth/login`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
@@ -26,8 +26,7 @@ export default NextAuth({
                     }
 
                 } catch (error) {
-                    throw new Error(error)
-                    
+                    throw new Error(error);
                 }
             }
         })
@@ -35,7 +34,6 @@ export default NextAuth({
     callbacks: {
         async session(session, token) {
             session.accessToken = token.accessToken;
-            
             return session
         },
 
