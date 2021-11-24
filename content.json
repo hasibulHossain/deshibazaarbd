@@ -1,0 +1,29 @@
+{
+    "name": "DeshibazaarBD",
+    "short_name": "Deshibazaar",
+    "main_url": "https://www.deshibazaarbd.com",
+    "seller_url": "https://seller.deshibazaarbd.com",
+    "meta_title" : "Deshibazaarbd.com | Choose Order Enjoy | Best E-commerce",
+    "meta_description" : "Deshi Bazaar BD is a multivendor e-commerce business solution in Bangladesh",
+    "meta_keywords" : "deshibazaar,deshibazaarbd,deshibazar,deshibazarbd,daraz",
+    "logo": "https://www.deshibazaarbd.com/images/logos/logo-en.svg",
+    "favicon": "https://www.deshibazaarbd.com/images/logos/logo-en.svg",
+    "registered_name": "deshibazaarbd.com",
+    "trade_licence_no": "223730",
+    "vat_reg_no": "BIN 004305858-0401",
+    "tin": "654033393432",
+    "primary_email": "info@deshibazaarbd.com",
+
+    "social_facebook": "https://www.facebook.com/Deshibazaarbd21",
+    "social_youtube": "https://www.youtube.com/channel/UCRQDLHqRMH4efiE7u89kVIg",
+    "social_twitter": "https://twitter.com/DeshibazaarbdC",
+    "social_linkedin": "https://www.linkedin.com/in/deshi-bazaar-bd-com-64ab2620b/",
+    "social_whatsapp": "",
+    "social_instagram": "",
+
+    "delivery_collecting_message": "Free Delivery on collecting your order from Deshibazaarbd Pick-up point",
+    "app_playstore_link": "https://play.google.com/store/apps/details?id=com.deshibazaarbd",
+    "copyright_text": " 2021 Deshibazaarbd.com | All rights reserved ",
+    "currency": "BDT",
+    "currency_symbol": "৳"
+}
