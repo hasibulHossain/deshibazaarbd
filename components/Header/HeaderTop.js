@@ -3,6 +3,7 @@ import { getCurrencies } from '../../services/currency';
 import Modal from '../master/Modal/Modal';
 import TrackingForm from './TrackingForm';
 import Translate from '../translation/Translate';
+import content from '../../content.json';
 
 const HeaderTop = () => {
     const [currencies, setCurrencies] = useState([]);
@@ -35,7 +36,7 @@ const HeaderTop = () => {
                         <div className="row justify-content-end">
                             <p className="heading-top-text pointer mr-3">
                                 <a
-                                    href="https://seller.deshibazaarbd.com"
+                                    href={content.seller_url}
                                     target="_blank"
                                     style={{ color: '#fff', textDecoration: 'none' }} >
                                     <i className="fas fa-user"></i>

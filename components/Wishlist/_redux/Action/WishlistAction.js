@@ -63,7 +63,7 @@ export const addOrRemoveWishItem = (itemId, isWishItemFound, isSignedIn) => asyn
             // console.log(error);
         })
     } else {
-        const wishItem = wishList.find(item => item.item_id === postData.item_id );
+        const wishItem = wishList.find(item => item.item_id.toString() === postData.item_id.toString() );
 
         if(!wishItem) return;
 

@@ -16,10 +16,4 @@ function Notfound() {
     )
 };
 
-export async function getStaticProps() {
-    return {
-        props: {}
-    }
-}
-
 export default Notfound;

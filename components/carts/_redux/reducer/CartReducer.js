@@ -46,10 +46,10 @@ const calculateTotalQtyAndPrices = (carts) => {
   };
 
   carts.forEach((cartItem) => {
-    const qty = parseInt(cartItem.quantity);
-    const price = parseFloat(cartItem.price);
-    const offerPrice = parseFloat(cartItem.offerPrice);
-    const hasOffer = productHasOffer(price, offerPrice);
+    const qty         = parseInt(cartItem.quantity);
+    const price       = parseFloat(cartItem.price);
+    const offerPrice  = parseFloat(cartItem.offerPrice);
+    const hasOffer    = productHasOffer(price, offerPrice, cartItem.isOffer);
 
     if (cartItem.isChecked) {
       response.totalQuantity += !qty ? 1 : qty; // By default 1 if quantity is not available, else quantity

@@ -1,4 +1,5 @@
 import React from 'react';
+import content from '../../content.json';
 
 const FooterBottom = () => {
     return (
@@ -7,7 +8,7 @@ const FooterBottom = () => {
                 <div className="row justify-content-between align-items-center">
                     <div className="col-md-12">
                         <div className="footer-bottom-info">
-                            <span>&copy; 2021 Deshibazaarbd.com | All rights reserved </span>
+                            <span>&copy; {content.copyright_text}</span>
                         </div>
                     </div>
                 </div>

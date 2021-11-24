@@ -20,6 +20,7 @@ import { formatCurrency } from "../../services/currency";
 import LazyLoad from "react-lazyload";
 import InnerImageZoom from 'react-inner-image-zoom';
 import Overlay from '../master/Modal/Overlay';
+import content from '../../content.json';
 
 const ProductDetailInfo = (props) => {
   const router = useRouter();
@@ -145,9 +146,9 @@ const ProductDetailInfo = (props) => {
           <Breadcrumb>
             {typeof product.category !== "undefined" &&
               product.category !== null && (
-                <Link href={`/products?category=${product.category.id}`}>
+                <Link href={`/products?category=${product.category.slug}`}>
                   <Breadcrumb.Item
-                    href={`/products?category=${product.category.id}`}
+                    href={`/products?category=${product.category.slug}`}
                   >
                     {product.category.name}
                   </Breadcrumb.Item>
@@ -156,9 +157,9 @@ const ProductDetailInfo = (props) => {
 
             {typeof product.sub_category !== "undefined" &&
               product.sub_category !== null && (
-                <Link href={`/products?category=${product.sub_category.id}`}>
+                <Link href={`/products?category=${product.sub_category.slug}`}>
                   <Breadcrumb.Item
-                    href={`/products?category=${product.sub_category.id}`}
+                    href={`/products?category=${product.sub_category.slug}`}
                   >
                     {product.sub_category.name}
                   </Breadcrumb.Item>
@@ -167,9 +168,9 @@ const ProductDetailInfo = (props) => {
 
             {typeof product.sub_category2 !== "undefined" &&
               product.sub_category2 !== null && (
-                <Link href={`/products?category=${product.sub_category2.id}`}>
+                <Link href={`/products?category=${product.sub_category2.slug}`}>
                   <Breadcrumb.Item
-                    href={`/products?category=${product.sub_category2.id}`}
+                    href={`/products?category=${product.sub_category2.slug}`}
                   >
                     {product.sub_category2.name}
                   </Breadcrumb.Item>
@@ -202,8 +203,8 @@ const ProductDetailInfo = (props) => {
                               {/* <Slider {...settings}> */}
                                 {product.images && product.images.length > 0 && product.images.map((item, index) => (
                                   <div key={index}>
-                                    <div onClick={() => handleChangePreviewImg(item.image_url) } style={{padding: '5px', width: '100%', height: '100px'}}>
-                                      <img  style={{maxWidth: '100%', objectFit: 'contain', height: '100%', border: '1px solid #ddd', padding: '5px'}} src={item.image_url} alt={product.name} />
+                                    <div className="pointer" onClick={() => handleChangePreviewImg(item.image_url) } style={{padding: '5px', width: '100%', height: '100px'}}>
+                                      <img width={90} height={90} style={{maxWidth: '100%', objectFit: 'contain', height: '100%', border: '1px solid #ddd', padding: '5px'}} src={item.image_url} alt={product.name} />
                                     </div>
                                   </div>
                                 ))}
@@ -276,7 +277,7 @@ const ProductDetailInfo = (props) => {
                                         <div>
                                           <ul className="social-media m-0">
                                               <li className="social-facebook m-0 ml-2" >
-                                                <Link  href={`https://www.facebook.com/sharer/sharer.php?u=https://www.deshibazaarbd.com${router.asPath}`}>
+                                                <Link  href={`https://www.facebook.com/sharer/sharer.php?u=${content.main_url}${router.asPath}`}>
                                                   <a target="_blank">
                                                     <i className="fab fa-facebook-f"></i>
                                                   </a>

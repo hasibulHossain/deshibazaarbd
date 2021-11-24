@@ -1,9 +1,9 @@
 import React from 'react';
+import content from '../../../content.json';
 
 const ShareProduct = ({ product }) => {
 
-    const hostAddress = "https://deshibazaarbd.com"; // @todo dynamically get host address by js
-    // const hostAddress = "https://deshibazaarbd.com"; // @todo dynamically get host address by js
+    const hostAddress = content.main_url; // @todo dynamically get host address by js
 
     return (
         <ul className="social-media">

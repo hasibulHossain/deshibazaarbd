@@ -263,6 +263,13 @@ function ProfileAccountSettingReducer(state = initialState, action) {
                         shippingAddressInput: initialState.shippingAddressInput
                     }
                 }
+
+            case Types.RESET_PROFILE_ACCOUNT_CITY_AREA:
+                return {
+                    ...state,
+                    cityList: [],
+                    areaList: []
+                }
               
         default:
             break;

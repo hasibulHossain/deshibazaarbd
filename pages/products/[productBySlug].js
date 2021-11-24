@@ -2,19 +2,20 @@ import React from "react";
 import ProductNoFound from "../../components/master/productNoFound/ProductNoFound";
 import ProductDetailInfo from "../../components/product-detail/ProductDetailInfo";
 import PageMeta from "../../components/layouts/PageMeta";
+import content from '../../content.json';
 
 export default function ProductBySlug({ product }) {
     let productUrl;
 
     if(product) {
-       productUrl = encodeURI(`https://deshibazaarbd.com/products/${product.sku}`);
+       productUrl = `${content.main_url}/products/${encodeURIComponent(product.sku)}`;
     }
 
     return (
         <>
             {
                 product && (
-                    <PageMeta 
+                    <PageMeta
                         ogpEnabled={true}
                         title={product.name}
                         keywords={product.name}
@@ -40,8 +41,8 @@ export default function ProductBySlug({ product }) {
 }
 
 export const getServerSideProps = async (context) => {
-    const productBySlug = context.params.productBySlug;
-    const uri = encodeURI(`${process.env.NEXT_PUBLIC_API_URL}get-item-detail/${productBySlug}`);
+    const productBySlug = encodeURIComponent(context.params.productBySlug);
+    const uri = `${process.env.NEXT_PUBLIC_API_URL}get-item-detail/${productBySlug}`;
     // Don't delete the base api_url from here.
     const res = await fetch(uri);
 

@@ -109,7 +109,7 @@ const CategoryWishProductList = ({showFilter, showFilterHandler}) => {
 
   return (
     <section className="category_wise_product_list">
-      <div className="row justify-content-between my-4">
+      <div className="row justify-content-between my-2 my-md-4">
         <div className="col-lg-6 col-sm-12">
           <div className="category_wise_product_list_heading">
             <h5 className="category-search-title">{title.replace(/-/g, " ")}</h5>

@@ -2,11 +2,21 @@ import Axios from "axios";
 import * as Types from "../Type/Types";
 
 export const getFilteredProducts = (filterParamObj, source = {token: ""}) => async (dispatch) => {
-  const filterParamObjClone = {
-    ...filterParamObj,
-    category: filterParamObj.category.length > 1 ? filterParamObj.category.slice(1).join(",") : filterParamObj.category.join(","),
-    brand: filterParamObj.brand.join(","),
-  };
+  let filterParamObjClone;
+
+  if(filterParamObj.type || filterParamObj.search) {
+    filterParamObjClone = {
+      ...filterParamObj,
+      category: filterParamObj.category[filterParamObj.category.length -1],
+      brand: filterParamObj.brand.join(","),
+    };
+  } else {
+    filterParamObjClone = {
+      ...filterParamObj,
+      category: filterParamObj.category.length > 1 ? filterParamObj.category.slice(1).join(",") : filterParamObj.category.join(","),
+      brand: filterParamObj.brand.join(","),
+    };
+  }
 
   const filterParam = Object.keys(filterParamObjClone)
     .filter((item) => filterParamObjClone[item])
@@ -91,13 +101,22 @@ export const resetFilterParams = (filterParams) => ({
 });
 
 export const getSubCategories = (parentId) => async dispatch => {
-
   dispatch(getCategoryRelatedBrands(parentId));
 
-  const url = 'categories/' + parentId
+  let url;
+  if(parentId) {
+    url = 'categories/' + parentId;
+  } else {
+    url = 'categories?parent_id=null';
+  }
+
   try {
     const res = await Axios.get(url);
-    dispatch({type: Types.GET_SUB_CATEGORY, payload: res.data && res.data.data && res.data.data.childs})
+    if(parentId) {
+      dispatch({type: Types.GET_SUB_CATEGORY, payload: res.data && res.data.data && res.data.data.childs})
+    } else {
+      dispatch({type: Types.GET_SUB_CATEGORY, payload: res.data && res.data.data})
+    }
   } catch (err) {
     // console.log('err => ', err)
   }

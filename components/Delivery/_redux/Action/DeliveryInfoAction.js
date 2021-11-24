@@ -31,8 +31,8 @@ export const storeSells = (customerInfo, carts, totalQuantity, shippingCost, tot
         const singleItem = {
             item_id           : item.productID,
             quantity          : parseInt(item.quantity),
-            unit_price        : item.offerPrice > 0 ? item.offerPrice : item.price,
-            unit_price_inc_tax: item.offerPrice > 0 ? item.offerPrice : item.price,
+            unit_price        : (item.offerPrice > 0 && item.isOffer) ? item.offerPrice : item.price,
+            unit_price_inc_tax: (item.offerPrice > 0 && item.isOffer) ? item.offerPrice : item.price,
             discount_amount   : 0,
             item_tax          : 0
         }

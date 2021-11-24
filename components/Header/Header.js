@@ -129,7 +129,7 @@ const Header = () => {
                         >
                           <div className="auth-user-name">
                             {/* {userData.first_name} */}
-                            {userData && userData.first_name && userData.first_name}
+                            {userData && userData.first_name && userData.first_name ? userData.first_name : 'My account'}
                           </div>
                         </Dropdown.Toggle>
 
@@ -213,7 +213,8 @@ const Header = () => {
                         <i className="fas fa-shopping-bag"></i>
 
                         <span className="cart-qty">
-                          {formatQtyDisplay(totalQuantity)}
+                          {/* {formatQtyDisplay(totalQuantity)} */}
+                          {totalQuantity}
                         </span>
                         {/* {!isMobile && (
                           <>

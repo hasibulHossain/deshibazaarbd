@@ -84,7 +84,7 @@ const LoginComponent = () => {
                 <div className="mb-3">
                   <div className="input-box">
                     <label htmlFor="email" className="form-label required">Email / Phone</label>
-                    <Field class="form-control" type="text" id="email" name="email" />
+                    <Field className="form-control" type="text" id="email" name="email" />
                     <ErrorMessage name="email" component={ ValidationError } />
                   </div>
                 </div>
@@ -94,7 +94,7 @@ const LoginComponent = () => {
                 <div className="mb-3">
                   <label htmlFor="password" className="form-label required">password</label>
                   <div className="account_input_group">
-                      <Field class="form-control" type={showPassword ? 'text' : 'password'} id="password" name="password" />
+                      <Field className="form-control" type={showPassword ? 'text' : 'password'} id="password" name="password" />
                       <div
                         className="account_input_group_prepend"
                         onClick={() => setShowPassword(!showPassword)} >

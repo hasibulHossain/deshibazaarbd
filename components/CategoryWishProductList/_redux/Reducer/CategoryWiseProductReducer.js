@@ -116,6 +116,7 @@ function CategoryWiseProductReducer(state = initialState, { type, payload }) {
           ...state.filterParams,
           type: "",
           search: "",
+          category: state.filterParams.type || state.filterParams.search ? [] : state.filterParams.category,
           // category: [],
           brand: [],
           min_price: null,
@@ -138,13 +139,13 @@ function CategoryWiseProductReducer(state = initialState, { type, payload }) {
     case Types.GET_SUB_CATEGORY:
       return {
         ...state,
-        categories: payload
+        categories: payload ? payload : []
       }
 
     case Types.GET_CATEGORY_RELATED_BRANDS:
       return {
         ...state,
-        brands: payload
+        brands: payload ? payload : []
       }
 
     default:

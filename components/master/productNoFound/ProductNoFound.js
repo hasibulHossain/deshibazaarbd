@@ -8,7 +8,7 @@ const ProductNoFound = ({title = null, description = null}) => {
                 {description === null ? "We're sorry. We cannot find any matches for your search term." : description}
             </p>
             <div className="search_product_not_found_img_box">
-                <img src="/images/deshibazaarbd-not-found.png" alt="error" />
+                <img src="/images/no-product.png" alt="error" />
             </div>
         </div>
     );

@@ -5,6 +5,12 @@ const initialState = {
   ShopList: [],
   error: false,
   isLoading: false,
+  paginate: {
+    currentPage: 1,
+    pageCount: [],
+    perPage: null,
+    totalCount: null,
+  }
 };
 function ShopReducer(state = initialState, { type, payload }) {
   switch (type) {
@@ -15,12 +21,21 @@ function ShopReducer(state = initialState, { type, payload }) {
       };
 
     case Types.GET_SHOP_LIST:
+      const totalPage_ = Math.ceil(parseInt(payload.total) / parseInt(payload.per_page));
       return {
         ...state,
-        ...payload,
+        ShopList: payload.data,
         isLoading: false,
         error: false,
+        paginate: {
+          ...state.paginate,
+          currentPage: payload.current_page,
+          pageCount: [...Array(totalPage_).keys()],
+          perPage: parseInt(payload.per_page),
+          totalCount: parseInt(payload.total)
+        }
       };
+
     case Types.FETCH_SHOP_LIST_FAILED:
       return {
         ...state,

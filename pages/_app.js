@@ -32,7 +32,6 @@ import 'react-inner-image-zoom/lib/InnerImageZoom/styles.min.css';
 import "../components/orders/scss/order-invoice.scss";
 import MainLayout from "../components/layouts/MainLayout";
 import axiosDefault from "../services/axios-default";
-import axios from 'axios';
 
 axiosDefault();
 toast.configure();
@@ -64,6 +63,7 @@ class MyApp extends App {
     return (
       <Provider store={Store}>
         <Head>
+          <link rel="shortcut icon" href="/favicon.ico" />
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
         </Head>

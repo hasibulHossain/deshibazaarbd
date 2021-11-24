@@ -155,12 +155,13 @@ a .custom-button-component:hover {
   background: var(--color-green-light);
   color: #fff;
   font-size: 10px;
-  width: 17px;
-  height: 17px;
+  width: 20px;
+  height: 20px;
   border-radius: 20px;
   top: -7px;
-  right: -3px;
+  right: -7px;
   text-align: center;
+  border: 2px solid white;
 }
 
 .custome-select {
@@ -407,7 +408,6 @@ a .custom-button-component:hover {
 .product-container .banner {
   width: 100%;
   overflow: hidden;
-  margin-bottom: 20px;
 }
 
 .product-container .banner .banner-photo-box {
@@ -1574,12 +1574,15 @@ h6.address_book_updated_title {
 }
 
 .footer-bottom {
-  background-color: #000e25;
+  /* background-color: #000e25; */
+  background-color: #fff;
 }
 
 .footer-bottom .footer-bottom-info {
   padding: 10px 0;
   text-align: center;
+  font-size: 12px;
+  color: #000e25;
 }
 
 /* .footer-bottom .footer-bottom-info  {
@@ -1612,6 +1615,10 @@ ul.social-media {
   cursor: pointer;
   -webkit-transition: 0.5s;
   transition: 0.5s;
+}
+
+.social-media li:first-child {
+  margin-left: 0px;
 }
 
 .social-media li a {
@@ -3897,4 +3904,9 @@ p.customer_info_edit {
 
 .search-input:focus {
   border: 2px solid var(--color-primary);
+}
+
+.img-responsive {
+  height: auto;
+  width: 100%;
 }

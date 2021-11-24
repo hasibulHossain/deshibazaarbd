@@ -1,42 +1,82 @@
-import React from 'react';
-// import { useSelector } from 'react-redux';
+import React from "react";
+import content from "../../content.json";
 
 const SocialMedia = () => {
+  return (
+    <ul className="social-media">
+      {content.social_facebook.length > 0 && (
+        <li className="social-facebook">
+          <a
+            href={content.social_facebook}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i className="fab fa-facebook-f"></i>
+          </a>
+        </li>
+      )}
 
-    return (
-        <ul className="social-media">
-            <li className="social-facebook">
-                <a href={"https://www.facebook.com/Deshibazaarbd21"} target="_blank" rel="noopener noreferrer">
-                    <i className="fab fa-facebook-f"></i>
-                </a>
-            </li>
-            <li className="social-youtube">
-                <a href="https://www.youtube.com/channel/UCRQDLHqRMH4efiE7u89kVIg" target="_blank" rel="noopener noreferrer">
-                    <i className="fab fa-youtube"></i>
-                </a>
-            </li>
-            <li className="social-twitter">
-                <a href="https://twitter.com/DeshibazaarbdC" target="_blank" rel="noopener noreferrer">
-                    <i className="fab fa-twitter"></i>
-                </a>
-            </li>
-            <li className="social-linkedIn">
-                <a href="https://www.linkedin.com/in/deshi-bazaar-bd-com-64ab2620b/" target="_blank" rel="noopener noreferrer">
-                    <i className="fab fa-linkedin"></i>
-                </a>
-            </li>
-            <li className="social-whatsApp">
-                <a href="#" target="_blank" rel="noopener noreferrer">
-                    <i className="fab fa-whatsapp"></i>
-                </a>
-            </li>
-            <li className="social-instagram">
-                <a href="#" target="_blank" rel="noopener noreferrer">
-                    <i className="fab fa-instagram"></i>
-                </a>
-            </li>
-        </ul>
-    );
+      {content.social_youtube.length > 0 && (
+        <li className="social-youtube">
+          <a
+            href={content.social_youtube}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i className="fab fa-youtube"></i>
+          </a>
+        </li>
+      )}
+
+      {content.social_twitter.length > 0 && (
+        <li className="social-twitter">
+          <a
+            href={content.social_twitter}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i className="fab fa-twitter"></i>
+          </a>
+        </li>
+      )}
+
+      {content.social_linkedin.length > 0 && (
+        <li className="social-linkedIn">
+          <a
+            href={content.social_linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i className="fab fa-linkedin"></i>
+          </a>
+        </li>
+      )}
+
+      {content.social_whatsapp.length > 0 && (
+        <li className="social-whatsApp">
+          <a
+            href={content.social_whatsapp}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i className="fab fa-whatsapp"></i>
+          </a>
+        </li>
+      )}
+
+      {content.social_instagram.length > 0 && (
+        <li className="social-instagram">
+          <a
+            href={content.social_instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i className="fab fa-instagram"></i>
+          </a>
+        </li>
+      )}
+    </ul>
+  );
 };
 
 export default SocialMedia;
