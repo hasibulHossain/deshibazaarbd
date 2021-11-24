@@ -2,7 +2,7 @@ import React from 'react';
 import CategoryList from './CategoryList';
 import Translate from '../translation/Translate';
 
-const CategoryListContainer = ({ parentID = null }) => {
+const CategoryListContainer = ({ parentID = null, homepageCategories }) => {
     return (
         <section className="container product-container">
             <div className="product-heading">
@@ -19,7 +19,7 @@ const CategoryListContainer = ({ parentID = null }) => {
                 } */}
             </div>
 
-            <CategoryList parentID={parentID} />
+            <CategoryList parentID={parentID} homepageCategories={homepageCategories} />
         </section>
     );
 };

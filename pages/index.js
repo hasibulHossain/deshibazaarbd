@@ -16,7 +16,7 @@ import CampaignContainer from "../components/campaign/CampaignContainer";
 // import NewOffer from "../components/NewCollection/NewOffer";
 // import OfferProducts from "../components/OfferProducts/OfferProducts";
 
-export default function Home() {
+export default function Home(props) {
   const {isMobile} = useSelector(state => state.GlobalReducer);
 
   return (
@@ -28,13 +28,13 @@ export default function Home() {
         ogpEnabled={true}
         pageSocialMetaUrl="https://deshibazaarbd.com"
         pageSocialMetaImage="https://www.deshibazaarbd.com/images/logos/logo-en.svg" />
-      <HomeBannerCarousel />
+      <HomeBannerCarousel slider={props.slider} />
 
       {/* <NewOffer /> */}
       {/* <OfferProducts /> */}
       {/* <ProductTopListContainer /> */}
       <CampaignContainer />
-      <CategoryListContainer />
+      <CategoryListContainer homepageCategories={props.homepageCategories} />
       
       <LazyLoad height={280} once>
         <DealFlash />
@@ -59,4 +59,23 @@ export default function Home() {
       </LazyLoad>
     </>
   );
+}
+
+export const getServerSideProps = async () => {
+  const [sliderRes, categoryRes] = await Promise.all([
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}sliders-frontend`), 
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}frontend-categories?type=homepage&limit=12`)
+  ]);
+
+  const [sliderObj, homepageCategoriesObj] = await Promise.all([
+    sliderRes.json(), 
+    categoryRes.json()
+  ]);
+
+  let slider              = sliderObj.status ? sliderObj.data : [];
+  let homepageCategories  = homepageCategoriesObj.status ? homepageCategoriesObj.data : [];
+
+  return {
+      props: { slider: slider, homepageCategories: homepageCategories }
+  }
 }

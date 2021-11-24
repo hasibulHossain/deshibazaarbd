@@ -202,7 +202,7 @@ const ProductDetailInfo = (props) => {
                               {/* <Slider {...settings}> */}
                                 {product.images && product.images.length > 0 && product.images.map((item, index) => (
                                   <div key={index}>
-                                    <div onClick={() => handleChangePreviewImg(item.image_url) } style={{padding: '5px', width: '100%', height: '100px'}}>
+                                    <div className="pointer" onClick={() => handleChangePreviewImg(item.image_url) } style={{padding: '5px', width: '100%', height: '100px'}}>
                                       <img width={90} height={90} style={{maxWidth: '100%', objectFit: 'contain', height: '100%', border: '1px solid #ddd', padding: '5px'}} src={item.image_url} alt={product.name} />
                                     </div>
                                   </div>

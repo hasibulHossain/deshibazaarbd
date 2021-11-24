@@ -1,32 +1,32 @@
 import React, { useEffect } from "react";
 import { Carousel } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import LoadingPlaceHolder from "../master/skelleton/LoadingPlaceholder";
-import { getHomeCarouselData } from "./_redux/homeBannerCarouselAction/HomeBannerCarouselAction";
+// import LoadingPlaceHolder from "../master/skelleton/LoadingPlaceholder";
+// import { getHomeCarouselData } from "./_redux/homeBannerCarouselAction/HomeBannerCarouselAction";
 
-const HomeBannerCarousel = () => {
-  const { carouselList, isLoading } = useSelector((state) => state.HomeBannerCarouselReducer);
+const HomeBannerCarousel = ({slider}) => {
+  // const { carouselList, isLoading } = useSelector((state) => state.HomeBannerCarouselReducer);
 
   const { isMobile } = useSelector((state) => state.GlobalReducer);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    if(!carouselList.length) {
-      dispatch(getHomeCarouselData());
-    }
-  }, []);
+  // useEffect(() => {
+  //   if(!carouselList.length) {
+  //     dispatch(getHomeCarouselData());
+  //   }
+  // }, []);
 
   return (
     <>
-      {isLoading && (
+      {/* {isLoading && (
         <div className="card shadow-sm mt-3 p-1">
             <LoadingPlaceHolder className="" count={1} height={isMobile ? 180 : 445} />
         </div>
-      )}
+      )} */}
 
       <Carousel>
-        {carouselList && carouselList.length > 0 &&
-          carouselList.map((item, index) => (
+        {slider && slider.length > 0 &&
+          slider.map((item, index) => (
             <Carousel.Item className="home-banner-carousel pointer" key={index + 1}>
               <img
                 className="d-block"
