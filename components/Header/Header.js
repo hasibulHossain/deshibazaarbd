@@ -213,7 +213,8 @@ const Header = () => {
                         <i className="fas fa-shopping-bag"></i>
 
                         <span className="cart-qty">
-                          {formatQtyDisplay(totalQuantity)}
+                          {/* {formatQtyDisplay(totalQuantity)} */}
+                          {totalQuantity}
                         </span>
                         {/* {!isMobile && (
                           <>

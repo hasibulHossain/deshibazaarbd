@@ -155,12 +155,13 @@ a .custom-button-component:hover {
   background: var(--color-green-light);
   color: #fff;
   font-size: 10px;
-  width: 17px;
-  height: 17px;
+  width: 20px;
+  height: 20px;
   border-radius: 20px;
   top: -7px;
-  right: -3px;
+  right: -7px;
   text-align: center;
+  border: 2px solid white;
 }
 
 .custome-select {

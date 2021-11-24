@@ -28,7 +28,8 @@ const HeaderWishlist = () => {
         <i className="fas fa-heart"></i>
         {" "}
         <span className="cart-qty">
-          {formatQtyDisplay(wishList.length)}
+          {wishList.length}
+          {/* {formatQtyDisplay(wishList.length)} */}
         </span>
     </div>
   );
