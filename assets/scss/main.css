@@ -1616,6 +1616,10 @@ ul.social-media {
   transition: 0.5s;
 }
 
+.social-media li:first-child {
+  margin-left: 0px;
+}
+
 .social-media li a {
   color: #fff;
   transition: 0.5s;

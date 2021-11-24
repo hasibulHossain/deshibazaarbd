@@ -119,6 +119,30 @@ const Footer = () => {
                                 <p className="pointer" onClick={() => handleShow()}>
                                     Order Tracking
                                 </p> */}
+                                
+                                <div className="mb-2">
+                                    <p>Subscribe to our newsletter to get notification about discount information</p>
+
+                                    <div className="">
+                                        <div className="mr-2">
+                                            <input onChange={(e) => setEmail(e.target.value)} type="text" className="form-control mb-3" placeholder="Enter your Email here" />
+                                        </div>
+                                        
+                                        <div>
+                                            <SimpleBtn onClick={onSubmit} type="submit" variant="danger" style={{width: 'fit-content'}}>
+                                                Subscribe
+                                                    {
+                                                        isLoading && (
+                                                            <>
+                                                                &#8203;
+                                                                <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                                            </>
+                                                        )
+                                                    }
+                                            </SimpleBtn>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div className="col-md-3 col-xs-6">
@@ -138,6 +162,11 @@ const Footer = () => {
                                     <div>Email</div>
                                     <div style={{fontSize: '14px'}}>info@deshibazaarbd.com</div>
                                 </div>
+                                <div className="mb-2">
+                                    <div>
+                                        <SocialMedia />
+                                    </div>
+                                </div>
                                 <div>
                                     <Link href="https://play.google.com/store/apps/details?id=com.deshibazaarbd" passHref={true}>
                                         <a target="_blank">
@@ -149,25 +178,27 @@ const Footer = () => {
                         </div>
                         <div className="col-md-3 col-sm-6">
                             <div className="footer-info">
-                                <div className="footer-info__follow-us">
-                                    <h3>FOLLOW US: </h3>
-                                    <SocialMedia />
+                                <h3>Company Info</h3>
+
+                                <div className="mb-2">
+                                    <div>Registered Name</div>
+                                    <div style={{fontSize: '14px'}}>deshibazaarbd.com</div>
                                 </div>
-                                <h3>Newsletter</h3>
-                                <p>Subscribe to our newsletter to get notification about discount information</p>
-                                <input onChange={(e) => setEmail(e.target.value)} type="text" className="form-control mb-3" placeholder="Enter your Email here" />
-                                <SimpleBtn onClick={onSubmit} type="submit" variant="danger" style={{width: 'fit-content'}}>
-                                    Subscribe
-                                    &#8203;
-                                        {
-                                            isLoading && (
-                                                <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                                            )
-                                        }
-                                </SimpleBtn>
-                                {/* <div className="pt-3">
-                                    <img src={"/images/payment-methods.png"} alt="Deshi BazaarBD"/>
-                                </div> */}
+
+                                <div className="mb-2">
+                                    <div>Trade License Number</div>
+                                    <div style={{fontSize: '14px'}}>223730</div>
+                                </div>
+
+                                <div className="mb-2">
+                                    <div>Vat Registration Number</div>
+                                    <div style={{fontSize: '14px'}}>BIN 004305858-0401</div>
+                                </div>
+
+                                <div className="mb-2">
+                                    <div>E-TIN</div>
+                                    <div style={{fontSize: '14px'}}>654033393432</div>
+                                </div>
                             </div>
                         </div>
                     </div>
