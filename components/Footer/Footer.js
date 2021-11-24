@@ -9,6 +9,7 @@ import SimpleModal from '../master/Modal/SimpleModal';
 import SimpleBtn from '../master/SimpleBtn/SimpleBtn';
 import { subscribeNewsletter } from './_redux/Action/FooterAction';
 const TrackingForm = dynamic(() => import('../Header/TrackingForm'));
+import content from '../../content.json';
 
 const Footer = () => {
     const {isLoading}       = useSelector(state => state.FooterReducer)
@@ -115,11 +116,11 @@ const Footer = () => {
                                         <a>My Account</a>
                                     </Link>
                                 </h3>
-                                
+
                                 <p className="pointer" onClick={() => handleShow()}>
                                     Order Tracking
                                 </p> */}
-                                
+
                                 <div className="mb-2">
                                     <p>Subscribe to our newsletter to get notification about discount information</p>
 
@@ -127,7 +128,7 @@ const Footer = () => {
                                         <div className="mr-2">
                                             <input onChange={(e) => setEmail(e.target.value)} type="text" className="form-control mb-3" placeholder="Enter your Email here" />
                                         </div>
-                                        
+
                                         <div>
                                             <SimpleBtn onClick={onSubmit} type="submit" variant="danger" style={{width: 'fit-content'}}>
                                                 Subscribe
@@ -150,55 +151,71 @@ const Footer = () => {
                                 <h3>Contact info</h3>
                                 <div className="mb-2">
                                     <div>Address</div>
-                                    <div style={{fontSize: '14px'}}>Sumi Tower 12th Floor, 66/1  Zoo Road, Mirpur-2, Dhaka-1216</div>
+                                    <div style={{fontSize: '14px'}}>
+                                        { content.contact_location }
+                                    </div>
                                 </div>
 
                                 <div className="mb-2">
                                     <div>Phone</div>
-                                    <div style={{fontSize: '14px'}}>+880 9696 848858</div>
+                                    <div style={{fontSize: '14px'}}>
+                                    <a href={`tel:${content.contact_phone}`} className="text-white">{content.contact_phone}</a>
+                                    </div>
                                 </div>
 
                                 <div className="mb-2">
                                     <div>Email</div>
-                                    <div style={{fontSize: '14px'}}>info@deshibazaarbd.com</div>
+                                    <div style={{fontSize: '14px'}}>
+                                        <a href={`mailto:${content.primary_email}`} className="text-white">{content.primary_email}</a>
+                                    </div>
                                 </div>
                                 <div className="mb-2">
                                     <div>
                                         <SocialMedia />
                                     </div>
                                 </div>
-                                <div>
-                                    <Link href="https://play.google.com/store/apps/details?id=com.deshibazaarbd" passHref={true}>
-                                        <a target="_blank">
-                                            <img src="/images/google-play-badge.png" alt="google-play-badge" />
-                                        </a>
-                                    </Link>
-                                </div>
+                                {content.app_playstore_link.length > 0 &&
+                                    <div>
+                                        <Link href={content.app_playstore_link} passHref={true}>
+                                            <a target="_blank">
+                                                <img src="/images/google-play-badge.png" alt="google-play-badge" />
+                                            </a>
+                                        </Link>
+                                    </div>
+                                }
                             </div>
                         </div>
                         <div className="col-md-3 col-sm-6">
                             <div className="footer-info">
                                 <h3>Company Info</h3>
 
-                                <div className="mb-2">
-                                    <div>Registered Name</div>
-                                    <div style={{fontSize: '14px'}}>deshibazaarbd.com</div>
-                                </div>
+                                {content.registered_name.length > 0 &&
+                                    <div className="mb-2">
+                                        <div>Registered Name</div>
+                                        <div style={{fontSize: '14px'}}>{content.registered_name}</div>
+                                    </div>
+                                }
 
-                                <div className="mb-2">
-                                    <div>Trade License Number</div>
-                                    <div style={{fontSize: '14px'}}>223730</div>
-                                </div>
+                                {content.trade_licence_no.length > 0 &&
+                                    <div className="mb-2">
+                                        <div>Trade License Number</div>
+                                        <div style={{fontSize: '14px'}}>{content.trade_licence_no}</div>
+                                    </div>
+                                }
 
-                                <div className="mb-2">
-                                    <div>Vat Registration Number</div>
-                                    <div style={{fontSize: '14px'}}>BIN 004305858-0401</div>
-                                </div>
+                                {content.vat_reg_no.length > 0 &&
+                                    <div className="mb-2">
+                                        <div>Vat Registration Number</div>
+                                        <div style={{fontSize: '14px'}}>{content.vat_reg_no}</div>
+                                    </div>
+                                }
 
-                                <div className="mb-2">
-                                    <div>E-TIN</div>
-                                    <div style={{fontSize: '14px'}}>654033393432</div>
-                                </div>
+                                {content.tin.length > 0 &&
+                                    <div className="mb-2">
+                                        <div>E-TIN</div>
+                                        <div style={{fontSize: '14px'}}>{content.tin}</div>
+                                    </div>
+                                }
                             </div>
                         </div>
                     </div>
