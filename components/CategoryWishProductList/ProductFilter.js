@@ -36,8 +36,13 @@ const ProductFilter = () => {
     const filterParamClone = { ...filterParams };
 
     if(filterParamClone.type || filterParamClone.search) {
-      filterParamClone.category.push(category.short_code);
       filterParamClone.brand = [];
+      filterParamClone.category.push(category.short_code);
+
+      if(!e.target.checked) {
+        filterParamClone.category = [];
+      }
+
       dispatch(setFilterParams(filterParamClone));
       dispatch(getCategoryRelatedBrands(category.short_code));
       return;
