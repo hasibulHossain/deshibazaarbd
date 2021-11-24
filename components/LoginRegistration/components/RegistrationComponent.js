@@ -7,7 +7,7 @@ import * as yup from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { showToast } from '../../master/Helper/ToastHelper';
 import Timer from '../../master/timer/Timer';
-
+import content from '../../../content.json';
 
 const LOWERCASEREGEX = /(?=.*[a-z])/;
 const UPPERCASEREGEX = /(?=.*[A-Z])/;
@@ -41,9 +41,9 @@ const RegistrationComponent = () => {
             last_name: yup.string().required('Required').min(2, "Name should be at least 2 characters").max(40, "Up to 40 characters"),
             phone_no:  yup.string().required('Required').test('phone_no', "Please input a valid phone number", (value) => {
                 const phoneRegex = /^[0][1-9]\d{9}$|^[1-9]\d{9}$/;
-    
+
                 let isValidPhone = phoneRegex.test(value);
-                
+
                 if(!isValidPhone) return false
                 return true
             }),
@@ -64,7 +64,7 @@ const RegistrationComponent = () => {
                         }
 
                         const res = await axios.post('auth/check-otp', otpBody);
-                        
+
                         if(res.data.status) {
                             IS_VALID_OTP = true;
                             return Promise.resolve(true);
@@ -80,7 +80,7 @@ const RegistrationComponent = () => {
                 if(value && value.length < 6) {
                     IS_VALID_OTP = false;
                 }
-                
+
                 return Promise.resolve(true);
             }),
             password: yup.string()
@@ -157,7 +157,7 @@ const RegistrationComponent = () => {
                 customerRegister(formData)
                     .then(data => {
                         if(data.data.status) {
-                            showToast('success', 'Registration successful');
+                            showToast('success', 'Your account created successfully, Please Login.');
                             window.location.replace('/login');
                         };
                     })
@@ -207,7 +207,7 @@ const RegistrationComponent = () => {
                         <div className="row">
                             <div className="col-12">
                                 <h5 className="account_title">Register Account</h5>
-                                <p className="account_sub_tite">Creating an account has many benefits. Check out faster, keep more than one address, track orders and more</p>
+                                <p className="account_sub_tite">Creating an account has many benefits. Check out faster, keep more than one address, track orders and many more.</p>
                             </div>
                         </div>
                         <div className="account_info_body">
@@ -256,9 +256,9 @@ const RegistrationComponent = () => {
                                                                 <Field type="checkbox" id="offer" name="offer" className="pointer" />
                                                             </div>
                                                             <label className="account_info_label pointer" htmlFor="offer">
-                                                                I want to receive exclusive offers and promotions from
+                                                                I want to receive exclusive offers and promotions from &nbsp;
                                                                 <Link href="/">
-                                                                    <a> Deshibazaarbd</a>
+                                                                    <a>{content.name}</a>
                                                                 </Link>
                                                             </label>
                                                         </div>
@@ -324,7 +324,7 @@ const RegistrationComponent = () => {
                                                                         <span>
                                                                             <i className="far fa-eye-slash"></i>
                                                                         </span>
-                                                                    ) 
+                                                                    )
                                                                 }
                                                             </div>
                                                         </div>
@@ -347,7 +347,7 @@ const RegistrationComponent = () => {
                                                                         <span>
                                                                             <i className="far fa-eye-slash"></i>
                                                                         </span>
-                                                                    ) 
+                                                                    )
                                                                 }
                                                             </div>
                                                         </div>
