@@ -2,12 +2,13 @@ import React from "react";
 import ProductNoFound from "../../components/master/productNoFound/ProductNoFound";
 import ProductDetailInfo from "../../components/product-detail/ProductDetailInfo";
 import PageMeta from "../../components/layouts/PageMeta";
+import content from '../../content.json';
 
 export default function ProductBySlug({ product }) {
     let productUrl;
 
     if(product) {
-       productUrl = `https://deshibazaarbd.com/products/${encodeURIComponent(product.sku)}`;
+       productUrl = `${content.main_url}/products/${encodeURIComponent(product.sku)}`;
     }
 
     return (
