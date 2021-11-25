@@ -13,7 +13,7 @@ function StoreProfile() {
     const [isShowing, SetIsShowing] = useState(false)
 
     const toggleHandler = () => {
-        SetIsShowing(preState => !preState)
+        // SetIsShowing(preState => !preState)
     }
     useEffect(() => {
         const store = router.query.storeById;
@@ -42,7 +42,7 @@ function StoreProfile() {
                                 Joined date: { storeInfo ? dayjs(storeInfo.created_at).format('DD MMMM YYYY') : 'Unknown'}
                             </p>
                             <p>
-                                Main product: Electronics
+                                Main product: 
                             </p>
                         </div>
                     </div>
