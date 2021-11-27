@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import { getSession } from 'next-auth/client'
+// import { getSession } from 'next-auth/client'
 // import Link from "next/link";
 import { useRouter } from 'next/router';
 
@@ -16,8 +16,10 @@ const withProtectedRoute = (WrappedComponent, isSignedIn = false) => {
         
         useEffect(() => {
             (async () => {
-                const session = await getSession();
-                if(session && session.accessToken) {
+                // const session = await getSession();
+                const accessToken = localStorage.getItem('access-token');
+
+                if(accessToken) {
                     setSession(true)
                 }
                 if(session || !session) {

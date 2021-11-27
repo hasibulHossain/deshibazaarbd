@@ -46,7 +46,8 @@ const Header = () => {
   const handleLogOut = () => {
     (async () => {
       const data = await signOut({redirect: false});
-
+      localStorage.removeItem('access-token');
+      
       if(data) {
         window.location.replace('/');
       }
