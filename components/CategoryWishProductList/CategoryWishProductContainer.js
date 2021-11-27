@@ -9,7 +9,6 @@ import {
   resetFilterParams,
   setFilterParams,
 } from "./_redux/Action/CategoryWiseProductAction";
-import ReactPaginate from "react-paginate";
 import {useRouter} from 'next/router'
 import Image from 'next/image';
 import Modal from "../master/Modal/Modal";
@@ -202,23 +201,6 @@ const CategoryWishProductContainer = () => {
                     perPage={paginate.per_page}
                     totalItemCount={paginate.total}
                   />
-                  {/* <div className="w-100 px-0 px-sm-3 mt-3">
-                    <div style={{display: 'flex', justifyContent: 'flex-end'}}>
-                      <ReactPaginate
-                        previousLabel={'<'}
-                        nextLabel={'>'}
-                        breakLabel={'...'}
-                        breakClassName={'break-me'}
-                        pageCount={paginate.pages.length}
-                        marginPagesDisplayed={2}
-                        pageRangeDisplayed={2}
-                        onPageChange={paginateHandler}
-                        initialPage={filterParams.page - 1}
-                        containerClassName={'react-pagination'}
-                        activeClassName={'active'}
-                      />
-                    </div>
-                  </div> */}
                 </>
               )
             }
