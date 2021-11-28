@@ -38,6 +38,7 @@ const initialState = {
   orderDetails: [],
   filterOptionList: [],
   trackingTimelineList: [],
+  isSubmitting: false,
 };
 
 const OrderReducer = (state = initialState, action) => {
@@ -97,6 +98,12 @@ const OrderReducer = (state = initialState, action) => {
     case Types.CHANGE_COUPON_INPUT_DATA:
       const couponData = { ...state.coupon, code: action.payload.value }
       return { ...state, coupon: couponData }
+
+    case Types.ORDER_SUBMIT:
+        return {
+          ...state,
+          isSubmitting: action.payload.isLoading
+        }
 
     default:
       return {
