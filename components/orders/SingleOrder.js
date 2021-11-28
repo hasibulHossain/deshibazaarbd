@@ -101,10 +101,16 @@ const SingleOrder = ({ item, isManageable = true }) => {
                                             </p>
                                         </div>
                                         <div className="col-lg-4 col-7">
-                                            <div className="badge badge-secondary p-1">
-                                                {
-                                                    item.is_suspend == 0 ? "Processing" : "Cancel"
-                                                }
+                                            <div className="p-1">
+                                                Payment:
+                                                <span className={`badge badge-${item.payment_status === 'paid' ? 'success' : 'primary'}`}>
+                                                    { item.payment_status }
+                                                </span>
+                                                <br />
+                                                Order:
+                                                <span className={`badge badge-${item.payment_status === 'completed' ? 'success' : 'secondary'}`}>
+                                                    { item.status }
+                                                </span>
                                             </div>
                                         </div>
                                         {
