@@ -6,9 +6,8 @@ import CheckoutPaymentMethod from "../components/ShippingInfo/CheckoutPaymentMet
 import OrderSummery from "../components/orders/OrderSummery";
 import CartProduct from "../components/carts/cart-product/CartProduct";
 import DeliveryInfo from '../components/Delivery/DeliveryInfo';
-import { storeSells } from "../components/Delivery/_redux/Action/DeliveryInfoAction";
 import { getCartsAction } from "../components/carts/_redux/action/CartAction";
-import { handleShippingCost } from "../components/orders/_redux/action/OrderAction";
+import { handleShippingCost, createOrder } from "../components/orders/_redux/action/OrderAction";
 // import ProtectedRoute from "../components/master/protectedRoute/ProtectedRoute";
 // import { toggleFloatingCart } from "../_redux/store/action/globalAction";
 import withProtectedRoute from "../components/master/hoc/withProtectedRoute";
@@ -20,7 +19,6 @@ import withProtectedRoute from "../components/master/hoc/withProtectedRoute";
 // const OrderSummery = dynamic(() => import('../components/orders/OrderSummery'));
 // const CartProduct = dynamic(() => import('../components/carts/cart-product/CartProduct'));
 // const DeliveryInfo = dynamic(() => import('../components/Delivery/DeliveryInfo'));
-
 
 
 const Checkout = ()=> {
@@ -41,7 +39,7 @@ const Checkout = ()=> {
 			couponData.code = coupon.code; // Append code in couponData for backend processing
 		}
 
-		// dispatch(storeSells(customerInfo, carts, totalQuantity, shippingCost, totalPrice, couponData, userData)); @todo fixed payment and active dispatch
+		dispatch(createOrder(customerInfo, carts, totalQuantity, shippingCost, totalPrice, couponData, userData));
 		// router.push('/');
 	}
 
