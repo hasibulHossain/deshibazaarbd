@@ -39,7 +39,7 @@ const Checkout = ()=> {
 			couponData.code = coupon.code; // Append code in couponData for backend processing
 		}
 
-		// dispatch(createOrder(customerInfo, carts, totalQuantity, shippingCost, totalPrice, couponData, userData)); @todo fixed payment and active dispatch
+		dispatch(createOrder(customerInfo, carts, totalQuantity, shippingCost, totalPrice, couponData, userData));
 		// router.push('/');
 	}
 

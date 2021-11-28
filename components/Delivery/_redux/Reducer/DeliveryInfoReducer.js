@@ -4,8 +4,7 @@ import * as Types from "../Type/Types";
 const initialState = {
   error: false,
   isLoading: false,
-  isSubmitting: false,
-  
+
   customerInfo: {
     first_name: null,
     surname: null,
@@ -26,7 +25,7 @@ const initialState = {
 };
 function DeliveryInfoReducer(state = initialState, action) {
   switch (action.type) {
-    
+
     case Types.DELIVER_CUSTOMER_INPUT_CHANGE:
       const customerInfo = { ...state.customerInfo };
       customerInfo[action.payload.name] = action.payload.value
@@ -41,12 +40,6 @@ function DeliveryInfoReducer(state = initialState, action) {
         customerInfo: action.payload
       };
 
-    case Types.ORDER_SUBMIT:
-      return {
-        ...state,
-        isSubmitting: action.payload.isLoading,
-        customerInfo: initialState.customerInfo
-      }
     default:
       return state;
   }

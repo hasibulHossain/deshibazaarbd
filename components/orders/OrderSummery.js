@@ -10,10 +10,9 @@ import { activeCurrency, formatCurrency } from '../../services/currency';
 const OrderSummery = ({ handleClick, buttonText }) => {
     const dispatch = useDispatch();
     const { register, handleSubmit, errors } = useForm();
-    const isSubmitting = useSelector((state) => state.DeliveryInfoReducer.isSubmitting);
     const { carts, totalPrice } = useSelector((state) => state.CartReducer);
 
-    const { coupon, couponLoading, couponData, shippingCostLoading } = useSelector((state) => state.OrderReducer);
+    const { coupon, couponLoading, couponData, shippingCostLoading, isSubmitting } = useSelector((state) => state.OrderReducer);
     const { shippingCost } = useSelector((state) => state.OrderReducer);
 
     useEffect(() => {

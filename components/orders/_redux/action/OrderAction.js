@@ -2,6 +2,8 @@ import Axios from "axios";
 import * as Types from "../types/Types";
 import { showToast } from "../../../master/Helper/ToastHelper";
 import dayjs from "dayjs";
+import { getCartsAction } from "../../../carts/_redux/action/CartAction";
+import { encrypt } from "../../../master/utils/EncryptHelper";
 
 //  ===================================handle coupon action==================================
 export const handleChangeCouponInput = (name, value) => (dispatch) => {
@@ -392,7 +394,7 @@ export const createOrder = (customerInfo, carts, totalQuantity, shippingCost, to
       return false;
   }
 
-  Axios.post(`sales`, orderPostedData)
+  Axios.post('sales', orderPostedData)
       .then((res) => {
           if (res.data.status) {
               response.status    = res.data.status;
@@ -407,16 +409,18 @@ export const createOrder = (customerInfo, carts, totalQuantity, shippingCost, to
 
               setTimeout(() => {
                   if(payment_method === 'cash') {
-                      const url = `${invoiceURL}${res.data.data.id}`;
-                      window.location.href = url;
+                    window.location.href = `${invoiceURL}${res.data.data.id}`;
                   } else {
                       if(res.data.data.payment !== null) {
                           window.location.href = res.data.data.payment.forwarding_url
+                      } else {
+                          showToast('error', 'Payment Error. please try again.');
                       }
                   }
               }, 1000);
           }
       }).catch((err) => {
+        console.log('err', err);
           const responseLog = err.response;
           response.isLoading = false;
 
