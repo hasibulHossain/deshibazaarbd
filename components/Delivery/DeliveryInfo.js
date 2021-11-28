@@ -393,7 +393,7 @@ const DeliveryInfo = () => {
                                                     !(shippingAddressInput.location === "home") && (
                                                         <>
                                                             {' '}
-                                                            <i class="fas fa-check"></i>
+                                                            <i className="fas fa-check"></i>
                                                         </>
                                                     )
                                                  }
