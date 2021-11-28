@@ -34,6 +34,7 @@ const ProductFilter = () => {
     })
 
     const filterParamClone = { ...filterParams };
+    filterParamClone.page = 1;
 
     if(filterParamClone.type || filterParamClone.search) {
       filterParamClone.brand = [];
@@ -53,6 +54,7 @@ const ProductFilter = () => {
     } else {
       filterParamClone.category.splice(1, 1)
     }
+    
     dispatch(setFilterParams(filterParamClone));
   };
 
@@ -60,6 +62,8 @@ const ProductFilter = () => {
   const brandCheckboxHandler = (e, brand) => {
     const filterParamClone = { ...filterParams };
     // conditionally insert and remove brand id from brand array
+
+    filterParamClone.page = 1;
 
     if (e.target.checked) {
       filterParamClone.brand.push(brand.slug);
