@@ -102,49 +102,45 @@ export const handleShippingCost = (carts) => (dispatch) => {
  * @return array oderList based on user_id
  */
 export const getUserOrderList = (value = 5) => (dispatch) => {
-  const accessToken = localStorage.getItem('access_token') || null;
-
-  if ( typeof accessToken !== 'undefined' && accessToken !== null && accessToken !== '' ) {
-    const responseData = {
-      orderList: [],
-      status   : false,
-      isLoading: true,
-    }
-    dispatch({ type: Types.GET_USER_ORDER_LIST, payload: responseData });
-
-    const end_date  = dayjs().format('YYYY-MM-DD');
-    let start_date = end_date;
-    let orderListURL = `sales/orders/customer?paginate_no=5`;
-
-    if (value == 15) {
-      start_date = dayjs().subtract(15, 'day').format('YYYY-MM-DD');
-    } else if (value == 30) {
-      start_date = dayjs().subtract(30, 'day').format('YYYY-MM-DD');;
-    } else if (value == 60) {
-      start_date = dayjs().subtract(60, 'day').format('YYYY-MM-DD');
-    }
-
-    if (typeof value === 'undefined' || value == 5) {
-      orderListURL = `sales/orders/customer?paginate_no=5`
-    } else {
-      orderListURL = `sales/orders/customer?start_date=${start_date}&end_date=${end_date}`
-    }
-
-    Axios.get(orderListURL)
-    .then((res) => {
-      responseData.orderList = res.data.data.data;
-      responseData.status    = true;
-      responseData.isLoading = false;
-      dispatch({ type: Types.GET_USER_ORDER_LIST, payload: responseData });
-    }).catch((error) => {
-      const responseLog      = error.response;
-      responseData.isLoading = false;
-      if (typeof responseLog !== 'undefined') {
-        showToast('error', responseLog.data.message);
-        dispatch({ type: Types.GET_USER_ORDER_LIST, payload: responseData });
-      }
-    })
+  const responseData = {
+    orderList: [],
+    status   : false,
+    isLoading: true,
   }
+  dispatch({ type: Types.GET_USER_ORDER_LIST, payload: responseData });
+
+  const end_date  = dayjs().format('YYYY-MM-DD');
+  let start_date = end_date;
+  let orderListURL = `sales/orders/customer?paginate_no=5`;
+
+  if (value == 15) {
+    start_date = dayjs().subtract(15, 'day').format('YYYY-MM-DD');
+  } else if (value == 30) {
+    start_date = dayjs().subtract(30, 'day').format('YYYY-MM-DD');;
+  } else if (value == 60) {
+    start_date = dayjs().subtract(60, 'day').format('YYYY-MM-DD');
+  }
+
+  if (typeof value === 'undefined' || value == 5) {
+    orderListURL = `sales/orders/customer?paginate_no=5`
+  } else {
+    orderListURL = `sales/orders/customer?start_date=${start_date}&end_date=${end_date}`
+  }
+
+  Axios.get(orderListURL)
+  .then((res) => {
+    responseData.orderList = res.data.data.data;
+    responseData.status    = true;
+    responseData.isLoading = false;
+    dispatch({ type: Types.GET_USER_ORDER_LIST, payload: responseData });
+  }).catch((error) => {
+    const responseLog      = error.response;
+    responseData.isLoading = false;
+    if (typeof responseLog !== 'undefined') {
+      showToast('error', responseLog.data.message);
+      dispatch({ type: Types.GET_USER_ORDER_LIST, payload: responseData });
+    }
+  })
 }
 
 /**
