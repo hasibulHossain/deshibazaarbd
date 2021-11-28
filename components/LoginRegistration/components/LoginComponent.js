@@ -43,10 +43,10 @@ const LoginComponent = () => {
       const session = await getSession();
       if(session && session.accessToken) {
         localStorage.setItem('access-token', session.accessToken);
-        router.replace('/')
         setIsLoading(false);
-        dispatch(isSignedIn())
+        dispatch(isSignedIn());
         dispatch(getUserDataAction());
+        router.replace('/');
       }
     }
   }

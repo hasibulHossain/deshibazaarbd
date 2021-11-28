@@ -1,10 +1,15 @@
 // import { getSession } from 'next-auth/client'
-// import { getUserDataAction } from '../../../components/_redux/getUserData/Action/UserDataAction';
+import { getUserDataAction } from '../../../components/_redux/getUserData/Action/UserDataAction';
 import * as types from "../types/types";
 
-export const isSignedIn = (isSignedIn) => async (dispatch) => {
+export const isSignedIn = (isSignedIn, userData) => async (dispatch) => {
   // const session = await getSession();
-  // dispatch(getUserDataAction());
+  const userDataFound = localStorage.getItem('user-info');
+
+  if(!userDataFound || !userData) {
+    dispatch(getUserDataAction());
+  }
+
 
   const accessToken = localStorage.getItem('access-token');
 
