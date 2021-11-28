@@ -84,6 +84,12 @@ const OrderInvoice = ({ title = translate('Invoice'), id, is_invoice = false }) 
                                                     {' '}
                                                     <Translate>Paid</Translate>
                                                 </span>
+                                                <br /><br />
+                                                <span className="bg-warning border-radius-5 p-1">
+                                                    <i className="fas fa-check"></i>
+                                                    {' '}
+                                                    Paid via: {orderDetails.payment_method}
+                                                </span>
                                             </p>
                                         }
                                     </div>
