@@ -11,6 +11,7 @@ import { handleShippingCost, createOrder } from "../components/orders/_redux/act
 // import ProtectedRoute from "../components/master/protectedRoute/ProtectedRoute";
 // import { toggleFloatingCart } from "../_redux/store/action/globalAction";
 import withProtectedRoute from "../components/master/hoc/withProtectedRoute";
+import { useRouter } from 'next/router';
 
 // import dynamic from 'next/dynamic';
 
@@ -22,6 +23,7 @@ import withProtectedRoute from "../components/master/hoc/withProtectedRoute";
 
 
 const Checkout = ()=> {
+	const router 							   = useRouter();
 	const dispatch                             = useDispatch();
 	const { customerInfo }                     = useSelector((state) => state.DeliveryInfoReducer);
 	const { couponData, shippingCost, coupon } = useSelector((state) => state.OrderReducer);
@@ -43,6 +45,11 @@ const Checkout = ()=> {
 		// router.push('/');
 	}
 
+	if(carts.length <= 0) {
+		router.push('/');
+		return null
+	}
+
 	return (
 			<div className="container">
 				<div className="row">
@@ -61,7 +68,7 @@ const Checkout = ()=> {
 								{
 									carts.length > 0 && carts.map((item, index) => (
 										<div className="cart_items_details py-3" key={index + 1}>
-											<CartProduct cart={item} />
+											<CartProduct cart={item} checkoutPage={true} />
 										</div>
 									))
 								}
