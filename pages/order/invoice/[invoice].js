@@ -8,11 +8,15 @@ const OrderInvoice = dynamic(() => import('../../../components/orders/OrderInvoi
 
 export default function invoice() {
     const router      = useRouter();
-    const { invoice } = router.query
+    const { invoice } = router.query;
 
     return (
         <div className="container" id="order-success-page">
-            <OrderInvoice title={translate('Invoice')} id={invoice} is_invoice={true} />
+            {
+                invoice && (
+                    <OrderInvoice title={translate('Invoice')} id={invoice} is_invoice={true} />
+                )
+            }
         </div>
     );
 }
