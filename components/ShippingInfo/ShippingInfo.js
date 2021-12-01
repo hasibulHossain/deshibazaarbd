@@ -38,13 +38,13 @@ const ShippingInfo = () => {
     return (
         <>
             <div className="card shadow-md mb-2">
-                <div className="shipping_info_title pt-3 px-2 row">
-                    <div className="col-12">
-                        <p className="checkout_shipping_title">Shipping & Billing</p>
+                <div className="shipping_info_title pt-3 px-2 d-flex justify-content-between align-items-center pb-2">
+                    <div className="">
+                        <p className="checkout_shipping_title m-0">Shipping & Billing</p>
                     </div>
                     {
                         !isLoading && defaultBillingAddress !== null && defaultBillingAddress.length === 0 && (
-                            <div className="col-lg-12 text-right mb-1">
+                            <div className="text-right">
                                 <SimpleBtn variant="success" style={{ width: 'fit-content' }} onClick={toggleShowHandler}>
                                     Add new address
                                 </SimpleBtn>
