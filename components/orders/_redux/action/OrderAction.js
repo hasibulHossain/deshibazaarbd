@@ -396,17 +396,18 @@ export const createOrder = (customerInfo, carts, totalQuantity, shippingCost, to
               response.status    = res.data.status;
               response.orderData = res.data.data;
               response.isLoading = false;
-              localStorage.removeItem("carts");
               dispatch(getCartsAction());
               localStorage.setItem('tr', encrypt(res.data.data.id));
-
+              
               showToast('success', res.data.message);
               dispatch({ type : Types.ORDER_SUBMIT, payload: response });
-
+              
               setTimeout(() => {
-                  if(payment_method === 'cash') {
-                    window.location.href = `${invoiceURL}${res.data.data.id}`;
-                  } else {
+                if(payment_method === 'cash') {
+                  window.location.href = `${invoiceURL}${res.data.data.id}`;
+                  localStorage.removeItem("carts");
+                } else {
+                    localStorage.removeItem("carts");
                       if(res.data.data.payment !== null) {
                           window.location.href = res.data.data.payment.forwarding_url
                       } else {
@@ -416,7 +417,7 @@ export const createOrder = (customerInfo, carts, totalQuantity, shippingCost, to
               }, 1000);
           }
       }).catch((err) => {
-        console.log('err', err);
+        // console.log('err', err);
           const responseLog = err.response;
           response.isLoading = false;
 

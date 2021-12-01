@@ -6,7 +6,7 @@ import { formatCurrency } from '../../../services/currency';
 import { toggleProductModalAction } from '../../products/_redux/Action/ProductAction';
 import Modal from '../../master/Modal/Modal';
 
-const CartProduct = ({ cart }) => {
+const CartProduct = ({ cart, checkoutPage = false }) => {
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -33,7 +33,11 @@ const CartProduct = ({ cart }) => {
     </Modal>
       <div className="row justify-content-between">
         <div className="col-lg-3 col-5 product_cart_left">
-          <input type="checkbox" className="cart-checkbox pointer mr-2" checked={cart.isChecked} onChange={() => dispatch(toggleAllCartSelection(!cart.isChecked, cart.productID))} />
+          {
+            !checkoutPage && (
+              <input type="checkbox" className="cart-checkbox pointer mr-2" checked={cart.isChecked} onChange={() => dispatch(toggleAllCartSelection(!cart.isChecked, cart.productID))} />
+            )
+          }
           <img
             src={cart.productImage === null ? 'https://img.icons8.com/plasticine/2x/image.png' : cart.productImage}
             alt={cart.productName}
@@ -61,10 +65,14 @@ const CartProduct = ({ cart }) => {
         </div>
 
         <div className="col-lg-4 col-md-12">
-          <div className="product_cart_purchase">
-            <CartQuantity cart={cart} />
-            <i className="fas fa-trash remove_product_from_cart" onClick={() => handleShow(cart)}></i>
-          </div>
+          {
+            !checkoutPage && (
+              <div className="product_cart_purchase">
+                <CartQuantity cart={cart} />
+                <i className="fas fa-trash remove_product_from_cart" onClick={() => handleShow(cart)}></i>
+              </div>
+            )
+          }
         </div>
       </div>
 

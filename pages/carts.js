@@ -87,18 +87,23 @@ export default function Carts() {
                     <p>Availability and promotions will be shown here</p>
                   </div>
                 </Card> */}
+
+
+
                 <div className="card mt-3">
 
                   <div className="cart_item_box_top">
-                    <div className="pointer d-flex align-items-center" onClick={() => dispatch(toggleAllCartSelection(!checkedAllCarts))}>
-                      <input className="cart-checkbox" type="checkbox" checked={checkedAllCarts} onChange={() => { }} />
-                      &nbsp; Select All ({carts.length} items)
-                    </div>
                     {
                       carts.length > 0 && (
-                        <div>
-                          <span onClick={toggleModalHandler} className="pointer">Clear all</span>
-                        </div>
+                        <>
+                          <div className="pointer d-flex align-items-center" onClick={() => dispatch(toggleAllCartSelection(!checkedAllCarts))}>
+                            <input className="cart-checkbox" type="checkbox" checked={checkedAllCarts} onChange={() => { }} />
+                            &nbsp; Select All ({carts.length} items)
+                          </div>
+                          <div>
+                            <span onClick={toggleModalHandler} className="pointer">Clear all</span>
+                          </div>
+                        </>
                       )
                     }
                   </div>
@@ -151,6 +156,16 @@ export default function Carts() {
 
                   <div className="p-2 mb-4">
                     <div className="text-center">
+                      {
+                        carts.length <= 0 && (
+                          <div>
+                            <img src="/images/db-empty-cart.png" alt="empty cart" />
+                            <div>
+                              <p>Oop!!! Your cart is empty! Start shopping</p>
+                            </div>
+                          </div>
+                        )
+                      }
                       <Link href="/">
                         <a style={{ display: "inline-block" }}>
                           <SimpleBtn variant="success">
