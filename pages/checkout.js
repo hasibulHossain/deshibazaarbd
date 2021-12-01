@@ -8,18 +8,12 @@ import CartProduct from "../components/carts/cart-product/CartProduct";
 import DeliveryInfo from '../components/Delivery/DeliveryInfo';
 import { getCartsAction } from "../components/carts/_redux/action/CartAction";
 import { handleShippingCost, createOrder } from "../components/orders/_redux/action/OrderAction";
-// import ProtectedRoute from "../components/master/protectedRoute/ProtectedRoute";
-// import { toggleFloatingCart } from "../_redux/store/action/globalAction";
 import withProtectedRoute from "../components/master/hoc/withProtectedRoute";
 import { useRouter } from 'next/router';
-
-// import dynamic from 'next/dynamic';
-
-// const ShippingInfo = dynamic(() => import('../components/ShippingInfo/ShippingInfo'));
-// const CheckoutPaymentMethod = dynamic(() => import('../components/ShippingInfo/CheckoutPaymentMethod'));
-// const OrderSummery = dynamic(() => import('../components/orders/OrderSummery'));
-// const CartProduct = dynamic(() => import('../components/carts/cart-product/CartProduct'));
-// const DeliveryInfo = dynamic(() => import('../components/Delivery/DeliveryInfo'));
+import AddressBook from "../components/ProfileAccountSetting/AddressBook";
+import { getAddress } from "../components/ProfileAccountSetting/_redux/Action/ProfileAccountSettingAction";
+import { loading } from "../components/master/loading/loading";
+import { showToast } from "../components/master/Helper/ToastHelper";
 
 
 const Checkout = ()=> {
@@ -29,16 +23,34 @@ const Checkout = ()=> {
 	const { couponData, shippingCost, coupon } = useSelector((state) => state.OrderReducer);
 	const { carts, totalPrice, totalQuantity } = useSelector((state) => state.CartReducer);
 	const { userData } = useSelector((state) => state.UserDataReducer);
+	const { billingAddress, shippingAddress, userInputData, isLoading } = useSelector(state => state.ProfileAccountSettingReducer);
 
 	useEffect(() => {
 		dispatch(getCartsAction());
 		dispatch(handleShippingCost(carts));
-		// dispatch(toggleFloatingCart(false));
+
+		dispatch(getAddress('billing_address', userData.id));
+        dispatch(getAddress('shipping_address', userData.id));
 	}, []);
 
 	const handleStoreOrder = () => {
 		if (couponData !== null) {
 			couponData.code = coupon.code; // Append code in couponData for backend processing
+		}
+
+		if((billingAddress && billingAddress.length === 0) && (shippingAddress && shippingAddress.length === 0)) {
+			showToast('error', 'Please add delivery information');
+			return; // @todo add toast message
+		}
+
+		if(billingAddress && billingAddress.length === 0) {
+			showToast('error', 'Please add a billing address');
+			return; // @todo add toast message
+		}
+		
+		if(shippingAddress && shippingAddress.length === 0) {
+			showToast('error', 'Please add a shipping address');
+			return; // @todo add toast message
 		}
 
 		dispatch(createOrder(customerInfo, carts, totalQuantity, shippingCost, totalPrice, couponData, userData));
@@ -50,12 +62,35 @@ const Checkout = ()=> {
 		return null
 	}
 
+	let deliveryInfo = (
+		<div>
+			{ loading() }
+		</div>
+	)
+
+    if(!isLoading && (billingAddress && billingAddress.length > 0) || (shippingAddress && shippingAddress.length > 0)) {
+		deliveryInfo = (
+			<AddressBook 
+				billingAddress={billingAddress} 
+				shippingAddress={shippingAddress} 
+				userInputData={userInputData} 
+				isLoading={isLoading}
+			/>
+		)
+    }
+
+	if(!isLoading && (billingAddress && billingAddress.length === 0) && (shippingAddress && shippingAddress.length === 0)) {
+		deliveryInfo = <DeliveryInfo />
+	}
+
 	return (
 			<div className="container">
 				<div className="row">
 					<div className="col-lg-8 col-md-7">
 						<div className="delivery_info mb-3 mt-5">
-							<DeliveryInfo />
+							{
+								deliveryInfo
+							}
 							{/* <div className="card mt-3 pl-3 pr-3 pt-2 shadow-sm">
 								<div className="d-flex justify-content-between align-items-center">
 									<p className="deliver_content">{carts.length} Items</p>
@@ -76,7 +111,7 @@ const Checkout = ()=> {
 						</div>
 					</div>
 					<div className="col-lg-4 col-md-5 cart_checkout_margin">
-						<ShippingInfo />
+						{/* <ShippingInfo /> */}
 						<CheckoutPaymentMethod />
 						<OrderSummery handleClick={() => handleStoreOrder()} buttonText="CONFIRM PAYMENT" />
 					</div>
