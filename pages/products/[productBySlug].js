@@ -18,7 +18,7 @@ export default function ProductBySlug({ product }) {
                     <PageMeta
                         ogpEnabled={true}
                         title={product.name}
-                        keywords={product.name}
+                        keywords={product.keywords ? product.keywords : product.name}
                         description={product.short_description}
                         pageSocialMetaUrl={productUrl}
                         pageSocialMetaImage={product.featured_url}
