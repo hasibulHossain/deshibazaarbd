@@ -213,7 +213,7 @@ const ProductDetailInfo = (props) => {
                           </div>
                           <div className="col-lg-6">
                             <div className="product_details_information py-2">
-                              <h2 className="product_title">{product.name}</h2>
+                              <h2 className="product_title pt-3">{product.name}</h2>
 
                               <div className="d-flex justify-content-between align-items-end">
                                 <div>
