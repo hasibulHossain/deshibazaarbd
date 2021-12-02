@@ -45,13 +45,13 @@ const HeaderMenu = ({ navigationToggleHandler, showToolbar }) => {
    * return void
    */
 
-  const clickMenuLink = (categorySlug, toggleBackdrop) => {
+  const clickMenuLink = (category, toggleBackdrop) => {
     if(toggleBackdrop) {
       navigationToggleHandler();
     }
     router
-      .push(`/products?category=${encodeURIComponent(categorySlug)}`)
-      .then((_) => window.scrollTo(0, 0));
+      .push(`/products?category=${encodeURIComponent(category.short_code)}&name=${encodeURIComponent(category.name)}`)
+      .then((_) => window.scrollTo(0, 0)); // added "name" query param only for collect category name from url on product page
   };
 
   const navItemExpandHandler = (e) => {
@@ -90,7 +90,7 @@ const HeaderMenu = ({ navigationToggleHandler, showToolbar }) => {
                 }`}
               >
                 <span
-                  onClick={() => clickMenuLink(itemLvl1.short_code, false)}
+                  onClick={() => clickMenuLink(itemLvl1, false)}
                   className="navigation__nav-link"
                 >
                   <Translate>{itemLvl1.name}</Translate>
@@ -109,7 +109,7 @@ const HeaderMenu = ({ navigationToggleHandler, showToolbar }) => {
                           }`}
                         >
                           <span
-                            onClick={() => clickMenuLink(itemLvl2.short_code, false)}
+                            onClick={() => clickMenuLink(itemLvl2, false)}
                             className="navigation__nav-link"
                           >
                             <Translate>{itemLvl2.name}</Translate>
@@ -123,7 +123,7 @@ const HeaderMenu = ({ navigationToggleHandler, showToolbar }) => {
                                     className={`navigation__nav-item`}
                                   >
                                     <span
-                                      onClick={() => clickMenuLink(itemLvl3.short_code, false)}
+                                      onClick={() => clickMenuLink(itemLvl3, false)}
                                       className="navigation__nav-link"
                                     >
                                       <Translate>{itemLvl3.name}</Translate>
@@ -161,7 +161,7 @@ const HeaderMenu = ({ navigationToggleHandler, showToolbar }) => {
                   ></span>
                 )}
                 <span
-                  onClick={() => clickMenuLink(itemLvl1.short_code, true)}
+                  onClick={() => clickMenuLink(itemLvl1, true)}
                   className="navigation-mobile__nav-link"
                   href="#"
                 >
@@ -187,7 +187,7 @@ const HeaderMenu = ({ navigationToggleHandler, showToolbar }) => {
                             ></span>
                           )}
                           <span
-                            onClick={() => clickMenuLink(itemLvl2.short_code, true)}
+                            onClick={() => clickMenuLink(itemLvl2, true)}
                             className="navigation-mobile__nav-link"
                           >
                             <Translate>{itemLvl2.name}</Translate>
@@ -213,7 +213,7 @@ const HeaderMenu = ({ navigationToggleHandler, showToolbar }) => {
                                       ></span>
                                     )}
                                     <span
-                                      onClick={() => clickMenuLink(itemLvl3.short_code, true)}
+                                      onClick={() => clickMenuLink(itemLvl3, true)}
                                       className="navigation-mobile__nav-link"
                                     >
                                       <Translate>{itemLvl3.name}</Translate>
@@ -229,7 +229,7 @@ const HeaderMenu = ({ navigationToggleHandler, showToolbar }) => {
                                             >
                                               <span
                                                 onClick={() =>
-                                                  clickMenuLink(itemLvl1.short_code, true)
+                                                  clickMenuLink(itemLvl1, true)
                                                 }
                                                 className="navigation-mobile__nav-link"
                                               >
