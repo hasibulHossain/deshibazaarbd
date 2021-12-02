@@ -135,59 +135,47 @@ const Header = () => {
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu>
-                          <ActiveLink
-                            href="/profile"
-                            activeLink="custom_dropdown_link"
-                          >
+                          <Dropdown.Item href="/profile" >
                             <span className="custom_drop_item">
                               <i className="fas fa-user"></i>
                               {" "}
                               <Translate>My Account</Translate>
                             </span>
-                          </ActiveLink>
+                          </Dropdown.Item>
 
-                          <ActiveLink
-                            href="/account-setting"
-                            activeLink="custom_dropdown_link"
-                          >
+                          <Dropdown.Item href="/account-setting">
                             <span className="custom_drop_item">
                             <i className="fas fa-user-cog"></i>
                               {" "}
                               <Translate>Account Setting</Translate>
                             </span>
-                          </ActiveLink>
-                          <ActiveLink
-                            href="/wishlist"
-                            activeLink="custom_dropdown_link"
-                          >
+                          </Dropdown.Item>
+
+                          <Dropdown.Item href="/wishlist">
                             <span className="custom_drop_item">
                             <i className="fas fa-heart"></i>
                               {" "}
                               <Translate>My Wish list</Translate>
                             </span>
-                          </ActiveLink>
-                          <ActiveLink
-                            href="/order"
-                            activeLink="custom_dropdown_link"
-                          >
+                          </Dropdown.Item>
+
+                          <Dropdown.Item href="/order">
                             <span className="custom_drop_item">
                             <i className="fas fa-shopping-bag"></i>
                               {" "}
                               <Translate>My Orders</Translate>
                             </span>
-                          </ActiveLink>
-                          <ActiveLink
-                            href="/product-review"
-                            isDropDown={true}
-                            activeLink="custom_dropdown_link"
-                          >
+                          </Dropdown.Item>
+
+                          <Dropdown.Item href="/product-review">
                             <span className="custom_drop_item">
                             <i className="fas fa-comment"></i>
                               {" "}
                               <Translate>My Reviews</Translate>
                             </span>
-                          </ActiveLink>
-                          <ActiveLink href={""}>
+                          </Dropdown.Item>
+
+                          <Dropdown.Item>
                             <span
                               className="custom_drop_item"
                               onClick={() => handleLogOut()}
@@ -196,7 +184,8 @@ const Header = () => {
                               {" "}
                               <Translate>Logout</Translate>
                             </span>
-                          </ActiveLink>
+                          </Dropdown.Item>
+
                         </Dropdown.Menu>
                       </Dropdown>
                       <Link href="/wishlist">
