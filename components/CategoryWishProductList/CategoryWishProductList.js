@@ -92,19 +92,15 @@ const CategoryWishProductList = ({showFilter, showFilterHandler}) => {
   // })
 
   let title = "";
-
-  if(categoryBrandDetails.name) {
-    title = categoryBrandDetails.name;
-  }
+  
+  const {type, search, name} = router.query;
 
   if(filterParams.seller_id) {
     title = filterParams.seller_id;
   }
 
-  const {type, search} = router.query;
-
-  if(type || search) {
-    title = type || search
+  if(type || search || name) {
+    title = type || search || name
   }
 
   return (
@@ -112,12 +108,23 @@ const CategoryWishProductList = ({showFilter, showFilterHandler}) => {
       <div className="row justify-content-between my-2 my-md-4">
         <div className="col-lg-6 col-sm-12">
           <div className="category_wise_product_list_heading">
-            <h5 className="category-search-title">{title.replace(/-/g, " ")}</h5>
+            <h5 className="category-search-title">
+              {
+                !isLoading && title && title.replace(/-/g, " ")
+              }
+              {
+                !isLoading && !title && "All products"
+              }
+            </h5>
           </div>
           <p>
             {
-              !isLoading &&
-              (paginate.total !== null ? paginate.total : '0') + ` items found in ${title.replace(/-/g, " ")}`
+              !isLoading && title &&
+              (paginate.total !== null ? paginate.total : '0') + ` products found in ${title.replace(/-/g, " ")}`
+            }
+            {
+              !isLoading && !title &&
+              (paginate.total !== null ? paginate.total : '0') + ' products found'
             }
           </p>
         </div>
