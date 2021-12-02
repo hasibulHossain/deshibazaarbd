@@ -48,8 +48,30 @@ const CategoryWishProductContainer = () => {
 
 
   useEffect(() => {
-    const queries = router.query;
+    const queries = {}
+
+    if(router.query["brand"]) {
+      queries["brand"] = router.query.brand
+    }
+
+    if(router.query["category"]) {
+      queries["category"] = router.query.category
+    }
+
+    if(router.query["type"]) {
+      queries["type"] = router.query.type
+    }
+
+    if(router.query["storeById"]) {
+      queries["storeById"] = router.query.storeById
+    }
+
+    if(router.query["search"]) {
+      queries["search"] = router.query.search
+    }
+
     const cloneFilterParams = {...filterParams};
+
     for(const query in queries) {
       if(Array.isArray(cloneFilterParams[query])) {
         // cloneFilterParams[query] = [];
