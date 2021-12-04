@@ -31,10 +31,10 @@ const SearchInput = () => {
 
   const onKeyDownHandler = (key) => {
     if(!search) return;
-    if(key === "Enter") {
+    if(key === "Enter") { 
       searchRef.current.value = ""
       setSearch("");
-      router.push(`/products?search=${encodeURI(search)}`).then((_) => {
+      router.push(`/products?search=${encodeURIComponent(search)}`).then((_) => {
         window.scrollTo(0, 0);
       });
     }
@@ -51,7 +51,7 @@ const SearchInput = () => {
     const uriEncodedSlug = encodeURIComponent(searchData.slug);
 
     if (searchData.is_item) {
-      const uri = encodeURI(`/products/${uriEncodedSlug}`);
+      const uri = `/products/${uriEncodedSlug}`;
       router
         .push(uri)
         .then((_) => {
@@ -60,14 +60,14 @@ const SearchInput = () => {
         });
     } else if (searchData.is_category) {
       router
-      .push(`/products?category=${uriEncodedSlug}`)
+      .push(`/products?category=${uriEncodedSlug}&name=${encodeURIComponent(searchData.search_name)}`)
       .then((_) => {
         window.scrollTo(0, 0);
         dispatch(toggleBackdrop());
       });
     } else if (searchData.is_brand) {
       router
-      .push(`/products?brand=${uriEncodedSlug}`)
+      .push(`/products?brand=${uriEncodedSlug}&name=${encodeURIComponent(searchData.search_name)}`)
         .then((_) => {
           window.scrollTo(0, 0);
           dispatch(toggleBackdrop());
