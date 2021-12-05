@@ -2,7 +2,12 @@ $redColor: #fb2841;
 
 @media print {
     .non-printable { display: none; }
-    #printable-invoice-area { display: block; }
+    #printable-invoice-area {
+        display: block;
+        width: 21cm;
+        height: 29.7cm;
+        margin: 30mm 45mm 30mm 45mm; 
+    }
 }
 
 .btn-print {
