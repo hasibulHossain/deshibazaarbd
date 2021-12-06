@@ -2,7 +2,6 @@ import React from 'react';
 import Link from 'next/link';
 
 const DeliveryFeatures = ({ product }) => {
-    console.log(product)
     const {location} = product.business;
     const hours = product.approx_delivery_time / 60;
     const days = Math.floor(hours / 24);
