@@ -4,7 +4,7 @@ import * as Types from "../Type/Types";
 export const getFilteredProducts = (filterParamObj, source = {token: ""}) => async (dispatch) => {
   let filterParamObjClone;
 
-  if(filterParamObj.type || filterParamObj.search) {
+  if(filterParamObj.type || filterParamObj.search || filterParamObj.seller_id) {
     filterParamObjClone = {
       ...filterParamObj,
       category: filterParamObj.category[filterParamObj.category.length -1],

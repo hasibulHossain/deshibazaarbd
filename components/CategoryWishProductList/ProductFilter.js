@@ -36,7 +36,7 @@ const ProductFilter = () => {
     const filterParamClone = { ...filterParams };
     filterParamClone.page = 1;
 
-    if(filterParamClone.type || filterParamClone.search) {
+    if(filterParamClone.type || filterParamClone.search || filterParamClone.seller_id) {
       filterParamClone.brand = [];
       filterParamClone.category.push(category.short_code);
 
