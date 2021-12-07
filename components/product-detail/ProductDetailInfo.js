@@ -228,7 +228,7 @@ const ProductDetailInfo = (props) => {
                                       {product.total_rating} Ratings{" "}
                                     </span>
                                   </div>
-                                  <div className="product__details__brand">
+                                  <div className="product__details__brand py-2">
                                     {typeof product.brand != "undefined" &&
                                       product.brand != null && (
                                         <Link
@@ -245,6 +245,18 @@ const ProductDetailInfo = (props) => {
                                         </Link>
                                       )}
                                   </div>
+                                  {
+                                    product.sku_manual && (
+                                      <div className="py-2">
+                                        <span>SKU: </span>
+                                        <span>
+                                          {
+                                            product.sku_manual
+                                          }
+                                        </span>
+                                      </div>
+                                    )
+                                  }
 
                                   <div>
                                     {product.current_stock > 0 &&
