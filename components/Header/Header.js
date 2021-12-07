@@ -55,6 +55,7 @@ const Header = () => {
     
     localStorage.removeItem('user-info');
     localStorage.removeItem('carts');
+    localStorage.removeItem('search-history');
   };
 
   const navigationToggleHandler = () => {

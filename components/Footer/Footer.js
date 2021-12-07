@@ -216,6 +216,15 @@ const Footer = () => {
                                         <div style={{fontSize: '14px'}}>{content.tin}</div>
                                     </div>
                                 }
+                                {
+                                    content.app_playStore_link_qr_code && (
+                                        <div>
+                                            <div style={{width: '100px', height: '100px'}}>
+                                                <img width="100" height="100" src={content.app_playStore_link_qr_code} alt="play store qr code" />
+                                            </div>
+                                        </div>
+                                    )
+                                }
                             </div>
                         </div>
                     </div>
