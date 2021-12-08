@@ -8,29 +8,15 @@ import { formatCurrency } from "../../services/currency";
 import axios from "axios";
 import { toggleBackdrop } from "../../_redux/store/action/globalAction";
 
-const ISSERVER = typeof window === "undefined";
-
-const data = [
-  {
-    id  : 12341324123,
-    name: 'mobile'
-  },
-  {
-    id  : 12341323123,
-    name: 'samsung'
-  },
-  {
-    id  : 12341324123,
-    name: 't-shirt'
-  },
-]
-
-
 const SearchInput = () => {
   const dispatch = useDispatch();
   const router = useRouter();
+  
   const [search, setSearch] = useState("");
+
+  const [isSearchInputTouch, setIsSearchInputTouch] = useState(false);
   const [isSearched, setIsSearched] = useState(false);
+  
   const [isSuggestionVisible, setIsSuggestionVisible] = useState(false);
   const [searchType, setSearchType] = useState("product"); // products || shops || brands
   const [searchHistory, setSearchHistory] = useState([]);
@@ -50,7 +36,8 @@ const SearchInput = () => {
   ];
 
   const searchProduct = (e) => {
-    setIsSearched(true)
+    setIsSearched(false);
+    setIsSearchInputTouch(true)
     setIsSuggestionVisible(false);
     setSearch(e.target.value);
   };
@@ -59,6 +46,7 @@ const SearchInput = () => {
     if(!search) return;
     if(key === "Enter") {
       setIsSearched(true)
+      setIsSearchInputTouch(true)
       const searchHistories = JSON.parse(localStorage.getItem('search-history'))|| [];
       const currentSearch = {id: new Date().getTime(), name: search}
 
@@ -81,6 +69,7 @@ const SearchInput = () => {
   const searchClick = (searchData) => {
     if(!search) return;
     setIsSearched(true)
+    setIsSearchInputTouch(true)
     // searchRef.current.value = ""
 
     // setSearch(""); @todo 
@@ -155,6 +144,7 @@ const SearchInput = () => {
 
   const inputFocusHandler = () => {
     if(search) return;
+    setIsSearchInputTouch(false)
     setIsSearched(false)
 
     if(searchHistory.length === 0) return;
@@ -169,7 +159,7 @@ const SearchInput = () => {
 
   const toggleInputAction = () => {
     if(isSuggestionVisible && !search) {
-      setIsSuggestionVisible(false)
+      setIsSearched(true)
     }
 
     if(search) {
@@ -195,13 +185,16 @@ const SearchInput = () => {
         className="search-input"
         placeholder={translate("Search for Products, Brands or more")}
         onFocus={inputFocusHandler}
-        // onBlur={() => setIsSuggestionVisible(false)}
+        onBlur={() => setTimeout(() => {
+          console.log('clicked')
+          setIsSuggestionVisible(false)
+        }, 200)}
         onChange={(e) => searchProduct(e)}
         onKeyDown={e => onKeyDownHandler(e.key)}
       />
 
       <div style={{position: 'absolute', zIndex: '100', right: 'calc(63px + 15px)', top: '16px', fontSize: '12px'}}>
-        <span className="color-main pointer" onClick={toggleInputAction}>
+        <span className="color-main pointer" onClick={toggleInputAction} style={{fontWeight: '500'}} >
           {
             (isSuggestionVisible && !search) ? 'close' : (search) && 'remove'
           }
@@ -213,14 +206,14 @@ const SearchInput = () => {
       </div>
 
         {
-          isSuggestionVisible && !search && (
-            <div className="search-suggestion-area modal-scrollbar">
+          isSuggestionVisible && !search && !isSearched && (
+            <div className="search-suggestion-area search-history modal-scrollbar">
               {
                 searchHistory && searchHistory.map((searchItem, index) => (
                   <div className="py-3 px-2" key={index}>
                     <div className="d-flex justify-content-between">
-                      <span className="pointer" onClick={() => {searchHistoryClickHandler(searchItem.name); setIsSuggestionVisible(false); setIsSearched(true); setTimeout(() => {searchRef.current.focus()}, 50);}}>{searchItem.name}</span>
-                      <span style={{fontSize: '12px'}} className="pointer color-main" onClick={() => removeSearchItem(searchItem.id)}>delete</span>
+                      <span className="pointer" onClick={() => {searchHistoryClickHandler(searchItem.name); setIsSuggestionVisible(false); setIsSearchInputTouch(true); setTimeout(() => {searchRef.current.focus()}, 50);}}>{searchItem.name}</span>
+                      <span style={{fontSize: '12px', fontWeight: '500'}} className="pointer color-main" onClick={() => removeSearchItem(searchItem.id)}>delete</span>
                     </div>
                   </div>
                 ))
@@ -230,7 +223,7 @@ const SearchInput = () => {
           )
         }
 
-      {search.length > 0 && (
+      {search.length > 0 && !isSearched && (
         <div className="search-suggestion-area modal-scrollbar">
           <div className="p-2" style={{backgroundColor: '#f7f7f7'}}>
               <div className="d-flex">
@@ -248,7 +241,7 @@ const SearchInput = () => {
           </div>
 
           {
-            search && loading && isSearched && <SearchLoadingSkeleton/>
+            search && loading && isSearchInputTouch && <SearchLoadingSkeleton/>
           }
 
           {
