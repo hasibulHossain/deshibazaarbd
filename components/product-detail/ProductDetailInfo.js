@@ -211,7 +211,7 @@ const ProductDetailInfo = (props) => {
                               {/* </Slider> */}
                             </div>
                           </div>
-                          <div className="col-lg-6">
+                          <div className="col-lg-6 px-0">
                             <div className="product_details_information py-2">
                               <h2 className="product_title pt-3">{product.name}</h2>
 

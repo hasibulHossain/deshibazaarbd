@@ -1337,8 +1337,8 @@ h6.address_book_updated_title {
 }
 
 .product_details_section .product_title {
-  font-weight: 600;
-  font-size: 18px;
+  font-weight: 500;
+  font-size: 1.6rem;
   flex-basis: 80%;
   /* overflow: hidden; */
   /* text-overflow: ellipsis; */
@@ -1378,12 +1378,56 @@ h6.address_book_updated_title {
   font-size: 14px;
 }
 
+.product-details__rich-text > h1,
+.product-details__rich-text > h2,
+.product-details__rich-text > h3,
+.product-details__rich-text > h4 {
+  padding-top: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.product-details__rich-text > ul {
+  margin: 0;
+  list-style: none;
+  padding: 10px 0;
+  columns: 2;
+}
+
+.product-details__rich-text > ul > li {
+  position: relative;
+  padding-left: 10px;
+  padding-bottom: 5px;
+
+  line-height: 18px;
+  text-align: left;
+  word-break: break-word;
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+  -moz-column-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.product-details__rich-text > ul > li:before {
+  content: "•";
+  position: absolute;
+  left: 0px;
+}
+
 .product-details__rich-text p {
-  margin-bottom: 30px;
+  margin: 0px;
+  padding: 10px 0;
+}
+
+.product-details__rich-text p:first-of-type {
+  margin: 0px;
+  padding-top: 0px;
 }
 
 .product-details__rich-text .table {
   overflow-x: scroll;
+  margin: 0;
 }
 
 .product-details__rich-text .table::-webkit-scrollbar {
@@ -1410,17 +1454,18 @@ h6.address_book_updated_title {
 }
 
 .product-details__rich-text .table table tbody tr td {
+  text-transform: capitalize;
   border: none;
   padding: 0px 12px 12px 0px;
   color: #1F2937;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .product-details__rich-text .table table tbody tr td:first-child {
   border: none;
   padding: 0px 40px 12px 0px;
   color: #6b7280;
-  font-weight: 500;
+  /* font-weight: 500; */
 }
 
 .product_details_quantity_section {
@@ -2455,6 +2500,10 @@ p.text-secondary.mb-0 {
   color: #333;
   overflow-y: auto;
   box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%);
+}
+
+.search-suggestion-area.search-history {
+  min-height: 0;
 }
 
 .search-suggestion-area-search_by-item {
