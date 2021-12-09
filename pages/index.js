@@ -63,20 +63,27 @@ export default function Home(props) {
 }
 
 export const getServerSideProps = async () => {
-  const [sliderRes, categoryRes] = await Promise.all([
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}sliders-frontend`), 
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}frontend-categories?type=homepage&limit=12`)
-  ]);
-
-  const [sliderObj, homepageCategoriesObj] = await Promise.all([
-    sliderRes.json(),
-    categoryRes.json()
-  ]);
-
-  const slider              = sliderObj.status ? sliderObj.data : [];
-  const homepageCategories  = homepageCategoriesObj.status ? homepageCategoriesObj.data : [];
-
-  return {
-      props: { slider, homepageCategories }
+  try {
+    const [sliderRes, categoryRes] = await Promise.all([
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}sliders-frontend`), 
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}frontend-categories?type=homepage&limit=12`)
+    ]);
+  
+    const [sliderObj, homepageCategoriesObj] = await Promise.all([
+      sliderRes.json(),
+      categoryRes.json()
+    ]);
+  
+    const slider              = sliderObj.status ? sliderObj.data : [];
+    const homepageCategories  = homepageCategoriesObj.status ? homepageCategoriesObj.data : [];
+  
+    return {
+        props: { slider, homepageCategories }
+    }
+  } catch (error) {
+    return {
+      props: {slider: [], homepageCategories: []}
+    }
+    
   }
 }
