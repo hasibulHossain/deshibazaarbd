@@ -4,7 +4,7 @@ import * as Types from "../Type/Types";
 export const getFilteredProducts = (filterParamObj, source = {token: ""}) => async (dispatch) => {
   let filterParamObjClone;
 
-  if(filterParamObj.type || filterParamObj.search) {
+  if(filterParamObj.type || filterParamObj.search || filterParamObj.seller_id) {
     filterParamObjClone = {
       ...filterParamObj,
       category: filterParamObj.category[filterParamObj.category.length -1],
@@ -21,7 +21,7 @@ export const getFilteredProducts = (filterParamObj, source = {token: ""}) => asy
   const filterParam = Object.keys(filterParamObjClone)
     .filter((item) => filterParamObjClone[item])
     .map((item) =>{
-      return `${item}=${filterParamObjClone[item]}`
+      return `${item}=${encodeURIComponent(filterParamObjClone[item])}`
     })
     .join("&");
 
@@ -32,7 +32,7 @@ export const getFilteredProducts = (filterParamObj, source = {token: ""}) => asy
 
   try {
     dispatch({ type: Types.INIT_FILTER_PRODUCT_LIST });
-    const res = await Axios.get(`get-items?${encodeURI(filterParam)}`, {cancelToken: source.token});
+    const res = await Axios.get(`get-items?${filterParam}`, {cancelToken: source.token});
     responseData.isLoading = false;
     responseData.data = res.data.data;
     dispatch({ type: Types.GET_FILTER_PRODUCT_LIST, payload: responseData });

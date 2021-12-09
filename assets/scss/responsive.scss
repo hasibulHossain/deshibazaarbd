@@ -52,9 +52,22 @@
   .flashDealButton {
     display: none !important;
   }
+
+  .product_details_section .product_title {
+    font-size: 1.2rem;
+  }
+
+  .search-input::placeholder {
+    // border: 2px solid var(--color-primary);
+    font-size: 11px;
+  }
 }
 
 @media only screen and (max-width: 768px) {
+  .product-details__rich-text > ul {
+    columns: 1;
+  }
+
   .menu_list {
     padding: 0px;
     padding-left: 1%;

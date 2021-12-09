@@ -32,6 +32,29 @@
   flex: 5;
 }
 
+.header__happy-hour {
+  display: block;
+  flex: 1;
+
+  @include media("<1200px") {
+    display: block;
+    flex: 2;
+  }
+
+  @include media("<993px") {
+    display: none;
+  }
+}
+
+.header__happy-hour > div {
+  margin-top: -10px;
+}
+
+.header__happy-hour > div > img {
+  width: 100%;
+}
+
+
 .header__srh-box-container {
   width: 100%;
 }

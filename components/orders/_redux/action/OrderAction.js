@@ -2,6 +2,8 @@ import Axios from "axios";
 import * as Types from "../types/Types";
 import { showToast } from "../../../master/Helper/ToastHelper";
 import dayjs from "dayjs";
+import { getCartsAction } from "../../../carts/_redux/action/CartAction";
+import { encrypt } from "../../../master/utils/EncryptHelper";
 
 //  ===================================handle coupon action==================================
 export const handleChangeCouponInput = (name, value) => (dispatch) => {
@@ -100,49 +102,45 @@ export const handleShippingCost = (carts) => (dispatch) => {
  * @return array oderList based on user_id
  */
 export const getUserOrderList = (value = 5) => (dispatch) => {
-  const accessToken = localStorage.getItem('access_token') || null;
-
-  if ( typeof accessToken !== 'undefined' && accessToken !== null && accessToken !== '' ) {
-    const responseData = {
-      orderList: [],
-      status   : false,
-      isLoading: true,
-    }
-    dispatch({ type: Types.GET_USER_ORDER_LIST, payload: responseData });
-
-    const end_date  = dayjs().format('YYYY-MM-DD');
-    let start_date = end_date;
-    let orderListURL = `sales/orders/customer?paginate_no=5`;
-
-    if (value == 15) {
-      start_date = dayjs().subtract(15, 'day').format('YYYY-MM-DD');
-    } else if (value == 30) {
-      start_date = dayjs().subtract(30, 'day').format('YYYY-MM-DD');;
-    } else if (value == 60) {
-      start_date = dayjs().subtract(60, 'day').format('YYYY-MM-DD');
-    }
-
-    if (typeof value === 'undefined' || value == 5) {
-      orderListURL = `sales/orders/customer?paginate_no=5`
-    } else {
-      orderListURL = `sales/orders/customer?start_date=${start_date}&end_date=${end_date}`
-    }
-
-    Axios.get(orderListURL)
-    .then((res) => {
-      responseData.orderList = res.data.data.data;
-      responseData.status    = true;
-      responseData.isLoading = false;
-      dispatch({ type: Types.GET_USER_ORDER_LIST, payload: responseData });
-    }).catch((error) => {
-      const responseLog      = error.response;
-      responseData.isLoading = false;
-      if (typeof responseLog !== 'undefined') {
-        showToast('error', responseLog.data.message);
-        dispatch({ type: Types.GET_USER_ORDER_LIST, payload: responseData });
-      }
-    })
+  const responseData = {
+    orderList: [],
+    status   : false,
+    isLoading: true,
   }
+  dispatch({ type: Types.GET_USER_ORDER_LIST, payload: responseData });
+
+  const end_date  = dayjs().format('YYYY-MM-DD');
+  let start_date = end_date;
+  let orderListURL = `sales/orders/customer?paginate_no=5`;
+
+  if (value == 15) {
+    start_date = dayjs().subtract(15, 'day').format('YYYY-MM-DD');
+  } else if (value == 30) {
+    start_date = dayjs().subtract(30, 'day').format('YYYY-MM-DD');;
+  } else if (value == 60) {
+    start_date = dayjs().subtract(60, 'day').format('YYYY-MM-DD');
+  }
+
+  if (typeof value === 'undefined' || value == 5) {
+    orderListURL = `sales/orders/customer?paginate_no=5`
+  } else {
+    orderListURL = `sales/orders/customer?start_date=${start_date}&end_date=${end_date}`
+  }
+
+  Axios.get(orderListURL)
+  .then((res) => {
+    responseData.orderList = res.data.data.data;
+    responseData.status    = true;
+    responseData.isLoading = false;
+    dispatch({ type: Types.GET_USER_ORDER_LIST, payload: responseData });
+  }).catch((error) => {
+    const responseLog      = error.response;
+    responseData.isLoading = false;
+    if (typeof responseLog !== 'undefined') {
+      showToast('error', responseLog.data.message);
+      dispatch({ type: Types.GET_USER_ORDER_LIST, payload: responseData });
+    }
+  })
 }
 
 /**
@@ -307,11 +305,136 @@ export const handleCancelOrder = (order_id, closeModal, user_id) => (dispatch) =
 }
 
 /**
+ * Create Ecommerce Order.
+ *
+ * It will create an order and follow the following steps:
+ * 1. Process data for order
+ * 2. Create an order
+ * 3. If Cash-in delivery, then create and redirect to order details invoice page
+ * 4. If Online-payment, then create and get checkout url from payment gateway
+ *    and redirect to that url.
+ * 5. After completing the payment, then redirect to order details page.
+ *
+ * @return void
+ */
+export const createOrder = (customerInfo, carts, totalQuantity, shippingCost, totalPrice, couponData, userData) => (dispatch) => {
+
+  let discountAmount = 0, discountType = 1;
+
+  if ( typeof couponData !== 'undefined' && couponData !== null ) {
+      discountAmount = couponData.discount_amount;
+      discountType   = 2; // 2 = Coupon Discount
+  }
+
+  shippingCost = isNaN(shippingCost) ? 0 : parseFloat(shippingCost);
+
+  const payment_method = localStorage.getItem('payment_method') || 'cash';
+  let sale_lines       = [];
+
+  carts.forEach((item) => {
+      const singleItem = {
+          item_id           : item.productID,
+          quantity          : parseInt(item.quantity),
+          unit_price        : (item.offerPrice > 0 && item.isOffer) ? item.offerPrice : item.price,
+          unit_price_inc_tax: (item.offerPrice > 0 && item.isOffer) ? item.offerPrice : item.price,
+          discount_amount   : 0,
+          item_tax          : 0
+      }
+
+      if(item.isChecked) {
+          sale_lines.push(singleItem)
+      }
+  });
+
+  const totalPayableAmount = parseFloat(shippingCost + totalPrice - discountAmount);
+  const orderPostedData = {
+      business_id     : userData.business_id,
+      created_by      : 1,
+      type            : "sell",
+      status          : 'pending',
+      delivery_status : 'not_delivered',
+      payment_status  : 'due', // @todo No needs
+      title           : 'Ecommerce Sale', // @todo No needs
+      invoice_no      : null, // @todo No needs
+      ref_no          : null, // @todo No needs
+      transaction_date: dayjs().format("YYYY-MM-DD"),
+      total_before_tax: totalPrice,
+      tax_amount      : 0,
+      discount_type_id: discountType,
+      tax_id          : 1,
+      discount_amount : discountAmount,
+      shipping_details: '', // @todo No needs, remove when fixed api
+      order_quantity  : totalQuantity,
+      shipping_charges: shippingCost,
+      additional_notes: '',
+      staff_note      : '',
+      paid_total      : 0,
+      due_total       : totalPayableAmount,
+      final_total     : totalPayableAmount,
+      sale_lines      : sale_lines,
+      payment_method  : payment_method,
+      coupon          : couponData !== null ? couponData.code : null
+  }
+
+  let response = {
+      status   : false,
+      isLoading: true,
+      orderData: {}
+  }
+
+  dispatch({ type: Types.ORDER_SUBMIT, payload: response });
+  const invoiceURL = `${window.location.protocol}//${window.location.host}/order/invoice/`;
+
+  if(typeof payment_method === 'undefined' && payment_method === null || payment_method === '') {
+      showToast('error', 'Please select a payment method');
+      return false;
+  }
+
+  Axios.post('sales', orderPostedData)
+      .then((res) => {
+          if (res.data.status) {
+              response.status    = res.data.status;
+              response.orderData = res.data.data;
+              response.isLoading = false;
+              dispatch(getCartsAction());
+              localStorage.setItem('tr', encrypt(res.data.data.id));
+              
+              showToast('success', res.data.message);
+              dispatch({ type : Types.ORDER_SUBMIT, payload: response });
+              
+              setTimeout(() => {
+                if(payment_method === 'cash') {
+                  window.location.href = `${invoiceURL}${res.data.data.id}`;
+                  localStorage.removeItem("carts");
+                } else {
+                    localStorage.removeItem("carts");
+                      if(res.data.data.payment !== null) {
+                          window.location.href = res.data.data.payment.forwarding_url
+                      } else {
+                          showToast('error', 'Payment Error. please try again.');
+                      }
+                  }
+              }, 1000);
+          }
+      }).catch((err) => {
+        // console.log('err', err);
+          const responseLog = err.response;
+          response.isLoading = false;
+
+          if (typeof responseLog !== 'undefined') {
+              const { request, ...errorObject } = responseLog;
+              showToast('error', responseLog.data.message);
+              dispatch({ type: Types.ORDER_SUBMIT, payload: response })
+          }
+      })
+}
+
+/**
  * Get Valid Decimal Value from amount
- * 
- * @param {int} value 
- * 
- * @returns 
+ *
+ * @param {int} value
+ *
+ * @returns
  */
 const getValidDecimalValue = (value) => {
   if(typeof value === 'undefined' || value === null || value === '' ) {
@@ -321,7 +444,7 @@ const getValidDecimalValue = (value) => {
   return parseFloat( value );
 }
 
-//get order life cycle details data 
+//get order life cycle details data
 export const getOrderLifeCycleData = (id) => (dispatch) => {
   let responseList = {
       isLoading    : true,

@@ -9,7 +9,6 @@ import {
   resetFilterParams,
   setFilterParams,
 } from "./_redux/Action/CategoryWiseProductAction";
-import ReactPaginate from "react-paginate";
 import {useRouter} from 'next/router'
 import Image from 'next/image';
 import Modal from "../master/Modal/Modal";
@@ -49,13 +48,37 @@ const CategoryWishProductContainer = () => {
 
 
   useEffect(() => {
-    const queries = router.query;
+    const queries = {}
+    
+    if(router.query["brand"]) {
+      queries["brand"] = router.query.brand
+    }
+    
+    if(router.query["category"]) {
+      queries["category"] = router.query.category
+    }
+    
+    if(router.query["type"]) {
+      queries["type"] = router.query.type
+    }
+    
+    if(router.query["storeById"]) {
+      queries["storeById"] = router.query.storeById
+    }
+    
+    if(router.query["search"]) {
+      queries["search"] = router.query.search
+    }
+    
     const cloneFilterParams = {...filterParams};
+
     for(const query in queries) {
       if(Array.isArray(cloneFilterParams[query])) {
         // cloneFilterParams[query] = [];
 
         if(query === 'brand') {
+          cloneFilterParams.seller_id = "";
+          cloneFilterParams.search = "";
           cloneFilterParams.category = [];
           cloneFilterParams.page = 1;
           cloneFilterParams[query].push(queries[query]);
@@ -63,6 +86,8 @@ const CategoryWishProductContainer = () => {
           dispatch(getCategoryOrBrandDetails('brands/' + queries[query]));
         }
         if(query === 'category') {
+          cloneFilterParams.search = "";
+          cloneFilterParams.seller_id = "";
           // check if category same or not after remount
           if(cloneFilterParams[query].length > 0 && !(cloneFilterParams[query][0] === queries[query])) {
             cloneFilterParams.page = 1;
@@ -83,9 +108,11 @@ const CategoryWishProductContainer = () => {
         cloneFilterParams.category = [];
         cloneFilterParams.brand = [];
         cloneFilterParams.page = 1;
+        cloneFilterParams.seller_id = "";
 
         if(query === 'storeById') {
           cloneFilterParams['seller_id'] = queries[query]
+          dispatch(getSubCategories(null))
         }
         if(query === 'type') {
           cloneFilterParams[query] = queries[query]
@@ -202,23 +229,6 @@ const CategoryWishProductContainer = () => {
                     perPage={paginate.per_page}
                     totalItemCount={paginate.total}
                   />
-                  {/* <div className="w-100 px-0 px-sm-3 mt-3">
-                    <div style={{display: 'flex', justifyContent: 'flex-end'}}>
-                      <ReactPaginate
-                        previousLabel={'<'}
-                        nextLabel={'>'}
-                        breakLabel={'...'}
-                        breakClassName={'break-me'}
-                        pageCount={paginate.pages.length}
-                        marginPagesDisplayed={2}
-                        pageRangeDisplayed={2}
-                        onPageChange={paginateHandler}
-                        initialPage={filterParams.page - 1}
-                        containerClassName={'react-pagination'}
-                        activeClassName={'active'}
-                      />
-                    </div>
-                  </div> */}
                 </>
               )
             }

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { signIn } from 'next-auth/client'
+import { signIn, getSession } from 'next-auth/client'
 import { isSignedIn } from "../../../_redux/store/action/globalAction";
 import { useRouter } from 'next/router';
 import { getUserDataAction } from "../../_redux/getUserData/Action/UserDataAction";
@@ -36,14 +36,18 @@ const LoginComponent = () => {
     }
     
     if(res) {
-      dispatch(isSignedIn())
       setIsLoading(false);
     }
     
     if(!res.error) {
-      router.replace('/')
-      setIsLoading(false);
-      dispatch(getUserDataAction());
+      const session = await getSession();
+      if(session && session.accessToken) {
+        localStorage.setItem('access-token', session.accessToken);
+        setIsLoading(false);
+        dispatch(isSignedIn());
+        dispatch(getUserDataAction());
+        router.replace('/');
+      }
     }
   }
 

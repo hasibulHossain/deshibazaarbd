@@ -46,7 +46,8 @@ const Header = () => {
   const handleLogOut = () => {
     (async () => {
       const data = await signOut({redirect: false});
-
+      localStorage.removeItem('access-token');
+      
       if(data) {
         window.location.replace('/');
       }
@@ -54,6 +55,7 @@ const Header = () => {
     
     localStorage.removeItem('user-info');
     localStorage.removeItem('carts');
+    localStorage.removeItem('search-history');
   };
 
   const navigationToggleHandler = () => {
@@ -74,7 +76,7 @@ const Header = () => {
                 <span className="bar"></span>
                 <span className="bar"></span>
               </div>
-              <div className="header__logo">
+              <div className="header__logo pr-md-2">
                 <div className="header__logo-box">
                   <Link href="/">
                     <a>
@@ -90,8 +92,41 @@ const Header = () => {
                   </div>
                 </div>
               </div>
+              <div className="header__happy-hour">
+                <div>
+                  <img src="/images/offer/happy-hour.gif" alt="happy hour gif" />
+                </div>
+              </div>
               <div className="header__signupIn header-nav">
                 <div className="d-flex align-items-center">
+                  <Link href="/carts">
+                    <a>
+                      <span
+                        className="header-nav-link pointer cart-nav-link"
+                      >
+                        <i className="fas fa-shopping-bag"></i>
+
+                        <span className="cart-qty">
+                          {/* {formatQtyDisplay(totalQuantity)} */}
+                          {totalQuantity}
+                        </span>
+                        {/* {!isMobile && (
+                          <>
+                            &nbsp;&nbsp; <Translate>Cart</Translate>
+                          </>
+                        )} */}
+                      </span>
+                    </a>
+                  </Link>
+                  {
+                    isSignedIn && (
+                      <Link href="/wishlist">
+                        <a>
+                          <HeaderWishlist />
+                        </a>
+                      </Link>
+                    )
+                  }
                   {!isSignedIn ? (
                     <div>
                       {
@@ -134,59 +169,47 @@ const Header = () => {
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu>
-                          <ActiveLink
-                            href="/profile"
-                            activeLink="custom_dropdown_link"
-                          >
+                          <Dropdown.Item href="/profile" >
                             <span className="custom_drop_item">
                               <i className="fas fa-user"></i>
                               {" "}
                               <Translate>My Account</Translate>
                             </span>
-                          </ActiveLink>
+                          </Dropdown.Item>
 
-                          <ActiveLink
-                            href="/account-setting"
-                            activeLink="custom_dropdown_link"
-                          >
+                          <Dropdown.Item href="/account-setting">
                             <span className="custom_drop_item">
                             <i className="fas fa-user-cog"></i>
                               {" "}
                               <Translate>Account Setting</Translate>
                             </span>
-                          </ActiveLink>
-                          <ActiveLink
-                            href="/wishlist"
-                            activeLink="custom_dropdown_link"
-                          >
+                          </Dropdown.Item>
+
+                          <Dropdown.Item href="/wishlist">
                             <span className="custom_drop_item">
                             <i className="fas fa-heart"></i>
                               {" "}
                               <Translate>My Wish list</Translate>
                             </span>
-                          </ActiveLink>
-                          <ActiveLink
-                            href="/order"
-                            activeLink="custom_dropdown_link"
-                          >
+                          </Dropdown.Item>
+
+                          <Dropdown.Item href="/order">
                             <span className="custom_drop_item">
                             <i className="fas fa-shopping-bag"></i>
                               {" "}
                               <Translate>My Orders</Translate>
                             </span>
-                          </ActiveLink>
-                          <ActiveLink
-                            href="/product-review"
-                            isDropDown={true}
-                            activeLink="custom_dropdown_link"
-                          >
+                          </Dropdown.Item>
+
+                          <Dropdown.Item href="/product-review">
                             <span className="custom_drop_item">
                             <i className="fas fa-comment"></i>
                               {" "}
                               <Translate>My Reviews</Translate>
                             </span>
-                          </ActiveLink>
-                          <ActiveLink href={""}>
+                          </Dropdown.Item>
+
+                          <Dropdown.Item>
                             <span
                               className="custom_drop_item"
                               onClick={() => handleLogOut()}
@@ -195,35 +218,12 @@ const Header = () => {
                               {" "}
                               <Translate>Logout</Translate>
                             </span>
-                          </ActiveLink>
+                          </Dropdown.Item>
+
                         </Dropdown.Menu>
                       </Dropdown>
-                      <Link href="/wishlist">
-                        <a>
-                          <HeaderWishlist />
-                        </a>
-                      </Link>
                     </>
                   )}
-                  <Link href="/carts">
-                    <a>
-                      <span
-                        className="header-nav-link pointer cart-nav-link"
-                      >
-                        <i className="fas fa-shopping-bag"></i>
-
-                        <span className="cart-qty">
-                          {/* {formatQtyDisplay(totalQuantity)} */}
-                          {totalQuantity}
-                        </span>
-                        {/* {!isMobile && (
-                          <>
-                            &nbsp;&nbsp; <Translate>Cart</Translate>
-                          </>
-                        )} */}
-                      </span>
-                    </a>
-                  </Link>
                 </div>
               </div>
             </div>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import SimpleModal from '../master/Modal/SimpleModal';
+import Modal from '../master/Modal/Modal';
 import { useDispatch, useSelector } from 'react-redux';
 import AddressUpdate from './AddressUpdate';
 import { getSingleAddress, deleteAddress } from './_redux/Action/ProfileAccountSettingAction';
@@ -12,6 +13,15 @@ function SingleAddress(props) {
     const {userData} = useSelector(state => state.UserDataReducer)
     const [show, setShow] = useState(false);
     const [deleteShow, setDeleteShow] = useState(false);
+
+    let street = "";
+    if(street1) {
+        street += street1
+    }
+
+    if(street2) {
+        street += ', ' + street2
+    }
 
     const toggleShowHandler = () => {
         setShow(preState => !preState);
@@ -31,8 +41,43 @@ function SingleAddress(props) {
         setDeleteShow(preState => !preState);
     }
 
+    const isDefaultAddress = (type, isDefault) => {
+        if(type === 'billing_address' && isDefault === 1) {
+            return 'Default Billing Address'
+        }
+
+        if(type === 'billing_address' && isDefault === 0) {
+            return 'Billing Address'
+        }
+
+        if(type === 'shipping_address' && isDefault === 1) {
+            return 'Default Shipping Address'
+        }
+
+        if(type === 'shipping_address' && isDefault === 0) {
+            return 'Shipping Address'
+        }
+    }
+
     return (
         <>
+            <Modal closeModalHandler={toggleDeleteModal} visible={deleteShow}>
+                <div className="mb-3">Are you sure to delete your address?</div>
+                <div className="d-flex justify-content-end">
+                    <button
+                    className="custom_secondary_btn custom-button-component"
+                    onClick={toggleDeleteModal} >
+                    Cancel
+                    </button>
+                    <button
+                    className="custom-button-component ml-3"
+                    style={{ padding: "5px 10px" }}
+                    onClick={handleDeleteAddress} >
+                        Delete
+                    </button>
+                </div>
+            </Modal>
+
             <li className="single-address" >
                 <div className="single-address__item">
                     <div>
@@ -40,7 +85,7 @@ function SingleAddress(props) {
                     </div>
                 </div>
                 <div className="single-address__item">
-                    <div>{`${street1}, ${street2}`}</div>
+                    <div>{street}</div>
                 </div>
                 <div className="single-address__item">
                     <div>{`${city} - ${area}`}</div>
@@ -53,10 +98,10 @@ function SingleAddress(props) {
                 <div className="single-address__item">
                     <div>
                         {
-                            (type === 'billing_address' && +is_default === 1) && 'Default billing Address'
+                            (type === 'billing_address' && +is_default === 1) ? 'Default Billing Address' : (type === 'billing_address' && +is_default === 0) && 'Billing Address'
                         }
                         {
-                            (type === 'shipping_address' && +is_default === 1) && 'Default Shipping Address'
+                            (type === 'shipping_address' && +is_default === 1) ? 'Default Shipping Address' : (type === 'shipping_address' && +is_default === 0) && 'Shipping Address'
                         }
                     </div>
                 </div>
@@ -74,7 +119,7 @@ function SingleAddress(props) {
             >
                 <AddressUpdate type={type} closeModal={toggleShowHandler} />
             </SimpleModal>
-
+{/* 
             <SimpleModal
                 size="md"
                 show={deleteShow}
@@ -88,7 +133,7 @@ function SingleAddress(props) {
                     confirmBtnVariant="simple_btn_bg"
                     closeBtnVariant="secondary"
                 />
-            </SimpleModal>
+            </SimpleModal> */}
         </>
     );
 

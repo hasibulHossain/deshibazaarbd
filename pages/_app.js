@@ -1,8 +1,7 @@
-import React from "react";
-import App from "next/app";
+import React, { useEffect } from "react";
 import Head from 'next/head';
 import { Provider } from "react-redux";
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
 import NProgress from 'nprogress';
 import { createWrapper } from "next-redux-wrapper";
 import Store from "../_redux/Store";
@@ -57,13 +56,30 @@ Router.onRouteChangeError = () => {
 };
 
 
-class MyApp extends App {
-  render() {
-    const { Component, pageProps } = this.props;
-    return (
+
+function MyApp({ Component, pageProps }) {
+  const router = useRouter()
+
+  useEffect(() => {
+    import('react-facebook-pixel')
+    .then((x) => x.default)
+    .then((ReactPixel) => {
+      ReactPixel.init(process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID) // facebookPixelId
+      ReactPixel.pageView()
+
+      router.events.on('routeChangeComplete', () => {
+        ReactPixel.pageView()
+      })
+    })
+  }, [router.events])
+
+  return (
+    <>
       <Provider store={Store}>
+        {/* Global Site Code Pixel - Facebook Pixel */}
         <Head>
           <link rel="shortcut icon" href="/favicon.ico" />
+          <link rel="canonical" href="https://www.deshibazaarbd.com" />
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
         </Head>
@@ -71,8 +87,8 @@ class MyApp extends App {
             <Component {...pageProps}></Component>
           </MainLayout>
       </Provider>
-    );
-  }
+    </>
+  )
 }
 
 const makeStore = () => Store;

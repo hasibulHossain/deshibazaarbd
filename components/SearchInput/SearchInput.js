@@ -11,12 +11,22 @@ import { toggleBackdrop } from "../../_redux/store/action/globalAction";
 const SearchInput = () => {
   const dispatch = useDispatch();
   const router = useRouter();
+  
   const [search, setSearch] = useState("");
+
+  const [isSearchInputTouch, setIsSearchInputTouch] = useState(false);
+  const [isSearched, setIsSearched] = useState(false);
+  
+  const [isSuggestionVisible, setIsSuggestionVisible] = useState(false);
   const [searchType, setSearchType] = useState("product"); // products || shops || brands
+  const [searchHistory, setSearchHistory] = useState([]);
+
   const suggestions = useSelector((state) => state.SearchReducer.products);
   const loading = useSelector((state) => state.SearchReducer.loading);
   const firstRenderRef = useRef(true);
   const searchRef = useRef();
+
+
 
   const searchByList = [
     {label: 'products', id: 'product'},
@@ -26,15 +36,31 @@ const SearchInput = () => {
   ];
 
   const searchProduct = (e) => {
+    setIsSearched(false);
+    setIsSearchInputTouch(true)
+    setIsSuggestionVisible(false);
     setSearch(e.target.value);
   };
 
   const onKeyDownHandler = (key) => {
     if(!search) return;
     if(key === "Enter") {
-      searchRef.current.value = ""
-      setSearch("");
-      router.push(`/products?search=${encodeURI(search)}`).then((_) => {
+      setIsSearched(true)
+      setIsSearchInputTouch(true)
+      const searchHistories = JSON.parse(localStorage.getItem('search-history'))|| [];
+      const currentSearch = {id: new Date().getTime(), name: search}
+
+      searchHistories.push(currentSearch);
+
+      setSearchHistory(searchHistories);
+      
+      localStorage.setItem('search-history', JSON.stringify(searchHistories))
+
+      // searchRef.current.value = ""
+
+      // setSearch(""); @todo 
+
+      router.push(`/products?search=${encodeURIComponent(search)}`).then((_) => {
         window.scrollTo(0, 0);
       });
     }
@@ -42,16 +68,19 @@ const SearchInput = () => {
 
   const searchClick = (searchData) => {
     if(!search) return;
-    searchRef.current.value = ""
+    setIsSearched(true)
+    setIsSearchInputTouch(true)
+    // searchRef.current.value = ""
 
-    setSearch("");
+    // setSearch(""); @todo 
+
     setSearchType('product');
     dispatch(toggleBackdrop());
 
     const uriEncodedSlug = encodeURIComponent(searchData.slug);
 
     if (searchData.is_item) {
-      const uri = encodeURI(`/products/${uriEncodedSlug}`);
+      const uri = `/products/${uriEncodedSlug}`;
       router
         .push(uri)
         .then((_) => {
@@ -60,14 +89,14 @@ const SearchInput = () => {
         });
     } else if (searchData.is_category) {
       router
-      .push(`/products?category=${uriEncodedSlug}`)
+      .push(`/products?category=${uriEncodedSlug}&name=${encodeURIComponent(searchData.search_name)}`)
       .then((_) => {
         window.scrollTo(0, 0);
         dispatch(toggleBackdrop());
       });
     } else if (searchData.is_brand) {
       router
-      .push(`/products?brand=${uriEncodedSlug}`)
+      .push(`/products?brand=${uriEncodedSlug}&name=${encodeURIComponent(searchData.search_name)}`)
         .then((_) => {
           window.scrollTo(0, 0);
           dispatch(toggleBackdrop());
@@ -87,10 +116,19 @@ const SearchInput = () => {
   }
 
   useEffect(() => {
+    const getSearchHistory = JSON.parse(localStorage.getItem('search-history')) || [];
+  
+    setSearchHistory(getSearchHistory)
+
+  }, [JSON.stringify(searchHistory)])
+
+  useEffect(() => {
+
     if(firstRenderRef.current) {
       firstRenderRef.current = false
       return
     }
+
     const source = axios.CancelToken.source();
 
     dispatch(searchProductAction({search: search, type: searchType}, source));
@@ -104,20 +142,88 @@ const SearchInput = () => {
     }
   }, [search, searchType])
 
+  const inputFocusHandler = () => {
+    if(search) return;
+    setIsSearchInputTouch(false)
+    setIsSearched(false)
+
+    if(searchHistory.length === 0) return;
+    
+    setIsSuggestionVisible(true);
+  }
+
+  const searchHistoryClickHandler = searchQuery => {
+    setSearch(searchQuery);
+    searchRef.current.value = searchQuery || ""
+  }
+
+  const toggleInputAction = () => {
+    if(isSuggestionVisible && !search) {
+      setIsSearched(true)
+    }
+
+    if(search) {
+      setSearch("")
+      searchRef.current.value = ""
+    }
+  }
+
+  const removeSearchItem = (id) => {
+    const cloneSearchHistory = [...searchHistory];
+
+    const updatedSearchHistory = cloneSearchHistory.filter(searchItem => searchItem.id !== id)
+
+    setSearchHistory(updatedSearchHistory);
+
+    localStorage.setItem('search-history', JSON.stringify(updatedSearchHistory));
+  }  
+
   return (
     <>
       <input
         ref={el => searchRef.current = el}
         className="search-input"
-        placeholder={translate("Search for Products, Brands or more")}
+        placeholder={translate("Search Products, Brands and Shop")}
+        onFocus={inputFocusHandler}
+        onBlur={() => setTimeout(() => {
+          console.log('clicked')
+          setIsSuggestionVisible(false)
+        }, 200)}
         onChange={(e) => searchProduct(e)}
         onKeyDown={e => onKeyDownHandler(e.key)}
       />
+
+      <div style={{position: 'absolute', zIndex: '100', right: 'calc(63px + 15px)', top: '16px', fontSize: '12px'}}>
+        <span className="color-main pointer" onClick={toggleInputAction} style={{fontWeight: '500'}} >
+          {
+            (isSuggestionVisible && !search) ? 'close' : (search) && 'remove'
+          }
+          </span>
+      </div>
+
       <div className="header-custom-prepend pointer" onClick={() => onKeyDownHandler('Enter')} >
         <i className="fas fa-search"></i>
       </div>
 
-      {search.length > 0 && (
+        {
+          isSuggestionVisible && !search && !isSearched && (
+            <div className="search-suggestion-area search-history modal-scrollbar">
+              {
+                searchHistory && searchHistory.map((searchItem, index) => (
+                  <div className="py-3 px-2" key={index}>
+                    <div className="d-flex justify-content-between">
+                      <span className="pointer" onClick={() => {searchHistoryClickHandler(searchItem.name); setIsSuggestionVisible(false); setIsSearchInputTouch(true); setTimeout(() => {searchRef.current.focus()}, 50);}}>{searchItem.name}</span>
+                      <span style={{fontSize: '12px', fontWeight: '500'}} className="pointer color-main" onClick={() => removeSearchItem(searchItem.id)}>delete</span>
+                    </div>
+                  </div>
+                ))
+              }
+
+            </div>
+          )
+        }
+
+      {search.length > 0 && !isSearched && (
         <div className="search-suggestion-area modal-scrollbar">
           <div className="p-2" style={{backgroundColor: '#f7f7f7'}}>
               <div className="d-flex">
@@ -135,7 +241,7 @@ const SearchInput = () => {
           </div>
 
           {
-            search && loading && <SearchLoadingSkeleton/>
+            search && loading && isSearchInputTouch && <SearchLoadingSkeleton/>
           }
 
           {

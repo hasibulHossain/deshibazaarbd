@@ -1,7 +1,7 @@
 import React from 'react';
+import Link from 'next/link';
 
 const DeliveryFeatures = ({ product }) => {
-
     const {location} = product.business;
     const hours = product.approx_delivery_time / 60;
     const days = Math.floor(hours / 24);
@@ -9,30 +9,26 @@ const DeliveryFeatures = ({ product }) => {
     return (
         <>
             <div className="delivery_features_section p-2">
-                <div className="d-flex justify-content-between">
+                {/* <div className="d-flex justify-content-between">
                     <small className="delivery_features_section-heading mb-2">Seller Information</small>
-                </div>
-                {
-                    (location.website !== null && location.website !== "") || (location.name !== null && location.name !== "") && (
-                        <p>
+                </div> */}
+
+                        <p className="m-0 pt-2">
                             <span className="user_icon color-main">
                                 <i className="fas fa-store"></i>
                             </span>
                             <span className="user_address store_name pointer">
-                                {
-                                    typeof location.website !== "undefined" && location.website !== null && location.website !== "" ? (
-                                        <a href={`https://${location.website}`} target="_blank" rel="noopener noreferrer">
-                                            {location.name}
-                                        </a>
-                                    ) :  location.name
-                                }
-
+                                <Link href={`/store/${product.business.slug}`}>
+                                    <a>
+                                        {
+                                            product.business && product.business.name
+                                        }
+                                    </a>
+                                </Link>
                             </span>
                         </p>
-                    )
-                }
 
-                {
+                {/* {
                     typeof location.email !== "undefined" && location.email !== null && location.email !== "" && (
                         <p>
                             <span className="user_icon color-main">
@@ -60,9 +56,9 @@ const DeliveryFeatures = ({ product }) => {
                             </span>
                         </p>
                     )
-                }
+                } */}
 
-                <p>
+                {/* <p>
                     <span className="user_icon color-main">
                         <i className="fas fa-map-marked-alt"></i>
                     </span>
@@ -71,7 +67,7 @@ const DeliveryFeatures = ({ product }) => {
                             {`${location.landmark !== null ? location.landmark + "," : ""} ${location.zip_code !== null ? location.zip_code + "," : ""} ${location.city !== null ? location.city + "," : ""} ${location.state !== null ? location.state + "," : ""} ${location.country !== null ? location.country : ""}`}
                         </a>
                     </span>
-                </p>
+                </p> */}
             </div>
             <div className="delivery_fee delivery_features_section mt-3 p-2">
                 <div className="d-flex justify-content-between align-items-end">

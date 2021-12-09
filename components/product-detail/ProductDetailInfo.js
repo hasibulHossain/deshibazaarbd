@@ -146,9 +146,9 @@ const ProductDetailInfo = (props) => {
           <Breadcrumb>
             {typeof product.category !== "undefined" &&
               product.category !== null && (
-                <Link href={`/products?category=${product.category.slug}`}>
+                <Link href={`/products?category=${encodeURIComponent(product.category.slug)}&name=${encodeURIComponent(product.category.name)}`}>
                   <Breadcrumb.Item
-                    href={`/products?category=${product.category.slug}`}
+                    href={`/products?category=${encodeURIComponent(product.category.slug)}&name=${encodeURIComponent(product.category.name)}`}
                   >
                     {product.category.name}
                   </Breadcrumb.Item>
@@ -157,9 +157,9 @@ const ProductDetailInfo = (props) => {
 
             {typeof product.sub_category !== "undefined" &&
               product.sub_category !== null && (
-                <Link href={`/products?category=${product.sub_category.slug}`}>
+                <Link href={`/products?category=${encodeURIComponent(product.sub_category.slug)}&name=${encodeURIComponent(product.sub_category.name)}`}>
                   <Breadcrumb.Item
-                    href={`/products?category=${product.sub_category.slug}`}
+                    href={`/products?category=${encodeURIComponent(product.sub_category.slug)}&name=${encodeURIComponent(product.sub_category.name)}`}
                   >
                     {product.sub_category.name}
                   </Breadcrumb.Item>
@@ -168,9 +168,9 @@ const ProductDetailInfo = (props) => {
 
             {typeof product.sub_category2 !== "undefined" &&
               product.sub_category2 !== null && (
-                <Link href={`/products?category=${product.sub_category2.slug}`}>
+                <Link href={`/products?category=${encodeURIComponent(product.sub_category2.slug)}&name=${encodeURIComponent(product.sub_category2.name)}`}>
                   <Breadcrumb.Item
-                    href={`/products?category=${product.sub_category2.slug}`}
+                    href={`/products?category=${encodeURIComponent(product.sub_category2.slug)}&name=${encodeURIComponent(product.sub_category2.name)}`}
                   >
                     {product.sub_category2.name}
                   </Breadcrumb.Item>
@@ -211,9 +211,9 @@ const ProductDetailInfo = (props) => {
                               {/* </Slider> */}
                             </div>
                           </div>
-                          <div className="col-lg-6">
+                          <div className="col-lg-6 px-0">
                             <div className="product_details_information py-2">
-                              <h2 className="product_title">{product.name}</h2>
+                              <h2 className="product_title pt-3">{product.name}</h2>
 
                               <div className="d-flex justify-content-between align-items-end">
                                 <div>
@@ -228,11 +228,11 @@ const ProductDetailInfo = (props) => {
                                       {product.total_rating} Ratings{" "}
                                     </span>
                                   </div>
-                                  <div className="product__details__brand">
+                                  <div className="product__details__brand py-2">
                                     {typeof product.brand != "undefined" &&
                                       product.brand != null && (
                                         <Link
-                                          href={`/brand/${product.brand.slug}`}
+                                          href={`/products?brand=${encodeURIComponent(product.brand.slug)}&name=${encodeURIComponent(product.brand.name)}`}
                                           className="LinkToBrandPage pointer"
                                         >
                                           <span>
@@ -245,6 +245,18 @@ const ProductDetailInfo = (props) => {
                                         </Link>
                                       )}
                                   </div>
+                                  {
+                                    product.sku_manual && (
+                                      <div className="py-2">
+                                        <span>SKU: </span>
+                                        <span>
+                                          {
+                                            product.sku_manual
+                                          }
+                                        </span>
+                                      </div>
+                                    )
+                                  }
 
                                   <div>
                                     {product.current_stock > 0 &&
@@ -366,7 +378,7 @@ const ProductDetailInfo = (props) => {
                       </div>
 
                       {/*Product Details Information*/}
-                      <div className="mt-4">
+                      <div className="my-4">
                         {typeof product.description != "undefined" &&
                           product.description !== null && (
                             <ProductDetailsDescription product={product} />
@@ -378,7 +390,7 @@ const ProductDetailInfo = (props) => {
                     {/*Location Section*/}
                     <div className="col-lg-3 pt-3 pt-md-0" style={{background: '#f7ae9d26'}}>
                       {
-                        product.business.location && (
+                        product.business && product.business.location && (
                           <DeliveryFeatures product={product} />
                         )
                       }

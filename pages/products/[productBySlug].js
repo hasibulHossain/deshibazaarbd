@@ -18,7 +18,7 @@ export default function ProductBySlug({ product }) {
                     <PageMeta
                         ogpEnabled={true}
                         title={product.name}
-                        keywords={product.name}
+                        keywords={product.keywords ? product.keywords : product.name}
                         description={product.short_description}
                         pageSocialMetaUrl={productUrl}
                         pageSocialMetaImage={product.featured_url}
@@ -44,17 +44,25 @@ export const getServerSideProps = async (context) => {
     const productBySlug = encodeURIComponent(context.params.productBySlug);
     const uri = `${process.env.NEXT_PUBLIC_API_URL}get-item-detail/${productBySlug}`;
     // Don't delete the base api_url from here.
-    const res = await fetch(uri);
 
-    const dataJSON = await res.json();
-    const data = dataJSON.data;
-
-    if(!data) {
+    try {
+        const res = await fetch(uri);
+    
+        const dataJSON = await res.json();
+        const data = dataJSON.data;
+        if(!data) {
+            return {
+                notFound: true
+            }
+        }
+        return {
+            props: { product: data }
+        }
+    } catch (error) {
         return {
             notFound: true
         }
     }
-    return {
-        props: { product: data }
-    }
+    
+
 }

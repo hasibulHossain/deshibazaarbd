@@ -37,6 +37,15 @@ const OrderInvoice = ({ title = translate('Invoice'), id, is_invoice = false }) 
             {
                 typeof orderDetails !== 'undefined' && orderDetails !== null &&
                 <div className="row" id="printable-invoice-area">
+                    <div className="col-12" >
+                        <div className="bg-white text-center py-4 mb-3">
+                            <div style={{color: 'var(--color-green-light)'}}>
+                                <p style={{fontSize: '20px', fontWeight: '600'}} >Thank you</p>
+                                <i style={{fontSize: '4rem'}} class="far fa-check-circle mb-3"></i>
+                            </div>
+                            <p style={{fontSize: '20px', fontWeight: '600'}}>Your order successfully placed</p>
+                        </div>
+                    </div>
                     <div className="col-md-7">
                         <div className="card card-body order-success-left">
                             <div className="row order-invoice-header">
@@ -83,6 +92,12 @@ const OrderInvoice = ({ title = translate('Invoice'), id, is_invoice = false }) 
                                                     <i className="fas fa-check"></i>
                                                     {' '}
                                                     <Translate>Paid</Translate>
+                                                </span>
+                                                <br /><br />
+                                                <span className="bg-warning border-radius-5 p-1">
+                                                    <i className="fas fa-check"></i>
+                                                    {' '}
+                                                    Paid via: {orderDetails.payment_method}
                                                 </span>
                                             </p>
                                         }
@@ -182,8 +197,16 @@ const OrderInvoice = ({ title = translate('Invoice'), id, is_invoice = false }) 
 
             {
                  typeof orderDetails === 'undefined' || orderDetails === null &&
-                 <div className="card card-body p-5">
-                     <h5>Loading Order Information for <span className="text-success">Invoice #{id}</span>...</h5>
+                 <div className="row">
+                    <div className="col-12" >
+                        <div className="bg-white text-center py-4 mb-3">
+                            <div style={{color: 'var(--color-green-light)'}}>
+                                <p style={{fontSize: '20px', fontWeight: '600'}} >Thank you</p>
+                                <i style={{fontSize: '4rem'}} class="far fa-check-circle mb-3"></i>
+                            </div>
+                            <p style={{fontSize: '20px', fontWeight: '600'}}>Your order successfully placed</p>
+                        </div>
+                    </div>
                  </div>
             }
         </div>
