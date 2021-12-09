@@ -390,7 +390,7 @@ const ProductDetailInfo = (props) => {
                     {/*Location Section*/}
                     <div className="col-lg-3 pt-3 pt-md-0" style={{background: '#f7ae9d26'}}>
                       {
-                        product.business.location && (
+                        product.business && product.business.location && (
                           <DeliveryFeatures product={product} />
                         )
                       }
