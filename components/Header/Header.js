@@ -76,7 +76,7 @@ const Header = () => {
                 <span className="bar"></span>
                 <span className="bar"></span>
               </div>
-              <div className="header__logo">
+              <div className="header__logo pr-md-2">
                 <div className="header__logo-box">
                   <Link href="/">
                     <a>
@@ -92,8 +92,41 @@ const Header = () => {
                   </div>
                 </div>
               </div>
+              <div className="header__happy-hour">
+                <div>
+                  <img src="/images/offer/happy-hour.gif" alt="happy hour gif" />
+                </div>
+              </div>
               <div className="header__signupIn header-nav">
                 <div className="d-flex align-items-center">
+                  <Link href="/carts">
+                    <a>
+                      <span
+                        className="header-nav-link pointer cart-nav-link"
+                      >
+                        <i className="fas fa-shopping-bag"></i>
+
+                        <span className="cart-qty">
+                          {/* {formatQtyDisplay(totalQuantity)} */}
+                          {totalQuantity}
+                        </span>
+                        {/* {!isMobile && (
+                          <>
+                            &nbsp;&nbsp; <Translate>Cart</Translate>
+                          </>
+                        )} */}
+                      </span>
+                    </a>
+                  </Link>
+                  {
+                    isSignedIn && (
+                      <Link href="/wishlist">
+                        <a>
+                          <HeaderWishlist />
+                        </a>
+                      </Link>
+                    )
+                  }
                   {!isSignedIn ? (
                     <div>
                       {
@@ -189,32 +222,8 @@ const Header = () => {
 
                         </Dropdown.Menu>
                       </Dropdown>
-                      <Link href="/wishlist">
-                        <a>
-                          <HeaderWishlist />
-                        </a>
-                      </Link>
                     </>
                   )}
-                  <Link href="/carts">
-                    <a>
-                      <span
-                        className="header-nav-link pointer cart-nav-link"
-                      >
-                        <i className="fas fa-shopping-bag"></i>
-
-                        <span className="cart-qty">
-                          {/* {formatQtyDisplay(totalQuantity)} */}
-                          {totalQuantity}
-                        </span>
-                        {/* {!isMobile && (
-                          <>
-                            &nbsp;&nbsp; <Translate>Cart</Translate>
-                          </>
-                        )} */}
-                      </span>
-                    </a>
-                  </Link>
                 </div>
               </div>
             </div>
