@@ -183,7 +183,7 @@ const SearchInput = () => {
       <input
         ref={el => searchRef.current = el}
         className="search-input"
-        placeholder={translate("Search for Products, Brands or more")}
+        placeholder={translate("Search Products, Brands and Shop")}
         onFocus={inputFocusHandler}
         onBlur={() => setTimeout(() => {
           console.log('clicked')
