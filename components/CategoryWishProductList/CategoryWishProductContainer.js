@@ -78,6 +78,7 @@ const CategoryWishProductContainer = () => {
 
         if(query === 'brand') {
           cloneFilterParams.seller_id = "";
+          cloneFilterParams.search = "";
           cloneFilterParams.category = [];
           cloneFilterParams.page = 1;
           cloneFilterParams[query].push(queries[query]);
@@ -85,6 +86,7 @@ const CategoryWishProductContainer = () => {
           dispatch(getCategoryOrBrandDetails('brands/' + queries[query]));
         }
         if(query === 'category') {
+          cloneFilterParams.search = "";
           cloneFilterParams.seller_id = "";
           // check if category same or not after remount
           if(cloneFilterParams[query].length > 0 && !(cloneFilterParams[query][0] === queries[query])) {
