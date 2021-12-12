@@ -86,7 +86,7 @@ const Header = () => {
                 </div>
               </div>
               <div className="header__srh-box">
-                <div className="header__srh-box-container">
+                <div className="header__srh-box-container px-lg-3">
                   <div className="header-search-product">
                     <SearchInput />
                   </div>
@@ -232,7 +232,7 @@ const Header = () => {
         {!backdrop && (
           <div className="container py-2">
             <div className="header__srh-box-bottom">
-              <div className="header__srh-box-container">
+              <div className="header__srh-box-container px-lg-3">
                 <div className="header-search-product">
                   <SearchInput />
                 </div>
