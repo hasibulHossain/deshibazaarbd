@@ -88,6 +88,7 @@ const CategoryWishProductContainer = () => {
         if(query === 'category') {
           cloneFilterParams.search = "";
           cloneFilterParams.seller_id = "";
+          cloneFilterParams.brand = [];
           // check if category same or not after remount
           if(cloneFilterParams[query].length > 0 && !(cloneFilterParams[query][0] === queries[query])) {
             cloneFilterParams.page = 1;
