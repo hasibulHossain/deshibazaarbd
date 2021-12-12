@@ -38,6 +38,11 @@ const Checkout = ()=> {
 			couponData.code = coupon.code; // Append code in couponData for backend processing
 		}
 
+		if(totalPrice < 300) {
+			showToast('error', 'The minimum order amount is 300Taka');
+			return;
+		}
+
 		if((billingAddress && billingAddress.length === 0) && (shippingAddress && shippingAddress.length === 0)) {
 			showToast('error', 'Please add delivery information');
 			return; // @todo add toast message
