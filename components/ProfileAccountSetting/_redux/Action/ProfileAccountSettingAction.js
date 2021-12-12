@@ -299,7 +299,7 @@ export const handleUpdateBillingAddress = (billingAddressInput, userId) => (disp
 }
 
 //handle store billing address
-export const addAddress = (addressInput, type, closeModal, userId) => (dispatch) => {
+export const addAddress = (addressInput, type, closeModal, userId, isToastDisable = false) => (dispatch) => {
     
     if (typeof addressInput.type === 'undefined' || addressInput.type === "") {
         addressInput.type = type;
@@ -342,7 +342,11 @@ export const addAddress = (addressInput, type, closeModal, userId) => (dispatch)
         .then((res) => {
             responseData.status = true;
             responseData.isLoading = false;
-            showToast('success', res.data.message);
+
+            if(!isToastDisable) {
+                showToast('success', res.data.message);
+            }
+
             dispatch({ type: Types.STORE_BILLING_ADDRESS, payload: responseData });
             dispatch(getAddress('billing_address', userId));
             dispatch(getAddress('shipping_address', userId));

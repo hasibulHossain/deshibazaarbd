@@ -354,6 +354,7 @@ const ProductDetailInfo = (props) => {
                                 <div className="d-flex mt-3 product-details-section">
                                   <div className="mr-2">
                                     <button
+                                      disabled={(product.default_selling_price !== null || undefined) && product.default_selling_price <= 0 ? true : false}
                                       className="btn buy_now_btn"
                                       onClick={() => redirectToCheckoutPage()}
                                     >
@@ -362,6 +363,7 @@ const ProductDetailInfo = (props) => {
                                   </div>
                                   <div>
                                     <button
+                                      disabled={(product.default_selling_price !== null || undefined) && product.default_selling_price <= 0 ? true : false}
                                       className="btn add_to_cart_btn"
                                       onClick={() => addToCart()}
                                     >
