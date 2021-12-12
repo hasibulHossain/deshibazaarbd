@@ -45,11 +45,11 @@ const HeaderTop = () => {
                                 </a>
                             </p>
 
-                            <p className="heading-top-text pointer" onClick={() => handleShow()}>
+                            {/* <p className="heading-top-text pointer" onClick={() => handleShow()}>
                                 <i className="fas fa-shipping-fast"></i>
                                 {' '}
                                 <Translate>Track Order</Translate>
-                            </p>
+                            </p> */}
                             <div className="dropdown-currency">
                                 {
                                     currencies.length > 0 && currencies.map((currency, index) => {
