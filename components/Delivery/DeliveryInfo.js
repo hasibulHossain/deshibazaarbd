@@ -58,17 +58,14 @@ const DeliveryInfo = () => {
             if(cloneVals.same_address) {
                 delete cloneVals.same_address;
                 dispatch(addAddress(cloneVals, 'new_address', () => {}, userData.id));
-                
-                console.log(cloneVals);
 
                 cloneVals.type = "billing_address";
 
-                dispatch(addAddress(cloneVals, 'new_address', () => {}, userData.id));
+                dispatch(addAddress(cloneVals, 'new_address', () => {}, userData.id, true));
                 
             } else {
                 delete cloneVals.same_address;
                 dispatch(addAddress(cloneVals, 'new_address', () => {}, userData.id));
-                console.log(cloneVals)
             }
         }
     })
