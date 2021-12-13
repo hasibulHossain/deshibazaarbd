@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useDispatch, useSelector } from 'react-redux';
 
 import FooterBottom from './FooterBottom';
-import SocialMedia from './SocialMedia';
+// import SocialMedia from './SocialMedia';
 import SimpleModal from '../master/Modal/SimpleModal';
 import SimpleBtn from '../master/SimpleBtn/SimpleBtn';
 import { subscribeNewsletter } from './_redux/Action/FooterAction';
@@ -121,7 +121,7 @@ const Footer = () => {
                                     Order Tracking
                                 </p> */}
 
-                                <div className="mb-2">
+                                {/* <div className="mb-2">
                                     <p>Subscribe to our newsletter to get notification about discount information</p>
 
                                     <div className="">
@@ -143,7 +143,7 @@ const Footer = () => {
                                             </SimpleBtn>
                                         </div>
                                     </div>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                         <div className="col-md-3 col-xs-6">
@@ -169,11 +169,11 @@ const Footer = () => {
                                         <a href={`mailto:${content.primary_email}`} className="text-white">{content.primary_email}</a>
                                     </div>
                                 </div>
-                                <div className="mb-2">
+                                {/* <div className="mb-2">
                                     <div>
                                         <SocialMedia />
                                     </div>
-                                </div>
+                                </div> */}
                                 {content.app_playstore_link.length > 0 &&
                                     <div>
                                         <Link href={content.app_playstore_link} passHref={true}>
@@ -219,8 +219,8 @@ const Footer = () => {
                                 {
                                     content.app_playStore_link_qr_code && (
                                         <div>
-                                            <div style={{width: '100px', height: '100px'}}>
-                                                <img width="100" height="100" src={content.app_playStore_link_qr_code} alt="play store qr code" />
+                                            <div style={{width: '80px', height: '80px'}}>
+                                                <img width="80" height="80" src={content.app_playStore_link_qr_code} alt="play store qr code" />
                                             </div>
                                         </div>
                                     )
@@ -233,13 +233,13 @@ const Footer = () => {
             <div className="bg-white">
                 <div className="container">
                     <div className="row">
-                        <div className="col-12 pt-4">
-                            <div className="mt-3 mb-2">
+                        <div className="col-12">
+                            <div className="my-3">
                                 <img className="img-responsive" src="/images/footer/shurjoPay.png" alt="shurjoPay" width={1240} height={188} />
                             </div>
-                            <div className="my-5">
+                            {/* <div className="my-5">
                                 <img className="img-responsive" src="/images/footer/payment-line.png" alt="payment-line" width={1240} height={45} />
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>

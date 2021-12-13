@@ -3,7 +3,7 @@ import content from "../../content.json";
 
 const SocialMedia = () => {
   return (
-    <ul className="social-media">
+    <ul className="social-media mb-0">
       {content.social_facebook.length > 0 && (
         <li className="social-facebook">
           <a
