@@ -52,9 +52,9 @@ export default function Home(props) {
         <ShopContainer />
       </LazyLoad>
 
-      <LazyLoad height={400} once>
+      {/* <LazyLoad height={400} once>
         <StoreContainer />
-      </LazyLoad>
+      </LazyLoad> */}
       <LazyLoad height={280} once>
         <CompanyPolicyContainer />
       </LazyLoad>
