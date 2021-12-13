@@ -94,7 +94,7 @@ const DeliveryFeatures = ({ product }) => {
                 </div>
             </div>
 
-            <div className="delivery_features_section mt-3 p-2">
+            {/* <div className="delivery_features_section mt-3 p-2">
                 <small className="delivery_features_section-heading">Return & Warranty</small>
                 <div className="d-flex mt-3">
                     <div className="color-main">
@@ -108,7 +108,7 @@ const DeliveryFeatures = ({ product }) => {
                     </div>
                     <p className="ml-3 return_information"> 14 days easy return </p>
                 </div>
-            </div>
+            </div> */}
         </>
     );
 };
