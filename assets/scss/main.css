@@ -3989,6 +3989,14 @@ p.customer_info_edit {
   
 }
 
+.header__profile-levitate-wrapper-signup {
+  padding: 10px 120px 10px 10px !important
+}
+
+.header__profile-levitate-wrapper-signin {
+  padding: 10px 120px 10px 10px !important
+}
+
 .header__profile-levitate-wrapper > div {
   white-space: nowrap;
   padding: 10px 80px 10px 10px;

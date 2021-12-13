@@ -139,7 +139,7 @@ const Header = () => {
                         {
                           !isSignedIn ? (
                             <>
-                              <div onClick={() => setOverlayVisible(preState => !preState)}>
+                              <div onClick={() => setOverlayVisible(preState => !preState)} className="header__profile-levitate-wrapper-signin">
                                 {/* <span> Sign Up </span> */}
                                 <Link href="/login" className="header-nav-link">
                                   <a className="">
@@ -148,7 +148,7 @@ const Header = () => {
                                 </Link>
                               </div>
                               
-                              <div onClick={() => setOverlayVisible(preState => !preState)}>
+                              <div onClick={() => setOverlayVisible(preState => !preState)} className="header__profile-levitate-wrapper-signup">
                                 <Link href="/register">
                                   <a>
                                     <Translate>Sign Up</Translate>
