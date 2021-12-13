@@ -93,14 +93,14 @@
 
 .overlay__overlay-wrapper {
   position: absolute;
-  top: calc(100% + 20px);
+  // top: calc(100% + 20px);
   right: 0;
 }
 
 .overlay__overlay-box {
   position: relative;
   max-height: 50%;
-  padding: 1rem;
+  // padding: 1rem;
   z-index: 800;
   overflow: hidden;
   background-color: #fff;

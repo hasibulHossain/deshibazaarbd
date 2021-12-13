@@ -3971,3 +3971,35 @@ p.customer_info_edit {
   height: auto;
   width: 100%;
 }
+
+
+/* header section */
+
+.header__profile {
+  
+}
+
+.header__profile-icon-wrapper {
+  font-size: 2rem;
+  color: var(--color-primary);
+  cursor: pointer;
+}
+
+.header__profile-levitate-wrapper {
+  
+}
+
+.header__profile-levitate-wrapper > div {
+  white-space: nowrap;
+  padding: 10px 80px 10px 10px;
+  cursor: pointer;
+}
+
+.header__profile-levitate-wrapper > div:not(:last-child) {
+  border-bottom: 1px solid #ddd;
+}
+
+.header__profile-levitate-wrapper > div:hover {
+  background-color: #dddddd59;
+  color: var(--color-primary);
+}

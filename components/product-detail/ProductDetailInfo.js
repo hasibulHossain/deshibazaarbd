@@ -283,8 +283,8 @@ const ProductDetailInfo = (props) => {
                                     <span className={`pointer ${overlayVisible ? 'color-main' : 'text-secondary'}`} onClick={() => setOverlayVisible(true)} >
                                       <i className="fas fa-share"></i>
                                     </span>
-                                    <Overlay visible={overlayVisible} closeModalHandler={() => setOverlayVisible(false)}>
-                                      <div className="d-flex justify-content-center align-items-center">
+                                    <Overlay visible={overlayVisible} closeModalHandler={() => setOverlayVisible(false)} offset={20}>
+                                      <div className="d-flex justify-content-center align-items-center p-3">
                                         <div>Share: </div>
                                         <div>
                                           <ul className="social-media m-0">

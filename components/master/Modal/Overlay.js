@@ -2,7 +2,7 @@ import React from "react";
 import { motion, AnimatePresence } from 'framer-motion';
 
 function Overlay (props) {
-    const { children, closeModalHandler, visible, style = {}} = props;
+    const { children, closeModalHandler, visible, style = {}, offset = 0} = props;
     let variants = {
         initial: {
             opacity: 0
@@ -16,10 +16,10 @@ function Overlay (props) {
     }
 
   let modalContent = (
-    <div className="overlay__overlay-wrapper">
+    <div className="overlay__overlay-wrapper" style={{top: `calc(100% + ${offset}px)`}}>
       <div onClick={() => closeModalHandler()} className="modal__backdrop-transparent" ></div>
       <AnimatePresence>
-        <motion.div initial="initial" animate="animate" exit="exit" variants={variants} transition={{duration: 0.3}} style={{ ...style }} className="overlay__overlay-box" >
+        <motion.div key="overlay-modal" initial="initial" animate="animate" exit="exit" variants={variants} transition={{duration: 0.2}} style={{ ...style }} className="overlay__overlay-box" >
           <div className="modal__children">{children}</div>
         </motion.div>
       </AnimatePresence>
@@ -32,5 +32,4 @@ function Overlay (props) {
     return null;
   }
 }
-
 export default React.memo(Overlay);

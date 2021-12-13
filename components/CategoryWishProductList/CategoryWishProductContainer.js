@@ -186,7 +186,7 @@ const CategoryWishProductContainer = () => {
         <ProductFilter show={true} />
       </Modal>
 
-      <section className="product-container">
+      <section className="pt-2 pt-md-4">
         {
           categoryBrandDetails.banner_url && (
               <div className="banner">

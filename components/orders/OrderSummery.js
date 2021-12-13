@@ -105,7 +105,7 @@ const OrderSummery = ({ handleClick, buttonText }) => {
                                 <p className="font-weight-bold">Total</p>
                                 <p className="font-weight-bold">{formatCurrency(totalAmount)} {activeCurrency('code')}</p>
                             </div>
-                            <div className="p-2 alert-info custom_delivery_charge">
+                            <div className="p-2 alert-info custom_delivery_charge mb-3">
                                 {/* <span className="checkout_delivery_free_message_title d-block">Delivery Charge : </span> */}
                                 {/* <span className="mt-1 mb-2 d-block">Inside Dhaka Metro-60/= (+Delivery charge will increase if product is heavier)</span> */}
                                 <span>The minimum order amount is 300Taka</span>
