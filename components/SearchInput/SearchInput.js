@@ -103,7 +103,7 @@ const SearchInput = () => {
         });
     } else if (searchData.is_shop) {
       router
-        .push(`/store/${uriEncodedSlug}`)
+        .push(`/store/${uriEncodedSlug}?name=${encodeURIComponent(searchData.search_name)}`)
         .then((_) => {
           window.scrollTo(0, 0);
           dispatch(toggleBackdrop());

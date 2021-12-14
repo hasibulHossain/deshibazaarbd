@@ -134,7 +134,7 @@ const ProductFilter = () => {
     });
 
     for (let index = 0; index < categoryCheckboxes.current.length; index++) {
-      if(filterParams.type || filterParams.search) {
+      if(filterParams.type || filterParams.search || filterParams.seller_id) {
         if(filterParams.category[filterParams.category.length - 1] == categoryCheckboxes.current[index].id) {
           categoryCheckboxes.current[index].checked = true;
           break;

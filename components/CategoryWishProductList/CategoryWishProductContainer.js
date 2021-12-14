@@ -44,11 +44,12 @@ const CategoryWishProductContainer = () => {
     page
   } = filterParams;
 
-
-
-
   useEffect(() => {
     const queries = {}
+    
+    if(router.query["storeById"]) {
+      queries["storeById"] = router.query.storeById
+    }
     
     if(router.query["brand"]) {
       queries["brand"] = router.query.brand
@@ -63,7 +64,7 @@ const CategoryWishProductContainer = () => {
     }
     
     if(router.query["storeById"]) {
-      queries["storeById"] = router.query.storeById
+      queries["seller_id"] = router.query.storeById
     }
     
     if(router.query["search"]) {
@@ -111,8 +112,8 @@ const CategoryWishProductContainer = () => {
         cloneFilterParams.page = 1;
         cloneFilterParams.seller_id = "";
 
-        if(query === 'storeById') {
-          cloneFilterParams['seller_id'] = queries[query]
+        if(query === 'seller_id') {
+          cloneFilterParams[query] = queries[query]
           dispatch(getSubCategories(null))
         }
         if(query === 'type') {
@@ -146,6 +147,8 @@ const CategoryWishProductContainer = () => {
     // }
     const source = Axios.CancelToken.source();
     dispatch(getFilteredProducts(filterParams, source));
+    window.scrollTo({ top: 0, behavior: "smooth" }); // Scroll to top after mount
+
     return () => {
       source.cancel()
     }
