@@ -41,7 +41,7 @@ const OrderInvoice = ({ title = translate('Invoice'), id, is_invoice = false }) 
                         <div className="bg-white text-center py-4 mb-3">
                             <div style={{color: 'var(--color-green-light)'}}>
                                 <p style={{fontSize: '20px', fontWeight: '600'}} >Thank you</p>
-                                <i style={{fontSize: '4rem'}} class="far fa-check-circle mb-3"></i>
+                                <i style={{fontSize: '4rem'}} className="far fa-check-circle mb-3"></i>
                             </div>
                             <p style={{fontSize: '20px', fontWeight: '600'}}>Your order successfully placed</p>
                         </div>
@@ -202,7 +202,7 @@ const OrderInvoice = ({ title = translate('Invoice'), id, is_invoice = false }) 
                         <div className="bg-white text-center py-4 mb-3">
                             <div style={{color: 'var(--color-green-light)'}}>
                                 <p style={{fontSize: '20px', fontWeight: '600'}} >Thank you</p>
-                                <i style={{fontSize: '4rem'}} class="far fa-check-circle mb-3"></i>
+                                <i style={{fontSize: '4rem'}} className="far fa-check-circle mb-3"></i>
                             </div>
                             <p style={{fontSize: '20px', fontWeight: '600'}}>Your order successfully placed</p>
                         </div>

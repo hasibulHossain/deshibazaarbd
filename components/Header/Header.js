@@ -131,7 +131,7 @@ const Header = () => {
                   }
                   <div className="header__profile position-relative">
                     <div className="header__profile-icon-wrapper" onClick={() => setOverlayVisible(true)}>
-                        <i class="far fa-user-circle"></i>
+                        <i className="far fa-user-circle"></i>
                     </div>
 
                     <Overlay visible={overlayVisible} closeModalHandler={() => setOverlayVisible(false)}>

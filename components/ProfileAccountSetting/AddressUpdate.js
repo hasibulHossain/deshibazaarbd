@@ -332,7 +332,7 @@ const AddressUpdate = (props) => {
                                 selectedAddress.location === "home" && (
                                     <>
                                         {' '}
-                                        <i class="fas fa-check"></i>
+                                        <i className="fas fa-check"></i>
                                     </>
                                 )
                             }
@@ -346,7 +346,7 @@ const AddressUpdate = (props) => {
                                 !(selectedAddress.location === "home") && (
                                     <>
                                         {' '}
-                                        <i class="fas fa-check"></i>
+                                        <i className="fas fa-check"></i>
                                     </>
                                 )
                                 }
