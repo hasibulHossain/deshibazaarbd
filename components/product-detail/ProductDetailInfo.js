@@ -26,7 +26,6 @@ const ProductDetailInfo = (props) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const { product } = props;
-  console.log(product)
   const { id: productId } = product;
   const [quantity, setQuantity] = useState(1);
   const { carts } = useSelector((state) => state.CartReducer);
@@ -94,7 +93,7 @@ const ProductDetailInfo = (props) => {
         setQuantity(1);
         setSubTotal(1 * default_price);
       }
-      
+
       if(Array.isArray(product.images)) {
         product.images.unshift({image_url: product.featured_url || ''})
       }
