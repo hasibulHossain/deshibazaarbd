@@ -192,7 +192,7 @@ const ProductDetailInfo = (props) => {
                     <div className="col-lg-9 bg-white">
                       <div className="">
                         <div className="row">
-                          <div className="col-lg-6 mt-2">
+                          <div className="col-lg-6 mt-2 text-center">
                               <InnerImageZoom 
                                 src={previewImg} 
                                 zoomSrc={previewImg}
