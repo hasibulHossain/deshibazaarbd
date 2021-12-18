@@ -2416,7 +2416,7 @@ p.address_sub_title {
 .custome_form_group label {
   font-size: 16px;
   font-weight: 500;
-  color: darkgrey;
+  color: #333;
 }
 
 .custom_form_input {
