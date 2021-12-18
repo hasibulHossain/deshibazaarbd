@@ -3986,7 +3986,8 @@ p.customer_info_edit {
 }
 
 .header__profile-levitate-wrapper {
-  
+  font-size: 14px;
+  font-weight: 500;
 }
 
 .header__profile-levitate-wrapper-signup {
@@ -3997,7 +3998,7 @@ p.customer_info_edit {
   padding: 10px 120px 10px 10px !important
 }
 
-.header__profile-levitate-wrapper > div {
+.header__profile-levitate-wrapper > div > div {
   white-space: nowrap;
   padding: 10px 80px 10px 10px;
   cursor: pointer;

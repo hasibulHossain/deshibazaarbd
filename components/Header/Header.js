@@ -18,6 +18,7 @@ import ActiveLink from "../master/activeLink/ActiveLink";
 import HeaderWishlist from "./HeaderWishlist";
 import { signOut } from 'next-auth/client';
 import Overlay from "../master/Modal/Overlay";
+import { useRouter } from 'next/router';
 
 const Header = () => {
   const [showToolbar, setShowToolbar] = useState(false);
@@ -26,6 +27,7 @@ const Header = () => {
   const { totalQuantity } = useSelector((state) => state.CartReducer);
   const { isSignedIn, isMobile, backdrop } = useSelector((state) => state.GlobalReducer);
   const { userData } = useSelector((state) => state.UserDataReducer);
+  const router = useRouter();
 
   const toggleCartHandler = () => {
     dispatch(toggleFloatingCart());
@@ -139,90 +141,86 @@ const Header = () => {
                         {
                           !isSignedIn ? (
                             <>
-                              <div onClick={() => setOverlayVisible(preState => !preState)} className="header__profile-levitate-wrapper-signin">
+                              <div onClick={() => {setOverlayVisible(preState => !preState); router.push('/login')}} className="header__profile-levitate-wrapper-signin">
                                 {/* <span> Sign Up </span> */}
-                                <Link href="/login" className="header-nav-link">
+                                {/* <Link href="/login" className="header-nav-link">
                                   <a className="">
                                     <Translate>Sign In</Translate>
                                   </a>
-                                </Link>
+                                </Link> */}
+                                <span>Sign In</span>
                               </div>
                               
-                              <div onClick={() => setOverlayVisible(preState => !preState)} className="header__profile-levitate-wrapper-signup">
-                                <Link href="/register">
-                                  <a>
-                                    <Translate>Sign Up</Translate>
-                                  </a>
-                                </Link>
+                              <div onClick={() => {setOverlayVisible(preState => !preState); router.push('/register')}} className="header__profile-levitate-wrapper-signup">
+                                <span>Sign Up</span>
                               </div>
                             </>
                           ) : (
                             <>
-                              <div onClick={() => setOverlayVisible(preState => !preState)}>
+                              <div onClick={() => {setOverlayVisible(preState => !preState); router.push('/profile')}}>
                                 {/* <span> Sign Up </span> */}
-                                <Link href="/profile" className="header-nav-link">
+                                {/* <Link href="/profile" className="header-nav-link"> */}
                                   <div>
                                     <i className="fas fa-user"></i>
-                                    <a className="">
+                                    <span className="ml-2">
                                       <Translate>My Profile</Translate>
-                                    </a>
+                                    </span>
                                   </div>
-                                </Link>
+                                {/* </Link> */}
                               </div>
                               
-                              <div onClick={() => setOverlayVisible(preState => !preState)}>
-                                <Link href="/account-setting">
+                              <div onClick={() => {setOverlayVisible(preState => !preState); router.push('/account-setting')}}>
+                                {/* <Link href="/account-setting"> */}
                                   <div>
                                     <i className="fas fa-user-cog"></i>
-                                    <a>
+                                    <span className="ml-2">
                                       <Translate>Account Settings</Translate>
-                                    </a>
+                                    </span>
                                   </div>
-                                </Link>
+                                {/* </Link> */}
                               </div>
                               
-                              <div onClick={() => setOverlayVisible(preState => !preState)}>
-                                <Link href="/wishlist">
+                              <div onClick={() => {setOverlayVisible(preState => !preState); router.push('/wishlist')}}>
+                                {/* <Link href="/wishlist"> */}
                                   <div>
                                     <i className="fas fa-heart"></i>
-                                    <a>
+                                    <span className="ml-2">
                                       <Translate>Wishlist</Translate>
-                                    </a>
+                                    </span>
                                   </div>
-                                </Link>
+                                {/* </Link> */}
                               </div>
                               
-                              <div onClick={() => setOverlayVisible(preState => !preState)}>
-                                <Link href="/order">
+                              <div onClick={() => {setOverlayVisible(preState => !preState); router.push('/order')}}>
+                                {/* <Link href="/order"> */}
                                   <div>
                                     <i className="fas fa-shopping-bag"></i>
-                                    <a>
+                                    <span className="ml-2">
                                       <Translate>Order</Translate>
-                                    </a>
+                                    </span>
                                   </div>
-                                </Link>
+                                {/* </Link> */}
                               </div>
                               
-                              <div onClick={() => setOverlayVisible(preState => !preState)}>
-                                <Link href="/product-review">
+                              <div onClick={() => {setOverlayVisible(preState => !preState); router.push('/product-review')}}>
+                                {/* <Link href="/product-review"> */}
                                   <div>
                                     <i className="fas fa-comment"></i>
-                                    <a>
+                                    <span className="ml-2">
                                       <Translate>Product Review</Translate>
-                                    </a>
+                                    </span>
                                   </div>
-                                </Link>
+                                {/* </Link> */}
                               </div>
                               
-                              <div onClick={() => setOverlayVisible(preState => !preState)}>
+                              <div onClick={() => {setOverlayVisible(preState => !preState); handleLogOut()}}>
 
-                                <span
-                                  onClick={() => handleLogOut()}
-                                >
+                                <div>
                                   <i className="fas fa-sign-out-alt"></i>
-                                  {" "}
-                                  <Translate>Logout</Translate>
-                                </span>
+                                  <span className="ml-2">
+                                    <Translate>Logout</Translate>
+                                  </span>
+                                </div>
                                 
                               </div>
                             </>
