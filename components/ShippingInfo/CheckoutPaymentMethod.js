@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCheckoutPaymentMethods } from './_redux/Action/ShippingInfoAction';
 
@@ -13,6 +12,7 @@ const CheckoutPaymentMethod = () => {
         dispatch(getCheckoutPaymentMethods());
         const payment_method = localStorage.getItem('payment_method') || 'cash';
         localStorage.setItem('payment_method', payment_method);
+        setPayMethod(payment_method);
     }, []);
 
     return (
@@ -20,29 +20,36 @@ const CheckoutPaymentMethod = () => {
             <p className="checkout_payment_method_title p-3">Select Payment Method</p>
             <div className="checkout_payment">
                 {
-                    paymentMethods.length > 0 && paymentMethods.map((item, index) => (
-                        <div className="shipping_payment_method_section" key={index + 1}>
-                            <Form.Check
-                                className={`shipping_method_checkbox ${payMethod === item.id ? 'active' : ''}`} 
-                                onChange={() => {
-                                    setPayMethod(item.id);
-                                    localStorage.setItem('payment_method', item.id);
-                                }}
-                                type="radio"
-                                label={item.name}
-                                name="formHorizontalRadios"
-                                id={item.id}
-                                checked={payMethod === item.id ? true : false}
-                            />
-                            <div style={{ overflow: 'hidden', display: 'block' }}>
-                                {
-                                    item.methodImg.length > 0 && item.methodImg.map((img, indexValue) => (
-                                        <img className="payment_method_in_shipping" src={img.img} alt="payment method img" key={indexValue} />
-                                    ))
-                                }
+                    paymentMethods.length > 0 && paymentMethods.map((item, index) => {
+                        return (
+                            <div className="shipping_payment_method_section" key={index + 1}>
+                                <div class="form-check">
+                                    <input 
+                                        class="form-check-input"
+                                        onChange={() => {
+                                            setPayMethod(item.id);
+                                            localStorage.setItem('payment_method', item.id);
+                                        }}
+                                        type="radio" 
+                                        name={item.name} 
+                                        id={item.id} 
+                                        checked={item.id === payMethod ? true : false}
+                                    />
+                                    <label class="form-check-label" for={item.id}>
+                                        {item.name}
+                                    </label>
+                                </div>
+
+                                <div style={{ overflow: 'hidden', display: 'block' }}>
+                                    {
+                                        item.methodImg.length > 0 && item.methodImg.map((img, indexValue) => (
+                                            <img className="payment_method_in_shipping" src={img.img} alt="payment method img" key={indexValue} />
+                                        ))
+                                    }
+                                </div>
                             </div>
-                        </div>
-                    ))
+                        )
+                    })
                 }
 
             </div>
