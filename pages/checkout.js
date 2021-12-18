@@ -118,7 +118,7 @@ const Checkout = ()=> {
 					<div className="col-lg-4 col-md-5 cart_checkout_margin">
 						{/* <ShippingInfo /> */}
 						<CheckoutPaymentMethod />
-						<OrderSummery handleClick={() => handleStoreOrder()} buttonText="CONFIRM PAYMENT" />
+						<OrderSummery handleClick={() => handleStoreOrder()} buttonText="CONFIRM ORDER" />
 					</div>
 				</div>
 			</div>
