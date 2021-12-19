@@ -7,6 +7,7 @@ import { translate } from "../../services/translation/translation";
 import { formatCurrency } from "../../services/currency";
 import axios from "axios";
 import { toggleBackdrop } from "../../_redux/store/action/globalAction";
+import Image from "../master/Image/Image";
 
 const SearchInput = () => {
   const dispatch = useDispatch();
@@ -158,6 +159,7 @@ const SearchInput = () => {
   }
 
   const toggleInputAction = () => {
+    setIsSuggestionVisible(false)
     if(isSuggestionVisible && !search) {
       setIsSearched(true)
     }
@@ -185,10 +187,9 @@ const SearchInput = () => {
         className="search-input"
         placeholder={translate("Search Products, Brands and Shop")}
         onFocus={inputFocusHandler}
-        onBlur={() => setTimeout(() => {
-          console.log('clicked')
-          setIsSuggestionVisible(false)
-        }, 200)}
+        // onBlur={() => setTimeout(() => {
+        //   setIsSuggestionVisible(false)
+        // }, 200)}
         onChange={(e) => searchProduct(e)}
         onKeyDown={e => onKeyDownHandler(e.key)}
       />
@@ -262,7 +263,8 @@ const SearchInput = () => {
               key={searchIndex}
               onClick={() => searchClick(searchItem)} >
                 <div className="search-suggestion-item__img-box">
-                  <img src={searchItem.search_image_url ? searchItem.search_image_url : '/images/default/fallback-image.png'} alt={searchItem.name} />
+                  {/* <img src={searchItem.search_image_url ? searchItem.search_image_url : '/images/default/fallback-image.png'} alt={searchItem.name} /> */}
+                  <Image src={searchItem.search_image_url} alt={searchItem.name} />
                 </div>
 
               <div className="search-suggestion-item__info">
