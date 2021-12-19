@@ -9,13 +9,14 @@ import NavLink from '../../master/NavLink/NavLink';
 
 import Cart from '../../../public/images/navigation/cart.svg';
 import Home from '../../../public/images/navigation/home.svg';
-import Nearby from '../../../public/images/navigation/nearby.svg';
+import Heart from '../../../public/images/navigation/heart.svg';
 import Profile from '../../../public/images/navigation/profile.svg';
 
 const FloatingCartButton = () => {
     const router = useRouter();
     const dispatch = useDispatch();
     const { totalQuantity, totalPrice } = useSelector(state => state.CartReducer);
+    const { wishList } = useSelector((state) => state.WishlistReducer);
     // const { isMobile } = useSelector(state => state.GlobalReducer);
 
     const flashDealBtnHandler = () => {
@@ -59,9 +60,12 @@ const FloatingCartButton = () => {
                         </NavLink>
                     </div>
                     <div className={styles.fixedCartIconBox}>
-                        <NavLink className="bottom-navigation" href="#" exact>
-                            <div>
-                                <Nearby />
+                        <NavLink className="bottom-navigation" href="/wishlist" exact>
+                            <div style={{position: 'relative'}}>
+                                <div className="bottom-navigation__cart-qty-container">
+                                    <span className="bottom-navigation__cart-qty">{wishList.length}</span>
+                                </div>
+                                <Heart />
                             </div>                
                         </NavLink>
                     </div>
