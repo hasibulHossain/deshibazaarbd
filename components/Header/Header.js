@@ -98,7 +98,7 @@ const Header = () => {
               </div>
               <div className="header__happy-hour">
                 <div>
-                  <img src="/images/offer/happy-hour.gif" alt="happy hour gif" />
+                  <img className="pointer" src="/images/offer/happy-hour.gif" alt="happy hour gif" />
                 </div>
               </div>
               <div className="header__signupIn header-nav">

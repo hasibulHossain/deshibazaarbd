@@ -9,6 +9,7 @@ import Translate from "../translation/Translate";
 import router from 'next/router'
 // import Image from 'next/image';
 import Link from 'next/link';
+import Image from "../master/Image/Image";
 
 /**
  * ProductSingleMini Component
@@ -93,7 +94,8 @@ const ProductSingleMini = ({
                   <div style={{overflow: 'hidden'}}>
                     <div>
                       {/* <Image src={imageURL} alt={item.name} width={200} height={200} /> */}
-                      <img src={imageURL} alt={item.name} className="test" />
+                      {/* <img src={imageURL} alt={item.name} className="test" /> */}
+                      <Image src={imageURL} alt={item.name} className="test" />
                     </div>
                     <div className="product-card-body-inner">
                       <h2 className="product-title">
@@ -152,7 +154,8 @@ const ProductSingleMini = ({
                   <Link href={uri}>
                     <a className="product-card-link">
                   <div style={{overflow: 'hidden', marginTop: '1rem'}}>
-                    <img src={imageURL} alt={item.name} className="img-fluid" />
+                    {/* <img src={imageURL} alt={item.name} className="img-fluid" /> */}
+                    <Image src={imageURL} alt={item.name} className="img-fluid" />
                     {/* <Image src={imageURL} alt={item.name} width={220} height={220} /> */}
                   </div>
                   <div>
@@ -215,7 +218,9 @@ const ProductSingleMini = ({
             <div style={{overflow: 'hidden'}}>
               <div>
                 {/* <Image src={imageURL} alt={item.name} width={200} height={200} /> */}
-                <img src={imageURL} alt={item.name} />
+                {/* <img src={imageURL} alt={item.name} /> */}
+                <Image src={imageURL} alt={item.name} />
+                
               </div>
             
               <div className="product-card-body-inner">
