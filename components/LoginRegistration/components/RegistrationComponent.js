@@ -85,9 +85,9 @@ const RegistrationComponent = () => {
             }),
             password: yup.string()
                 .required('Required')
-                .matches(LOWERCASEREGEX, 'At least one lowercase character required')
-                .matches(UPPERCASEREGEX, 'At least one uppercase character required')
-                .matches(NUMERICREGEX, 'At least one numeric value required')
+                // .matches(LOWERCASEREGEX, 'At least one lowercase character required')
+                // .matches(UPPERCASEREGEX, 'At least one uppercase character required')
+                // .matches(NUMERICREGEX, 'At least one numeric value required')
                 .min(8, 'Minimum 8 characters required'),
             password_confirmation: yup.string()
                 .oneOf([yup.ref('password'), null], 'Password confirmation does not match password!')
