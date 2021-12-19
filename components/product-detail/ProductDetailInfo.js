@@ -203,7 +203,7 @@ const ProductDetailInfo = (props) => {
                                 alt={previewImg}
                                 hasSpacer
                               />
-                            <div className="product_preview_gallery mt-2">
+                            <div className="product_preview_gallery justify-content-center justify-content-lg-start mt-2">
                               {/* <Slider {...settings}> */}
                                 {product.images && product.images.length > 0 && product.images.map((item, index) => (
                                   <div key={index}>
