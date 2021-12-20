@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import HomeBannerCarousel from "../components/homeBannerCarousel/HomeBannerCarousel";
 import CategoryListContainer from "../components/category/CategoryListContainer";
 import CompanyPolicyContainer from '../components/CompanyPolicy/CompanyPolicyContainer'
@@ -16,9 +16,30 @@ import CampaignContainer from "../components/campaign/CampaignContainer";
 // import NewOffer from "../components/NewCollection/NewOffer";
 // import OfferProducts from "../components/OfferProducts/OfferProducts";
 import content from '../content.json';
+import Modal from "../components/master/Modal/Modal";
+import CountdownTimer from "react-component-countdown-timer";
 
 export default function Home(props) {
   const {isMobile} = useSelector(state => state.GlobalReducer);
+  const [welcomeCountDown, setWelcomeCountDown] = useState(false);
+  const [welcomeCountDownShown, setWelcomeCountDownShown] = useState(false);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      if(!welcomeCountDown && !welcomeCountDownShown) {
+        setWelcomeCountDown(true)
+        setWelcomeCountDownShown(true);
+      }
+    }, 2000);
+
+    return () => clearTimeout(timeout)
+  }, [])
+
+
+  const offerEndDate     = new Date('Tue Dec 21 2021 20:00:00 GMT+0600').getTime();
+  const currentTime      = new Date().getTime();
+  const offerEndCount    = (offerEndDate - currentTime) / 1000
+  const isOfferAvailable = offerEndCount > 1;
 
   return (
     <>
@@ -58,6 +79,27 @@ export default function Home(props) {
       <LazyLoad height={280} once>
         <CompanyPolicyContainer />
       </LazyLoad>
+      <Modal visible={welcomeCountDown} closeModalHandler={() => setWelcomeCountDown(false)} >
+          <div className="position-relative">
+            <div style={{width: '700px', height: 'auto'}}>
+              <img style={{width: '100%', height: '100%'}} src="/images/welcome-message.jpg" alt="" /> 
+            </div>
+            <div className="grand-opening-count position-absolute">
+              <CountdownTimer
+                showTitle
+                noPoints
+                count={isOfferAvailable ? offerEndCount : 0}
+                size={30}
+                labelSize={20}
+                color="var(--color-primary)"
+                dayTitle="DAY"
+                hourTitle="HRS"
+                minuteTitle="MINS"
+                secondTitle="SECS"
+              />
+            </div>
+          </div>
+      </Modal>
     </>
   );
 }

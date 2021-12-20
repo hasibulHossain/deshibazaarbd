@@ -69,7 +69,7 @@ const Header = () => {
 
   return (
     <div>
-      <DemoWarning />
+      {/* <DemoWarning /> */}
       <HeaderTop />
       <div className="header__root">
         <div className="header__container">
