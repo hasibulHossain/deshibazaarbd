@@ -82,7 +82,7 @@ export default function Home(props) {
       <Modal visible={welcomeCountDown} closeModalHandler={() => setWelcomeCountDown(false)} >
           <div className="position-relative">
             <div style={{width: '700px', height: 'auto'}}>
-              <img style={{width: '100%', height: '100%'}} src="/images/welcome-message.jpg" alt="" /> 
+              <img width="700" height="490" style={{width: '100%', height: '100%'}} src="/images/welcome-message.jpg" alt="" /> 
             </div>
             <div className="grand-opening-count position-absolute">
               <CountdownTimer
