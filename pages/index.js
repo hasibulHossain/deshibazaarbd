@@ -23,7 +23,7 @@ export default function Home(props) {
   const {isMobile} = useSelector(state => state.GlobalReducer);
   const [welcomeCountDown, setWelcomeCountDown] = useState(false);
   const [welcomeCountDownShown, setWelcomeCountDownShown] = useState(false);
-
+  
   useEffect(() => {
     const timeout = setTimeout(() => {
       if(!welcomeCountDown && !welcomeCountDownShown) {
