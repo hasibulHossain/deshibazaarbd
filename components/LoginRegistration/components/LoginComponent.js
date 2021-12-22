@@ -26,7 +26,7 @@ const LoginComponent = () => {
   const loginPost = async (values) => {
     setIsLoading(true);
     const res = await signIn('credentials', {
-        email: values.email,
+        email: values.email.trim(),
         password: values.password,
         redirect: false,
     })
@@ -59,17 +59,18 @@ const LoginComponent = () => {
     email: yup.string()
     .required("Required")
     .test('email&pass', 'Enter a valid phone number or email address', value => {
-      const emailRegex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-      const phoneRegex = /^[0][1-9]\d{9}$|^[1-9]\d{9}$/; // Change this regex based on requirement
+      if(value === undefined || value === null) return false;
 
-      let isValidEmail = emailRegex.test(value);
-      let isValidPhone = phoneRegex.test(value);
+      const emailRegex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+      const phoneRegex = /^[0][1-9]\d{9}$|^[1-9]\d{9}$/;
+      let isValidEmail = emailRegex.test(value.trim());
+      let isValidPhone = phoneRegex.test(value.trim());
       
       if(!isValidEmail && !isValidPhone) return false
       return true
     }),
     password: yup.string()
-    .min(6, 'Minimum 6 characters required')
+    .min(6, 'Minimum 8 characters required')
     .required('Required')
   });
 
