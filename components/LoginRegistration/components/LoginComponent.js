@@ -63,6 +63,7 @@ const LoginComponent = () => {
 
       const emailRegex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
       const phoneRegex = /^[0][1-9]\d{9}$|^[1-9]\d{9}$/;
+
       let isValidEmail = emailRegex.test(value.trim());
       let isValidPhone = phoneRegex.test(value.trim());
       
@@ -70,8 +71,15 @@ const LoginComponent = () => {
       return true
     }),
     password: yup.string()
-    .min(6, 'Minimum 8 characters required')
+    .min(8, 'Minimum 8 characters required')
     .required('Required')
+    .test('password', 'space not allowed', (value) => {
+      if(value === undefined || value === null) return false;
+
+      if(/\s/g.test(value)) return false;
+
+      return true;
+    })
   });
 
   return (

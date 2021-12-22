@@ -12,6 +12,7 @@ import content from '../../../content.json';
 const LOWERCASEREGEX = /(?=.*[a-z])/;
 const UPPERCASEREGEX = /(?=.*[A-Z])/;
 const NUMERICREGEX   = /(?=.*[0-9])/;
+
 let IS_VALID_OTP     = false;
 
 const RegistrationComponent = () => {
@@ -88,7 +89,15 @@ const RegistrationComponent = () => {
                 // .matches(LOWERCASEREGEX, 'At least one lowercase character required')
                 // .matches(UPPERCASEREGEX, 'At least one uppercase character required')
                 // .matches(NUMERICREGEX, 'At least one numeric value required')
-                .min(8, 'Minimum 8 characters required'),
+                // .matches(NUMERICREGEX, 'At least one numeric value required')
+                .min(8, 'Minimum 8 characters required')
+                .test('password', 'space not allowed', (value) => {
+                    if(value === undefined || value === null) return false;
+
+                    if(/\s/g.test(value)) return false;
+
+                    return true;
+                }),
             password_confirmation: yup.string()
                 .oneOf([yup.ref('password'), null], 'Password confirmation does not match password!')
                 .required('Required')
