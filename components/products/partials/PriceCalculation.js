@@ -5,8 +5,8 @@ import { productHasOffer } from '../../../services/ProductService';
 const PriceCalculation = ({ item }) => {
     const { is_offer_enable: isOfferEnable, offer_selling_price, default_selling_price } = item;
 
-    const sellingPrice = parseInt(default_selling_price);
-    const offerPrice = parseInt(offer_selling_price);
+    const sellingPrice = default_selling_price;
+    const offerPrice = offer_selling_price;
 
     const is_offer_enable  = productHasOffer(sellingPrice, offerPrice, isOfferEnable);
     const selling_price    = ( typeof sellingPrice !== 'undefined' && sellingPrice !== null ) ? sellingPrice : 0;
