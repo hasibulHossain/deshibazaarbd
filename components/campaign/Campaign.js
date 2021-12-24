@@ -6,7 +6,7 @@ function Campaign() {
         <div className="row bg-white py-4">
             <div className="col-lg-4 col-md-6 col-12 mb-3 mb-lg-0">
                 <div className="pointer text-center">
-                    <Link href="/products?type=flash-sale">
+                    <Link href="/products?type=flash-sale&name=Flash Sale">
                         <a>
                             <div>
                                 <img width={400} height={200} className="img-responsive" src="/images/campaign/flash-sale.jpg" alt="flash sale" />
@@ -18,7 +18,7 @@ function Campaign() {
 
             <div className="col-lg-4 col-md-6 col-12 mb-3 mb-lg-0">
                 <div className="pointer text-center">
-                    <Link href="/products?type=hatt-bazaar">
+                    <Link href="/products?type=haat-bazaar&name=Haat Bazaar">
                         <a>
                             <div>
                                 <img width={400} height={200} className="img-responsive" src="/images/campaign/hatbazaar.jpg" alt="Hatt bazaar"/>
@@ -30,7 +30,7 @@ function Campaign() {
 
             <div className="col-lg-4 col-md-6 col-12 mb-lg-0">
                 <div className="pointer text-center">
-                    <Link href="/products?type=super-sale">
+                    <Link href="/products?type=super-sale&name=Super Sale">
                         <a>
                             <div>
                                 <img width={400} height={200} className="img-responsive" src="/images/campaign/mega-deals.jpg" alt="Mega deals" />

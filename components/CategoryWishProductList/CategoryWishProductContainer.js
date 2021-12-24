@@ -191,10 +191,10 @@ const CategoryWishProductContainer = () => {
 
       <section className="pt-2 pt-md-4">
         {
-          categoryBrandDetails.banner_url && (
+          categoryBrandDetails.banner_url || typeQuery === 'haat-bazaar' && (
               <div className="banner">
                 <div className="banner-photo-box">
-                  <Image src={categoryBrandDetails.banner_url} width={1260} height={280} />
+                  <Image src={typeQuery === 'haat-bazaar' ? '/images/campaign/haatbazaar-banner.jpg' : categoryBrandDetails.banner_url} width={1260} height={280} />
                 </div>
               </div>
           )

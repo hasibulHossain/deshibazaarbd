@@ -17,21 +17,23 @@ const PriceCalculation = ({ item }) => {
     return (
         <div className="price-area">
             <p className="active-price">
-                { formatCurrency(default_price) }
+                { formatCurrency(floorNum(default_price)) }
             </p>
 
             {
                 (is_offer_enable && offer_price !== 0) &&
                 <p className="inactive-price">
-                    <del>{ formatCurrency(selling_price) } </del>
+                    <del>{ formatCurrency(floorNum(selling_price)) }</del>
                     &nbsp;
                     <span className="discount-percent">
-                        {discount_percent.toFixed(1)}%
+                        -{discount_percent < 1 ? discount_percent.toFixed(1) : floorNum(discount_percent)}%
                     </span>
                 </p>
             }
         </div>
     );
 }
+
+const floorNum = (val) => Math.floor(val)
 
 export default PriceCalculation;
