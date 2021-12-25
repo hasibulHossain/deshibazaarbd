@@ -59,7 +59,7 @@ const DeliveryInfo = () => {
                 delete cloneVals.same_address;
                 dispatch(addAddress(cloneVals, 'new_address', () => {}, userData.id));
 
-                cloneVals.type = "billing_address";
+                cloneVals.type = cloneVals.type === "shipping_address" ? "billing_address" : "shipping_address";
 
                 dispatch(addAddress(cloneVals, 'new_address', () => {}, userData.id, true));
                 
@@ -116,7 +116,6 @@ const DeliveryInfo = () => {
                             <div className="custome_form_group">
                                 <label className="form-label" htmlFor="address_type">Address Type</label>
                                 <CustomSelect
-                                    isDisabled={true}
                                     id="type"
                                     name="type"
                                     onChange={value=> formik.setFieldValue('type', value.value)}
@@ -203,7 +202,11 @@ const DeliveryInfo = () => {
                                         checked={formik.values.same_address}
                                     />
                                     <div>
-                                        <label className="form-label m-0" htmlFor="same_address">Bill to the same address</label>
+                                        <label className="form-label m-0" htmlFor="same_address">
+                                            {
+                                                `${formik.values.type === 'shipping_address' ? 'Bill' : 'Ship'} to the same address`
+                                            }
+                                        </label>
                                     </div>
                                 </div>
                             </div>
@@ -212,7 +215,7 @@ const DeliveryInfo = () => {
                         <div className="col-lg-6 ">
                             <div className="custome_form_group">
                                 <label className="form-label required" htmlFor="street1">Street-1</label>
-                                <textarea name="street1" id="street1" cols="30" rows="2" placeholder="Street-1" className="custom_form_input" onChange={formik.handleChange} value={formik.values.street1}>
+                                <textarea style={{resize: 'none'}} name="street1" id="street1" cols="30" rows="2" placeholder="Street-1" className="custom_form_input" onChange={formik.handleChange} value={formik.values.street1}>
                                 </textarea>
                             </div>
                         </div>
@@ -220,7 +223,7 @@ const DeliveryInfo = () => {
                         <div className="col-lg-6 ">
                             <div className="custome_form_group">
                                 <label className="form-label" htmlFor="street2">Street-2</label>
-                                <textarea name="street2" id="street2" cols="30" rows="2" placeholder="Street-2" className="custom_form_input" onChange={formik.handleChange} value={formik.values.street2}>
+                                <textarea style={{resize: 'none'}} name="street2" id="street2" cols="30" rows="2" placeholder="Street-2" className="custom_form_input" onChange={formik.handleChange} value={formik.values.street2}>
                                 </textarea>
                             </div>
                         </div>
