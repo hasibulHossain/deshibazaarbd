@@ -52,7 +52,7 @@ const Checkout = ()=> {
 			showToast('error', 'Please add a billing address');
 			return; // @todo add toast message
 		}
-		
+
 		if(shippingAddress && shippingAddress.length === 0) {
 			showToast('error', 'Please add a shipping address');
 			return; // @todo add toast message

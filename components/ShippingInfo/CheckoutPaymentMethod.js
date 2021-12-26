@@ -24,18 +24,18 @@ const CheckoutPaymentMethod = () => {
                         return (
                             <div className="shipping_payment_method_section" key={index + 1}>
                                 <div class="form-check">
-                                    <input 
+                                    <input
                                         class="form-check-input"
                                         onChange={() => {
                                             setPayMethod(item.id);
                                             localStorage.setItem('payment_method', item.id);
                                         }}
-                                        type="radio" 
-                                        name={item.name} 
-                                        id={item.id} 
+                                        type="radio"
+                                        name={item.name}
+                                        id={item.id}
                                         checked={item.id === payMethod ? true : false}
                                     />
-                                    <label class="form-check-label" for={item.id}>
+                                    <label class="form-check-label" htmlFor={item.id}>
                                         {item.name}
                                     </label>
                                 </div>
