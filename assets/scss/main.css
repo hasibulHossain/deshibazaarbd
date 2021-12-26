@@ -4039,3 +4039,13 @@ p.customer_info_edit {
 .grand-opening-count .countBoxItem {
   padding: 0 10px;
 }
+
+.product_details_section__exceed-amount-message {
+  display: inline-block;
+  padding: 10px;
+  border: 2px solid var(--color-primary);
+  text-transform: uppercase;
+  font-weight: 500;
+  border-radius: 3px;
+  font-size: 13px;
+}

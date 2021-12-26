@@ -98,8 +98,12 @@ const ProductSingleMini = ({
                       <Image src={imageURL} alt={item.name} className="test" />
                     </div>
                     <div className="product-card-body-inner">
-                      <h2 className="product-title">
-                        <Translate>{item.name}</Translate>
+                      <h2 className="product-title text-capitalize">
+                        <Translate>
+                          {
+                            item.name && item.name.toLowerCase()
+                          }
+                        </Translate>
                       </h2>
                       <span className="product-unit">{item.per_unit_value} {' '} {item.unit_name && item.unit_name}</span>
                       <p
@@ -159,7 +163,7 @@ const ProductSingleMini = ({
                     {/* <Image src={imageURL} alt={item.name} width={220} height={220} /> */}
                   </div>
                   <div>
-                    <h2 className="product-title px-3">{item.name}</h2>
+                    <h2 className="product-title px-3 text-capitalize">{item.name && item.name.toLowerCase()}</h2>
                     <span className="product-unit">{item.per_unit_value} {' '} {item.unit_name && item.unit_name}</span>
                     <p
                       className={`stock-status ${
@@ -224,8 +228,12 @@ const ProductSingleMini = ({
               </div>
             
               <div className="product-card-body-inner">
-                <h2 className="product-title">
-                  <Translate>{item.name}</Translate>
+                <h2 className="product-title text-capitalize">
+                  <Translate>
+                    {
+                      item.name && item.name.toLowerCase()
+                    }
+                  </Translate>
                 </h2>
                 <span className="product-unit">{item.per_unit_value} {' '} {item.unit_name && item.unit_name}</span>
                 <p
