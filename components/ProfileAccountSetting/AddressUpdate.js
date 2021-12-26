@@ -6,32 +6,35 @@ import ErrorMessage from '../master/ErrorMessage/ErrorMessage'
 import { RHFInput } from 'react-hook-form-input';
 import Select from 'react-select';
 import { Spinner } from 'react-bootstrap'
+import { handleShippingCost } from '../orders/_redux/action/OrderAction';
 
 const AddressUpdate = (props) => {
     const dispatch = useDispatch();
     const { countryList, divisionList, cityList, areaList, isSubmitting, selectedAddress } = useSelector((state) => state.ProfileAccountSettingReducer);
     const {userData} = useSelector(state => state.UserDataReducer);
-    const { register, handleSubmit, errors, setValue } = useForm();
+    const { register, errors, setValue } = useForm();
 
-    //handle change input 
+    //handle change input
     const handleChangeTextInput = (name, value) => {
         dispatch(handleChangeBillingAddressInput(name, value))
     }
 
     const submitUpdatedAddressHandler = (e) => {
         e.preventDefault();
-        dispatch(addAddress(selectedAddress, props.type, props.closeModal, userData.id))
+        dispatch(addAddress(selectedAddress, props.type, props.closeModal, userData.id));
+
+        // Dispatch to calculate shipping cost again.
+        dispatch(handleShippingCost([]));
     }
 
     useEffect(() => {
         if (selectedAddress.country && selectedAddress.city) {
-            dispatch(getLocationData('cities', 'division', selectedAddress.country));
+            dispatch(getLocationData('cities', 'division', selectedAddress.division_id));
             dispatch(getLocationData('areas', 'city', selectedAddress.city_id));
         }
         if (props.type === "new_address") {
             dispatch(handleEmptyDispatch("new_address"))
         }
-
     }, [])
 
 
@@ -176,7 +179,7 @@ const AddressUpdate = (props) => {
                                 rules={{ required: true }}
                                 name="division_id"
                                 register={register}
-                                value={selectedAddress.selectedCountry}
+                                value={selectedAddress.selectedDivision}
                                 onChange={(option) => {
                                     handleChangeTextInput("division", option.label);
                                     handleChangeTextInput("division_id", option.value);

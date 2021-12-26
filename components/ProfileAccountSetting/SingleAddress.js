@@ -4,12 +4,11 @@ import Modal from '../master/Modal/Modal';
 import { useDispatch, useSelector } from 'react-redux';
 import AddressUpdate from './AddressUpdate';
 import { getSingleAddress, deleteAddress } from './_redux/Action/ProfileAccountSettingAction';
-import SimpleConfirmComponent from '../master/Modal/SimpleConfirmComponent';
+import { handleShippingCost } from '../orders/_redux/action/OrderAction';
 
 function SingleAddress(props) {
     const dispatch = useDispatch();
     const { id, type, name, phone_no, location, userName, city, area, street1, street2, is_default } = props;
-    const isLoading = useSelector((state)=> state.ProfileAccountSettingReducer.isLoading);
     const {userData} = useSelector(state => state.UserDataReducer)
     const [show, setShow] = useState(false);
     const [deleteShow, setDeleteShow] = useState(false);
@@ -39,6 +38,9 @@ function SingleAddress(props) {
     const handleDeleteAddress = () => {
         dispatch(deleteAddress(id, toggleDeleteModal, userData.id));
         setDeleteShow(preState => !preState);
+
+        // Dispatch to calculate shipping cost again.
+        dispatch(handleShippingCost([]));
     }
 
     const isDefaultAddress = (type, isDefault) => {

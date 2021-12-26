@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as yup from "yup";
 import { useFormik } from "formik";
 import CustomSelect from '../master/custom-select/CustomSelect';
+import { handleShippingCost } from '../orders/_redux/action/OrderAction';
 
 
 const DeliveryInfo = () => {
@@ -62,11 +63,13 @@ const DeliveryInfo = () => {
                 cloneVals.type = cloneVals.type === "shipping_address" ? "billing_address" : "shipping_address";
 
                 dispatch(addAddress(cloneVals, 'new_address', () => {}, userData.id, true));
-                
             } else {
                 delete cloneVals.same_address;
                 dispatch(addAddress(cloneVals, 'new_address', () => {}, userData.id));
             }
+
+            // Dispatch to calculate shipping cost again.
+            dispatch(handleShippingCost([]));
         }
     })
 

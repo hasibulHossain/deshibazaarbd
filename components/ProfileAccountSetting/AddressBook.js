@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react'
 import LoadingSpinner from '../master/LoadingSpinner/LoadingSpinner';
 import SimpleModal from '../master/Modal/SimpleModal';
 import SimpleBtn from '../master/SimpleBtn/SimpleBtn';
@@ -7,7 +6,6 @@ import WarningMessage from '../master/warningMessage/WarningMessage';
 import Translate from '../translation/Translate';
 import AddressUpdate from './AddressUpdate';
 import SingleAddress from './SingleAddress';
-import { getAddress } from './_redux/Action/ProfileAccountSettingAction';
 
 function AddressBook({billingAddress, shippingAddress, userInputData, isLoading}) {
     const [show, setShow] = useState(false);
@@ -15,7 +13,6 @@ function AddressBook({billingAddress, shippingAddress, userInputData, isLoading}
     const toggleShowHandler = () => {
         setShow(preState => !preState);
     }
-
 
     if(!isLoading) {
         return (
@@ -98,12 +95,11 @@ function AddressBook({billingAddress, shippingAddress, userInputData, isLoading}
             </>
         )
     } else {
-        return (                                 
+        return (
             <div className="d-flex justify-content-center">
                 <LoadingSpinner text="Loading Address...." />
             </div>
         )
-        
     }
 }
 
