@@ -75,8 +75,10 @@ export const handleShippingCost = (carts = []) => (dispatch) => {
   const cartsData = localStorage.getItem('carts');
   const cart      = typeof cartsData !== 'undefined' && cartsData !== null ? JSON.parse(cartsData) : [];
 
+  const filteredCart = cart.filter(item => item.isChecked)
+
   const shippingCost = {
-    carts: cart,
+    carts: filteredCart,
   };
 
   Axios.post(`shipping/shipping-cost-by-cart`, shippingCost)

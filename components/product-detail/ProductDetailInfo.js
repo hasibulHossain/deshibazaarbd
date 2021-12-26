@@ -218,7 +218,7 @@ const ProductDetailInfo = (props) => {
                           </div>
                           <div className="col-lg-6 px-0">
                             <div className="product_details_information py-2">
-                              <h2 className="product_title pt-3">{product.name}</h2>
+                              <h2 className="product_title pt-3 text-capitalize">{product.name && product.name.toLowerCase()}</h2>
 
                               <div className="d-flex justify-content-between align-items-end">
                                 <div>
@@ -377,8 +377,8 @@ const ProductDetailInfo = (props) => {
                                   </div>
                                 </div>
                               </div>
-                              <div className="mt-2">
-                                <span>
+                              <div className="mt-3 mt-lg-4">
+                                <span className="product_details_section__exceed-amount-message">
                                   Pay 10&#37; advance if purchase amount above 2000 BDT
                                 </span>
                               </div>

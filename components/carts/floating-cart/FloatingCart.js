@@ -16,6 +16,7 @@ function FloatingCart() {
   const { carts, totalQuantity, totalPrice } = useSelector(
     (state) => state.CartReducer
   );
+  const { shippingCost } = useSelector((state) => state.OrderReducer);
 
   const [show, setShow] = useState(false);
 
@@ -137,7 +138,7 @@ function FloatingCart() {
                   ))}
               </div>
 
-              <div className="floating-cart__payment-info">
+              {/* <div className="floating-cart__payment-info">
                 <div className="floating-cart__payment-details">
                   <span>Sub Total</span>
                   <span>
@@ -148,7 +149,7 @@ function FloatingCart() {
                 <div className="floating-cart__payment-details">
                   <span>Delivery Fee</span>
                   <span>
-                    {formatCurrency(totalPrice > 0 ? 60 : 0)}{" "}
+                    {formatCurrency(shippingCost)}{" "}
                     {activeCurrency("code")}
                   </span>
                 </div>
@@ -161,7 +162,7 @@ function FloatingCart() {
                     </span>
                   </div>
                 )}
-              </div>
+              </div> */}
 
               <div className="floating-cart__actions">
                 <div onClick={() => redirectToCart()}>
