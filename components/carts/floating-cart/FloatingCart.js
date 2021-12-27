@@ -123,12 +123,18 @@ function FloatingCart() {
 
           {+totalQuantity > 0 && (
             <>
-              <p
-                onClick={handleClose}
-                style={{ padding: "0rem 1rem", cursor: "pointer" }}
-              >
-                Clear all
-              </p>
+              <div className="mb-2 d-flex justify-content-between" style={{fontSize: '14px'}}>
+                <span
+                  className="d-inline-block"
+                  onClick={handleClose}
+                  style={{ padding: "0rem 1rem", cursor: "pointer" }}
+                >
+                  Clear all
+                </span>
+                <span className="d-inline-block" style={{padding: "0 1rem", fontWeight: '500', color: 'var(--color-primary)'}}>
+                  {formatCurrency(totalPrice)}
+                </span>
+              </div>
               <div className="floating-cart__products">
                 {carts.length > 0 &&
                   carts.map((item, index) => (
