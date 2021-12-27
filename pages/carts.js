@@ -52,6 +52,7 @@ export default function Carts() {
 
   const clearAllItem = () => {
     dispatch(removeAllCartItem());
+    dispatch(handleShippingCost());
     toggleModalHandler();
   };
   
