@@ -7,7 +7,7 @@ import LoadingSkelleton from '../master/skelleton/LoadingSkelleton.jsx';
 import SingleOrder from './SingleOrder.js';
 import dayjs from 'dayjs';
 import { formatCurrency } from '../../services/currency.js';
-import OrderLifeCycle from './OrderLifeCycle.js';
+// import OrderLifeCycle from './OrderLifeCycle.js';
 
 const OrderDetails = ({ orderID }) => {
     const router = useRouter();
@@ -58,7 +58,7 @@ const OrderDetails = ({ orderID }) => {
 
                         <div className="mt-3 mb-3">
                             <SingleOrder item={orderDetails} isManageable={false} />
-                            <OrderLifeCycle orderID={manageOrder} />
+                            {/* <OrderLifeCycle orderID={manageOrder} /> */}
                         </div>
                     </>
                 )
