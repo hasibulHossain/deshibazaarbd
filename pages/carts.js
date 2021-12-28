@@ -171,7 +171,7 @@ export default function Carts() {
                       {
                         carts.length <= 0 && (
                           <div>
-                            <img src="/images/db-empty-cart.png" alt="empty cart" />
+                            <img width={240} height={160} src="/images/db-empty-cart.png" alt="empty cart" />
                             <div>
                               <p>Oop!!! Your cart is empty! Start shopping</p>
                             </div>

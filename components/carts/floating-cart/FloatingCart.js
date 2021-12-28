@@ -115,7 +115,7 @@ function FloatingCart() {
           {+totalQuantity <= 0 && (
             <div className="floating-cart__not-found">
               <div className="floating-cart__not-found-img-box d-flex justify-content-center">
-                <img src="/images/db-empty-cart.png" alt="empty cart" />
+                <img width={240} height={160} src="/images/db-empty-cart.png" alt="empty cart" />
               </div>
               <p>Oop!!! Your cart is empty ! Start shopping</p>
             </div>
