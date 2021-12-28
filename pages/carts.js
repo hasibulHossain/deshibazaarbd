@@ -52,6 +52,7 @@ export default function Carts() {
 
   const clearAllItem = () => {
     dispatch(removeAllCartItem());
+    dispatch(handleShippingCost());
     toggleModalHandler();
   };
   
@@ -108,7 +109,7 @@ export default function Carts() {
                       carts.length > 0 && (
                         <>
                           <div className="pointer d-flex align-items-center" onClick={selectAllHandler}>
-                            <input className="cart-checkbox" type="checkbox" checked={checkedAllCarts} onChange={() => { }} />
+                            <input type="checkbox" checked={checkedAllCarts} onChange={() => { }} />
                             &nbsp; Select All ({carts.length} items)
                           </div>
                           <div>
@@ -127,7 +128,7 @@ export default function Carts() {
                             <div className="row justify-content-between">
                               <div className="col-lg-6">
                                 <div className="cart_shop_name d-flex">
-                                  <input className="cart-checkbox" type="checkbox" checked={item.isChecked} onChange={() => selectShopHandler(item)} />
+                                  <input type="checkbox" checked={item.isChecked} onChange={() => selectShopHandler(item)} />
                                   <div className="ml-2">
                                     <div className="cart_details_body">
                                       <p>
@@ -170,7 +171,7 @@ export default function Carts() {
                       {
                         carts.length <= 0 && (
                           <div>
-                            <img src="/images/db-empty-cart.png" alt="empty cart" />
+                            <img width={240} height={160} src="/images/db-empty-cart.png" alt="empty cart" />
                             <div>
                               <p>Oop!!! Your cart is empty! Start shopping</p>
                             </div>

@@ -6,6 +6,7 @@ import { handleApplyCouponCode, handleChangeCouponInput, handleShippingCost } fr
 import { getCartsAction } from '../carts/_redux/action/CartAction';
 import ErrorMessage from '../master/ErrorMessage/ErrorMessage'
 import { activeCurrency, formatCurrency } from '../../services/currency';
+import SimpleBtn from '../master/SimpleBtn/SimpleBtn';
 
 const OrderSummery = ({ handleClick, buttonText }) => {
     const dispatch = useDispatch();
@@ -74,9 +75,9 @@ const OrderSummery = ({ handleClick, buttonText }) => {
                             <hr />
 
                             <form onSubmit={handleSubmit(onSubmit)}>
-                                <div className="d-flex justify-content-between">
+                                <div className="d-flex flex-column justify-content-between align-items-center ">
                                     <input
-                                        className="form-control mr-1 coupon-input"
+                                        className="form-control coupon-input"
                                         name="code"
                                         autoComplete="off"
                                         placeholder="Discount Code"
@@ -85,9 +86,17 @@ const OrderSummery = ({ handleClick, buttonText }) => {
                                         ref={register({ required: true })}
                                     />
                                     <br />
-                                    <button disabled={couponLoading ? true : false} className="btn btn-success ml-2 btn-coupon-apply" type="submit">
+                                    <SimpleBtn
+                                        variant="success"
+                                        type="submit"
+                                        onClick={() => {}} 
+                                        disabled={couponLoading ? true : false}
+                                     >
                                         { couponLoading ? 'Checking...' : 'APPLY' }
-                                    </button>
+                                    </SimpleBtn>
+                                    {/* <button disabled={couponLoading ? true : false} className="btn btn-success ml-2 btn-coupon-apply" type="submit">
+                                        { couponLoading ? 'Checking...' : 'APPLY' }
+                                    </button> */}
                                 </div>
                                 <div> {errors.code ?
                                     <ErrorMessage errorText="Please add your discount code." />
@@ -113,26 +122,38 @@ const OrderSummery = ({ handleClick, buttonText }) => {
                             <p className="text-right border-top text-secondary pt-3 mb-1">
                                 <b>VAT</b> included, where applicable
                             </p>
-                        </div>
-                    </div>
-
-                    <div className="cart__right-footer">
-                        <div className="cart__proceed-btn">
                             {
                                 !isSubmitting && (
-                                    <button className="simple-btn btn-danger" onClick={handleClick} disabled={carts.length === 0 ? true : false} >
+                                    <SimpleBtn 
+                                        className="mt-2"
+                                        variant="danger" 
+                                        onClick={handleClick} 
+                                        disabled={carts.length === 0 ? true : false}
+                                    >
                                         {buttonText}
-                                    </button>
+                                    </SimpleBtn>
                                 )
                             }
                             {
                                 isSubmitting &&
-                                (<button disabled={true} className="simple-btn btn-danger d-flex">
+                                (
+                                    <SimpleBtn
+                                        className="mt-2"
+                                        variant="danger"
+                                        onClick={handleClick} 
+                                        disabled={carts.length === 0 ? true : false}
+                                    >
                                     <span className="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>  {buttonText}
-                                </button>)
+                                </SimpleBtn>
+                                )
                             }
                         </div>
                     </div>
+
+                    {/* <div className="cart__right-footer">
+                        <div className="cart__proceed-btn">
+                        </div>
+                    </div> */}
                 </div>
             </Card>
         </>

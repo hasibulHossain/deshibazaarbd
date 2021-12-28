@@ -378,7 +378,7 @@ const RegistrationComponent = () => {
                                             }
                                             <button type="submit" disabled={isLoading ? true : false} className="btn account_btn mt-2">
                                                 {
-                                                    validationStep === 0 ? 'Continue ' : 'Register '
+                                                    validationStep === 0 ? 'Continue ' : 'Sign Up'
                                                 }
                                                 {
                                                     isLoading && (
