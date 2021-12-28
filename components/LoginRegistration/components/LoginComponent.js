@@ -148,7 +148,7 @@ const LoginComponent = () => {
                 </div> */}
                 <div className="mt-3" style={{width: '50%'}}>
                   <SimpleBtn disabled={isLoading} variant="success" type="submit" style={{backgroundColor: 'var(--color-green)'}}>
-                    Login &nbsp;
+                    Sign In &nbsp;
                     {
                       isLoading && (
                           <div className="spinner-border" style={{color: '#fff', fontSize: '10px', width: '20px', height: '20px'}} role="status">
