@@ -42,7 +42,7 @@ const CartProduct = ({ cart, checkoutPage = false }) => {
         <div className="col-lg-3 col-5 product_cart_left">
           {
             !checkoutPage && (
-              <input type="checkbox" className="cart-checkbox pointer mr-2" checked={cart.isChecked} onChange={checkHandler} />
+              <input type="checkbox" className="pointer mr-2" checked={cart.isChecked} onChange={checkHandler} />
             )
           }
           <img
