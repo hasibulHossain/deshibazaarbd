@@ -8,10 +8,12 @@ import { formatCurrency } from "../../services/currency";
 import axios from "axios";
 import { toggleBackdrop } from "../../_redux/store/action/globalAction";
 import Image from "../master/Image/Image";
+import Link from 'next/link';
 
 const SearchInput = () => {
   const dispatch = useDispatch();
   const router = useRouter();
+  const { pathname } = router;
   
   const [search, setSearch] = useState("");
 
@@ -118,10 +120,14 @@ const SearchInput = () => {
 
   useEffect(() => {
     const getSearchHistory = JSON.parse(localStorage.getItem('search-history')) || [];
-  
+
+    if(pathname === '/') {
+      searchRef.current.value = "";
+      setSearch("")
+    }
     setSearchHistory(getSearchHistory)
 
-  }, [JSON.stringify(searchHistory)])
+  }, [JSON.stringify(searchHistory), pathname])
 
   useEffect(() => {
 
@@ -144,9 +150,9 @@ const SearchInput = () => {
   }, [search, searchType])
 
   const inputFocusHandler = () => {
+    setIsSearched(false)
     if(search) return;
     setIsSearchInputTouch(false)
-    setIsSearched(false)
 
     if(searchHistory.length === 0) return;
     
@@ -154,8 +160,12 @@ const SearchInput = () => {
   }
 
   const searchHistoryClickHandler = searchQuery => {
-    setSearch(searchQuery);
     searchRef.current.value = searchQuery || ""
+    
+    setSearch(searchQuery);
+    setIsSearched(true);
+    setIsSuggestionVisible(false);
+    setIsSearchInputTouch(true)
   }
 
   const toggleInputAction = () => {
@@ -170,14 +180,10 @@ const SearchInput = () => {
     }
   }
 
-  const removeSearchItem = (id) => {
-    const cloneSearchHistory = [...searchHistory];
-
-    const updatedSearchHistory = cloneSearchHistory.filter(searchItem => searchItem.id !== id)
-
-    setSearchHistory(updatedSearchHistory);
-
-    localStorage.setItem('search-history', JSON.stringify(updatedSearchHistory));
+  const clearSearchHistory = () => {
+    setSearchHistory([]);
+    setIsSuggestionVisible(false);
+    localStorage.setItem('search-history', JSON.stringify([]));
   }  
 
   return (
@@ -188,8 +194,9 @@ const SearchInput = () => {
         placeholder={translate("Search Products, Brands and Shop")}
         onFocus={inputFocusHandler}
         // onBlur={() => setTimeout(() => {
-        //   setIsSuggestionVisible(false)
-        // }, 200)}
+        //   setIsSearched(true);
+        //   setIsSuggestionVisible(false);
+        // }, 150)}
         onChange={(e) => searchProduct(e)}
         onKeyDown={e => onKeyDownHandler(e.key)}
       />
@@ -209,12 +216,21 @@ const SearchInput = () => {
         {
           isSuggestionVisible && !search && !isSearched && (
             <div className="search-suggestion-area search-history modal-scrollbar">
+              <div className="d-flex justify-content-between">
+                <span className="d-inline-block py-2 px-2 font-12 font-weight-500 pointer">Search history</span>
+                <span className="d-inline-block py-2 px-2 font-12 font-weight-500 pointer" onClick={clearSearchHistory}>Clear</span>
+              </div>
               {
                 searchHistory && searchHistory.map((searchItem, index) => (
-                  <div className="py-3 px-2" key={index}>
-                    <div className="d-flex justify-content-between">
-                      <span className="pointer" onClick={() => {searchHistoryClickHandler(searchItem.name); setIsSuggestionVisible(false); setIsSearchInputTouch(true); setTimeout(() => {searchRef.current.focus()}, 50);}}>{searchItem.name}</span>
-                      <span style={{fontSize: '12px', fontWeight: '500'}} className="pointer color-main" onClick={() => removeSearchItem(searchItem.id)}>delete</span>
+                  <div 
+                    className="pointer search-history-item"
+                    key={index}
+                    onClick={() => searchHistoryClickHandler(searchItem.name)}
+                  >
+                    <div>
+                      <Link href={`/products?search=${searchItem.name}`}>
+                        <a className="d-block py-2 px-3 text-decoration-none" style={{color: '#333'}}>{searchItem.name}</a>
+                      </Link>
                     </div>
                   </div>
                 ))
