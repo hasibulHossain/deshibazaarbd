@@ -2533,8 +2533,10 @@ p.text-secondary.mb-0 {
 }
 
 .search-suggestion-area-search_by-item.active {
-  color: var(--color-primary);
-  border-color: var(--color-primary);
+  background-color: var(--color-primary);
+  color: #fff;
+  border-radius: 4px;
+  font-weight: 600;
 }
 
 .search-suggestion-item {

@@ -232,7 +232,7 @@ const SearchInput = () => {
                     searchByList.map((item, index) => (
                       <span
                         key={index}
-                        className={`search-suggestion-area-search_by-item d-inline-block px-1 py-2 mr-3 ${searchType === item.id ? 'active' : ''}`}
+                        className={`search-suggestion-area-search_by-item d-inline-block p-2 mr-3 ${searchType === item.id ? 'active' : ''}`}
                         onClick={() => searchByListHandler(item.id)} >
                         {item.label}
                       </span>
