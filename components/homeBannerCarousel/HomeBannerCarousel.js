@@ -11,10 +11,10 @@ const HomeBannerCarousel = ({slider}) => {
       <Carousel>
         {slider && slider.length > 0 &&
           slider.map((item, index) => {
-            const backgroundColor = item?.title.split('---')[1] ?? '#ffff'; // get background color from slider title. ex: electronics---#ddd
+            const background = parseBgColorFromTitle(item)
 
             return (
-              <Carousel.Item style={{backgroundColor: backgroundColor}} className="home-banner-carousel pointer" key={index + 1}>
+              <Carousel.Item style={{background: background}} className="home-banner-carousel pointer" key={index + 1}>
                 <img
                   className="d-block"
                   style={{margin: '0 auto'}}
@@ -30,5 +30,19 @@ const HomeBannerCarousel = ({slider}) => {
     </>
   );
 };
+
+/**
+ * parse background color from slider title. ex: electronics---#ddd3F,#fffff
+ * @param {Object} slider
+ * @returns String -> linear-gradient(90deg, #ffff 0%, #dfdfdf 100%)
+ */
+
+function parseBgColorFromTitle(slider) {
+  const bgColors = slider?.title.split('---')[1]?.split?.(',');
+  const bgOne = bgColors[0] ?? '#ffff';
+  const bgTwo = bgColors[1] ?? '#ffff';
+
+  return `linear-gradient(90deg, ${bgOne} 0%, ${bgTwo} 100%)`;
+}
 
 export default HomeBannerCarousel;
