@@ -39,14 +39,6 @@ const CheckoutPaymentMethod = () => {
                                         {item.name}
                                     </label>
                                 </div>
-
-                                <div style={{ overflow: 'hidden', display: 'block' }}>
-                                    {
-                                        item.methodImg.length > 0 && item.methodImg.map((img, indexValue) => (
-                                            <img className="payment_method_in_shipping" src={img.img} alt="payment method img" key={indexValue} />
-                                        ))
-                                    }
-                                </div>
                             </div>
                         )
                     })
