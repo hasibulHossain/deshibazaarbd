@@ -19,6 +19,8 @@ import ImageWithFallback from '../master/Image/Image';
 import Link from 'next/link';
 
 const CategoryWishProductContainer = ({ isMainCategory, subCategories, mainCategoryBanner }) => {
+  const dispatch = useDispatch();
+  const router = useRouter();
   const [showFilter, setShowFilter] = useState(false);
 
   const { paginate, filterParams, categoryBrandDetails, isLoading } = useSelector(
@@ -27,13 +29,8 @@ const CategoryWishProductContainer = ({ isMainCategory, subCategories, mainCateg
 
   // const firstRenderRef = useRef(true);
 
-  const dispatch = useDispatch();
-
-  const router = useRouter();
 
   const {brand: brandQuery = "", category: categoryQuery = "", type: typeQuery = "", storeById = "", search: searchQuery = ""} = router.query;
-  const mainCategory = router.query['main-category'];
-
 
 
   const paginateHandler = (page) => {
@@ -46,7 +43,6 @@ const CategoryWishProductContainer = ({ isMainCategory, subCategories, mainCateg
 
     dispatch(setFilterParams(filterParamClone));
   };
-
 
   const getImgSrc = () => {
     let src = categoryBrandDetails?.banner_url ?? "";
@@ -61,6 +57,15 @@ const CategoryWishProductContainer = ({ isMainCategory, subCategories, mainCateg
 
     return src;
   }
+
+
+
+
+  useEffect(() => {
+    dispatch(getSubCategories(null))
+  }, [])
+
+
 
   return (
     <>

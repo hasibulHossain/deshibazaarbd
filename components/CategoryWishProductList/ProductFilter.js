@@ -9,8 +9,10 @@ import {
 } from "./_redux/Action/CategoryWiseProductAction";
 import ReactStars from "react-rating-stars-component";
 import { activeCurrency } from "../../services/currency";
+import { useRouter } from 'next/router';
 
 const ProductFilter = () => {
+  const router = useRouter();
   const dispatch = useDispatch();
   const { filterParams, categories, brands } = useSelector(
     (state) => state.CategoryWiseProductReducer
@@ -51,6 +53,10 @@ const ProductFilter = () => {
 
     if (e.target.checked) {
       filterParamClone.category[1] = category.short_code;
+      router.replace({
+        pathname: '/products',
+        query: parseFilterString({queries: router.query, filteredItem: 'category', filteredVal: category.short_code})
+      })
     } else {
       filterParamClone.category.splice(1, 1)
     }
@@ -100,6 +106,10 @@ const ProductFilter = () => {
   );
 
   const priceRangeHandler = (newValue) => {
+    router.replace({
+      pathname: '/products',
+      query: parseFilterString({queries: router.query, filteredItem: 'rating', filteredVal: `min-${newValue.min},max-${newValue.max}`})
+    })
     debounceReturn(newValue, filterParams);
     setValue(newValue);
   };
@@ -223,5 +233,58 @@ const ProductFilter = () => {
     </section>
   );
 };
+
+function parseFilterString({queries, filteredItem, filteredVal}) {
+  const cloneQueries = {...queries};
+  const isFilterQueryPresent = cloneQueries['filter'] && true;
+  const filterStr = isFilterQueryPresent && cloneQueries?.filter;
+
+  console.log('filter string => ', filterStr)
+  
+  console.log('is filter present => ', isFilterQueryPresent)
+
+  if(!isFilterQueryPresent) {
+    return {
+      ...cloneQueries,
+      filter: `${filteredItem}__${filteredVal}`
+    }
+  }
+
+  const isMultipleFilterItemFound = countMatched(filterStr) > 1 ? true : false;
+  //if multiple filter item found string will look like - filter=category__fashion--brand__zara
+  //if not - filter=category__fashion
+
+  if(!isMultipleFilterItemFound && filterStr.split('__')[0] === filteredItem) {
+    return {
+      ...cloneQueries,
+      filter: `${filteredItem}__${filteredVal}--`
+    }
+  }
+
+  const filterItemArr = filterStr.split?.('--') || [] // ['category__fashion', 'brand__zara']
+
+  const FoundFilteredItemIndex  = filterItemArr.findIndex(filterItemWithVal => {
+    const filterItem = filterItemWithVal.split('__')[0];
+
+    if(filterItem === filteredItem) return true;
+
+    return false;
+  });
+
+  filterItemArr.splice(FoundFilteredItemIndex, 1, `${filteredItem}__${filteredVal}`);
+
+  const updatedFilterItemArr = filterItemArr.join('--');
+  console.log('updatedFilter item arr => ', updatedFilterItemArr)
+  return {
+    ...cloneQueries,
+    filter: updatedFilterItemArr
+  }
+
+}
+
+function countMatched(str) {
+  const re = /--/g
+  return ((str || '').match(re) || []).length;
+}
 
 export default ProductFilter;
