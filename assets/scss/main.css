@@ -98,6 +98,18 @@ a {
   font-weight: 600 !important;
 }
 
+.color-main {
+  color: var(--color-primary);
+}
+
+.color-secondary {
+  color: #212529
+}
+
+.color-main-hover:hover {
+  color: var(--color-primary);
+}
+
 /*****************************************************************
                         Global CSS Part :: End
 /*****************************************************************/
@@ -3981,10 +3993,6 @@ p.customer_info_edit {
 
 .website-info-title {
   font-weight: 600;
-}
-
-.color-main {
-  color: var(--color-primary);
 }
 
 .website-info-content {

@@ -280,7 +280,7 @@ const SearchInput = () => {
               onClick={() => searchClick(searchItem)} >
                 <div className="search-suggestion-item__img-box">
                   {/* <img src={searchItem.search_image_url ? searchItem.search_image_url : '/images/default/fallback-image.png'} alt={searchItem.name} /> */}
-                  <Image src={searchItem.search_image_url} alt={searchItem.name} />
+                  <Image src={searchItem.search_image_url} alt={searchItem.name} width={60} height={60} />
                 </div>
 
               <div className="search-suggestion-item__info">
