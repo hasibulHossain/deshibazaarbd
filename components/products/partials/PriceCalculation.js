@@ -14,6 +14,8 @@ const PriceCalculation = ({ item }) => {
     const offer_price      = ( is_offer_enable && offerPrice != 0 && offerPrice !== null) ? offerPrice: 0;
     const discount_percent = ( ( selling_price - offer_price ) * 100 ) / selling_price;
 
+    const discount = '' +  Math.round( discount_percent * 1e2 ) / 1e2; // return 2 digit after point. haven't use toFixed cause toFixed return String value
+
     return (
         <div className="price-area">
             <p className="active-price">
@@ -26,7 +28,7 @@ const PriceCalculation = ({ item }) => {
                     <del>{ formatCurrency(floorNum(selling_price)) }</del>
                     &nbsp;
                     <span className="discount-percent">
-                        -{discount_percent < 1 ? discount_percent.toFixed(1) : floorNum(discount_percent)}%
+                        -{discount}%
                     </span>
                 </p>
             }

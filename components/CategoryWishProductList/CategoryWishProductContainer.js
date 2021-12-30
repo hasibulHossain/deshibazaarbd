@@ -179,9 +179,23 @@ const CategoryWishProductContainer = () => {
     dispatch(setFilterParams(filterParamClone));
   };
 
+  const getImgSrc = () => {
+    let src = categoryBrandDetails?.banner_url ?? "";
+
+    if(typeQuery === 'haat-bazaar') {
+      src = '/images/campaign/haatbazaar-banner.jpg';
+    }
+
+    if(typeQuery === 'super-sale') {
+      src = '/images/campaign/super-sale.jpg';
+    }
+
+    return src;
+  }
+
   return (
     <>
-      <Modal 
+      <Modal
         visible={showFilter}
         closeModalHandler={() => setShowFilter(preState => !preState)}
         sideModal={true}
@@ -191,10 +205,10 @@ const CategoryWishProductContainer = () => {
 
       <section className="pt-2 pt-md-4">
         {
-          (categoryBrandDetails.banner_url || typeQuery === 'haat-bazaar') && (
+          (categoryBrandDetails.banner_url || typeQuery === 'haat-bazaar' || typeQuery === 'super-sale') && (
               <div className="banner">
                 <div className="banner-photo-box">
-                  <Image src={typeQuery === 'haat-bazaar' ? '/images/campaign/haatbazaar-banner.jpg' : categoryBrandDetails.banner_url} width={1260} height={280} />
+                  <Image src={getImgSrc()} width={1260} height={280} />
                 </div>
               </div>
           )
