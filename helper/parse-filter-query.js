@@ -1,160 +1,134 @@
-    /**
-     * 
-     * @param {Object} queries 
-     * @param {Object} filterItemObj 
-     * @returns {Object} -> will return updated query object
-     */
-    function parseFilterString(queries, filterItemObj) {
-        if(typeof filterItemObj !== 'object' && typeof queries !== 'object') {
-            throw new Error('filterItem is not Object; Object required');
-        }
+/**
+ * 
+ * @param {Object} queries
+ * @param {Object} filterItemObj
+ * @returns {Object} -> will return updated query object
+ */
+function parseFilterString(queries, filterItemObj) {
+    if(typeof filterItemObj !== 'object' && typeof queries !== 'object') {
+        throw new Error('filterItem is not Object; Object required');
+    }
 
-        const filterItems = Object.keys(filterItemObj);
+    const filterItems = Object.keys(filterItemObj);
 
-        const cloneQueries = {...queries};
-        const isFilterQueryPresent = cloneQueries['filter'] && true;
-        const filterStr = isFilterQueryPresent && cloneQueries?.filter;
-    
-        if(!isFilterQueryPresent) {
-            return {
-                ...cloneQueries,
-                filter: generateFilterStrFromObj(filterItemObj)
-            }
-        }
-    
-        const isMultipleFilterItemFound = countMatched(filterStr) > 0 ? true : false;
-    
-        if(!isMultipleFilterItemFound && filterItems.some((filterItem => filterStr.split('__')[0] === filterItem))) {
-            return {
-                ...cloneQueries,
-                filter: generateFilterStrFromObj(filterItemObj)
-            }
-        }
-    
-        const filterItemArr       = filterStr.split?.('--').filter(query => query) || []
-    
-        const filterItemSingleArr = generateFilterStrFromObj(filterItemObj).split?.('--').filter(query => query) || [];
+    const cloneQueries = {...queries};
+    const isFilterQueryPresent = cloneQueries['filter'] && true;
+    const filterStr = isFilterQueryPresent && cloneQueries?.filter;
 
-        filterItemSingleArr.forEach(item => {
-            const FoundFilteredItemIndex  = filterItemArr.findIndex(filterItemWithVal => {
+    if(!isFilterQueryPresent) {
+        return {
+            ...cloneQueries,
+            filter: generateFilterStrFromObj(filterItemObj)
+        }
+    }
+
+    const isMultipleFilterItemFound = countMatched(filterStr) > 0 ? true : false;
+
+    if(!isMultipleFilterItemFound && filterItems.some((filterItem => filterStr.split('__')[0] === filterItem))) {
+        return {
+            ...cloneQueries,
+            filter: generateFilterStrFromObj(filterItemObj)
+        }
+    }
+
+    const filterItemArr       = filterStr.split?.('--').filter(query => query) || []
+
+    const filterItemSingleArr = generateFilterStrFromObj(filterItemObj).split?.('--').filter(query => query) || [];
+
+    filterItemSingleArr.forEach(item => {
+        const FoundFilteredItemIndex  = filterItemArr.findIndex(filterItemWithVal => {
             const filterItem = filterItemWithVal.split?.('__')?.[0] ?? '';
         
             if(filterItem === item.split?.('__')[0]) return true;
         
             return false;
-            });
+        });
 
-            if(FoundFilteredItemIndex === -1) {
-                filterItemArr.push(item)
-            } else {
-                filterItemArr.splice(FoundFilteredItemIndex, 1, `${item}`);
-            }
-        })
+        if(FoundFilteredItemIndex === -1) {
+            filterItemArr.push(item)
+        } else {
+            filterItemArr.splice(FoundFilteredItemIndex, 1, `${item}`);
+        }
+    })
 
-        const removeDuplicate      = [...new Set(filterItemArr)];
-        
-        const updatedFilterItemArr = removeDuplicate.join('--');
+    const removeDuplicate      = [...new Set(filterItemArr)];
+    
+    const updatedFilterItemArr = removeDuplicate.join('--');
 
-        return {
+    return {
         ...cloneQueries,
         filter: updatedFilterItemArr
-        }
     }
+};
+
+
+function parseUri(queries) {
+    const cloneQueries = {...queries};
+    const isFilterQueryPresent = cloneQueries['filter'] && true;
+    const filterStr = isFilterQueryPresent ? cloneQueries?.filter : '';
   
-    function countMatched(str) {
-        const re = /--/g
-        return ((str || '').match(re) || []).length;
+    const filterArr = filterStr.split('--') || []; // ['order_by__price', 'order__asc', 'paginate_no__100', 'page__1']
+    console.log('filterArr => ', filterArr)
+
+    filterArr.forEach(filterItem => {
+      const filterKeyAndVal = filterItem.split?.('__') || [];
+      const filterKey = filterKeyAndVal?.[0];
+      const filterVal = filterKeyAndVal?.[1];
+  
+      cloneQueries[filterKey] = filterVal;
+    });
+
+    console.log('clone queries obj after filter item added => ', cloneQueries)
+  
+    const finalUriObj = {
+      category: cloneQueries?.['category'] || '',
+      brand: cloneQueries?.['brand'] || '',
+      type: cloneQueries?.['type'] || '',
+      rating: cloneQueries?.['rating'] || '',
+      search: cloneQueries?.['search'] || '',
+      page: cloneQueries?.['page'] || '',
+      seller_id: cloneQueries?.['seller_id'] || '',
+      paginate_no: cloneQueries?.['paginate_no'] || '',
+      order_by: cloneQueries?.['order_by'] || '',
+      order: cloneQueries?.['order'] || '',
+      min_price: cloneQueries?.['min_price'] || '',
+      max_price: cloneQueries?.['max_price'] || '',
+    };
+
+    const filterParam = Object.keys(finalUriObj)
+      .filter((item) => finalUriObj[item])
+      .map((item) =>{
+        return `${item}=${encodeURIComponent(finalUriObj[item])}`
+      })
+      .join("&");
+
+    return {filterParam, finalUriObj};
+}
+
+
+
+
+
+
+
+
+
+
+function countMatched(str) {
+    const re = /--/g
+    return ((str || '').match(re) || []).length;
+};
+
+function generateFilterStrFromObj(filterItemObj) {
+    if(typeof filterItemObj !== 'object') throw new Error('generateFilterStrFromObj obj required');
+
+    let filterStr = "";
+
+    for (const key in filterItemObj) {
+        filterStr += `${key}__${filterItemObj[key]}--`
     }
 
-    function generateFilterStrFromObj(filterItemObj) {
-        if(typeof filterItemObj !== 'object') throw new Error('generateFilterStrFromObj obj required');
+    return filterStr;
+};
 
-        let filterStr = "";
-
-        for (const key in filterItemObj) {
-            filterStr += `${key}__${filterItemObj[key]}--`
-        }
-
-        return filterStr;
-    }
-
-    export { parseFilterString };
-
-
-
-
-    // function parseFilterString(queries, filterItemObj) {
-    //     if(typeof filterItemObj !== 'object') {
-    //         throw new Error('filterItem is not Object; Object required');
-    //     }
-
-    //     const filterItems = Object.keys(filterItemObj);
-
-    //     const cloneQueries = {...queries};
-    //     const isFilterQueryPresent = cloneQueries['filter'] && true;
-    //     const filterStr = isFilterQueryPresent && cloneQueries?.filter;
-        
-    //     if(!isFilterQueryPresent) {
-    //       return {
-    //         ...cloneQueries,
-    //         filter: `${filteredItem}__${filteredVal}--`
-    //       }
-    //     }
-        
-    //     const isMultipleFilterItemFound = countMatched(filterStr) > 0 ? true : false;
-    //     //if multiple filter item found string will look like - filter=category__fashion--brand__zara
-    //     //if not - filter=category__fashion
-        
-    //     if(!isMultipleFilterItemFound && filterItems.some((filterItem => filterStr.split('__')[0] === filterItem))) {
-    //       return {
-    //         ...cloneQueries,
-    //         filter: generateFilterStrFromObj(filterItemObj)
-    //       }
-    //     }
-        
-    //     const filterItemArr = filterStr.split?.('--').filter(query => query) || [] // ['category__fashion', '']
-        
-    //     const FoundFilteredItemIndex  = filterItemArr.findIndex(filterItemWithVal => {
-    //       const filterItem = filterItemWithVal.split?.('__')?.[0] ?? '';
-        
-    //       if(filterItem === filteredItem) return true;
-        
-    //       return false;
-    //     });
-
-    //     console.log('index found => ', FoundFilteredItemIndex);
-
-    //     if(FoundFilteredItemIndex === -1) {
-    //         filterItemArr.push(`${filteredItem}__${filteredVal}`)
-    //     }
-
-    //     console.log('filter item arr => ', filterItemArr);
-        
-    //     filterItemArr.splice(FoundFilteredItemIndex, 1, `${filteredItem}__${filteredVal}--`);
-        
-    //     const updatedFilterItemArr = filterItemArr.join('--');
-    //     console.log('updatedFilter item arr => ', updatedFilterItemArr)
-    //     return {
-    //       ...cloneQueries,
-    //       filter: updatedFilterItemArr
-    //     }
-    // }
-        
-    // function countMatched(str) {
-    //     const re = /--/g
-    //     return ((str || '').match(re) || []).length;
-    // }
-
-    // function generateFilterStrFromObj(filterItemObj) {
-    //     if(typeof filterItemObj !== 'object') throw new Error('generateFilterStrFromObj obj required');
-
-    //     const filterStr = "";
-
-    //     for (const key in filterItemObj) {
-    //         filterStr += `${key}__${filterItemObj[key]}--`
-    //     }
-
-    //     return filterStr;
-    // }
-
-    // export { parseFilterString };
+export { parseFilterString, parseUri };

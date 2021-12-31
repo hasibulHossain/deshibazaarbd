@@ -18,7 +18,7 @@ const HomeBannerCarousel = ({slider}) => {
                 <img
                   className="d-block"
                   style={{margin: '0 auto'}}
-                  width={!isMobile ? 1920 : 1440}
+                  width={1440}
                   height={!isMobile ? 450 : 944}
                   src={!isMobile ? item.image_url : item.mobile_image_url}
                   alt={item.title}

@@ -8,6 +8,7 @@ import {
 import classNames from "classnames";
 import {useRouter} from 'next/router';
 import LoadingPlaceHolder from "../master/skelleton/LoadingPlaceholder";
+import { parseFilterString } from "../../helper/parse-filter-query";
 
 
 const CategoryWishProductList = ({showFilter, showFilterHandler}) => {
@@ -23,8 +24,6 @@ const CategoryWishProductList = ({showFilter, showFilterHandler}) => {
     (state) => state.CategoryWiseProductReducer
   );
 
-  const [columns, setColumns] = useState("col-md-3");
-
   const selectHandler = (e) => {
     let filterParamClone = { ...filterParams };
 
@@ -33,43 +32,59 @@ const CategoryWishProductList = ({showFilter, showFilterHandler}) => {
         filterParamClone.order_by = ""
         filterParamClone.order = ""
         break;
+
       case "price_low_high":
-        filterParamClone.order_by = "price"
-        filterParamClone.order = "asc"
-        break;
+        router.replace({
+          pathname: '/products',
+          query: parseFilterString(router.query, {order_by: 'price', order: 'asc'}) 
+        })
+      break;
+
       case "price_high_low":
-        filterParamClone.order_by = "price"
-        filterParamClone.order = "desc"
-        break;
+        router.replace({
+          pathname: '/products',
+          query: parseFilterString(router.query, {order_by: 'price', order: 'desc'})
+        })
+      break;
+
       case "rating_high":
-        filterParamClone.order_by = "rating"
-        filterParamClone.order = "desc"
-        break;
+        router.replace({
+          pathname: '/products',
+          query: parseFilterString(router.query, {order_by: 'rating', order: 'desc'})
+        })
+      break;
+
       case "stock_high":
-        filterParamClone.order_by = "stock"
-        filterParamClone.order = "desc"
-        break;
+        router.replace({
+          pathname: '/products',
+          query: parseFilterString(router.query, {order_by: 'stock', order: 'desc'})
+        })
+      break;
     }
-    dispatch(setFilterParams(filterParamClone));
   }
   const perPageHandler = (e) => {
     let filterParamClone = { ...filterParams };
 
-    switch (e.target.value) {
-      case "20":
-        filterParamClone.paginate_no = 20
-        break;
-
+    switch (e.target.value) {        
       case "40":
-        filterParamClone.paginate_no = 40
+        router.replace({
+          pathname: '/products',
+          query: parseFilterString(router.query, {paginate_no: '40', page: '1'})
+        })
         break;
-
-      case "60":
-        filterParamClone.paginate_no = 60
+        
+        case "60":
+        router.replace({
+          pathname: '/products',
+          query: parseFilterString(router.query, {paginate_no: '60', page: '1'})
+        , page: '2'})
         break;
-
-      case "100":
-        filterParamClone.paginate_no = 100
+        
+        case "100":
+        router.replace({
+          pathname: '/products',
+          query: parseFilterString(router.query, {paginate_no: '100', page: '1'})
+        })
         break;
     }
 
@@ -166,7 +181,6 @@ const CategoryWishProductList = ({showFilter, showFilterHandler}) => {
               <Form>
                 <Form.Group controlId="exampleFormSelectCustom">
                   <Form.Control onChange={perPageHandler} as="select" custom>
-                    <option value="20">20</option>
                     <option value="40">40</option>
                     <option value="60">60</option>
                     <option value="100">100</option>
@@ -187,7 +201,7 @@ const CategoryWishProductList = ({showFilter, showFilterHandler}) => {
       <div className={rowClasses}>
         {
           !isLoading && (
-            <CategoryWiseMiniProduct columns={columns} />
+            <CategoryWiseMiniProduct columns="col-md-3" />
           )
         }
       </div>

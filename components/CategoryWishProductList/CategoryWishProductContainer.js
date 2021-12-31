@@ -17,11 +17,14 @@ import Axios from 'axios'
 import Paginate from "../master/paginate/Paginate";
 import ImageWithFallback from '../master/Image/Image';
 import Link from 'next/link';
+import { parseFilterString, parseUri } from "../../helper/parse-filter-query";
 
 const CategoryWishProductContainer = ({ isMainCategory, subCategories, mainCategoryBanner }) => {
   const dispatch = useDispatch();
   const router = useRouter();
   const [showFilter, setShowFilter] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  // const [filterParam, setFilterParam] = useState(parseUri(router.query));
 
   const { paginate, filterParams, categoryBrandDetails, isLoading } = useSelector(
     (state) => state.CategoryWiseProductReducer
@@ -30,7 +33,7 @@ const CategoryWishProductContainer = ({ isMainCategory, subCategories, mainCateg
   // const firstRenderRef = useRef(true);
 
 
-  const {brand: brandQuery = "", category: categoryQuery = "", type: typeQuery = "", storeById = "", search: searchQuery = ""} = router.query;
+  const {type: typeQuery = ""} = router.query;
 
 
   const paginateHandler = (page) => {
@@ -38,10 +41,12 @@ const CategoryWishProductContainer = ({ isMainCategory, subCategories, mainCateg
 
     window.scrollTo({ top: 0, behavior: "smooth" });
 
-    const filterParamClone = { ...filterParams };
-    filterParamClone.page  = page.selected + 1;
+    router.replace({
+      pathname: '/products',
+      query: parseFilterString(router.query, {page: page.selected + 1})
+    })
 
-    dispatch(setFilterParams(filterParamClone));
+    // dispatch(setFilterParams(filterParamClone));
   };
 
   const getImgSrc = () => {
@@ -61,9 +66,24 @@ const CategoryWishProductContainer = ({ isMainCategory, subCategories, mainCateg
 
 
 
+  // useEffect(() => {
+  //   dispatch(getSubCategories(null))
+  // }, []);
+
+
   useEffect(() => {
-    dispatch(getSubCategories(null))
-  }, [])
+    const source = Axios.CancelToken.source();
+    const {filterParam, finalUriObj} = parseUri(router.query);
+    const currentPage = finalUriObj['page'] || 1
+    setCurrentPage(currentPage);
+    dispatch(getFilteredProducts(filterParam, source));
+
+    window.scrollTo({ top: 0, behavior: "smooth" }); // Scroll to top after mount
+  
+    return () => {
+      source.cancel()
+    }
+  }, [JSON.stringify(router.query)]);
 
 
 
@@ -99,7 +119,7 @@ const CategoryWishProductContainer = ({ isMainCategory, subCategories, mainCateg
                     <Paginate
                       pageCount={paginate.pages.length}
                       onPageChange={paginateHandler}
-                      currentPage={filterParams.page}
+                      currentPage={currentPage}
                       perPage={paginate.per_page}
                       totalItemCount={paginate.total}
                     />
@@ -114,7 +134,7 @@ const CategoryWishProductContainer = ({ isMainCategory, subCategories, mainCateg
               return (
                 <div className="col-lg-3 col-md-4 py-3" key={index}>
                   <div className="pointer">
-                    <Link href={`/products?category=${encodeURIComponent(item.short_code)}&name=${encodeURIComponent(item.name)}`}>
+                    <Link href={`/products?category=${encodeURIComponent(item.short_code)}&name=${encodeURIComponent(item.name)}&filter=paginate_no=40`}>
                       <a>
                         <div className="text-center">
                           <ImageWithFallback width={400} height={280} src={item?.image_url} alt={item?.name} />
@@ -136,6 +156,11 @@ const CategoryWishProductContainer = ({ isMainCategory, subCategories, mainCateg
     </>
   );
 };
+
+// brand, category, type, storeById, search
+
+let obj = {category: 'groceries', name: 'Groceries', filter: 'order_by__price--order__asc--paginate_no__100--page__1'};
+
 
 export default CategoryWishProductContainer;
 

@@ -24,7 +24,7 @@ const initialState = {
     seller_id: "",
     order: "",
     page: 1,
-    paginate_no: 20,
+    paginate_no: 40,
   },
   paginate: {
     pages: [],
