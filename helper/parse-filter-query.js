@@ -1,5 +1,5 @@
 /**
- * 
+ * key and value separated by '__' and filter item separated by '--' ex: filter=category__groceries--page__2 
  * @param {Object} queries
  * @param {Object} filterItemObj
  * @returns {Object} -> will return updated query object
@@ -49,7 +49,7 @@ function parseFilterString(queries, filterItemObj) {
         } else {
             filterItemArr.splice(FoundFilteredItemIndex, 1, `${item}`);
         }
-    })
+    });
 
     const removeDuplicate      = [...new Set(filterItemArr)];
     
@@ -66,22 +66,20 @@ function parseUri(queries) {
     const cloneQueries = {...queries};
     const isFilterQueryPresent = cloneQueries['filter'] && true;
     const filterStr = isFilterQueryPresent ? cloneQueries?.filter : '';
-  
-    const filterArr = filterStr.split('--') || []; // ['order_by__price', 'order__asc', 'paginate_no__100', 'page__1']
-    console.log('filterArr => ', filterArr)
 
+    const filterArr = filterStr && filterStr.split('--') || []; // ['order_by__price', 'order__asc', 'paginate_no__100', 'page__1']
+    
     filterArr.forEach(filterItem => {
-      const filterKeyAndVal = filterItem.split?.('__') || [];
-      const filterKey = filterKeyAndVal?.[0];
-      const filterVal = filterKeyAndVal?.[1];
-  
-      cloneQueries[filterKey] = filterVal;
+        const filterKeyAndVal = filterItem.split?.('__') || [];
+        const filterKey = filterKeyAndVal?.[0];
+        const filterVal = filterKeyAndVal?.[1];
+        
+        cloneQueries[filterKey] = filterVal;
     });
 
-    console.log('clone queries obj after filter item added => ', cloneQueries)
-  
     const finalUriObj = {
       category: cloneQueries?.['category'] || '',
+      name: cloneQueries?.['name'] || '',
       brand: cloneQueries?.['brand'] || '',
       type: cloneQueries?.['type'] || '',
       rating: cloneQueries?.['rating'] || '',
@@ -104,15 +102,6 @@ function parseUri(queries) {
 
     return {filterParam, finalUriObj};
 }
-
-
-
-
-
-
-
-
-
 
 function countMatched(str) {
     const re = /--/g
