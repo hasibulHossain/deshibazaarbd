@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Carousel } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
+import Link from 'next/link';
 
 const HomeBannerCarousel = ({slider}) => {
 
@@ -15,14 +16,16 @@ const HomeBannerCarousel = ({slider}) => {
 
             return (
               <Carousel.Item style={{background: background}} className="home-banner-carousel pointer" key={index + 1}>
-                <img
-                  className="d-block"
-                  style={{margin: '0 auto'}}
-                  width={1440}
-                  height={!isMobile ? 450 : 944}
-                  src={!isMobile ? item.image_url : item.mobile_image_url}
-                  alt={item.title}
-                />
+                <Link href={item?.button_link || '/'}>
+                  <img
+                    className="d-block"
+                    style={{margin: '0 auto'}}
+                    width={1440}
+                    height={!isMobile ? 450 : 944}
+                    src={!isMobile ? item.image_url : item.mobile_image_url}
+                    alt={item.title}
+                  />
+                </Link>
               </Carousel.Item>
           )
           })}
