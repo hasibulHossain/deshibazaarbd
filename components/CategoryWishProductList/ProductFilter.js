@@ -10,7 +10,7 @@ import {
 import ReactStars from "react-rating-stars-component";
 import { activeCurrency } from "../../services/currency";
 import { useRouter } from 'next/router';
-import { parseFilterString, parseUri } from "../../helper/parse-filter-query";
+import { parseFilterString } from "../../helper/parse-filter-query";
 
 const ProductFilter = () => {
   const router = useRouter();
@@ -37,9 +37,8 @@ const ProductFilter = () => {
     })
 
     const filterParamClone = { ...filterParams };
-    filterParamClone.page = 1;
 
-    if(filterParamClone.type || filterParamClone.search || filterParamClone.seller_id) {
+    if(router.query?.['type'] || router.query?.['search'] || router.query?.['seller_id']) {
       filterParamClone.brand = [];
       filterParamClone.category.push(category.short_code);
 
@@ -49,22 +48,26 @@ const ProductFilter = () => {
 
       dispatch(setFilterParams(filterParamClone));
       dispatch(getCategoryRelatedBrands(category.short_code));
-      return;
     }
+
+    const cloneQueries = {...router.query};
+    delete cloneQueries.brand;
 
     if (e.target.checked) {
       filterParamClone.category[1] = category.short_code;
       router.replace({
         pathname: '/products',
-        query: parseFilterString(router.query, {category: category.short_code})
+        query: parseFilterString(cloneQueries, {category: category.short_code})
       })
     } else {
+      router.replace({
+        pathname: '/products',
+        query: parseFilterString(cloneQueries, {category: cloneQueries?.['category'] || ""})
+      })
       filterParamClone.category.splice(1, 1)
     }
     
-    parseUri(router.query)
-    
-    // dispatch(setFilterParams(filterParamClone));
+    dispatch(setFilterParams(filterParamClone));
   };
 
   // checkbox handler
@@ -76,12 +79,36 @@ const ProductFilter = () => {
 
     if (e.target.checked) {
       filterParamClone.brand.push(brand.slug);
+
+      router.replace({
+        pathname: '/products',
+        query: {
+          ...router.query,
+          brand: router.query.brand ? router.query.brand + ',' + brand.slug : brand.slug
+        }
+      })
     } else {
       const updatedCategory = filterParamClone.brand.filter(
         (item) => item !== brand.slug
-      );
+      ) || [];
+
       filterParamClone.brand = updatedCategory;
+      
+      // const cloneQuery = {...router.query};
+
+      // if(router.query['brand'] === brand.slug) {
+      //   delete cloneQuery.brand
+      // }
+
+      router.replace({
+        pathname: '/products',
+        query: {
+          ...router.query,
+          brand: updatedCategory.join(',')
+        }
+      })
     }
+
     dispatch(setFilterParams(filterParamClone));
   };
 
@@ -100,19 +127,15 @@ const ProductFilter = () => {
 
   const debounceReturn = useCallback(
     debounce((newValue, filterParams) => {
-      const filterParamClone = { ...filterParams };
-      filterParamClone.min_price = newValue.min;
-      filterParamClone.max_price = newValue.max;
-      dispatch(setFilterParams(filterParamClone));
+      router.replace({
+        pathname: '/products',
+        query: parseFilterString(router.query, {max_price: newValue.max, min_price: newValue.min})
+      })
     }, 500),
     []
   );
 
   const priceRangeHandler = (newValue) => {
-    router.replace({
-      pathname: '/products',
-      query: parseFilterString(router.query, {max_price: newValue.max, min_price: newValue.min})
-    })
     debounceReturn(newValue, filterParams);
     setValue(newValue);
   };
@@ -125,17 +148,20 @@ const ProductFilter = () => {
     color: "#ddd",
     activeColor: '#ffd700',
     onChange: (newValue) => {
-      const filterParamClone = { ...filterParams };
-      filterParamClone.rating = newValue;
-      dispatch(setFilterParams(filterParamClone));
+      router.replace({
+        pathname: '/products',
+        query: parseFilterString(router.query, {rating: newValue})
+      })
     },
   };
   
   const resetRatingHandler = () => {
-    const filterParamClone = { ...filterParams };
-    filterParamClone.rating = null;
+    router.replace({
+      pathname: '/products',
+      query: parseFilterString(router.query, {rating: ""})
+    })
 
-    dispatch(setFilterParams(filterParamClone));
+    // dispatch(setFilterParams(filterParamClone));
   }
 
   useEffect(() => {
