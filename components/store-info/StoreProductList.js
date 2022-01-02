@@ -9,7 +9,7 @@ function StoreProductList() {
     const router = useRouter(); 
 
     useEffect(() => {
-        const storeId = router.query.storeById;
+        const storeId = router.query.seller_id;
         dispatch(getProductsBySellerId(storeId));
     }, [])
 
