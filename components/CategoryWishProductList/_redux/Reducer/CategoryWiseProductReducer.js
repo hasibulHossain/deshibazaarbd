@@ -116,7 +116,7 @@ function CategoryWiseProductReducer(state = initialState, { type, payload }) {
           ...state.filterParams,
           type: "",
           search: "",
-          category: state.filterParams.type || state.filterParams.search ? [] : state.filterParams.category,
+          category: [],
           // category: [],
           brand: [],
           min_price: null,
@@ -126,7 +126,7 @@ function CategoryWiseProductReducer(state = initialState, { type, payload }) {
           order_by: "",
           seller_id: "",
           order: "",
-          paginate_no: 20,
+          paginate_no: 40,
         },
         categoryBrandDetails: {
           isLoading: false,

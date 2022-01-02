@@ -101,11 +101,11 @@ export const resetFilterParams = (filterParams) => ({
 });
 
 export const getSubCategories = (parentId) => async dispatch => {
-  dispatch(getCategoryRelatedBrands(parentId));
-
+  
   let url;
   if(parentId) {
     url = 'categories/' + parentId;
+    dispatch(getCategoryRelatedBrands(parentId));
   } else {
     url = 'categories?parent_id=null';
   }
