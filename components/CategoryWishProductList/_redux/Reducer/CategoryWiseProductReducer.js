@@ -43,7 +43,7 @@ const initialState = {
   error: false,
 };
 
-function CategoryWiseProductReducer(state = initialState, { type, payload }) {
+const CategoryWiseProductReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case Types.INIT_PRODUCT_LIST:
       return {
