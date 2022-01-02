@@ -46,14 +46,20 @@ const HeaderMenu = ({ navigationToggleHandler, showToolbar }) => {
    */
 
   const clickMenuLink = (category, toggleBackdrop, isMainCategory = false) => {
-    const categoryType = isMainCategory ? 'main-category' : 'category'
+    let categoryType = "";
+
+    if(isMainCategory && category.short_code === 'groceries') {
+      categoryType =  'main-category';
+    } else {
+      categoryType = 'category';
+    }
 
     if(toggleBackdrop) {
       navigationToggleHandler();
     }
 
     router
-      .push(`/products?${categoryType}=${encodeURIComponent(category.short_code)}&name=${encodeURIComponent(category.name)}`)
+      .push(`/products?${categoryType}=${encodeURIComponent(category.short_code)}&name=${encodeURIComponent(category.name)}&filter=paginate_no__40`)
       .then((_) => window.scrollTo(0, 0)); // added "name" query param only for collect category name from url on product page
   };
 
