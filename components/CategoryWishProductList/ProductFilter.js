@@ -44,10 +44,15 @@ const ProductFilter = () => {
 
       if(!e.target.checked) {
         filterParamClone.category = [];
+        filterParamClone.brand = [];
+        dispatch(getCategoryRelatedBrands(null));
+      }
+
+      if(e.target.checked) {
+        dispatch(getCategoryRelatedBrands(category.short_code));
       }
 
       dispatch(setFilterParams(filterParamClone));
-      dispatch(getCategoryRelatedBrands(category.short_code));
     }
 
     const cloneQueries = {...router.query};
@@ -56,15 +61,14 @@ const ProductFilter = () => {
     if (e.target.checked) {
       filterParamClone.category[1] = category.short_code;
       router.replace({
-        pathname: '/products',
         query: parseFilterString(cloneQueries, {category: category.short_code})
       })
     } else {
       router.replace({
         pathname: '/products',
         query: parseFilterString(cloneQueries, {category: cloneQueries?.['category'] || ""})
-      })
-      filterParamClone.category.splice(1, 1)
+      });
+      filterParamClone.category.splice(1, 1);
     }
     
     dispatch(setFilterParams(filterParamClone));
