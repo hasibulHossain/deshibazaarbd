@@ -36,6 +36,11 @@ const ProductFilter = () => {
       }
     })
 
+    // remove brands check-box after changed category
+    brandCheckboxes.current.forEach(checkbox => {
+      checkbox.checked = false
+    })
+
     const filterParamClone = { ...filterParams };
 
     if(router.query?.['type'] || router.query?.['search'] || router.query?.['seller_id']) {
@@ -45,6 +50,7 @@ const ProductFilter = () => {
       if(!e.target.checked) {
         filterParamClone.category = [];
         filterParamClone.brand = [];
+        
         dispatch(getCategoryRelatedBrands(null));
       }
 
@@ -56,7 +62,9 @@ const ProductFilter = () => {
     }
 
     const cloneQueries = {...router.query};
-    delete cloneQueries.brand;
+    if(cloneQueries?.category) {
+      delete cloneQueries.brand;
+    }
 
     if (e.target.checked) {
       filterParamClone.category[1] = category.short_code;
@@ -65,7 +73,6 @@ const ProductFilter = () => {
       })
     } else {
       router.replace({
-        pathname: '/products',
         query: parseFilterString(cloneQueries, {category: cloneQueries?.['category'] || ""})
       });
       filterParamClone.category.splice(1, 1);
@@ -85,7 +92,6 @@ const ProductFilter = () => {
       filterParamClone.brand.push(brand.slug);
 
       router.replace({
-        pathname: '/products',
         query: {
           ...router.query,
           brand: router.query.brand ? router.query.brand + ',' + brand.slug : brand.slug
@@ -105,7 +111,6 @@ const ProductFilter = () => {
       // }
 
       router.replace({
-        pathname: '/products',
         query: {
           ...router.query,
           brand: updatedCategory.join(',')
@@ -132,7 +137,6 @@ const ProductFilter = () => {
   const debounceReturn = useCallback(
     debounce((newValue, filterParams) => {
       router.replace({
-        pathname: '/products',
         query: parseFilterString(router.query, {max_price: newValue.max, min_price: newValue.min})
       })
     }, 500),
@@ -153,7 +157,6 @@ const ProductFilter = () => {
     activeColor: '#ffd700',
     onChange: (newValue) => {
       router.replace({
-        pathname: '/products',
         query: parseFilterString(router.query, {rating: newValue})
       })
     },
@@ -161,7 +164,6 @@ const ProductFilter = () => {
   
   const resetRatingHandler = () => {
     router.replace({
-      pathname: '/products',
       query: parseFilterString(router.query, {rating: ""})
     })
 
