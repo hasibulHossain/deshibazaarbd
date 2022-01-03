@@ -107,7 +107,7 @@ a {
 }
 
 .color-secondary {
-  color: #212529
+  color: #212529;
 }
 
 .color-main-hover:hover {
@@ -4045,6 +4045,7 @@ p.customer_info_edit {
 
 .err-mss {
   position: absolute;
+  left: 0;
   bottom: 0;
   font-weight: 500;
 }
