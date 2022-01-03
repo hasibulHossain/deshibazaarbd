@@ -100,9 +100,23 @@ const CategoryWishProductContainer = ({ isMainCategory, subCategories, mainCateg
 
 
 
+  const getImgSrc = () => {
+    let src = categoryBrandDetails?.banner_url ?? "";
+
+    if(typeQuery === 'haat-bazaar') {
+      src = '/images/campaign/haatbazaar-banner.jpg';
+    }
+
+    if(typeQuery === 'super-sale') {
+      src = '/images/campaign/super-sale.jpg';
+    }
+
+    return src;
+  }
+
   return (
     <>
-      <Modal 
+      <Modal
         visible={showFilter}
         closeModalHandler={() => setShowFilter(preState => !preState)}
         sideModal={true}
