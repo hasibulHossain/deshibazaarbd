@@ -24,7 +24,7 @@ const CategoryWishProductContainer = ({ isMainCategory, subCategories, mainCateg
   const [filterParams, setFilterParamsFromQuery] = useState(null);
   const dispatch                                 = useDispatch();
   const router                                   = useRouter();
-  const {type: typeQuery = ""}                   = router.query;
+  const {type: typeQuery = "", name = ""}        = router.query;
 
   const { paginate, categoryBrandDetails, isLoading } = useSelector(
     (state) => state.CategoryWiseProductReducer
@@ -121,7 +121,41 @@ const CategoryWishProductContainer = ({ isMainCategory, subCategories, mainCateg
           )
         }
 
-        <div className="row">
+        {
+          isMainCategory && (
+            <div className="pl-1 pl-md-3 mt-3 main-category-title">
+              <span className="font-weight-600">
+                {name}
+              </span>
+            </div>
+          )
+        }
+        <div className={`row ${isMainCategory ? 'mt-4' : ''}`}>
+          {
+            isMainCategory &&
+            subCategories?.map?.((item, index) => {
+              return (
+                <>
+                  <div className="col-lg-3 col-md-4 col-6 py-2 py-md-3 px-3 px-md-3 pb-3 m-0 mb-md-3" key={index}>
+                    <div className="pointer">
+                      <Link href={`/products?category=${encodeURIComponent(item.short_code)}&name=${encodeURIComponent(item.name)}&filter=paginate_no__40`}>
+                        <a>
+                          <div className="text-center">
+                            <ImageWithFallback width={400} height={280} src={item?.image_url} alt={item?.name} />
+                            <span className="d-inline-block pt-2 color-secondary color-main-hover font-15 font-weight-500">
+                              {
+                                item?.name
+                              }
+                            </span>
+                          </div>
+                        </a>
+                      </Link>
+                    </div>
+                  </div>
+                </>
+              )
+            })
+          }
           {
             !isMainCategory &&
             <div className="col-md-12 mb-5 px-0" style={{fontSize: '14px'}}>
@@ -140,29 +174,6 @@ const CategoryWishProductContainer = ({ isMainCategory, subCategories, mainCateg
                 )
               }
             </div>
-          }
-          {
-            isMainCategory &&
-            subCategories?.map?.((item, index) => {
-              return (
-                <div className="col-lg-3 col-md-4 col-6 py-2 py-md-3 px-1 px-md-3" key={index}>
-                  <div className="pointer">
-                    <Link href={`/products?category=${encodeURIComponent(item.short_code)}&name=${encodeURIComponent(item.name)}&filter=paginate_no__40`}>
-                      <a>
-                        <div className="text-center">
-                          <ImageWithFallback width={400} height={280} src={item?.image_url} alt={item?.name} />
-                          <span className="d-inline-block pt-2 color-secondary color-main-hover font-15">
-                            {
-                              item?.name
-                            }
-                          </span>
-                        </div>
-                      </a>
-                    </Link>
-                  </div>
-                </div>
-              )
-            })
           }
         </div>
       </section>
