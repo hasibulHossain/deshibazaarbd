@@ -151,9 +151,9 @@ const ProductDetailInfo = (props) => {
           <Breadcrumb>
             {typeof product.category !== "undefined" &&
               product.category !== null && (
-                <Link href={`/products?category=${encodeURIComponent(product.category.slug)}&name=${encodeURIComponent(product.category.name)}`}>
+                <Link href={`/products?category=${encodeURIComponent(product.category.slug)}&name=${encodeURIComponent(product.category.name)}&filter=paginate_no__40`}>
                   <Breadcrumb.Item
-                    href={`/products?category=${encodeURIComponent(product.category.slug)}&name=${encodeURIComponent(product.category.name)}`}
+                    href={`/products?category=${encodeURIComponent(product.category.slug)}&name=${encodeURIComponent(product.category.name)}&filter=paginate_no__40`}
                   >
                     {product.category.name}
                   </Breadcrumb.Item>
@@ -162,9 +162,9 @@ const ProductDetailInfo = (props) => {
 
             {typeof product.sub_category !== "undefined" &&
               product.sub_category !== null && (
-                <Link href={`/products?category=${encodeURIComponent(product.sub_category.slug)}&name=${encodeURIComponent(product.sub_category.name)}`}>
+                <Link href={`/products?category=${encodeURIComponent(product.sub_category.slug)}&name=${encodeURIComponent(product.sub_category.name)}&filter=paginate_no__40`}>
                   <Breadcrumb.Item
-                    href={`/products?category=${encodeURIComponent(product.sub_category.slug)}&name=${encodeURIComponent(product.sub_category.name)}`}
+                    href={`/products?category=${encodeURIComponent(product.sub_category.slug)}&name=${encodeURIComponent(product.sub_category.name)}&filter=paginate_no__40`}
                   >
                     {product.sub_category.name}
                   </Breadcrumb.Item>
@@ -173,9 +173,9 @@ const ProductDetailInfo = (props) => {
 
             {typeof product.sub_category2 !== "undefined" &&
               product.sub_category2 !== null && (
-                <Link href={`/products?category=${encodeURIComponent(product.sub_category2.slug)}&name=${encodeURIComponent(product.sub_category2.name)}`}>
+                <Link href={`/products?category=${encodeURIComponent(product.sub_category2.slug)}&name=${encodeURIComponent(product.sub_category2.name)}&paginate_no__40`}>
                   <Breadcrumb.Item
-                    href={`/products?category=${encodeURIComponent(product.sub_category2.slug)}&name=${encodeURIComponent(product.sub_category2.name)}`}
+                    href={`/products?category=${encodeURIComponent(product.sub_category2.slug)}&name=${encodeURIComponent(product.sub_category2.name)}&paginate_no__40`}
                   >
                     {product.sub_category2.name}
                   </Breadcrumb.Item>
@@ -218,7 +218,7 @@ const ProductDetailInfo = (props) => {
                           </div>
                           <div className="col-lg-6 px-0">
                             <div className="product_details_information py-2">
-                              <h2 className="product_title pt-3 text-capitalize">{product.name && product.name.toLowerCase()}</h2>
+                              <h2 className="product_title pt-3 text-uppercase">{product.name && product.name.toLowerCase()}</h2>
 
                               <div className="d-flex justify-content-between align-items-end">
                                 <div>
@@ -237,7 +237,7 @@ const ProductDetailInfo = (props) => {
                                     {typeof product.brand != "undefined" &&
                                       product.brand != null && (
                                         <Link
-                                          href={`/products?brand=${encodeURIComponent(product.brand.slug)}&name=${encodeURIComponent(product.brand.name)}`}
+                                          href={`/products?brand=${encodeURIComponent(product.brand.slug)}&name=${encodeURIComponent(product.brand.name)}&filter=paginate_no__40`}
                                           className="LinkToBrandPage pointer"
                                         >
                                           <span>

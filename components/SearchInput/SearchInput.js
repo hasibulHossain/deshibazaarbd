@@ -63,7 +63,14 @@ const SearchInput = () => {
 
       // setSearch(""); @todo 
 
-      router.push(`/products?search=${encodeURIComponent(search)}`).then((_) => {
+      router.push({
+        pathname: '/products',
+        query: {
+          search: encodeURIComponent(search),
+          filter: 'paginate_no__40'
+        }
+      })
+      .then((_) => {
         window.scrollTo(0, 0);
       });
     }
@@ -92,14 +99,14 @@ const SearchInput = () => {
         });
     } else if (searchData.is_category) {
       router
-      .push(`/products?category=${uriEncodedSlug}&name=${encodeURIComponent(searchData.search_name)}`)
+      .push(`/products?category=${uriEncodedSlug}&name=${encodeURIComponent(searchData.search_name)}&filter=paginate_no__40`)
       .then((_) => {
         window.scrollTo(0, 0);
         dispatch(toggleBackdrop());
       });
     } else if (searchData.is_brand) {
       router
-      .push(`/products?brand=${uriEncodedSlug}&name=${encodeURIComponent(searchData.search_name)}`)
+      .push(`/products?brand=${uriEncodedSlug}&name=${encodeURIComponent(searchData.search_name)}&filter=paginate_no__40`)
         .then((_) => {
           window.scrollTo(0, 0);
           dispatch(toggleBackdrop());
@@ -228,7 +235,7 @@ const SearchInput = () => {
                     onClick={() => searchHistoryClickHandler(searchItem.name)}
                   >
                     <div>
-                      <Link href={`/products?search=${searchItem.name}`}>
+                      <Link href={`/products?search=${searchItem.name}&filter=paginate_no__40`}>
                         <a className="d-block py-2 px-3 text-decoration-none" style={{color: '#333'}}>{searchItem.name}</a>
                       </Link>
                     </div>
@@ -280,7 +287,7 @@ const SearchInput = () => {
               onClick={() => searchClick(searchItem)} >
                 <div className="search-suggestion-item__img-box">
                   {/* <img src={searchItem.search_image_url ? searchItem.search_image_url : '/images/default/fallback-image.png'} alt={searchItem.name} /> */}
-                  <Image src={searchItem.search_image_url} alt={searchItem.name} />
+                  <Image src={searchItem.search_image_url} alt={searchItem.name} width={60} height={60} />
                 </div>
 
               <div className="search-suggestion-item__info">

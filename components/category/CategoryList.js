@@ -33,8 +33,16 @@ const CategoryList = ({ parentID = null, homepageCategories }) => {
    * @return void
    */
   const navigateCategoryList = (item) => {
+    let categoryType = "";
+
+    if(item.short_code === 'groceries') {
+      categoryType =  'main-category';
+    } else {
+      categoryType = 'category';
+    }
+
     router
-      .push(`/products?category=${encodeURIComponent(item.short_code)}&name=${encodeURIComponent(item.name)}`)
+      .push(`/products?${categoryType}=${encodeURIComponent(item.short_code)}&name=${encodeURIComponent(item.name)}&filter=paginate_no__40`)
       .then((_) => window.scrollTo(0, 0));
   };
 

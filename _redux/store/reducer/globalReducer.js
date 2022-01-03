@@ -5,6 +5,7 @@ const initialState = {
   backdrop: false,
   isMobile: false,
   isSignedIn  : false,
+  welcomePopup: false
 };
 
 function GlobalReducer(state = initialState, { type, payload }) {
@@ -44,6 +45,12 @@ function GlobalReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         isSignedIn: payload,
+      };
+      
+    case types.SET_WELCOME_POPUP:
+      return {
+        ...state,
+        welcomePopup: payload
       };
 
     default:
