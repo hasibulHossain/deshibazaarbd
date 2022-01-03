@@ -23,35 +23,30 @@ const CategoryWishProductList = ({showFilter, showFilterHandler, filterParams}) 
     switch (e.target.value) {
       case "best_match":
         router.replace({
-          pathname: '/products',
           query: parseFilterString(router.query, {order_by: '', order: ''}) 
         })
         break;
 
       case "price_low_high":
         router.replace({
-          pathname: '/products',
           query: parseFilterString(router.query, {order_by: 'price', order: 'asc'}) 
         })
       break;
 
       case "price_high_low":
         router.replace({
-          pathname: '/products',
           query: parseFilterString(router.query, {order_by: 'price', order: 'desc'})
         })
       break;
 
       case "rating_high":
         router.replace({
-          pathname: '/products',
           query: parseFilterString(router.query, {order_by: 'rating', order: 'desc'})
         })
       break;
 
       case "stock_high":
         router.replace({
-          pathname: '/products',
           query: parseFilterString(router.query, {order_by: 'stock', order: 'desc'})
         })
       break;
@@ -62,21 +57,18 @@ const CategoryWishProductList = ({showFilter, showFilterHandler, filterParams}) 
     switch (e.target.value) {        
       case "40":
         router.replace({
-          pathname: '/products',
           query: parseFilterString(router.query, {paginate_no: '40', page: '1'})
         })
         break;
         
         case "60":
         router.replace({
-          pathname: '/products',
           query: parseFilterString(router.query, {paginate_no: '60', page: '1'})
-        , page: '2'})
+        })
         break;
         
         case "100":
         router.replace({
-          pathname: '/products',
           query: parseFilterString(router.query, {paginate_no: '100', page: '1'})
         })
         break;
