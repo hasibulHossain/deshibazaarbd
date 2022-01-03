@@ -11,6 +11,7 @@ import LazyLoad from "react-lazyload";
 import PageMeta from "../components/layouts/PageMeta";
 import CampaignContainer from "../components/campaign/CampaignContainer";
 import Modal from "../components/master/Modal/Modal";
+import Link from 'next/link';
 
 import content from '../content.json';
 import { setWelcomePopup } from "../_redux/store/action/globalAction";
@@ -21,14 +22,18 @@ export default function Home(props) {
 
   return (
     <>
-      {/* <Modal visible={welcomePopup} closeModalHandler={() => dispatch(setWelcomePopup(false))} style={{margin: '0 20px'}} >
+      <Modal visible={welcomePopup} closeModalHandler={() => dispatch(setWelcomePopup(false))} style={{margin: '0 20px'}} >
         <div className="position-relative">
           <button className="iiz__btn iiz__close iiz__close--visible" onClick={() => dispatch(setWelcomePopup(false))}></button>
-          <div style={{maxWidth: '700px', height: 'auto'}}>
-            <img style={{width: '100%', height: '100%'}} src="/images/welcome-message.jpg" alt="" /> 
+          <div style={{maxWidth: '500px', height: 'auto'}}>
+            <Link href="/products?type=super-sale">
+              <a onClick={() => dispatch(setWelcomePopup(false))}>
+                <img className="pointer" style={{width: '100%', height: '100%'}} src="/images/campaign/super-sale-welcome-popup.jpg" alt="super sale popup" /> 
+              </a>
+            </Link>
           </div>
         </div>
-      </Modal> */}
+      </Modal>
       <PageMeta
         title={content.meta_title}
         description={content.meta_description}
