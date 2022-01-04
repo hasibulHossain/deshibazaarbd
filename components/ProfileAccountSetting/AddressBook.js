@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import DeliveryInfo from '../Delivery/DeliveryInfo';
 import LoadingSpinner from '../master/LoadingSpinner/LoadingSpinner';
 import SimpleModal from '../master/Modal/SimpleModal';
 import SimpleBtn from '../master/SimpleBtn/SimpleBtn';
@@ -90,7 +91,8 @@ function AddressBook({billingAddress, shippingAddress, userInputData, isLoading}
                     show        = {show}
                     handleClose = {toggleShowHandler}
                 >
-                    <AddressUpdate addAddress={true} type="new_address" closeModal={toggleShowHandler} />
+                    {/* <AddressUpdate addAddress={true} type="new_address" closeModal={toggleShowHandler} /> */}
+                    <DeliveryInfo fromAddressBook={true} closeModal={toggleShowHandler} />
                 </SimpleModal>
             </>
         )

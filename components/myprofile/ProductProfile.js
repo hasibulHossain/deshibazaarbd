@@ -8,6 +8,7 @@ import AddressUpdate from "./../ProfileAccountSetting/AddressUpdate";
 import Link from 'next/link';
 import WarningMessage from "../master/warningMessage/WarningMessage";
 import Translate from "../translation/Translate";
+import DeliveryInfo from "../Delivery/DeliveryInfo";
 
 const ProductProfile = () => {
 
@@ -175,7 +176,8 @@ const ProductProfile = () => {
         show={show}
         handleClose={toggleShowHandler}
       >
-        <AddressUpdate addAddress={true} type="new_address" closeModal={toggleShowHandler} />
+        {/* <AddressUpdate addAddress={true} type="new_address" closeModal={toggleShowHandler} /> */}
+        <DeliveryInfo fromAddressBook={true} closeModal={toggleShowHandler} />
       </SimpleModal>
     </>
   );

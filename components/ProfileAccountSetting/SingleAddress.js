@@ -98,7 +98,7 @@ function SingleAddress(props) {
                     </div>
                 </div>
                 <div className="single-address__item">
-                    <div>
+                    <div style={{background: type === 'billing_address' && +is_default === 1 ? '#0c7e33d4' : type === 'shipping_address' && +is_default === 1 ? '#e9000fb3' : '', padding: '5px', borderRadius: '3px', color: 'white'}}>
                         {
                             (type === 'billing_address' && +is_default === 1) ? 'Default Billing Address' : (type === 'billing_address' && +is_default === 0) && 'Billing Address'
                         }
@@ -107,9 +107,9 @@ function SingleAddress(props) {
                         }
                     </div>
                 </div>
-                <div onClick={() => editHandler(id, type)} className="single-address__edit single-address__item" >
+                {/* <div onClick={() => editHandler(id, type)} className="single-address__edit single-address__item" >
                     <div>edit</div>
-                </div>
+                </div> */}
                 <div onClick={() => toggleDeleteModal()} className="single-address__edit single-address__item" >
                     <div>delete</div>
                 </div>
