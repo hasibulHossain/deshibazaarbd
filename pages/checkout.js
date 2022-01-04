@@ -85,7 +85,7 @@ const Checkout = ()=> {
     }
 
 	if(!isLoading && (billingAddress && billingAddress.length === 0) && (shippingAddress && shippingAddress.length === 0)) {
-		deliveryInfo = <DeliveryInfo />
+		deliveryInfo = <DeliveryInfo fromAddressBook={false} />
 	}
 
 	return (

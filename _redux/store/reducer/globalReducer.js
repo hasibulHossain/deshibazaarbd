@@ -8,7 +8,7 @@ const initialState = {
   welcomePopup: false
 };
 
-function GlobalReducer(state = initialState, { type, payload }) {
+const GlobalReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case types.TOGGLE_FLOATING_CART:
       const isModalVisible =

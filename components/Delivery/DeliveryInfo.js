@@ -8,7 +8,7 @@ import CustomSelect from '../master/custom-select/CustomSelect';
 import { handleShippingCost } from '../orders/_redux/action/OrderAction';
 
 
-const DeliveryInfo = () => {
+const DeliveryInfo = ({fromAddressBook, closeModal = null}) => {
     const dispatch                                       = useDispatch();
     const [isLoadingAddress, setIsLoadingAddress]        = useState(false);
     const { userData }                                   = useSelector(state => state.UserDataReducer);
@@ -37,7 +37,7 @@ const DeliveryInfo = () => {
             street1       : "",
             street2       : "",
             location      : "home", // home | office
-            same_address  : true,
+            same_address  : fromAddressBook ? false : true,
             user_id       : userData.id,
             transaction_id: null
         },
@@ -75,12 +75,11 @@ const DeliveryInfo = () => {
                 dispatch(addAddress(cloneVals, 'new_address', () => {}, userData.id));
             }
 
+            closeModal?.();
             // Dispatch to calculate shipping cost again.
             dispatch(handleShippingCost([]));
         }
     })
-
-    console.log('formik => ', formik)
 
     const options = [{ label: 'Shipping address', value: 'shipping_address' }, { label: 'Billing address', value: 'billing_address' }];
 
@@ -217,28 +216,33 @@ const DeliveryInfo = () => {
                             </div>
                         </div>
 
-                        <div className="col-lg-6 align-self-center">
-                            <div className="custome_form_group pb-3 mb-1 position-relative">
-                                <div className="d-flex align-items-center">
-                                    <input
-                                        style={{width: '10%'}}
-                                        id="same_address"
-                                        name="same_address"
-                                        type="checkbox"
-                                        className="custom_form_input"
-                                        onChange={formik.handleChange}
-                                        checked={formik.values.same_address}
-                                    />
-                                    <div>
-                                        <label className="form-label m-0" htmlFor="same_address">
-                                            {
-                                                `${formik.values.type === 'shipping_address' ? 'Bill' : 'Ship'} to the same address`
-                                            }
-                                        </label>
+                        {
+                            !fromAddressBook && (
+                                <div className="col-lg-6 align-self-center">
+                                    <div className="custome_form_group pb-3 mb-1 position-relative">
+                                        <div className="d-flex align-items-center">
+                                            <input
+                                                style={{width: '10%'}}
+                                                id="same_address"
+                                                name="same_address"
+                                                type="checkbox"
+                                                className="custom_form_input"
+                                                onChange={formik.handleChange}
+                                                checked={formik.values.same_address}
+                                            />
+                                            <div>
+                                                <label className="form-label m-0" htmlFor="same_address">
+                                                    {
+                                                        `${formik.values.type === 'shipping_address' ? 'Bill' : 'Ship'} to the same address`
+                                                    }
+                                                </label>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                            )
+                        }
+
 
                         <div className="col-lg-6 ">
                             <div className="custome_form_group pb-3 mb-1 position-relative">
@@ -264,8 +268,7 @@ const DeliveryInfo = () => {
                                 </textarea>
                             </div>
                         </div>
-                        <div className="col-lg-6"></div>
-                        <div className="col-lg-6 text-right">
+                        <div className="col-lg-12 text-right">
                             <button type="submit" disabled={isLoadingAddress ? true : false} className="btn btn-success checkout_address_save_btn">
                                 Save
                                 {
