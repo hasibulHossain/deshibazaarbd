@@ -43,7 +43,14 @@ const DeliveryInfo = () => {
         },
         validationSchema: yup.object().shape({
             name: yup.string().required('Required'),
-            phone_no: yup.string().required('Required'),
+            phone_no:  yup.string().required('Required').test('phone_no', "required ex: 01712345678", (value) => {
+                const phoneRegex = /^[0][1-9]\d{9}$|^[1-9]\d{9}$/;
+
+                let isValidPhone = phoneRegex.test(value);
+
+                if(!isValidPhone) return false
+                return true
+            }),
             type: yup.string().required('Required'),
             division: yup.string().required('Required'),
             city: yup.string().required('Required'),
@@ -73,6 +80,8 @@ const DeliveryInfo = () => {
         }
     })
 
+    console.log('formik => ', formik)
+
     const options = [{ label: 'Shipping address', value: 'shipping_address' }, { label: 'Billing address', value: 'billing_address' }];
 
     return (
@@ -86,37 +95,53 @@ const DeliveryInfo = () => {
                     <div className="row">
 
                         <div className="col-lg-6 ">
-                            <div className="custome_form_group">
+                            <div className="custome_form_group pb-3 mb-1 position-relative">
                                 <label className="form-label required" htmlFor="name">Name</label>
                                 <input
                                     id="name"
                                     name="name"
                                     type="text"
                                     className="custom_form_input"
-                                    placeholder="Name"
+                                    placeholder="ex: John Doe"
                                     onChange={formik.handleChange}
+                                    onBlur={formik.handleBlur}
                                     value={formik.values.name}
                                 />
+                                {
+                                    formik.errors.name && formik.touched.name && (
+                                        <ValidationError>
+                                            {formik.errors.name}
+                                        </ValidationError>
+                                    )
+                                }
                             </div>
                         </div>
 
                         <div className="col-lg-6 ">
-                            <div className="custome_form_group">
+                            <div className="custome_form_group pb-3 mb-1 position-relative">
                                 <label className="form-label required" htmlFor="phone_no">Phone No</label>
                                 <input
                                     id="phone_no"
                                     name="phone_no"
                                     type="text"
                                     className="custom_form_input"
-                                    placeholder="Phone No"
+                                    placeholder="ex: 01712345678"
                                     onChange={formik.handleChange}
+                                    onBlur={formik.handleBlur}
                                     value={formik.values.phone_no}
                                 />
+                                {
+                                    formik.errors.phone_no && formik.touched.phone_no && (
+                                        <ValidationError>
+                                            {formik.errors.phone_no}
+                                        </ValidationError>
+                                    )
+                                }
                             </div>
                         </div>
 
                         <div className="col-lg-6">
-                            <div className="custome_form_group">
+                            <div className="custome_form_group pb-3 mb-1 position-relative">
                                 <label className="form-label" htmlFor="address_type">Address Type</label>
                                 <CustomSelect
                                     id="type"
@@ -129,7 +154,7 @@ const DeliveryInfo = () => {
                         </div>
 
                         <div className="col-lg-6">
-                            <div className="custome_form_group">
+                            <div className="custome_form_group pb-3 mb-1 position-relative">
                                 <label className="form-label required" htmlFor="division">Division</label>
                                 <CustomSelect
                                     id="division"
@@ -146,7 +171,7 @@ const DeliveryInfo = () => {
                         </div>
 
                         <div className="col-lg-6">
-                            <div className="custome_form_group">
+                            <div className="custome_form_group pb-3 mb-1 position-relative">
                                 <label className="form-label required" htmlFor="city">Zilla</label>
                                     <CustomSelect
                                         id="city"
@@ -163,7 +188,7 @@ const DeliveryInfo = () => {
                         </div>
 
                         <div className="col-lg-6">
-                            <div className="custome_form_group">
+                            <div className="custome_form_group pb-3 mb-1 position-relative">
                                 <label className="form-label required" htmlFor="area">Upazilla</label>
                                     <CustomSelect
                                         id="area"
@@ -178,7 +203,7 @@ const DeliveryInfo = () => {
                             </div>
                         </div>
                         <div className="col-lg-6">
-                            <div className="custome_form_group">
+                            <div className="custome_form_group pb-3 mb-1 position-relative">
                                 <label className="form-label required" htmlFor="location">Select a label for effective delivery</label>
                                     <CustomSelect
                                         id="location"
@@ -193,7 +218,7 @@ const DeliveryInfo = () => {
                         </div>
 
                         <div className="col-lg-6 align-self-center">
-                            <div className="custome_form_group">
+                            <div className="custome_form_group pb-3 mb-1 position-relative">
                                 <div className="d-flex align-items-center">
                                     <input
                                         style={{width: '10%'}}
@@ -216,17 +241,26 @@ const DeliveryInfo = () => {
                         </div>
 
                         <div className="col-lg-6 ">
-                            <div className="custome_form_group">
+                            <div className="custome_form_group pb-3 mb-1 position-relative">
                                 <label className="form-label required" htmlFor="street1">Street-1</label>
-                                <textarea style={{resize: 'none'}} name="street1" id="street1" cols="30" rows="2" placeholder="Street-1" className="custom_form_input" onChange={formik.handleChange} value={formik.values.street1}>
+                                <textarea style={{resize: 'none'}} name="street1" id="street1" cols="30" rows="2" placeholder="Street-1" className="custom_form_input" onChange={formik.handleChange}
+                                onBlur={formik.handleBlur} value={formik.values.street1}>
                                 </textarea>
+                                {
+                                    formik.errors.street1 && formik.touched.street1 && (
+                                        <ValidationError>
+                                            {formik.errors.street1}
+                                        </ValidationError>
+                                    )
+                                }
                             </div>
                         </div>
 
                         <div className="col-lg-6 ">
-                            <div className="custome_form_group">
+                            <div className="custome_form_group pb-3 mb-1 position-relative">
                                 <label className="form-label" htmlFor="street2">Street-2</label>
-                                <textarea style={{resize: 'none'}} name="street2" id="street2" cols="30" rows="2" placeholder="Street-2" className="custom_form_input" onChange={formik.handleChange} value={formik.values.street2}>
+                                <textarea style={{resize: 'none'}} name="street2" id="street2" cols="30" rows="2" placeholder="Street-2" className="custom_form_input" onChange={formik.handleChange}
+                                onBlur={formik.handleBlur} value={formik.values.street2}>
                                 </textarea>
                             </div>
                         </div>

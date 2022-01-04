@@ -74,6 +74,10 @@ a {
   font-size: 14px !important;
 }
 
+.font-15 {
+  font-size: 15px !important;
+}
+
 .font-weight-100 {
   font-weight: 100 !important;
 }
@@ -96,6 +100,18 @@ a {
 
 .font-weight-600 {
   font-weight: 600 !important;
+}
+
+.color-main {
+  color: var(--color-primary);
+}
+
+.color-secondary {
+  color: #212529;
+}
+
+.color-main-hover:hover {
+  color: var(--color-primary);
 }
 
 /*****************************************************************
@@ -3983,10 +3999,6 @@ p.customer_info_edit {
   font-weight: 600;
 }
 
-.color-main {
-  color: var(--color-primary);
-}
-
 .website-info-content {
   display: flex;
   flex-direction: column;
@@ -4033,6 +4045,7 @@ p.customer_info_edit {
 
 .err-mss {
   position: absolute;
+  left: 0;
   bottom: 0;
   font-weight: 500;
 }

@@ -94,7 +94,7 @@ const LoginComponent = () => {
           <Form>
             <div className="row">
               <div className="col-12 px-0 px-lg-5">
-                <div className="mb-3">
+                <div className="pb-3 position-relative">
                   <div className="input-box">
                     <label htmlFor="email" className="form-label required">Email / Phone</label>
                     <Field className="form-control" type="text" id="email" name="email" />
@@ -104,7 +104,7 @@ const LoginComponent = () => {
               </div>
 
               <div className="col-12 px-0 px-lg-5">
-                <div className="mb-3">
+                <div className="pb-3 position-relative">
                   <label htmlFor="password" className="form-label required">password</label>
                   <div className="account_input_group">
                       <Field className="form-control" type={showPassword ? 'text' : 'password'} id="password" name="password" />

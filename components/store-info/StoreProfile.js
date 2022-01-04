@@ -16,7 +16,7 @@ function StoreProfile() {
         // SetIsShowing(preState => !preState)
     }
     useEffect(() => {
-        const store = router.query.storeById;
+        const store = router.query.seller_id;
         dispatch(getStoreInfo(store));
     }, [])
 
