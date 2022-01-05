@@ -125,10 +125,15 @@ const SearchInput = () => {
     setSearchType(id);
   }
 
+  // useEffect(() => {
+  //   console.log('pathname  from useeffect => ', pathname);
+  // }, [pathname])
+
   useEffect(() => {
     const getSearchHistory = JSON.parse(localStorage.getItem('search-history')) || [];
 
     if(pathname === '/') {
+      setIsSearched(true)
       searchRef.current.value = "";
       setSearch("")
     }
