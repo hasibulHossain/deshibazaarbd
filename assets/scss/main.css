@@ -4126,3 +4126,13 @@ p.customer_info_edit {
   border-radius: 3px;
   font-size: 13px;
 }
+
+/* zoom in out animation */
+.zoom-in-zoom-out {
+  background: green;
+  animation: zoom-in-zoom-out 300ms infinite alternate;
+}
+
+@keyframes zoom-in-zoom-out {
+  to { transform: scale(1.02); }
+}
