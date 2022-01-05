@@ -26,7 +26,7 @@ export default function Home(props) {
         <div className="position-relative">
           <button className="iiz__btn iiz__close iiz__close--visible" onClick={() => dispatch(setWelcomePopup(false))}></button>
           <div style={{maxWidth: '500px', height: 'auto'}}>
-            <Link href="/products?type=masher-bazaar&name=Masher Bazaar">
+            <Link href="/products?type=masher-bazaar&name=Masher Bazaar&filter=paginate_no__40">
               <a onClick={() => dispatch(setWelcomePopup(false))}>
                 <img className="pointer" style={{width: '100%', height: '100%'}} src="/images/campaign/masher-bazaar-welcome.jpg" alt="super sale popup" /> 
               </a>
