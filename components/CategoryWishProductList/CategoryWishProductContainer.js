@@ -57,6 +57,10 @@ const CategoryWishProductContainer = ({ isMainCategory, subCategories, mainCateg
       src = '/images/campaign/super-sale.jpg';
     }
 
+    if(typeQuery === 'masher-bazaar') {
+      src = '/images/campaign/masher-bazaar-banner.jpg';
+    }
+
     return src;
   }
 
@@ -114,7 +118,7 @@ const CategoryWishProductContainer = ({ isMainCategory, subCategories, mainCateg
 
       <section className="pt-2 pt-md-4">
         {
-          (categoryBrandDetails.banner_url || typeQuery === 'haat-bazaar' || typeQuery === 'super-sale' || isMainCategory) && (
+          (categoryBrandDetails.banner_url || typeQuery === 'masher-bazaar' || typeQuery === 'haat-bazaar' || typeQuery === 'super-sale' || isMainCategory) && (
               <div className="banner mb-md-2 px-1 px-md-3">
                 <div className="banner-photo-box">
                   <Image src={getImgSrc()} width={1260} height={280} />
