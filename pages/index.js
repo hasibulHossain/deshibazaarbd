@@ -26,9 +26,9 @@ export default function Home(props) {
         <div className="position-relative">
           <button className="iiz__btn iiz__close iiz__close--visible" onClick={() => dispatch(setWelcomePopup(false))}></button>
           <div style={{maxWidth: '500px', height: 'auto'}}>
-            <Link href="/products?type=super-sale">
+            <Link href="/products?type=masher-bazaar&name=Masher Bazaar&filter=paginate_no__40">
               <a onClick={() => dispatch(setWelcomePopup(false))}>
-                <img className="pointer" style={{width: '100%', height: '100%'}} src="/images/campaign/super-sale-welcome-popup.jpg" alt="super sale popup" /> 
+                <img className="pointer" style={{width: '100%', height: '100%'}} src="/images/campaign/masher-bazaar-welcome.jpg" alt="super sale popup" /> 
               </a>
             </Link>
           </div>
@@ -50,6 +50,7 @@ export default function Home(props) {
         <DealFlash />
       </LazyLoad>
 
+      <ProductSection title={translate('Most Offer Product')} type="most-offer-product" limit={6} url='most-offer-product' />
       <ProductSection title={translate('Daily Essential')} type="daily-essentials" limit={isMobile ? 6 : 10} url='daily-essentials' isSliding={isMobile ? false : true} />
       <ProductSection title={translate('Fastest Delivery')} type="fastest" limit={6} url='fastest' />
       <ProductSection title={translate('Latest Products')} type="latest" limit={6} url='latest' />

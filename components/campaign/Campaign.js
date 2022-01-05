@@ -18,10 +18,10 @@ function Campaign() {
 
             <div className="col-lg-4 col-md-6 col-12 mb-3 mb-lg-0">
                 <div className="pointer text-center">
-                    <Link href="/products?type=haat-bazaar&name=Haat Bazaar&filter=paginate_no__40">
+                    <Link href="/products?type=masher-bazaar&name=Masher Bazaar&filter=paginate_no__40">
                         <a>
-                            <div>
-                                <img width={400} height={200} className="img-responsive" src="/images/campaign/hatbazaar.jpg" alt="Hatt bazaar"/>
+                            <div className='zoom-in-zoom-out'>
+                                <img width={400} height={200} className="img-responsive" src="/images/campaign/masher-bazaar.jpg" alt="Masher Bazaar"/>
                             </div>
                         </a>
                     </Link>
