@@ -66,10 +66,9 @@ const ProductSingleMini = ({
   let singleProduct = (
     <div
       className={`
-                px-2
                 ${
                   columnClassName === "col-md-2" &&
-                  "col-xl-2 col-lg-3 col-md-4 col-6"
+                  "col-xl-2 col-lg-3 col-md-4 col-6 px-2"
                 } 
                 ${
                   columnClassName === "col-md-3" &&
@@ -78,7 +77,7 @@ const ProductSingleMini = ({
                 ${columnClassName === "col-md-12" && "col-12"}
         `}
     >
-      <div className="" style={{border: '1px solid #ddd', borderRadius: '4px'}}>
+      <div className="">
       {/* // <div className={`${(columnClassName === "col-md-2" || columnClassName === "col-md-3") ? columnClassName + ' col-6 col-sm-6' : "col-12"}`}> */}
       <div
         className={`${cardClassName} ${cardClass} ${
@@ -99,7 +98,7 @@ const ProductSingleMini = ({
                       {/* <img src={imageURL} alt={item.name} className="test" /> */}
                       <Image src={imageURL} alt={item.name} className="test" />
                     </div>
-                    <div className="product-card-body-inner" style={{minHeight: '150px', maxHeight: '150px', display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
+                    <div className="product-card-body-inner" style={{minHeight: '110px', maxHeight: '110px', display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
                     <span className="product-title text-capitalize text-center">
                       <span className="font-14">
                         {item.name && item.name.toLowerCase()}
@@ -144,7 +143,7 @@ const ProductSingleMini = ({
                     <div className="simple-btn__icon">
                       <i className="fas fa-shopping-bag"></i>
                     </div>
-                    <span className="simple-btn__txt">Add to cartss</span>
+                    <span className="simple-btn__txt">Add to cart</span>
                   </div>
                 </button>
               </div>
@@ -164,7 +163,7 @@ const ProductSingleMini = ({
                     <Image src={imageURL} alt={item.name} className="img-fluid" />
                     {/* <Image src={imageURL} alt={item.name} width={220} height={220} /> */}
                   </div>
-                  <div style={{minHeight: '150px', maxHeight: '150px', display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
+                  <div style={{minHeight: '110px', maxHeight: '110px', display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
                     <span className="product-title px-2 text-capitalize text-center">
                       <span className="font-14">
                         {item.name && item.name.toLowerCase()}
@@ -235,7 +234,7 @@ const ProductSingleMini = ({
                 
               </div>
             
-              <div className="product-card-body-inner" style={{minHeight: '150px', maxHeight: '150px', display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
+              <div className="product-card-body-inner" style={{minHeight: '110px', maxHeight: '110px', display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
                 <span className="product-title text-capitalize text-center">
                   <span className="font-14">
                     {item.name && item.name.toLowerCase()}
