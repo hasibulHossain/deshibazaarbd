@@ -117,7 +117,6 @@ const ProductDetailInfo = (props) => {
   };
 
   const addToCart = () => {
-    console.log('product => ', product);
     if (parseInt(product.current_stock) === 0) {
       showToast("error", "This product is out of stock!");
     } else if (typeof filterCarts !== "undefined" && filterCarts !== null) {
