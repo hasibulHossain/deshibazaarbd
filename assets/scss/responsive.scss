@@ -407,7 +407,7 @@
     margin-bottom: 10px;
   }
 
-  .product_details_section .inactive-price .discount-percent{
+  .product_details_section .inactive-price .discount-percent {
     position: unset;
   }
 
@@ -438,7 +438,12 @@
   .modal__modal-box.side-modal {
     width: 60%;
   }
-  
+
+  .productList-body,
+  .category-list {
+    padding: 20px 0;
+    margin-top: 10px;
+  }
 }
 
 @media (max-width: 1024px) {

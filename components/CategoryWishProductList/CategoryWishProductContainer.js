@@ -37,7 +37,6 @@ const CategoryWishProductContainer = ({ isMainCategory, subCategories, mainCateg
     window.scrollTo({ top: 0, behavior: "smooth" });
 
     router.replace({
-      pathname: '/products',
       query: parseFilterString(router.query, {page: page.selected + 1})
     })
   };
@@ -136,7 +135,7 @@ const CategoryWishProductContainer = ({ isMainCategory, subCategories, mainCateg
             </div>
           )
         }
-        <div className={`row ${isMainCategory ? 'mt-4' : ''}`}>
+        <div className={`row ${isMainCategory ? 'my-4' : ''}`}>
           {
             isMainCategory &&
             subCategories?.map?.((item, index) => {

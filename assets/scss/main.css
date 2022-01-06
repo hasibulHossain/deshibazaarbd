@@ -772,7 +772,7 @@ a .custom-button-component:hover {
 }
 
 .product-card .product-card-body .product-title {
-  margin-top: 10px;
+  /* margin-top: 10px;
   margin-bottom: 5px;
   font-size: 16px;
   font-weight: 500;
@@ -780,7 +780,12 @@ a .custom-button-component:hover {
   width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: nowrap; */
+
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
 }
 
 .product-card .product-card-body .rating {
@@ -2044,9 +2049,8 @@ ul.social-media {
 }
 
 .filter_column_3 .product-card-body .product-title {
-  font-weight: 500;
-  font-size: 16px;
-  overflow: hidden;
+  font-weight: 400;
+  /* overflow: hidden; */
   /* height: 45px; */
 }
 
@@ -4134,5 +4138,7 @@ p.customer_info_edit {
 }
 
 @keyframes zoom-in-zoom-out {
-  to { transform: scale(1.02); }
+  to {
+    transform: scale(1.02);
+  }
 }

@@ -117,7 +117,6 @@ const ProductDetailInfo = (props) => {
   };
 
   const addToCart = () => {
-    console.log('product => ', product);
     if (parseInt(product.current_stock) === 0) {
       showToast("error", "This product is out of stock!");
     } else if (typeof filterCarts !== "undefined" && filterCarts !== null) {
@@ -314,7 +313,7 @@ const ProductDetailInfo = (props) => {
                                 </div>
                               </div>
                               <div className="mt-4">
-                              <span className="product-unit">{product.per_unit_value} {' '} {product.unit && product.unit.actual_name && product.unit.actual_name}</span>
+                              <span className="product-unit font-weight-500">{product.per_unit_value} {' '} {product.unit && product.unit.actual_name && product.unit.actual_name}</span>
                                 <PriceCalculation item={product} />
                               </div>
                               <hr />
