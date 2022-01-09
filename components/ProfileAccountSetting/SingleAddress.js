@@ -2,25 +2,16 @@ import React, { useState } from 'react'
 import SimpleModal from '../master/Modal/SimpleModal';
 import Modal from '../master/Modal/Modal';
 import { useDispatch, useSelector } from 'react-redux';
-import AddressUpdate from './AddressUpdate';
-import { getSingleAddress, deleteAddress } from './_redux/Action/ProfileAccountSettingAction';
+import { deleteAddress, addAddress } from './_redux/Action/ProfileAccountSettingAction';
 import { handleShippingCost } from '../orders/_redux/action/OrderAction';
+import DeliveryInfo from '../Delivery/DeliveryInfo';
 
 function SingleAddress(props) {
     const dispatch = useDispatch();
-    const { id, type, name, phone_no, location, userName, city, area, street1, street2, is_default } = props;
+    const { id } = props;
     const {userData} = useSelector(state => state.UserDataReducer)
     const [show, setShow] = useState(false);
     const [deleteShow, setDeleteShow] = useState(false);
-
-    let street = "";
-    if(street1) {
-        street += street1
-    }
-
-    if(street2) {
-        street += ', ' + street2
-    }
 
     const toggleShowHandler = () => {
         setShow(preState => !preState);
@@ -30,35 +21,24 @@ function SingleAddress(props) {
         setDeleteShow(preState => !preState);
     }
 
-    const editHandler = (id, type) => {
-        dispatch(getSingleAddress(id, type));
-        setShow(preState => !preState);
-    }
-
     const handleDeleteAddress = () => {
         dispatch(deleteAddress(id, toggleDeleteModal, userData.id));
         setDeleteShow(preState => !preState);
 
-        // Dispatch to calculate shipping cost again.
         dispatch(handleShippingCost([]));
     }
 
-    const isDefaultAddress = (type, isDefault) => {
-        if(type === 'billing_address' && isDefault === 1) {
-            return 'Default Billing Address'
+    const defaultAddressHandler = () => {
+        const addressData = {
+            name: props.name,
+            phone_no: props.phone_no,
+            area: props.area,
+            area_id: props.area_id,
+            is_default: 1,
+            street1: props.street1
         }
 
-        if(type === 'billing_address' && isDefault === 0) {
-            return 'Billing Address'
-        }
-
-        if(type === 'shipping_address' && isDefault === 1) {
-            return 'Default Shipping Address'
-        }
-
-        if(type === 'shipping_address' && isDefault === 0) {
-            return 'Shipping Address'
-        }
+        dispatch(addAddress(addressData, 'update_address' , () => {}, userData.id, false, props?.id));
     }
 
     return (
@@ -80,65 +60,48 @@ function SingleAddress(props) {
                 </div>
             </Modal>
 
-            <li className="single-address" >
-                <div className="single-address__item">
+            <div className="single-address shadow-sm p-2 pointer d-flex align-items-center mb-3">
+                <div style={{flexBasis: '80%'}} onClick={defaultAddressHandler} >
+                <div className='d-flex'>
+                    {
+                        props?.is_default == 1 && (
+                            <span className='mr-2' style={{color: 'var(--color-green-light)'}}>
+                                <i style={{fontSize: '1rem'}} className="far fa-check-circle"></i>
+                            </span>
+                        )
+                    }
+
                     <div>
-                        {name ? name : "N/A"}
+                        <div className='font-15'>
+                            {
+                                props?.area + ', ' + (props?.city || '')
+                            }
+                        </div>
+                        <div className='font-14'>
+                            {
+                                props?.phone_no
+                            }
+                        </div>
                     </div>
                 </div>
-                <div className="single-address__item">
-                    <div>{street}</div>
+
                 </div>
-                <div className="single-address__item">
-                    <div>{`${city} - ${area}`}</div>
+                <div style={{flexBasis: '20%'}} className='text-right'>
+                    <span className='pr-2 font-12 font-weight-500' onClick={toggleShowHandler}>edit</span>
+                    <span className='color-main font-12 font-weight-500' onClick={toggleDeleteModal}>delete</span>
                 </div>
-                <div className="single-address__item">
-                    <div>
-                        {phone_no ? phone_no : "N/A"}
-                    </div>
-                </div>
-                <div className="single-address__item">
-                    <div style={{background: type === 'billing_address' && +is_default === 1 ? '#0c7e33d4' : type === 'shipping_address' && +is_default === 1 ? '#e9000fb3' : '', padding: '5px', borderRadius: '3px', color: 'white'}}>
-                        {
-                            (type === 'billing_address' && +is_default === 1) ? 'Default Billing Address' : (type === 'billing_address' && +is_default === 0) && 'Billing Address'
-                        }
-                        {
-                            (type === 'shipping_address' && +is_default === 1) ? 'Default Shipping Address' : (type === 'shipping_address' && +is_default === 0) && 'Shipping Address'
-                        }
-                    </div>
-                </div>
-                {/* <div onClick={() => editHandler(id, type)} className="single-address__edit single-address__item" >
-                    <div>edit</div>
-                </div> */}
-                <div onClick={() => toggleDeleteModal()} className="single-address__edit single-address__item" >
-                    <div>delete</div>
-                </div>
-            </li>
+            </div>
+
             <SimpleModal
                 size="xl"
                 show={show}
                 handleClose={toggleShowHandler}
             >
-                <AddressUpdate type={type} closeModal={toggleShowHandler} />
+                <DeliveryInfo closeModal={toggleShowHandler} address={props} isUpdate={true} />
             </SimpleModal>
-{/* 
-            <SimpleModal
-                size="md"
-                show={deleteShow}
-                handleClose={toggleDeleteModal}
-            >
-                <SimpleConfirmComponent
-                    text="Are you sure to delete your address?"
-                    isLoading={isLoading}
-                    confirmClick={handleDeleteAddress}
-                    closeModal={toggleDeleteModal}
-                    confirmBtnVariant="simple_btn_bg"
-                    closeBtnVariant="secondary"
-                />
-            </SimpleModal> */}
         </>
     );
 
 }
 
-export default SingleAddress
+export default SingleAddress;
