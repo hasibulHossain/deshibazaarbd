@@ -39,6 +39,12 @@ const CategoryWishProductList = ({showFilter, showFilterHandler, filterParams}) 
         })
       break;
 
+      case "offer":
+        router.replace({
+          query: parseFilterString(router.query, {order_by: 'offer', order: 'desc'})
+        })
+      break;
+
       case "rating_high":
         router.replace({
           query: parseFilterString(router.query, {order_by: 'rating', order: 'desc'})
@@ -147,6 +153,7 @@ const CategoryWishProductList = ({showFilter, showFilterHandler, filterParams}) 
                         <option value="best_match">Best Match</option>
                         <option value="price_low_high">Price Low to High</option>
                         <option value="price_high_low">Price High to Low</option>
+                        <option value="offer">Offer</option>
                         <option value="rating_high">Rating</option>
                         <option value="stock_high">Stock</option>
                       </Form.Control>
