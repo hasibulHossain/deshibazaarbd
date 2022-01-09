@@ -8,7 +8,6 @@ import CustomSelect from '../master/custom-select/CustomSelect';
 import { handleShippingCost } from '../orders/_redux/action/OrderAction';
 
 const DeliveryInfo = ({closeModal = null, address, isUpdate = false}) => {
-    console.log('address => ', address, isUpdate)
     const dispatch                                       = useDispatch();
     const [isLoadingAddress, setIsLoadingAddress]        = useState(false);
     const { userData }                                   = useSelector(state => state.UserDataReducer);
@@ -46,7 +45,6 @@ const DeliveryInfo = ({closeModal = null, address, isUpdate = false}) => {
         }),
         onSubmit: values => {
             setIsLoadingAddress(true);
-            console.log('running from deliver info', values);
 
             dispatch(addAddress(values, isUpdate ?  'update_address' : 'new_address' , () => {}, userData.id, false, address?.id));
             
