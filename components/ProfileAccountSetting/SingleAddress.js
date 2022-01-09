@@ -62,10 +62,10 @@ function SingleAddress(props) {
 
             <div className="single-address shadow-sm p-2 pointer d-flex align-items-center mb-3">
                 <div style={{flexBasis: '80%'}} onClick={defaultAddressHandler} >
-                <div className='d-flex'>
+                <div className='pl-3 position-relative'>
                     {
                         props?.is_default == 1 && (
-                            <span className='mr-2' style={{color: 'var(--color-green-light)'}}>
+                            <span className='d-inline-block position-absolute' style={{color: 'var(--color-green-light)', left: '0'}}>
                                 <i style={{fontSize: '1rem'}} className="far fa-check-circle"></i>
                             </span>
                         )
