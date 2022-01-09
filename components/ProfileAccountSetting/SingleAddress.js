@@ -36,9 +36,11 @@ function SingleAddress(props) {
             area_id: props.area_id,
             is_default: 1,
             street1: props.street1
-        }
+        };
 
-        dispatch(addAddress(addressData, 'update_address' , () => {}, userData.id, false, props?.id));
+        if(props.is_default != 1) {
+            dispatch(addAddress(addressData, 'update_address' , () => {}, userData.id, false, props?.id));
+        }
     }
 
     return (
@@ -62,7 +64,7 @@ function SingleAddress(props) {
 
             <div className="single-address shadow-sm p-2 pointer d-flex align-items-center mb-3">
                 <div style={{flexBasis: '80%'}} onClick={defaultAddressHandler} >
-                <div className='pl-3 position-relative'>
+                <div className='pl-4 position-relative'>
                     {
                         props?.is_default == 1 && (
                             <span className='d-inline-block position-absolute' style={{color: 'var(--color-green-light)', left: '0'}}>
