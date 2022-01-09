@@ -22,7 +22,8 @@ export default function Home(props) {
 
   return (
     <>
-      <Modal visible={welcomePopup} closeModalHandler={() => dispatch(setWelcomePopup(false))} style={{margin: '0 20px'}} >
+      {/* visible={welcomePopup} */}
+      <Modal visible={false} closeModalHandler={() => dispatch(setWelcomePopup(false))} style={{margin: '0 20px'}} >
         <div className="position-relative">
           <button className="iiz__btn iiz__close iiz__close--visible" onClick={() => dispatch(setWelcomePopup(false))}></button>
           <div style={{maxWidth: '500px', height: 'auto'}}>

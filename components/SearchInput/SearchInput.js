@@ -50,14 +50,10 @@ const SearchInput = () => {
     if(key === "Enter") {
       setIsSearched(true)
       setIsSearchInputTouch(true)
-      const searchHistories = JSON.parse(localStorage.getItem('search-history'))|| [];
-      const currentSearch = {id: new Date().getTime(), name: search}
 
-      searchHistories.push(currentSearch);
+      const searchHistories = updateSearchHistory(search, null)
 
       setSearchHistory(searchHistories);
-      
-      localStorage.setItem('search-history', JSON.stringify(searchHistories))
 
       // searchRef.current.value = ""
 
@@ -90,6 +86,9 @@ const SearchInput = () => {
     const uriEncodedSlug = encodeURIComponent(searchData.slug);
 
     if (searchData.is_item) {
+      const searchHistories = updateSearchHistory(searchData.search_name, searchData.slug, true)
+      setSearchHistory(searchHistories);
+
       const uri = `/products/${uriEncodedSlug}`;
       router
         .push(uri)
@@ -240,7 +239,13 @@ const SearchInput = () => {
                     onClick={() => searchHistoryClickHandler(searchItem.name)}
                   >
                     <div>
-                      <Link href={`/products?search=${searchItem.name}&filter=paginate_no__40`}>
+                      <Link href={{
+                        pathname: searchItem?.isItem ? `/products/${searchItem?.slug}` : '/products',
+                        query: {
+                          search: !searchItem?.isItem ? searchItem?.name : '',
+                          filter: !searchItem?.isItem ? 'paginate_no__40' : ''
+                        }
+                      }}>
                         <a className="d-block py-2 px-3 text-decoration-none" style={{color: '#333'}}>{searchItem.name}</a>
                       </Link>
                     </div>
@@ -310,5 +315,15 @@ const SearchInput = () => {
     </>
   );
 };
+
+const updateSearchHistory = (search, slug = null, isItem = false) => {
+  const searchHistories = JSON.parse(localStorage.getItem('search-history'))|| [];
+  const currentSearch = {id: new Date().getTime(), name: search, slug: slug, isItem: isItem}
+
+  searchHistories.unshift(currentSearch);
+  localStorage.setItem('search-history', JSON.stringify(searchHistories))
+
+  return searchHistories;
+}
 
 export default SearchInput;
