@@ -201,7 +201,7 @@ const SearchInput = () => {
     <>
       <input
         ref={el => searchRef.current = el}
-        className="search-input"
+        className="search-input font-14"
         placeholder={translate("Search Products, Brands and Shop")}
         onFocus={inputFocusHandler}
         // onBlur={() => setTimeout(() => {
@@ -212,7 +212,7 @@ const SearchInput = () => {
         onKeyDown={e => onKeyDownHandler(e.key)}
       />
 
-      <div style={{position: 'absolute', zIndex: '100', right: 'calc(63px + 15px)', top: '16px', fontSize: '12px'}}>
+      <div style={{position: 'absolute', zIndex: '100', right: 'calc(63px + 15px)', top: '17px', fontSize: '12px'}}>
         <span className="color-main pointer" onClick={toggleInputAction} style={{fontWeight: '500'}} >
           {
             (isSuggestionVisible && !search) ? 'close' : (search) && 'remove'
@@ -246,7 +246,11 @@ const SearchInput = () => {
                           filter: !searchItem?.isItem ? 'paginate_no__40' : ''
                         }
                       }}>
-                        <a className="d-block py-2 px-3 text-decoration-none" style={{color: '#333'}}>{searchItem.name}</a>
+                        <a className="d-block py-2 px-3 text-decoration-none" style={{color: '#333'}}>
+                          <span className="text-ellipsis">
+                            {searchItem.name}
+                          </span>
+                        </a>
                       </Link>
                     </div>
                   </div>
