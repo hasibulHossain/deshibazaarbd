@@ -38,7 +38,9 @@ const ProductFilter = () => {
 
     // remove brands check-box after changed category
     brandCheckboxes.current.forEach(checkbox => {
-      checkbox.checked = false
+      if(checkbox?.checked !== undefined) {
+        checkbox.checked = false;
+      }
     })
 
     const filterParamClone = { ...filterParams };
