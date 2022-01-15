@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ProfileSideBar from "./ProfileSideBar";
 import { getDefaultAddress } from "../ProfileAccountSetting/_redux/Action/ProfileAccountSettingAction";
 import LoadingSpinner from './../master/LoadingSpinner/LoadingSpinner'
-import SimpleModal from '../master/Modal/SimpleModal';
+import SimpleModal from '../master/modal/SimpleModal';
 import Link from 'next/link';
 import WarningMessage from "../master/warningMessage/WarningMessage";
 import Translate from "../translation/Translate";
@@ -72,7 +72,6 @@ const ProductProfile = () => {
                       </span>
                     </p>
                   </div>
-                 
                 </div>
                 <div className="col-lg-5 card m-1 p-3 default_height">
                   <div className="card-title">
@@ -127,7 +126,6 @@ const ProductProfile = () => {
                     </div>
 
                   </div>
-                  
                 </div>
               </div>
             </div>

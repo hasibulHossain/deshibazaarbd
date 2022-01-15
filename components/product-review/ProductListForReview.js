@@ -6,7 +6,7 @@ import ProductReviewCreate from './ProductReviewCreate';
 import PriceCalculation from '../products/partials/PriceCalculation';
 import SimpleBtn from '../master/SimpleBtn/SimpleBtn';
 import AddWishList from '../Wishlist/AddWishList';
-import SimpleModal from '../master/Modal/SimpleModal';
+import SimpleModal from '../master/modal/SimpleModal';
 import WarningMessage from '../master/warningMessage/WarningMessage';
 import Link from 'next/link';
 

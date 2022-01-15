@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import LoadingSpinner from '../master/LoadingSpinner/LoadingSpinner';
 
-import SimpleModal from "../master/Modal/SimpleModal";
+import SimpleModal from "../master/modal/SimpleModal";
 import ProductSingleFull from "./ProductSingleFull";
 import { getSingleProductDetailsAction, toggleProductModalAction } from './_redux/Action/ProductAction';
 
@@ -17,7 +17,8 @@ const ProductModal = () => {
 
     return (
         <SimpleModal
-            size="xl" show={isModalOpen}
+            size="xl"
+            show={isModalOpen}
             handleClose={() => dispatch(toggleProductModalAction(''))}
         >
             {
