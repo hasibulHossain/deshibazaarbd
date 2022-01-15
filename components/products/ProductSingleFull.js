@@ -10,8 +10,8 @@ import {
 import { showToast } from "../master/Helper/ToastHelper";
 import router from "next/router";
 import { toggleProductModalAction } from "./_redux/Action/ProductAction";
-import LoadingSpinner from "../master/LoadingSpinner/LoadingSpinner";
-import { activeCurrency, formatCurrency } from "../../services/currency";
+import LoadingSpinner from "../master/loading/LoadingSpinner";
+import { formatCurrency } from "../../services/currency";
 import SimpleBtn from "../master/SimpleBtn/SimpleBtn";
 import Translate from "../translation/Translate";
 

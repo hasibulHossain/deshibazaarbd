@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ProfileSideBar from "./ProfileSideBar";
 import { getDefaultAddress } from "../ProfileAccountSetting/_redux/Action/ProfileAccountSettingAction";
-import LoadingSpinner from './../master/LoadingSpinner/LoadingSpinner'
+import LoadingSpinner from '../master/loading/LoadingSpinner';
 import SimpleModal from '../master/modal/SimpleModal';
 import Link from 'next/link';
 import WarningMessage from "../master/warningMessage/WarningMessage";

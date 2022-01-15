@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import LoadingSpinner from '../master/LoadingSpinner/LoadingSpinner';
+import LoadingSpinner from '../master/loading/LoadingSpinner';
 
 import SimpleModal from "../master/modal/SimpleModal";
 import ProductSingleFull from "./ProductSingleFull";

@@ -2,12 +2,11 @@ import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserData, handleChangeUserInput, handleUpdateUserData } from '../ProfileAccountSetting/_redux/Action/ProfileAccountSettingAction';
-import ErrorMessage from '../master/ErrorMessage/ErrorMessage'
-import LoadingSpinner from '../master/LoadingSpinner/LoadingSpinner';
+import ErrorMessage from '../master/ErrorMessage/ErrorMessage';
 
 const PersonalInformationUpdate = () => {
     const dispatch = useDispatch();
-    const { userInputData, userDetails, isSubmitting } = useSelector((state) => state.ProfileAccountSettingReducer);
+    const { userInputData, isSubmitting } = useSelector((state) => state.ProfileAccountSettingReducer);
     const { userData } = useSelector(state => state.UserDataReducer)
     const { register, handleSubmit, errors } = useForm();
 
@@ -22,6 +21,7 @@ const PersonalInformationUpdate = () => {
     const handleUpdatedProfile = () => {
         dispatch(handleUpdateUserData(userInputData, userData))
     }
+
     return (
         <div className="">
             <h6>Personal Information</h6> <hr />

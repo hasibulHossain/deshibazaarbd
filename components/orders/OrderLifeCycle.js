@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
-import LoadingSpinner from '../master/LoadingSpinner/LoadingSpinner';
+import LoadingSpinner from '../master/loading/LoadingSpinner';
 import WarningMessage from '../master/warningMessage/WarningMessage';
 import { getOrderLifeCycleData } from './_redux/action/OrderAction';
 import dayjs from "dayjs";

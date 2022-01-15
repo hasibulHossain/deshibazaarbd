@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import DeliveryInfo from '../Delivery/DeliveryInfo';
-import LoadingSpinner from '../master/LoadingSpinner/LoadingSpinner';
+import LoadingSpinner from '../master/loading/LoadingSpinner';
 import SimpleModal from '../master/modal/SimpleModal';
 import SimpleBtn from '../master/SimpleBtn/SimpleBtn';
 import Translate from '../translation/Translate';

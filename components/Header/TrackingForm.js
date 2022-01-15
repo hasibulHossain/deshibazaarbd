@@ -7,7 +7,7 @@ import { getUserOrderList } from "../orders/_redux/action/OrderAction";
 import dayjs from "dayjs";
 import Link from "next/link";
 import { activeCurrency, formatCurrency } from "../../services/currency";
-import LoadingSpinner from "../master/LoadingSpinner/LoadingSpinner";
+import LoadingSpinner from "../master/loading/LoadingSpinner";
 import WarningMessage from "../master/warningMessage/WarningMessage";
 
 const TrackingForm = ({ show, setShow }) => {
