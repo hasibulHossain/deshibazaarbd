@@ -3,7 +3,7 @@ import { Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import ReactStars from "react-rating-stars-component";
 import { useDispatch, useSelector } from 'react-redux';
-import ErrorMessage from '../master/ErrorMessage/ErrorMessage';
+import ErrorMessage from '../master/message/ErrorMessage';
 import SimpleBtn from '../master/SimpleBtn/SimpleBtn';
 import PriceCalculation from '../products/partials/PriceCalculation';
 import { handleChangeReviewItemInput, storeReviewData } from './_redux/action/reviewAction';
@@ -69,7 +69,7 @@ const ProductReviewCreate = ({ ReviewItem, handleClose }) => {
                                     ref={register({ required: true })}
                                 />
                                 {errors.comment &&
-                                    <ErrorMessage errorText="Your Comments can't be blank! " />
+                                    <ErrorMessage message="Your Comments can't be blank! " />
                                 }
                                 <br />
 

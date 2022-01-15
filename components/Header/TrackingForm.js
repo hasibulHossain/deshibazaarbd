@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import ErrorMessage from "../master/ErrorMessage/ErrorMessage";
+import ErrorMessage from "../master/message/ErrorMessage";
 import { getUserOrderList } from "../orders/_redux/action/OrderAction";
 import dayjs from "dayjs";
 import Link from "next/link";
@@ -80,7 +80,7 @@ const TrackingForm = ({ show, setShow }) => {
         />
 
         {errors.orderID && (
-          <ErrorMessage errorText="Please Enter Your Order ID No" />
+          <ErrorMessage message="Please Enter Your Order ID No" />
         )}
         <button
           className="custom-button-component float-right mt-2"

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserData, handleChangeUserProfileInputData, handleUpdateUserData } from './_redux/Action/ProfileAccountSettingAction';
-import ErrorMessage from './../master/ErrorMessage/ErrorMessage'
+import ErrorMessage from './../master/message/ErrorMessage'
 import Translate from '../translation/Translate';
 import { Spinner } from 'react-bootstrap';
 
@@ -56,7 +56,7 @@ const PersonalInfoForm = () => {
                             />
                             {
                                 errors.first_name && errors.first_name.type === 'required' && (
-                                    <ErrorMessage errorText="Please give your first name !" />
+                                    <ErrorMessage message="Please give your first name !" />
                                 )
                             }
                         </div>
@@ -93,7 +93,7 @@ const PersonalInfoForm = () => {
                             />
                             {
                                 errors.email && errors.email.type === 'required' && (
-                                    <ErrorMessage errorText="Please give a valid email address !" />
+                                    <ErrorMessage message="Please give a valid email address !" />
                                 )
                             }
                         </div>
@@ -114,7 +114,7 @@ const PersonalInfoForm = () => {
                             />
                             {
                                 errors.phone_no && errors.phone_no.type === 'required' && (
-                                    <ErrorMessage errorText="Please give your phone number !" />
+                                    <ErrorMessage message="Please give your phone number !" />
                                 )
                             }
                         </div>

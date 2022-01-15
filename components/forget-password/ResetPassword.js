@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
-import ErrorMessage from "../master/ErrorMessage/ErrorMessage";
+import ErrorMessage from "../master/message/ErrorMessage";
 import SimpleBtn from "../master/SimpleBtn/SimpleBtn";
 import { resetPassword } from "./_redux/action/forget-password-action";
 
@@ -55,7 +55,7 @@ export default function App() {
                       />
 
                       {errors.password && (
-                        <ErrorMessage errorText={errors.password.message} />
+                        <ErrorMessage message={errors.password.message} />
                       )}
                     </div>
                   </div>
