@@ -106,6 +106,7 @@ const ProductDetailInfo = (props) => {
   const updateQuantity = (quantity) => {
     if(!quantity || quantity == 0) {
       setQuantity(1);
+      setSubTotal(1 * default_price);
       return;
     }
 
