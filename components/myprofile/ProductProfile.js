@@ -12,10 +12,10 @@ import DeliveryInfo from "../Delivery/DeliveryInfo";
 const ProductProfile = () => {
 
   const dispatch = useDispatch()
-  const { userData, access_token } = useSelector((state) => state.UserDataReducer);
-  const isLoading = useSelector((state) => state.ProfileAccountSettingReducer.isLoading);
-  const defaultShippingAddress = useSelector((state) => state.ProfileAccountSettingReducer.defaultShippingAddress);
-  const defaultBillingAddress = useSelector((state) => state.ProfileAccountSettingReducer.defaultBillingAddress);
+  const { userData, access_token } = useSelector((state) => state.user);
+  const isLoading = useSelector((state) => state.userProfile.isLoading);
+  const defaultShippingAddress = useSelector((state) => state.userProfile.defaultShippingAddress);
+  const defaultBillingAddress = useSelector((state) => state.userProfile.defaultBillingAddress);
   const [show, setShow] = useState(false);
 
   useEffect(() => {

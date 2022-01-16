@@ -9,7 +9,7 @@ import { getSingleProductDetailsAction, toggleProductModalAction } from './_redu
 const ProductModal = () => {
 
     const dispatch = useDispatch();
-    const { isModalOpen, product, productSlug } = useSelector(state => state.ProductReducer);
+    const { isModalOpen, product, productSlug } = useSelector(state => state.product);
 
     useEffect(() => {
         dispatch(getSingleProductDetailsAction(productSlug));

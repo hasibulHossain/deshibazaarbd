@@ -10,8 +10,8 @@ import { handleShippingCost } from '../orders/_redux/action/OrderAction';
 
 const AddressUpdate = (props) => {
     const dispatch = useDispatch();
-    const { countryList, divisionList, cityList, areaList, isSubmitting, selectedAddress } = useSelector((state) => state.ProfileAccountSettingReducer);
-    const {userData} = useSelector(state => state.UserDataReducer);
+    const { countryList, divisionList, cityList, areaList, isSubmitting, selectedAddress } = useSelector((state) => state.userProfile);
+    const {userData} = useSelector(state => state.user);
     const { register, errors, setValue } = useForm();
 
     //handle change input

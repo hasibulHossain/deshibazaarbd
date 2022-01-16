@@ -24,9 +24,9 @@ const Header = () => {
   const [showToolbar, setShowToolbar] = useState(false);
   const [overlayVisible, setOverlayVisible] = useState(false);
   const dispatch = useDispatch();
-  const { totalQuantity } = useSelector((state) => state.CartReducer);
+  const { totalQuantity } = useSelector((state) => state.cart);
   const { isSignedIn, isMobile, backdrop } = useSelector((state) => state.global);
-  const { userData } = useSelector((state) => state.UserDataReducer);
+  const { userData } = useSelector((state) => state.user);
   const router = useRouter();
 
   const toggleCartHandler = () => {

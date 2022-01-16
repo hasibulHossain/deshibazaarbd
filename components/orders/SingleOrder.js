@@ -11,8 +11,8 @@ const SingleOrder = ({ item, isManageable = true }) => {
     const dispatch = useDispatch();
     const [show, setShow] = useState(false);
     const [orderItem, setOrderItem] = useState(null);
-    const userData = useSelector((state) => state.UserDataReducer.userData);
-    const { isDeleting } = useSelector((state) => state.OrderReducer);
+    const userData = useSelector((state) => state.user.userData);
+    const { isDeleting } = useSelector((state) => state.order);
 
     const toggleShowHandler = (item) => {
         setShow(preState => !preState);

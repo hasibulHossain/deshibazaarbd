@@ -28,7 +28,7 @@ const ProductDetailInfo = (props) => {
   const { product } = props;
   const { id: productId } = product;
   const [quantity, setQuantity] = useState(1);
-  const { carts } = useSelector((state) => state.CartReducer);
+  const { carts } = useSelector((state) => state.cart);
   const { isSignedIn } = useSelector(state => state.global)
   const [filterCarts, setFilterCarts] = useState(null);
   const [updatedID, setUpdatedID] = useState(null);

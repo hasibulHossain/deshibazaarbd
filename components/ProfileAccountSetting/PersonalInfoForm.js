@@ -8,10 +8,10 @@ import { Spinner } from 'react-bootstrap';
 
 const PersonalInfoForm = () => {
     const dispatch = useDispatch();
-    const userInputData = useSelector((state) => state.ProfileAccountSettingReducer.userInputData);
-    const { userData } = useSelector(state => state.UserDataReducer)
+    const userInputData = useSelector((state) => state.userProfile.userInputData);
+    const { userData } = useSelector(state => state.user)
     const { register, handleSubmit, errors, setValue, watch } = useForm();
-    const isSubmitting = useSelector((state) => state.ProfileAccountSettingReducer.isSubmitting);
+    const isSubmitting = useSelector((state) => state.userProfile.isSubmitting);
 
     useEffect(() => {
         dispatch(getUserData(userData))

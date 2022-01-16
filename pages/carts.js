@@ -26,9 +26,9 @@ export default function Carts() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const { isModalActive } = useSelector((state) => state.global);
   const { supplierWiseCarts, carts, checkedAllCarts } = useSelector(
-    (state) => state.CartReducer
+    (state) => state.cart
   );
-  const userData = useSelector((state) => state.UserDataReducer.userData);
+  const userData = useSelector((state) => state.user.userData);
 
   const deleteItemsHandler = () => {
     dispatch(toggleModal());

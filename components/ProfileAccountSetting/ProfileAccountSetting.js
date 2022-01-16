@@ -12,8 +12,8 @@ import AddressBook from './AddressBook';
 const ProfileAccountSetting = () => {
     const dispatch = useDispatch();
 
-    const { userData } = useSelector(state => state.UserDataReducer)
-    const { billingAddress, shippingAddress, userInputData, isLoading } = useSelector(state => state.ProfileAccountSettingReducer);
+    const { userData } = useSelector(state => state.user)
+    const { billingAddress, shippingAddress, userInputData, isLoading } = useSelector(state => state.userProfile);
 
     useEffect(() => {
         dispatch(getAddress('billing_address', userData.id));

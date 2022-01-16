@@ -12,9 +12,9 @@ const ProductReviewCreate = ({ ReviewItem, handleClose }) => {
 
     const dispatch                                  = useDispatch()
     const [ratingValue, setRatingValue]             = React.useState(4);
-    const reviewSubmitting                          = useSelector((state) => state.ReviewReducer.reviewSubmitting);
-    const reviewInput                               = useSelector((state) => state.ReviewReducer.reviewInput);
-    const {userData}                                = useSelector(state => state.UserDataReducer);
+    const reviewSubmitting                          = useSelector((state) => state.productReviewAnother.reviewSubmitting);
+    const reviewInput                               = useSelector((state) => state.productReviewAnother.reviewInput);
+    const {userData}                                = useSelector(state => state.user);
     const { register, handleSubmit, watch, errors } = useForm();
 
     const reviewStoreInput = {

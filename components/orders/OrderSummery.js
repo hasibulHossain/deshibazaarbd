@@ -11,10 +11,10 @@ import SimpleBtn from '../master/SimpleBtn/SimpleBtn';
 const OrderSummery = ({ handleClick, buttonText }) => {
     const dispatch = useDispatch();
     const { register, handleSubmit, errors } = useForm();
-    const { carts, totalPrice } = useSelector((state) => state.CartReducer);
+    const { carts, totalPrice } = useSelector((state) => state.cart);
 
-    const { coupon, couponLoading, couponData, shippingCostLoading, isSubmitting } = useSelector((state) => state.OrderReducer);
-    const { shippingCost } = useSelector((state) => state.OrderReducer);
+    const { coupon, couponLoading, couponData, shippingCostLoading, isSubmitting } = useSelector((state) => state.order);
+    const { shippingCost } = useSelector((state) => state.order);
 
     useEffect(() => {
         dispatch(getCartsAction());

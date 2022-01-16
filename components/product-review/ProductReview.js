@@ -6,7 +6,7 @@ import ProductReviewHistory from './ProductReviewHistory';
 import { useSelector } from 'react-redux';
 const ProductReview = () => {
 
-    const {itemList, reviewList} = useSelector((state) => state.ProductReviewReducer);
+    const {itemList, reviewList} = useSelector((state) => state.productReview);
     const {isMobile} = useSelector((state) => state.global);
 
     return (

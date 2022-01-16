@@ -18,7 +18,7 @@ import { productImageUrl } from '../../services/ProductService';
 const OrderInvoice = ({ title = translate('Invoice'), id, is_invoice = false }) => {
 
     const dispatch = useDispatch();
-    const { orderDetails, isLoading } = useSelector((state) => state.OrderReducer);
+    const { orderDetails, isLoading } = useSelector((state) => state.order);
 
     useEffect(() => {
         dispatch(getOrderDetails(id))

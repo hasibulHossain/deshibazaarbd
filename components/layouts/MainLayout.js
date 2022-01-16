@@ -14,7 +14,7 @@ import { checkIsMobileDevice, isSignedIn, setWelcomePopup } from "../../_redux/s
 const MainLayout = ({children}) => {
   const dispatch = useDispatch();
   const { backdrop, isSignedIn: alreadySignedIn, welcomePopup } = useSelector(state => state.global);
-  const { userData } = useSelector(state => state.UserDataReducer)
+  const { userData } = useSelector(state => state.user)
 
   useEffect(() => {
     const bodyDOM = window.document.body;

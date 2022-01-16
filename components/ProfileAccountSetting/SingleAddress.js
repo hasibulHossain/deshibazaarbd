@@ -8,7 +8,7 @@ import { handleShippingCost } from '../orders/_redux/action/OrderAction';
 function SingleAddress(props) {
     const dispatch = useDispatch();
     const { id } = props;
-    const {userData} = useSelector(state => state.UserDataReducer)
+    const {userData} = useSelector(state => state.user)
     const [show, setShow] = useState(false);
     const [deleteShow, setDeleteShow] = useState(false);
 

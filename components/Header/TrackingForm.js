@@ -18,8 +18,8 @@ const TrackingForm = ({ show, setShow }) => {
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const { orderList, isLoading } = useSelector((state) => state.OrderReducer);
-  const userData = useSelector((state) => state.UserDataReducer.userData);
+  const { orderList, isLoading } = useSelector((state) => state.order);
+  const userData = useSelector((state) => state.user.userData);
 
   const onSubmit = (data) => {
     router.push(`/order/${data.orderID}`).then((_) => window.scrollTo(0, 0));

@@ -10,8 +10,8 @@ import { handleShippingCost } from '../orders/_redux/action/OrderAction';
 const DeliveryInfo = ({closeModal = null, address, isUpdate = false}) => {
     const dispatch                                       = useDispatch();
     const [isLoadingAddress, setIsLoadingAddress]        = useState(false);
-    const { userData }                                   = useSelector(state => state.UserDataReducer);
-    const { areaList }                                   = useSelector((state) => state.ProfileAccountSettingReducer);
+    const { userData }                                   = useSelector(state => state.user);
+    const { areaList }                                   = useSelector((state) => state.userProfile);
 
     const {first_name = "", last_name = "", phone_no = ""} = userData;
 

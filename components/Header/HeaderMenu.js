@@ -7,7 +7,7 @@ import { getMenuListData } from "./_redux/HeaderAction/HeaderAction";
 import Translate from "../translation/Translate";
 
 const HeaderMenu = ({ navigationToggleHandler, showToolbar }) => {
-  const { menuList } = useSelector((state) => state.HeaderReducer);
+  const { menuList } = useSelector((state) => state.header);
   const router = useRouter();
   const dispatch = useDispatch();
 

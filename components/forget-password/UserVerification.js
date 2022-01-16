@@ -8,7 +8,7 @@ import { validateOtp } from "./_redux/action/forget-password-action";
 
 function UserVerification() {
   const { email, isLoading, isOtpVerified } = useSelector(
-    (state) => state.ForgetPasswordReducer
+    (state) => state.authForgetPassword
   );
   const { register, handleSubmit, errors } = useForm();
   const dispatch = useDispatch();

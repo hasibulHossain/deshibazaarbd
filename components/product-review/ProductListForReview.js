@@ -16,7 +16,7 @@ const ProductListForReview = () => {
     const [show, setShow] = useState(false);
     const [ReviewItem, setReviewItem] = useState(null);
 
-    const { isLoading, itemList } = useSelector((state) => state.ProductReviewReducer);
+    const { isLoading, itemList } = useSelector((state) => state.productReview);
 
     useEffect(() => {
         dispatch(getItemListByUser());

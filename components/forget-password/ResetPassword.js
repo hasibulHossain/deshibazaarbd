@@ -11,7 +11,7 @@ export default function App() {
   const dispatch = useDispatch();
   const router = useRouter();
   const { otp, isLoading, passwordUpdated, email } = useSelector(
-    (state) => state.ForgetPasswordReducer
+    (state) => state.authForgetPassword
   );
   const password = useRef({});
   password.current = watch("password", "");

@@ -14,10 +14,8 @@ import { IRootReducer } from "../../../_redux/RootReducer";
 function FloatingCart() {
   const dispatch = useDispatch();
   const { floatingCartVisible } = useSelector((state: IRootReducer) => state.global);
-  const { carts, totalQuantity, totalPrice } = useSelector(
-    (state) => state.CartReducer
-  );
-  const { shippingCost } = useSelector((state) => state.OrderReducer);
+  const { carts, totalQuantity, totalPrice } = useSelector((state: IRootReducer) => state.cart); // TODO: suggestion will come after interfacing at reducer
+  // const { shippingCost } = useSelector((state: IRootReducer) => state.order);
 
   const [show, setShow] = useState(false);
 

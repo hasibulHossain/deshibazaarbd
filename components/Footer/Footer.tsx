@@ -12,7 +12,7 @@ const TrackingForm = dynamic(() => import('../Header/TrackingForm'));
 import content from '../../content.json';
 
 const Footer = () => {
-    const {isLoading}       = useSelector(state => state.FooterReducer)
+    const {isLoading}       = useSelector(state => state.footer)
     const dispatch          = useDispatch();
     const [show, setShow]   = useState(false);
     const [email, setEmail] = useState("");

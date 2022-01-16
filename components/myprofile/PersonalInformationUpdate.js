@@ -6,8 +6,8 @@ import ErrorMessage from '../master/message/ErrorMessage';
 
 const PersonalInformationUpdate = () => {
     const dispatch = useDispatch();
-    const { userInputData, isSubmitting } = useSelector((state) => state.ProfileAccountSettingReducer);
-    const { userData } = useSelector(state => state.UserDataReducer)
+    const { userInputData, isSubmitting } = useSelector((state) => state.userProfile);
+    const { userData } = useSelector(state => state.user)
     const { register, handleSubmit, errors } = useForm();
 
     useEffect(() => {

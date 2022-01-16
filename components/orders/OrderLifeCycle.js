@@ -17,8 +17,8 @@ import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 const OrderLifeCycle = ({ orderID }) => {
 
     const dispatch              = useDispatch();
-    const OrderLifeCycleDetails = useSelector((state) => state.OrderReducer.OrderLifeCycleDetails)
-    const lifeCycleLoading      = useSelector((state) => state.OrderReducer.lifeCycleLoading)
+    const OrderLifeCycleDetails = useSelector((state) => state.order.OrderLifeCycleDetails)
+    const lifeCycleLoading      = useSelector((state) => state.order.lifeCycleLoading)
     useEffect(() => {
         dispatch(getOrderLifeCycleData(orderID))
     }, []);

@@ -9,12 +9,12 @@ import { Spinner } from 'react-bootstrap'
 import { getLocationData } from '../ProfileAccountSetting/_redux/Action/ProfileAccountSettingAction';
 const BillingAddressUpdate = () => {
     const dispatch = useDispatch();
-    const countryList = useSelector((state) => state.ProfileAccountSettingReducer.countryList);
-    const cityList = useSelector((state) => state.ProfileAccountSettingReducer.cityList);
-    const areaList = useSelector((state) => state.ProfileAccountSettingReducer.areaList);
-    const isSubmitting = useSelector((state) => state.ProfileAccountSettingReducer.isSubmitting);
-    const billingAddressInput = useSelector((state) => state.ProfileUpdateReducer.billingAddressInput);
-    const {userData} = useSelector(state => state.UserDataReducer)
+    const countryList = useSelector((state) => state.userProfile.countryList);
+    const cityList = useSelector((state) => state.userProfile.cityList);
+    const areaList = useSelector((state) => state.userProfile.areaList);
+    const isSubmitting = useSelector((state) => state.userProfile.isSubmitting);
+    const billingAddressInput = useSelector((state) => state.userAddress.billingAddressInput);
+    const {userData} = useSelector(state => state.user)
     const { register, handleSubmit, errors, setValue } = useForm();
 
     //handle change input 

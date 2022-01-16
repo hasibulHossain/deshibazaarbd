@@ -5,7 +5,7 @@ import { getCheckoutPaymentMethods } from './_redux/Action/ShippingInfoAction';
 const CheckoutPaymentMethod = () => {
 
     const dispatch                  = useDispatch();
-    const { paymentMethods }        = useSelector((state) => state.ShippingInfoReducer);
+    const { paymentMethods }        = useSelector((state) => state.OrderShipping);
     const [payMethod, setPayMethod] = useState('cash');
 
     useEffect(() => {

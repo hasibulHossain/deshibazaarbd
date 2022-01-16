@@ -10,7 +10,7 @@ function ForgetPassword() {
   const dispatch = useDispatch();
   const { register, handleSubmit, errors } = useForm();
   const { isLoading, isValidUser } = useSelector(
-    (state) => state.ForgetPasswordReducer
+    (state) => state.authForgetPassword
   );
   const router = useRouter();
 

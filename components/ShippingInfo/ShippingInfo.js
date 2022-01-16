@@ -11,10 +11,10 @@ import content from '../../content.json';
 const ShippingInfo = () => {
 
     const dispatch = useDispatch();
-    const { userData } = useSelector((state) => state.UserDataReducer);
+    const { userData } = useSelector((state) => state.user);
     const [show, setShow] = useState(false);
 
-    const { isLoading, defaultBillingAddress } = useSelector((state) => state.ProfileAccountSettingReducer);
+    const { isLoading, defaultBillingAddress } = useSelector((state) => state.userProfile);
 
     const toggleShowHandler = () => {
         setShow(preState => !preState);
