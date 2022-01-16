@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 
-import GlobalReducer from "./store/reducer/globalReducer";
+import GlobalReducer, { IGlobalReducer } from "./store/reducer/GlobalReducer";
 import CategoryWiseProductReducer from "../components/CategoryWishProductList/_redux/Reducer/CategoryWiseProductReducer";
 import CompanyPolicyReducer from "../components/CompanyPolicy/_redux/Reducer/CompanyPolicyReducer";
 import DealFlashReducer from "../components/DealFlash/_redux/Reducer/DealFlashReducer";
@@ -29,22 +29,50 @@ import ForgetPasswordReducer from '../components/forget-password/_redux/reducer/
 import StoreInfoReducer from '../components/store-info/_redux/reducer/store-info_reducer';
 import NewOfferReducer from "../components/NewCollection/_redux/Reducer/new-offer-reducer";
 
-export default combineReducers({
-  GlobalReducer               : GlobalReducer,
+export interface IRootReducer {
+  global                      : IGlobalReducer;
+  HeaderReducer               : object; // @TODO: Need to implement interface for all of this reducers.
+  HomeBannerCarouselReducer   : object;
+  ProductTopListReducer       : object;
+  CategoryReducer             : object;
+  CompanyPolicyReducer        : object;
+  DealFlashReducer            : object;
+  NewOfferReducer             : object;
+  CategoryWiseProductReducer  : object;
+  ShopReducer                 : object;
+  StoreReducer                : object;
+  StoreInfoReducer            : object;
+  AuthReducer                 : object;
+  UserDataReducer             : object;
+  ProfileAccountSettingReducer: object;
+  WishlistReducer             : object;
+  CartReducer                 : object;
+  SearchReducer               : object;
+  DeliveryInfoReducer         : object;
+  ProfileUpdateReducer        : object;
+  PaymentMethodReducer        : object;
+  ProductReducer              : object;
+  OrderReducer                : object;
+  ProductReviewReducer        : object;
+  ShippingInfoReducer         : object;
+  FooterReducer               : object;
+  ReviewReducer               : object;
+  ForgetPasswordReducer       : object;
+}
+
+const reducers = {
+  global                      : GlobalReducer,
   HeaderReducer               : HeaderReducer,
-  HomeBannerCarouselReducer   : HomeBannerCarouselReducer,
   ProductTopListReducer       : ProductTopListReducer,
   CategoryReducer             : CategoryReducer,
   CompanyPolicyReducer        : CompanyPolicyReducer,
   DealFlashReducer            : DealFlashReducer,
-  NewOfferReducer            : NewOfferReducer,
-  CategoryWiseProductReducer  : CategoryWiseProductReducer,
+  NewOfferReducer             : NewOfferReducer,
   ShopReducer                 : ShopReducer,
   StoreReducer                : StoreReducer,
   StoreInfoReducer            : StoreInfoReducer,
   AuthReducer                 : AuthReducer,
   UserDataReducer             : UserDataReducer,
-  ProfileAccountSettingReducer: ProfileAccountSettingReducer,
   WishlistReducer             : WishlistReducer,
   CartReducer                 : CartReducer,
   SearchReducer               : SearchReducer,
@@ -57,5 +85,11 @@ export default combineReducers({
   ShippingInfoReducer         : ShippingInfoReducer,
   FooterReducer               : FooterReducer,
   ReviewReducer               : ReviewReducer,
-  ForgetPasswordReducer       : ForgetPasswordReducer
-});
+  ForgetPasswordReducer       : ForgetPasswordReducer,
+  HomeBannerCarouselReducer   : HomeBannerCarouselReducer,
+  CategoryWiseProductReducer  : CategoryWiseProductReducer,
+  ProfileAccountSettingReducer: ProfileAccountSettingReducer,
+};
+
+
+export default combineReducers(reducers);
