@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import Rater from "react-rater";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,6 +21,7 @@ import LazyLoad from "react-lazyload";
 import InnerImageZoom from 'react-inner-image-zoom';
 import Overlay from '../master/Modal/Overlay';
 import content from '../../content.json';
+import priceCalculation from "../../helper/price-calculation";
 
 const ProductDetailInfo = (props) => {
   const router = useRouter();
@@ -143,6 +144,11 @@ const ProductDetailInfo = (props) => {
     }
   };
 
+  const { isOfferEnable, offerPrice, discount, displayActivePrice, displayInactivePrice } = useCallback(
+    priceCalculation(product),
+    [productId],
+  )
+
   return (
     <>
       {product !== "undefined" && product !== null && (
@@ -217,57 +223,36 @@ const ProductDetailInfo = (props) => {
                           </div>
                           <div className="col-lg-6 px-0">
                             <div className="product_details_information py-2">
-                              <h2 className="product_title pt-3 text-uppercase">{product.name && product.name.toLowerCase()}</h2>
-
-                              <div className="d-flex justify-content-between align-items-end">
-                                <div>
-                                  <div className="review_rating">
+                              <div className="pb-2" style={{borderBottom: '2px dashed #ddd'}}>
+                                <h2 className="product_title pt-3 text-uppercase mb-0">{product.name && product.name.toLowerCase()}</h2>
+                                <div className="d-flex align-items-center">
                                     <Rater
                                       total={5}
                                       interactive={false}
                                       rating={parseInt(product.average_rating)}
                                     />{" "}
-                                    <span className="rating_value_text">
-                                      {" "}
-                                      {product.total_rating} Ratings{" "}
+                                    <span className="font-15 font-weight-500">
+                                      &nbsp;
+                                      {
+                                        `(${product.total_rating}) Rating`
+                                      }
                                     </span>
-                                  </div>
-                                  <div className="product__details__brand py-2">
-                                    {typeof product.brand != "undefined" &&
-                                      product.brand != null && (
-                                        <Link
-                                          href={`/products?brand=${encodeURIComponent(product.brand.slug)}&name=${encodeURIComponent(product.brand.name)}&filter=paginate_no__40`}
-                                          className="LinkToBrandPage pointer"
-                                        >
-                                          <span>
-                                            {" "}
-                                            Brand Name:{" "}
-                                            <span className="brand_name_in_details">
-                                              {product.brand.name}
-                                            </span>
-                                          </span>
-                                        </Link>
-                                      )}
-                                  </div>
-                                  {
-                                    product.sku_manual && (
-                                      <div className="py-2">
-                                        <span>SKU: </span>
-                                        <span>
-                                          {
-                                            product.sku_manual
-                                          }
-                                        </span>
-                                      </div>
-                                    )
-                                  }
+                                </div>
+                              </div>
 
-                                  <div>
+                              <div className="font-weight-600 py-4" style={{borderBottom: '2px dashed #ddd'}}>
+                                  <div className="mb-2 pb-1">
                                     {product.current_stock > 0 &&
                                       product.enable_stock ? (
                                       <div className="stock-area in-stock">
                                         <span>
-                                          In Stock - {product.current_stock}{" "}
+                                          <i style={{fontSize: '1rem'}} className="fas fa-check-circle"></i>
+                                        </span>
+
+                                        <span>
+                                          &nbsp;
+                                          In Stock
+                                           {/* - {product.current_stock}{" "} */}
                                         </span>
                                       </div>
                                     ) : (
@@ -276,7 +261,73 @@ const ProductDetailInfo = (props) => {
                                       </div>
                                     )}
                                   </div>
+
+                                  <div className="pb-1">
+                                    {typeof product.brand != "undefined" &&
+                                      product.brand != null && (
+                                        <Link
+                                          href={`/products?brand=${encodeURIComponent(product.brand.slug)}&name=${encodeURIComponent(product.brand.name)}&filter=paginate_no__40`}
+                                          className="LinkToBrandPage pointer"
+                                        >
+                                          <span>
+                                            {" "}
+                                            Brand:{" "}
+                                            <span className="brand_name_in_details">
+                                              {product.brand.name}
+                                            </span>
+                                          </span>
+                                        </Link>
+                                      )}
+                                  </div>
+
+                                  <div className="pb-1">
+                                    <span>Net weight: </span>
+                                    <span className="product-unit font-weight-500">{product.per_unit_value} {' '} {product.unit && product.unit.actual_name && product.unit.actual_name}</span>
+                                  </div>
+
+                                  <div>
+                                    {
+                                      product.sku_manual && (
+                                        <div>
+                                          <span>SKU: </span>
+                                          <span className="color-main">
+                                            {
+                                              product.sku_manual
+                                            }
+                                          </span>
+                                        </div>
+                                      )
+                                    }
+                                  </div>
+                              </div>
+
+                              <div className="py-4" style={{borderBottom: '2px dashed #ddd'}} >
+                                <div className="d-flex justify-content-between align-items-center">
+                                  <div>
+                                    <div className="font-14 font-weight-500 mb-1">
+                                      <span>Regular price: </span>
+                                      <span style={{textDecoration: 'line-through'}}>
+                                        {displayInactivePrice}
+                                      </span>
+                                    </div>
+                                    <div>
+                                      <span className="font-weight-600">Discounted Price: </span>
+                                      <span className="font-weight-600 font-20 color-main">
+                                        {displayActivePrice}
+                                      </span>
+                                    </div>
+                                  </div>
+
+                                  <div>
+                                    <span className="discount-percent position-relative font-14">
+                                      -{discount}
+                                    </span>
+                                  </div>
                                 </div>
+                              </div>
+
+                              {/* <div className="d-flex justify-content-between align-items-end">
+
                                 <div className="d-flex" >
                                   <div>
                                     <span className="mr-3">
@@ -311,19 +362,15 @@ const ProductDetailInfo = (props) => {
                                     </Overlay>
                                   </div>
                                 </div>
-                              </div>
-                              <div className="mt-4">
-                              <span className="product-unit font-weight-500">{product.per_unit_value} {' '} {product.unit && product.unit.actual_name && product.unit.actual_name}</span>
-                                <PriceCalculation item={product} />
-                              </div>
-                              <hr />
 
-                              <div className="product_details_price">
-                                {/* <PriceCalculation item={product} /> */}
+                              </div> */}
 
+                              <div className="py-4" style={{borderBottom: '2px dashed #ddd'}}>
                                 <div className="d-flex justify-content-between align-items-center">
-                                  <div className="quantity">
+
+                                  <div style={{border: '2px solid var(--color-primary)', borderRadius: '50px'}}>
                                     <button
+                                      style={{border: 'none', outline: 'none', backgroundColor: 'transparent', color: 'var(--color-primary)', display: 'inline-block', padding: '8px 12px', borderRight: '2px solid var(--color-primary)'}}
                                       disabled={quantity <= 1 ? true : false}
                                       onClick={() => updateQuantity(quantity - 1)}
                                       className={
@@ -333,6 +380,8 @@ const ProductDetailInfo = (props) => {
                                       <i className="fas fa-minus"></i>
                                     </button>
                                     <input
+                                      className="font-weight-600 quantity-input"
+                                      style={{border: 'none', outline: 'none', textAlign: 'center', backgroundColor: 'transparent'}}
                                       type="text"
                                       value={quantity}
                                       onChange={(e) =>
@@ -340,47 +389,70 @@ const ProductDetailInfo = (props) => {
                                       }
                                     />
                                     <button
+                                      style={{border: 'none', outline: 'none', backgroundColor: 'transparent', color: 'var(--color-primary)', display: 'inline-block', padding: '8px 12px', borderLeft: '2px solid var(--color-primary)'}}
                                       className="pointer"
                                       onClick={() => updateQuantity(quantity + 1)}
                                     >
                                       <i className="fas fa-plus"></i>
                                     </button>
                                   </div>
-                                  <div className="badge mt-3">
-                                    <p className="floating-cart__product-price">
-                                      {quantity} <span>X</span>&nbsp;
-                                      {formatCurrency(default_price)} ={" "}
-                                      {formatCurrency(subTotal)}&nbsp;
-                                    </p>
+
+                                  <div>
+                                      <span className="font-weight-600">Total Price: </span>
+                                      <span className="font-weight-600 font-20 color-main">
+                                        {formatCurrency(subTotal)}
+                                      </span>
                                   </div>
                                 </div>
+                              </div>
 
-                                <div className="d-flex mt-3 product-details-section">
-                                  <div className="mr-2">
+                              <div className="py-4">
+
+                                <div className="d-flex justify-content-between product-details-section">
+                                  <div className="flex-grow-1 mr-2">
                                     <button
                                       disabled={(product.default_selling_price !== null || undefined) && product.default_selling_price <= 0 ? true : false}
-                                      className="btn buy_now_btn"
+                                      className="btn buy_now_btn font-weight-600"
                                       onClick={() => redirectToCheckoutPage()}
                                     >
+                                      <i className="fas fa-shopping-bag"></i>
+                                      &nbsp;
                                       Buy Now
                                     </button>
                                   </div>
-                                  <div>
+                                  <div className="flex-grow-1 mr-2">
                                     <button
                                       disabled={(product.default_selling_price !== null || undefined) && product.default_selling_price <= 0 ? true : false}
-                                      className="btn add_to_cart_btn"
+                                      className="btn add_to_cart_btn font-weight-600"
                                       onClick={() => addToCart()}
                                     >
+                                      <i class="fas fa-cart-plus"></i>
+                                      &nbsp;
                                       Add To Cart
                                     </button>
                                   </div>
+                                  <div className="flex-grow-1">
+                                    <button
+                                      disabled={(product.default_selling_price !== null || undefined) && product.default_selling_price <= 0 ? true : false}
+                                      className="btn font-weight-600"
+                                      onClick={() => addToCart()}
+                                      style={{background: 'transparent', border: '1px solid var(--color-primary)', color: 'var(--color-primary)', width: '100%'}}
+                                    >
+                                      <i class="fas fa-heart"></i>
+                                      &nbsp;
+                                      Add To Wishlist
+                                    </button>
+                                  </div>
                                 </div>
+
+                                <div className="mt-3 mt-lg-4 text-center">
+                                  <span className="font-13 font-weight-600 py-2 px-4 d-inline-block rounded" style={{backgroundColor: 'rgba(230, 46, 4, 0.15)', color: '#e62e04', textTransform: 'uppercase', width: '100%'}}>
+                                    Pay 10&#37; advance if purchase amount above 2000 BDT
+                                  </span>
+                                </div>
+
                               </div>
-                              <div className="mt-3 mt-lg-4">
-                                <span className="product_details_section__exceed-amount-message">
-                                  Pay 10&#37; advance if purchase amount above 2000 BDT
-                                </span>
-                              </div>
+
                             </div>
                           </div>
                         </div>
