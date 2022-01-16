@@ -1,15 +1,14 @@
 import React, { useState } from 'react'
-import SimpleModal from '../master/Modal/SimpleModal';
-import Modal from '../master/Modal/Modal';
+import SimpleModal from '../master/modal/SimpleModal';
+import DeliveryInfo from '../Delivery/DeliveryInfo';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteAddress, addAddress } from './_redux/Action/ProfileAccountSettingAction';
 import { handleShippingCost } from '../orders/_redux/action/OrderAction';
-import DeliveryInfo from '../Delivery/DeliveryInfo';
 
 function SingleAddress(props) {
     const dispatch = useDispatch();
     const { id } = props;
-    const {userData} = useSelector(state => state.UserDataReducer)
+    const {userData} = useSelector(state => state.user)
     const [show, setShow] = useState(false);
     const [deleteShow, setDeleteShow] = useState(false);
 
@@ -45,7 +44,11 @@ function SingleAddress(props) {
 
     return (
         <>
-            <Modal closeModalHandler={toggleDeleteModal} visible={deleteShow}>
+            <SimpleModal
+                handleClose={toggleDeleteModal}
+                show={deleteShow}
+                size="sm"
+            >
                 <div className="mb-3">Are you sure to delete your address?</div>
                 <div className="d-flex justify-content-end">
                     <button
@@ -54,13 +57,12 @@ function SingleAddress(props) {
                     Cancel
                     </button>
                     <button
-                    className="custom-button-component ml-3"
-                    style={{ padding: "5px 10px" }}
-                    onClick={handleDeleteAddress} >
+                    className="custom-button-component ml-3 py-1 px-3"
+                    onClick={handleDeleteAddress}>
                         Delete
                     </button>
                 </div>
-            </Modal>
+            </SimpleModal>
 
             <div className="single-address shadow-sm p-2 pointer d-flex align-items-center mb-3">
                 <div style={{flexBasis: '80%'}} onClick={defaultAddressHandler} >

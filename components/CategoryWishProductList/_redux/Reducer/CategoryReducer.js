@@ -45,6 +45,12 @@ const initialState = {
 
 const CategoryWiseProductReducer = (state = initialState, { type, payload }) => {
   switch (type) {
+    case Types.GET_CATEGORIES:
+      return {
+        ...state,
+        categories: payload.data
+      };
+
     case Types.INIT_PRODUCT_LIST:
       return {
         ...state,

@@ -4,17 +4,17 @@ import { Card } from 'react-bootstrap'
 import { useForm } from 'react-hook-form';
 import { handleApplyCouponCode, handleChangeCouponInput, handleShippingCost } from './_redux/action/OrderAction';
 import { getCartsAction } from '../carts/_redux/action/CartAction';
-import ErrorMessage from '../master/ErrorMessage/ErrorMessage'
+import ErrorMessage from '../master/message/ErrorMessage'
 import { activeCurrency, formatCurrency } from '../../services/currency';
 import SimpleBtn from '../master/SimpleBtn/SimpleBtn';
 
 const OrderSummery = ({ handleClick, buttonText }) => {
     const dispatch = useDispatch();
     const { register, handleSubmit, errors } = useForm();
-    const { carts, totalPrice } = useSelector((state) => state.CartReducer);
+    const { carts, totalPrice } = useSelector((state) => state.cart);
 
-    const { coupon, couponLoading, couponData, shippingCostLoading, isSubmitting } = useSelector((state) => state.OrderReducer);
-    const { shippingCost } = useSelector((state) => state.OrderReducer);
+    const { coupon, couponLoading, couponData, shippingCostLoading, isSubmitting } = useSelector((state) => state.order);
+    const { shippingCost } = useSelector((state) => state.order);
 
     useEffect(() => {
         dispatch(getCartsAction());
@@ -99,12 +99,12 @@ const OrderSummery = ({ handleClick, buttonText }) => {
                                     </button> */}
                                 </div>
                                 <div> {errors.code ?
-                                    <ErrorMessage errorText="Please add your discount code." />
+                                    <ErrorMessage message="Please add your discount code." />
                                     :
                                     (couponData && !couponData.errors && couponData.message ? (
                                         <p className="text-success font-weight-bold mt-2">{couponData.message}</p>
                                     ) : couponData && couponData.errors && (
-                                        <ErrorMessage errorText={couponData.errors.message} />
+                                        <ErrorMessage message={couponData.errors.message} />
                                     )
                                     )}
                                 </div>

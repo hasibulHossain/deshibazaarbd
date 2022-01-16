@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ProfileSideBar from "./ProfileSideBar";
 import { getDefaultAddress } from "../ProfileAccountSetting/_redux/Action/ProfileAccountSettingAction";
-import LoadingSpinner from './../master/LoadingSpinner/LoadingSpinner'
-import SimpleModal from '../master/Modal/SimpleModal';
+import LoadingSpinner from '../master/loading/LoadingSpinner';
+import SimpleModal from '../master/modal/SimpleModal';
 import Link from 'next/link';
 import WarningMessage from "../master/warningMessage/WarningMessage";
 import Translate from "../translation/Translate";
@@ -12,10 +12,10 @@ import DeliveryInfo from "../Delivery/DeliveryInfo";
 const ProductProfile = () => {
 
   const dispatch = useDispatch()
-  const { userData, access_token } = useSelector((state) => state.UserDataReducer);
-  const isLoading = useSelector((state) => state.ProfileAccountSettingReducer.isLoading);
-  const defaultShippingAddress = useSelector((state) => state.ProfileAccountSettingReducer.defaultShippingAddress);
-  const defaultBillingAddress = useSelector((state) => state.ProfileAccountSettingReducer.defaultBillingAddress);
+  const { userData, access_token } = useSelector((state) => state.user);
+  const isLoading = useSelector((state) => state.userProfile.isLoading);
+  const defaultShippingAddress = useSelector((state) => state.userProfile.defaultShippingAddress);
+  const defaultBillingAddress = useSelector((state) => state.userProfile.defaultBillingAddress);
   const [show, setShow] = useState(false);
 
   useEffect(() => {
@@ -72,7 +72,6 @@ const ProductProfile = () => {
                       </span>
                     </p>
                   </div>
-                 
                 </div>
                 <div className="col-lg-5 card m-1 p-3 default_height">
                   <div className="card-title">
@@ -127,7 +126,6 @@ const ProductProfile = () => {
                     </div>
 
                   </div>
-                  
                 </div>
               </div>
             </div>

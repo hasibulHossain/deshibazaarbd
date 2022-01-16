@@ -19,11 +19,11 @@ import { showToast } from "../components/master/Helper/ToastHelper";
 const Checkout = ()=> {
 	const router 							  							= useRouter();
 	const dispatch                             							= useDispatch();
-	const { customerInfo }                     							= useSelector((state) => state.DeliveryInfoReducer);
-	const { couponData, shippingCost, coupon } 							= useSelector((state) => state.OrderReducer);
-	const { carts, totalPrice, totalQuantity } 							= useSelector((state) => state.CartReducer);
-	const { userData } 													= useSelector((state) => state.UserDataReducer);
-	const { billingAddress, shippingAddress, userInputData, isLoading } = useSelector(state => state.ProfileAccountSettingReducer);
+	const { customerInfo }                     							= useSelector((state) => state.orderDelivery);
+	const { couponData, shippingCost, coupon } 							= useSelector((state) => state.order);
+	const { carts, totalPrice, totalQuantity } 							= useSelector((state) => state.cart);
+	const { userData } 													= useSelector((state) => state.user);
+	const { billingAddress, shippingAddress, userInputData, isLoading } = useSelector(state => state.userProfile);
 
 	useEffect(() => {
 		dispatch(getCartsAction());

@@ -8,7 +8,7 @@ import dayjs from 'dayjs';
 
 function StoreProfile() {
     const dispatch = useDispatch();
-    const { storeInfo } = useSelector(state => state.StoreInfoReducer);
+    const { storeInfo } = useSelector(state => state.storeInfo);
     const router = useRouter();
     const [isShowing, SetIsShowing] = useState(false)
 

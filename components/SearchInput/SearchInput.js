@@ -24,8 +24,8 @@ const SearchInput = () => {
   const [searchType, setSearchType] = useState("product"); // products || shops || brands
   const [searchHistory, setSearchHistory] = useState([]);
 
-  const suggestions = useSelector((state) => state.SearchReducer.products);
-  const loading = useSelector((state) => state.SearchReducer.loading);
+  const suggestions = useSelector((state) => state.productSearch.products);
+  const loading = useSelector((state) => state.productSearch.loading);
   const firstRenderRef = useRef(true);
   const searchRef = useRef();
 

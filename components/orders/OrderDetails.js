@@ -13,7 +13,7 @@ const OrderDetails = ({ orderID }) => {
     const router = useRouter();
     const dispatch = useDispatch();
     const { manageOrder } = router.query;
-    const { orderDetails, isLoading } = useSelector((state) => state.OrderReducer);
+    const { orderDetails, isLoading } = useSelector((state) => state.order);
 
     useEffect(() => {
         dispatch(getOrderDetails(manageOrder))
