@@ -104,16 +104,22 @@ const ProductDetailInfo = (props) => {
   }, [productId]);
 
   const updateQuantity = (quantity) => {
+    if(!quantity || quantity == 0) {
+      setQuantity(1);
+      return;
+    }
+
     if (
       typeof filterCarts !== "undefined" &&
       filterCarts !== null &&
       updatedID !== null
     ) {
       setQuantity(filterCarts.quantity);
-      dispatch(updateCartQtyAction(updatedID, quantity));
+      dispatch(updateCartQtyAction(updatedID, +quantity));
     } else {
-      setQuantity(quantity);
-      setSubTotal(quantity * default_price);
+      console.log('running from else check => ')
+      setQuantity(+quantity);
+      setSubTotal(+quantity * default_price);
     }
   };
 
@@ -382,7 +388,7 @@ const ProductDetailInfo = (props) => {
                                     <input
                                       className="font-weight-600 quantity-input"
                                       style={{border: 'none', outline: 'none', textAlign: 'center', backgroundColor: 'transparent'}}
-                                      type="text"
+                                      type="number"
                                       value={quantity}
                                       onChange={(e) =>
                                         updateQuantity(e.target.value)
