@@ -24,7 +24,7 @@ export default function Carts() {
   const router = useRouter();
   const dispatch = useDispatch();
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const { isModalActive } = useSelector((state) => state.GlobalReducer);
+  const { isModalActive } = useSelector((state) => state.global);
   const { supplierWiseCarts, carts, checkedAllCarts } = useSelector(
     (state) => state.CartReducer
   );

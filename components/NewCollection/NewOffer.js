@@ -6,7 +6,7 @@ import { getNewOfferList } from './_redux/Action/new-offer-action';
 const NewOffer = () => {
     const dispatch = useDispatch();
     const {newOffer, isLoading} = useSelector(state => state.NewOfferReducer);
-    const {isMobile} = useSelector(state => state.GlobalReducer);
+    const {isMobile} = useSelector(state => state.global);
 
     useEffect(() => {
         if(newOffer.length === 0) {

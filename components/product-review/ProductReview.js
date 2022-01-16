@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 const ProductReview = () => {
 
     const {itemList, reviewList} = useSelector((state) => state.ProductReviewReducer);
-    const {isMobile} = useSelector((state) => state.GlobalReducer);
+    const {isMobile} = useSelector((state) => state.global);
 
     return (
         <div className="row">

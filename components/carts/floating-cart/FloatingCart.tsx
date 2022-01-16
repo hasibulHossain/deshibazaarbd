@@ -2,17 +2,18 @@ import React, { useEffect, useState } from "react";
 import router from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 
-import { formatCurrency, activeCurrency } from "../../../services/currency";
+import { formatCurrency } from "../../../services/currency";
 import Modal from "../../master/Modal/Modal";
 import SimpleBtn from "../../master/SimpleBtn/SimpleBtn";
 import FloatingCartProduct from "./FloatingCartProduct";
 
 import { toggleFloatingCart } from "../../../_redux/store/action/globalAction";
 import { getCartsAction, removeAllCartItem } from "../_redux/action/CartAction";
+import { IRootReducer } from "../../../_redux/RootReducer";
 
 function FloatingCart() {
   const dispatch = useDispatch();
-  const { floatingCartVisible } = useSelector((state) => state.GlobalReducer);
+  const { floatingCartVisible } = useSelector((state: IRootReducer) => state.global);
   const { carts, totalQuantity, totalPrice } = useSelector(
     (state) => state.CartReducer
   );
@@ -83,23 +84,23 @@ function FloatingCart() {
     floatingCart = (
       <>
         <Modal closeModalHandler={handleClose} visible={show}>
-            <p className="remove_title">Cart item</p>
-            <div className="mb-3">All products will be removed</div>
-            <div className="d-flex justify-content-end">
-              <button
-                className="custom_secondary_btn custom-button-component"
-                onClick={handleClose}
-              >
-                Cancel
-              </button>
-              <button
-                className="custom-button-component ml-3"
-                style={{ padding: "5px 10px" }}
-                onClick={clearAllItem}
-              >
-                Remove all
-              </button>
-            </div>
+          <p className="remove_title">Cart item</p>
+          <div className="mb-3">All products will be removed</div>
+          <div className="d-flex justify-content-end">
+            <button
+              className="custom_secondary_btn custom-button-component"
+              onClick={handleClose}
+            >
+              Cancel
+            </button>
+            <button
+              className="custom-button-component ml-3"
+              style={{ padding: "5px 10px" }}
+              onClick={clearAllItem}
+            >
+              Remove all
+            </button>
+          </div>
         </Modal>
         <div className="floating-cart modal-scrollbar">
           <div className="floating-cart__header">
@@ -123,7 +124,7 @@ function FloatingCart() {
 
           {+totalQuantity > 0 && (
             <>
-              <div className="mb-2 d-flex justify-content-between" style={{fontSize: '14px'}}>
+              <div className="mb-2 d-flex justify-content-between" style={{ fontSize: '14px' }}>
                 <span
                   className="d-inline-block"
                   onClick={handleClose}
@@ -131,7 +132,7 @@ function FloatingCart() {
                 >
                   Clear all
                 </span>
-                <span className="d-inline-block" style={{padding: "0 1rem", fontWeight: '500', color: 'var(--color-primary)'}}>
+                <span className="d-inline-block" style={{ padding: "0 1rem", fontWeight: 500, color: 'var(--color-primary)' }}>
                   {formatCurrency(totalPrice)}
                 </span>
               </div>

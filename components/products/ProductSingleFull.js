@@ -20,7 +20,7 @@ const ProductSingleFull = ({ product }) => {
   const [quantity, setQuantity] = useState(1);
   const [previewImg, setPreviewImg] = useState(null);
   const { carts } = useSelector((state) => state.CartReducer);
-  const {isSignedIn} = useSelector(state => state.GlobalReducer)
+  const {isSignedIn} = useSelector(state => state.global)
   const [filterCarts, setFilterCarts] = useState(null);
   const [updatedID, setUpdatedID] = useState(null);
 

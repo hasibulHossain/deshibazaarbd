@@ -29,7 +29,7 @@ const ProductDetailInfo = (props) => {
   const { id: productId } = product;
   const [quantity, setQuantity] = useState(1);
   const { carts } = useSelector((state) => state.CartReducer);
-  const { isSignedIn } = useSelector(state => state.GlobalReducer)
+  const { isSignedIn } = useSelector(state => state.global)
   const [filterCarts, setFilterCarts] = useState(null);
   const [updatedID, setUpdatedID] = useState(null);
   const [previewImg, setPreviewImg] = useState("");

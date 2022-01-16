@@ -16,7 +16,7 @@ const CategoryWishProductList = ({showFilter, showFilterHandler, filterParams}) 
   const { isLoading, paginate } = useSelector(
     (state) => state.CategoryWiseProductReducer
   );
-  const {isMobile} = useSelector(state => state.GlobalReducer);
+  const {isMobile} = useSelector(state => state.global);
 
   const selectHandler = (e) => {
 

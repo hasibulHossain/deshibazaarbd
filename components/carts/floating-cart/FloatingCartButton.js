@@ -17,7 +17,7 @@ const FloatingCartButton = () => {
     const dispatch = useDispatch();
     const { totalQuantity, totalPrice } = useSelector(state => state.CartReducer);
     const { wishList } = useSelector((state) => state.WishlistReducer);
-    // const { isMobile } = useSelector(state => state.GlobalReducer);
+    // const { isMobile } = useSelector(state => state.global);
 
     const flashDealBtnHandler = () => {
         dispatch(toggleFloatingCart());

@@ -25,7 +25,7 @@ const Header = () => {
   const [overlayVisible, setOverlayVisible] = useState(false);
   const dispatch = useDispatch();
   const { totalQuantity } = useSelector((state) => state.CartReducer);
-  const { isSignedIn, isMobile, backdrop } = useSelector((state) => state.GlobalReducer);
+  const { isSignedIn, isMobile, backdrop } = useSelector((state) => state.global);
   const { userData } = useSelector((state) => state.UserDataReducer);
   const router = useRouter();
 

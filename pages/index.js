@@ -18,7 +18,7 @@ import { setWelcomePopup } from "../_redux/store/action/globalAction";
 
 export default function Home(props) {
   const dispatch                 = useDispatch();
-  const {isMobile, welcomePopup} = useSelector(state => state.GlobalReducer);
+  const {isMobile, welcomePopup} = useSelector(state => state.global);
 
   return (
     <>
