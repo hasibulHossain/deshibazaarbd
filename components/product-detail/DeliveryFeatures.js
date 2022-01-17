@@ -7,109 +7,81 @@ const DeliveryFeatures = ({ product }) => {
     const days = Math.floor(hours / 24);
 
     return (
-        <>
-            <div className="delivery_features_section p-2">
-                {/* <div className="d-flex justify-content-between">
-                    <small className="delivery_features_section-heading mb-2">Seller Information</small>
-                </div> */}
-
-                        <p className="m-0 pt-2">
-                            <span className="user_icon color-main">
-                                <i className="fas fa-store"></i>
-                            </span>
-                            <span className="user_address store_name pointer">
-                                <Link href={`/store/${product.business.slug}`}>
-                                    <a>
-                                        {
-                                            product.business && product.business.name
-                                        }
-                                    </a>
-                                </Link>
-                            </span>
-                        </p>
-
-                {/* {
-                    typeof location.email !== "undefined" && location.email !== null && location.email !== "" && (
-                        <p>
-                            <span className="user_icon color-main">
-                                <i className="fas fa-envelope-open-text"></i>
-                            </span>
-                            <span className="user_address text-lowercase">
-                                <a href={`mailto:${location.email}`} target="_blank" rel="noopener noreferrer">
-                                    {location.email}
-                                </a>
-                            </span>
-                        </p>
-                    )
-                }
-
-                {
-                    typeof location.mobile !== "undefined" && location.mobile !== null && location.mobile !== "" && (
-                        <p>
-                            <span className="user_icon color-main">
-                                <i className="fas fa-phone-square-alt"></i>
-                            </span>
-                            <span className="user_address text-lowercase">
-                                <a href={`tel:${location.mobile}`}>
-                                    {location.mobile}
-                                </a>
-                            </span>
-                        </p>
-                    )
-                } */}
-
-                {/* <p>
-                    <span className="user_icon color-main">
-                        <i className="fas fa-map-marked-alt"></i>
-                    </span>
-                    <span className="user_address">
-                        <a href={`http://maps.google.com/?q=${location.landmark !== null ? location.landmark + "," : ""} ${location.zip_code !== null ? location.zip_code + "," : ""} ${location.city !== null ? location.city + "," : ""} ${location.state !== null ? location.state + "," : ""} ${location.country !== null ? location.country : ""}`} target="_blank" rel="noopener noreferrer">
-                            {`${location.landmark !== null ? location.landmark + "," : ""} ${location.zip_code !== null ? location.zip_code + "," : ""} ${location.city !== null ? location.city + "," : ""} ${location.state !== null ? location.state + "," : ""} ${location.country !== null ? location.country : ""}`}
-                        </a>
-                    </span>
-                </p> */}
-            </div>
-            <div className="delivery_fee delivery_features_section mt-3 p-2">
-                <div className="d-flex justify-content-between align-items-end">
-                    <div className="d-flex">
-                        <span className="color-main">
-                            <i className="fas fa-truck"></i>
-                        </span>
-                        <div className="ml-3 product_details__delivery__features_info">
-                            <p>Home Delivery <br />
-                                <small style={{color: 'var(--color-green-light)'}} className="delivery_time">
-                                    {
-                                        `${days} - ${days + 1}`
-                                    } days
-                                </small>
-                            </p>
-                        </div>
-                    </div>
+        <div className='pt-4'>
+            <div className='d-flex pb-3'>
+                <div className='color-main'>
+                    <i className="fas fa-store"></i>
                 </div>
-                <div className="d-flex">
-                    <span className="color-main">
-                        <i className="fas fa-money-check-alt"></i>
+                <div className='pl-3'>
+                    <span className='font-weight-600 d-block'>Store Name</span>
+                    <span>
+                        <Link href={`/store/${product.business.slug}`}>
+                            <a className='color-main font-weight-500 font-14'>
+                                {
+                                    product.business && product.business.name
+                                }
+                            </a>
+                        </Link>
                     </span>
-                    <p className="ml-3 product_details__delivery__features_info">Cash on Delivery Available</p>
                 </div>
             </div>
 
-            {/* <div className="delivery_features_section mt-3 p-2">
-                <small className="delivery_features_section-heading">Return & Warranty</small>
-                <div className="d-flex mt-3">
-                    <div className="color-main">
-                        <i className="fas fa-check-square"></i>
-                    </div>
-                    <p className="ml-3 return_information"> 100% Authentic</p>
+            <div className='d-flex pb-3'>
+                <div className='color-main'>
+                    <i className="fas fa-money-check-alt"></i>
                 </div>
-                <div className="d-flex">
-                    <div className="color-main">
-                        <i className="fas fa-check-square"></i>
-                    </div>
-                    <p className="ml-3 return_information"> 14 days easy return </p>
+                <div className='pl-3'>
+                    <span className='font-weight-600 d-block'>Payment</span>
+                    <span className='font-14 font-weight-500 d-block'>
+                        Cash on delivery available
+                    </span>
+                    <span className='font-14 font-weight-500'>
+                        Accepts online payments
+                    </span>
                 </div>
-            </div> */}
-        </>
+            </div>
+
+            <div className='d-flex pb-3'>
+                <div className='color-main'>
+                    <i className="fas fa-truck"></i>
+                </div>
+                <div className='pl-3'>
+                    <span className='font-weight-600 d-block'>Tentative Delivery Time</span>
+                    <span className='font-14 font-weight-500'>
+                        Within 4 hours to 72 hours
+                    </span>
+                </div>
+            </div>
+
+            <div className='d-flex pb-3'>
+                <div className='color-main'>
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <div className='pl-4'>
+                    <span className='font-weight-600 d-block'>Delivery Charge</span>
+                    <ul className='pl-3 font-14 font-weight-500'>
+                        <li>60 BDT 	&#8212; Dhaka city only</li>
+                        <li>120 BDT &#8212; Outside Dhaka</li>
+                        <li>Delivery charges may vary with product size, weight, quantity and delivery location</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div className='border-top-1-light pt-3 pb-4'>
+                <span className='font-weight-600 font-14 d-inline-block pb-2'>
+                    Additionally you can place an order by calling the following number
+                </span>
+                <div className='text-white bg-color-main py-2 px-3 rounded' style={{width: 'fit-content'}}>
+                    <span>
+                        <i class="fas fa-mobile-alt"></i>
+                    </span>
+                    <span>
+                        &nbsp;
+                        <a className='text-white font-weight-500 font-14' href="tel:+880 9696 848858">+880 9696 848858</a>
+                    </span>
+                </div>
+            </div>
+        </div>
     );
 };
 

@@ -37,7 +37,7 @@ export const getWishListData = () => (dispatch) => {
  * @returns {void}
  */
 export const addOrRemoveWishItem = (itemId, isWishItemFound, isSignedIn) => async dispatch => {
-    const wishList = store.getState() && store.getState().WishlistReducer && store.getState().WishlistReducer.wishList;
+    const wishList = store.getState() && store.getState().wishlist && store.getState().wishlist.wishList;
 
     if (!isSignedIn) {
         toast.error(<p><i className="fas fa-times-circle"></i> You must login to add items to your wishlist!</p>, {
