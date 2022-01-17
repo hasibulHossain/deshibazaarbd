@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getCategoryRelatedBrands,
   setFilterParams,
-} from "./_redux/Action/CategoryWiseProductAction";
+} from "./_redux/action/CategoryAction";
 import ReactStars from "react-rating-stars-component";
 import { activeCurrency } from "../../services/currency";
 import { useRouter } from 'next/router';
@@ -15,9 +15,7 @@ import { parseFilterString } from "../../helper/parse-filter-query";
 const ProductFilter = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const { filterParams, categories, brands } = useSelector(
-    (state) => state.CategoryWiseProductReducer
-  );
+  const { filterParams, categories, brands } = useSelector((state) => state.category);
 
   const [value, setValue] = useState({ min: 100, max: 90000 });
   const [isChecked, setIsChecked] = useState(false);

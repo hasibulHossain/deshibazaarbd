@@ -3,16 +3,16 @@ import dayjs from 'dayjs';
 import Link from 'next/link'
 import { handleCancelOrder } from './_redux/action/OrderAction.js';
 import { useDispatch, useSelector } from 'react-redux';
-import SimpleModal from '../master/Modal/SimpleModal.js';
-import SimpleConfirmComponent from '../master/Modal/SimpleConfirmComponent.js';
+import SimpleModal from '../master/modal/SimpleModal.js';
+import SimpleConfirmComponent from '../master/modal/SimpleConfirmComponent.js';
 
 const SingleOrder = ({ item, isManageable = true }) => {
 
     const dispatch = useDispatch();
     const [show, setShow] = useState(false);
     const [orderItem, setOrderItem] = useState(null);
-    const userData = useSelector((state) => state.UserDataReducer.userData);
-    const { isDeleting } = useSelector((state) => state.OrderReducer);
+    const userData = useSelector((state) => state.user.userData);
+    const { isDeleting } = useSelector((state) => state.order);
 
     const toggleShowHandler = (item) => {
         setShow(preState => !preState);

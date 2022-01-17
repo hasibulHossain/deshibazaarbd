@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 const HomeBannerCarousel = ({slider}) => {
 
-  const { isMobile } = useSelector((state) => state.GlobalReducer);
+  const { isMobile } = useSelector((state) => state.global);
 
   return (
     <>

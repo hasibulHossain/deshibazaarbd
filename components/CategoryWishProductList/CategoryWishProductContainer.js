@@ -8,10 +8,10 @@ import {
   getSubCategories,
   resetFilterParams,
   setFilterParams,
-} from "./_redux/Action/CategoryWiseProductAction";
+} from "./_redux/action/CategoryAction";
 import {useRouter} from 'next/router'
 import Image from 'next/image';
-import Modal from "../master/Modal/Modal";
+import Modal from "../master/modal/Modal";
 import Axios from 'axios'
 import Paginate from "../master/paginate/Paginate";
 import ImageWithFallback from '../master/Image/Image';
@@ -25,11 +25,7 @@ const CategoryWishProductContainer = ({ isMainCategory, subCategories, mainCateg
   const dispatch                                 = useDispatch();
   const router                                   = useRouter();
   const {type: typeQuery = "", name = ""}        = router.query;
-
-  const { paginate, categoryBrandDetails, isLoading } = useSelector(
-    (state) => state.CategoryWiseProductReducer
-  );
-
+  const { paginate, categoryBrandDetails, isLoading } = useSelector((state) => state.category);
 
   const paginateHandler = (page) => {
     if (!page) return;
@@ -72,7 +68,7 @@ const CategoryWishProductContainer = ({ isMainCategory, subCategories, mainCateg
 
     setCurrentPage(currentPage);
     setFilterParamsFromQuery(finalUriObj);
-    
+
     dispatch(getFilteredProducts(filterParam, source));
 
     const category = router.query?.['category'] || null;
@@ -84,7 +80,7 @@ const CategoryWishProductContainer = ({ isMainCategory, subCategories, mainCateg
     if(router.query?.['category']) {
       dispatch(getCategoryOrBrandDetails('categories/' + router.query?.['category']));
     }
-    
+
     if(router.query?.['brand']) {
       dispatch(getCategoryOrBrandDetails('brands/' + router.query?.['brand']));
     }

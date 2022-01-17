@@ -4,7 +4,7 @@ import { deleteCartItemAction, toggleAllCartSelection } from '../_redux/action/C
 import CartQuantity from '../partials/CartQuantity';
 import { formatCurrency } from '../../../services/currency';
 import { toggleProductModalAction } from '../../products/_redux/Action/ProductAction';
-import Modal from '../../master/Modal/Modal';
+import Modal from '../../master/modal/Modal';
 import { handleShippingCost } from '../../orders/_redux/action/OrderAction';
 
 const CartProduct = ({ cart, checkoutPage = false }) => {

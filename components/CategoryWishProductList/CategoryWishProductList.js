@@ -4,7 +4,7 @@ import CategoryWiseMiniProduct from "./CategoryWiseMiniProduct";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setFilterParams,
-} from "./_redux/Action/CategoryWiseProductAction";
+} from "./_redux/action/CategoryAction";
 import classNames from "classnames";
 import {useRouter} from 'next/router';
 import LoadingPlaceHolder from "../master/skelleton/LoadingPlaceholder";
@@ -13,10 +13,8 @@ import { parseFilterString } from "../../helper/parse-filter-query";
 
 const CategoryWishProductList = ({showFilter, showFilterHandler, filterParams}) => {
   const router = useRouter();
-  const { isLoading, paginate } = useSelector(
-    (state) => state.CategoryWiseProductReducer
-  );
-  const {isMobile} = useSelector(state => state.GlobalReducer);
+  const { isLoading, paginate } = useSelector((state) => state.category);
+  const {isMobile} = useSelector(state => state.global);
 
   const selectHandler = (e) => {
 

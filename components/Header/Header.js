@@ -4,29 +4,26 @@ import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { Dropdown } from "react-bootstrap";
 
-import DemoWarning from "../Demo/DemoWarning";
+// import DemoWarning from "../Demo/DemoWarning";
 import HeaderTop from "./HeaderTop";
 import HeaderMenu from "./HeaderMenu";
-import Button from "../master/Button/Button";
 import SearchInput from "../SearchInput/SearchInput";
 import { toggleBackdrop, toggleFloatingCart } from "../../_redux/store/action/globalAction";
 import { getCartsAction } from "../carts/_redux/action/CartAction";
 
 import Translate from "../translation/Translate";
-import { translate } from "../../services/translation/translation";
-import ActiveLink from "../master/activeLink/ActiveLink";
 import HeaderWishlist from "./HeaderWishlist";
 import { signOut } from 'next-auth/client';
-import Overlay from "../master/Modal/Overlay";
+import Overlay from "../master/modal/Overlay";
 import { useRouter } from 'next/router';
 
 const Header = () => {
   const [showToolbar, setShowToolbar] = useState(false);
   const [overlayVisible, setOverlayVisible] = useState(false);
   const dispatch = useDispatch();
-  const { totalQuantity } = useSelector((state) => state.CartReducer);
-  const { isSignedIn, isMobile, backdrop } = useSelector((state) => state.GlobalReducer);
-  const { userData } = useSelector((state) => state.UserDataReducer);
+  const { totalQuantity } = useSelector((state) => state.cart);
+  const { isSignedIn, isMobile, backdrop } = useSelector((state) => state.global);
+  // const { userData } = useSelector((state) => state.user);
   const router = useRouter();
 
   const toggleCartHandler = () => {
@@ -51,12 +48,12 @@ const Header = () => {
     (async () => {
       const data = await signOut({redirect: false});
       localStorage.removeItem('access-token');
-      
+
       if(data) {
         window.location.replace('/');
       }
     })();
-    
+
     localStorage.removeItem('user-info');
     localStorage.removeItem('carts');
     localStorage.removeItem('search-history');
@@ -150,7 +147,7 @@ const Header = () => {
                                 </Link> */}
                                 <span>Sign In</span>
                               </div>
-                              
+
                               <div onClick={() => {setOverlayVisible(preState => !preState); router.push('/register')}} className="header__profile-levitate-wrapper-signup">
                                 <span>Sign Up</span>
                               </div>
@@ -168,7 +165,7 @@ const Header = () => {
                                   </div>
                                 {/* </Link> */}
                               </div>
-                              
+
                               <div onClick={() => {setOverlayVisible(preState => !preState); router.push('/account-setting')}}>
                                 {/* <Link href="/account-setting"> */}
                                   <div>
@@ -179,7 +176,7 @@ const Header = () => {
                                   </div>
                                 {/* </Link> */}
                               </div>
-                              
+
                               <div onClick={() => {setOverlayVisible(preState => !preState); router.push('/wishlist')}}>
                                 {/* <Link href="/wishlist"> */}
                                   <div>
@@ -190,7 +187,7 @@ const Header = () => {
                                   </div>
                                 {/* </Link> */}
                               </div>
-                              
+
                               <div onClick={() => {setOverlayVisible(preState => !preState); router.push('/order')}}>
                                 {/* <Link href="/order"> */}
                                   <div>
@@ -201,7 +198,7 @@ const Header = () => {
                                   </div>
                                 {/* </Link> */}
                               </div>
-                              
+
                               <div onClick={() => {setOverlayVisible(preState => !preState); router.push('/product-review')}}>
                                 {/* <Link href="/product-review"> */}
                                   <div>
@@ -212,7 +209,6 @@ const Header = () => {
                                   </div>
                                 {/* </Link> */}
                               </div>
-                              
                               <div onClick={() => {setOverlayVisible(preState => !preState); handleLogOut()}}>
 
                                 <div>
@@ -221,7 +217,6 @@ const Header = () => {
                                     <Translate>Logout</Translate>
                                   </span>
                                 </div>
-                                
                               </div>
                             </>
                           )

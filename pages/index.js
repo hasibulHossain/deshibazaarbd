@@ -10,7 +10,7 @@ import { useSelector, useDispatch } from "react-redux";
 import LazyLoad from "react-lazyload";
 import PageMeta from "../components/layouts/PageMeta";
 import CampaignContainer from "../components/campaign/CampaignContainer";
-import Modal from "../components/master/Modal/Modal";
+import Modal from "../components/master/modal/Modal";
 import Link from 'next/link';
 
 import content from '../content.json';
@@ -18,7 +18,7 @@ import { setWelcomePopup } from "../_redux/store/action/globalAction";
 
 export default function Home(props) {
   const dispatch                 = useDispatch();
-  const {isMobile, welcomePopup} = useSelector(state => state.GlobalReducer);
+  const {isMobile, welcomePopup} = useSelector(state => state.global);
 
   return (
     <>

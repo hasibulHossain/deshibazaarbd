@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 
 import SimpleBtn from "../components/master/SimpleBtn/SimpleBtn";
-import Modal from "../components/master/Modal/Modal";
+import Modal from "../components/master/modal/Modal";
 import RemoveCartItem from "../components/RemoveCartItem/RemoveCartItem";
 import OrderSummery from "../components/orders/OrderSummery";
 
@@ -24,11 +24,11 @@ export default function Carts() {
   const router = useRouter();
   const dispatch = useDispatch();
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const { isModalActive } = useSelector((state) => state.GlobalReducer);
+  const { isModalActive } = useSelector((state) => state.global);
   const { supplierWiseCarts, carts, checkedAllCarts } = useSelector(
-    (state) => state.CartReducer
+    (state) => state.cart
   );
-  const userData = useSelector((state) => state.UserDataReducer.userData);
+  const userData = useSelector((state) => state.user.userData);
 
   const deleteItemsHandler = () => {
     dispatch(toggleModal());

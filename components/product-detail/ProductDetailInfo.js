@@ -19,7 +19,7 @@ import ProductMainList from "../products/ProductMainList";
 import { formatCurrency } from "../../services/currency";
 import LazyLoad from "react-lazyload";
 import InnerImageZoom from 'react-inner-image-zoom';
-import Overlay from '../master/Modal/Overlay';
+import Overlay from '../master/modal/Overlay';
 import content from '../../content.json';
 import priceCalculation from "../../helper/price-calculation";
 
@@ -29,8 +29,8 @@ const ProductDetailInfo = (props) => {
   const { product } = props;
   const { id: productId } = product;
   const [quantity, setQuantity] = useState(1);
-  const { carts } = useSelector((state) => state.CartReducer);
-  const { isSignedIn } = useSelector(state => state.GlobalReducer)
+  const { carts } = useSelector((state) => state.cart);
+  const { isSignedIn } = useSelector(state => state.global)
   const [filterCarts, setFilterCarts] = useState(null);
   const [updatedID, setUpdatedID] = useState(null);
   const [previewImg, setPreviewImg] = useState("");
