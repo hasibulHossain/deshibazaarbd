@@ -3,7 +3,7 @@ import router from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 
 import { formatCurrency } from "../../../services/currency";
-import Modal from "../../master/Modal/Modal";
+import Modal from "../../master/modal/Modal";
 import SimpleBtn from "../../master/SimpleBtn/SimpleBtn";
 import FloatingCartProduct from "./FloatingCartProduct";
 

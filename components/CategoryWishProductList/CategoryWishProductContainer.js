@@ -11,7 +11,7 @@ import {
 } from "./_redux/action/CategoryAction";
 import {useRouter} from 'next/router'
 import Image from 'next/image';
-import Modal from "../master/Modal/Modal";
+import Modal from "../master/modal/Modal";
 import Axios from 'axios'
 import Paginate from "../master/paginate/Paginate";
 import ImageWithFallback from '../master/Image/Image';

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getCurrencies } from '../../services/currency';
-import Modal from '../master/Modal/Modal';
+import Modal from '../master/modal/Modal';
 import TrackingForm from './TrackingForm';
 import Translate from '../translation/Translate';
 import content from '../../content.json';

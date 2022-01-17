@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 
 import SimpleBtn from "../components/master/SimpleBtn/SimpleBtn";
-import Modal from "../components/master/Modal/Modal";
+import Modal from "../components/master/modal/Modal";
 import RemoveCartItem from "../components/RemoveCartItem/RemoveCartItem";
 import OrderSummery from "../components/orders/OrderSummery";
 
