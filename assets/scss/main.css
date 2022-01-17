@@ -121,6 +121,10 @@ a {
   font-weight: 600 !important;
 }
 
+.bg-color-main {
+  background: var(--color-primary);
+}
+
 .color-main {
   color: var(--color-primary);
 }
@@ -142,6 +146,11 @@ a {
   text-overflow: ellipsis;
   overflow: hidden;
 }
+
+.border-top-1-light {
+  border-top: 1px solid var(--color-border-light);
+}
+
 
 /*****************************************************************
                         Global CSS Part :: End

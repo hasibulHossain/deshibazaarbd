@@ -202,7 +202,7 @@ const ProductDetailInfo = (props) => {
               <div className="">
                 <div className="card shadow-md">
                   <div className="row ">
-                    <div className="col-lg-9 bg-white">
+                    <div className="col-lg-9 col-md-12 bg-white">
                       <div className="">
                         <div className="row">
                           <div className="col-lg-6 mt-2 text-center">
@@ -310,26 +310,41 @@ const ProductDetailInfo = (props) => {
 
                               <div className="py-4" style={{borderBottom: '2px dashed #ddd'}} >
                                 <div className="d-flex justify-content-between align-items-center">
-                                  <div>
-                                    <div className="font-14 font-weight-500 mb-1">
-                                      <span>Regular price: </span>
-                                      <span style={{textDecoration: 'line-through'}}>
-                                        {displayInactivePrice}
-                                      </span>
-                                    </div>
+                                  {
+                                    isOfferEnable ? (
+                                      <div>
+                                        <div className="font-14 font-weight-500 mb-1">
+                                          <span>Regular price: </span>
+                                          <span style={{textDecoration: 'line-through'}}>
+                                            {displayInactivePrice}
+                                          </span>
+                                        </div>
+                                        <div>
+                                          <span className="font-weight-600">Discount Price: </span>
+                                          <span className="font-weight-600 font-20 color-main">
+                                            {displayActivePrice}
+                                          </span>
+                                        </div>
+                                      </div>
+                                    ) : (
+                                      <div>
+                                        <span className="font-weight-600">Price: </span>
+                                        <span className="font-weight-600 font-20 color-main">
+                                          {displayActivePrice}
+                                        </span>
+                                      </div>
+                                    )
+                                  }
+                                  
+                                  {
+                                   isOfferEnable  && (
                                     <div>
-                                      <span className="font-weight-600">Discounted Price: </span>
-                                      <span className="font-weight-600 font-20 color-main">
-                                        {displayActivePrice}
+                                      <span className="discount-percent position-relative font-14">
+                                        {discount}% Off
                                       </span>
                                     </div>
-                                  </div>
-
-                                  <div>
-                                    <span className="discount-percent position-relative font-14">
-                                      -{discount}
-                                    </span>
-                                  </div>
+                                   ) 
+                                  }
                                 </div>
                               </div>
 
@@ -439,16 +454,7 @@ const ProductDetailInfo = (props) => {
                                     </button>
                                   </div>
                                   <div className="flex-grow-1">
-                                    <button
-                                      disabled={(product.default_selling_price !== null || undefined) && product.default_selling_price <= 0 ? true : false}
-                                      className="btn font-weight-600"
-                                      onClick={() => addToCart()}
-                                      style={{background: 'transparent', border: '1px solid var(--color-primary)', color: 'var(--color-primary)', width: '100%'}}
-                                    >
-                                      <i class="fas fa-heart"></i>
-                                      &nbsp;
-                                      Add To Wishlist
-                                    </button>
+                                    <AddWishList productId={product.id} isBtnStyle />
                                   </div>
                                 </div>
 
@@ -466,7 +472,7 @@ const ProductDetailInfo = (props) => {
                       </div>
 
                       {/*Product Details Information*/}
-                      <div className="my-4">
+                      <div className="py-3 border-top-1-light">
                         {typeof product.description != "undefined" &&
                           product.description !== null && (
                             <ProductDetailsDescription product={product} />
@@ -476,7 +482,7 @@ const ProductDetailInfo = (props) => {
                       
                     </div>
                     {/*Location Section*/}
-                    <div className="col-lg-3 pt-3 pt-md-0" style={{background: '#f7ae9d26'}}>
+                    <div className="col-lg-3 col-md-12 pt-3 pt-md-0" style={{background: '#f9f9f9'}}>
                       {
                         product.business && product.business.location && (
                           <DeliveryFeatures product={product} />
