@@ -40,7 +40,6 @@ const ProductReviewCreate = ({ ReviewItem, handleClose }) => {
                     autoComplete="off"
                 >
                     <div className="pool-container m-1">
-                        <h6>Delivered on 24 Feb 2021</h6>
                         {/* <p>Rate and review purchased product:</p> */}
                         <div className="row">
                             <div className="col-2">
@@ -59,7 +58,7 @@ const ProductReviewCreate = ({ ReviewItem, handleClose }) => {
                                     onChange={(newValue) => setRatingValue(newValue)}
                                     size={30}
                                     activeColor="#ffd700"
-                                />,
+                                />
                                 <label>Review detail</label>
                                 <textarea
                                     className="form-control"
@@ -79,8 +78,8 @@ const ProductReviewCreate = ({ ReviewItem, handleClose }) => {
                                             name="images"
                                             onChange={(e) => handleChangeCouponCode("images", e)}
                                             isValid />
-                                        <Form.File.Label data-browse="UPLOAD">
-                                            Choose Your Review Image
+                                        <Form.File.Label data-browse="Upload">
+                                            Choose Your Review Image (optional)
                                         </Form.File.Label>
                                     </Form.File>
                                 </div>
@@ -93,15 +92,15 @@ const ProductReviewCreate = ({ ReviewItem, handleClose }) => {
                     </div>
                     {
                         !reviewSubmitting && (
-                            <SimpleBtn type="submit" variant="simple_btn_bg" style={{ width: 'fit-content', float: "right", marginTop: "10px" }}>
-                                Submit
+                            <SimpleBtn type="submit" variant="success" style={{ width: 'fit-content', float: "right", marginTop: "10px" }}>
+                                Give Review
                             </SimpleBtn>
                         )
                     }
 
                     {reviewSubmitting && (
-                        <SimpleBtn type="submit" variant="simple_btn_bg" style={{ width: 'fit-content', float: "right", marginTop: "10px", cursor: "not-allowed" }}>
-                            <span className="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span> Submitting...
+                        <SimpleBtn type="submit" variant="success" style={{ width: 'fit-content', float: "right", marginTop: "10px", cursor: "not-allowed" }}>
+                            <span className="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span> Giving Review...
                         </SimpleBtn>
                     )}
                 </form>

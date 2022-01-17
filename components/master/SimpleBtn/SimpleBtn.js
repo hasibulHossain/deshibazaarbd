@@ -1,10 +1,5 @@
 import React from "react";
 
-// variant
-//  success
-//  danger
-//  
-
 function SimpleBtn(props) {
   const { children, variant, style = {}, onClick, type, disabled=false, className="" } = props;
   return (

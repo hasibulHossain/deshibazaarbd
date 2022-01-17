@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 // local import
-import ShippingInfo from "../components/ShippingInfo/ShippingInfo";
+// import ShippingInfo from "../components/ShippingInfo/ShippingInfo";
 import CheckoutPaymentMethod from "../components/ShippingInfo/CheckoutPaymentMethod";
 import OrderSummery from "../components/orders/OrderSummery";
 import CartProduct from "../components/carts/cart-product/CartProduct";
@@ -12,9 +12,8 @@ import withProtectedRoute from "../components/master/hoc/withProtectedRoute";
 import { useRouter } from 'next/router';
 import AddressBook from "../components/ProfileAccountSetting/AddressBook";
 import { getAddress } from "../components/ProfileAccountSetting/_redux/Action/ProfileAccountSettingAction";
-import { loading } from "../components/master/loading/loading";
+import LoadingSpinner from "../components/master/loading/LoadingSpinner";
 import { showToast } from "../components/master/Helper/ToastHelper";
-
 
 const Checkout = ()=> {
 	const router 							  							= useRouter();
@@ -59,7 +58,7 @@ const Checkout = ()=> {
 
 	let deliveryInfo = (
 		<div>
-			{ loading() }
+			<LoadingSpinner text="Loading..." />
 		</div>
 	)
 

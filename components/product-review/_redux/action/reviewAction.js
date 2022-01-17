@@ -68,8 +68,8 @@ export const storeReviewData = (reviewStoreInput, handleClose, userId) => (dispa
         isLoading: true,
         returnData: ""
     };
-    dispatch({ type: Types.STORE_REVIEW_DATA, payload: responseData });  
-    
+    dispatch({ type: Types.STORE_REVIEW_DATA, payload: responseData });
+
     Axios.post(`item-review/create`, reviewStoreInput)
     .then((res) => {
             if (res.data.status) {
@@ -88,7 +88,12 @@ export const storeReviewData = (reviewStoreInput, handleClose, userId) => (dispa
             // const { response } = err;e
             const { request, ...errorObject } = err;
             responseData.isLoading = false;
-            showToast("error", "Sorry! Something went wrong...")
+            if(typeof errorObject.response !== 'undefined' && typeof errorObject.response.data !== 'undefined' && typeof errorObject.response.data.message !== 'undefined' && errorObject.response.data.message.length > 0){
+                responseData.message = errorObject.response.data.message;
+            } else {
+                responseData.message = 'Sorry! Something went wrong...';
+            }
+            showToast("error", responseData.message);
             dispatch({ type: Types.STORE_REVIEW_DATA, payload: responseData });
             handleClose();
         });
