@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { handleCancelOrder } from './_redux/action/OrderAction.js';
 import { useDispatch, useSelector } from 'react-redux';
 import SimpleModal from '../master/modal/SimpleModal.js';
-import SimpleConfirmComponent from '../master/Modal/SimpleConfirmComponent.js';
+import SimpleConfirmComponent from '../master/modal/SimpleConfirmComponent.js';
 
 const SingleOrder = ({ item, isManageable = true }) => {
 
