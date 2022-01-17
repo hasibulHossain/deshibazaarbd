@@ -11,11 +11,10 @@ import { handleChangeReviewItemInput, storeReviewData } from './_redux/action/re
 const ProductReviewCreate = ({ ReviewItem, handleClose }) => {
 
     const dispatch                                  = useDispatch()
-    const [ratingValue, setRatingValue]             = React.useState(4);
-    const reviewSubmitting                          = useSelector((state) => state.productReviewAnother.reviewSubmitting);
-    const reviewInput                               = useSelector((state) => state.productReviewAnother.reviewInput);
-    const {userData}                                = useSelector(state => state.user);
-    const { register, handleSubmit, watch, errors } = useForm();
+    const [ratingValue, setRatingValue]             = React.useState(5);
+    const { reviewSubmitting, reviewInput }         = useSelector((state) => state.productReviewAnother);
+    const { userData }                              = useSelector(state => state.user);
+    const { register, handleSubmit, errors }        = useForm();
 
     const reviewStoreInput = {
         item_id     : ReviewItem.item_id,
@@ -23,7 +22,8 @@ const ProductReviewCreate = ({ ReviewItem, handleClose }) => {
         comment     : reviewInput.comment,
         images      : reviewInput.images
     }
-    const handleChangeCouponCode = (name, value) => {
+
+    const handleChangeReviewComment = (name, value) => {
         dispatch(handleChangeReviewItemInput(name, value))
     }
 
@@ -64,7 +64,7 @@ const ProductReviewCreate = ({ ReviewItem, handleClose }) => {
                                     className="form-control"
                                     placeholder="Please share your feedback about the product: was the product as described? What is the quality like?"
                                     name="comment"
-                                    onChange={(e) => handleChangeCouponCode("comment", e.target.value)}
+                                    onChange={(e) => handleChangeReviewComment("comment", e.target.value)}
                                     ref={register({ required: true })}
                                 />
                                 {errors.comment &&
@@ -72,17 +72,18 @@ const ProductReviewCreate = ({ ReviewItem, handleClose }) => {
                                 }
                                 <br />
 
-                                <div className="mb-3">
+                                {/* TODO: Hide images for now */}
+                                {/* <div className="mb-3">
                                     <Form.File id="formcheck-api-custom" custom>
                                         <Form.File.Input
                                             name="images"
-                                            onChange={(e) => handleChangeCouponCode("images", e)}
+                                            onChange={(e) => handleChangeReviewComment("images", e)}
                                             isValid />
                                         <Form.File.Label data-browse="Upload">
                                             Choose Your Review Image (optional)
                                         </Form.File.Label>
                                     </Form.File>
-                                </div>
+                                </div> */}
                                 {/* <div className="input-group">
                                         <label className="input-group-text" for="inputGroupFile01">Upload</label>
                                         <input type="file" className="form-control" id="inputGroupFile01" />

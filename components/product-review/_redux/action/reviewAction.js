@@ -51,7 +51,7 @@ export const getReviewListByUser = (isItem, isUser, status) => (dispatch) => {
         })
 }
 
-//handle change review item 
+//handle change review item
 export const handleChangeReviewItemInput = (name, value) => (dispatch) => {
     const reviewInput = {
         name: name,
@@ -60,7 +60,7 @@ export const handleChangeReviewItemInput = (name, value) => (dispatch) => {
     dispatch({ type: Types.CHANGE_REVIEW_INPUT, payload: reviewInput })
 }
 
-// store review 
+// store review
 export const storeReviewData = (reviewStoreInput, handleClose, userId) => (dispatch => {
     let responseData = {
         status: false,
