@@ -17,7 +17,7 @@ const PriceCalculation = ({ item }) => {
                     <del>{ displayInactivePrice }</del>
                     &nbsp;
                     <span className="discount-percent">
-                        -{discount}%
+                        {discount}% Off
                     </span>
                 </p>
             }
