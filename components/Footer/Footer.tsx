@@ -10,9 +10,10 @@ import SimpleModal from '../master/modal/SimpleModal';
 import { subscribeNewsletter } from './_redux/Action/FooterAction';
 const TrackingForm = dynamic(() => import('../Header/TrackingForm'));
 import content from '../../content.json';
+import { IRootReducer } from '../../_redux/RootReducer';
 
 const Footer = () => {
-    const {isLoading}       = useSelector(state => state.footer)
+    // const {isLoading}       = useSelector((state: IRootReducer) => state.footer)
     const dispatch          = useDispatch();
     const [show, setShow]   = useState(false);
     const [email, setEmail] = useState("");

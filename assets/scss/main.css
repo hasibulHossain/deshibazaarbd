@@ -77,6 +77,25 @@ a {
 .font-15 {
   font-size: 15px !important;
 }
+.font-16 {
+  font-size: 16px !important;
+}
+
+.font-17 {
+  font-size: 17px !important;
+}
+
+.font-18 {
+  font-size: 18px !important;
+}
+
+.font-19 {
+  font-size: 17px !important;
+}
+
+.font-20 {
+  font-size: 18px !important;
+}
 
 .font-weight-100 {
   font-weight: 100 !important;
@@ -102,6 +121,10 @@ a {
   font-weight: 600 !important;
 }
 
+.bg-color-main {
+  background: var(--color-primary);
+}
+
 .color-main {
   color: var(--color-primary);
 }
@@ -123,6 +146,11 @@ a {
   text-overflow: ellipsis;
   overflow: hidden;
 }
+
+.border-top-1-light {
+  border-top: 1px solid var(--color-border-light);
+}
+
 
 /*****************************************************************
                         Global CSS Part :: End
@@ -749,6 +777,7 @@ a .custom-button-component:hover {
   color: gray;
 }
 
+.discount-percent,
 .inactive-price .discount-percent {
   color: #fff;
   position: absolute;
@@ -1425,8 +1454,8 @@ h6.address_book_updated_title {
 }
 
 .product_details_section .product_title {
-  font-weight: 500;
-  font-size: 1.6rem;
+  font-weight: 600;
+  font-size: 1.5rem;
   flex-basis: 80%;
   /* overflow: hidden; */
   /* text-overflow: ellipsis; */
@@ -1595,6 +1624,11 @@ h6.address_book_updated_title {
   text-align: center;
   width: 56%;
   background-color: transparent;
+}
+
+.quantity-input {
+  width: 80px;
+  font-size: 20px;
 }
 
 .product_details_quantity_section .color_picker {
@@ -3253,19 +3287,20 @@ span.brand_name_in_details:hover {
 }
 
 .stock-area span {
-  padding: 6px 25px;
+  /* padding: 6px 25px; */
   border-radius: 20px;
-  font-weight: 500;
-  font-size: 12px;
+  font-weight: 600;
+  /* font-size: 12px; */
 }
 
 .stock-area.in-stock span {
-  background-color: #dbffc9;
-  color: #59cf1f;
+  /* background-color: #dbffc9; */
+  /* color: #59cf1f; */
+  color: #03a53a;
 }
 
 .stock-area.out-stock span {
-  background-color: #fffab8;
+  /* background-color: #fffab8; */
   color: var(--color-primary);
 }
 
@@ -4160,4 +4195,19 @@ p.customer_info_edit {
 
 #street_address:focus + .street_address_warning {
   opacity: 1;
+}
+
+
+/* remove arrow from type=number */
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }

@@ -9,7 +9,7 @@ import { translate } from "../services/translation/translation";
 import { useSelector, useDispatch } from "react-redux";
 import LazyLoad from "react-lazyload";
 import PageMeta from "../components/layouts/PageMeta";
-import CampaignContainer from "../components/campaign/CampaignContainer";
+// import CampaignContainer from "../components/campaign/CampaignContainer";
 import Modal from "../components/master/modal/Modal";
 import Link from 'next/link';
 
@@ -44,7 +44,7 @@ export default function Home(props) {
         pageSocialMetaImage={content.logo} />
       <HomeBannerCarousel slider={props.slider} />
 
-      <CampaignContainer />
+      {/* <CampaignContainer /> */}
       <CategoryListContainer homepageCategories={props.homepageCategories} />
 
       <LazyLoad height={280} once>
