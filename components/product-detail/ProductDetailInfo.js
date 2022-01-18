@@ -118,7 +118,6 @@ const ProductDetailInfo = (props) => {
       setQuantity(filterCarts.quantity);
       dispatch(updateCartQtyAction(updatedID, +quantity));
     } else {
-      console.log('running from else check => ')
       setQuantity(+quantity);
       setSubTotal(+quantity * default_price);
     }
