@@ -5,7 +5,7 @@ import { getFilteredStoreList } from "./_redux/action/store-action";
 import Link from 'next/link';
 import ProductNoFound from "../master/productNoFound/ProductNoFound";
 import Paginate from "../master/paginate/Paginate";
-import { loading } from "../master/loading/loading";
+import LoadingSpinner from "../master/loading/LoadingSpinner";
 
 function StoreListFull() {
     const dispatch = useDispatch();
@@ -14,9 +14,7 @@ function StoreListFull() {
     let list;
     if(isLoading) {
         list = <div className="col-12">
-            {
-                loading()
-            }
+            <LoadingSpinner text="Loading Stores..." />
         </div>
     }
 
