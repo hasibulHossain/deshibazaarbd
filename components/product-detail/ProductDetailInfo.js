@@ -291,7 +291,7 @@ const ProductDetailInfo = (props) => {
                                     <span className="product-unit font-weight-500">{product.per_unit_value} {' '} {product.unit && product.unit.actual_name && product.unit.actual_name}</span>
                                   </div>
 
-                                  <div>
+                                  <div className="pb-1">
                                     {
                                       product.sku_manual && (
                                         <div>
@@ -305,6 +305,26 @@ const ProductDetailInfo = (props) => {
                                       )
                                     }
                                   </div>
+                                  {/* size and color variant */}
+                                  
+                                  {/* <div className="pb-1 d-flex align-items-center">
+                                    <span className="d-inline-block">Color: </span>
+                                    <div className="d-flex">
+                                      <div className="d-inline-block ml-2 bg-color-main" style={{width: '30px', height: '30px', borderRadius: '50px'}}></div>
+                                      <div className="d-inline-block ml-2 bg-color-main" style={{width: '30px', height: '30px', borderRadius: '50px'}}></div>
+                                      <div className="d-inline-block ml-2 bg-color-main" style={{width: '30px', height: '30px', borderRadius: '50px'}}></div>
+                                    </div>
+                                  </div>
+
+                                  <div className="pb-1 d-flex align-items-center">
+                                    <span className="d-inline-block">Size: </span>
+                                    <div className="d-flex">
+                                      <div className="ml-2 font-12 d-flex justify-content-center align-items-center" style={{width: '30px', height: '30px', borderRadius: '50px', border: '1px solid var(--color-primary)'}}>XL</div>
+                                      <div className="ml-2 font-12 d-flex justify-content-center align-items-center" style={{width: '30px', height: '30px', borderRadius: '50px', border: '1px solid var(--color-primary)'}}>L</div>
+                                      <div className="ml-2 font-12 d-flex justify-content-center align-items-center" style={{width: '30px', height: '30px', borderRadius: '50px', border: '1px solid var(--color-primary)'}}>M</div>
+                                    </div>
+                                  </div> */}
+
                               </div>
 
                               <div className="py-4" style={{borderBottom: '2px dashed #ddd'}} >
