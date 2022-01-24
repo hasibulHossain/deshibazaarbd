@@ -17,6 +17,9 @@ import Paginate from "../master/paginate/Paginate";
 import ImageWithFallback from '../master/Image/Image';
 import Link from 'next/link';
 import { parseFilterString, parseUri } from "../../helper/parse-filter-query";
+import SimpleBtn from '../master/SimpleBtn/SimpleBtn';
+import SearchInput from "../SearchInput/SearchInput";
+// import  from '../master/Image/Image';
 
 const CategoryWishProductContainer = ({ isMainCategory, subCategories, mainCategoryBanner }) => {
   const [showFilter, setShowFilter]              = useState(false);
@@ -124,13 +127,116 @@ const CategoryWishProductContainer = ({ isMainCategory, subCategories, mainCateg
 
         {
           isMainCategory && (
-            <div className="pl-1 pl-md-3 mt-3 main-category-title">
+            <>
+              <div className="row shadow-sm mx-3 bg-white mt-4 mb-5 rounded">
+                <div className="col-lg-4 p-3 pl-4 border-right-1-light">
+                    <div>
+                      <span className="font-weight-600 font-20 text-center d-block">Upload your bazaar list</span>
+                      <div className="mb-2">
+                        <ImageWithFallback width={400} height={280} src='/images/default/fallback-image.png' />
+                      </div>
+
+                      <div className="pb-3">
+                        <SimpleBtn
+                          variant="danger" 
+                          size="sm"
+                          onClick={() => console.log('upload now')} >
+                          Upload now
+                        </SimpleBtn>
+                      </div>
+                    </div>
+                </div>
+                <div className="col-lg-8 p-3 pl-4">
+                  <div>
+                    <span className="font-weight-600 font-20 text-center d-block">Write Down Your Bazaar List Here</span>
+                    <div>
+                      <SearchInput />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="row mx-3 bg-white py-5 rounded shadow-sm">
+                <div className="col-lg-4">
+                  <div className="text-center">
+                    <div>
+                      <img src="/images/default/fallback-image.png" alt="" />
+                    </div>
+                    <div>
+                      <span className="font-weight-600 d-inline-block pb-2">Family Classic Package</span>
+                      <div className="mb-3">
+                        <del className="font-weight-600 d-inline-block pr-3">1000 BDT</del>
+                        <span className="font-weight-600 d-inline-block color-main">8000 BDT</span>
+                      </div>
+                      <SimpleBtn
+                          variant="danger" 
+                          size="sm"
+                          onClick={() => console.log('upload now')}
+                          style={{width: 'fit-content'}} >
+                          View Details
+                      </SimpleBtn>
+                    </div>
+
+                  </div>
+                </div>
+                <div className="col-lg-4">
+                  <div className="text-center">
+                    <div>
+                      <img src="/images/default/fallback-image.png" alt="" />
+                    </div>
+                    <div>
+                      <span className="font-weight-600 d-inline-block pb-2">Family Classic Package</span>
+                      <div className="mb-3">
+                        <del className="font-weight-600 d-inline-block pr-3">1000 BDT</del>
+                        <span className="font-weight-600 d-inline-block color-main">8000 BDT</span>
+                      </div>
+                      <SimpleBtn
+                          variant="danger" 
+                          size="sm"
+                          onClick={() => console.log('upload now')}
+                          style={{width: 'fit-content'}} >
+                          View Details
+                      </SimpleBtn>
+                    </div>
+
+                  </div>
+                </div>
+                <div className="col-lg-4">
+                  <div className="text-center">
+                    <div>
+                      <img src="/images/default/fallback-image.png" alt="" />
+                    </div>
+                    <div>
+                      <span className="font-weight-600 d-inline-block pb-2">Family Classic Package</span>
+                      <div className="mb-3">
+                        <del className="font-weight-600 d-inline-block pr-3">1000 BDT</del>
+                        <span className="font-weight-600 d-inline-block color-main">8000 BDT</span>
+                      </div>
+                      <SimpleBtn
+                          variant="danger" 
+                          size="sm"
+                          onClick={() => console.log('upload now')}
+                          style={{width: 'fit-content'}} >
+                          View Details
+                      </SimpleBtn>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </>
+          )
+        }
+
+        {
+          isMainCategory && (
+            <div className="pl-1 pl-md-3 mt-5 main-category-title">
               <span className="font-weight-600">
                 {name}
               </span>
             </div>
           )
         }
+
         <div className={`row ${isMainCategory ? 'my-4' : ''}`}>
           {
             isMainCategory &&
