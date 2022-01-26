@@ -150,7 +150,9 @@ const CategoryWishProductContainer = ({ isMainCategory, subCategories, mainCateg
                   <div>
                     <span className="font-weight-600 font-20 text-center d-block">Write Down Your Bazaar List Here</span>
                     <div>
-                      <SearchInput />
+                      <div className="header-search-product">
+                        <SearchInput />
+                      </div>
                     </div>
                   </div>
                 </div>
