@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import Head from 'next/head';
 import { Provider } from "react-redux";
 import Router, { useRouter } from "next/router";
@@ -61,8 +61,13 @@ Router.onRouteChangeError = () => {
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter()
+  const firstRenderRef = useRef(true);
 
   useEffect(() => {
+    if(firstRenderRef.current) {
+      firstRenderRef.current = false
+    }
+
     import('react-facebook-pixel')
     .then((x) => x.default)
     .then((ReactPixel) => {
@@ -106,6 +111,27 @@ function MyApp({ Component, pageProps }) {
           `,
         }}
       />
+
+      {
+        firstRenderRef.current && (
+          <>
+            <Script
+              strategy="afterInteractive"
+              src={`https://assets.aweber-static.com/aweberjs/aweber.js`}
+            />
+      
+            <Script
+              strategy="afterInteractive"
+              dangerouslySetInnerHTML={{
+                __html: `
+                  var AWeber = window.AWeber || [];AWeber.push(function() {AWeber.WebPush.init('BD7gINEe6CuUJa5gX6JEF2mIHotvL_-jD_Ezd3DcL7_4jN4nqK1udPpa3BlaHUwGrTk2POA9csUEV0e_8ivxUn4','752f8750-bdbf-4a97-abb9-29393c13dcef','3bd5c440-1403-455a-a9a3-94986684a5fe');});
+                `,
+              }}
+            />
+          </>
+        )
+      }
+
 
       <Provider store={Store}>
         {/* Global Site Code Pixel - Facebook Pixel */}
