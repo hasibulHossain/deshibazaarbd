@@ -89,6 +89,10 @@ function MyApp({ Component, pageProps }) {
     <>
       <Script
         strategy="afterInteractive"
+        src={`https://assets.aweber-static.com/aweberjs/aweber.js`}
+      />
+      <Script
+        strategy="afterInteractive"
         src={`https://www.googletagmanager.com/gtag/js?id=G-1PNGH962LS`}
       />
 
@@ -103,6 +107,15 @@ function MyApp({ Component, pageProps }) {
             gtag('config', '${gtag.GA_TRACKING_ID}', {
               page_path: window.location.pathname,
             });
+          `,
+        }}
+      />
+
+      <Script
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+          var AWeber = window.AWeber || [];AWeber.push(function() {AWeber.WebPush.init('BD7gINEe6CuUJa5gX6JEF2mIHotvL_-jD_Ezd3DcL7_4jN4nqK1udPpa3BlaHUwGrTk2POA9csUEV0e_8ivxUn4','752f8750-bdbf-4a97-abb9-29393c13dcef','3bd5c440-1403-455a-a9a3-94986684a5fe');});
           `,
         }}
       />
@@ -127,3 +140,6 @@ const makeStore = () => Store;
 const wrapper = createWrapper(makeStore);
 
 export default wrapper.withRedux(MyApp);
+
+<script>
+</script>
